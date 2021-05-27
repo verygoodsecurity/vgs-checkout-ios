@@ -80,7 +80,12 @@ Pod::Spec.new do |spec|
   spec.subspec 'Core' do |core|
   #set as default podspec to prevent from downloading additional modules
     core.source_files = "Sources/VGSCheckout", "Sources/VGSCheckout/**/*.{swift}", "Sources/VGSCheckout/**/*.{h, m}"
+		core.dependency "VGSCollectSDK", '1.7.13'
   end
+
+	spec.subspec 'CardIO' do |cardIO|
+		cardIO.dependency "VGSCollectSDK/CardIO"
+	end
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
