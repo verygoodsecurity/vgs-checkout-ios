@@ -71,10 +71,12 @@ class ShoppingCartView: UIView {
 	/// Total hint label.
 	private lazy var totalHintLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title1).demoapp_bold()
+		label.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
 		label.adjustsFontForContentSizeCategory = true
+		label.adjustsFontSizeToFitWidth = true
 		label.textAlignment = .left
 		label.text = "Total"
+		label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
 		return label
 	}()
@@ -96,6 +98,8 @@ class ShoppingCartView: UIView {
 		
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .right
+
+		label.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
 		return label
 	}()

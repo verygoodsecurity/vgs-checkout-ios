@@ -32,7 +32,7 @@ class CheckoutFlowMainView: UIView {
 		return stackView
 	}()
 
-	/// Button
+	/// Button.
 	private lazy var button: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false

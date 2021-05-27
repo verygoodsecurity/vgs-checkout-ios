@@ -27,9 +27,9 @@ class ShoppingCartItemView: UIView {
 	private lazy var imageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.contentMode = .scaleAspectFill
+		imageView.contentMode = .scaleToFill
 		
-		imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+		imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
 		imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
 
 		return imageView
@@ -38,9 +38,13 @@ class ShoppingCartItemView: UIView {
 	/// Title label.
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
+		label.numberOfLines = 0
+		label.adjustsFontSizeToFitWidth = true
 		label.font = UIFont.preferredFont(forTextStyle: .title3)
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .left
+		label.lineBreakMode = .byTruncatingTail
+		label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
 		return label
 	}()
@@ -48,9 +52,11 @@ class ShoppingCartItemView: UIView {
 	/// Price label.
 	private lazy var priceLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
+		label.font = UIFont.preferredFont(forTextStyle: .title3).demoapp_bold()
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .right
+
+		label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
 
 		return label
 	}()
