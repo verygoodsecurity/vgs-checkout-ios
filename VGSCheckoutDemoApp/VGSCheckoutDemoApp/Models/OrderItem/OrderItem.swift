@@ -4,7 +4,9 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// Holds order item.
 struct OrderItem {

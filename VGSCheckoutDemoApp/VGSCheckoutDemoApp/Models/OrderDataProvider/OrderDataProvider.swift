@@ -4,7 +4,10 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
+
 
 /// Order data provider.
 final class OrderDataProvider {

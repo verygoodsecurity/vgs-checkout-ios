@@ -3,7 +3,9 @@
 //  VGSCheckoutDemoApp
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 extension UIFont {
 	/// Provide font for traits.

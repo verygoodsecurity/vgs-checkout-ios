@@ -4,13 +4,16 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// Checkout main view delegate.
 protocol CheckoutFlowMainViewDelegate: AnyObject {
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView)
 }
 
+/// Main view for checkout screens.
 class CheckoutFlowMainView: UIView {
 
 	// MARK: - Vars
@@ -32,13 +35,21 @@ class CheckoutFlowMainView: UIView {
 		return stackView
 	}()
 
+	/// Container view with insets for button.
+	private lazy var buttonContainerView: DemoInsetContainerView = {
+		let view = DemoInsetContainerView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
 	/// Button.
 	private lazy var button: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-
 		button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+
 		button.adjustsImageSizeForAccessibilityContentSizeCategory = true
 		button.backgroundColor = .systemBlue
 		button.layer.cornerRadius = 6
@@ -77,17 +88,21 @@ class CheckoutFlowMainView: UIView {
 		if #available(iOS 13.0, *) {
 			backgroundColor = .systemGroupedBackground
 		} else {
-			backgroundColor = .gray
+			backgroundColor = UIColor(demo_hexString: "#f2f2f7ff")
 		}
 
 		addSubview(stackView)
 		stackView.checkoutDemo_constraintViewToSuperviewEdges()
 		stackView.addArrangedSubview(shoppingCartView)
-		stackView.addArrangedSubview(button)
 
 		let emptyBottomView = UIView()
 		emptyBottomView.backgroundColor = .clear
 		emptyBottomView.translatesAutoresizingMaskIntoConstraints = false
+
+		buttonContainerView.paddings = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+		buttonContainerView.addContentView(button)
+		stackView.addArrangedSubview(buttonContainerView)
+
 		stackView.addArrangedSubview(emptyBottomView)
 
 		button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)

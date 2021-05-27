@@ -4,7 +4,9 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// View for shopping cart item.
 class ShoppingCartItemView: UIView {

@@ -22,6 +22,8 @@
 		441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E5265F6CC50080B01E /* OrderDataProvider.swift */; };
 		441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */; };
 		441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927EA265FA3E60080B01E /* UIFont+Extensions.swift */; };
+		44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC9F75265FC4F7001CDD79 /* DemoInsetContainerView.swift */; };
+		44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC9F78265FC6B9001CDD79 /* UIColor+Extensions.swift */; };
 		DBAB612DF720F182FE895D82 /* Pods_VGSCheckoutDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42760D83CBF1C987F361DD79 /* Pods_VGSCheckoutDemoApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		441927E5265F6CC50080B01E /* OrderDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataProvider.swift; sourceTree = "<group>"; };
 		441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFlowMainView.swift; sourceTree = "<group>"; };
 		441927EA265FA3E60080B01E /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		44FC9F75265FC4F7001CDD79 /* DemoInsetContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoInsetContainerView.swift; sourceTree = "<group>"; };
+		44FC9F78265FC6B9001CDD79 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		760967BCBD1A2B4746DEF158 /* Pods-VGSCheckoutDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VGSCheckoutDemoApp.release.xcconfig"; path = "Target Support Files/Pods-VGSCheckoutDemoApp/Pods-VGSCheckoutDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		D55379504AB51A467EEF79E2 /* Pods-VGSCheckoutDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VGSCheckoutDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-VGSCheckoutDemoApp/Pods-VGSCheckoutDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +172,7 @@
 		441927BE265F62D10080B01E /* Extenions */ = {
 			isa = PBXGroup;
 			children = (
+				44FC9F77265FC6A8001CDD79 /* UIColor+Extensions */,
 				441927BF265F62D10080B01E /* UIKit+Extenions */,
 				441927C0265F62D10080B01E /* Foundation+Extensions */,
 			);
@@ -230,6 +235,7 @@
 		441927CC265F62D10080B01E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				44FC9F74265FC4CF001CDD79 /* DemoInsetContainerView */,
 				441927D8265F64F20080B01E /* ShoppingCart */,
 			);
 			path = Views;
@@ -299,6 +305,22 @@
 				441927EA265FA3E60080B01E /* UIFont+Extensions.swift */,
 			);
 			path = "UIFont+Extensions";
+			sourceTree = "<group>";
+		};
+		44FC9F74265FC4CF001CDD79 /* DemoInsetContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				44FC9F75265FC4F7001CDD79 /* DemoInsetContainerView.swift */,
+			);
+			path = DemoInsetContainerView;
+			sourceTree = "<group>";
+		};
+		44FC9F77265FC6A8001CDD79 /* UIColor+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44FC9F78265FC6B9001CDD79 /* UIColor+Extensions.swift */,
+			);
+			path = "UIColor+Extensions";
 			sourceTree = "<group>";
 		};
 		B5126D1FBC88B461DF5445A5 /* Frameworks */ = {
@@ -473,6 +495,8 @@
 				441927DD265F673C0080B01E /* UIView+Extensions.swift in Sources */,
 				441927D7265F64A60080B01E /* CheckoutBasicFlowVC.swift in Sources */,
 				441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */,
+				44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */,
+				44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */,
 				441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */,
 				441927E3265F6ACE0080B01E /* OrderItem.swift in Sources */,
 			);

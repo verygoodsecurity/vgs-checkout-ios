@@ -4,8 +4,9 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
-
+#endif
 
 internal extension UIView {
 	func checkoutDemo_constraintViewToSuperviewEdges() {
