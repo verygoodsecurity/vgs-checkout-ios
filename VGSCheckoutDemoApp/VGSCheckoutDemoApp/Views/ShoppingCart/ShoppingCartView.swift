@@ -19,7 +19,27 @@ class ShoppingCartView: UIView {
 		stackView.axis = .vertical
 		stackView.spacing = 8
 		stackView.distribution = .fill
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+
+		return stackView
+	}()
+
+	/// Items stack view.
+	private lazy var itemsStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+
+		if #available(iOS 13.0, *) {
+			stackView.backgroundColor = .systemBackground
+		} else {
+			stackView.backgroundColor = .white
+		}
+		stackView.layer.cornerRadius = 6
+		stackView.layer.masksToBounds = true
+
+		stackView.axis = .vertical
+		stackView.spacing = 0
+		stackView.distribution = .fill
+		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 		stackView.isLayoutMarginsRelativeArrangement = true
 
 		return stackView
@@ -33,8 +53,6 @@ class ShoppingCartView: UIView {
 		stackView.axis = .horizontal
 		stackView.spacing = 8
 		stackView.distribution = .fill
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-		stackView.isLayoutMarginsRelativeArrangement = true
 
 		return stackView
 	}()
@@ -42,7 +60,7 @@ class ShoppingCartView: UIView {
 	/// Order title label.
 	private lazy var orderTitleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title2)
+		label.font = UIFont.preferredFont(forTextStyle: .largeTitle).demoapp_bold()
 		label.adjustsFontForContentSizeCategory = true
 		label.text = "Your order"
 		label.textAlignment = .left
@@ -53,7 +71,7 @@ class ShoppingCartView: UIView {
 	/// Total hint label.
 	private lazy var totalHintLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title1)
+		label.font = UIFont.preferredFont(forTextStyle: .title1).demoapp_bold()
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .left
 		label.text = "Total"
@@ -74,7 +92,8 @@ class ShoppingCartView: UIView {
 	/// Price label.
 	private lazy var priceLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title2)
+		label.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
+		
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .right
 
@@ -102,18 +121,19 @@ class ShoppingCartView: UIView {
 			stackView.removeArrangedSubview(view)
 		}
 		stackView.addArrangedSubview(orderTitleLabel)
+		stackView.addArrangedSubview(itemsStackView)
 
 		for item in items {
 			let itemView = ShoppingCartItemView(frame: .zero)
 			itemView.configure(with: item)
 
-			stackView.addArrangedSubview(itemView)
+			itemsStackView.addArrangedSubview(itemView)
 		}
 
 		stackView.addArrangedSubview(separatorView)
 		stackView.addArrangedSubview(totalPriceStackView)
 
-		priceLabel.text = "$\(items.totalPrice)"
+		priceLabel.text = "$\(items.totalPriceText)"
 	}
 
 	// MARK: - Helpers

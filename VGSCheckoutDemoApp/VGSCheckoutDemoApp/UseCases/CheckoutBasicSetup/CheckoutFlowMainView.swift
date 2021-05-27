@@ -15,6 +15,7 @@ class CheckoutFlowMainView: UIView {
 
 	// MARK: - Vars
 
+	/// An object that acts as a view delegate.
 	weak var delegate: CheckoutFlowMainViewDelegate?
 
 	/// Stack view.
@@ -36,10 +37,15 @@ class CheckoutFlowMainView: UIView {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+
+		button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+		button.adjustsImageSizeForAccessibilityContentSizeCategory = true
 		button.backgroundColor = .systemBlue
 		button.layer.cornerRadius = 6
 		button.layer.masksToBounds = true
 		button.setTitle("CHECKOUT", for: .normal)
+		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
+		button.titleLabel?.adjustsFontForContentSizeCategory = true
 
 		return button
 	}()
@@ -68,10 +74,21 @@ class CheckoutFlowMainView: UIView {
 
 	/// Setup basic UI.
 	private func setupUI() {
+		if #available(iOS 13.0, *) {
+			backgroundColor = .systemGroupedBackground
+		} else {
+			backgroundColor = .gray
+		}
+
 		addSubview(stackView)
 		stackView.checkoutDemo_constraintViewToSuperviewEdges()
 		stackView.addArrangedSubview(shoppingCartView)
 		stackView.addArrangedSubview(button)
+
+		let emptyBottomView = UIView()
+		emptyBottomView.backgroundColor = .clear
+		emptyBottomView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.addArrangedSubview(emptyBottomView)
 
 		button.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
 	}

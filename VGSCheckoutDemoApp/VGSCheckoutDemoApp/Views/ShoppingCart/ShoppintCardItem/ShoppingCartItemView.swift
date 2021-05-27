@@ -19,8 +19,6 @@ class ShoppingCartItemView: UIView {
 		stackView.spacing = 8
 		stackView.distribution = .fill
 		stackView.axis = .horizontal
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-		stackView.isLayoutMarginsRelativeArrangement = true
 
 		return stackView
 	}()
@@ -29,15 +27,10 @@ class ShoppingCartItemView: UIView {
 	private lazy var imageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.contentMode = .scaleAspectFit
+		imageView.contentMode = .scaleAspectFill
 		
 		imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
 		imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
-		if #available(iOS 13.0, *) {
-			imageView.backgroundColor = .systemBackground
-		} else {
-			imageView.backgroundColor = .white
-		}
 
 		return imageView
 	}()
@@ -45,7 +38,7 @@ class ShoppingCartItemView: UIView {
 	/// Title label.
 	private lazy var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .body)
+		label.font = UIFont.preferredFont(forTextStyle: .title3)
 		label.adjustsFontForContentSizeCategory = true
 		label.textAlignment = .left
 
@@ -55,8 +48,9 @@ class ShoppingCartItemView: UIView {
 	/// Price label.
 	private lazy var priceLabel: UILabel = {
 		let label = UILabel(frame: .zero)
-		label.font = UIFont.preferredFont(forTextStyle: .title2)
+		label.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
 		label.adjustsFontForContentSizeCategory = true
+		label.textAlignment = .right
 
 		return label
 	}()
@@ -80,13 +74,18 @@ class ShoppingCartItemView: UIView {
 	func configure(with item: OrderItem) {
 		titleLabel.text = item.title
 		imageView.image = item.image
-		priceLabel.text = "$\(item.price)"
+		priceLabel.text = "$\(item.priceText)"
 	}
 
 	// MARK: - Helpers
 
 	/// Setup basic UI and layout.
 	private func setupUI() {
+		if #available(iOS 13.0, *) {
+			backgroundColor = .systemBackground
+		} else {
+			backgroundColor = .white
+		}
 		addSubview(stackView)
 		stackView.checkoutDemo_constraintViewToSuperviewEdges()
 

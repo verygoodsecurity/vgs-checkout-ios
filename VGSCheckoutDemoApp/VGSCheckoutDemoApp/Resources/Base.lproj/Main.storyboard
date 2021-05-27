@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="801" y="55"/>
         </scene>
-        <!--Checkout Basic FlowVC-->
+        <!--Checkout-->
         <scene sceneID="Fcz-Jd-477">
             <objects>
                 <viewController id="1di-nm-31V" customClass="CheckoutBasicFlowVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,7 +83,7 @@
                         <viewLayoutGuide key="safeArea" id="3PL-cr-E9J"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="d8t-EM-TOO"/>
+                    <navigationItem key="navigationItem" title="Checkout" id="d8t-EM-TOO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLq-ae-KxF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
