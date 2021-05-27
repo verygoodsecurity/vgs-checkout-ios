@@ -12,8 +12,8 @@ final class OrderDataProvider {
 	/// - Returns: An array of `OrderItem` objects.
 	static func provideOrders() -> [OrderItem] {
 		return [
-			OrderItem(title: "Pizza diablo", image: UIImage(named: "pizza_diable"), price: 10),
-			OrderItem(title: "Pizza diablo", image: UIImage(named: "pizza_vegano"), price: 30.50)
+			OrderItem(title: "Pizza Diablo", image: UIImage(named: "pizza_diablo"), price: 10),
+			OrderItem(title: "Pizza Vegano", image: UIImage(named: "pizza_vegano"), price: 30.50)
 		]
 	}
 }

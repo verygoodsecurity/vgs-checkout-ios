@@ -45,6 +45,7 @@ class ShoppingCartView: UIView {
 		label.font = UIFont.preferredFont(forTextStyle: .title2)
 		label.adjustsFontForContentSizeCategory = true
 		label.text = "Your order"
+		label.textAlignment = .left
 
 		return label
 	}()
@@ -54,6 +55,7 @@ class ShoppingCartView: UIView {
 		let label = UILabel(frame: .zero)
 		label.font = UIFont.preferredFont(forTextStyle: .title1)
 		label.adjustsFontForContentSizeCategory = true
+		label.textAlignment = .left
 		label.text = "Total"
 
 		return label
@@ -69,20 +71,12 @@ class ShoppingCartView: UIView {
 		return view
 	}()
 
-	/// Image view.
-	private lazy var imageView: UIImageView = {
-		let imageView = UIImageView(frame: .zero)
-		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.contentMode = .scaleAspectFit
-
-		return imageView
-	}()
-
 	/// Price label.
 	private lazy var priceLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.font = UIFont.preferredFont(forTextStyle: .title2)
 		label.adjustsFontForContentSizeCategory = true
+		label.textAlignment = .right
 
 		return label
 	}()

@@ -30,6 +30,14 @@ class ShoppingCartItemView: UIView {
 		let imageView = UIImageView(frame: .zero)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		imageView.contentMode = .scaleAspectFit
+		
+		imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+		imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+		if #available(iOS 13.0, *) {
+			imageView.backgroundColor = .systemBackground
+		} else {
+			imageView.backgroundColor = .white
+		}
 
 		return imageView
 	}()
@@ -39,6 +47,7 @@ class ShoppingCartItemView: UIView {
 		let label = UILabel(frame: .zero)
 		label.font = UIFont.preferredFont(forTextStyle: .body)
 		label.adjustsFontForContentSizeCategory = true
+		label.textAlignment = .left
 
 		return label
 	}()
