@@ -88,7 +88,7 @@ class CheckoutFlowMainView: UIView {
 		if #available(iOS 13.0, *) {
 			backgroundColor = .systemGroupedBackground
 		} else {
-			backgroundColor = UIColor(demo_hexString: "#f2f2f7ff")
+			backgroundColor = UIColor(demoHexString: "#f2f2f7ff")
 		}
 
 		addSubview(stackView)

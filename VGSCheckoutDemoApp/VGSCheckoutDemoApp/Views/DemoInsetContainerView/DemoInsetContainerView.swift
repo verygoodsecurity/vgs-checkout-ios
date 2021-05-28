@@ -7,7 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-
 /// Container view is a helper view to hold content views in form and add paddings.
 internal class DemoInsetContainerView: UIView {
 

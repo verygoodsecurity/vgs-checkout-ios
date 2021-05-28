@@ -8,7 +8,6 @@ import Foundation
 import UIKit
 #endif
 
-
 class CheckoutBasicFlowVC: UIViewController {
 
 	// MARK: - Vars
