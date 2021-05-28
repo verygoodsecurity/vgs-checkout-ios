@@ -22,9 +22,8 @@ public class VGSCheckout {
 	}
 
 	public func presentCheckout(from viewController: UIViewController, cardScanner: CardScanner?) {
-		guard let scanner = cardScanner else {
-			return
-		}
+		let checkoutVC = CheckoutViewController(cardScanner: cardScanner)
+		viewController.present(checkoutVC, animated: true, completion: nil)
 	}
 }
 
