@@ -13,11 +13,19 @@ let package = Package(
 		// Products define the executables and libraries produced by a package, and make them visible to other packages.
 		.library(
 			name: "VGSCheckout",
-			targets: ["VGSCheckout"])
+			targets: ["VGSCheckout"]),
+		.library(
+				name: "VGSCheckoutCardIOScanner",
+				targets: ["VGSCheckoutCardIOScanner"])
 	],
 	dependencies: [
 		.package(
 			name: "VGSCollectSDK",
+			url: "https://github.com/verygoodsecurity/vgs-collect-ios.git",
+			.exact("1.7.13")
+		),
+		.package(
+			name: "VGSCardIOCollector",
 			url: "https://github.com/verygoodsecurity/vgs-collect-ios.git",
 			.exact("1.7.13")
 		),
@@ -32,6 +40,10 @@ let package = Package(
 				"VGSCheckout.h",
 				"Info.plist"
 			]),
+		.target(
+			name: "VGSCheckoutCardIOScanner",
+			dependencies: ["VGSCheckout"],
+			path: "Sources/VGSCheckoutCardIOScanner/"),
 		.testTarget(
 			name: "VGSCheckoutTests",
 			dependencies: ["VGSCheckout"]

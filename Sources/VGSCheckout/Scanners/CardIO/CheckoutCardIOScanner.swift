@@ -10,7 +10,7 @@ import UIKit
 //#if canImport(CardIOSDK)
 //import CardIOSDK
 //#endif
-import CardIO
+//import CardIO
 
 //let view = CardIOView(frame: .zero)
 
