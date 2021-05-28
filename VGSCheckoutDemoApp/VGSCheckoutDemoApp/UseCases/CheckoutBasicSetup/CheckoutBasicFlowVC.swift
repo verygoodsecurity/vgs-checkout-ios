@@ -7,6 +7,7 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
+import VGSCheckout
 
 class CheckoutBasicFlowVC: UIViewController {
 
@@ -27,15 +28,24 @@ class CheckoutBasicFlowVC: UIViewController {
 
 		view.addSubview(mainView)
 		mainView.checkoutDemo_constraintViewToSuperviewEdges()
+		mainView.delegate = self
 
-		loadData()
+		displayShoppingCartData()
 	}
 
 	// MARK: - Helpers
 
 	/// Load orders data.
-	private func loadData() {
+	private func displayShoppingCartData() {
 		let items = OrderDataProvider.provideOrders()
 		mainView.shoppingCartView.configure(with: items)
+	}
+}
+
+// MARK: - CheckoutFlowMainViewDelegate
+
+extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
+	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
+		VGSCheckout().presentCheckout(from: self, cardScanner: .cardIO)
 	}
 }

@@ -21,8 +21,15 @@ public class VGSCheckout {
 		case bouncer
 	}
 
+	// MARK: - Initializer
+
+	public init() {}
+
+	// MARK: - Interface
+
 	public func presentCheckout(from viewController: UIViewController, cardScanner: CardScanner?) {
 		let checkoutVC = CheckoutViewController(cardScanner: cardScanner)
+		checkoutVC.modalPresentationStyle = .fullScreen
 		viewController.present(checkoutVC, animated: true, completion: nil)
 	}
 }
@@ -43,6 +50,7 @@ internal class CheckoutViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		view.backgroundColor = .yellow
 		guard let scanner = cardScanner else {
 			return
 		}
