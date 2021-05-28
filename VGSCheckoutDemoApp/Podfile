@@ -8,5 +8,6 @@ target 'VGSCheckoutDemoApp' do
   # Pods for VGSCheckoutDemoApp
 
   pod 'VGSCheckout', :path => "../"
+	pod 'VGSCheckout/CardIO', :path => "../"
 
 end

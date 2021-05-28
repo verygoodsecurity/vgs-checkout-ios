@@ -24,63 +24,25 @@ Pod::Spec.new do |spec|
 
   spec.homepage     = "https://github.com/verygoodsecurity/vgs-checkout-ios"
   spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
-
   spec.author             = { "Very Good Security" => "support@verygoodsecurity.com" }
-  # Or just: spec.author    = "dmytro.khl"
-  # spec.authors            = { "dmytro.khl" => "dmytro.khludkov@vgs.io" }
-  # spec.social_media_url   = "https://twitter.com/dmytro.khl"
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
-  # spec.platform     = :ios, "11.0"
-
-  #  When using multiple platforms
   spec.ios.deployment_target = "11.0"
-  # spec.osx.deployment_target = "10.7"
-  # spec.watchos.deployment_target = "2.0"
-  # spec.tvos.deployment_target = "9.0"
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
   spec.source       = { :git => "https://github.com/verygoodsecurity/vgs-checkout-ios.git", :tag => "#{spec.version}" }
 
 
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any swift, h, m, mm, c & cpp files.
-  #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
-
   spec.requires_arc = true
-
   spec.default_subspec = 'Core'
 
   spec.subspec 'Core' do |core|
   #set as default podspec to prevent from downloading additional modules
     core.source_files = "Sources/VGSCheckout", "Sources/VGSCheckout/**/*.{swift}", "Sources/VGSCheckout/**/*.{h, m}"
+		core.dependency "VGSCollectSDK", '1.7.13'
   end
+
+	spec.subspec 'CardIO' do |cardIO|
+		cardIO.dependency "VGSCollectSDK/CardIO"
+		cardIO.source_files  = "Sources/VGSCheckoutCardIOScanner", "Sources/VGSCheckoutCardIOScanner/**/*.{swift}", "Sources/VGSCheckoutCardIOScanner/**/*.{h, m}"
+    cardIO.dependency "VGSCheckout/Core"
+	end
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

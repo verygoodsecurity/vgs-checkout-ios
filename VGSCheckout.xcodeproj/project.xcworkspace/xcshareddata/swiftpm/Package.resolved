@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CardIOSDK",
+        "repositoryURL": "https://github.com/verygoodsecurity/CardIOSDK-iOS.git",
+        "state": {
+          "branch": null,
+          "revision": "bb23083190c4c41e8e2d7d6bb88cecfa2d5ba1d2",
+          "version": "5.5.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
