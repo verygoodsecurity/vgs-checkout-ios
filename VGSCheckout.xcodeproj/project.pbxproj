@@ -10,10 +10,9 @@
 		3286E0C6265EC19C001FECEB /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		3286E131265EC588001FECEB /* VGSCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3286E139265EC5DC001FECEB /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */; };
+		44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44C4C8B726648E0300195505 /* VGSCollectSDK */; };
 		44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */; };
-		44ECE608265FEE13006C160B /* CardIOSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44ECE607265FEE13006C160B /* CardIOSDK */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
-		44ECE610265FF02D006C160B /* CardIOSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44ECE60F265FF02D006C160B /* CardIOSDK */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
 		44ECE616265FF596006C160B /* CheckoutCardIOScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */; };
 /* End PBXBuildFile section */
@@ -54,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44ECE610265FF02D006C160B /* CardIOSDK in Frameworks */,
+				44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +69,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44ECE608265FEE13006C160B /* CardIOSDK in Frameworks */,
 				44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +219,7 @@
 			);
 			name = VGSCheckout;
 			packageProductDependencies = (
-				44ECE60F265FF02D006C160B /* CardIOSDK */,
+				44C4C8B726648E0300195505 /* VGSCollectSDK */,
 			);
 			productName = VGSCheckout;
 			productReference = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */;
@@ -263,7 +261,6 @@
 			);
 			name = VGSCheckoutCardIOScanner;
 			packageProductDependencies = (
-				44ECE607265FEE13006C160B /* CardIOSDK */,
 			);
 			productName = VGSCheckoutCardIOScanner;
 			productReference = 44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */;
@@ -300,7 +297,7 @@
 			);
 			mainGroup = 3286E0B2265EC19C001FECEB;
 			packageReferences = (
-				44ECE606265FEE13006C160B /* XCRemoteSwiftPackageReference "CardIOSDK-iOS" */,
+				44C4C8B626648E0300195505 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */,
 			);
 			productRefGroup = 3286E0BD265EC19C001FECEB /* Products */;
 			projectDirPath = "";
@@ -748,26 +745,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		44ECE606265FEE13006C160B /* XCRemoteSwiftPackageReference "CardIOSDK-iOS" */ = {
+		44C4C8B626648E0300195505 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/verygoodsecurity/CardIOSDK-iOS.git";
+			repositoryURL = "https://github.com/verygoodsecurity/vgs-collect-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = 5.5.6;
+				version = 1.7.13;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		44ECE607265FEE13006C160B /* CardIOSDK */ = {
+		44C4C8B726648E0300195505 /* VGSCollectSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 44ECE606265FEE13006C160B /* XCRemoteSwiftPackageReference "CardIOSDK-iOS" */;
-			productName = CardIOSDK;
-		};
-		44ECE60F265FF02D006C160B /* CardIOSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44ECE606265FEE13006C160B /* XCRemoteSwiftPackageReference "CardIOSDK-iOS" */;
-			productName = CardIOSDK;
+			package = 44C4C8B626648E0300195505 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */;
+			productName = VGSCollectSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
