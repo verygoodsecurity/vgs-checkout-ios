@@ -8,18 +8,6 @@ import Foundation
 import UIKit
 #endif
 
-struct VGSCheckoutTheme {
-	struct CardPaymentTheme {
-		struct PaymentButton {
-			static var backgroundColor: UIColor = UIColor.systemPurple
-			static var opacity: CGFloat = 0.60
-			static var titleOpacity: CGFloat = 0.8
-			static var successColor: UIColor = UIColor.systemGreen
-			static var cornerRadius: CGFloat = 6
-		}
-	}
-}
-
 /// Control for payment submit button.
 internal class VGSSubmitButton: UIControl {
 
@@ -172,7 +160,6 @@ internal class VGSSubmitButton: UIControl {
 
 		// Allow the subviews simply passes the event through.
 		stackView.isUserInteractionEnabled = false
-
 
 		let leftPadding = UIView()
 		let rightPadding = UIView()

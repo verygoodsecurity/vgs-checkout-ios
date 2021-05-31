@@ -8,15 +8,34 @@ import Foundation
 import UIKit
 #endif
 
+/// `UIViewController` subclass to display forms.
 internal class VGSFormViewController: UIViewController {
 
 	// MARK: - Vars
 
-	internal let formView = VGSFormView()
+	/// Form view.
+	internal let formView: VGSFormView
+
+	/// Bottom constraint to manage view position on keyboard show/hide notifications.
 	private var formKeyboardGuideBottomConstraint: NSLayoutConstraint?
+
+	// MARK: - Initialization
+
+	/// Intialization.
+	/// - Parameter formView: `VGSFormView` object, form view.
+	init(formView: VGSFormView) {
+		self.formView = formView
+		super.init(nibName: nil, bundle: nil)
+	}
+
+	/// no:doc
+	required init?(coder: NSCoder) {
+		fatalError("not implemented")
+	}
 
 	// MARK: - Lifecycle
 
+	/// no:doc
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -26,10 +45,16 @@ internal class VGSFormViewController: UIViewController {
 
 	// MARK: - Helpers
 
+	/// Setup basic UI and laout.
 	internal func setupUI() {
 		view.addSubview(formView)
-		view.backgroundColor = .white
 		formView.translatesAutoresizingMaskIntoConstraints = false
+
+		if #available(iOS 13.0, *) {
+			view.backgroundColor = .systemBackground
+		} else {
+			view.backgroundColor = .white
+		}
 
 		var formConstraints = [NSLayoutConstraint?]()
 		if #available(iOS 11.0, *) {
@@ -54,6 +79,7 @@ internal class VGSFormViewController: UIViewController {
 		NSLayoutConstraint.activate(formConstraints.compactMap { $0 })
 	}
 
+	/// Add listeners for keyboard notifcations.
 	internal func addListeners() {
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self,
@@ -62,6 +88,7 @@ internal class VGSFormViewController: UIViewController {
 																	 object: nil)
 	}
 
+	/// Handle keyboard notification.
 	@objc private func handleKeyboardFrameUpdate(_ notification: NSNotification) {
 		guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 

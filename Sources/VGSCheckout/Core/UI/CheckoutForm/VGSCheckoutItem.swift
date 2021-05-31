@@ -72,7 +72,6 @@ public class VGSCheckoutComponent: NSObject {
 		return view
 	}()
 
-
 	internal lazy var cardCheckoutView: VGSCheckoutCardFormView = {
 		let view = VGSCheckoutCardFormView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -80,8 +79,15 @@ public class VGSCheckoutComponent: NSObject {
 		return view
 	}()
 
+	/// Form view.
+	lazy var formView: VGSFormView = {
+		let view = VGSFormView()
+
+		return view
+	}()
+
 	internal lazy var formController: VGSFormViewController = {
-		let viewController = VGSFormViewController()
+		let viewController = VGSFormViewController(formView: formView)
 		viewController.formView.stackView.layoutMargins = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)
 		viewController.formView.stackView.isLayoutMarginsRelativeArrangement = true
 
@@ -104,14 +110,28 @@ public class VGSCheckoutComponent: NSObject {
 		return viewController
 	}()
 
-	internal var vgsCollect: VGSCollect
+	/// `VGSCollect` object.
+	internal let vgsCollect: VGSCollect
+
+	/// Checkout configuration.
+	internal var checkoutConfiguration: VGSCheckoutConfiguration
 
 	// MARK: - Initialization
 
-	public init(vgsCollect: VGSCollect) {
-		self.vgsCollect = vgsCollect
+	public init(checkoutConfiguration: VGSCheckoutConfiguration) {
+		self.checkoutConfiguration = checkoutConfiguration
+		//self.vgsCollect = VGSCollect(id: "", environment: "")
+		let hostNamePolicy = self.checkoutConfiguration.routeConfiguration.hostnamePolicy
+		let collectConfig = checkoutConfiguration.collectConfig
+		switch hostNamePolicy {
+		case .vault:
+			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment)
+		case .customHostname(let customHostname):
+			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: customHostname)
+		case .local(let satelliteConfiguration):
+			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
+		}
 		super.init()
-		buildForm()
 	}
 
 	// MARK: - Helpers

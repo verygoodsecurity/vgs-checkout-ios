@@ -28,6 +28,7 @@
 		44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8DE2664B18B00195505 /* VGSSubmitButton.swift */; };
 		44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8FA2664B1FD00195505 /* UIView+Extensions.swift */; };
 		44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */; };
+		44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */; };
 		44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
@@ -75,6 +76,7 @@
 		44C4C8DE2664B18B00195505 /* VGSSubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSSubmitButton.swift; sourceTree = "<group>"; };
 		44C4C8FA2664B1FD00195505 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTheme.swift; sourceTree = "<group>"; };
 		44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCardIOScanner.swift; sourceTree = "<group>"; };
 		44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckoutCardIOScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardIOScanner.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		44C4C8B92664B18A00195505 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				44C4C8FF2664BA4700195505 /* Theme */,
 				44C4C8DA2664B18B00195505 /* FormControllers */,
 				44C4C8BA2664B18A00195505 /* SupplementaryViews */,
 				44C4C8BD2664B18A00195505 /* CheckoutForm */,
@@ -317,6 +320,14 @@
 				44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */,
 			);
 			path = "UIColor+Extensions";
+			sourceTree = "<group>";
+		};
+		44C4C8FF2664BA4700195505 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		44ECE5E0265FE1E8006C160B /* Scanners */ = {
@@ -597,6 +608,7 @@
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
 				44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */,
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
+				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,
 				44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */,
 				44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */,
