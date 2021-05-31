@@ -40,7 +40,8 @@
 		44C4C91E2664F15400195505 /* VGSCheckoutRequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C91D2664F15400195505 /* VGSCheckoutRequestOptions.swift */; };
 		44C4C9212664F19D00195505 /* VGSCheckoutDataMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9202664F19D00195505 /* VGSCheckoutDataMergePolicy.swift */; };
 		44C4C9242664F1FF00195505 /* VGSCheckoutHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9232664F1FF00195505 /* VGSCheckoutHTTPMethod.swift */; };
-		44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */; };
+		44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92626651AD700195505 /* VGSCheckout.swift */; };
+		44C4C92A26651DCD00195505 /* VGSCardFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92926651DCD00195505 /* VGSCardFormItem.swift */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
 		44ECE616265FF596006C160B /* CheckoutCardIOScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */; };
@@ -99,7 +100,8 @@
 		44C4C91D2664F15400195505 /* VGSCheckoutRequestOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestOptions.swift; sourceTree = "<group>"; };
 		44C4C9202664F19D00195505 /* VGSCheckoutDataMergePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDataMergePolicy.swift; sourceTree = "<group>"; };
 		44C4C9232664F1FF00195505 /* VGSCheckoutHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHTTPMethod.swift; sourceTree = "<group>"; };
-		44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCardIOScanner.swift; sourceTree = "<group>"; };
+		44C4C92626651AD700195505 /* VGSCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckout.swift; sourceTree = "<group>"; };
+		44C4C92926651DCD00195505 /* VGSCardFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardFormItem.swift; sourceTree = "<group>"; };
 		44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckoutCardIOScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardIOScanner.swift; sourceTree = "<group>"; };
 		44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutCardIOScanner.h; sourceTree = "<group>"; };
@@ -168,7 +170,6 @@
 			children = (
 				44ECE5E2265FE1F0006C160B /* Core */,
 				44C4C8F62664B1CE00195505 /* Helpers */,
-				44ECE5E0265FE1E8006C160B /* Scanners */,
 				3286E12F265EC588001FECEB /* VGSCheckout.h */,
 				3286E130265EC588001FECEB /* Info.plist */,
 			);
@@ -458,25 +459,27 @@
 			path = HTTPMethods;
 			sourceTree = "<group>";
 		};
-		44ECE5E0265FE1E8006C160B /* Scanners */ = {
+		44C4C92526651AC600195505 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
-				44ECE5E1265FE1E8006C160B /* CardIO */,
+				44C4C92626651AD700195505 /* VGSCheckout.swift */,
+				44C4C92826651DB100195505 /* CardFormItem */,
 			);
-			path = Scanners;
+			path = Checkout;
 			sourceTree = "<group>";
 		};
-		44ECE5E1265FE1E8006C160B /* CardIO */ = {
+		44C4C92826651DB100195505 /* CardFormItem */ = {
 			isa = PBXGroup;
 			children = (
-				44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */,
+				44C4C92926651DCD00195505 /* VGSCardFormItem.swift */,
 			);
-			path = CardIO;
+			path = CardFormItem;
 			sourceTree = "<group>";
 		};
 		44ECE5E2265FE1F0006C160B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				44C4C92526651AC600195505 /* Checkout */,
 				44C4C9022664EC5800195505 /* Configuration */,
 				44C4C8B92664B18A00195505 /* UI */,
 			);
@@ -743,14 +746,15 @@
 				44C4C9242664F1FF00195505 /* VGSCheckoutHTTPMethod.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
-				44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */,
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
 				44C4C9122664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift in Sources */,
 				44C4C9092664ECD200195505 /* VGSCheckoutVaultConfiguration.swift in Sources */,
 				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,
+				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,
 				44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */,
 				44C4C9182664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift in Sources */,
+				44C4C92A26651DCD00195505 /* VGSCardFormItem.swift in Sources */,
 				44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFormItemView.swift in Sources */,
 			);

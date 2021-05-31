@@ -7,6 +7,9 @@ import Foundation
 /// Holds configuration for vault, confirms to `VGSCheckoutConfigurationProtocol`.
 public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
 
+	/// Payment flow type.
+	internal let paymentFlowType: VGSCheckoutPaymentFlowType = .vault
+
 	/// `String` object, organization vault id.
 	public let vaultID: String
 
@@ -20,7 +23,7 @@ public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
 	public var cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions()
 
 	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
-	public var routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRouteConfiguration()
+	public var routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()
 
 	/// Initialization.
 	/// - Parameters:
@@ -28,8 +31,8 @@ public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
 	///   - path: `String` object, inbound rout path for your organization vault.
 	///   - cardDetailsOptions: `VGSCheckoutCardDetailsOptions`, card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
-	///   - routeConfiguration: `VGSCheckoutRouteConfiguration`, default is `VGSCheckoutRouteConfiguration` object.
-	public init(vaultID: String, environment: String, path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRouteConfiguration()) {
+	///   - routeConfiguration: `VGSCheckoutRequestConfiguration`, default is `VGSCheckoutRequestConfiguration` object.
+	public init(vaultID: String, environment: String, path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()) {
 		self.vaultID = vaultID
 		self.environment = environment
 		self.path = path

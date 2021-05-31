@@ -43,7 +43,7 @@ internal class VGSSeparatedStackView: UIStackView {
 	/// CALayer for separators.
 	private let separatorsShapeLayer = CAShapeLayer()
 
-	/// A boolean flag indicating wether view has border.
+	/// A boolean flag indicating whether view has border.
 	internal var hasBorderView: Bool = false {
 		didSet {
 			if !hasBorderView {
@@ -63,7 +63,7 @@ internal class VGSSeparatedStackView: UIStackView {
 		}
 	}
 
-	/// A boolean flag indicating wether RTL is active.
+	/// A boolean flag indicating whether RTL is active.
 	internal var isRTL: Bool {
 		return traitCollection.layoutDirection == .rightToLeft
 	}

@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// Route configuration
+/// Request configuration
 public struct VGSCheckoutRequestConfiguration {
 
 	/// Hostname policy (specifies different hosts how to send your data). Default is `vault`.

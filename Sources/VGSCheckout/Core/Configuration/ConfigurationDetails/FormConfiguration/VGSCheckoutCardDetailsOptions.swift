@@ -17,7 +17,7 @@ public struct VGSCheckoutCardDetailsOptions {
 	/// CVC field name (should be configured in your route on the dashboard)
 	public var cvcFieldName: String = ""
 
-	/// A boolean flag indicating wether card icon is hidden. Default is `false`.
+	/// A boolean flag indicating whether card icon is hidden. Default is `false`.
 	public var isCardIconHidden: Bool = false
 
 	/// Card holder name field type. Default is `hidden`.
