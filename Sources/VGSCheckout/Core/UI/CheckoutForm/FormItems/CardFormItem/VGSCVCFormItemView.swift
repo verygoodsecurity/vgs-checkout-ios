@@ -13,7 +13,7 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormComponentProtocol {
 
 	// MARK: - Vars
 
-	let placeholderComponent = VGSPlaceholderComponentView(frame: .zero)
+	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cvcTextField

@@ -16,7 +16,7 @@ internal enum VGSCheckoutFormValidationState {
 }
 
 internal protocol VGSTextFieldFormComponentProtocol: AnyObject {
-	var placeholderComponent: VGSPlaceholderComponentView {get}
+	var placeholderComponent: VGSPlaceholderFormItemView {get}
 	var textField: VGSTextField {get}
 }
 
@@ -24,7 +24,7 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormComponentP
 
 	// MARK: - Vars
 
-	let placeholderComponent = VGSPlaceholderComponentView(frame: .zero)
+	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return expDateTextField

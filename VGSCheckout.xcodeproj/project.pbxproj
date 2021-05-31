@@ -20,7 +20,7 @@
 		44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D02664B18B00195505 /* VGSCardNumberFormItemView.swift */; };
 		44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D12664B18B00195505 /* VGSExpirationDateFormItemView.swift */; };
 		44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D22664B18B00195505 /* VGSFormComponent.swift */; };
-		44C4C8F02664B18B00195505 /* VGSPlaceholderComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */; };
+		44C4C8F02664B18B00195505 /* VGSPlaceholderFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D42664B18B00195505 /* VGSPlaceholderFormItemView.swift */; };
 		44C4C8F12664B18B00195505 /* VGSFormHintComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */; };
 		44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D72664B18B00195505 /* VGSContainerItemView.swift */; };
 		44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D92664B18B00195505 /* VGSSeparatedStackView.swift */; };
@@ -67,7 +67,7 @@
 		44C4C8D02664B18B00195505 /* VGSCardNumberFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardNumberFormItemView.swift; sourceTree = "<group>"; };
 		44C4C8D12664B18B00195505 /* VGSExpirationDateFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpirationDateFormItemView.swift; sourceTree = "<group>"; };
 		44C4C8D22664B18B00195505 /* VGSFormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormComponent.swift; sourceTree = "<group>"; };
-		44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPlaceholderComponentView.swift; sourceTree = "<group>"; };
+		44C4C8D42664B18B00195505 /* VGSPlaceholderFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPlaceholderFormItemView.swift; sourceTree = "<group>"; };
 		44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormHintComponentView.swift; sourceTree = "<group>"; };
 		44C4C8D72664B18B00195505 /* VGSContainerItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSContainerItemView.swift; sourceTree = "<group>"; };
 		44C4C8D92664B18B00195505 /* VGSSeparatedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSSeparatedStackView.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		44C4C8D32664B18B00195505 /* PlaceholderFormItem */ = {
 			isa = PBXGroup;
 			children = (
-				44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */,
+				44C4C8D42664B18B00195505 /* VGSPlaceholderFormItemView.swift */,
 				44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */,
 			);
 			path = PlaceholderFormItem;
@@ -586,7 +586,7 @@
 				44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */,
 				44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */,
 				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
-				44C4C8F02664B18B00195505 /* VGSPlaceholderComponentView.swift in Sources */,
+				44C4C8F02664B18B00195505 /* VGSPlaceholderFormItemView.swift in Sources */,
 				44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */,
 				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
 				44C4C8F42664B18B00195505 /* VGSFormViewController.swift in Sources */,
