@@ -14,7 +14,7 @@ internal class VGSPlaceholderFormItemView: UIView {
 	// MARK: - Vars
 
 	/// Stack view.
-	private lazy var stackView: UIStackView = {
+	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
@@ -24,8 +24,8 @@ internal class VGSPlaceholderFormItemView: UIView {
 	}()
 
 	/// Hint component view.
-	internal lazy var hintComponentView: VGSFormHintComponentView = {
-		let view = VGSFormHintComponentView(frame: .zero)
+	internal lazy var hintComponentView: VGSFormHintView = {
+		let view = VGSFormHintView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
 
 		return view
@@ -65,10 +65,7 @@ internal class VGSPlaceholderFormItemView: UIView {
 	/// Setup UI and basic layout.
 	fileprivate func setupUI() {
 		addSubview(stackView)
-		stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-		stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-		stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-		stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		stackView.checkout_constraintViewToSuperviewEdges()
 
 		stackView.addArrangedSubview(hintComponentView)
 	}

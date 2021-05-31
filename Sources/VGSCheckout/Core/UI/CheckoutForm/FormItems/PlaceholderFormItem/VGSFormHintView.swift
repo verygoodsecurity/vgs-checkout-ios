@@ -1,19 +1,20 @@
 //
 //  VGSFormHintComponentView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation
-
 #if canImport(UIKit)
 import UIKit
 #endif
 
-internal class VGSFormHintComponentView: UIView {
+/// Form component for hint.
+internal class VGSFormHintView: UIView {
 
 	// MARK: - Vars
 
-	internal lazy var stackView: UIStackView = {
+	/// Stack view.
+	private lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .horizontal
@@ -23,6 +24,7 @@ internal class VGSFormHintComponentView: UIView {
 		return stackView
 	}()
 
+	/// Hint label.
 	internal lazy var label: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +34,7 @@ internal class VGSFormHintComponentView: UIView {
 		return label
 	}()
 
+	/// Accessory type, default is `none`.
 	internal var accessory: VGSCheckoutHintItemType = .none {
 		didSet {
 			switch accessory {
@@ -50,6 +53,7 @@ internal class VGSFormHintComponentView: UIView {
 		}
 	}
 
+	/// Container for hint image view.
 	internal lazy var hintImageViewContainer: UIView = {
 		let view = UIView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -60,45 +64,39 @@ internal class VGSFormHintComponentView: UIView {
 			hintImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			hintImageView.topAnchor.constraint(equalTo: view.topAnchor),
 			hintImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//			hintImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
 		]
 
-		if #available(iOS 11.0, *) {
-			hintImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-		} else {
-			// Fallback on earlier versions
-		}
-
-//		hintImageView.setContentHuggingPriority(.required, for: .horizontal)
-//		hintImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
-
 		NSLayoutConstraint.activate(constraints)
-
 		return view
 	}()
 
-	internal lazy var hintImageView: UIImageView = {
+	/// Hint image view.
+	private lazy var hintImageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.contentMode = .scaleAspectFit
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 
+		imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
 		return imageView
 	}()
 
 	// MARK: - Initialization
 
+	/// no:doc
 	internal override init(frame: CGRect) {
 		super.init(frame: .zero)
 
 		setupUI()
 	}
 
+	/// no:doc
 	internal required init?(coder: NSCoder) {
 		fatalError("not implemented")
 	}
 
 	// MARK: - Helpers
 
+	/// Build basic UI and layout.
 	internal func setupUI() {
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()
@@ -108,6 +106,7 @@ internal class VGSFormHintComponentView: UIView {
 		stackView.addArrangedSubview(hintImageViewContainer)
 	}
 
+	/// Hide allv views except hint label.
 	internal func hideAllExceptLabel() {
 		let allOtherSubviewsExceptLabel = stackView.arrangedSubviews.filter { $0 != label}
 		allOtherSubviewsExceptLabel.forEach { view in

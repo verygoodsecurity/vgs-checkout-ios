@@ -1,6 +1,6 @@
 //
 //  VGSContainerItemView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation
