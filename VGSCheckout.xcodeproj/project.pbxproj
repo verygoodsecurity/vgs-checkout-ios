@@ -11,6 +11,23 @@
 		3286E131265EC588001FECEB /* VGSCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3286E139265EC5DC001FECEB /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */; };
 		44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44C4C8B726648E0300195505 /* VGSCollectSDK */; };
+		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
+		44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */; };
+		44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BF2664B18B00195505 /* VGSFormView.swift */; };
+		44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */; };
+		44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8CE2664B18B00195505 /* VGSCVCFormItemView.swift */; };
+		44C4C8EC2664B18B00195505 /* VGSCardholderFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8CF2664B18B00195505 /* VGSCardholderFormItemView.swift */; };
+		44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D02664B18B00195505 /* VGSCardNumberFormItemView.swift */; };
+		44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D12664B18B00195505 /* VGSExpirationDateFormItemView.swift */; };
+		44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D22664B18B00195505 /* VGSFormComponent.swift */; };
+		44C4C8F02664B18B00195505 /* VGSPlaceholderComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */; };
+		44C4C8F12664B18B00195505 /* VGSFormHintComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */; };
+		44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D72664B18B00195505 /* VGSContainerItemView.swift */; };
+		44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8D92664B18B00195505 /* VGSSeparatedStackView.swift */; };
+		44C4C8F42664B18B00195505 /* VGSFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8DB2664B18B00195505 /* VGSFormViewController.swift */; };
+		44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8DE2664B18B00195505 /* VGSSubmitButton.swift */; };
+		44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8FA2664B1FD00195505 /* UIView+Extensions.swift */; };
+		44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */; };
 		44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
@@ -41,6 +58,23 @@
 		3286E130265EC588001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTests.swift; sourceTree = "<group>"; };
 		3286E138265EC5DC001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHeaderView.swift; sourceTree = "<group>"; };
+		44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardFormView.swift; sourceTree = "<group>"; };
+		44C4C8BF2664B18B00195505 /* VGSFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormView.swift; sourceTree = "<group>"; };
+		44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutItem.swift; sourceTree = "<group>"; };
+		44C4C8CE2664B18B00195505 /* VGSCVCFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCVCFormItemView.swift; sourceTree = "<group>"; };
+		44C4C8CF2664B18B00195505 /* VGSCardholderFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardholderFormItemView.swift; sourceTree = "<group>"; };
+		44C4C8D02664B18B00195505 /* VGSCardNumberFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardNumberFormItemView.swift; sourceTree = "<group>"; };
+		44C4C8D12664B18B00195505 /* VGSExpirationDateFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpirationDateFormItemView.swift; sourceTree = "<group>"; };
+		44C4C8D22664B18B00195505 /* VGSFormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormComponent.swift; sourceTree = "<group>"; };
+		44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPlaceholderComponentView.swift; sourceTree = "<group>"; };
+		44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormHintComponentView.swift; sourceTree = "<group>"; };
+		44C4C8D72664B18B00195505 /* VGSContainerItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSContainerItemView.swift; sourceTree = "<group>"; };
+		44C4C8D92664B18B00195505 /* VGSSeparatedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSSeparatedStackView.swift; sourceTree = "<group>"; };
+		44C4C8DB2664B18B00195505 /* VGSFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormViewController.swift; sourceTree = "<group>"; };
+		44C4C8DE2664B18B00195505 /* VGSSubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSSubmitButton.swift; sourceTree = "<group>"; };
+		44C4C8FA2664B1FD00195505 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		44ECE5E3265FE1F0006C160B /* CheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCardIOScanner.swift; sourceTree = "<group>"; };
 		44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckoutCardIOScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardIOScanner.swift; sourceTree = "<group>"; };
@@ -109,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				44ECE5E2265FE1F0006C160B /* Core */,
+				44C4C8F62664B1CE00195505 /* Helpers */,
 				44ECE5E0265FE1E8006C160B /* Scanners */,
 				3286E12F265EC588001FECEB /* VGSCheckout.h */,
 				3286E130265EC588001FECEB /* Info.plist */,
@@ -133,6 +168,157 @@
 			path = VGSCheckoutTests;
 			sourceTree = "<group>";
 		};
+		44C4C8B92664B18A00195505 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8DA2664B18B00195505 /* FormControllers */,
+				44C4C8BA2664B18A00195505 /* SupplementaryViews */,
+				44C4C8BD2664B18A00195505 /* CheckoutForm */,
+				44C4C8DC2664B18B00195505 /* Controls */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		44C4C8BA2664B18A00195505 /* SupplementaryViews */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8BB2664B18A00195505 /* VGSCheckoutHeaderView */,
+			);
+			path = SupplementaryViews;
+			sourceTree = "<group>";
+		};
+		44C4C8BB2664B18A00195505 /* VGSCheckoutHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */,
+			);
+			path = VGSCheckoutHeaderView;
+			sourceTree = "<group>";
+		};
+		44C4C8BD2664B18A00195505 /* CheckoutForm */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */,
+				44C4C8BF2664B18B00195505 /* VGSFormView.swift */,
+				44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */,
+				44C4C8C12664B18B00195505 /* FormItems */,
+				44C4C8D82664B18B00195505 /* VGSSeparatedStackView */,
+			);
+			path = CheckoutForm;
+			sourceTree = "<group>";
+		};
+		44C4C8C12664B18B00195505 /* FormItems */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8CD2664B18B00195505 /* CardFormItem */,
+				44C4C8D22664B18B00195505 /* VGSFormComponent.swift */,
+				44C4C8D32664B18B00195505 /* PlaceholderFormItem */,
+				44C4C8D62664B18B00195505 /* ContainerItemView */,
+			);
+			path = FormItems;
+			sourceTree = "<group>";
+		};
+		44C4C8CD2664B18B00195505 /* CardFormItem */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8CE2664B18B00195505 /* VGSCVCFormItemView.swift */,
+				44C4C8CF2664B18B00195505 /* VGSCardholderFormItemView.swift */,
+				44C4C8D02664B18B00195505 /* VGSCardNumberFormItemView.swift */,
+				44C4C8D12664B18B00195505 /* VGSExpirationDateFormItemView.swift */,
+			);
+			path = CardFormItem;
+			sourceTree = "<group>";
+		};
+		44C4C8D32664B18B00195505 /* PlaceholderFormItem */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8D42664B18B00195505 /* VGSPlaceholderComponentView.swift */,
+				44C4C8D52664B18B00195505 /* VGSFormHintComponentView.swift */,
+			);
+			path = PlaceholderFormItem;
+			sourceTree = "<group>";
+		};
+		44C4C8D62664B18B00195505 /* ContainerItemView */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8D72664B18B00195505 /* VGSContainerItemView.swift */,
+			);
+			path = ContainerItemView;
+			sourceTree = "<group>";
+		};
+		44C4C8D82664B18B00195505 /* VGSSeparatedStackView */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8D92664B18B00195505 /* VGSSeparatedStackView.swift */,
+			);
+			path = VGSSeparatedStackView;
+			sourceTree = "<group>";
+		};
+		44C4C8DA2664B18B00195505 /* FormControllers */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8DB2664B18B00195505 /* VGSFormViewController.swift */,
+			);
+			path = FormControllers;
+			sourceTree = "<group>";
+		};
+		44C4C8DC2664B18B00195505 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8DD2664B18B00195505 /* SubmitControl */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		44C4C8DD2664B18B00195505 /* SubmitControl */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8DE2664B18B00195505 /* VGSSubmitButton.swift */,
+			);
+			path = SubmitControl;
+			sourceTree = "<group>";
+		};
+		44C4C8F62664B1CE00195505 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8F72664B1D600195505 /* Extenions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		44C4C8F72664B1D600195505 /* Extenions */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8F82664B1DD00195505 /* UIKit+Extensions */,
+			);
+			path = Extenions;
+			sourceTree = "<group>";
+		};
+		44C4C8F82664B1DD00195505 /* UIKit+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8FC2664B3A500195505 /* UIColor+Extensions */,
+				44C4C8F92664B1E700195505 /* UIView+Extensions */,
+			);
+			path = "UIKit+Extensions";
+			sourceTree = "<group>";
+		};
+		44C4C8F92664B1E700195505 /* UIView+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8FA2664B1FD00195505 /* UIView+Extensions.swift */,
+			);
+			path = "UIView+Extensions";
+			sourceTree = "<group>";
+		};
+		44C4C8FC2664B3A500195505 /* UIColor+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8FD2664B3B900195505 /* UIColor+Extensions.swift */,
+			);
+			path = "UIColor+Extensions";
+			sourceTree = "<group>";
+		};
 		44ECE5E0265FE1E8006C160B /* Scanners */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +338,7 @@
 		44ECE5E2265FE1F0006C160B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				44C4C8B92664B18A00195505 /* UI */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -396,7 +583,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */,
+				44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */,
+				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
+				44C4C8F02664B18B00195505 /* VGSPlaceholderComponentView.swift in Sources */,
+				44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */,
+				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
+				44C4C8F42664B18B00195505 /* VGSFormViewController.swift in Sources */,
+				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
+				44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */,
+				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
+				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
+				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
 				44ECE5E4265FE1F0006C160B /* CheckoutCardIOScanner.swift in Sources */,
+				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
+				44C4C8F12664B18B00195505 /* VGSFormHintComponentView.swift in Sources */,
+				44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */,
+				44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */,
+				44C4C8EC2664B18B00195505 /* VGSCardholderFormItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
