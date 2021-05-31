@@ -22,8 +22,8 @@ public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
 	/// Card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
 	public var cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions()
 
-	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
-	public var routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()
+	/// Request configuration, default is `VGSCheckoutRequestConfiguration` object.
+	public var requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()
 
 	/// Initialization.
 	/// - Parameters:
@@ -32,11 +32,11 @@ public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
 	///   - path: `String` object, inbound rout path for your organization vault.
 	///   - cardDetailsOptions: `VGSCheckoutCardDetailsOptions`, card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
 	///   - routeConfiguration: `VGSCheckoutRequestConfiguration`, default is `VGSCheckoutRequestConfiguration` object.
-	public init(vaultID: String, environment: String, path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), routeConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()) {
+	public init(vaultID: String, environment: String, path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()) {
 		self.vaultID = vaultID
 		self.environment = environment
 		self.path = path
 		self.cardDetailsOptions = cardDetailsOptions
-		self.routeConfiguration = routeConfiguration
+		self.requestConfiguration = requestConfiguration
 	}
 }

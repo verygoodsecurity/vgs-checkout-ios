@@ -31,7 +31,7 @@ internal enum VGSCheckoutPaymentFlowType {
 	case multiplexing
 }
 
-internal enum VGSPaymentFlowConfigurationType {
+internal enum VGSPaymentFlow {
 	case vault(_ configuration: VGSCheckoutVaultConfiguration)
 	/// case multiplexing
 

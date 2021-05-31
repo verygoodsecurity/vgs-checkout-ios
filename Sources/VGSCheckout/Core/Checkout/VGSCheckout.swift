@@ -18,9 +18,10 @@ public class VGSCheckout {
 		case card
 	}
 
-	/// Checkout configuration.
-	internal let configurationType: VGSPaymentFlowConfigurationType
+	/// Payment flow type.
+	internal let paymentFlow: VGSPaymentFlow
 
+	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
 	// MARK: - Initialization
@@ -29,23 +30,13 @@ public class VGSCheckout {
 	/// - Parameter configuration: `VGSCheckoutBasicConfigurationProtocol` object, should confirm to `VGSCheckoutBasicConfigurationProtocol` and hold valid checkout configuration.
 	public init?(configuration: VGSCheckoutBasicConfigurationProtocol) {
 
-		guard let checkoutConfigurationType = VGSPaymentFlowConfigurationType(configuration: configuration) else {
+		guard let checkoutPaymentFlow = VGSPaymentFlow(configuration: configuration) else {
 			assertionFailure("VGSCheckout critical error! Unsupported configuration!")
 			return nil
 		}
 
-		self.configurationType = checkoutConfigurationType
-
-		let hostNamePolicy = self.checkoutConfiguration.routeConfiguration.hostnamePolicy
-		let collectConfig = checkoutConfiguration.collectConfig
-		switch hostNamePolicy {
-		case .vault:
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment)
-		case .customHostname(let customHostname):
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: customHostname)
-		case .local(let satelliteConfiguration):
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
-		}
+		self.paymentFlow = checkoutPaymentFlow
+		self.vgsCollect = VGSCollect(paymentFlow: checkoutPaymentFlow)
 	}
 
 	// MARK: - Interface
@@ -65,15 +56,18 @@ public class VGSCheckout {
 }
 
 internal extension VGSCollect {
-	init(hostnamePolicy: VGSPaymentFlowConfigurationType) {
-		
-		switch hostNamePolicy {
-		case .vault:
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment)
-		case .customHostname(let customHostname):
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: customHostname)
-		case .local(let satelliteConfiguration):
-			self.vgsCollect = VGSCollect(id: collectConfig.vaultID, environment: collectConfig.environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
+	convenience init(paymentFlow: VGSPaymentFlow) {
+		switch paymentFlow {
+		case .vault(let configuration):
+			let hostNamePolicy = configuration.requestConfiguration.hostnamePolicy
+			switch hostNamePolicy {
+			case .vault:
+				self.init(id: configuration.vaultID, environment: configuration.environment)
+			case .customHostname(let customHostname):
+				self.init(id: configuration.vaultID, environment: configuration.environment, hostname: customHostname)
+			case .local(let satelliteConfiguration):
+				self.init(id: configuration.vaultID, environment: configuration.environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
+			}
 		}
 	}
 }
