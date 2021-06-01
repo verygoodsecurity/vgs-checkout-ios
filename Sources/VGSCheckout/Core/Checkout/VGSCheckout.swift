@@ -24,6 +24,8 @@ public class VGSCheckout {
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
+	internal let checkoutFormController: VGSCheckoutFormController
+
 	// MARK: - Initialization
 
 	/// Initialization.
@@ -35,8 +37,10 @@ public class VGSCheckout {
 			return nil
 		}
 
+		let vgsCollect = VGSCollect(paymentFlow: checkoutPaymentFlow)
 		self.paymentFlow = checkoutPaymentFlow
-		self.vgsCollect = VGSCollect(paymentFlow: checkoutPaymentFlow)
+		self.vgsCollect = vgsCollect
+		self.checkoutFormController = VGSCheckoutFormController(paymentFlow: checkoutPaymentFlow, vgsCollect: vgsCollect)
 	}
 
 	// MARK: - Interface
@@ -51,7 +55,9 @@ public class VGSCheckout {
 	// MARK: - Helpers
 
 	internal func presentPayment(from viewController: UIViewController, animated: Bool, flow: CheckoutFlow) {
-
+		let checkoutController = checkoutFormController.buildCheckoutViewController()
+		checkoutController.modalPresentationStyle = .overFullScreen
+		viewController.present(checkoutController, animated: animated, completion: nil)
 	}
 }
 

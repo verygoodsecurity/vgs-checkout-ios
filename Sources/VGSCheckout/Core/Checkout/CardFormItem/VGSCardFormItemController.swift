@@ -1,14 +1,44 @@
 //
-//  VGSCardFormItemManager.swift
+//  VGSCardFormItemController.swift
 //  VGSCheckout
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 import VGSCollectSDK
 
+internal protocol VGSFormItemControllerDelegate: AnyObject {
+	func stateDidChange(_ state: FormItemControllerState)
+}
+
+internal protocol VGSBaseFormItemController {
+	var vgsTextFields: [VGSTextField] {get}
+}
+
+internal enum FormItemControllerState {
+	case valid
+	case invalid
+}
+
+internal enum FormItemControllerValidationBehavior {
+	case onFocus
+	case onTextChange
+}
+
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardFormItemController {
+final internal class VGSCardFormItemController: VGSBaseFormItemController {
+
+	weak var delegate: VGSFormItemControllerDelegate?
+
+	internal var state: FormItemControllerState = .invalid {
+		didSet {
+			delegate?.stateDidChange(state)
+		}
+	}
+
+	internal let validationBehavior: FormItemControllerValidationBehavior
 
 	/// Card view.
 	internal lazy var cardFormView: VGSCheckoutCardFormView = {
@@ -24,6 +54,10 @@ final internal class VGSCardFormItemController {
 						cardFormView.cvcDateComponentView]
 	}
 
+	var vgsTextFields: [VGSTextField] {
+		return textFiedComponents.map({return $0.textField})
+	}
+
 	/// Configuration type.
 	internal let paymentFlow: VGSPaymentFlow
 
@@ -32,9 +66,10 @@ final internal class VGSCardFormItemController {
 
 	// MARK: - Initialization
 
-	internal init(paymentFlow: VGSPaymentFlow, vgsCollect: VGSCollect) {
+	internal init(paymentFlow: VGSPaymentFlow, vgsCollect: VGSCollect, validationBehavior: FormItemControllerValidationBehavior = .onFocus) {
 		self.paymentFlow = paymentFlow
 		self.vgsCollect = vgsCollect
+		self.validationBehavior = validationBehavior
 	}
 
 	// MARK: - Interface
@@ -82,6 +117,7 @@ final internal class VGSCardFormItemController {
 		expDateConfiguration.formatPattern = "##/####"
 
 		/// Update validation rules
+		/// FIXME - hardcoded for now!
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleCardExpirationDate(dateFormat: .longYear, error: VGSValidationErrorType.expDate.rawValue)
 		])
@@ -112,33 +148,43 @@ final internal class VGSCardFormItemController {
 // MARK: - VGSTextFieldDelegate
 
 extension VGSCardFormItemController: VGSTextFieldDelegate {
-	public func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		var isFormValid = false
-		textFiedComponents.forEach { formComponent in
-			if formComponent.textField === textField {
-				let state = textField.state
-				let isValid = state.isValid
+	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
 
-				var fieldState = VGSCheckoutFormValidationState.valid
-				if !isValid {
-					fieldState = .invalid
+		switch validationBehavior {
+		case .onFocus:
+			textFiedComponents.forEach { formComponent in
+				if formComponent.textField === textField {
+					let state = textField.state
+					let isValid = state.isValid
+
+					var fieldState = VGSCheckoutFormValidationState.valid
+					if !isValid {
+						fieldState = .invalid
+					}
+
+					formComponent.placeholderComponent.updateUI(for: fieldState)
 				}
-
-				formComponent.placeholderComponent.updateUI(for: fieldState)
 			}
+		default:
+			break
 		}
 	}
 
-	public func vgsTextFieldDidChange(_ textField: VGSTextField) {
-		let invalidFields = textFiedComponents.filter { textField in
-			return !textField.textField.state.isValid
-		}
+	func vgsTextFieldDidChange(_ textField: VGSTextField) {
+		switch validationBehavior {
+		case .onFocus:
+			break
+		default:
+			let invalidFields = textFiedComponents.filter { textField in
+				return !textField.textField.state.isValid
+			}
 
-//		let isValid = invalidFields.isEmpty
-//		if isValid {
-//			state = .valid
-//		} else {
-//			state = .invalid
-//		}
+			let isValid = invalidFields.isEmpty
+			if isValid {
+				state = .valid
+			} else {
+				state = .invalid
+			}
+		}
 	}
 }
