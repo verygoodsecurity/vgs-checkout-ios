@@ -109,7 +109,7 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		// cardNumber.delegate = self
 		cardNumber.becomeFirstResponder()
 
-		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardDetails.expidationDateFieldName)
+		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardDetails.expirationDateFieldName)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
 

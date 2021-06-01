@@ -13,6 +13,9 @@ class CheckoutBasicFlowVC: UIViewController {
 
 	// MARK: - Vars
 
+	/// Checkout instance.
+	fileprivate var vgsCheckout: VGSCheckout?
+
 	/// Main view.
 	fileprivate lazy var mainView: CheckoutFlowMainView = {
 		let view = CheckoutFlowMainView(frame: .zero)
@@ -31,6 +34,7 @@ class CheckoutBasicFlowVC: UIViewController {
 		mainView.delegate = self
 
 		displayShoppingCartData()
+		setupCheckout()
 	}
 
 	// MARK: - Helpers
@@ -40,12 +44,28 @@ class CheckoutBasicFlowVC: UIViewController {
 		let items = OrderDataProvider.provideOrders()
 		mainView.shoppingCartView.configure(with: items)
 	}
+
+	/// Setup VGS Checkout configuration.
+	private func setupCheckout() {
+		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, path: "post")
+
+		var cardDetailsOptions = VGSCheckoutCardDetailsOptions()
+		cardDetailsOptions.cardHolderNameFieldType = .single("cardHolder_name")
+
+		cardDetailsOptions.cardNumberFieldName = "card_number"
+		cardDetailsOptions.expirationDateFieldName = "card_expirationDate"
+		cardDetailsOptions.cvcFieldName = "card_cvc"
+
+		checkoutVaultConfiguration.cardDetailsOptions = cardDetailsOptions
+
+		vgsCheckout = VGSCheckout(configuration: checkoutVaultConfiguration)
+	}
 }
 
 // MARK: - CheckoutFlowMainViewDelegate
 
 extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		VGSCheckout().presentCheckout(from: self, cardScanner: .cardIO)
+		vgsCheckout?.present(from: self, animated: true)
 	}
 }

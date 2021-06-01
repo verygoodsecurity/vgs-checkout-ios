@@ -9,10 +9,10 @@ import Foundation
 public struct VGSCheckoutCardDetailsOptions {
 
 	/// Card number field name (should be configured in your route on the dashboard).
-	public let cardNumberFieldName: String = ""
+	public var cardNumberFieldName: String = ""
 
 	/// Expiration date field name (should be configured in your route on the dashboard)
-	public let expidationDateFieldName: String = ""
+	public var expirationDateFieldName: String = ""
 
 	/// CVC field name (should be configured in your route on the dashboard)
 	public var cvcFieldName: String = ""
