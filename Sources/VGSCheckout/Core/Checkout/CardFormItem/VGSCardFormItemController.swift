@@ -173,18 +173,17 @@ extension VGSCardFormItemController: VGSTextFieldDelegate {
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 		switch validationBehavior {
 		case .onFocus:
-			break
-		default:
 			let invalidFields = textFiedComponents.filter { textField in
 				return !textField.textField.state.isValid
 			}
-
 			let isValid = invalidFields.isEmpty
 			if isValid {
 				state = .valid
 			} else {
 				state = .invalid
 			}
+		default:
+			break
 		}
 	}
 }

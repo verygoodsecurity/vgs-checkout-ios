@@ -37,9 +37,10 @@ internal class VGSCheckoutFormController: NSObject {
 
 	internal let payButtonContainerView: VGSContainerItemView
 
+	internal let cardFormController: VGSCardFormItemController
+
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
-
 
 	// MARK: - Initialization
 
@@ -48,8 +49,10 @@ internal class VGSCheckoutFormController: NSObject {
 		self.payButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
 		self.payButtonContainerView = VGSContainerItemView(frame: .zero)
 		self.vgsCollect = vgsCollect
+		self.cardFormController = VGSCardFormItemController(paymentFlow: paymentFlow, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		super.init()
 		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		cardFormController.delegate = self
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
@@ -60,10 +63,12 @@ internal class VGSCheckoutFormController: NSObject {
 		viewController.formView.stackView.layoutMargins = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)
 		viewController.formView.stackView.isLayoutMarginsRelativeArrangement = true
 
-
 		viewController.formView.addFormItemView(backgroundStackView)
+		payButtonContainerView.addContentView(payButton)
 
-		backgroundStackView.addArrangedSubview(cardCheckoutView)
+		cardFormController.buildForm()
+
+		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)
 
 		/// Add empty transparent view to bottom.
@@ -76,17 +81,7 @@ internal class VGSCheckoutFormController: NSObject {
 		return viewController
 	}
 
-	// MARK: - View
-
-	internal lazy var cardCheckoutView: VGSCheckoutCardFormView = {
-		let view = VGSCheckoutCardFormView(frame: .zero)
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		return view
-	}()
-
 	// MARK: - Helpers
-
 
 	@objc fileprivate func payDidTap() {
 		payButton.status = .processing
@@ -94,10 +89,17 @@ internal class VGSCheckoutFormController: NSObject {
 			self.payButton.status = .success
 		}
 	}
+}
 
-	var textFiedComponents: [VGSTextFieldFormComponentProtocol] {
-		return [cardCheckoutView.cardNumberComponentView,
-						cardCheckoutView.expDateComponentView,
-						cardCheckoutView.cvcDateComponentView]
+// MARK: - VGSFormItemControllerDelegate
+
+extension VGSCheckoutFormController: VGSFormItemControllerDelegate {
+	func stateDidChange(_ state: FormItemControllerState) {
+		switch state {
+		case .invalid:
+			payButton.status = .disabled
+		case .valid:
+			payButton.status = .enabled
+		}
 	}
 }
