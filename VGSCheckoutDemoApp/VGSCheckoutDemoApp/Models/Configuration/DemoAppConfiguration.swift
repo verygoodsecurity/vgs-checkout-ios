@@ -18,5 +18,5 @@ class DemoAppConfiguration {
 	var vaultId = "vaultId"
 
 	///  Set environment - `sandbox` for testing or `live` for production
-	var environment = "sandxob"
+	var environment = "sandbox"
 }
