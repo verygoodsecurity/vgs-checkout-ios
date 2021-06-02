@@ -47,8 +47,21 @@ class CheckoutBasicFlowVC: UIViewController {
 
 	/// Setup VGS Checkout configuration.
 	private func setupCheckout() {
-		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, path: "post")
 
+	}
+}
+
+// MARK: - CheckoutFlowMainViewDelegate
+
+extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
+	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
+		// Init Checkout with vault and ID.
+		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
+
+		// Create vault configuration.
+		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration(path: "post")
+
+		// Create card details.
 		var cardDetailsOptions = VGSCheckoutCardDetailsOptions()
 		cardDetailsOptions.cardHolderNameFieldType = .single("cardHolder_name")
 
@@ -58,14 +71,7 @@ class CheckoutBasicFlowVC: UIViewController {
 
 		checkoutVaultConfiguration.cardDetailsOptions = cardDetailsOptions
 
-		vgsCheckout = VGSCheckout(configuration: checkoutVaultConfiguration)
-	}
-}
-
-// MARK: - CheckoutFlowMainViewDelegate
-
-extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
-	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		vgsCheckout?.present(from: self, animated: true)
+		// Present checkout configuration.
+		vgsCheckout?.present(with: checkoutVaultConfiguration, from: self)
 	}
 }

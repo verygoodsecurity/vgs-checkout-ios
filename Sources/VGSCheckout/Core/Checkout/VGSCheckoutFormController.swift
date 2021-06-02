@@ -33,9 +33,9 @@ internal class VGSCheckoutFormController: NSObject {
 
 	internal let paymentFlow: VGSPaymentFlow
 
-	internal let payButton: VGSSubmitButton
+	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
 
-	internal let payButtonContainerView: VGSContainerItemView
+	internal let payButtonContainerView: VGSContainerItemView = VGSCheckoutFormViewBuilder.buildPaymentButtonContainerView()
 
 	internal let cardFormController: VGSCardFormItemController
 
@@ -46,13 +46,9 @@ internal class VGSCheckoutFormController: NSObject {
 
 	init(paymentFlow: VGSPaymentFlow, vgsCollect: VGSCollect) {
 		self.paymentFlow = paymentFlow
-		self.payButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
-		self.payButtonContainerView = VGSContainerItemView(frame: .zero)
 		self.vgsCollect = vgsCollect
 		self.cardFormController = VGSCardFormItemController(paymentFlow: paymentFlow, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		super.init()
-		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
-		cardFormController.delegate = self
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
@@ -67,6 +63,9 @@ internal class VGSCheckoutFormController: NSObject {
 		payButtonContainerView.addContentView(payButton)
 
 		cardFormController.buildForm()
+
+		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		cardFormController.delegate = self
 
 		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)
