@@ -400,8 +400,8 @@
 		44C4C9072664ECA600195505 /* Vaullt */ = {
 			isa = PBXGroup;
 			children = (
-				44EC94ED26690C9E00CE04F4 /* VaultFormConfiguration */,
 				44C4C9082664ECD200195505 /* VGSCheckoutVaultConfiguration.swift */,
+				44EC94ED26690C9E00CE04F4 /* VaultFormConfiguration */,
 			);
 			path = Vaullt;
 			sourceTree = "<group>";

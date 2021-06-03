@@ -8,7 +8,7 @@ import Foundation
 public struct VGSCheckoutCardHolderOptions {
 
 	/// Field name type. Default is `.single.` with empty fieldName.
-	public var filedNameType: FieldNameType = .single("")
+	public var fieldNameType: FieldNameType = .single("")
 
 	/// Field visibiliby, default is `.visible`.
 	public var fieldVisibility: VGSCheckoutFieldVisibility = .visible

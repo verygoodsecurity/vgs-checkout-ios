@@ -7,8 +7,8 @@ import Foundation
 /// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
-	/// Request configuration, default is `VGSCheckoutRequestConfiguration` object.
-	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
+	/// Request configuration, default is `VGSCheckoutVaultRouteConfiguration` object.
+	public var routeConfiguration: VGSCheckoutVaultRouteConfiguration = VGSCheckoutVaultRouteConfiguration()
 
 	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default options.
 	internal var formConfiguration: VGSCheckoutVaultFormConfiguration = VGSCheckoutVaultFormConfiguration()
@@ -52,6 +52,14 @@ public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtoc
 		}
 	}
 
-	// TODO: Add CVC
-}
+	/// CVC field options.
+	public var cvcFieldOptions: VGSCheckoutCVCOptions {
+		get {
+			return formConfiguration.cardOptions.cvcOptions
+		}
 
+		set {
+			formConfiguration.cardOptions.cvcOptions = newValue
+		}
+	}
+}
