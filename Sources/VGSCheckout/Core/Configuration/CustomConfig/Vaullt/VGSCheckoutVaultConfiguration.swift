@@ -4,29 +4,54 @@
 
 import Foundation
 
-/// Holds configuration for vault, confirms to `VGSCheckoutConfigurationProtocol`.
-public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
-
-	/// Payment flow type.
-	internal let paymentFlowType: VGSCheckoutPaymentFlowType = .vault
-
-	/// Inbound rout path for your organization vault.
-	public let path: String
-
-	/// Card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
-	public var cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions()
+/// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
 	/// Request configuration, default is `VGSCheckoutRequestConfiguration` object.
-	public var requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()
+	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
+
+	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default options.
+	internal var formConfiguration: VGSCheckoutVaultFormConfiguration = VGSCheckoutVaultFormConfiguration()
+
+	/// Payment flow type (internal use only).
+	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
 
 	/// Initialization.
-	/// - Parameters:
-	///   - path: `String` object, inbound rout path for your organization vault.
-	///   - cardDetailsOptions: `VGSCheckoutCardDetailsOptions`, card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
-	///   - routeConfiguration: `VGSCheckoutRequestConfiguration`, default is `VGSCheckoutRequestConfiguration` object.
-	public init(path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()) {
-		self.path = path
-		self.cardDetailsOptions = cardDetailsOptions
-		self.requestConfiguration = requestConfiguration
+	public init() {}
+
+	/// Card number field options.
+	public var cardNumberFieldOptions: VGSCheckoutCardNumberOptions {
+		get {
+			return formConfiguration.cardOptions.cardNumberOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.cardNumberOptions = newValue
+		}
 	}
+
+	/// Card holder field options.
+	public var cardHolderFieldOptions: VGSCheckoutCardHolderOptions {
+		get {
+			return formConfiguration.cardOptions.cardHolderOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.cardHolderOptions = newValue
+		}
+	}
+
+	/// Expiration date field options.
+	public var expirationDateFieldOptions: VGSCheckoutExpirationDateOptions {
+		get {
+			return formConfiguration.cardOptions.expirationDateOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.expirationDateOptions = newValue
+		}
+	}
+
+	// TODO: Add CVC
 }
+

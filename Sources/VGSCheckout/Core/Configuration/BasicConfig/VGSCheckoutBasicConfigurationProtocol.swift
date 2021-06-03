@@ -5,18 +5,18 @@
 
 import Foundation
 
-/// VGSCheckout basic configuration.
-public protocol VGSCheckoutBasicConfigurationProtocol {}
+/// VGSCheckout configuration, public interface.
+public protocol VGSCheckoutConfigurationProtocol {}
 
 /// Internal protocol for VGSCheckout configuration.
-internal protocol VGSCheckoutConfigurationProtocol: VGSCheckoutBasicConfigurationProtocol {
+internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol {
 
 	/// Payment flow type.
-	var paymentFlowType: VGSCheckoutPaymentFlowType {get}
+	var paymentFlowType: VGSPaymentFlowIdentifier {get}
 }
 
-/// Defines payment flow types.
-internal enum VGSCheckoutPaymentFlowType {
+/// Defines payment flow identifiers.
+internal enum VGSPaymentFlowIdentifier {
 
 	/// Use regular vault flow.
 	case vault
@@ -25,13 +25,15 @@ internal enum VGSCheckoutPaymentFlowType {
 	case multiplexing
 }
 
-internal enum VGSPaymentFlow {
+/// Defines paymnet processing flow.
+internal enum VGSPaymentProcessingFlow {
+
 	case vault(_ configuration: VGSCheckoutVaultConfiguration)
 
 	/// case multiplexing
 
-	init?(configuration: VGSCheckoutBasicConfigurationProtocol) {
-		guard let checkoutConfiguration = configuration as? VGSCheckoutConfigurationProtocol else {
+	init?(configuration: VGSCheckoutConfigurationProtocol) {
+		guard let checkoutConfiguration = configuration as? VGSCheckoutBasicConfigurationProtocol else {
 			return nil
 		}
 

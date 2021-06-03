@@ -19,6 +19,8 @@ internal class VGSFormViewController: UIViewController {
 	/// Bottom constraint to manage view position on keyboard show/hide notifications.
 	private var formKeyboardGuideBottomConstraint: NSLayoutConstraint?
 
+	private let tapGestureRecognizer = UITapGestureRecognizer()
+
 	// MARK: - Initialization
 
 	/// Intialization.
@@ -41,6 +43,8 @@ internal class VGSFormViewController: UIViewController {
 
 		setupUI()
 		addListeners()
+		formView.addGestureRecognizer(tapGestureRecognizer)
+		tapGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
 	}
 
 	// MARK: - Helpers
@@ -100,5 +104,9 @@ internal class VGSFormViewController: UIViewController {
 		}
 
 		formKeyboardGuideBottomConstraint?.constant = heightOffset
+	}
+
+	@objc fileprivate func dismissKeyboard() {
+		view.endEditing(true)
 	}
 }

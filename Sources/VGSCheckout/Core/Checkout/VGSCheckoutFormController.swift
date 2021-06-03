@@ -31,7 +31,7 @@ internal class VGSCheckoutFormController: NSObject {
 
 	fileprivate let backgroundStackView: UIStackView = VGSCheckoutFormViewBuilder.buildBackgroundStackView()
 
-	internal let paymentFlow: VGSPaymentFlow
+	internal let paymentFlow: VGSPaymentProcessingFlow
 
 	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
 
@@ -44,7 +44,7 @@ internal class VGSCheckoutFormController: NSObject {
 
 	// MARK: - Initialization
 
-	init(paymentFlow: VGSPaymentFlow, vgsCollect: VGSCollect) {
+	init(paymentFlow: VGSPaymentProcessingFlow, vgsCollect: VGSCollect) {
 		self.paymentFlow = paymentFlow
 		self.vgsCollect = vgsCollect
 		self.cardFormController = VGSCardFormItemController(paymentFlow: paymentFlow, vgsCollect: vgsCollect, validationBehavior: .onFocus)
@@ -66,6 +66,14 @@ internal class VGSCheckoutFormController: NSObject {
 
 		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardFormController.delegate = self
+		/// Add empty transparent view to bottom.
+
+		let view1 = UIView()
+		view1.backgroundColor = .clear
+		view1.translatesAutoresizingMaskIntoConstraints = false
+		view1.heightAnchor.constraint(equalToConstant: 400).isActive = true
+
+		backgroundStackView.addArrangedSubview(view1)
 
 		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)

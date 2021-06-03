@@ -59,19 +59,25 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
 
 		// Create vault configuration.
-		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration(path: "post")
+		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration()
+//		checkoutVaultConfiguration.formConfiguration =
+//			VGSCheckoutFormConfiguration(fieldnames: "card_numner", expDate: "exp_date", cvc: "cvc", cardholderFieldNameType: .single("cardholder_name"))
+
+		checkoutVaultConfiguration.cardNumberField.fieldName = "card_number"
+		checkoutVaultConfiguration.expirationDateField.fieldName = "exp_data"
+		checkoutVaultConfiguration.cardHolderField.filedNameStyle = .single("first")
 
 		// Create card details.
-		var cardDetailsOptions = VGSCheckoutCardDetailsOptions()
-		cardDetailsOptions.cardHolderNameFieldType = .single("cardHolder_name")
-
-		cardDetailsOptions.cardNumberFieldName = "card_number"
-		cardDetailsOptions.expirationDateFieldName = "card_expirationDate"
-		cardDetailsOptions.cvcFieldName = "card_cvc"
-
-		checkoutVaultConfiguration.cardDetailsOptions = cardDetailsOptions
-
-		// Present checkout configuration.
-		vgsCheckout?.present(with: checkoutVaultConfiguration, from: self)
+//		var cardDetailsOptions = VGSCheckoutCardDetailsOptions()
+//		cardDetailsOptions.cardHolderNameFieldType = .single("cardHolder_name")
+//
+//		cardDetailsOptions.cardNumberFieldName = "card_number"
+//		cardDetailsOptions.expirationDateFieldName = "card_expirationDate"
+//		cardDetailsOptions.cvcFieldName = "card_cvc"
+//
+//		checkoutVaultConfiguration.cardDetailsOptions = cardDetailsOptions
+//
+//		// Present checkout configuration.
+//		vgsCheckout?.present(with: checkoutVaultConfiguration, from: self)
 	}
 }
