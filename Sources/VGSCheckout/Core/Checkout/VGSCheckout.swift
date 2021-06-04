@@ -28,7 +28,7 @@ public class VGSCheckout {
 		self.environment = environment
 	}
 
-	/// We need to keep a reference to the instance
+	/// We need to keep a reference to the instance.
 	internal var checkoutFormController: VGSCheckoutFormController?
 
 	// MARK: - Interface

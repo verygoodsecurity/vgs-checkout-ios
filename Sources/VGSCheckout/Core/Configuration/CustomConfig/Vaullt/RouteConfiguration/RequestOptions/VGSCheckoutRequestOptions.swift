@@ -1,11 +1,11 @@
 //
-//  VGSCheckoutRequestConfiguration.swift
+//  VGSCheckoutRequestOptions.swift
 //  VGSCheckout
 
 import Foundation
 
 /// Holds request options.
-public struct VGSCheckoutRequestConfiguration {
+public struct VGSCheckoutRequestOptions {
 
 	/// HTTP Method. Default is `post`.
 	public var method: VGSCheckoutHTTPMethod = .post
