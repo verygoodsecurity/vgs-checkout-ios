@@ -26,7 +26,7 @@ internal enum VGSPaymentFlowIdentifier {
 }
 
 /// Defines paymnet processing flow.
-internal enum VGSPaymentProcessingFlow {
+internal enum VGSPaymentInstrument {
 
 	case vault(_ configuration: VGSCheckoutVaultConfiguration)
 

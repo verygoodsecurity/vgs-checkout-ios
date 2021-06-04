@@ -31,7 +31,7 @@ internal class VGSCheckoutFormController: NSObject {
 
 	fileprivate let backgroundStackView: UIStackView = VGSCheckoutFormViewBuilder.buildBackgroundStackView()
 
-	internal let paymentFlow: VGSPaymentProcessingFlow
+	internal let paymentInstrument: VGSPaymentInstrument
 
 	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
 
@@ -44,10 +44,10 @@ internal class VGSCheckoutFormController: NSObject {
 
 	// MARK: - Initialization
 
-	init(paymentFlow: VGSPaymentProcessingFlow, vgsCollect: VGSCollect) {
-		self.paymentFlow = paymentFlow
+	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
+		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-		self.cardFormController = VGSCardFormItemController(paymentFlow: paymentFlow, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+		self.cardFormController = VGSCardFormItemController(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		super.init()
 	}
 
@@ -66,12 +66,13 @@ internal class VGSCheckoutFormController: NSObject {
 
 		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardFormController.delegate = self
-		/// Add empty transparent view to bottom.
+		// Add empty transparent view to bottom.
 
+		// Test view for keyboard animation check.
 		let view1 = UIView()
 		view1.backgroundColor = .clear
 		view1.translatesAutoresizingMaskIntoConstraints = false
-		view1.heightAnchor.constraint(equalToConstant: 400).isActive = true
+		view1.heightAnchor.constraint(equalToConstant: 200).isActive = true
 
 		backgroundStackView.addArrangedSubview(view1)
 

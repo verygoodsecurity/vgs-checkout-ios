@@ -48,8 +48,10 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		return view
 	}()
 
+	/// TODO: - this should be dynamic.
 	var textFiedComponents: [VGSTextFieldFormComponentProtocol] {
-		return [cardFormView.cardNumberComponentView,
+		return [
+			      cardFormView.cardNumberComponentView,
 						cardFormView.expDateComponentView,
 						cardFormView.cvcDateComponentView]
 	}
@@ -59,15 +61,15 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 	}
 
 	/// Configuration type.
-	internal let paymentFlow: VGSPaymentProcessingFlow
+	internal let paymentInstrument: VGSPaymentInstrument
 
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
 	// MARK: - Initialization
 
-	internal init(paymentFlow: VGSPaymentProcessingFlow, vgsCollect: VGSCollect, validationBehavior: FormItemControllerValidationBehavior = .onFocus) {
-		self.paymentFlow = paymentFlow
+	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: FormItemControllerValidationBehavior = .onFocus) {
+		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
 	}
@@ -75,7 +77,7 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 	// MARK: - Interface
 
 	internal func buildForm() {
-		switch paymentFlow {
+		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
 		default:
