@@ -86,14 +86,16 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 	// MARK: - Helpers
 
 	private func setupCardForm(with vaultConfiguration: VGSCheckoutVaultConfiguration) {
-		let cardDetails = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
+		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
+		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
+		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
 
 		let cardNumber = cardFormView.cardNumberComponentView.cardTextField
 		let expCardDate = cardFormView.expDateComponentView.expDateTextField
 		let cvcCardNum = cardFormView.cvcDateComponentView.cvcTextField
 
-		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName)
-		//cardConfiguration.type = .cardNumber
+		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
+		cardConfiguration.type = .cardNumber
 		cardConfiguration.isRequiredValidOnly = true
 
 		/// Enable validation of unknown card brand if needed
@@ -102,16 +104,15 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		])
 		cardNumber.configuration = cardConfiguration
 		cardNumber.placeholder = "4111 1111 1111 1111"
-//			cardNumber.textAlignment = .natural
-//			cardNumber.cardIconLocation = .right
 
-		// To handle VGSTextFieldDelegate methods
-		// cardNumber.delegate = self
-		//cardNumber.becomeFirstResponder()
+		cardNumber.textAlignment = .natural
+    cardNumber.cardIconLocation = .right
 
-		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "cvc")
+		cardNumber.becomeFirstResponder()
+
+		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
 		expDateConfiguration.isRequiredValidOnly = true
-		//expDateConfiguration.type = .expDate
+		expDateConfiguration.type = .expDate
 
 		/// Default .expDate format is "##/##"
 		expDateConfiguration.formatPattern = "##/####"
@@ -126,9 +127,9 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		expCardDate.placeholder = "MM/YYYY"
 //        expCardDate.monthPickerFormat = .longSymbols
 
-		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "cvc")
+		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true
-//		cvcConfiguration.type = .cvc
+		cvcConfiguration.type = .cvc
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true

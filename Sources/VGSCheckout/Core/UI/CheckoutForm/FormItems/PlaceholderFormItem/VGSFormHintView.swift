@@ -42,10 +42,10 @@ internal class VGSFormHintView: UIView {
 				hideAllExceptLabel()
 			case .invalid:
 				hintImageViewContainer.isHidden = false
-//				hintImageView.image = UIImage(named: "invalid_state_icon", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
+				hintImageView.image = UIImage(named: "invalid_state_icon", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
 			case .valid:
 				hintImageViewContainer.isHidden = false
-//				hintImageView.image = UIImage(named: "valid_state_icon", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
+				hintImageView.image = UIImage(named: "valid_state_icon", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
 			case .custom(let view):
 				hideAllExceptLabel()
 				stackView.addArrangedSubview(view)
