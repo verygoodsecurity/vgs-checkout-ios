@@ -63,7 +63,7 @@ internal class VGSFormHintView: UIView {
 		let constraints = [
 			hintImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			hintImageView.topAnchor.constraint(equalTo: view.topAnchor),
-			hintImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			hintImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 		]
 
 		NSLayoutConstraint.activate(constraints)

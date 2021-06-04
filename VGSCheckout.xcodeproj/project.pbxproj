@@ -48,6 +48,7 @@
 		44EC95132669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */; };
 		44EC95142669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */; };
 		44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */; };
+		44EC95182669F06000CE04F4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44EC95172669F06000CE04F4 /* Media.xcassets */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
 		44ECE616265FF596006C160B /* CheckoutCardIOScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */; };
@@ -114,6 +115,7 @@
 		44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSatelliteConfiguration.swift; sourceTree = "<group>"; };
 		44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutVaultRouteConfiguration.swift; sourceTree = "<group>"; };
 		44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHostnamePolicy.swift; sourceTree = "<group>"; };
+		44EC95172669F06000CE04F4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckoutCardIOScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardIOScanner.swift; sourceTree = "<group>"; };
 		44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutCardIOScanner.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				44ECE5E2265FE1F0006C160B /* Core */,
 				44C4C8F62664B1CE00195505 /* Helpers */,
+				44EC95162669F01900CE04F4 /* Resources */,
 				3286E12F265EC588001FECEB /* VGSCheckout.h */,
 				3286E130265EC588001FECEB /* Info.plist */,
 			);
@@ -542,6 +545,14 @@
 			path = HostnamePolicy;
 			sourceTree = "<group>";
 		};
+		44EC95162669F01900CE04F4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				44EC95172669F06000CE04F4 /* Media.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		44ECE5E2265FE1F0006C160B /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +722,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44EC95182669F06000CE04F4 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
