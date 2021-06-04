@@ -11,26 +11,7 @@ public struct VGSCheckoutVaultRouteConfiguration {
 	public var hostnamePolicy: VGSCheckoutHostnamePolicy = .vault
 
 	/// Request options.
-	public var requestOptions = VGSCheckoutRequestConfiguration()
-
-	/// no:doc
-	public init() {}
-}
-
-/// Holds request options.
-public struct VGSCheckoutRequestConfiguration {
-
-	/// HTTP Method. Default is `post`.
-	public var method: VGSCheckoutHTTPMethod = .post
-
-	/// Extra data, should be valid `JSON`. Default is `nil`.
-	public var extraData: [String: Any]?
-
-	/// Merge options or merge policy, default is `flat`.
-	public var mergePolicy: VGSCheckoutDataMergePolicy = .flat
-
-	/// Custom request headers.
-	public var customHeaders: [String: String] = [:]
+	public var requestOptions = VGSCheckoutRequesOptions()
 
 	/// no:doc
 	public init() {}

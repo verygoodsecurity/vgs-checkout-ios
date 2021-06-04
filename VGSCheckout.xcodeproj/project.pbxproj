@@ -428,6 +428,7 @@
 		44C4C9132664EFE800195505 /* RequestConfiguration */ = {
 			isa = PBXGroup;
 			children = (
+				44EC95032669EC9800CE04F4 /* New Group */,
 				44C4C9142664F01600195505 /* VGSCheckoutRequestConfiguration.swift */,
 				44C4C9222664F1EE00195505 /* HTTPMethods */,
 				44C4C91F2664F17C00195505 /* DataMergePolicy */,
@@ -565,6 +566,13 @@
 				44EC950126690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift */,
 			);
 			path = FieldVisibility;
+			sourceTree = "<group>";
+		};
+		44EC95032669EC9800CE04F4 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		44ECE5E2265FE1F0006C160B /* Core */ = {
