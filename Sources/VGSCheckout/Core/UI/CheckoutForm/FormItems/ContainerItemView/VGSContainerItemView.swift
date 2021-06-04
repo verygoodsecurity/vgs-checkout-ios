@@ -42,7 +42,6 @@ internal class VGSContainerItemView: UIView {
 
 	/// Layout paddings.
 	private func layoutPaddings() {
-		preservesSuperviewLayoutMargins = true
 		guard let contentView = contentView else {return}
 		contentView.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(contentView)
@@ -52,8 +51,8 @@ internal class VGSContainerItemView: UIView {
 		paddingConstraints = [
 			contentView.topAnchor.constraint(equalTo: topAnchor, constant: paddings.top),
 			contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: paddings.left),
-			contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: paddings.right),
-			contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: paddings.bottom)
+			contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -paddings.right),
+			contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -paddings.bottom)
 		]
 
 		NSLayoutConstraint.activate(paddingConstraints)

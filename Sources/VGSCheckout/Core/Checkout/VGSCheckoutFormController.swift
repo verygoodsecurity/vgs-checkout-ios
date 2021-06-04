@@ -31,11 +31,11 @@ internal class VGSCheckoutFormController: NSObject {
 
 	fileprivate let backgroundStackView: UIStackView = VGSCheckoutFormViewBuilder.buildBackgroundStackView()
 
-	internal let paymentFlow: VGSPaymentFlow
+	internal let paymentInstrument: VGSPaymentInstrument
 
-	internal let payButton: VGSSubmitButton
+	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
 
-	internal let payButtonContainerView: VGSContainerItemView
+	internal let payButtonContainerView: VGSContainerItemView = VGSCheckoutFormViewBuilder.buildPaymentButtonContainerView()
 
 	internal let cardFormController: VGSCardFormItemController
 
@@ -44,15 +44,11 @@ internal class VGSCheckoutFormController: NSObject {
 
 	// MARK: - Initialization
 
-	init(paymentFlow: VGSPaymentFlow, vgsCollect: VGSCollect) {
-		self.paymentFlow = paymentFlow
-		self.payButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
-		self.payButtonContainerView = VGSContainerItemView(frame: .zero)
+	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
+		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-		self.cardFormController = VGSCardFormItemController(paymentFlow: paymentFlow, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+		self.cardFormController = VGSCardFormItemController(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		super.init()
-		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
-		cardFormController.delegate = self
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
@@ -67,6 +63,18 @@ internal class VGSCheckoutFormController: NSObject {
 		payButtonContainerView.addContentView(payButton)
 
 		cardFormController.buildForm()
+
+		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		cardFormController.delegate = self
+		// Add empty transparent view to bottom.
+
+		// Test view for keyboard animation check.
+		let view1 = UIView()
+		view1.backgroundColor = .clear
+		view1.translatesAutoresizingMaskIntoConstraints = false
+		view1.heightAnchor.constraint(equalToConstant: 200).isActive = true
+
+		backgroundStackView.addArrangedSubview(view1)
 
 		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)

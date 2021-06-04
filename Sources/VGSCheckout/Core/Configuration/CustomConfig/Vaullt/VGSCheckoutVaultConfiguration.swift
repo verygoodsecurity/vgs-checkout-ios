@@ -4,39 +4,62 @@
 
 import Foundation
 
-/// Holds configuration for vault, confirms to `VGSCheckoutConfigurationProtocol`.
-public struct VGSCheckoutVaultConfiguration: VGSCheckoutConfigurationProtocol {
+/// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
-	/// Payment flow type.
-	internal let paymentFlowType: VGSCheckoutPaymentFlowType = .vault
+	/// Route configuration, default is `VGSCheckoutVaultRouteConfiguration` object.
+	public var routeConfiguration: VGSCheckoutVaultRouteConfiguration = VGSCheckoutVaultRouteConfiguration()
 
-	/// `String` object, organization vault id.
-	public let vaultID: String
+	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default settings.
+	internal var formConfiguration: VGSCheckoutVaultFormConfiguration = VGSCheckoutVaultFormConfiguration()
 
-	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
-	public let environment: String
-
-	/// Inbound rout path for your organization vault.
-	public let path: String
-
-	/// Card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
-	public var cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions()
-
-	/// Request configuration, default is `VGSCheckoutRequestConfiguration` object.
-	public var requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()
+	/// Payment flow type (internal use only).
+	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
 
 	/// Initialization.
-	/// - Parameters:
-	///   - vaultID: `String` object, organization vault id.
-	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
-	///   - path: `String` object, inbound rout path for your organization vault.
-	///   - cardDetailsOptions: `VGSCheckoutCardDetailsOptions`, card details options. Check `VGSCheckoutCardDetailsOptions` for default options.
-	///   - routeConfiguration: `VGSCheckoutRequestConfiguration`, default is `VGSCheckoutRequestConfiguration` object.
-	public init(vaultID: String, environment: String, path: String, cardDetailsOptions: VGSCheckoutCardDetailsOptions = VGSCheckoutCardDetailsOptions(), requestConfiguration: VGSCheckoutRequestConfiguration = VGSCheckoutRequestConfiguration()) {
-		self.vaultID = vaultID
-		self.environment = environment
-		self.path = path
-		self.cardDetailsOptions = cardDetailsOptions
-		self.requestConfiguration = requestConfiguration
+	public init() {}
+
+	/// Card number field options.
+	public var cardNumberFieldOptions: VGSCheckoutCardNumberOptions {
+		get {
+			return formConfiguration.cardOptions.cardNumberOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.cardNumberOptions = newValue
+		}
+	}
+
+	/// Card holder field options.
+	public var cardHolderFieldOptions: VGSCheckoutCardHolderOptions {
+		get {
+			return formConfiguration.cardOptions.cardHolderOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.cardHolderOptions = newValue
+		}
+	}
+
+	/// Expiration date field options.
+	public var expirationDateFieldOptions: VGSCheckoutExpirationDateOptions {
+		get {
+			return formConfiguration.cardOptions.expirationDateOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.expirationDateOptions = newValue
+		}
+	}
+
+	/// CVC field options.
+	public var cvcFieldOptions: VGSCheckoutCVCOptions {
+		get {
+			return formConfiguration.cardOptions.cvcOptions
+		}
+
+		set {
+			formConfiguration.cardOptions.cvcOptions = newValue
+		}
 	}
 }

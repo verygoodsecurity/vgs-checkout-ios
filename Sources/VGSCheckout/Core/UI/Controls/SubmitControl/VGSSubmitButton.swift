@@ -27,6 +27,7 @@ internal class VGSSubmitButton: UIControl {
 		case lockImage
 	}
 
+	/// Current icon accessory style.
 	internal var iconAccessory: LeftIconAccessory = .lockImage {
 		didSet {
 			switch iconAccessory {
@@ -46,6 +47,7 @@ internal class VGSSubmitButton: UIControl {
 		}
 	}
 
+	/// Lock icon image view.
 	internal lazy var lockImageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.contentMode = .scaleAspectFit
@@ -55,9 +57,7 @@ internal class VGSSubmitButton: UIControl {
 		} else {
 			// Fallback on earlier versions
 		}
-		//imageView.backgroundColor = .yellow
-
-//		imageView.image = UIImage(named: "submit_button_lock", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
+		imageView.image = UIImage(named: "submit_button_lock", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
 
 		return imageView
 	}()

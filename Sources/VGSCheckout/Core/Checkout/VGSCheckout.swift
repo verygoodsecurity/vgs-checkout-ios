@@ -11,68 +11,65 @@ import VGSCollectSDK
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
 
-	/// Defines checkout flows (internal for now).
-	internal enum CheckoutFlow {
+	/// `String` object, organization vault id.
+	internal let vaultID: String
 
-		/// Pay with card.
-		case card
-	}
-
-	/// Payment flow type.
-	internal let paymentFlow: VGSPaymentFlow
-
-	/// VGSCollect instance.
-	internal let vgsCollect: VGSCollect
-
-	internal let checkoutFormController: VGSCheckoutFormController
+	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
+	internal let environment: String
 
 	// MARK: - Initialization
 
 	/// Initialization.
-	/// - Parameter configuration: `VGSCheckoutBasicConfigurationProtocol` object, should confirm to `VGSCheckoutBasicConfigurationProtocol` and hold valid checkout configuration.
-	public init?(configuration: VGSCheckoutBasicConfigurationProtocol) {
-
-		guard let checkoutPaymentFlow = VGSPaymentFlow(configuration: configuration) else {
-			assertionFailure("VGSCheckout critical error! Unsupported configuration!")
-			return nil
-		}
-
-		let vgsCollect = VGSCollect(paymentFlow: checkoutPaymentFlow)
-		self.paymentFlow = checkoutPaymentFlow
-		self.vgsCollect = vgsCollect
-		self.checkoutFormController = VGSCheckoutFormController(paymentFlow: checkoutPaymentFlow, vgsCollect: vgsCollect)
+	/// - Parameters:
+	///   - vaultID: `String` object, organization vault id.
+	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	public init(vaultID: String, environment: String = "sandbox") {
+		self.vaultID = vaultID
+		self.environment = environment
 	}
+
+	/// We need to keep a reference to the instance.
+	internal var checkoutFormController: VGSCheckoutFormController?
 
 	// MARK: - Interface
 
 	/// Present drop-in checkout.
-	/// - Parameter viewController: `UIViewController` object, view controller to present checkout from.
+	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
+	/// - Parameter viewController: `UIViewController` object, view controller to present checkout.
+	/// - Parameter theme: `Any` object. Theme for UI configuration will be used here. Empty object for now.
 	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
-	public func present(from viewController: UIViewController, animated: Bool = true) {
-		presentPayment(from: viewController, animated: animated, flow: CheckoutFlow.card)
-	}
+	public func present(with configuration: VGSCheckoutConfigurationProtocol, from viewController: UIViewController, theme: Any? = nil, animated: Bool = true) {
+		guard let checkoutPaymentFlow = VGSPaymentInstrument(configuration: configuration) else {
+			assertionFailure("VGSCheckout critical error! Unsupported configuration!")
+			return
+		}
+		let vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: checkoutPaymentFlow)
 
-	// MARK: - Helpers
+		checkoutFormController = VGSCheckoutFormController(paymentInstrument: checkoutPaymentFlow, vgsCollect: vgsCollect)
 
-	internal func presentPayment(from viewController: UIViewController, animated: Bool, flow: CheckoutFlow) {
-		let checkoutController = checkoutFormController.buildCheckoutViewController()
-		checkoutController.modalPresentationStyle = .overFullScreen
-		viewController.present(checkoutController, animated: animated, completion: nil)
+		let checkoutViewController = checkoutFormController?.buildCheckoutViewController()
+		checkoutViewController?.modalPresentationStyle = .overFullScreen
+		viewController.present(checkoutViewController!, animated: animated, completion: nil)
 	}
 }
 
 internal extension VGSCollect {
-	convenience init(paymentFlow: VGSPaymentFlow) {
+	/// Convenience init for `VGSCollect`.
+	/// - Parameters:
+	///   - vaultID: `String` object, organization vault id.
+	///   - environment: environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	///   - paymentFlow: `VGSPaymentProcessingFlow` object.
+	convenience init(vaultID: String, environment: String, paymentFlow: VGSPaymentInstrument) {
 		switch paymentFlow {
 		case .vault(let configuration):
-			let hostNamePolicy = configuration.requestConfiguration.hostnamePolicy
+			let hostNamePolicy = configuration.routeConfiguration.hostnamePolicy
 			switch hostNamePolicy {
 			case .vault:
-				self.init(id: configuration.vaultID, environment: configuration.environment)
+				self.init(id: vaultID, environment: environment)
 			case .customHostname(let customHostname):
-				self.init(id: configuration.vaultID, environment: configuration.environment, hostname: customHostname)
+				self.init(id: vaultID, environment: environment, hostname: customHostname)
 			case .local(let satelliteConfiguration):
-				self.init(id: configuration.vaultID, environment: configuration.environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
+				self.init(id: vaultID, environment: environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
 			}
 		}
 	}

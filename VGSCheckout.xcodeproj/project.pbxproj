@@ -31,19 +31,25 @@
 		44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */; };
 		44C4C9052664EC7600195505 /* VGSCheckoutBasicConfigurationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9042664EC7600195505 /* VGSCheckoutBasicConfigurationProtocol.swift */; };
 		44C4C9092664ECD200195505 /* VGSCheckoutVaultConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9082664ECD200195505 /* VGSCheckoutVaultConfiguration.swift */; };
-		44C4C90D2664ED7E00195505 /* VGSCheckoutCardDetailsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C90C2664ED7E00195505 /* VGSCheckoutCardDetailsOptions.swift */; };
-		44C4C9102664EE1600195505 /* VGSCheckoutCardHolderFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C90F2664EE1600195505 /* VGSCheckoutCardHolderFieldType.swift */; };
-		44C4C9122664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9112664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift */; };
-		44C4C9152664F01600195505 /* VGSCheckoutRequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9142664F01600195505 /* VGSCheckoutRequestConfiguration.swift */; };
-		44C4C9182664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9172664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift */; };
-		44C4C91B2664F11D00195505 /* VGSCheckoutSatelliteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C91A2664F11C00195505 /* VGSCheckoutSatelliteConfiguration.swift */; };
-		44C4C91E2664F15400195505 /* VGSCheckoutRequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C91D2664F15400195505 /* VGSCheckoutRequestOptions.swift */; };
-		44C4C9212664F19D00195505 /* VGSCheckoutDataMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9202664F19D00195505 /* VGSCheckoutDataMergePolicy.swift */; };
-		44C4C9242664F1FF00195505 /* VGSCheckoutHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9232664F1FF00195505 /* VGSCheckoutHTTPMethod.swift */; };
 		44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92626651AD700195505 /* VGSCheckout.swift */; };
 		44C4C92A26651DCD00195505 /* VGSCardFormItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92926651DCD00195505 /* VGSCardFormItemController.swift */; };
 		44C4C92C2665F8ED00195505 /* VGSCheckoutFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92B2665F8ED00195505 /* VGSCheckoutFormController.swift */; };
 		44C4C92E2665F9F800195505 /* VGSCheckoutFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92D2665F9F800195505 /* VGSCheckoutFormViewBuilder.swift */; };
+		44EC94EF26690CC000CE04F4 /* VaultFormConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94EE26690CC000CE04F4 /* VaultFormConfiguration.swift */; };
+		44EC94F226690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94F126690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift */; };
+		44EC94F626690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94F526690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift */; };
+		44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94F826690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift */; };
+		44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94FB26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift */; };
+		44EC950026690DD100CE04F4 /* VGSCheckoutCardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC94FF26690DD100CE04F4 /* VGSCheckoutCardOptions.swift */; };
+		44EC950226690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950126690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift */; };
+		44EC95102669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC95062669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift */; };
+		44EC95112669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC95082669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift */; };
+		44EC95122669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */; };
+		44EC95132669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */; };
+		44EC95142669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */; };
+		44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */; };
+		44EC95182669F06000CE04F4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44EC95172669F06000CE04F4 /* Media.xcassets */; };
+		44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC951A2669F23D00CE04F4 /* BundleUtils.swift */; };
 		44ECE60A265FEE38006C160B /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
 		44ECE616265FF596006C160B /* CheckoutCardIOScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */; };
@@ -93,19 +99,25 @@
 		44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTheme.swift; sourceTree = "<group>"; };
 		44C4C9042664EC7600195505 /* VGSCheckoutBasicConfigurationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBasicConfigurationProtocol.swift; sourceTree = "<group>"; };
 		44C4C9082664ECD200195505 /* VGSCheckoutVaultConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutVaultConfiguration.swift; sourceTree = "<group>"; };
-		44C4C90C2664ED7E00195505 /* VGSCheckoutCardDetailsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardDetailsOptions.swift; sourceTree = "<group>"; };
-		44C4C90F2664EE1600195505 /* VGSCheckoutCardHolderFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardHolderFieldType.swift; sourceTree = "<group>"; };
-		44C4C9112664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPostalCodeFieldType.swift; sourceTree = "<group>"; };
-		44C4C9142664F01600195505 /* VGSCheckoutRequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestConfiguration.swift; sourceTree = "<group>"; };
-		44C4C9172664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHostnamePolicy.swift; sourceTree = "<group>"; };
-		44C4C91A2664F11C00195505 /* VGSCheckoutSatelliteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSatelliteConfiguration.swift; sourceTree = "<group>"; };
-		44C4C91D2664F15400195505 /* VGSCheckoutRequestOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestOptions.swift; sourceTree = "<group>"; };
-		44C4C9202664F19D00195505 /* VGSCheckoutDataMergePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDataMergePolicy.swift; sourceTree = "<group>"; };
-		44C4C9232664F1FF00195505 /* VGSCheckoutHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHTTPMethod.swift; sourceTree = "<group>"; };
 		44C4C92626651AD700195505 /* VGSCheckout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckout.swift; sourceTree = "<group>"; };
 		44C4C92926651DCD00195505 /* VGSCardFormItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardFormItemController.swift; sourceTree = "<group>"; };
 		44C4C92B2665F8ED00195505 /* VGSCheckoutFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFormController.swift; sourceTree = "<group>"; };
 		44C4C92D2665F9F800195505 /* VGSCheckoutFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFormViewBuilder.swift; sourceTree = "<group>"; };
+		44EC94EE26690CC000CE04F4 /* VaultFormConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultFormConfiguration.swift; sourceTree = "<group>"; };
+		44EC94F126690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardNumberOptions.swift; sourceTree = "<group>"; };
+		44EC94F526690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCVCOptions.swift; sourceTree = "<group>"; };
+		44EC94F826690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutExpirationDateOptions.swift; sourceTree = "<group>"; };
+		44EC94FB26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardHolderOptions.swift; sourceTree = "<group>"; };
+		44EC94FF26690DD100CE04F4 /* VGSCheckoutCardOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardOptions.swift; sourceTree = "<group>"; };
+		44EC950126690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFieldVisibility.swift; sourceTree = "<group>"; };
+		44EC95062669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHTTPMethod.swift; sourceTree = "<group>"; };
+		44EC95082669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestOptions.swift; sourceTree = "<group>"; };
+		44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDataMergePolicy.swift; sourceTree = "<group>"; };
+		44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSatelliteConfiguration.swift; sourceTree = "<group>"; };
+		44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutVaultRouteConfiguration.swift; sourceTree = "<group>"; };
+		44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHostnamePolicy.swift; sourceTree = "<group>"; };
+		44EC95172669F06000CE04F4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		44EC951A2669F23D00CE04F4 /* BundleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleUtils.swift; sourceTree = "<group>"; };
 		44ECE5FB265FECA8006C160B /* VGSCheckoutCardIOScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckoutCardIOScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardIOScanner.swift; sourceTree = "<group>"; };
 		44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutCardIOScanner.h; sourceTree = "<group>"; };
@@ -174,6 +186,7 @@
 			children = (
 				44ECE5E2265FE1F0006C160B /* Core */,
 				44C4C8F62664B1CE00195505 /* Helpers */,
+				44EC95162669F01900CE04F4 /* Resources */,
 				3286E12F265EC588001FECEB /* VGSCheckout.h */,
 				3286E130265EC588001FECEB /* Info.plist */,
 			);
@@ -311,6 +324,7 @@
 		44C4C8F62664B1CE00195505 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				44EC95192669F21F00CE04F4 /* BundleUtils */,
 				44C4C8F72664B1D600195505 /* Extenions */,
 			);
 			path = Helpers;
@@ -362,7 +376,6 @@
 			children = (
 				44C4C9032664EC6600195505 /* BasicConfig */,
 				44C4C9062664EC9A00195505 /* CustomConfig */,
-				44C4C90A2664ED2400195505 /* ConfigurationDetails */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -387,80 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				44C4C9082664ECD200195505 /* VGSCheckoutVaultConfiguration.swift */,
+				44EC95042669EE8700CE04F4 /* RouteConfiguration */,
+				44EC94ED26690C9E00CE04F4 /* VaultFormConfiguration */,
 			);
 			path = Vaullt;
-			sourceTree = "<group>";
-		};
-		44C4C90A2664ED2400195505 /* ConfigurationDetails */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C9132664EFE800195505 /* RequestConfiguration */,
-				44C4C90B2664ED5100195505 /* FormConfiguration */,
-			);
-			path = ConfigurationDetails;
-			sourceTree = "<group>";
-		};
-		44C4C90B2664ED5100195505 /* FormConfiguration */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C90C2664ED7E00195505 /* VGSCheckoutCardDetailsOptions.swift */,
-				44C4C90F2664EE1600195505 /* VGSCheckoutCardHolderFieldType.swift */,
-				44C4C9112664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift */,
-			);
-			path = FormConfiguration;
-			sourceTree = "<group>";
-		};
-		44C4C9132664EFE800195505 /* RequestConfiguration */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C9142664F01600195505 /* VGSCheckoutRequestConfiguration.swift */,
-				44C4C9222664F1EE00195505 /* HTTPMethods */,
-				44C4C91F2664F17C00195505 /* DataMergePolicy */,
-				44C4C91C2664F14200195505 /* RequestOptions */,
-				44C4C9192664F0CC00195505 /* SatelliteConfiguration */,
-				44C4C9162664F09C00195505 /* HostnamePolicy */,
-			);
-			path = RequestConfiguration;
-			sourceTree = "<group>";
-		};
-		44C4C9162664F09C00195505 /* HostnamePolicy */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C9172664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift */,
-			);
-			path = HostnamePolicy;
-			sourceTree = "<group>";
-		};
-		44C4C9192664F0CC00195505 /* SatelliteConfiguration */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C91A2664F11C00195505 /* VGSCheckoutSatelliteConfiguration.swift */,
-			);
-			path = SatelliteConfiguration;
-			sourceTree = "<group>";
-		};
-		44C4C91C2664F14200195505 /* RequestOptions */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C91D2664F15400195505 /* VGSCheckoutRequestOptions.swift */,
-			);
-			path = RequestOptions;
-			sourceTree = "<group>";
-		};
-		44C4C91F2664F17C00195505 /* DataMergePolicy */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C9202664F19D00195505 /* VGSCheckoutDataMergePolicy.swift */,
-			);
-			path = DataMergePolicy;
-			sourceTree = "<group>";
-		};
-		44C4C9222664F1EE00195505 /* HTTPMethods */ = {
-			isa = PBXGroup;
-			children = (
-				44C4C9232664F1FF00195505 /* VGSCheckoutHTTPMethod.swift */,
-			);
-			path = HTTPMethods;
 			sourceTree = "<group>";
 		};
 		44C4C92526651AC600195505 /* Checkout */ = {
@@ -480,6 +423,145 @@
 				44C4C92926651DCD00195505 /* VGSCardFormItemController.swift */,
 			);
 			path = CardFormItem;
+			sourceTree = "<group>";
+		};
+		44EC94ED26690C9E00CE04F4 /* VaultFormConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94EE26690CC000CE04F4 /* VaultFormConfiguration.swift */,
+				44EC94F026690CD900CE04F4 /* FormFields */,
+			);
+			path = VaultFormConfiguration;
+			sourceTree = "<group>";
+		};
+		44EC94F026690CD900CE04F4 /* FormFields */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94FD26690DA900CE04F4 /* CardDetails */,
+			);
+			path = FormFields;
+			sourceTree = "<group>";
+		};
+		44EC94F326690D0800CE04F4 /* CardNumber */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94F126690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift */,
+			);
+			path = CardNumber;
+			sourceTree = "<group>";
+		};
+		44EC94F426690D1400CE04F4 /* CVC */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94F526690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift */,
+			);
+			path = CVC;
+			sourceTree = "<group>";
+		};
+		44EC94F726690D4100CE04F4 /* ExpirationDate */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94F826690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift */,
+			);
+			path = ExpirationDate;
+			sourceTree = "<group>";
+		};
+		44EC94FA26690D6800CE04F4 /* CardHolder */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94FB26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift */,
+			);
+			path = CardHolder;
+			sourceTree = "<group>";
+		};
+		44EC94FD26690DA900CE04F4 /* CardDetails */ = {
+			isa = PBXGroup;
+			children = (
+				44EC94FF26690DD100CE04F4 /* VGSCheckoutCardOptions.swift */,
+				44EC94FA26690D6800CE04F4 /* CardHolder */,
+				44EC94F326690D0800CE04F4 /* CardNumber */,
+				44EC94F726690D4100CE04F4 /* ExpirationDate */,
+				44EC94F426690D1400CE04F4 /* CVC */,
+				44EC94FE26690DB700CE04F4 /* FieldVisibility */,
+			);
+			path = CardDetails;
+			sourceTree = "<group>";
+		};
+		44EC94FE26690DB700CE04F4 /* FieldVisibility */ = {
+			isa = PBXGroup;
+			children = (
+				44EC950126690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift */,
+			);
+			path = FieldVisibility;
+			sourceTree = "<group>";
+		};
+		44EC95042669EE8700CE04F4 /* RouteConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */,
+				44EC95052669EE8700CE04F4 /* HTTPMethods */,
+				44EC95072669EE8700CE04F4 /* RequestOptions */,
+				44EC95092669EE8700CE04F4 /* DataMergePolicy */,
+				44EC950B2669EE8700CE04F4 /* SatelliteConfiguration */,
+				44EC950E2669EE8700CE04F4 /* HostnamePolicy */,
+			);
+			path = RouteConfiguration;
+			sourceTree = "<group>";
+		};
+		44EC95052669EE8700CE04F4 /* HTTPMethods */ = {
+			isa = PBXGroup;
+			children = (
+				44EC95062669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift */,
+			);
+			path = HTTPMethods;
+			sourceTree = "<group>";
+		};
+		44EC95072669EE8700CE04F4 /* RequestOptions */ = {
+			isa = PBXGroup;
+			children = (
+				44EC95082669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift */,
+			);
+			path = RequestOptions;
+			sourceTree = "<group>";
+		};
+		44EC95092669EE8700CE04F4 /* DataMergePolicy */ = {
+			isa = PBXGroup;
+			children = (
+				44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */,
+			);
+			path = DataMergePolicy;
+			sourceTree = "<group>";
+		};
+		44EC950B2669EE8700CE04F4 /* SatelliteConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */,
+			);
+			path = SatelliteConfiguration;
+			sourceTree = "<group>";
+		};
+		44EC950E2669EE8700CE04F4 /* HostnamePolicy */ = {
+			isa = PBXGroup;
+			children = (
+				44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */,
+			);
+			path = HostnamePolicy;
+			sourceTree = "<group>";
+		};
+		44EC95162669F01900CE04F4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				44EC95172669F06000CE04F4 /* Media.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		44EC95192669F21F00CE04F4 /* BundleUtils */ = {
+			isa = PBXGroup;
+			children = (
+				44EC951A2669F23D00CE04F4 /* BundleUtils.swift */,
+			);
+			path = BundleUtils;
 			sourceTree = "<group>";
 		};
 		44ECE5E2265FE1F0006C160B /* Core */ = {
@@ -651,6 +733,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44EC95182669F06000CE04F4 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,37 +815,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44C4C9102664EE1600195505 /* VGSCheckoutCardHolderFieldType.swift in Sources */,
-				44C4C91E2664F15400195505 /* VGSCheckoutRequestOptions.swift in Sources */,
+				44EC950026690DD100CE04F4 /* VGSCheckoutCardOptions.swift in Sources */,
+				44EC95112669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift in Sources */,
+				44EC95122669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift in Sources */,
 				44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */,
 				44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */,
-				44C4C90D2664ED7E00195505 /* VGSCheckoutCardDetailsOptions.swift in Sources */,
 				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
 				44C4C8F02664B18B00195505 /* VGSPlaceholderFormItemView.swift in Sources */,
+				44EC95142669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift in Sources */,
 				44C4C9052664EC7600195505 /* VGSCheckoutBasicConfigurationProtocol.swift in Sources */,
+				44EC94F626690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift in Sources */,
 				44C4C92E2665F9F800195505 /* VGSCheckoutFormViewBuilder.swift in Sources */,
-				44C4C9212664F19D00195505 /* VGSCheckoutDataMergePolicy.swift in Sources */,
 				44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */,
 				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
 				44C4C8F42664B18B00195505 /* VGSFormViewController.swift in Sources */,
-				44C4C91B2664F11D00195505 /* VGSCheckoutSatelliteConfiguration.swift in Sources */,
+				44EC94F226690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift in Sources */,
+				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
-				44C4C9152664F01600195505 /* VGSCheckoutRequestConfiguration.swift in Sources */,
+				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
 				44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */,
 				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
-				44C4C9242664F1FF00195505 /* VGSCheckoutHTTPMethod.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
-				44C4C9122664EE4600195505 /* VGSCheckoutPostalCodeFieldType.swift in Sources */,
 				44C4C9092664ECD200195505 /* VGSCheckoutVaultConfiguration.swift in Sources */,
 				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,
 				44C4C92C2665F8ED00195505 /* VGSCheckoutFormController.swift in Sources */,
+				44EC94EF26690CC000CE04F4 /* VaultFormConfiguration.swift in Sources */,
+				44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */,
+				44EC95132669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift in Sources */,
+				44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */,
 				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,
+				44EC950226690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift in Sources */,
 				44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */,
-				44C4C9182664F0AF00195505 /* VGSCheckoutHostnamePolicy.swift in Sources */,
 				44C4C92A26651DCD00195505 /* VGSCardFormItemController.swift in Sources */,
+				44EC95102669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift in Sources */,
 				44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFormItemView.swift in Sources */,
 			);
