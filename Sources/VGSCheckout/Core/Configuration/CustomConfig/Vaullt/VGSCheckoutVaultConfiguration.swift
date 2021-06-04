@@ -7,10 +7,10 @@ import Foundation
 /// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
-	/// Request configuration, default is `VGSCheckoutVaultRouteConfiguration` object.
+	/// Route configuration, default is `VGSCheckoutVaultRouteConfiguration` object.
 	public var routeConfiguration: VGSCheckoutVaultRouteConfiguration = VGSCheckoutVaultRouteConfiguration()
 
-	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default options.
+	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default settings.
 	internal var formConfiguration: VGSCheckoutVaultFormConfiguration = VGSCheckoutVaultFormConfiguration()
 
 	/// Payment flow type (internal use only).
