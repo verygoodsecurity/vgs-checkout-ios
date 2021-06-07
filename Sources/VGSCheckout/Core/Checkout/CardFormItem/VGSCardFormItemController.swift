@@ -40,13 +40,8 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 
 	internal let validationBehavior: FormItemControllerValidationBehavior
 
-	/// Card view.
-	internal lazy var cardFormView: VGSCheckoutCardFormView = {
-		let view = VGSCheckoutCardFormView(frame: .zero)
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		return view
-	}()
+	/// Card form view.
+	internal let cardFormView: VGSCheckoutCardFormView
 
 	/// TODO: - this should be dynamic.
 	var textFiedComponents: [VGSTextFieldFormComponentProtocol] {
@@ -72,11 +67,14 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
+		self.cardFormView = VGSCheckoutCardFormView(paymentInstrument: paymentInstrument)
 	}
 
 	// MARK: - Interface
 
 	internal func buildForm() {
+		cardFormView.translatesAutoresizingMaskIntoConstraints = false
+		
 		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
