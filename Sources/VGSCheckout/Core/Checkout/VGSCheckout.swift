@@ -68,8 +68,8 @@ internal extension VGSCollect {
 				self.init(id: vaultID, environment: environment)
 			case .customHostname(let customHostname):
 				self.init(id: vaultID, environment: environment, hostname: customHostname)
-			case .local(let satelliteConfiguration):
-				self.init(id: vaultID, environment: environment, hostname: satelliteConfiguration.localhost, satellitePort: satelliteConfiguration.port)
+			case .local(let localhost, let port):
+				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
 			}
 		}
 	}

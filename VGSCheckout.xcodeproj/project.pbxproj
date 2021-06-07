@@ -45,7 +45,6 @@
 		44EC95102669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC95062669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift */; };
 		44EC95112669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC95082669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift */; };
 		44EC95122669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */; };
-		44EC95132669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */; };
 		44EC95142669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */; };
 		44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */; };
 		44EC95182669F06000CE04F4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44EC95172669F06000CE04F4 /* Media.xcassets */; };
@@ -113,7 +112,6 @@
 		44EC95062669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHTTPMethod.swift; sourceTree = "<group>"; };
 		44EC95082669EE8700CE04F4 /* VGSCheckoutRequestOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestOptions.swift; sourceTree = "<group>"; };
 		44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDataMergePolicy.swift; sourceTree = "<group>"; };
-		44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSatelliteConfiguration.swift; sourceTree = "<group>"; };
 		44EC950D2669EE8700CE04F4 /* VGSCheckoutVaultRouteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutVaultRouteConfiguration.swift; sourceTree = "<group>"; };
 		44EC950F2669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHostnamePolicy.swift; sourceTree = "<group>"; };
 		44EC95172669F06000CE04F4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -502,7 +500,6 @@
 				44EC95052669EE8700CE04F4 /* HTTPMethods */,
 				44EC95072669EE8700CE04F4 /* RequestOptions */,
 				44EC95092669EE8700CE04F4 /* DataMergePolicy */,
-				44EC950B2669EE8700CE04F4 /* SatelliteConfiguration */,
 				44EC950E2669EE8700CE04F4 /* HostnamePolicy */,
 			);
 			path = RouteConfiguration;
@@ -530,14 +527,6 @@
 				44EC950A2669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift */,
 			);
 			path = DataMergePolicy;
-			sourceTree = "<group>";
-		};
-		44EC950B2669EE8700CE04F4 /* SatelliteConfiguration */ = {
-			isa = PBXGroup;
-			children = (
-				44EC950C2669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift */,
-			);
-			path = SatelliteConfiguration;
 			sourceTree = "<group>";
 		};
 		44EC950E2669EE8700CE04F4 /* HostnamePolicy */ = {
@@ -843,7 +832,6 @@
 				44C4C92C2665F8ED00195505 /* VGSCheckoutFormController.swift in Sources */,
 				44EC94EF26690CC000CE04F4 /* VaultFormConfiguration.swift in Sources */,
 				44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */,
-				44EC95132669EE8700CE04F4 /* VGSCheckoutSatelliteConfiguration.swift in Sources */,
 				44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */,
 				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,
