@@ -158,7 +158,17 @@ internal class VGSCheckoutCardFormView: UIView {
 
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
-		rootStackView.addArrangedSubview(cardHolderDetailsView)
+
+		switch paymentInstrument {
+		case .vault(let configuration):
+			switch configuration.cardHolderFieldOptions.fieldVisibility {
+			case .visible:
+				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
+				rootStackView.addArrangedSubview(cardHolderDetailsView)
+			default:
+				break
+			}
+		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
