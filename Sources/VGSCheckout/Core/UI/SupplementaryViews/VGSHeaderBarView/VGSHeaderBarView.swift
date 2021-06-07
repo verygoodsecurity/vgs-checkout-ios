@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 #endif
 
+/// Header view delate.
 internal protocol VGSHeaderBarViewDelegate: AnyObject {
 	func buttonDidTap(in header: VGSHeaderBarView)
 }
@@ -14,13 +15,37 @@ internal protocol VGSHeaderBarViewDelegate: AnyObject {
 /// Custom header bar vier for checkout.
 internal class VGSHeaderBarView: UIView {
 
+	/// Holds layout style.
+	internal struct FixedBarLayout {
+
+		/// Header view height.
+		let barHeight: CGFloat
+
+		/// Button left padding.
+		let leftPaddig: CGFloat
+
+		/// Button radius.
+		let buttonRadius: CGFloat
+	}
+
+	/// Defines header view style.
+	internal enum LayoutStyle {
+		case fixed(_ layout: FixedBarLayout)
+	}
+
+	/// Layout style.
+	internal var layoutStyle: LayoutStyle = .fixed(defaultLayout)
+
+	/// Default layout for fixed style.
+	static var defaultLayout = FixedBarLayout(barHeight: 50, leftPaddig: 8, buttonRadius: 12)
+
   // MARK: - Vars
 
 	/// An object that acts as a delegate of `VGSHeaderBarView`.
 	internal weak var delegate: VGSHeaderBarViewDelegate?
 
 	/// Header bar view height.
-	internal static var height: CGFloat = 50
+	internal static var maxHeight: CGFloat = 60
 
 	/// Close button.
 	internal lazy var button: VGSCustomRoundedButton = {
@@ -35,6 +60,7 @@ internal class VGSHeaderBarView: UIView {
 	/// no:doc
 	init() {
 		super.init(frame: .zero)
+		setupUI()
 	}
 
 	/// no:doc
@@ -46,21 +72,30 @@ internal class VGSHeaderBarView: UIView {
 
 	/// no:doc
 	override var intrinsicContentSize: CGSize {
-			return CGSize(width: UIView.noIntrinsicMetric, height: VGSHeaderBarView.height)
+		let height: CGFloat
+		switch layoutStyle {
+		case .fixed(let layoutStyle):
+			height = layoutStyle.barHeight
+		}
+		return CGSize(width: UIView.noIntrinsicMetric, height: height)
 	}
 
 	// MARK: - Helpers
 
 	/// Setup UI and layout.
 	private func setupUI() {
-		let constraints = [
-			button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-			button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16),
-			button.centerYAnchor.constraint(equalTo: centerYAnchor)
-		]
-		NSLayoutConstraint.activate(constraints)
+		addSubview(button)
+		switch layoutStyle {
+		case .fixed(let style):
+			let constraints = [
+				button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: style.leftPaddig),
+				button.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-		button.updateStyle(with: .close)
+			]
+			NSLayoutConstraint.activate(constraints)
+			button.updateStyle(with: .close)
+			button.radius = style.buttonRadius
+		}
 
 		button.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
 	}

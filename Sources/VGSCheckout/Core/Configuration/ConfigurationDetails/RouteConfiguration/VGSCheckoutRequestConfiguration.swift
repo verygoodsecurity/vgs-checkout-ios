@@ -11,7 +11,7 @@ public struct VGSCheckoutRouteConfiguration {
 	public var hostnamePolicy: VGSCheckoutHostnamePolicy = .vault
 
 	/// Request options.
-	public var requestOptions = VGSCheckoutRequestConfiguration()
+	public var requestOptions = VGSCheckoutRequestOptions()
 
 	/// no:doc
 	public init() {}

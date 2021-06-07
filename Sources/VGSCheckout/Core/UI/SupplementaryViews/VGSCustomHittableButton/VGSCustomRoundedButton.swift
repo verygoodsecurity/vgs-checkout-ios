@@ -41,7 +41,11 @@ internal class VGSCustomRoundedButton: UIControl {
 	}
 
 	/// Button radius.
-	internal var radius: CGFloat = 12
+	internal var radius: CGFloat = 12 {
+		didSet {
+			redrawShadow()
+		}
+	}
 
 	/// Min tappable area.
 	internal var minTapAreaSize: CGSize = CGSize(width: 44, height: 44)
@@ -104,8 +108,20 @@ internal class VGSCustomRoundedButton: UIControl {
 
 	/// Setup UI and layout.
 	private func setupUI() {
+		if #available(iOS 13.0, *) {
+			backgroundColor = UIColor.systemBackground
+		} else {
+			backgroundColor = UIColor.white
+		}
 		addSubview(imageView)
 		imageView.checkout_constraintViewToSuperviewEdges()
+	}
+
+	private func redrawShadow() {
+		layer.cornerRadius = radius
+		layer.masksToBounds = false
+		isAccessibilityElement = true
+		accessibilityTraits = [.button]
 
 		layer.shadowOffset = CGSize(width: 0, height: 1)
 		layer.shadowRadius = 1.5
@@ -114,7 +130,7 @@ internal class VGSCustomRoundedButton: UIControl {
 		} else {
 			layer.shadowColor = UIColor.gray.cgColor
 		}
-		layer.shadowOpacity = 0.1
+		layer.shadowOpacity = 0.8
 		let path = UIBezierPath(
 				arcCenter: CGPoint(x: radius, y: radius), radius: radius,
 				startAngle: 0,

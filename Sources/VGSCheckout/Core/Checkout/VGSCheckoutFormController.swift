@@ -59,8 +59,13 @@ internal class VGSCheckoutFormController: NSObject {
 		formView.translatesAutoresizingMaskIntoConstraints = false
 
 		let viewController = VGSFormViewController(formView: formView)
-		viewController.formView.stackView.layoutMargins = UIEdgeInsets(top: 50, left: 16, bottom: 50, right: 16)
+		viewController.formView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
 		viewController.formView.stackView.isLayoutMarginsRelativeArrangement = true
+
+		let headerView = VGSHeaderBarView()
+		headerView.translatesAutoresizingMaskIntoConstraints = false
+		viewController.formView.addFormItemView(headerView)
+		headerView.delegate = self
 
 		viewController.formView.addFormItemView(backgroundStackView)
 		payButtonContainerView.addContentView(payButton)
@@ -76,10 +81,6 @@ internal class VGSCheckoutFormController: NSObject {
 		view1.backgroundColor = .clear
 		view1.translatesAutoresizingMaskIntoConstraints = false
 		view1.heightAnchor.constraint(equalToConstant: 200).isActive = true
-
-		let headerView = VGSHeaderBarView()
-		backgroundStackView.addArrangedSubview(headerView)
-		headerView.delegate = self
 
 		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)
