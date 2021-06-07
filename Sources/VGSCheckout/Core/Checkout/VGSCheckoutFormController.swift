@@ -42,6 +42,9 @@ internal class VGSCheckoutFormController: NSObject {
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
 
+	/// Checkout coordinator.
+	fileprivate var checkoutCoordinator = VGSCheckoutCoordinator()
+
 	// MARK: - Initialization
 
 	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
@@ -74,7 +77,9 @@ internal class VGSCheckoutFormController: NSObject {
 		view1.translatesAutoresizingMaskIntoConstraints = false
 		view1.heightAnchor.constraint(equalToConstant: 200).isActive = true
 
-		backgroundStackView.addArrangedSubview(view1)
+		let headerView = VGSHeaderBarView()
+		backgroundStackView.addArrangedSubview(headerView)
+		headerView.delegate = self
 
 		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
 		backgroundStackView.addArrangedSubview(payButtonContainerView)
@@ -85,6 +90,8 @@ internal class VGSCheckoutFormController: NSObject {
 		view.translatesAutoresizingMaskIntoConstraints = false
 
 		viewController.formView.addFormItemView(view)
+
+		checkoutCoordinator.setRootViewController(viewController)
 
 		return viewController
 	}
@@ -99,6 +106,14 @@ internal class VGSCheckoutFormController: NSObject {
 	}
 }
 
+// MARK: - VGSHeaderBarViewDelegate
+
+extension VGSCheckoutFormController: VGSHeaderBarViewDelegate {
+	func buttonDidTap(in header: VGSHeaderBarView) {
+		checkoutCoordinator.dismissCurrentController()
+	}
+}
+
 // MARK: - VGSFormItemControllerDelegate
 
 extension VGSCheckoutFormController: VGSFormItemControllerDelegate {
@@ -109,5 +124,17 @@ extension VGSCheckoutFormController: VGSFormItemControllerDelegate {
 		case .valid:
 			payButton.status = .enabled
 		}
+	}
+}
+
+internal class VGSCheckoutCoordinator {
+	internal var rootController: UIViewController?
+
+	func setRootViewController(_ viewController: UIViewController) {
+		rootController = viewController
+	}
+
+	func dismissCurrentController() {
+		rootController?.dismiss(animated: true, completion: nil)
 	}
 }

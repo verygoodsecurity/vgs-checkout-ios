@@ -10,16 +10,47 @@ import UIKit
 /// Custom button.
 internal class VGSCustomRoundedButton: UIControl {
 
+	/// Defines button UI styles.
+	internal enum ButtonStyle {
+
+		/**
+		Close button.
+		*/
+		case close
+
+		/**
+		Back button.
+		*/
+		case back
+
+		/**
+		Custom view.
+
+		Parameters:
+		- view: `UIView` object, custom view to add.
+		*/
+		case customView(_ view: UIView)
+
+		/**
+		Custom image.
+
+		Parameters:
+		- image: `UIImage` object, custom image to set.
+		*/
+		case customImage(_ image: UIImage)
+	}
+
 	/// Button radius.
-	private var radius: CGFloat = 12
+	internal var radius: CGFloat = 12
 
 	/// Min tappable area.
-	private var minTapAreaSize: CGSize = CGSize(width: 44, height: 44)
+	internal var minTapAreaSize: CGSize = CGSize(width: 44, height: 44)
 
 	/// Image view.
-	private lazy var imageView: UIImageView = {
+	internal lazy var imageView: UIImageView = {
 		let imageView = UIImageView()
 		imageView.translatesAutoresizingMaskIntoConstraints = false
+		imageView.contentMode = .scaleAspectFit
 
 		return imageView
 	}()
@@ -47,6 +78,26 @@ internal class VGSCustomRoundedButton: UIControl {
 	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		let area = bounds.insetBy(dx: -minTapAreaSize.width / 2, dy: -minTapAreaSize.height / 2)
 		return area.contains(point)
+	}
+
+	// MARK: - Interface
+
+	/// Update button with style.
+	/// - Parameter style: `ButtonStyle` object, button style.
+	internal func updateStyle(with style: ButtonStyle) {
+		switch style {
+		case .close:
+			imageView.image = UIImage(named: "navigation_view_close_button", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
+		case .back:
+			break
+		case .customImage(let image):
+			imageView.image = image
+		case .customView(let view):
+			imageView.isHidden = true
+			addSubview(view)
+			view.translatesAutoresizingMaskIntoConstraints = false
+			view.checkout_constraintViewToSuperviewEdges()
+		}
 	}
 
 	// MARK: - Helpers

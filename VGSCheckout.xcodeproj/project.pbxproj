@@ -11,7 +11,7 @@
 		3286E131265EC588001FECEB /* VGSCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3286E139265EC5DC001FECEB /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */; };
 		44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */; };
-		44955C28266DE8B800435FC6 /* VGSCustomHittableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C27266DE8B800435FC6 /* VGSCustomHittableButton.swift */; };
+		44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */; };
 		44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44C4C8B726648E0300195505 /* VGSCollectSDK */; };
 		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
 		44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */; };
@@ -81,7 +81,7 @@
 		3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTests.swift; sourceTree = "<group>"; };
 		3286E138265EC5DC001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSHeaderBarView.swift; sourceTree = "<group>"; };
-		44955C27266DE8B800435FC6 /* VGSCustomHittableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCustomHittableButton.swift; sourceTree = "<group>"; };
+		44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCustomRoundedButton.swift; sourceTree = "<group>"; };
 		44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHeaderView.swift; sourceTree = "<group>"; };
 		44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardFormView.swift; sourceTree = "<group>"; };
 		44C4C8BF2664B18B00195505 /* VGSFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormView.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		44955C26266DE82500435FC6 /* VGSCustomHittableButton */ = {
 			isa = PBXGroup;
 			children = (
-				44955C27266DE8B800435FC6 /* VGSCustomHittableButton.swift */,
+				44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */,
 			);
 			path = VGSCustomHittableButton;
 			sourceTree = "<group>";
@@ -847,8 +847,8 @@
 				44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */,
 				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
-				44955C28266DE8B800435FC6 /* VGSCustomHittableButton.swift in Sources */,
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
+				44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */,
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
 				44C4C9092664ECD200195505 /* VGSCheckoutVaultConfiguration.swift in Sources */,
 				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,

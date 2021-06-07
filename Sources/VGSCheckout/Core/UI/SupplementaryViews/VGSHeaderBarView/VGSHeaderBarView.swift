@@ -7,37 +7,33 @@ import Foundation
 import UIKit
 #endif
 
+internal protocol VGSHeaderBarViewDelegate: AnyObject {
+	func buttonDidTap(in header: VGSHeaderBarView)
+}
+
 /// Custom header bar vier for checkout.
 internal class VGSHeaderBarView: UIView {
 
-	/// Defines button UI styles.
-	internal enum ButtonStyle {
-		case close
-		case back
-		case customView(_ view: UIView)
-		case customImage(_ image: UIImage)
-	}
-
   // MARK: - Vars
+
+	/// An object that acts as a delegate of `VGSHeaderBarView`.
+	internal weak var delegate: VGSHeaderBarViewDelegate?
 
 	/// Header bar view height.
 	internal static var height: CGFloat = 50
 
 	/// Close button.
-	internal lazy var button: UIButton = {
-		let button = UIButton()
+	internal lazy var button: VGSCustomRoundedButton = {
+		let button = VGSCustomRoundedButton(frame: .zero)
 		button.translatesAutoresizingMaskIntoConstraints = false
 
 		return button
 	}()
 
-	fileprivate let style: ButtonStyle
-
 	// MARK: - Initialization
 
 	/// no:doc
-	init(style: VGSHeaderBarView.ButtonStyle) {
-		self.style = style
+	init() {
 		super.init(frame: .zero)
 	}
 
@@ -55,6 +51,7 @@ internal class VGSHeaderBarView: UIView {
 
 	// MARK: - Helpers
 
+	/// Setup UI and layout.
 	private func setupUI() {
 		let constraints = [
 			button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -62,5 +59,14 @@ internal class VGSHeaderBarView: UIView {
 			button.centerYAnchor.constraint(equalTo: centerYAnchor)
 		]
 		NSLayoutConstraint.activate(constraints)
+
+		button.updateStyle(with: .close)
+
+		button.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
+	}
+
+	/// Tap action.
+	@objc fileprivate func handleTap(_ sender: VGSCustomRoundedButton) {
+		delegate?.buttonDidTap(in: self)
 	}
 }
