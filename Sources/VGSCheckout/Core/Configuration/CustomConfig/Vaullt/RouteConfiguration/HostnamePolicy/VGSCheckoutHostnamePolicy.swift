@@ -19,10 +19,12 @@ public enum VGSCheckoutHostnamePolicy {
 	case customHostname(_ hostname: String)
 
 	/**
-	 Configuration for local testing with satellite.
+	 Configuration for local testing with VGS Satellite.
 
 	 - Parameters:
-			- satelliteConfiguration: `VGSCheckoutSatelliteConfiguration` object, configuration for local testing.
+		- localhost: `String` object, Satellite localhost. IMPORTANT! Use only with .sandbox environment! Should be specified for valid http://localhost or in local IP format http://192.168.X.X.
+
+	 - port: `Int` object, custom port for Satellite configuration.
 	*/
-	case local(_ satelliteConfiguration: VGSCheckoutSatelliteConfiguration)
+	case local(_ localhost: String, port: Int)
 }

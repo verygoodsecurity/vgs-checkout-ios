@@ -28,7 +28,7 @@ internal enum VGSPaymentFlowIdentifier {
 /// Defines paymnet processing flow.
 internal enum VGSPaymentInstrument {
 
-	case vault(_ configuration: VGSCheckoutVaultConfiguration)
+	case vault(_ configuration: VGSCheckoutConfiguration)
 
 	/// case multiplexing
 
@@ -39,7 +39,7 @@ internal enum VGSPaymentInstrument {
 
 		switch checkoutConfiguration.paymentFlowType {
 		case .vault:
-			if let vaultConfig = checkoutConfiguration as? VGSCheckoutVaultConfiguration {
+			if let vaultConfig = checkoutConfiguration as? VGSCheckoutConfiguration {
 				self = .vault(vaultConfig)
 				return
 			} else {

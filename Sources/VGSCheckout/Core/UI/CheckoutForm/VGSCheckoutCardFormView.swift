@@ -8,17 +8,21 @@ import Foundation
 import UIKit
 #endif
 
+internal struct VGSFieldGroup {
+	internal let fieldView: [[UIView]]
+}
+
 internal class VGSCheckoutCardFormView: UIView {
 
-	internal enum CardHolderNameType {
-		case none
-		case single(_ cardHolder: VGSCardholderFormItemView)
-		case splitted(_ firstName: VGSCardholderFormItemView, _ lastName: VGSCardholderFormItemView)
+	/// Defines field distribution.
+	internal enum FieldsDistribution {
+		case singleLineDateAndCVC
+		case doubleLineDateAndCVC
+		case singleLineAll
 	}
 
-	// MARK: - Vars
-
-	fileprivate var cardHolderNameType: CardHolderNameType
+	/// Fields distribution.
+	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
 
 	/// Card number view.
 	internal lazy var cardNumberComponentView: VGSCardNumberFormItemView = {
@@ -43,6 +47,9 @@ internal class VGSCheckoutCardFormView: UIView {
 
 		return componentView
 	}()
+
+	/// Card holder view.
+	internal let cardHolderDetailsView: VGSCardHolderDetailsView
 
 	/// Container view for header to add insets.
 	internal lazy var headerContainerView: VGSContainerItemView = {
@@ -124,21 +131,22 @@ internal class VGSCheckoutCardFormView: UIView {
 		return stackView
 	}()
 
+	/// Payment instrument.
+	fileprivate let paymentInstrument: VGSPaymentInstrument
+
 	// MARK: - Initialization
 
-	override init(frame: CGRect) {
-		let holderNameItemView = VGSCardholderFormItemView(frame: .zero)
-		self.cardHolderNameType = .single(holderNameItemView)
-
-//		let firstNameItemView = VGSCardholderFormItemView(frame: .zero)
-//		let lastNameItemView = VGSCardholderFormItemView(frame: .zero)
-//		self.cardHolderNameType = .splitted(firstNameItemView, lastNameItemView)
-
+	/// Initialization.
+	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
+	init(paymentInstrument: VGSPaymentInstrument) {
+		self.paymentInstrument = paymentInstrument
+		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
 		super.init(frame: .zero)
 
 		setupUI()
 	}
 
+	/// no:doc
 	required init?(coder: NSCoder) {
 		fatalError("Not implemented")
 	}
@@ -155,33 +163,15 @@ internal class VGSCheckoutCardFormView: UIView {
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 
-		switch cardHolderNameType {
-		case .single(let itemView):
-			rootStackView.addArrangedSubview(cardHolderNameStackView)
-			cardHolderNameStackView.addArrangedSubview(itemView)
-			itemView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			itemView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
-
-			itemView.cardHolderName.placeholder = "John Doe"
-			itemView.placeholderComponent.hintComponentView.label.text = "Cardholder"
-		case .splitted(let firstNameItemView, let lastNameItemView):
-			rootStackView.addArrangedSubview(cardHolderNameStackView)
-			cardHolderNameStackView.addArrangedSubview(firstNameItemView)
-			cardHolderNameStackView.addArrangedSubview(lastNameItemView)
-
-			firstNameItemView.cardHolderName.placeholder = "John"
-			lastNameItemView.cardHolderName.placeholder = "Doe"
-
-			firstNameItemView.placeholderComponent.hintComponentView.label.text = "First Name"
-			lastNameItemView.placeholderComponent.hintComponentView.label.text = "Last Name"
-
-			firstNameItemView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			firstNameItemView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
-
-			lastNameItemView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			lastNameItemView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
-		case .none:
-			break
+		switch paymentInstrument {
+		case .vault(let configuration):
+			switch configuration.cardHolderFieldOptions.fieldVisibility {
+			case .visible:
+				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
+				rootStackView.addArrangedSubview(cardHolderDetailsView)
+			default:
+				break
+			}
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
@@ -189,6 +179,24 @@ internal class VGSCheckoutCardFormView: UIView {
 		cardNumberComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		cardNumberComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
 
+		verticalStackView.addArrangedSubview(cardNumberComponentView)
+
+		switch fieldsDistribution {
+		case .singleLineDateAndCVC:
+			setupDateAndCVC(in: true)
+		case .doubleLineDateAndCVC:
+			setupDateAndCVC(in: false)
+		case .singleLineAll:
+			setupAllInSingleLine()
+		}
+	}
+
+	private func setupDateAndCVC(in singleLine: Bool) {
+		if singleLine {
+			horizonalStackView.axis = .horizontal
+		} else {
+			horizonalStackView.axis = .vertical
+		}
 
 		expDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		expDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
@@ -199,7 +207,18 @@ internal class VGSCheckoutCardFormView: UIView {
 		horizonalStackView.addArrangedSubview(expDateComponentView)
 		horizonalStackView.addArrangedSubview(cvcDateComponentView)
 
-		verticalStackView.addArrangedSubview(cardNumberComponentView)
 		verticalStackView.addArrangedSubview(horizonalStackView)
+	}
+
+	private func setupAllInSingleLine() {
+		expDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		expDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
+
+		cvcDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		cvcDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
+
+		verticalStackView.axis = .horizontal
+		verticalStackView.addArrangedSubview(expDateComponentView)
+		verticalStackView.addArrangedSubview(cvcDateComponentView)
 	}
 }
