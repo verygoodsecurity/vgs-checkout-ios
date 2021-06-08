@@ -21,24 +21,21 @@ internal class VGSAddCardFormPresenter: NSObject {
 		didSet {
 			switch state {
 			case .invalid:
-				payButton.status = .disabled
+				addCardMainView.payButton.status = .disabled
 			case .valid:
-				payButton.status = .enabled
+				addCardMainView.payButton.status = .enabled
 			case .processing:
-				payButton.status = .processing
+				addCardMainView.payButton.status = .processing
 			}
 		}
 	}
 
-	fileprivate let backgroundStackView: UIStackView = VGSCheckoutFormViewBuilder.buildBackgroundStackView()
-
 	internal let paymentInstrument: VGSPaymentInstrument
 
-	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
-
-	internal let payButtonContainerView: VGSContainerItemView = VGSCheckoutFormViewBuilder.buildPaymentButtonContainerView()
-
 	internal let cardFormController: VGSCardFormItemController
+
+	/// Add card main view.
+	internal let addCardMainView: VGSAddCardMainView
 
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
@@ -49,53 +46,18 @@ internal class VGSAddCardFormPresenter: NSObject {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.cardFormController = VGSCardFormItemController(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+		self.addCardMainView = VGSAddCardMainView(paymentInstrument: paymentInstrument, cardDetailsView: cardFormController.cardFormView, viewLayoutStyle: .fullScreen)
 		super.init()
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
-		let formView = VGSFormView()
-		formView.translatesAutoresizingMaskIntoConstraints = false
 
-		let viewController = VGSFormViewController(formView: formView)
-		viewController.formView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
-		viewController.formView.stackView.isLayoutMarginsRelativeArrangement = true
-		viewController.formView.stackView.spacing = 8
+		addCardMainView.headerView.delegate = self
+		addCardMainView.translatesAutoresizingMaskIntoConstraints = false
+		let viewController = VGSFormViewController(formView: addCardMainView)
 
-		let headerView = VGSHeaderBarView()
-		headerView.translatesAutoresizingMaskIntoConstraints = false
-		viewController.formView.addFormItemView(headerView)
-		headerView.delegate = self
-
-		let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
-		payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
-		viewController.formView.addFormItemView(payWithCardHeaderView)
-
-		viewController.formView.addFormItemView(backgroundStackView)
-		payButtonContainerView.addContentView(payButton)
-
-		cardFormController.buildForm()
-
-		payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		addCardMainView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardFormController.delegate = self
-		// Add empty transparent view to bottom.
-
-		// Test view for keyboard animation check.
-		let view1 = UIView()
-		view1.backgroundColor = .clear
-		view1.translatesAutoresizingMaskIntoConstraints = false
-		view1.heightAnchor.constraint(equalToConstant: 200).isActive = true
-
-		backgroundStackView.addArrangedSubview(cardFormController.cardFormView)
-		backgroundStackView.addArrangedSubview(payButtonContainerView)
-
-		/// Add empty transparent view to bottom.
-		let view = UIView()
-		view.backgroundColor = .clear
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		viewController.formView.addFormItemView(view)
-
-		//checkoutCoordinator.setRootViewController(viewController)
 
 		return viewController
 	}
@@ -103,9 +65,9 @@ internal class VGSAddCardFormPresenter: NSObject {
 	// MARK: - Helpers
 
 	@objc fileprivate func payDidTap() {
-		payButton.status = .processing
+		addCardMainView.payButton.status = .processing
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-			self.payButton.status = .success
+			self.addCardMainView.payButton.status = .success
 		}
 	}
 }
@@ -124,10 +86,9 @@ extension VGSAddCardFormPresenter: VGSFormItemControllerDelegate {
 	func stateDidChange(_ state: FormItemControllerState) {
 		switch state {
 		case .invalid:
-			payButton.status = .disabled
+			addCardMainView.payButton.status = .disabled
 		case .valid:
-			payButton.status = .enabled
+			addCardMainView.payButton.status = .enabled
 		}
 	}
 }
-

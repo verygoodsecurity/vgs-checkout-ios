@@ -68,6 +68,8 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
 		self.cardFormView = VGSCheckoutCardFormView(paymentInstrument: paymentInstrument)
+
+		buildForm()
 	}
 
 	// MARK: - Interface
@@ -78,8 +80,6 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
-		default:
-			break
 		}
 	}
 

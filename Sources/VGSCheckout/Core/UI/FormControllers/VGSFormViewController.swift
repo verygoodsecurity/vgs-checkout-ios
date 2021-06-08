@@ -14,7 +14,7 @@ internal class VGSFormViewController: UIViewController {
 	// MARK: - Vars
 
 	/// Form view.
-	internal let formView: VGSFormView
+	internal let formView: UIView
 
 	/// Bottom constraint to manage view position on keyboard show/hide notifications.
 	private var formKeyboardGuideBottomConstraint: NSLayoutConstraint?
@@ -24,8 +24,8 @@ internal class VGSFormViewController: UIViewController {
 	// MARK: - Initialization
 
 	/// Intialization.
-	/// - Parameter formView: `VGSFormView` object, form view.
-	init(formView: VGSFormView) {
+	/// - Parameter formView: `UIView` object, form view.
+	init(formView: UIView) {
 		self.formView = formView
 		super.init(nibName: nil, bundle: nil)
 	}
