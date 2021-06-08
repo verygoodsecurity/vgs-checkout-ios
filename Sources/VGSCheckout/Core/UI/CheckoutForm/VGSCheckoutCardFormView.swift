@@ -22,7 +22,7 @@ internal class VGSCheckoutCardFormView: UIView {
 	}
 
 	/// Fields distribution.
-	internal var fieldsDistribution: FieldsDistribution = .singleLineAll
+	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
 
 	/// Card number view.
 	internal lazy var cardNumberComponentView: VGSCardNumberFormItemView = {

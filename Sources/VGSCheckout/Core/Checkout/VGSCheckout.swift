@@ -29,7 +29,7 @@ public class VGSCheckout {
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	///   - configuration: `VGSCheckoutConfigurationProtocol` object, checkout configuration.
+	///   - configuration: `VGSCheckoutConfigurationProtocol` object, should be valid checkout configuration.
 	public init(vaultID: String, environment: String = "sandbox", configuration: VGSCheckoutConfigurationProtocol) {
 		guard let paymetInstrument = VGSPaymentInstrument(configuration: configuration) else {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
