@@ -85,7 +85,7 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 
 	// MARK: - Helpers
 
-	private func setupCardForm(with vaultConfiguration: VGSCheckoutVaultConfiguration) {
+	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
 		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName

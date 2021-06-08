@@ -1,11 +1,11 @@
 //
-//  VGSCheckoutVaultRouteConfiguration.swift
+//  VGSCheckoutRouteConfiguration.swift
 //  VGSCheckout
 
 import Foundation
 
 /// Route configuration for Vault.
-public struct VGSCheckoutVaultRouteConfiguration {
+public struct VGSCheckoutRouteConfiguration {
 
 	/// Inbound rout path for your organization vault.
 	public var path = ""

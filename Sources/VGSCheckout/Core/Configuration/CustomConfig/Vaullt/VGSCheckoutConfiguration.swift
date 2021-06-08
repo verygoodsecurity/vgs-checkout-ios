@@ -1,17 +1,17 @@
 //
-//  VGSCheckoutVaultConfiguration.swift
+//  VGSCheckoutConfiguration.swift
 //  VGSCheckout
 
 import Foundation
 
 /// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutVaultConfiguration: VGSCheckoutBasicConfigurationProtocol {
+public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
 	/// Route configuration, default is `VGSCheckoutVaultRouteConfiguration` object.
-	public var routeConfiguration: VGSCheckoutVaultRouteConfiguration = VGSCheckoutVaultRouteConfiguration()
+	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
 
 	/// Form configuration options. Check `VGSCheckoutVaultFormConfiguration` for default settings.
-	internal var formConfiguration: VGSCheckoutVaultFormConfiguration = VGSCheckoutVaultFormConfiguration()
+	internal var formConfiguration: VGSCheckoutFormConfiguration = VGSCheckoutFormConfiguration()
 
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault

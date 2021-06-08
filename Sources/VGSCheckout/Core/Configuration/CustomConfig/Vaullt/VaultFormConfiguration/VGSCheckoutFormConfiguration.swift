@@ -1,12 +1,11 @@
 //
-//  VaultFormConfiguration.swift
+//  VGSCheckoutFormConfiguration.swift
 //  VGSCheckout
-//
 
 import Foundation
 
-/// Form configuration for vault.
-public struct VGSCheckoutVaultFormConfiguration {
+/// Form configuration.
+public struct VGSCheckoutFormConfiguration {
 
 	/// Card details.
 	public var cardOptions = VGSCheckoutCardOptions()

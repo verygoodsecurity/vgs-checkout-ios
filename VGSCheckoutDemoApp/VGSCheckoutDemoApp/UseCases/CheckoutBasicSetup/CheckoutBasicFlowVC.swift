@@ -56,7 +56,7 @@ class CheckoutBasicFlowVC: UIViewController {
 extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 		// Create vault configuration.
-		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration()
+		var checkoutVaultConfiguration = VGSCheckoutConfiguration()
 
 		checkoutVaultConfiguration.cardHolderFieldOptions.fieldNameType = .splitted("f", lastName: "l")
 		checkoutVaultConfiguration.cardNumberFieldOptions.fieldName = "card_number"
