@@ -12,6 +12,8 @@ internal class VGSPayWithCardHeaderView: UIView {
 
 	// MARK: - Vars
 
+	// This is adapted from https://github.com/noahsark769/ColorCompatibility
+	// Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
 	/// Separator color.
 	static var separatorColor: UIColor {
 			if #available(iOS 13, *) {
@@ -26,7 +28,7 @@ internal class VGSPayWithCardHeaderView: UIView {
 	internal lazy var hintLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.text = "Or pay with card"
+		label.text = "Or pay with a card"
 		label.font = UIFont.preferredFont(forTextStyle: .headline)
 		label.adjustsFontForContentSizeCategory = true
 		label.textColor = UIColor.gray
@@ -87,10 +89,9 @@ internal class VGSPayWithCardHeaderView: UIView {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 
-
 		let lineView = UIView()
 		lineView.translatesAutoresizingMaskIntoConstraints = false
-		lineView.backgroundColor = Self.separatorColor
+		lineView.backgroundColor = VGSPayWithCardHeaderView.separatorColor
 
 		view.addSubview(lineView)
 		let constraints = [

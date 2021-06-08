@@ -17,15 +17,27 @@ public class VGSCheckout {
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
 	internal let environment: String
 
+	/// Payment instrument.
+	internal let paymentInstrument: VGSPaymentInstrument
+
+	/// Collect instance
+	internal let vgsCollect: VGSCollect
+
 	// MARK: - Initialization
 
 	/// Initialization.
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init(vaultID: String, environment: String = "sandbox") {
+	public init(vaultID: String, environment: String = "sandbox", configuration: VGSCheckoutConfigurationProtocol) {
+		guard let paymetInstrument = VGSPaymentInstrument(configuration: configuration) else {
+			fatalError("VGSCheckout critical error! Unsupported configuration!")
+		}
 		self.vaultID = vaultID
 		self.environment = environment
+		self.paymentInstrument = paymetInstrument
+		self.vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: paymetInstrument)
+		self.checkoutFormController = VGSCheckoutFormController(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect)
 	}
 
 	/// We need to keep a reference to the instance.
@@ -34,19 +46,10 @@ public class VGSCheckout {
 	// MARK: - Interface
 
 	/// Present drop-in checkout.
-	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
 	/// - Parameter viewController: `UIViewController` object, view controller to present checkout.
 	/// - Parameter theme: `Any` object. Theme for UI configuration will be used here. Empty object for now.
 	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
-	public func present(with configuration: VGSCheckoutConfigurationProtocol, from viewController: UIViewController, theme: Any? = nil, animated: Bool = true) {
-		guard let checkoutPaymentFlow = VGSPaymentInstrument(configuration: configuration) else {
-			assertionFailure("VGSCheckout critical error! Unsupported configuration!")
-			return
-		}
-		let vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: checkoutPaymentFlow)
-
-		checkoutFormController = VGSCheckoutFormController(paymentInstrument: checkoutPaymentFlow, vgsCollect: vgsCollect)
-
+	public func present(from viewController: UIViewController, theme: Any? = nil, animated: Bool = true) {
 		let checkoutViewController = checkoutFormController?.buildCheckoutViewController()
 		checkoutViewController?.modalPresentationStyle = .overFullScreen
 		viewController.present(checkoutViewController!, animated: animated, completion: nil)

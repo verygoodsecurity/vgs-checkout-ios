@@ -55,18 +55,18 @@ class CheckoutBasicFlowVC: UIViewController {
 
 extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		// Init Checkout with vault and ID.
-		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
-
 		// Create vault configuration.
 		var checkoutVaultConfiguration = VGSCheckoutVaultConfiguration()
 
-		checkoutVaultConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
+		checkoutVaultConfiguration.cardHolderFieldOptions.fieldNameType = .splitted("f", lastName: "l")
 		checkoutVaultConfiguration.cardNumberFieldOptions.fieldName = "card_number"
 		checkoutVaultConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutVaultConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
+		// Init Checkout with vault and ID.
+		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutVaultConfiguration)
+
 		// Present checkout configuration.
-		vgsCheckout?.present(with: checkoutVaultConfiguration, from: self)
+		vgsCheckout?.present(from: self)
 	}
 }

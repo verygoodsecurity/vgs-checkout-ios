@@ -14,14 +14,14 @@ internal struct VGSFieldGroup {
 
 internal class VGSCheckoutCardFormView: UIView {
 
-	/// Defines field distribution in card details section.
-	internal enum FieldsDistribution {
+	/// Defines field distribution for cvc/exp date.
+	internal enum DateAndCVCFieldsDistribution {
 		case singleLine
-		case splitted
+		case doubleLine
 	}
 
 	/// Fields distribution.
-	internal var fieldsDistribution: FieldsDistribution = .singleLine
+	internal var fieldsDistribution: DateAndCVCFieldsDistribution = .singleLine
 
 	/// Card number view.
 	internal lazy var cardNumberComponentView: VGSCardNumberFormItemView = {
@@ -47,6 +47,7 @@ internal class VGSCheckoutCardFormView: UIView {
 		return componentView
 	}()
 
+	/// Card holder view.
 	internal let cardHolderDetailsView: VGSCardHolderDetailsView
 
 	/// Container view for header to add insets.
@@ -134,6 +135,8 @@ internal class VGSCheckoutCardFormView: UIView {
 
 	// MARK: - Initialization
 
+	/// Initialization.
+	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
 	init(paymentInstrument: VGSPaymentInstrument) {
 		self.paymentInstrument = paymentInstrument
 		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
@@ -180,6 +183,13 @@ internal class VGSCheckoutCardFormView: UIView {
 
 		cvcDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		cvcDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
+
+		switch fieldsDistribution {
+		case .singleLine:
+			break
+		case .doubleLine:
+			horizonalStackView.axis = .vertical
+		}
 
 		horizonalStackView.addArrangedSubview(expDateComponentView)
 		horizonalStackView.addArrangedSubview(cvcDateComponentView)
