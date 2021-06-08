@@ -9,11 +9,13 @@ import UIKit
 #endif
 import VGSCollectSDK
 
+/// Form section delegate protocol.
 internal protocol VGSFormSectionPresenterDelegate: AnyObject {
 	func stateDidChange(_ state: VGSFormSectionState)
 }
 
-internal protocol VGSBaseFormItemPresenter {
+/// Base protocol for form section.
+internal protocol VGSBaseFormSectionProtocol {
 	var vgsTextFields: [VGSTextField] {get}
 }
 
@@ -23,13 +25,14 @@ internal enum VGSFormSectionState {
 	case invalid
 }
 
-internal enum FormItemControllerValidationBehavior {
+/// Defines validation behavior.
+internal enum VGSFormValidationBehaviour {
 	case onFocus
 	case onTextChange
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormItemPresenter {
+final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProtocol {
 
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -39,7 +42,7 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormItemPresente
 		}
 	}
 
-	internal let validationBehavior: FormItemControllerValidationBehavior
+	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
 	internal let cardFormView: VGSCheckoutCardFormView
@@ -64,7 +67,7 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormItemPresente
 
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: FormItemControllerValidationBehavior = .onFocus) {
+	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
@@ -192,7 +195,7 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 			break
 		}
 	}
-  
+
   /// Navigate to next TextField from TextFields
   func navigateToNextTextField(from textField: VGSTextField) {
     guard let fieldIndex = vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (vgsTextFields.count - 1) else {
