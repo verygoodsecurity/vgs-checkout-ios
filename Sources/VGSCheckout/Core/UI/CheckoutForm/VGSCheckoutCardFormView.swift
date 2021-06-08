@@ -14,14 +14,15 @@ internal struct VGSFieldGroup {
 
 internal class VGSCheckoutCardFormView: UIView {
 
-	/// Defines field distribution for cvc/exp date.
-	internal enum DateAndCVCFieldsDistribution {
-		case singleLine
-		case doubleLine
+	/// Defines field distribution.
+	internal enum FieldsDistribution {
+		case singleLineDateAndCVC
+		case doubleLineDateAndCVC
+		case singleLineAll
 	}
 
 	/// Fields distribution.
-	internal var fieldsDistribution: DateAndCVCFieldsDistribution = .singleLine
+	internal var fieldsDistribution: FieldsDistribution = .singleLineAll
 
 	/// Card number view.
 	internal lazy var cardNumberComponentView: VGSCardNumberFormItemView = {
@@ -178,23 +179,46 @@ internal class VGSCheckoutCardFormView: UIView {
 		cardNumberComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		cardNumberComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
 
+		verticalStackView.addArrangedSubview(cardNumberComponentView)
+
+		switch fieldsDistribution {
+		case .singleLineDateAndCVC:
+			setupDateAndCVC(in: true)
+		case .doubleLineDateAndCVC:
+			setupDateAndCVC(in: false)
+		case .singleLineAll:
+			setupAllInSingleLine()
+		}
+	}
+
+	private func setupDateAndCVC(in singleLine: Bool) {
+		if singleLine {
+			horizonalStackView.axis = .horizontal
+		} else {
+			horizonalStackView.axis = .vertical
+		}
+
 		expDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		expDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
 
 		cvcDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		cvcDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
 
-		switch fieldsDistribution {
-		case .singleLine:
-			break
-		case .doubleLine:
-			horizonalStackView.axis = .vertical
-		}
-
 		horizonalStackView.addArrangedSubview(expDateComponentView)
 		horizonalStackView.addArrangedSubview(cvcDateComponentView)
 
-		verticalStackView.addArrangedSubview(cardNumberComponentView)
 		verticalStackView.addArrangedSubview(horizonalStackView)
+	}
+
+	private func setupAllInSingleLine() {
+		expDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		expDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
+
+		cvcDateComponentView.placeholderComponent.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		cvcDateComponentView.placeholderComponent.stackView.isLayoutMarginsRelativeArrangement = true
+
+		verticalStackView.axis = .horizontal
+		verticalStackView.addArrangedSubview(expDateComponentView)
+		verticalStackView.addArrangedSubview(cvcDateComponentView)
 	}
 }

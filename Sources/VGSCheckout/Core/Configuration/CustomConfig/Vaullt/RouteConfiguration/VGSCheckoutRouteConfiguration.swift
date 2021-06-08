@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// Route configuration for Vault.
+/// Checkout route configuration.
 public struct VGSCheckoutRouteConfiguration {
 
 	/// Inbound rout path for your organization vault.
