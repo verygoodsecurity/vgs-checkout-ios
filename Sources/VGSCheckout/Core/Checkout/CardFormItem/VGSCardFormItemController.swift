@@ -180,11 +180,24 @@ extension VGSCardFormItemController: VGSTextFieldDelegate {
 			let isValid = invalidFields.isEmpty
 			if isValid {
 				state = .valid
+        /// when input is valid - automatically navigaste to the next textField
 			} else {
 				state = .invalid
 			}
+      if textField.state.isValid {
+        navigateToNextTextField(from: textField)
+      }
 		default:
 			break
 		}
 	}
+  
+  
+  /// Navigate to next TextField from TextFields
+  func navigateToNextTextField(from textField: VGSTextField) {
+    guard let fieldIndex = vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (vgsTextFields.count - 1) else {
+      return
+    }
+    vgsTextFields[fieldIndex + 1].becomeFirstResponder()
+  }
 }
