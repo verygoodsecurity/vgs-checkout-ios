@@ -1,5 +1,5 @@
 //
-//  VGSCheckoutFormController.swift
+//  VGSAddCardFormPresenter.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,7 +8,8 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-internal class VGSCheckoutFormController: NSObject {
+/// Handle add card form logic.
+internal class VGSAddCardFormPresenter: NSObject {
 
 	enum FormState {
 		case invalid
@@ -41,9 +42,6 @@ internal class VGSCheckoutFormController: NSObject {
 
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
-
-	/// Checkout coordinator.
-	fileprivate var checkoutCoordinator = VGSCheckoutCoordinator()
 
 	// MARK: - Initialization
 
@@ -97,7 +95,7 @@ internal class VGSCheckoutFormController: NSObject {
 
 		viewController.formView.addFormItemView(view)
 
-		checkoutCoordinator.setRootViewController(viewController)
+		//checkoutCoordinator.setRootViewController(viewController)
 
 		return viewController
 	}
@@ -114,15 +112,15 @@ internal class VGSCheckoutFormController: NSObject {
 
 // MARK: - VGSHeaderBarViewDelegate
 
-extension VGSCheckoutFormController: VGSHeaderBarViewDelegate {
+extension VGSAddCardFormPresenter: VGSHeaderBarViewDelegate {
 	func buttonDidTap(in header: VGSHeaderBarView) {
-		checkoutCoordinator.dismissCurrentController()
+		//checkoutCoordinator.dismissRootViewController()
 	}
 }
 
 // MARK: - VGSFormItemControllerDelegate
 
-extension VGSCheckoutFormController: VGSFormItemControllerDelegate {
+extension VGSAddCardFormPresenter: VGSFormItemControllerDelegate {
 	func stateDidChange(_ state: FormItemControllerState) {
 		switch state {
 		case .invalid:
@@ -133,14 +131,3 @@ extension VGSCheckoutFormController: VGSFormItemControllerDelegate {
 	}
 }
 
-internal class VGSCheckoutCoordinator {
-	internal var rootController: UIViewController?
-
-	func setRootViewController(_ viewController: UIViewController) {
-		rootController = viewController
-	}
-
-	func dismissCurrentController() {
-		rootController?.dismiss(animated: true, completion: nil)
-	}
-}
