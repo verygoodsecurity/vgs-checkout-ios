@@ -1,5 +1,5 @@
 //
-//  VGSCardFormItemController.swift
+//  VGSCardDetailsFormSectionPresenter.swift
 //  VGSCheckout
 //
 
@@ -9,15 +9,16 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-internal protocol VGSFormItemControllerDelegate: AnyObject {
-	func stateDidChange(_ state: FormItemControllerState)
+internal protocol VGSFormSectionPresenterDelegate: AnyObject {
+	func stateDidChange(_ state: VGSFormSectionState)
 }
 
-internal protocol VGSBaseFormItemController {
+internal protocol VGSBaseFormItemPresenter {
 	var vgsTextFields: [VGSTextField] {get}
 }
 
-internal enum FormItemControllerState {
+/// Form section sate.
+internal enum VGSFormSectionState {
 	case valid
 	case invalid
 }
@@ -28,11 +29,11 @@ internal enum FormItemControllerValidationBehavior {
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardFormItemController: VGSBaseFormItemController {
+final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormItemPresenter {
 
-	weak var delegate: VGSFormItemControllerDelegate?
+	weak var delegate: VGSFormSectionPresenterDelegate?
 
-	internal var state: FormItemControllerState = .invalid {
+	internal var state: VGSFormSectionState = .invalid {
 		didSet {
 			delegate?.stateDidChange(state)
 		}
@@ -148,7 +149,7 @@ final internal class VGSCardFormItemController: VGSBaseFormItemController {
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSCardFormItemController: VGSTextFieldDelegate {
+extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
 
 		switch validationBehavior {
@@ -191,7 +192,6 @@ extension VGSCardFormItemController: VGSTextFieldDelegate {
 			break
 		}
 	}
-  
   
   /// Navigate to next TextField from TextFields
   func navigateToNextTextField(from textField: VGSTextField) {

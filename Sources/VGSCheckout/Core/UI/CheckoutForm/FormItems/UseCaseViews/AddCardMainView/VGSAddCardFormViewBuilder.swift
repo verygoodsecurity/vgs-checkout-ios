@@ -1,5 +1,5 @@
 //
-//  VGSCheckoutFormViewBuilder.swift
+//  VGSAddCardFormViewBuilder.swift
 //  VGSCheckout
 //
 
@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSCheckoutFormViewBuilder {
+internal class VGSAddCardFormViewBuilder {
 
 	// TODO: - add styling 
 	static func buildBackgroundStackView() -> UIStackView {

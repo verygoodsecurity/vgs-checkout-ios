@@ -52,13 +52,13 @@ internal class VGSAddCardMainView: UIView {
 	}()
 
 	/// Background stack view.
-	fileprivate let backgroundStackView: UIStackView = VGSCheckoutFormViewBuilder.buildBackgroundStackView()
+	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
 
 	/// Pay button.
-	internal let payButton: VGSSubmitButton = VGSCheckoutFormViewBuilder.buildPaymentButton()
+	internal let payButton: VGSSubmitButton = VGSAddCardFormViewBuilder.buildPaymentButton()
 
 	/// Pay button container view to add insets.
-	internal let payButtonContainerView: VGSContainerItemView = VGSCheckoutFormViewBuilder.buildPaymentButtonContainerView()
+	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
 
 	internal let cardDetailsView: VGSCheckoutCardFormView
 

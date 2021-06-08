@@ -30,9 +30,11 @@ internal class VGSAddCardFormPresenter: NSObject {
 		}
 	}
 
+	/// Payment instrument.
 	internal let paymentInstrument: VGSPaymentInstrument
 
-	internal let cardFormController: VGSCardFormItemController
+	///
+	internal let cardFormController: VGSCardDetailsFormSectionPresenter
 
 	/// Add card main view.
 	internal let addCardMainView: VGSAddCardMainView
@@ -45,7 +47,7 @@ internal class VGSAddCardFormPresenter: NSObject {
 	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-		self.cardFormController = VGSCardFormItemController(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+		self.cardFormController = VGSCardDetailsFormSectionPresenter(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		self.addCardMainView = VGSAddCardMainView(paymentInstrument: paymentInstrument, cardDetailsView: cardFormController.cardFormView, viewLayoutStyle: .fullScreen)
 		super.init()
 	}
@@ -82,8 +84,8 @@ extension VGSAddCardFormPresenter: VGSHeaderBarViewDelegate {
 
 // MARK: - VGSFormItemControllerDelegate
 
-extension VGSAddCardFormPresenter: VGSFormItemControllerDelegate {
-	func stateDidChange(_ state: FormItemControllerState) {
+extension VGSAddCardFormPresenter: VGSFormSectionPresenterDelegate {
+	func stateDidChange(_ state: VGSFormSectionState) {
 		switch state {
 		case .invalid:
 			addCardMainView.payButton.status = .disabled
