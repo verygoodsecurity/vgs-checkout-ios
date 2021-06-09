@@ -18,6 +18,16 @@ internal enum VGSCheckoutFormValidationState {
 internal protocol VGSTextFieldFormComponentProtocol: AnyObject {
 	var placeholderComponent: VGSPlaceholderFormItemView {get}
 	var textField: VGSTextField {get}
+	var formFieldType: VGSAddCardFormFieldType {get}
+}
+
+internal enum VGSAddCardFormFieldType {
+	case cardNumber
+	case expirationDate
+	case cvc
+	case cardholderName
+	case firstName
+	case lastName
 }
 
 internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormComponentProtocol {
@@ -29,6 +39,8 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormComponentP
 	var textField: VGSTextField {
 		return expDateTextField
 	}
+
+	let formFieldType: VGSAddCardFormFieldType = .expirationDate
 
 	lazy var expDateTextField: VGSExpDateTextField = {
 		let field = VGSExpDateTextField()
@@ -60,7 +72,7 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormComponentP
 		placeholderComponent.translatesAutoresizingMaskIntoConstraints = false
 		placeholderComponent.checkout_constraintViewToSuperviewEdges()
 
-		placeholderComponent.hintComponentView.label.text = "MM/YY"
+		placeholderComponent.hintComponentView.label.text = "Expiration date"
 		placeholderComponent.stackView.addArrangedSubview(expDateTextField)
 	}
 }

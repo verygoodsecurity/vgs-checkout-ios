@@ -43,4 +43,15 @@ internal class VGSAddCardFormViewBuilder {
 		view.paddings = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
 		return view
 	}
+
+	static func buildErrorLabel() -> UILabel {
+		let label = UILabel(frame: .zero)
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.adjustsFontForContentSizeCategory = true
+		label.font = .preferredFont(forTextStyle: .footnote)
+		label.textColor = .systemRed
+		label.numberOfLines = 0
+
+		return label
+	}
 }

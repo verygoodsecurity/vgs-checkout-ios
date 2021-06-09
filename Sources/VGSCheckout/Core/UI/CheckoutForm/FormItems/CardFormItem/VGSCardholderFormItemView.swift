@@ -19,6 +19,8 @@ internal class VGSCardholderFormItemView: UIView, VGSTextFieldFormComponentProto
 		return cardHolderName
 	}
 
+	var formFieldType: VGSAddCardFormFieldType = .cardholderName
+
 	lazy var cardHolderName: VGSTextField = {
 		let field = VGSTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false

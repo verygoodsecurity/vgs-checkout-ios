@@ -94,6 +94,9 @@ internal class VGSCardHolderDetailsView: UIView {
 		firstNameItemView.cardHolderName.placeholder = "John"
 		lastNameItemView.cardHolderName.placeholder = "Doe"
 
+		firstNameItemView.formFieldType = .firstName
+		lastNameItemView.formFieldType = .lastName
+
 		firstNameItemView.placeholderComponent.hintComponentView.label.text = "First Name"
 		lastNameItemView.placeholderComponent.hintComponentView.label.text = "Last Name"
 

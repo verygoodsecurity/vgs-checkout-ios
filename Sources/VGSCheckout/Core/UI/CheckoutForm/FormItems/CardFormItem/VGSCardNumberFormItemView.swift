@@ -13,6 +13,8 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProto
 
 	// MARK: - Vars
 
+	internal let formFieldType: VGSAddCardFormFieldType = .cardNumber
+
 	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {

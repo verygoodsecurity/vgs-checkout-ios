@@ -13,6 +13,8 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormComponentProtocol {
 
 	// MARK: - Vars
 
+	internal let formFieldType: VGSAddCardFormFieldType = .cvc
+
 	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {

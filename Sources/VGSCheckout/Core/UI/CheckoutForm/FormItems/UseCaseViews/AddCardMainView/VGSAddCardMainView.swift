@@ -23,6 +23,13 @@ internal class VGSAddCardMainView: UIView {
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
+	/// Displays error messages for invalid card holder name.
+	internal let cardHolderErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+
+	/// Displays error messages for invalid card details.
+	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+
+
 	/// Header bar view.
 	internal lazy var headerView: VGSHeaderBarView = {
 		let view = VGSHeaderBarView()
@@ -77,6 +84,12 @@ internal class VGSAddCardMainView: UIView {
 	/// :nodoc:
 	internal required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	// MARK: - Interface
+
+	internal func updateUI() {
+		
 	}
 
 	// MARK: - Helpers

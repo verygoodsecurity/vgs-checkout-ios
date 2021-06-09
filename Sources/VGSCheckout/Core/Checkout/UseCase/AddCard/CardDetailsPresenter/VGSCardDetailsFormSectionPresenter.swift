@@ -19,7 +19,7 @@ internal protocol VGSBaseFormSectionProtocol {
 	var vgsTextFields: [VGSTextField] {get}
 }
 
-/// Form section sate.
+/// Form section state.
 internal enum VGSFormSectionState {
 	case valid
 	case invalid

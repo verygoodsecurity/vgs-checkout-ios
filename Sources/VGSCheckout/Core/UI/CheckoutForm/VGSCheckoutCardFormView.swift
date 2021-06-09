@@ -21,6 +21,13 @@ internal class VGSCheckoutCardFormView: UIView {
 		case singleLineAll
 	}
 
+	/// Displays error messages for invalid card holder name.
+	internal let cardHolderErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+
+	/// Displays error messages for invalid card details.
+	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+
+
 	/// Fields distribution.
 	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
 
@@ -169,6 +176,8 @@ internal class VGSCheckoutCardFormView: UIView {
 			case .visible:
 				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 				rootStackView.addArrangedSubview(cardHolderDetailsView)
+				rootStackView.addArrangedSubview(cardHolderErrorLabel)
+				cardDetailsErrorLabel.isHidden = true
 			default:
 				break
 			}
@@ -189,6 +198,9 @@ internal class VGSCheckoutCardFormView: UIView {
 		case .singleLineAll:
 			setupAllInSingleLine()
 		}
+
+		rootStackView.addArrangedSubview(cardDetailsErrorLabel)
+		cardDetailsErrorLabel.isHidden = true
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {
