@@ -211,11 +211,19 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 				return !textField.textField.state.isValid
 			}
 			let isValid = invalidFields.isEmpty
+
 			if isValid {
 				state = .valid
         /// when input is valid - automatically navigaste to the next textField
 			} else {
 				state = .invalid
+
+				if let firstInvalidField = invalidFields.first(where: {$0.textField.isFocused}) {
+					if let fieldError = firstInvalidField.textField.state.validationErrors.first {
+						print("fieldE1rror: \(fieldError)")
+					}
+				}
+
 			}
       if textField.state.isValid {
         navigateToNextTextField(from: textField)

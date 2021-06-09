@@ -27,6 +27,7 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 		field.placeholder = "CVC"
 
+		field.cvcIconSize = CGSize(width: 32, height: 20)
 		field.cornerRadius = 0
 		field.borderWidth = 0
 		return field

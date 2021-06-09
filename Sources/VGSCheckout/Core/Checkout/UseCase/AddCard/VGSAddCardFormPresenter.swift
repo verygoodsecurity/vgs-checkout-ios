@@ -56,7 +56,7 @@ internal class VGSAddCardFormPresenter: NSObject {
 
 		addCardMainView.headerView.delegate = self
 		addCardMainView.translatesAutoresizingMaskIntoConstraints = false
-		let viewController = VGSFormViewController(formView: addCardMainView)
+		let viewController = VGSFormViewController(formView: addCardMainView.formView)
 
 		addCardMainView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardFormController.delegate = self
