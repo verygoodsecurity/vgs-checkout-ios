@@ -1,5 +1,5 @@
 //
-//  VGSCardDetailsFormSectionPresenter.swift
+//  VGSCardDataSectionManager.swift
 //  VGSCheckout
 //
 
@@ -32,7 +32,7 @@ internal enum VGSFormValidationBehaviour {
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProtocol {
+final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -181,7 +181,7 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProto
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
+extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
 
 		switch validationBehavior {
@@ -194,6 +194,9 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 					var fieldState = VGSCheckoutFormValidationState.valid
 					if !isValid {
 						fieldState = .invalid
+						if let error = state.validationErrors.first {
+
+						}
 					}
 
 					formComponent.formItemView.updateUI(for: fieldState)
@@ -214,20 +217,19 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 
 			if isValid {
 				state = .valid
-        /// when input is valid - automatically navigaste to the next textField
+        /// when input is valid - automatically navigate to the next textField
 			} else {
 				state = .invalid
 
 				if let firstInvalidField = invalidFields.first(where: {$0.textField.isFocused}) {
 					if let fieldError = firstInvalidField.textField.state.validationErrors.first {
-						print("fieldE1rror: \(fieldError)")
+						
+						}
 					}
 				}
-
+			if textField.state.isValid {
+				navigateToNextTextField(from: textField)
 			}
-      if textField.state.isValid {
-        navigateToNextTextField(from: textField)
-      }
 		default:
 			break
 		}

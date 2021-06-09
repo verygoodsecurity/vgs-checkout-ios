@@ -1,5 +1,5 @@
 //
-//  VGSAddCardMainView.swift
+//  VGSAddCardSectionFormView.swift
 //  VGSCheckout
 
 import Foundation
@@ -7,8 +7,8 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for AddCard flow.
-internal class VGSAddCardMainView: UIView {
+/// Holds UI for add card section form.
+internal class VGSAddCardSectionFormView: VGSFormView {
 
 	/// Defines layout style.
 	internal enum LayoutStyle {
@@ -29,9 +29,8 @@ internal class VGSAddCardMainView: UIView {
 	/// Displays error messages for invalid card details.
 	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
-
 	/// Header bar view.
-	internal lazy var headerView: VGSHeaderBarView = {
+	internal lazy var headerBarView: VGSHeaderBarView = {
 		let view = VGSHeaderBarView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -46,18 +45,6 @@ internal class VGSAddCardMainView: UIView {
 		return view
 	}()
 
-	/// Form view.
-	internal lazy var formView: VGSFormView = {
-		let view = VGSFormView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		view.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
-		view.stackView.isLayoutMarginsRelativeArrangement = true
-		view.stackView.spacing = 8
-
-		return view
-	}()
-
 	/// Background stack view.
 	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
 
@@ -67,6 +54,7 @@ internal class VGSAddCardMainView: UIView {
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
 
+  /// Card details view.
 	internal let cardDetailsView: VGSCardDetailsFormView
 
 	// MARK: - Initialization
@@ -76,20 +64,32 @@ internal class VGSAddCardMainView: UIView {
 		self.paymentInstrument = paymentInstrument
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsView = cardDetailsView
-		super.init(frame: .zero)
+
+		super.init()
+
+		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
+		stackView.isLayoutMarginsRelativeArrangement = true
+		stackView.spacing = 8
 
 		setupUI()
 	}
 
-	/// :nodoc:
+	/// no:doc
 	internal required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
 	// MARK: - Interface
 
-	internal func updateUI() {
-		
+	internal func updateUI(errorText: String, formFieldType: VGSAddCardFormFieldType) {
+		switch formFieldType {
+		case .cardholderName, .firstName, .lastName:
+			cardDetailsView.cardHolderErrorLabel.isHidden = false
+			cardDetailsView.cardHolderErrorLabel.text = errorText
+		case .cardNumber, .expirationDate, .cvc:
+			cardDetailsView.cardDetailsErrorLabel.isHidden = false
+			cardDetailsView.cardDetailsErrorLabel.text = errorText
+		}
 	}
 
 	// MARK: - Helpers
@@ -98,22 +98,14 @@ internal class VGSAddCardMainView: UIView {
 	private func setupUI() {
 		switch viewLayoutStyle {
 		case .fullScreen:
-			let headerView = VGSHeaderBarView()
-			headerView.translatesAutoresizingMaskIntoConstraints = false
-			formView.addFormItemView(headerView)
-
-			//headerView.delegate = self
+			addFormItemView(headerBarView)
 
 			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
 			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
-			formView.addFormItemView(payWithCardHeaderView)
+			addFormItemView(payWithCardHeaderView)
 
-			formView.addFormItemView(backgroundStackView)
+			addFormItemView(backgroundStackView)
 			payButtonContainerView.addContentView(payButton)
-
-			//payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
-			// cardFormController.delegate = self
-			// Add empty transparent view to bottom.
 
 			backgroundStackView.addArrangedSubview(cardDetailsView)
 			backgroundStackView.addArrangedSubview(payButtonContainerView)

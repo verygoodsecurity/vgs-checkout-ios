@@ -27,7 +27,7 @@ public class VGSCheckout {
 	fileprivate var checkoutCoordinator = VGSCheckoutFlowCoordinator()
 
 	/// Handles add card flow.
-	internal let checkoutFormController: VGSAddCardFormPresenter
+	internal let addCardUseCaseManager: VGSAddCardUseCaseManager
 
 	// MARK: - Initialization
 
@@ -44,7 +44,8 @@ public class VGSCheckout {
 		self.environment = environment
 		self.paymentInstrument = paymetInstrument
 		self.vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: paymetInstrument)
-		self.checkoutFormController = VGSAddCardFormPresenter(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect)
+		self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect)
+		addCardUseCaseManager.delegate = self
 	}
 
 	// MARK: - Interface
@@ -55,10 +56,16 @@ public class VGSCheckout {
 	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
 	public func present(from viewController: UIViewController, theme: Any? = nil, animated: Bool = true) {
 
-		let checkoutViewController = checkoutFormController.buildCheckoutViewController()
+		let checkoutViewController = addCardUseCaseManager.buildCheckoutViewController()
 		checkoutCoordinator.setRootViewController(checkoutViewController)
 		checkoutViewController.modalPresentationStyle = .overFullScreen
 
 		viewController.present(checkoutViewController, animated: animated, completion: nil)
+	}
+}
+
+extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
+	func addCardFlowDidChange(with state: VGSCheckoutAddCardState) {
+		checkoutCoordinator.dismissRootViewController()
 	}
 }

@@ -71,12 +71,14 @@ class CheckoutFlowMainView: UIView {
 
 	// MARK: - Initializer
 
+	/// no:doc
 	override init(frame: CGRect) {
 		super.init(frame: .zero)
 
 		setupUI()
 	}
 
+	/// no:doc
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
