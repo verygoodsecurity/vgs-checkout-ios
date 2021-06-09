@@ -9,13 +9,13 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProtocol {
+internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	// MARK: - Vars
 
-	internal let formFieldType: VGSAddCardFormFieldType = .cardNumber
+	internal let fieldType: VGSAddCardFormFieldType = .cardNumber
 
-	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
+	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cardTextField
@@ -47,11 +47,11 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProto
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(placeholderComponent)
-		placeholderComponent.translatesAutoresizingMaskIntoConstraints = false
-		placeholderComponent.checkout_constraintViewToSuperviewEdges()
+		addSubview(formItemView)
+		formItemView.translatesAutoresizingMaskIntoConstraints = false
+		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderComponent.hintComponentView.label.text = "Card number"
-		placeholderComponent.stackView.addArrangedSubview(cardTextField)
+		formItemView.hintComponentView.label.text = "Card number"
+		formItemView.stackView.addArrangedSubview(cardTextField)
 	}
 }

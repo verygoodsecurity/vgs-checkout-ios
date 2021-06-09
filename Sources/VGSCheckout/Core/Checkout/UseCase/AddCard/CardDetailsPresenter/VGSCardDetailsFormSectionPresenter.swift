@@ -45,18 +45,15 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProto
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
-	internal let cardFormView: VGSCheckoutCardFormView
+	internal let cardFormView: VGSCardDetailsFormView
 
-	/// TODO: - this should be dynamic.
-	var textFiedComponents: [VGSTextFieldFormComponentProtocol] {
-		return [
-			      cardFormView.cardNumberComponentView,
-						cardFormView.expDateComponentView,
-						cardFormView.cvcDateComponentView]
+	/// Text field form items in add card section.
+	var textFiedFormItems: [VGSTextFieldFormItemProtocol] {
+		return cardFormView.formItems
 	}
 
 	var vgsTextFields: [VGSTextField] {
-		return textFiedComponents.map({return $0.textField})
+		return textFiedFormItems.map({return $0.textField})
 	}
 
 	/// Configuration type.
@@ -71,7 +68,7 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProto
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-		self.cardFormView = VGSCheckoutCardFormView(paymentInstrument: paymentInstrument)
+		self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument)
 
 		buildForm()
 	}
@@ -94,9 +91,9 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProto
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
 		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
 
-		let cardNumber = cardFormView.cardNumberComponentView.cardTextField
-		let expCardDate = cardFormView.expDateComponentView.expDateTextField
-		let cvcCardNum = cardFormView.cvcDateComponentView.cvcTextField
+		let cardNumber = cardFormView.cardNumberFormItemView.cardTextField
+		let expCardDate = cardFormView.expDateFormItemView.expDateTextField
+		let cvcCardNum = cardFormView.cvcFormItemView.cvcTextField
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
 		cardConfiguration.type = .cardNumber
@@ -147,6 +144,38 @@ final internal class VGSCardDetailsFormSectionPresenter: VGSBaseFormSectionProto
 			textField.tintColor = .lightGray
 			textField.delegate = self
 		}
+
+		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
+		if cardHolderOptions.fieldVisibility == .visible {
+			switch cardHolderOptions.fieldNameType {
+			case .single(let fieldName):
+				let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: fieldName)
+				holderConfiguration.type = .cardHolderName
+				holderConfiguration.keyboardType = .namePhonePad
+
+				if let cardHolderName = textFiedFormItems.first(where: {$0.fieldType == .cardholderName}) {
+					cardHolderName.textField.textAlignment = .natural
+					cardHolderName.textField.configuration = holderConfiguration
+				}
+			case .splitted(let firstName, lastName: let lastName):
+				if let firstNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .firstName}), let lastNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .lastName})  {
+
+					let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: firstName)
+					firstNameConfiguration.type = .cardHolderName
+					firstNameConfiguration.keyboardType = .namePhonePad
+
+					firstNameFormItem.textField.textAlignment = .natural
+					firstNameFormItem.textField.configuration = firstNameConfiguration
+
+					let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: lastName)
+					lastNameConfiguration.type = .cardHolderName
+					lastNameConfiguration.keyboardType = .namePhonePad
+
+					lastNameFormItem.textField.textAlignment = .natural
+					lastNameFormItem.textField.configuration = firstNameConfiguration
+				}
+			}
+		}
 	}
 }
 
@@ -157,7 +186,7 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 
 		switch validationBehavior {
 		case .onFocus:
-			textFiedComponents.forEach { formComponent in
+			textFiedFormItems.forEach { formComponent in
 				if formComponent.textField === textField {
 					let state = textField.state
 					let isValid = state.isValid
@@ -167,7 +196,7 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 						fieldState = .invalid
 					}
 
-					formComponent.placeholderComponent.updateUI(for: fieldState)
+					formComponent.formItemView.updateUI(for: fieldState)
 				}
 			}
 		default:
@@ -178,7 +207,7 @@ extension VGSCardDetailsFormSectionPresenter: VGSTextFieldDelegate {
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 		switch validationBehavior {
 		case .onFocus:
-			let invalidFields = textFiedComponents.filter { textField in
+			let invalidFields = textFiedFormItems.filter { textField in
 				return !textField.textField.state.isValid
 			}
 			let isValid = invalidFields.isEmpty

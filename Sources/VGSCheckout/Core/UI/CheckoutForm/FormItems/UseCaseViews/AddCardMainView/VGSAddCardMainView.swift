@@ -67,12 +67,12 @@ internal class VGSAddCardMainView: UIView {
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
 
-	internal let cardDetailsView: VGSCheckoutCardFormView
+	internal let cardDetailsView: VGSCardDetailsFormView
 
 	// MARK: - Initialization
 
 	/// Initializer.
-	internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCheckoutCardFormView, viewLayoutStyle: LayoutStyle = .fullScreen) {
+	internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsFormView, viewLayoutStyle: LayoutStyle = .fullScreen) {
 		self.paymentInstrument = paymentInstrument
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsView = cardDetailsView

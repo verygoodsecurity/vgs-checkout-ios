@@ -16,7 +16,7 @@
 		44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */; };
 		44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44C4C8B726648E0300195505 /* VGSCollectSDK */; };
 		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
-		44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */; };
+		44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */; };
 		44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BF2664B18B00195505 /* VGSFormView.swift */; };
 		44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */; };
 		44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8CE2664B18B00195505 /* VGSCVCFormItemView.swift */; };
@@ -90,7 +90,7 @@
 		44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSHeaderBarView.swift; sourceTree = "<group>"; };
 		44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCustomRoundedButton.swift; sourceTree = "<group>"; };
 		44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHeaderView.swift; sourceTree = "<group>"; };
-		44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCardFormView.swift; sourceTree = "<group>"; };
+		44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardDetailsFormView.swift; sourceTree = "<group>"; };
 		44C4C8BF2664B18B00195505 /* VGSFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormView.swift; sourceTree = "<group>"; };
 		44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutItem.swift; sourceTree = "<group>"; };
 		44C4C8CE2664B18B00195505 /* VGSCVCFormItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCVCFormItemView.swift; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 		44C4C8BD2664B18A00195505 /* CheckoutForm */ = {
 			isa = PBXGroup;
 			children = (
-				44C4C8BE2664B18A00195505 /* VGSCheckoutCardFormView.swift */,
+				44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */,
 				44C4C8BF2664B18B00195505 /* VGSFormView.swift */,
 				44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */,
 				44C4C8C12664B18B00195505 /* FormItems */,
@@ -918,7 +918,7 @@
 				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
-				44C4C8E02664B18B00195505 /* VGSCheckoutCardFormView.swift in Sources */,
+				44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */,
 				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
