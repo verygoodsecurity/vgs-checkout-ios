@@ -8,6 +8,12 @@ import UIKit
 #endif
 import VGSCollectSDK
 
+/// A set of methods to notify about changes in chkout state.
+/// Should consider different payment flows
+public protocol VGSCheckoutDelegate {
+	func checkoutStateDidChage()
+}
+
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
 
