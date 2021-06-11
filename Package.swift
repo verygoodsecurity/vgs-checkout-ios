@@ -22,7 +22,7 @@ let package = Package(
 		.package(
 			name: "VGSCollectSDK",
 			url: "https://github.com/verygoodsecurity/vgs-collect-ios.git",
-			.branch("feature/iossdk-233/payment_cards_module")
+			.exact("1.8.0")
 		)
 	],
 	targets: [
