@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
+//import VGSPaymentCards
 
 class CheckoutBasicFlowVC: UIViewController {
 
@@ -54,6 +55,7 @@ class CheckoutBasicFlowVC: UIViewController {
 // MARK: - CheckoutFlowMainViewDelegate
 
 extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
+
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 		// Create vault configuration.
 		var checkoutVaultConfiguration = VGSCheckoutConfiguration()
@@ -65,6 +67,11 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutVaultConfiguration)
+
+		/// Change default valid card number lengthes
+//		VGSPaymentCards.visa.cardNumberLengths = [16]
+//		/// Change default format pattern
+//		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
 
 		// Present checkout configuration.
 		vgsCheckout?.present(from: self)

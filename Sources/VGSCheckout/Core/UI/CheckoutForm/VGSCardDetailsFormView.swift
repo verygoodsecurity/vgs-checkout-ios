@@ -196,10 +196,16 @@ internal class VGSCardDetailsFormView: UIView {
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {
+		cardNumberFormItemView.formItemView.borderCornerMasks = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 		if singleLine {
 			horizonalStackView.axis = .horizontal
+
+			expDateFormItemView.formItemView.borderCornerMasks = [.layerMinXMaxYCorner]
+			cvcFormItemView.formItemView.borderCornerMasks = [.layerMaxXMaxYCorner]
+
 		} else {
 			horizonalStackView.axis = .vertical
+			cvcFormItemView.formItemView.borderCornerMasks = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 		}
 
 		expDateFormItemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)

@@ -182,12 +182,25 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 // MARK: - VGSTextFieldDelegate
 
 extension VGSCardDataSectionManager: VGSTextFieldDelegate {
+
+	func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
+		textFiedFormItems.forEach { formComponent in
+			if formComponent.textField === textField {
+				formComponent.formItemView.highlight(with: .blue)
+			}
+		}
+	}
+
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
 
 		switch validationBehavior {
 		case .onFocus:
 			textFiedFormItems.forEach { formComponent in
 				if formComponent.textField === textField {
+
+					formComponent.formItemView.removeHighlight()
+
+
 					let state = textField.state
 					let isValid = state.isValid
 

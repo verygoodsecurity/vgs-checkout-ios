@@ -74,6 +74,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, viewLayoutStyle: .fullScreen)
 		super.init()
+		self.addCardSectionFormView.payButton.status = .enabled
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {

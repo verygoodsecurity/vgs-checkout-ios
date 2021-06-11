@@ -13,6 +13,10 @@ internal class VGSPlaceholderFormItemView: UIView {
 
 	// MARK: - Vars
 
+	fileprivate let borderView = UIView()
+
+	internal var borderCornerMasks: CACornerMask = []
+
 	/// Stack view.
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
@@ -68,5 +72,33 @@ internal class VGSPlaceholderFormItemView: UIView {
 		stackView.checkout_constraintViewToSuperviewEdges()
 
 		stackView.addArrangedSubview(hintComponentView)
+
+		borderView.isHidden = true
+	}
+
+	override func layoutSubviews() {
+		super.layoutSubviews()
+
+		if superview != nil && borderView.superview == nil {
+			superview?.addSubview(borderView)
+		}
+		borderView.frame = superview!.bounds.inset(by: UIEdgeInsets(top: -1, left: -1, bottom: -1, right: -1))
+		borderView.layer.borderWidth = 2
+		borderView.layer.zPosition = 99
+		borderView.layer.maskedCorners = borderCornerMasks
+		borderView.layer.cornerRadius = 4
+	}
+
+	internal func highlight(with color: UIColor) {
+		UIView.animate(withDuration: 0.1) {
+			self.borderView.layer.borderColor = color.cgColor
+			self.borderView.isHidden = false
+		}
+	}
+
+	internal func removeHighlight() {
+		UIView.animate(withDuration: 0.1) {
+			self.borderView.isHidden = true
+		}
 	}
 }

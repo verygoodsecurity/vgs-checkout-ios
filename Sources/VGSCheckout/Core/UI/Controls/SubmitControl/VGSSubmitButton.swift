@@ -218,11 +218,14 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.startAnimating()
 			iconAccessory = .loader
 		case .success:
-			backgroundColor = theme.successColor
+
+			self.checkmarkIndicatorView.completeProgress()
+			self.iconAccessory = .none
 			UIView.animate(withDuration: 0.3, delay: 0, options: []) {
-				self.titleLabel.isHidden = true
+				self.titleLabel.text = "Success"
+				self.backgroundColor = theme.successColor
 			} completion: { isFinished in
-				self.checkmarkIndicatorView.completeProgress()
+				//self.checkmarkIndicatorView.completeProgress()
 			}
 		}
 	}
@@ -319,14 +322,14 @@ class CheckProgressView: UIView {
 				circleLayer.add(circleAnimation, forKey: "animateDone")
 
 				// Check the mark
-				let animation = CABasicAnimation(keyPath: "strokeEnd")
-				animation.beginTime = CACurrentMediaTime() + circleAnimation.duration + 0.15  // Start after the circle closes
-				animation.fillMode = .backwards
-				animation.duration = checkmarkStrokeDuration
-				animation.fromValue = 0.0
-				animation.toValue = 1
-				animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-				checkmarkLayer.strokeEnd = 1.0
-				checkmarkLayer.add(animation, forKey: "animateFinishCircle")
+//				let animation = CABasicAnimation(keyPath: "strokeEnd")
+//				animation.beginTime = CACurrentMediaTime() + circleAnimation.duration + 0.15  // Start after the circle closes
+//				animation.fillMode = .backwards
+//				animation.duration = checkmarkStrokeDuration
+//				animation.fromValue = 0.0
+//				animation.toValue = 1
+//				animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+//				checkmarkLayer.strokeEnd = 1.0
+//				checkmarkLayer.add(animation, forKey: "animateFinishCircle")
 		}
 }
