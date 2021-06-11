@@ -8,11 +8,18 @@ import Foundation
 import UIKit
 #endif
 
+internal protocol VGSPlaceholderFormItemViewDelegate: AnyObject {
+	func didTap(in formView: VGSPlaceholderFormItemView)
+}
+
 /// View for placeholder item in form.
 internal class VGSPlaceholderFormItemView: UIView {
 
 	// MARK: - Vars
 
+	weak var delegate: VGSPlaceholderFormItemViewDelegate?
+
+	internal let tapGesture = UITapGestureRecognizer()
 	fileprivate let borderView = UIView()
 
 	internal var borderCornerMasks: CACornerMask = []
@@ -74,6 +81,8 @@ internal class VGSPlaceholderFormItemView: UIView {
 		stackView.addArrangedSubview(hintComponentView)
 
 		borderView.isHidden = true
+		hintComponentView.addGestureRecognizer(tapGesture)
+		tapGesture.addTarget(self, action: #selector(handleTap))
 	}
 
 	override func layoutSubviews() {
@@ -90,6 +99,16 @@ internal class VGSPlaceholderFormItemView: UIView {
 		borderView.layer.cornerRadius = 4
 	}
 
+	internal func increaseBorderZPosition() {
+		borderView.layer.zPosition = 100
+		borderView.frame = superview!.bounds.inset(by: UIEdgeInsets(top: -2, left: -2, bottom: -2, right: -2))
+	}
+
+	internal func decreaseBorderZPosition() {
+		borderView.layer.zPosition = 2
+		borderView.frame = superview!.bounds.inset(by: UIEdgeInsets(top: -1, left: -1, bottom: -1, right: -1))
+	}
+
 	internal func highlight(with color: UIColor) {
 		UIView.animate(withDuration: 0.1) {
 			self.borderView.layer.borderColor = color.cgColor
@@ -101,5 +120,9 @@ internal class VGSPlaceholderFormItemView: UIView {
 		UIView.animate(withDuration: 0.1) {
 			self.borderView.isHidden = true
 		}
+	}
+
+	@objc fileprivate func handleTap() {
+		delegate?.didTap(in: self)
 	}
 }

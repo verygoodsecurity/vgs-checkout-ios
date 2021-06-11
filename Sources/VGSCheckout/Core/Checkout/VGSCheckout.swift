@@ -8,10 +8,22 @@ import UIKit
 #endif
 import VGSCollectSDK
 
+public enum VGSCheckoutPaymentFlow {
+	case addCard
+	case multiplexing
+}
+
+public enum VGSCheckoutRequestResult {
+	case success(_ statusCode: Int)
+	case failure(_ error: Error)
+}
+
 /// A set of methods to notify about changes in chkout state.
 /// Should consider different payment flows
 public protocol VGSCheckoutDelegate {
-	func checkoutStateDidChage()
+	func checkoutDidFinish(with result: VGSCheckoutRequestResult)
+
+	func checkoutDidCancel()
 }
 
 /// A drop-in class that presents a checkout form for a customer to complete payment.

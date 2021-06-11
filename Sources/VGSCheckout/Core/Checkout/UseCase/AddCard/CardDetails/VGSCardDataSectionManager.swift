@@ -32,7 +32,7 @@ internal enum VGSFormValidationBehaviour {
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
+final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {
 
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -174,6 +174,18 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 			textField.tintColor = .lightGray
 			textField.delegate = self
 		}
+
+		for item in textFiedFormItems {
+			item.formItemView.delegate = self
+		}
+	}
+
+	func didTap(in formView: VGSPlaceholderFormItemView) {
+		for item in textFiedFormItems {
+			if item.formItemView === formView {
+				item.textField.becomeFirstResponder()
+			}
+		}
 	}
 }
 
@@ -185,6 +197,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 		textFiedFormItems.forEach { formComponent in
 			if formComponent.textField === textField {
 				formComponent.formItemView.highlight(with: .blue)
+				formComponent.formItemView.increaseBorderZPosition()
 			}
 		}
 	}
@@ -197,7 +210,6 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 				if formComponent.textField === textField {
 
 					let state = textField.state
-
 					if !state.isDirty {
 						formComponent.formItemView.removeHighlight()
 						return
@@ -210,6 +222,8 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 					} else {
 						formComponent.formItemView.highlight(with: .red)
 					}
+
+					formComponent.formItemView.decreaseBorderZPosition()
 
 					//formComponent.formItemView.updateUI(for: fieldState)
 				}
