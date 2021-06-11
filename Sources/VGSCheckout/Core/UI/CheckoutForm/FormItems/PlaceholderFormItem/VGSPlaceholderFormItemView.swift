@@ -95,6 +95,13 @@ internal class VGSPlaceholderFormItemView: UIView {
 		if borderViewSuperView != nil && borderView.superview == nil {
 			borderViewSuperView?.addSubview(borderView)
 		}
+
+		if let view = borderViewSuperView {
+			let convertedFrame = convert(frame, to: view)
+			borderView.frame = convertedFrame.inset(by: UIEdgeInsets(top: -2, left: -2, bottom: -2, right: -2))
+		}
+
+
 //		borderView.frame = bounds.inset(by: UIEdgeInsets(top: -1, left: -1, bottom: -1, right: -1))
 		borderView.layer.borderWidth = 2
 		borderView.layer.zPosition = 99
