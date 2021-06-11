@@ -174,6 +174,7 @@ internal class VGSCardDetailsFormView: UIView {
 		cardNumberFormItemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		verticalStackView.addArrangedSubview(cardNumberFormItemView)
+		cardNumberFormItemView.formItemView.borderViewSuperView = verticalStackView
 
 		switch fieldsDistribution {
 		case .singleLineDateAndCVC:
@@ -202,8 +203,10 @@ internal class VGSCardDetailsFormView: UIView {
 		if singleLine {
 			horizonalStackView.axis = .horizontal
 
+			expDateFormItemView.formItemView.borderViewSuperView = verticalStackView
 			expDateFormItemView.formItemView.borderCornerMasks = [.layerMinXMaxYCorner]
 			cvcFormItemView.formItemView.borderCornerMasks = [.layerMaxXMaxYCorner]
+			cvcFormItemView.formItemView.borderViewSuperView = verticalStackView
 
 		} else {
 			horizonalStackView.axis = .vertical
