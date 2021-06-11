@@ -109,8 +109,6 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 		cardNumber.textAlignment = .natural
     cardNumber.cardIconLocation = .right
 
-		cardNumber.becomeFirstResponder()
-
 		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
@@ -137,21 +135,13 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 		cvcCardNum.placeholder = "CVC"
 		cvcCardNum.tintColor = .lightGray
 
-		vgsCollect.textFields.forEach { textField in
-			textField.textColor = UIColor.black
-			textField.font = UIFont.preferredFont(forTextStyle: .body)
-			textField.adjustsFontForContentSizeCategory = true
-			textField.tintColor = .lightGray
-			textField.delegate = self
-		}
-
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
 		if cardHolderOptions.fieldVisibility == .visible {
 			switch cardHolderOptions.fieldNameType {
 			case .single(let fieldName):
 				let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: fieldName)
 				holderConfiguration.type = .cardHolderName
-				holderConfiguration.keyboardType = .namePhonePad
+				holderConfiguration.returnKeyType = .next
 
 				if let cardHolderName = textFiedFormItems.first(where: {$0.fieldType == .cardholderName}) {
 					cardHolderName.textField.textAlignment = .natural
@@ -162,19 +152,27 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol {
 
 					let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: firstName)
 					firstNameConfiguration.type = .cardHolderName
-					firstNameConfiguration.keyboardType = .namePhonePad
+					firstNameConfiguration.returnKeyType = .next
 
 					firstNameFormItem.textField.textAlignment = .natural
 					firstNameFormItem.textField.configuration = firstNameConfiguration
 
 					let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: lastName)
 					lastNameConfiguration.type = .cardHolderName
-					lastNameConfiguration.keyboardType = .namePhonePad
+					lastNameConfiguration.returnKeyType = .next
 
 					lastNameFormItem.textField.textAlignment = .natural
 					lastNameFormItem.textField.configuration = firstNameConfiguration
 				}
 			}
+		}
+
+		vgsCollect.textFields.forEach { textField in
+			textField.textColor = UIColor.black
+			textField.font = UIFont.preferredFont(forTextStyle: .body)
+			textField.adjustsFontForContentSizeCategory = true
+			textField.tintColor = .lightGray
+			textField.delegate = self
 		}
 	}
 }
@@ -198,21 +196,22 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 			textFiedFormItems.forEach { formComponent in
 				if formComponent.textField === textField {
 
-					formComponent.formItemView.removeHighlight()
-
-
 					let state = textField.state
-					let isValid = state.isValid
 
-					var fieldState = VGSCheckoutFormValidationState.valid
-					if !isValid {
-						fieldState = .invalid
-						if let error = state.validationErrors.first {
-
-						}
+					if !state.isDirty {
+						formComponent.formItemView.removeHighlight()
+						return
 					}
 
-					formComponent.formItemView.updateUI(for: fieldState)
+					let isValid = state.isValid
+
+					if isValid {
+						formComponent.formItemView.removeHighlight()
+					} else {
+						formComponent.formItemView.highlight(with: .red)
+					}
+
+					//formComponent.formItemView.updateUI(for: fieldState)
 				}
 			}
 		default:
@@ -223,6 +222,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 		switch validationBehavior {
 		case .onFocus:
+			print("textFiedFormItems: \(textFiedFormItems)")
 			let invalidFields = textFiedFormItems.filter { textField in
 				return !textField.textField.state.isValid
 			}
@@ -236,16 +236,37 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 				if let firstInvalidField = invalidFields.first(where: {$0.textField.isFocused}) {
 					if let fieldError = firstInvalidField.textField.state.validationErrors.first {
-						
 						}
 					}
 				}
-			if textField.state.isValid {
-				navigateToNextTextField(from: textField)
+
+			if isValid {
+				return 
+			}
+
+			if let last = textFiedFormItems.last?.textField {
+				if textField.configuration?.type != .cardHolderName {
+					if textField !== last && textField.state.isValid {
+						navigateToNextTextField(from: textField)
+					}
+				}
 			}
 		default:
 			break
 		}
+	}
+
+	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
+			textFiedFormItems.forEach { formItem in
+				if formItem.textField === textField {
+					switch formItem.fieldType {
+					case .cardholderName, .firstName, .lastName:
+						navigateToNextTextField(from: textField)
+					default:
+						break
+					}
+				}
+			}
 	}
 
   /// Navigate to next TextField from TextFields

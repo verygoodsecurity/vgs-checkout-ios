@@ -86,6 +86,7 @@ internal class VGSPlaceholderFormItemView: UIView {
 		borderView.layer.borderWidth = 2
 		borderView.layer.zPosition = 99
 		borderView.layer.maskedCorners = borderCornerMasks
+		borderView.isUserInteractionEnabled = false
 		borderView.layer.cornerRadius = 4
 	}
 

@@ -188,11 +188,13 @@ internal class VGSCardDetailsFormView: UIView {
 		cardDetailsErrorLabel.isHidden = true
 
 		// Gather all form items.
-		formItems = [
+		formItems = cardHolderDetailsView.formItems + [
 			cardNumberFormItemView,
 			expDateFormItemView,
 			cvcFormItemView
-		] + cardHolderDetailsView.formItems
+		]
+
+		formItems.first?.textField.becomeFirstResponder()
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {
