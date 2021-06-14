@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'Core' do |core|
   #set as default podspec to prevent from downloading additional modules
     core.source_files = "Sources/VGSCheckout", "Sources/VGSCheckout/**/*.{swift}", "Sources/VGSCheckout/**/*.{h, m}"
-		core.dependency "VGSCollectSDK", '1.7.13'
+		core.dependency "VGSCollectSDK", '1.8.0'
 		core.resource_bundles = {
 			'CheckoutResources' => ['Sources/VGSCheckout/Resources/*']
 		}
