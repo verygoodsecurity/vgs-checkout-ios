@@ -49,6 +49,9 @@ public class VGSCheckout {
 		}
 
 		VGSCollectLogger.loggerPrefix = "VGSCheckout"
+		VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
+		VGSCollectLogger.shared.configuration.level = .info
+		
 		self.vaultID = vaultID
 		self.environment = environment
 		self.paymentInstrument = paymetInstrument
