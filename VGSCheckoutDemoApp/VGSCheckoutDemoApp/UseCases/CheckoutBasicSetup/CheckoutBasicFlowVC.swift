@@ -95,6 +95,8 @@ extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
 			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
 		}
 
+		alert.addAction(UIAlertAction(title: "OK", style: .default))
+
 		self.present(alert, animated: true, completion: nil)
 	}
 
@@ -113,6 +115,8 @@ extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
 		}
 
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+		alert.addAction(UIAlertAction(title: "OK", style: .default))
 
 		if let popoverController = alert.popoverPresentationController {
 			popoverController.sourceView = self.view //to set the source of your alert
