@@ -41,6 +41,8 @@ internal class VGSAddCreditCardVaultAPIWorker: VGSAddCreditCardAPIWorkerProtocol
 
 		let httpMethod = HTTPMethod(checkoutHTTPMethod: requestOptions.method)
 		let customHeaders = requestOptions.customHeaders
+
+		vgsCollect.customHeaders = customHeaders
 		let extraData = requestOptions.extraData
 
 		let mergePolicy = requestOptions.mergePolicy

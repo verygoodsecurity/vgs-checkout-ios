@@ -20,7 +20,8 @@ internal class VGSCheckoutFlowCoordinator {
 	}
 
 	/// Dismiss current root controller.
-	internal func dismissRootViewController() {
-		rootController?.dismiss(animated: true, completion: nil)
+	internal func dismissRootViewController(with completion: @escaping () -> Void
+	) {
+		rootController?.dismiss(animated: true, completion: completion)
 	}
 }

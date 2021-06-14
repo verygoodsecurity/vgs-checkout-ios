@@ -8,9 +8,11 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
+
+	/// An object that acts as a `VGSCheckout` delegate.
+	public weak var delegate: VGSCheckoutDelegate?
 
 	/// `String` object, organization vault id.
 	internal let vaultID: String
@@ -65,8 +67,19 @@ public class VGSCheckout {
 	}
 }
 
+// MARK: - VGSAddCardUseCaseManagerDelegate
+
 extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
-	func addCardFlowDidChange(with state: VGSCheckoutAddCardState) {
-		checkoutCoordinator.dismissRootViewController()
+	func addCardFlowDidChange(with state: VGSAddCardFlowState, in useCaseManager: VGSAddCardUseCaseManager) {
+		switch state {
+		case .cancelled:
+			checkoutCoordinator.dismissRootViewController(with: {
+				self.delegate?.checkoutDidCancel()
+			})
+		case .requestSubmitted(let requestResult):
+			checkoutCoordinator.dismissRootViewController {
+				self.delegate?.checkoutDidFinish(with: requestResult)
+			}
+		}
 	}
 }

@@ -7,25 +7,14 @@ import Foundation
 import UIKit
 #endif
 import VGSCollectSDK
-public enum VGSAddCardFlowVaultState {
-	case success(_ data: Data)
-	case failed
-	case cancelled
-}
 
-public enum VGSAddCardFlowMultiplexingState {
-	case success
-	case failed
+internal enum VGSAddCardFlowState {
+	case requestSubmitted(_ result: VGSCheckoutRequestResult)
 	case cancelled
-}
-
-public enum VGSCheckoutAddCardState {
-	case vault(_ state: VGSAddCardFlowVaultState)
-	case multiplexing(case: VGSAddCardFlowMultiplexingState)
 }
 
 internal protocol VGSAddCardUseCaseManagerDelegate: AnyObject {
-	func addCardFlowDidChange(with state: VGSCheckoutAddCardState)
+	func addCardFlowDidChange(with state: VGSAddCardFlowState, in useCaseManager: VGSAddCardUseCaseManager)
 }
 
 /// Handle add card form logic.
@@ -64,6 +53,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
 
+	/// API worker, sends data with current payment instrument.
+	internal let apiWorker: VGSAddCreditCardAPIWorkerProtocol
+
 	// MARK: - Initialization
 
 	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
@@ -71,6 +63,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.vgsCollect = vgsCollect
 		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, viewLayoutStyle: .fullScreen)
+		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 		super.init()
 		self.addCardSectionFormView.payButton.status = .disabled
 	}
@@ -89,9 +82,13 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	// MARK: - Helpers
 
 	@objc fileprivate func payDidTap() {
+		addCardSectionFormView.isUserInteractionEnabled = false
 		addCardSectionFormView.payButton.status = .processing
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-			self.addCardSectionFormView.payButton.status = .success
+
+		apiWorker.sendData {[weak self] requestResult in
+			guard let strongSelf = self else {return}
+			let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+			strongSelf.delegate?.addCardFlowDidChange(with: state, in: strongSelf)
 		}
 	}
 }
@@ -102,7 +99,7 @@ extension VGSAddCardUseCaseManager: VGSHeaderBarViewDelegate {
 	func buttonDidTap(in header: VGSHeaderBarView) {
 		switch paymentInstrument {
 		case .vault:
-			delegate?.addCardFlowDidChange(with: .vault(.cancelled))
+			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
 		default:
 			break
 		}
