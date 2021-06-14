@@ -6,13 +6,15 @@ PODS:
     - VGSCheckout/Core
     - VGSCollectSDK/CardIO
   - VGSCheckout/Core (0.0.1):
-    - VGSCollectSDK (= 1.7.13)
-  - VGSCollectSDK (1.7.13):
-    - VGSCollectSDK/Core (= 1.7.13)
-  - VGSCollectSDK/CardIO (1.7.13):
+    - VGSCollectSDK (= 1.8.0)
+  - VGSCollectSDK (1.8.0):
+    - VGSCollectSDK/Core (= 1.8.0)
+  - VGSCollectSDK/CardIO (1.8.0):
     - CardIOSDK (= 5.5.6)
     - VGSCollectSDK/Core
-  - VGSCollectSDK/Core (1.7.13)
+  - VGSCollectSDK/Core (1.8.0):
+    - VGSCollectSDK/PaymentCards
+  - VGSCollectSDK/PaymentCards (1.8.0)
 
 DEPENDENCIES:
   - VGSCheckout (from `../`)
@@ -29,9 +31,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CardIOSDK: 772e8f3d5e23854fa289c9c4760ca931bfdf3c9c
-  VGSCheckout: fd936b81bf44e40eeff3fe95dcc04c423c93a522
-  VGSCollectSDK: 10fc834bcf00a6e62c7add608b59033a0aaf71a1
+  VGSCheckout: 0b9dc0d55621efd9ea47035310fa7998ef92d482
+  VGSCollectSDK: cd017a3c25b36ba5482d8aa493b07bb3b5776938
 
 PODFILE CHECKSUM: dab5f7573e2e6ae7b430927766aab655b991ffdf
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

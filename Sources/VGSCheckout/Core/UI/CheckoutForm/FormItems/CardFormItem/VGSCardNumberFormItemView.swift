@@ -9,11 +9,13 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProtocol {
+internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	// MARK: - Vars
 
-	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
+	internal let fieldType: VGSAddCardFormFieldType = .cardNumber
+
+	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cardTextField
@@ -25,6 +27,8 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProto
 
 		field.placeholder = "4111 1111 1111 1111"
 
+		field.adjustsFontForContentSizeCategory = true
+		field.cardIconSize = CGSize(width: 32, height: 20)
 		field.cornerRadius = 0
 		field.borderWidth = 0
 		return field
@@ -45,11 +49,11 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormComponentProto
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(placeholderComponent)
-		placeholderComponent.translatesAutoresizingMaskIntoConstraints = false
-		placeholderComponent.checkout_constraintViewToSuperviewEdges()
+		addSubview(formItemView)
+		formItemView.translatesAutoresizingMaskIntoConstraints = false
+		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderComponent.hintComponentView.label.text = "Card number"
-		placeholderComponent.stackView.addArrangedSubview(cardTextField)
+		formItemView.hintComponentView.label.text = "Card number"
+		formItemView.stackView.addArrangedSubview(cardTextField)
 	}
 }

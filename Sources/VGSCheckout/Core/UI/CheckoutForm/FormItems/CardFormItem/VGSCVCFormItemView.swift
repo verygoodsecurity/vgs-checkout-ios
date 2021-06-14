@@ -9,11 +9,13 @@ import UIKit
 #endif
 import VGSCollectSDK
 
-internal class VGSCVCFormItemView: UIView, VGSTextFieldFormComponentProtocol {
+internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	// MARK: - Vars
 
-	let placeholderComponent = VGSPlaceholderFormItemView(frame: .zero)
+	internal let fieldType: VGSAddCardFormFieldType = .cvc
+
+	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cvcTextField
@@ -25,6 +27,7 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormComponentProtocol {
 
 		field.placeholder = "CVC"
 
+		field.cvcIconSize = CGSize(width: 32, height: 20)
 		field.cornerRadius = 0
 		field.borderWidth = 0
 		return field
@@ -45,11 +48,11 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormComponentProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(placeholderComponent)
-		placeholderComponent.translatesAutoresizingMaskIntoConstraints = false
-		placeholderComponent.checkout_constraintViewToSuperviewEdges()
+		addSubview(formItemView)
+		formItemView.translatesAutoresizingMaskIntoConstraints = false
+		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderComponent.hintComponentView.label.text = "CVC"
-		placeholderComponent.stackView.addArrangedSubview(cvcTextField)
+		formItemView.hintComponentView.label.text = "CVC"
+		formItemView.stackView.addArrangedSubview(cvcTextField)
 	}
 }

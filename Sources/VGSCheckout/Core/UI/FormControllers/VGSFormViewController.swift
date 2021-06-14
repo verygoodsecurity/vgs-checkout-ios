@@ -24,7 +24,7 @@ internal class VGSFormViewController: UIViewController {
 	// MARK: - Initialization
 
 	/// Intialization.
-	/// - Parameter formView: `VGSFormView` object, form view.
+	/// - Parameter formView: `UIView` object, form view.
 	init(formView: VGSFormView) {
 		self.formView = formView
 		super.init(nibName: nil, bundle: nil)

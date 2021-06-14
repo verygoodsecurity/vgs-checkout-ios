@@ -35,12 +35,12 @@ internal class VGSSubmitButton: UIControl {
 				accessoryContainerView.isHidden = true
 			case .loader:
 				accessoryContainerView.isHidden = false
-				checkmarkIndicatorView.isHidden = false
-				checkmarkIndicatorView.beginProgress()
+				progressView.isHidden = false
+				progressView.beginProgress()
 				lockImageView.isHidden = true
 			case .lockImage:
 				accessoryContainerView.isHidden = false
-				checkmarkIndicatorView.isHidden = true
+				progressView.isHidden = true
 				activityIndicatorView.stopAnimating()
 				lockImageView.isHidden = false
 			}
@@ -70,11 +70,11 @@ internal class VGSSubmitButton: UIControl {
 		view.widthAnchor.constraint(equalToConstant: 20).isActive = true
 		view.addSubview(lockImageView)
 		lockImageView.checkout_constraintViewToSuperviewEdges()
-		view.addSubview(checkmarkIndicatorView)
-		checkmarkIndicatorView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-		checkmarkIndicatorView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-		checkmarkIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		checkmarkIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+		view.addSubview(progressView)
+		progressView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+		progressView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+		progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		progressView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
 		return view
 	}()
@@ -105,17 +105,17 @@ internal class VGSSubmitButton: UIControl {
 
 	/// Activity indicator.
 	private lazy var activityIndicatorView: UIActivityIndicatorView = {
-			let activityIndicatorView = UIActivityIndicatorView(style: .white)
-//			activityIndicatorView.color = titleLabel.textColor
-			activityIndicatorView.backgroundColor = .clear
-			activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-			activityIndicatorView.hidesWhenStopped = true
+		let activityIndicatorView = UIActivityIndicatorView(style: .white)
+		//			activityIndicatorView.color = titleLabel.textColor
+		activityIndicatorView.backgroundColor = .clear
+		activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+		activityIndicatorView.hidesWhenStopped = true
 
-			return activityIndicatorView
+		return activityIndicatorView
 	}()
 
-	private lazy var checkmarkIndicatorView: CheckProgressView = {
-		let view = CheckProgressView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
+	private lazy var progressView: VGSProgressView = {
+		let view = VGSProgressView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
 		view.translatesAutoresizingMaskIntoConstraints = false
 
 		return view
@@ -169,7 +169,7 @@ internal class VGSSubmitButton: UIControl {
 		stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
 
 		stackView.addArrangedSubview(accessoryContainerView)
-//		stackView.addArrangedSubview(activityIndicatorView)
+		//		stackView.addArrangedSubview(activityIndicatorView)
 		stackView.addArrangedSubview(titleLabel)
 
 		stackView.addArrangedSubview(rightPadding)
@@ -189,7 +189,7 @@ internal class VGSSubmitButton: UIControl {
 			isUserInteractionEnabled = false
 			backgroundColor =
 				theme.backgroundColor.withAlphaComponent(theme.opacity)
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .callout)
+			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
 			titleLabel.textColor = UIColor.white.withAlphaComponent(theme.titleOpacity)
 			titleLabel.text = "Pay"
 			lockImageView.alpha = theme.titleOpacity
@@ -200,7 +200,7 @@ internal class VGSSubmitButton: UIControl {
 			isUserInteractionEnabled = true
 			backgroundColor =
 				theme.backgroundColor
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .callout)
+			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
 			titleLabel.textColor = UIColor.white
 			titleLabel.text = "Pay"
 			titleLabel.textAlignment = .center
@@ -211,122 +211,112 @@ internal class VGSSubmitButton: UIControl {
 			isUserInteractionEnabled = false
 			backgroundColor =
 				theme.backgroundColor.withAlphaComponent(theme.opacity)
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .callout)
+			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
 			titleLabel.textColor = UIColor.white.withAlphaComponent(theme.titleOpacity)
 			titleLabel.text = "Processing"
 			titleLabel.textAlignment = .center
 			activityIndicatorView.startAnimating()
 			iconAccessory = .loader
 		case .success:
-			backgroundColor = theme.successColor
+
+			self.progressView.endProgress()
+			self.iconAccessory = .none
 			UIView.animate(withDuration: 0.3, delay: 0, options: []) {
-				self.titleLabel.isHidden = true
+				self.titleLabel.text = "Success"
+				self.backgroundColor = theme.successColor
+				self.titleLabel.textColor = UIColor.white
+				self.titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
 			} completion: { isFinished in
-				self.checkmarkIndicatorView.completeProgress()
+				//self.checkmarkIndicatorView.completeProgress()
 			}
 		}
 	}
 }
 
-private let spinnerMoveToCenterAnimationDuration = 0.35
-private let checkmarkStrokeDuration = 0.2
+/// Progress view.
+class VGSProgressView: UIView {
 
-// MARK: - CheckProgressView
+	// MARK: - Vars
 
-class CheckProgressView: UIView {
-		let circleLayer = CAShapeLayer()
-		let checkmarkLayer = CAShapeLayer()
+	/// Circle layer
+	internal let progressLayer = CAShapeLayer()
 
-		override init(frame: CGRect) {
-				// Circle
-				let circlePath = UIBezierPath(
-						arcCenter: CGPoint(
-								x: frame.size.width / 2,
-								y: frame.size.height / 2),
-						radius: (frame.size.width) / 2,
-						startAngle: 0.0,
-						endAngle: CGFloat.pi * 2,
-						clockwise: false)
-				circleLayer.bounds = CGRect(
-						x: 0, y: 0, width: frame.size.width, height: frame.size.width)
-				circleLayer.path = circlePath.cgPath
-				circleLayer.fillColor = UIColor.clear.cgColor
-				circleLayer.strokeColor = UIColor.white.cgColor
-				circleLayer.lineCap = .round
-				circleLayer.lineWidth = 1.0
-				circleLayer.strokeEnd = 0.0
+	/// Animation duration.
+	private let animationDuration = 0.35
 
-				// Checkmark
-				let checkmarkPath = UIBezierPath()
-				let checkOrigin = CGPoint(x: frame.size.width * 0.33, y: frame.size.height * 0.5)
-				let checkPoint1 = CGPoint(x: frame.size.width * 0.46, y: frame.size.height * 0.635)
-				let checkPoint2 = CGPoint(x: frame.size.width * 0.70, y: frame.size.height * 0.36)
-				checkmarkPath.move(to: checkOrigin)
-				checkmarkPath.addLine(to: checkPoint1)
-				checkmarkPath.addLine(to: checkPoint2)
+	// MARK: - Initialization
 
-				checkmarkLayer.bounds = CGRect(
-						x: 0, y: 0, width: frame.size.width, height: frame.size.width)
-				checkmarkLayer.path = checkmarkPath.cgPath
-				checkmarkLayer.lineCap = .round
-				checkmarkLayer.fillColor = UIColor.clear.cgColor
-				checkmarkLayer.strokeColor = UIColor.white.cgColor
-				checkmarkLayer.lineWidth = 1.5
-				checkmarkLayer.strokeEnd = 0.0
+	/// no:doc
+	override init(frame: CGRect) {
+		let originX = frame.size.width / 2
+		let originY = frame.size.width / 2
 
-				checkmarkLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
-				circleLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
+		let circlePath = UIBezierPath(
+			arcCenter: CGPoint(
+				x: originX,
+				y: originY),
+			radius: (frame.size.width) / 2,
+			startAngle: 0.0,
+			endAngle: CGFloat.pi * 2,
+			clockwise: false)
 
-				super.init(frame: frame)
+		progressLayer.bounds = CGRect(
+			x: 0, y: 0, width: frame.size.width, height: frame.size.width)
+		progressLayer.path = circlePath.cgPath
 
-				self.backgroundColor = UIColor.clear
-				layer.addSublayer(circleLayer)
-				layer.addSublayer(checkmarkLayer)
-		}
+		progressLayer.fillColor = UIColor.clear.cgColor
+		progressLayer.strokeColor = UIColor.white.cgColor
+		progressLayer.lineCap = .round
 
-		required init?(coder: NSCoder) {
-				fatalError()
-		}
+		progressLayer.lineWidth = 1.0
+		progressLayer.strokeEnd = 0.0
 
-		func beginProgress() {
-				checkmarkLayer.strokeEnd = 0.0  // Make sure checkmark is not drawn yet
-				let animation = CABasicAnimation(keyPath: "strokeEnd")
-				animation.duration = 1.0
-				animation.fromValue = 0
-				animation.toValue = 0.8
-				animation.timingFunction = CAMediaTimingFunction(
-						name: CAMediaTimingFunctionName.easeOut)
-				circleLayer.strokeEnd = 0.8
-				circleLayer.add(animation, forKey: "animateCircle")
-				let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
-				rotationAnimation.byValue = 2.0 * Float.pi
-				rotationAnimation.duration = 1
-				rotationAnimation.repeatCount = .infinity
-				circleLayer.add(rotationAnimation, forKey: "animateRotate")
-		}
+		progressLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
 
-		func completeProgress() {
-				circleLayer.removeAnimation(forKey: "animateCircle")
+		super.init(frame: frame)
 
-				// Close the circle
-				let circleAnimation = CABasicAnimation(keyPath: "strokeEnd")
-				circleAnimation.duration = spinnerMoveToCenterAnimationDuration
-				circleAnimation.fromValue = 0.8
-				circleAnimation.toValue = 1
-				circleAnimation.timingFunction = CAMediaTimingFunction(
-						name: CAMediaTimingFunctionName.easeIn)
-				circleLayer.strokeEnd = 1.0
-				circleLayer.add(circleAnimation, forKey: "animateDone")
+		self.backgroundColor = UIColor.clear
+		layer.addSublayer(progressLayer)
+	}
 
-				// Check the mark
-				let animation = CABasicAnimation(keyPath: "strokeEnd")
-				animation.beginTime = CACurrentMediaTime() + circleAnimation.duration + 0.15  // Start after the circle closes
-				animation.fillMode = .backwards
-				animation.duration = checkmarkStrokeDuration
-				animation.fromValue = 0.0
-				animation.toValue = 1
-				animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
-				checkmarkLayer.strokeEnd = 1.0
-				checkmarkLayer.add(animation, forKey: "animateFinishCircle")
-		}
+	/// no:doc
+	internal required init?(coder: NSCoder) {
+		fatalError("not implemented")
+	}
+
+	// MARK: - Interface
+
+	/// Start animation progress.
+	internal func beginProgress() {
+		let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+		strokeAnimation.duration = 1.0
+		strokeAnimation.fromValue = 0
+		strokeAnimation.toValue = 0.7
+		strokeAnimation.timingFunction = CAMediaTimingFunction(
+			name: CAMediaTimingFunctionName.easeOut)
+
+		progressLayer.strokeEnd = 0.7
+		progressLayer.add(strokeAnimation, forKey: "animateCircle")
+		let progressAnimation = CABasicAnimation(keyPath: "transform.rotation")
+		progressAnimation.byValue = 2.0 * Float.pi
+		progressAnimation.duration = 1
+		progressAnimation.repeatCount = .infinity
+		progressLayer.add(progressAnimation, forKey: "animateRotate")
+	}
+
+	/// End progress.
+	internal func endProgress() {
+		progressLayer.removeAnimation(forKey: "animateCircle")
+
+		// Close the circle
+		let endProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+		endProgressAnimation.duration = animationDuration
+		endProgressAnimation.fromValue = 0.7
+		endProgressAnimation.toValue = 1
+		endProgressAnimation.timingFunction = CAMediaTimingFunction(
+			name: CAMediaTimingFunctionName.easeInEaseOut)
+
+		progressLayer.strokeEnd = 1.0
+		progressLayer.add(endProgressAnimation, forKey: "animateDone")
+	}
 }
