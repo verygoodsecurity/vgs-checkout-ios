@@ -14,7 +14,6 @@
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
 		44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */; };
 		44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */; };
-		44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44C4C8B726648E0300195505 /* VGSCollectSDK */; };
 		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
 		44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */; };
 		44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BF2664B18B00195505 /* VGSFormView.swift */; };
@@ -39,6 +38,10 @@
 		44C4C92A26651DCD00195505 /* VGSCardDataSectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92926651DCD00195505 /* VGSCardDataSectionManager.swift */; };
 		44C4C92C2665F8ED00195505 /* VGSAddCardUseCaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92B2665F8ED00195505 /* VGSAddCardUseCaseManager.swift */; };
 		44C4C92E2665F9F800195505 /* VGSAddCardFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C92D2665F9F800195505 /* VGSAddCardFormViewBuilder.swift */; };
+		44D520CC26771AD8005AB588 /* VGSCreditCardAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520CB26771AD8005AB588 /* VGSCreditCardAPIWorker.swift */; };
+		44D520CE26771E56005AB588 /* VGSCheckoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520CD26771E56005AB588 /* VGSCheckoutDelegate.swift */; };
+		44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520D226771EFD005AB588 /* VGSCheckoutRequestResult.swift */; };
+		44D520D726772195005AB588 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44D520D626772195005AB588 /* VGSCollectSDK */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -113,6 +116,9 @@
 		44C4C92926651DCD00195505 /* VGSCardDataSectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardDataSectionManager.swift; sourceTree = "<group>"; };
 		44C4C92B2665F8ED00195505 /* VGSAddCardUseCaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardUseCaseManager.swift; sourceTree = "<group>"; };
 		44C4C92D2665F9F800195505 /* VGSAddCardFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardFormViewBuilder.swift; sourceTree = "<group>"; };
+		44D520CB26771AD8005AB588 /* VGSCreditCardAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCreditCardAPIWorker.swift; sourceTree = "<group>"; };
+		44D520CD26771E56005AB588 /* VGSCheckoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDelegate.swift; sourceTree = "<group>"; };
+		44D520D226771EFD005AB588 /* VGSCheckoutRequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestResult.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -141,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44C4C8B826648E0300195505 /* VGSCollectSDK in Frameworks */,
+				44D520D726772195005AB588 /* VGSCollectSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +457,9 @@
 		44C4C92526651AC600195505 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
+				44D520D026771ECF005AB588 /* Models */,
 				44C4C92626651AD700195505 /* VGSCheckout.swift */,
+				44D520CF26771E61005AB588 /* CheckoutDelegate */,
 				44EBEBF7266F89AE00270953 /* UseCase */,
 			);
 			path = Checkout;
@@ -463,6 +471,46 @@
 				44C4C92926651DCD00195505 /* VGSCardDataSectionManager.swift */,
 			);
 			path = CardDetails;
+			sourceTree = "<group>";
+		};
+		44D520C926771A89005AB588 /* DataWorkers */ = {
+			isa = PBXGroup;
+			children = (
+				44D520CA26771AA3005AB588 /* AddCardDataWorkers */,
+			);
+			path = DataWorkers;
+			sourceTree = "<group>";
+		};
+		44D520CA26771AA3005AB588 /* AddCardDataWorkers */ = {
+			isa = PBXGroup;
+			children = (
+				44D520CB26771AD8005AB588 /* VGSCreditCardAPIWorker.swift */,
+			);
+			path = AddCardDataWorkers;
+			sourceTree = "<group>";
+		};
+		44D520CF26771E61005AB588 /* CheckoutDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				44D520CD26771E56005AB588 /* VGSCheckoutDelegate.swift */,
+			);
+			path = CheckoutDelegate;
+			sourceTree = "<group>";
+		};
+		44D520D026771ECF005AB588 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44D520D126771ED7005AB588 /* CheckoutRequestResult */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44D520D126771ED7005AB588 /* CheckoutRequestResult */ = {
+			isa = PBXGroup;
+			children = (
+				44D520D226771EFD005AB588 /* VGSCheckoutRequestResult.swift */,
+			);
+			path = CheckoutRequestResult;
 			sourceTree = "<group>";
 		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {
@@ -479,6 +527,7 @@
 			children = (
 				44C4C92B2665F8ED00195505 /* VGSAddCardUseCaseManager.swift */,
 				44C4C92826651DB100195505 /* CardDetails */,
+				44D520C926771A89005AB588 /* DataWorkers */,
 			);
 			path = AddCard;
 			sourceTree = "<group>";
@@ -719,7 +768,7 @@
 			);
 			name = VGSCheckout;
 			packageProductDependencies = (
-				44C4C8B726648E0300195505 /* VGSCollectSDK */,
+				44D520D626772195005AB588 /* VGSCollectSDK */,
 			);
 			productName = VGSCheckout;
 			productReference = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */;
@@ -913,6 +962,7 @@
 				44C4C92E2665F9F800195505 /* VGSAddCardFormViewBuilder.swift in Sources */,
 				44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */,
 				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
+				44D520CC26771AD8005AB588 /* VGSCreditCardAPIWorker.swift in Sources */,
 				44C4C8F42664B18B00195505 /* VGSFormViewController.swift in Sources */,
 				44EC94F226690CF100CE04F4 /* VGSCheckoutCardNumberOptions.swift in Sources */,
 				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
@@ -931,6 +981,7 @@
 				44C4C92C2665F8ED00195505 /* VGSAddCardUseCaseManager.swift in Sources */,
 				44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */,
 				44EC94EF26690CC000CE04F4 /* VGSCheckoutFormConfiguration.swift in Sources */,
+				44D520CE26771E56005AB588 /* VGSCheckoutDelegate.swift in Sources */,
 				44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */,
 				44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */,
 				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
@@ -941,6 +992,7 @@
 				44EC95102669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift in Sources */,
 				44C4C8E22664B18B00195505 /* VGSCheckoutItem.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFormItemView.swift in Sources */,
+				44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,13 +1346,13 @@
 			repositoryURL = "https://github.com/verygoodsecurity/vgs-collect-ios.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.7.13;
+				version = 1.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		44C4C8B726648E0300195505 /* VGSCollectSDK */ = {
+		44D520D626772195005AB588 /* VGSCollectSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44C4C8B626648E0300195505 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */;
 			productName = VGSCollectSDK;
