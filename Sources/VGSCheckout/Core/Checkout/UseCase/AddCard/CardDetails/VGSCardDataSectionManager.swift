@@ -227,7 +227,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		cvcCardNum.placeholder = "CVC"
 		cvcCardNum.tintColor = .lightGray
 
-		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let lastNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
+		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
 			assertionFailure("Invalid multiplexing setup!")
 			return
 		}
@@ -245,6 +245,10 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		lastNameConfiguration.type = .cardHolderName
 		lastNameConfiguration.keyboardType = .namePhonePad
 		/// Required to be not empty
+
+		cardHolderLastName.textAlignment = .natural
+		cardHolderLastName.configuration = lastNameConfiguration
+		cardHolderLastName.placeholder = "Last Name"
 	}
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {

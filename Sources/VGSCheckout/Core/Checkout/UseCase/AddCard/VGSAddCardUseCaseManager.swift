@@ -59,6 +59,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	// MARK: - Initialization
 
 	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
+		VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
+		VGSCollectLogger.shared.configuration.level = .info
+
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)

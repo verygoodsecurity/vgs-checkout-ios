@@ -7,8 +7,6 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
-//import VGSPaymentCards
-//import VGSCollectSDK
 
 class CheckoutMultiplexingFlowVC: UIViewController {
 
@@ -75,7 +73,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 	func checkoutDidCancel() {
 
-		let alert = UIAlertController(title: "Checkout status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)
+		let alert = UIAlertController(title: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)
 
 		if let popoverController = alert.popoverPresentationController {
 			popoverController.sourceView = self.view //to set the source of your alert
@@ -95,13 +93,13 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 
 		switch requestResult {
 		case .success(let statusCode, let data, let response):
-			title = "Checkout status: Success!"
+			title = "Checkout Multiplexing status: Success!"
 			message = "status code is: \(statusCode)"
-			let text = DemoAppResponseParser.stringifySuccessResponse(from: data) ?? ""
+			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
 			mainView.responseLabel.isHidden = false
 			mainView.responseLabel.text = text
 		case .failure(let statusCode, let data, let response, let error):
-			title = "Checkout status: Failed!"
+			title = "Checkout Multiplexing status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 		}
 
