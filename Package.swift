@@ -22,7 +22,7 @@ let package = Package(
 		.package(
 			name: "VGSCollectSDK",
 			url: "https://github.com/verygoodsecurity/vgs-collect-ios.git",
-			.branch("feature/IOSSDK/debug-logs-prefix")
+			.exact("1.8.0")
 		)
 	],
 	targets: [
