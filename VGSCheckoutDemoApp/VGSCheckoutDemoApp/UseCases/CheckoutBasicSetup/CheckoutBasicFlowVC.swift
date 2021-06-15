@@ -9,6 +9,7 @@ import UIKit
 #endif
 import VGSCheckout
 //import VGSPaymentCards
+//import VGSCollectSDK
 
 class CheckoutBasicFlowVC: UIViewController {
 

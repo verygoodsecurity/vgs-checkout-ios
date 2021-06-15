@@ -48,10 +48,6 @@ public class VGSCheckout {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-		VGSCollectLogger.loggerPrefix = "VGSCheckout"
-		VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
-		VGSCollectLogger.shared.configuration.level = .info
-		
 		self.vaultID = vaultID
 		self.environment = environment
 		self.paymentInstrument = paymetInstrument
