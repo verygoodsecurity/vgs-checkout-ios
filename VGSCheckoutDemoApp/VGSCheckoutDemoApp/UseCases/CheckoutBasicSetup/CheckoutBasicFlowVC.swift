@@ -58,18 +58,18 @@ class CheckoutBasicFlowVC: UIViewController {
 extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		// Create vault configuration.
-		var checkoutVaultConfiguration = VGSCheckoutConfiguration()
+		// Create custom configuration.
+		var checkoutConfiguration = VGSCheckoutConfiguration()
 
-		checkoutVaultConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
-		checkoutVaultConfiguration.cardNumberFieldOptions.fieldName = "card_number"
-		checkoutVaultConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
-		checkoutVaultConfiguration.cvcFieldOptions.fieldName = "card_cvc"
+		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
+		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
+		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
+		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
-		checkoutVaultConfiguration.routeConfiguration.path = "post"
+		checkoutConfiguration.routeConfiguration.path = "post"
 
 		// Init Checkout with vault and ID.
-		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutVaultConfiguration)
+		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutConfiguration)
 
 		/// Change default valid card number lengthes
 //		VGSPaymentCards.visa.cardNumberLengths = [16]

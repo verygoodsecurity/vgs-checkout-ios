@@ -100,8 +100,8 @@ extension VGSAddCardUseCaseManager: VGSHeaderBarViewDelegate {
 		switch paymentInstrument {
 		case .vault:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
-		default:
-			break
+		case .multiplexing:
+			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
 		}
 	}
 }

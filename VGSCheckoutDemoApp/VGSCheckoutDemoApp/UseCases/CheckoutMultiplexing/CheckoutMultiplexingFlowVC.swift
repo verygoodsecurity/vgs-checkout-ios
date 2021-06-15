@@ -57,8 +57,8 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		// Create vault configuration.
-		var multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration()
+		// Create multiplexing configuration.
+		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration()
 
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: multiplexingConfiguration)
