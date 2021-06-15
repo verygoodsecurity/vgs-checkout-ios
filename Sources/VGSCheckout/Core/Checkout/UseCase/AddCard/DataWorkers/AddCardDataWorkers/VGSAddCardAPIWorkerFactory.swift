@@ -13,7 +13,7 @@ internal class VGSAddCardAPIWorkerFactory {
 			return VGSAddCreditCardVaultAPIWorker(vgsCollect: vgsCollect, vaultConfiguration: configuration)
 		default:
 			// TODO: - Add multiplexing here.
-			break
+		fatalError("not implemented yet!")
 		}
 	}
 }

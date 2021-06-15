@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CardIOSDK",
+        "repositoryURL": "https://github.com/verygoodsecurity/CardIOSDK-iOS.git",
+        "state": {
+          "branch": null,
+          "revision": "2a764795a837f259a9f50845fbd5fbba69b330bf",
+          "version": "5.5.5"
+        }
+      },
+      {
+        "package": "CardScan",
+        "repositoryURL": "https://github.com/getbouncer/cardscan-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "84e7d1e7805675274edd85bc786b2dd1e4d864e0",
+          "version": "2.0.9"
+        }
+      },
+      {
+        "package": "VGSCheckout",
+        "repositoryURL": "https://github.com/verygoodsecurity/vgs-checkout-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "5d4ad5322bdea3407470104f6650bef2e4ea7515",
+          "version": null
+        }
+      },
+      {
+        "package": "VGSCollectSDK",
+        "repositoryURL": "https://github.com/verygoodsecurity/vgs-collect-ios.git",
+        "state": {
+          "branch": "feature/IOSSDK/debug-logs-prefix",
+          "revision": "8fe53d08e3ea33c2736e6b1d8a8826b7ec868f59",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

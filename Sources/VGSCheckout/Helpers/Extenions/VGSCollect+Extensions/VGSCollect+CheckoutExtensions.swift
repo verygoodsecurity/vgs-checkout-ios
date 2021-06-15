@@ -23,6 +23,8 @@ internal extension VGSCollect {
 			case .local(let localhost, let port):
 				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
 			}
+		case .multiplexing(let multiplexingConfig):
+			self.init(id: vaultID, environment: environment)
 		}
 	}
 }

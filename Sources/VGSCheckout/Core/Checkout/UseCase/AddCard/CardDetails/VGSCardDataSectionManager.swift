@@ -81,6 +81,8 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
+		case .multiplexing(let multiplexingConfig):
+			break
 		}
 	}
 

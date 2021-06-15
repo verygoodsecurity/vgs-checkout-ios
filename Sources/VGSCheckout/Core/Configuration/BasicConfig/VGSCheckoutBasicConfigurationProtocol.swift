@@ -30,7 +30,7 @@ internal enum VGSPaymentInstrument {
 
 	case vault(_ configuration: VGSCheckoutConfiguration)
 
-	/// case multiplexing
+	case multiplexing(_ configuration: VGSCheckoutMultiplexingConfiguration)
 
 	init?(configuration: VGSCheckoutConfigurationProtocol) {
 		guard let checkoutConfiguration = configuration as? VGSCheckoutBasicConfigurationProtocol else {
@@ -46,7 +46,12 @@ internal enum VGSPaymentInstrument {
 				return nil
 			}
 		case .multiplexing:
-			break
+			if let multiplexingConfig = checkoutConfiguration as? VGSCheckoutMultiplexingConfiguration {
+				self = .multiplexing(multiplexingConfig)
+				return
+			} else {
+				return nil
+			}
 		}
 
 		return nil
