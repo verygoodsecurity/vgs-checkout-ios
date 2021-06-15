@@ -74,6 +74,7 @@ internal class VGSCardHolderDetailsView: UIView {
 					itemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 					itemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
 					itemView.formItemView.borderCornerMasks = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+					itemView.formItemView.borderViewSuperView = cardHolderNameStackView
 
 					itemView.cardHolderName.placeholder = "John Doe"
 					itemView.formItemView.hintComponentView.label.text = "Cardholder"
@@ -84,7 +85,7 @@ internal class VGSCardHolderDetailsView: UIView {
 				}
 			}
 		case .multiplexing(let multiplexing):
-			break
+			setupSplittedFieldName()
 		}
 	}
 
@@ -109,6 +110,8 @@ internal class VGSCardHolderDetailsView: UIView {
 			lastNameItemView.formItemView.borderCornerMasks = [
 				.layerMaxXMinYCorner, .layerMaxXMaxYCorner
 			]
+			firstNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
+			lastNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
 		case .doubleLine:
 			cardHolderNameStackView.axis = .vertical
 		}
