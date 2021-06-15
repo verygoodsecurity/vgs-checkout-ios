@@ -11,9 +11,8 @@ internal class VGSAddCardAPIWorkerFactory {
 		switch paymentInstrument {
 		case .vault(let configuration):
 			return VGSAddCreditCardVaultAPIWorker(vgsCollect: vgsCollect, vaultConfiguration: configuration)
-		default:
-			// TODO: - Add multiplexing here.
-			break
+		case .multiplexing(let multiplexingConfiguration):
+			return VGSAddCreditCardMultiplexingAPIWorker(vgsCollect: vgsCollect, multiplexingConfiguration: multiplexingConfiguration)
 		}
 	}
 }

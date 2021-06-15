@@ -80,13 +80,27 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		
 		switch paymentInstrument {
 		case .vault(let configuration):
-			setupCardForm(with: configuration)
+			setupCardForm(withVault: configuration)
+		case .multiplexing(let multiplexingConfig):
+			setupCardForm(withMultiplexing: multiplexingConfig)
+		}
+
+		vgsCollect.textFields.forEach { textField in
+			textField.textColor = UIColor.black
+			textField.font = UIFont.preferredFont(forTextStyle: .body)
+			textField.adjustsFontForContentSizeCategory = true
+			textField.tintColor = .lightGray
+			textField.delegate = self
+		}
+
+		for item in textFiedFormItems {
+			item.formItemView.delegate = self
 		}
 	}
 
 	// MARK: - Helpers
 
-	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
+	private func setupCardForm(withVault vaultConfiguration: VGSCheckoutConfiguration) {
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
 		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
@@ -166,18 +180,74 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 				}
 			}
 		}
+	}
 
-		vgsCollect.textFields.forEach { textField in
-			textField.textColor = UIColor.black
-			textField.font = UIFont.preferredFont(forTextStyle: .body)
-			textField.adjustsFontForContentSizeCategory = true
-			textField.tintColor = .lightGray
-			textField.delegate = self
+	private func setupCardForm(withMultiplexing multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
+
+		let cardNumber = cardFormView.cardNumberFormItemView.cardTextField
+		let expCardDate = cardFormView.expDateFormItemView.expDateTextField
+		let cvcCardNum = cardFormView.cvcFormItemView.cvcTextField
+
+		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.number")
+		cardConfiguration.type = .cardNumber
+		cardConfiguration.isRequiredValidOnly = true
+
+		/// Enable validation of unknown card brand if needed
+		cardConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRulePaymentCard(error: VGSValidationErrorType.cardNumber.rawValue, validateUnknownCardBrand: true)
+		])
+		cardNumber.configuration = cardConfiguration
+		cardNumber.placeholder = "4111 1111 1111 1111"
+
+		cardNumber.textAlignment = .natural
+		cardNumber.cardIconLocation = .right
+
+		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "data.attributes.details")
+		expDateConfiguration.type = .expDate
+		expDateConfiguration.inputDateFormat = .shortYear
+		expDateConfiguration.outputDateFormat = .longYear
+		expDateConfiguration.serializers = [VGSExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
+		expDateConfiguration.formatPattern = "##/##"
+
+		/// Update validation rules
+		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
+		])
+
+		expCardDate.configuration = expDateConfiguration
+		expCardDate.placeholder = "MM/YY"
+		expCardDate.monthPickerFormat = .longSymbols
+
+		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.verification_value")
+		cvcConfiguration.type = .cvc
+
+		cvcCardNum.configuration = cvcConfiguration
+		cvcCardNum.isSecureTextEntry = true
+		cvcCardNum.placeholder = "CVC"
+		cvcCardNum.tintColor = .lightGray
+
+		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
+			assertionFailure("Invalid multiplexing setup!")
+			return
 		}
 
-		for item in textFiedFormItems {
-			item.formItemView.delegate = self
-		}
+		let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.first_name")
+		firstNameConfiguration.type = .cardHolderName
+		firstNameConfiguration.keyboardType = .namePhonePad
+		/// Required to be not empty
+
+		cardHolderFirstName.textAlignment = .natural
+		cardHolderFirstName.configuration = firstNameConfiguration
+		cardHolderFirstName.placeholder = "First Name"
+
+		let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.last_name")
+		lastNameConfiguration.type = .cardHolderName
+		lastNameConfiguration.keyboardType = .namePhonePad
+		/// Required to be not empty
+
+		cardHolderLastName.textAlignment = .natural
+		cardHolderLastName.configuration = lastNameConfiguration
+		cardHolderLastName.placeholder = "Last Name"
 	}
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {
@@ -212,6 +282,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 					let state = textField.state
 					if !state.isDirty {
 						formComponent.formItemView.removeHighlight()
+						formComponent.formItemView.updateUI(for: .none)
 						return
 					}
 
@@ -219,8 +290,10 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 					if isValid {
 						formComponent.formItemView.removeHighlight()
+						formComponent.formItemView.updateUI(for: .valid)
 					} else {
 						formComponent.formItemView.highlight(with: .red)
+						formComponent.formItemView.updateUI(for: .invalid)
 					}
 
 					formComponent.formItemView.decreaseBorderZPosition()

@@ -11,6 +11,10 @@ import VGSCollectSDK
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
 
+	deinit {
+		//VGSCollectLogger.loggerPrefix = "VGSCollectSDK"
+	}
+
 	/// An object that acts as a `VGSCheckout` delegate.
 	public weak var delegate: VGSCheckoutDelegate?
 
@@ -43,6 +47,7 @@ public class VGSCheckout {
 		guard let paymetInstrument = VGSPaymentInstrument(configuration: configuration) else {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
+
 		self.vaultID = vaultID
 		self.environment = environment
 		self.paymentInstrument = paymetInstrument

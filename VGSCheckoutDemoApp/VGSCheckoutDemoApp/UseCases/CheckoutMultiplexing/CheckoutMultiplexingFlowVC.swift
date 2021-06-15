@@ -1,17 +1,14 @@
 //
-//  CheckoutBasicFlowVC.swift
+//  CheckoutMultiplexingFlowVC.swift
 //  VGSCheckoutDemoApp
-//
 
 import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
 import VGSCheckout
-//import VGSPaymentCards
-//import VGSCollectSDK
 
-class CheckoutBasicFlowVC: UIViewController {
+class CheckoutMultiplexingFlowVC: UIViewController {
 
 	// MARK: - Vars
 
@@ -55,26 +52,14 @@ class CheckoutBasicFlowVC: UIViewController {
 
 // MARK: - CheckoutFlowMainViewDelegate
 
-extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
+extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-		// Create custom configuration.
-		var checkoutConfiguration = VGSCheckoutConfiguration()
-
-		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
-		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
-		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
-		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
-
-		checkoutConfiguration.routeConfiguration.path = "post"
+		// Create multiplexing configuration.
+		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration()
 
 		// Init Checkout with vault and ID.
-		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutConfiguration)
-
-		/// Change default valid card number lengthes
-//		VGSPaymentCards.visa.cardNumberLengths = [16]
-//		/// Change default format pattern
-//		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
+		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: multiplexingConfiguration)
 
 		// Present checkout configuration.
 		vgsCheckout?.present(from: self)
@@ -85,10 +70,10 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 // MARK: - VGSCheckoutDelegate
 
-extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
+extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 	func checkoutDidCancel() {
 
-		let alert = UIAlertController(title: "Checkout status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)
+		let alert = UIAlertController(title: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)
 
 		if let popoverController = alert.popoverPresentationController {
 			popoverController.sourceView = self.view //to set the source of your alert
@@ -108,13 +93,13 @@ extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
 
 		switch requestResult {
 		case .success(let statusCode, let data, let response):
-			title = "Checkout status: Success!"
+			title = "Checkout Multiplexing status: Success!"
 			message = "status code is: \(statusCode)"
-			let text = DemoAppResponseParser.stringifySuccessResponse(from: data) ?? ""
+			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
 			mainView.responseLabel.isHidden = false
 			mainView.responseLabel.text = text
 		case .failure(let statusCode, let data, let response, let error):
-			title = "Checkout status: Failed!"
+			title = "Checkout Multiplexing status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 		}
 
