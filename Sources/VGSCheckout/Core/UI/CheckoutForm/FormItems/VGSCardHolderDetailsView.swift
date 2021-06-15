@@ -110,11 +110,12 @@ internal class VGSCardHolderDetailsView: UIView {
 			lastNameItemView.formItemView.borderCornerMasks = [
 				.layerMaxXMinYCorner, .layerMaxXMaxYCorner
 			]
-			firstNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
-			lastNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
 		case .doubleLine:
 			cardHolderNameStackView.axis = .vertical
 		}
+
+		firstNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
+		lastNameItemView.formItemView.borderViewSuperView = cardHolderNameStackView
 
 		formItems = [firstNameItemView, lastNameItemView]
 
