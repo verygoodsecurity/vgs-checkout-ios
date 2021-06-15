@@ -85,7 +85,6 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			setupCardForm(withMultiplexing: multiplexingConfig)
 		}
 
-
 		vgsCollect.textFields.forEach { textField in
 			textField.textColor = UIColor.black
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
@@ -283,6 +282,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 					let state = textField.state
 					if !state.isDirty {
 						formComponent.formItemView.removeHighlight()
+						formComponent.formItemView.updateUI(for: .none)
 						return
 					}
 
@@ -290,8 +290,10 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 					if isValid {
 						formComponent.formItemView.removeHighlight()
+						formComponent.formItemView.updateUI(for: .valid)
 					} else {
 						formComponent.formItemView.highlight(with: .red)
+						formComponent.formItemView.updateUI(for: .invalid)
 					}
 
 					formComponent.formItemView.decreaseBorderZPosition()
