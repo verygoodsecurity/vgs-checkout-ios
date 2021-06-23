@@ -1365,8 +1365,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/verygoodsecurity/vgs-collect-ios.git";
 			requirement = {
-				kind = revision;
-				revision = c8c759011e131839585c70920e10661840adeee7;
+				kind = exactVersion;
+				version = 1.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

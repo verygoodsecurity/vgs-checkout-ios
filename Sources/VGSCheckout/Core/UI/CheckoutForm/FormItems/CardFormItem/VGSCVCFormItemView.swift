@@ -52,7 +52,7 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		formItemView.translatesAutoresizingMaskIntoConstraints = false
 		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "CVC"
+		formItemView.hintComponentView.label.text = "Security code"
 		formItemView.stackView.addArrangedSubview(cvcTextField)
 	}
 }
