@@ -62,6 +62,8 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
+	internal let formValidationHelper: VGSFormValidationHelper
+
 	// MARK: - Initialization
 
 	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus) {
@@ -69,6 +71,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
 		self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument)
+		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
 
 		buildForm()
 	}
@@ -123,21 +126,23 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		cardNumber.textAlignment = .natural
     cardNumber.cardIconLocation = .right
 
-		let expDateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
+		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
 
 		/// Default .expDate format is "##/##"
-		expDateConfiguration.formatPattern = "##/####"
+		expDateConfiguration.formatPattern = "##/##"
 
 		/// Update validation rules
 		/// FIXME - hardcoded for now!
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleCardExpirationDate(dateFormat: .longYear, error: VGSValidationErrorType.expDate.rawValue)
+			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
 		])
 
+		//expDateConfiguration.inputSource = .keyboard
+		expDateConfiguration.inputDateFormat = .shortYear
 		expCardDate.configuration = expDateConfiguration
-		expCardDate.placeholder = "MM/YYYY"
+		expCardDate.placeholder = "MM/YY"
 //        expCardDate.monthPickerFormat = .longSymbols
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
@@ -208,15 +213,16 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		expDateConfiguration.outputDateFormat = .longYear
 		expDateConfiguration.serializers = [VGSExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
 		expDateConfiguration.formatPattern = "##/##"
+		//expDateConfiguration.inputSource = .keyboard
 
 		/// Update validation rules
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
 		])
 
+		expDateConfiguration.inputDateFormat = .shortYear
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
-		expCardDate.monthPickerFormat = .longSymbols
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.verification_value")
 		cvcConfiguration.type = .cvc
@@ -263,104 +269,159 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 
 extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
-	func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
-		textFiedFormItems.forEach { formComponent in
-			if formComponent.textField === textField {
-				formComponent.formItemView.highlight(with: .blue)
-				formComponent.formItemView.increaseBorderZPosition()
-			}
-		}
-	}
-
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-
-		switch validationBehavior {
-		case .onFocus:
-			textFiedFormItems.forEach { formComponent in
-				if formComponent.textField === textField {
-
-					let state = textField.state
-					if !state.isDirty {
-						formComponent.formItemView.removeHighlight()
-						formComponent.formItemView.updateUI(for: .none)
-						return
-					}
-
-					let isValid = state.isValid
-
-					if isValid {
-						formComponent.formItemView.removeHighlight()
-						formComponent.formItemView.updateUI(for: .valid)
-					} else {
-						formComponent.formItemView.highlight(with: .red)
-						formComponent.formItemView.updateUI(for: .invalid)
-					}
-
-					formComponent.formItemView.decreaseBorderZPosition()
-
-					//formComponent.formItemView.updateUI(for: fieldState)
-				}
-			}
-		default:
-			break
-		}
+		formValidationHelper.updateFieldUIOnEndEditing(for: textField)
 	}
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
+		formValidationHelper.updateFieldUIOnTextChange(for: textField)
+
 		switch validationBehavior {
 		case .onFocus:
-			print("textFiedFormItems: \(textFiedFormItems)")
-			let invalidFields = textFiedFormItems.filter { textField in
-				return !textField.textField.state.isValid
-			}
-			let isValid = invalidFields.isEmpty
-
-			if isValid {
+			// Update the entire form state.
+			if formValidationHelper.isFormValid() {
 				state = .valid
-        /// when input is valid - automatically navigate to the next textField
 			} else {
 				state = .invalid
-
-				if let firstInvalidField = invalidFields.first(where: {$0.textField.isFocused}) {
-					if let fieldError = firstInvalidField.textField.state.validationErrors.first {
-						}
-					}
-				}
-
-			if isValid {
-				return 
 			}
 
-			if let last = textFiedFormItems.last?.textField {
-				if textField.configuration?.type != .cardHolderName {
-					if textField !== last && textField.state.isValid {
-						navigateToNextTextField(from: textField)
-					}
-				}
+			// Update form blocks UI.
+			let formBlocks = formValidationHelper.formBlocks
+			formBlocks.forEach { formBlock in
+				let isFormBlockValid = self.formValidationHelper.isCardFormBlockValid(formBlock)
+				self.cardFormView.updateFormBlock(formBlock, isValid: isFormBlockValid)
 			}
-		default:
+
+			formValidationHelper.focusToNextFieldIfNeeded(for: textField)
+		case .onTextChange:
 			break
 		}
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-			textFiedFormItems.forEach { formItem in
-				if formItem.textField === textField {
-					switch formItem.fieldType {
-					case .cardholderName, .firstName, .lastName:
-						navigateToNextTextField(from: textField)
-					default:
-						break
-					}
-				}
-			}
+		formValidationHelper.focusOnEndEditingOnReturn(for: textField)
+	}
+}
+
+internal class VGSFormValidationHelper {
+	internal let formItems: [VGSTextFieldFormItemProtocol]
+	internal let validationBehaviour: VGSFormValidationBehaviour
+
+	internal init(formItems: [VGSTextFieldFormItemProtocol], validationBehaviour: VGSFormValidationBehaviour) {
+		self.formItems = formItems
+		self.validationBehaviour = validationBehaviour
 	}
 
-  /// Navigate to next TextField from TextFields
-  func navigateToNextTextField(from textField: VGSTextField) {
-    guard let fieldIndex = vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (vgsTextFields.count - 1) else {
-      return
-    }
-    vgsTextFields[fieldIndex + 1].becomeFirstResponder()
-  }
+	internal func updateFieldUIOnEndEditing(for textField: VGSTextField) {
+		switch validationBehaviour {
+		case .onFocus:
+			guard let formItem = fieldFormItem(for: textField) else {return}
+			let state = textField.state
+			// Don't update UI for non-edited field.
+			if !state.isDirty {
+				formItem.formItemView.updateUI(for: .inactive)
+				return
+			}
+
+			let isValid = state.isValid
+
+			if isValid {
+				formItem.formItemView.updateUI(for: .focused)
+			} else {
+				formItem.formItemView.updateUI(for: .invalid)
+			}
+		default:
+			break
+		}
+	}
+
+	internal func updateFieldUIOnTextChange(for textField: VGSTextField) {
+		switch validationBehaviour {
+		case .onFocus:
+			if let formItem = fieldFormItem(for: textField) {
+				if textField.state.isValid {
+					formItem.formItemView.updateUI(for: .focused)
+				} else {
+					formItem.formItemView.updateUI(for: .invalid)
+				}
+			}
+		case .onTextChange:
+			break
+		}
+	}
+
+	internal func isCardFormBlockValid(_ formBlock: VGSAddCardFormBlock) -> Bool {
+		let cardHolderFormItems = formItems.filter({$0.fieldType.formBlock == formBlock})
+
+		return isStateValid(for: cardHolderFormItems)
+	}
+
+	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldFormItemProtocol? {
+		return formItems.first(where: {$0.textField === textField})
+	}
+
+	internal func isFormValid() -> Bool {
+		let invalidFields = formItems.filter { textField in
+			return !textField.textField.state.isValid
+		}
+		let isValid = invalidFields.isEmpty
+
+		return isValid
+	}
+
+	internal func isStateValid(for formItems: [VGSTextFieldFormItemProtocol]) -> Bool {
+		var isValid = true
+		formItems.forEach { formItem in
+			let state = formItem.textField.state
+
+			// Don't mark fields as invalid without input.
+			if state.isDirty && state.isValid == false {
+				isValid = false
+			}
+		}
+
+		return isValid
+	}
+
+	internal var vgsTextFields: [VGSTextField] {
+		return formItems.map({return $0.textField})
+	}
+
+	/// Navigate to next TextField from TextFields
+	internal func navigateToNextTextField(from textField: VGSTextField) {
+		guard let fieldIndex = vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (vgsTextFields.count - 1) else {
+			return
+		}
+		vgsTextFields[fieldIndex + 1].becomeFirstResponder()
+	}
+
+	internal func focusToNextFieldIfNeeded(for textField: VGSTextField) {
+		// Do not switch focus for valid form.
+		guard isFormValid() else {return}
+
+		// Do not switch from last field.
+		if let last = formItems.last?.textField {
+			// Do not focus from card holder fields since its length does not have specific validation rule.
+			if textField.configuration?.type != .cardHolderName {
+				// Change focus only from valid field.
+				if textField !== last && textField.state.isValid {
+					navigateToNextTextField(from: textField)
+				}
+			}
+		}
+	}
+
+	internal var formBlocks: [VGSAddCardFormBlock] {
+		return Array(Set(formItems.map({return $0.fieldType.formBlock})))
+	}
+
+	internal func focusOnEndEditingOnReturn(for textField: VGSTextField) {
+		guard let formItem = fieldFormItem(for: textField) else {return}
+		switch formItem.fieldType {
+		case .cardholderName, .firstName, .lastName:
+			navigateToNextTextField(from: textField)
+		default:
+			break
+		}
+	}
 }

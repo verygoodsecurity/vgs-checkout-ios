@@ -23,9 +23,9 @@
         "package": "VGSCollectSDK",
         "repositoryURL": "https://github.com/verygoodsecurity/vgs-collect-ios.git",
         "state": {
-          "branch": null,
-          "revision": "790feee1e08a06dc478f29fe11ec91d5664bfabf",
-          "version": "1.8.0"
+          "branch": "canary",
+          "revision": "c8c759011e131839585c70920e10661840adeee7",
+          "version": null
         }
       }
     ]
