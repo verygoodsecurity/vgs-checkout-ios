@@ -8,6 +8,9 @@ import Foundation
 import UIKit
 #endif
 import VGSCollectSDK
+#if canImport(VGSPaymentCards)
+import VGSPaymentCards
+#endif
 
 /// Form section delegate protocol.
 internal protocol VGSFormSectionPresenterDelegate: AnyObject {
@@ -275,6 +278,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 		formValidationHelper.updateFieldUIOnTextChange(for: textField)
+		formValidationHelper.updateSecurityCodeFieldIfNeeded(for: textField)
 
 		switch validationBehavior {
 		case .onFocus:
@@ -424,4 +428,22 @@ internal class VGSFormValidationHelper {
 			break
 		}
 	}
+
+	internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
+		if editingTextField.configuration?.type == .cardNumber, let cardState = editingTextField.state as? CardState {
+			updateCVCPlaceholder(for: cardState.cardBrand)
+		}
+	}
+
+	internal func updateCVCPlaceholder(for cardBrand: VGSPaymentCards.CardBrand) {
+		 guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
+			 return
+		 }
+		 switch cardBrand {
+		 case .amex:
+			 cvcField.placeholder = "CVV"
+		 default:
+			 cvcField.placeholder = "CVC"
+		 }
+	 }
 }
