@@ -257,6 +257,19 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			}
 		}
 	}
+  
+  /// Update CVC field placeholder for specific card brand
+  func updateCVCPlaceholder(for cardBrand: VGSPaymentCards.CardBrand) {
+    guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
+      return
+    }
+    switch cardBrand {
+    case .amex:
+      cvcField.placeholder = "CVC"
+    default:
+      cvcField.placeholder = "CVV"
+    }
+  }
 }
 
 // MARK: - VGSTextFieldDelegate
@@ -307,6 +320,12 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 	}
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
+
+    /// Update CVC placeholder when card number field is updated
+    if textField.configuration?.type == .cardNumber, let cardState = textField.state as? CardState {
+      updateCVCPlaceholder(for: cardState.cardBrand)
+    }
+    
 		switch validationBehavior {
 		case .onFocus:
 			print("textFiedFormItems: \(textFiedFormItems)")
