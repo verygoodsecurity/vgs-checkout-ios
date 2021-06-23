@@ -24,9 +24,6 @@ internal class VGSCardDetailsFormView: UIView {
 	/// Form items.
 	internal var formItems: [VGSTextFieldFormItemProtocol] = []
 
-	/// Displays error messages for invalid card holder name.
-	internal let cardHolderErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
-
 	/// Displays error messages for invalid card details.
 	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
@@ -64,7 +61,7 @@ internal class VGSCardDetailsFormView: UIView {
 	internal lazy var headerContainerView: VGSContainerItemView = {
 		let view = VGSContainerItemView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.paddings = UIEdgeInsets(top: 16, left: 0, bottom: -8, right: 0)
+		view.paddings = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 
 		return view
 	}()
@@ -145,6 +142,25 @@ internal class VGSCardDetailsFormView: UIView {
 
 	// MARK: - Interface
 
+	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
+		switch block {
+		case .cardHolder:
+			if isValid {
+				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+			} else {
+				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
+			}
+		case .cardDetails:
+			if isValid {
+				verticalStackView.separatorColor = UIColor.gray
+				horizonalStackView.separatorColor = UIColor.gray
+			} else {
+				verticalStackView.separatorColor = UIColor.red
+				horizonalStackView.separatorColor = UIColor.red
+			}
+		}
+	}
+
 	// MARK: - Helpers
 
 	/// Setup UI and layout.
@@ -161,7 +177,6 @@ internal class VGSCardDetailsFormView: UIView {
 			case .visible:
 				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 				rootStackView.addArrangedSubview(cardHolderDetailsView)
-				rootStackView.addArrangedSubview(cardHolderErrorLabel)
 				cardDetailsErrorLabel.isHidden = true
 			default:
 				break
@@ -169,7 +184,6 @@ internal class VGSCardDetailsFormView: UIView {
 		case .multiplexing(let multiplexing):
 			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 			rootStackView.addArrangedSubview(cardHolderDetailsView)
-			rootStackView.addArrangedSubview(cardHolderErrorLabel)
 			cardDetailsErrorLabel.isHidden = true
 		}
 
@@ -179,7 +193,6 @@ internal class VGSCardDetailsFormView: UIView {
 		cardNumberFormItemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		verticalStackView.addArrangedSubview(cardNumberFormItemView)
-		cardNumberFormItemView.formItemView.borderViewSuperView = verticalStackView
 
 		switch fieldsDistribution {
 		case .singleLineDateAndCVC:
@@ -204,18 +217,10 @@ internal class VGSCardDetailsFormView: UIView {
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {
-		cardNumberFormItemView.formItemView.borderCornerMasks = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 		if singleLine {
 			horizonalStackView.axis = .horizontal
-
-			expDateFormItemView.formItemView.borderViewSuperView = verticalStackView
-			expDateFormItemView.formItemView.borderCornerMasks = [.layerMinXMaxYCorner]
-			cvcFormItemView.formItemView.borderCornerMasks = [.layerMaxXMaxYCorner]
-			cvcFormItemView.formItemView.borderViewSuperView = verticalStackView
-
 		} else {
 			horizonalStackView.axis = .vertical
-			cvcFormItemView.formItemView.borderCornerMasks = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 		}
 
 		expDateFormItemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)

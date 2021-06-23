@@ -9,10 +9,17 @@ import UIKit
 #endif
 import VGSCollectSDK
 
+internal enum VGSAddCardFormBlock {
+	case cardHolder
+	case cardDetails
+}
+
 internal enum VGSCheckoutFormValidationState {
-	case none
+	case inactive
+	case focused
 	case valid
 	case invalid
+	case disabled
 }
 
 internal protocol VGSTextFieldFormItemProtocol: AnyObject {
@@ -28,6 +35,15 @@ internal enum VGSAddCardFormFieldType {
 	case cardholderName
 	case firstName
 	case lastName
+
+	var formBlock: VGSAddCardFormBlock {
+		switch self {
+		case .cardholderName, .firstName, .lastName:
+			return .cardHolder
+		case .cardNumber, .expirationDate, .cvc:
+			return .cardDetails
+		}
+	}
 }
 
 internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtocol {
