@@ -44,6 +44,8 @@ internal class VGSAddCardFormViewBuilder {
 		return view
 	}
 
+	/// Build error label.
+	/// - Returns: `UILabel` for error message.
 	static func buildErrorLabel() -> UILabel {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false

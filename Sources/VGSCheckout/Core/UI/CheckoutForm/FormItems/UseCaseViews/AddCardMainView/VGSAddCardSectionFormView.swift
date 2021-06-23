@@ -7,6 +7,8 @@ import Foundation
 import UIKit
 #endif
 
+
+
 /// Holds UI for add card section form.
 internal class VGSAddCardSectionFormView: VGSFormView {
 
@@ -22,9 +24,6 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
-
-	/// Displays error messages for invalid card holder name.
-	internal let cardHolderErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
 	/// Displays error messages for invalid card details.
 	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
@@ -67,7 +66,7 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 
 		super.init()
 
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
+		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 50, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 
@@ -81,15 +80,13 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 
 	// MARK: - Interface
 
-	internal func updateUI(errorText: String, formFieldType: VGSAddCardFormFieldType) {
-		switch formFieldType {
-		case .cardholderName, .firstName, .lastName:
-			cardDetailsView.cardHolderErrorLabel.isHidden = false
-			cardDetailsView.cardHolderErrorLabel.text = errorText
-		case .cardNumber, .expirationDate, .cvc:
-			cardDetailsView.cardDetailsErrorLabel.isHidden = false
-			cardDetailsView.cardDetailsErrorLabel.text = errorText
+	internal func updateErrorUI(for errorText: String?, fieldType: VGSAddCardFormFieldType) {
+		guard let text = errorText else {
+			cardDetailsView.cardDetailsErrorLabel.isHidden = true
+			return
 		}
+		cardDetailsView.cardDetailsErrorLabel.isHidden = false
+		cardDetailsView.cardDetailsErrorLabel.text = text
 	}
 
 	// MARK: - Helpers
