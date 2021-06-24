@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,7 +44,6 @@
 		44D520D926772937005AB588 /* VGSAddCardAPIWorkerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520D826772937005AB588 /* VGSAddCardAPIWorkerFactory.swift */; };
 		44D520E6267870CE005AB588 /* VGSCheckoutMultiplexingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingConfiguration.swift */; };
 		44D520F226788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520F126788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift */; };
-		44D520F4267A0949005AB588 /* VGSCollectSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 44D520F3267A0949005AB588 /* VGSCollectSDK */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -153,7 +152,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44D520F4267A0949005AB588 /* VGSCollectSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,7 +783,6 @@
 			);
 			name = VGSCheckout;
 			packageProductDependencies = (
-				44D520F3267A0949005AB588 /* VGSCollectSDK */,
 			);
 			productName = VGSCheckout;
 			productReference = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */;
@@ -863,7 +860,6 @@
 			);
 			mainGroup = 3286E0B2265EC19C001FECEB;
 			packageReferences = (
-				44D520E726787A5D005AB588 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */,
 			);
 			productRefGroup = 3286E0BD265EC19C001FECEB /* Products */;
 			projectDirPath = "";
@@ -1359,25 +1355,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		44D520E726787A5D005AB588 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/verygoodsecurity/vgs-collect-ios.git";
-			requirement = {
-				kind = exactVersion;
-				version = 1.8.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		44D520F3267A0949005AB588 /* VGSCollectSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 44D520E726787A5D005AB588 /* XCRemoteSwiftPackageReference "vgs-collect-ios" */;
-			productName = VGSCollectSDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3286E0B3265EC19C001FECEB /* Project object */;
 }
