@@ -14,7 +14,7 @@ import UIKit
 extension VGSCollect {
 
     ///:nodoc: Check device if it jailbroken
-    public static func isJailbroken() -> Bool {
+    internal static func isJailbroken() -> Bool {
         
         guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return false }
         if UIApplication.shared.canOpenURL(cydiaUrlScheme as URL) {

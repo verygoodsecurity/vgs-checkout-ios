@@ -9,7 +9,7 @@
 import Foundation
 
 /// Response enum cases for SDK requests
-@frozen public enum VGSResponse {
+@frozen internal enum VGSResponse {
 		/**
 		 Success response case
 

@@ -9,16 +9,16 @@
 import Foundation
 
 /// Key-value data type, usually used for response format.
-public typealias JsonData = [String: Any]
+internal typealias JsonData = [String: Any]
 
 /// Key-value data type, used in http request headers.
-public typealias HTTPHeaders = [String: String]
+internal typealias HTTPHeaders = [String: String]
 
 /// Key-value data type, for internal use.
 internal typealias BodyData = [String: Any]
 
 /// HTTP request methods
-public enum HTTPMethod: String {
+internal enum HTTPMethod: String {
 		/// GET method.
 		case get     = "GET"
 		/// POST method.

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class APIClient {
+internal class APIClient {
 
 	/// Additional custom headers.
 	var customHeader: HTTPHeaders?
@@ -42,10 +42,10 @@ class APIClient {
 		let version = ProcessInfo.processInfo.operatingSystemVersion
 		let versionString = "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
 
-		let trStatus = VGSAnalyticsClient.shared.shouldCollectAnalytics ? "default" : "none"
+		let trStatus = VGSCheckoutAnalyticsClient.shared.shouldCollectAnalytics ? "default" : "none"
 
 		return [
-			"vgs-client": "source=iosSDK&medium=vgs-collect&content=\(Utils.vgsCollectVersion)&osVersion=\(versionString)&vgsCollectSessionId=\(VGSAnalyticsClient.shared.vgsCollectSessionId)&tr=\(trStatus)"
+			"vgs-client": "source=iosSDK&medium=vgs-collect&content=\(Utils.vgsCollectVersion)&osVersion=\(versionString)&vgsCollectSessionId=\(VGSCheckoutAnalyticsClient.shared.vgsCollectSessionId)&tr=\(trStatus)"
 		]
 	}()
 
@@ -230,7 +230,7 @@ extension APIClient {
 						let event = VGSLogEvent(level: .info, text: text)
 						VGSCollectLogger.shared.forwardLogEvent(event)
 
-						VGSAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .success, extraData: ["hostname": hostname])
+						VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .success, extraData: ["hostname": hostname])
 					}
 					return
 				} else {
@@ -251,7 +251,7 @@ extension APIClient {
 					let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
 					VGSCollectLogger.shared.forwardLogEvent(event)
 
-					VGSAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .failed, extraData: ["hostname": hostname])
+					VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .failed, extraData: ["hostname": hostname])
 					return
 				}
 			}

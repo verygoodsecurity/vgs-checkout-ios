@@ -9,7 +9,7 @@
 import Foundation
 
 /// Type of `VGSError`  and it status code.
-public enum VGSErrorType: Int {
+internal enum VGSErrorType: Int {
     
     // MARK: - Text input data errors
     
@@ -43,18 +43,18 @@ public enum VGSErrorType: Int {
 }
 
 /// An error produced by `VGSCollectSDK`. Works similar to default `NSError` in iOS.
-public class VGSError: NSError {
+internal class VGSError: NSError {
     
     /// `VGSErrorType `-  required for each `VGSError` instance
-    public let type: VGSErrorType!
+    internal let type: VGSErrorType!
     
     /// Code assiciated with `VGSErrorType`
-    override public var code: Int {
+    override internal var code: Int {
         return type.rawValue
     }
 
 	  ///: nodoc. Public required init.
-    public required init?(coder: NSCoder) {
+	internal required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

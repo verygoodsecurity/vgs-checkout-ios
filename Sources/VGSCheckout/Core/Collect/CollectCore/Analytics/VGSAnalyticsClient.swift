@@ -12,7 +12,7 @@ import UIKit
 #endif
 
 /// :nodoc: VGS Analytics event type
-public enum VGSAnalyticsEventType: String {
+internal enum VGSAnalyticsEventType: String {
   case fieldInit = "Init"
   case hostnameValidation = "HostNameValidation"
   case beforeSubmit = "BeforeSubmit"
@@ -23,7 +23,7 @@ public enum VGSAnalyticsEventType: String {
 /// Client responsably for managing and sending VGS Collect SDK analytics events.
 /// Note: we track only VGSCollectSDK usage and features statistics.
 /// :nodoc:
-public class VGSAnalyticsClient {
+public class VGSCheckoutAnalyticsClient {
   
   public enum AnalyticEventStatus: String {
     case success = "Ok"
@@ -32,10 +32,10 @@ public class VGSAnalyticsClient {
   }
   
   /// Shared `VGSAnalyticsClient` instance
-  public static let shared = VGSAnalyticsClient()
+  public static let shared = VGSCheckoutAnalyticsClient()
   
   /// Enable or disable VGS analytics tracking
-  public var shouldCollectAnalytics = true
+  public var shouldCollectAnalytics = false
   
   /// Uniq id that should stay the same during application rintime
   public let vgsCollectSessionId = UUID().uuidString
@@ -67,7 +67,7 @@ public class VGSAnalyticsClient {
       }()
 
   /// :nodoc: Track events related to specific VGSCollect instance
-  public func trackFormEvent(_ form: VGSFormAnanlyticsDetails, type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
+  internal func trackFormEvent(_ form: VGSFormAnanlyticsDetails, type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
       let formDetails = ["formId": form.formId,
                          "tnt": form.tenantId,
                          "env": form.environment
@@ -87,14 +87,14 @@ public class VGSAnalyticsClient {
   }
 
   /// :nodoc: Base function to Track analytics event
-  public func trackEvent(_ type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
+  internal func trackEvent(_ type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
       var data = [String: Any]()
       if let extraData = extraData {
         data = extraData
       }
       data["type"] = type.rawValue
       data["status"] = status.rawValue
-      data["ua"] = VGSAnalyticsClient.userAgentData
+      data["ua"] = VGSCheckoutAnalyticsClient.userAgentData
       data["version"] = Utils.vgsCollectVersion
       data["source"] = "iosSDK"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
@@ -116,7 +116,7 @@ public class VGSAnalyticsClient {
 	}
 }
 
-internal extension VGSAnalyticsClient {
+internal extension VGSCheckoutAnalyticsClient {
   
   // send events
   func sendAnalyticsRequest(method: HTTPMethod = .post, path: String = "vgs", data: [String: Any] ) {

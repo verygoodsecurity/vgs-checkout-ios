@@ -61,7 +61,7 @@ internal class VGSCollect {
     ///   - environment: `String` object, your organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
     ///   - hostname: `String?` object, custom Hostname, if not set, data will be sent to Vault Url. Default is `nil`.
 	  ///   - satellitePort: `Int?` object, custom port for satellite configuration.  Default is `nil`. **IMPORTANT! Use only with .sandbox environment! Hostname should be specified for valid http://localhost or in local IP format  http://192.168.X.X**.
-    public init(id: String, environment: String, hostname: String? = nil, satellitePort: Int? = nil) {
+	internal init(id: String, environment: String, hostname: String? = nil, satellitePort: Int? = nil) {
       self.tenantId = id
       self.regionalEnvironment = environment
       self.formAnalyticsDetails = VGSFormAnanlyticsDetails.init(formId: formId, tenantId: tenantId, environment: regionalEnvironment)
@@ -80,7 +80,7 @@ internal class VGSCollect {
     ///   - dataRegion: `String` object, id of data storage region (e.g. "eu-123").
     ///   - hostname: `String` object, custom Hostname, if not set, data will be sent to Vault Url. Default is `nil`.
 	  ///   - satellitePort: `Int?` object, custom port for satellite configuration. Default is `nil`. **IMPORTANT! Use only with .sandbox environment! Hostname should be specified for valid http://localhost or in local IP format http://192.168.X.X**.
-	public convenience init(id: String, environment: Environment = .sandbox, dataRegion: String? = nil, hostname: String? = nil, satellitePort: Int? = nil) {
+	internal convenience init(id: String, environment: Environment = .sandbox, dataRegion: String? = nil, hostname: String? = nil, satellitePort: Int? = nil) {
       let env = Self.generateRegionalEnvironmentString(environment, region: dataRegion)
       self.init(id: id, environment: env, hostname: hostname, satellitePort: satellitePort)
     }
@@ -88,7 +88,7 @@ internal class VGSCollect {
     // MARK: - Manage VGSTextFields
     
     /// Returns `VGSTextField` with `VGSConfiguration.fieldName` associated with `VGCollect` instance.
-    public func getTextField(fieldName: String) -> VGSTextField? {
+	internal func getTextField(fieldName: String) -> VGSTextField? {
         return storage.textFields.first(where: { $0.fieldName == fieldName })
     }
   
@@ -96,7 +96,7 @@ internal class VGSCollect {
     ///
     /// - Parameters:
     ///   - textField: `VGSTextField` that should be unsubscribed.
-    public func unsubscribeTextField(_ textField: VGSTextField) {
+	internal func unsubscribeTextField(_ textField: VGSTextField) {
       self.unregisterTextFields(textField: [textField])
     }
   
@@ -104,19 +104,19 @@ internal class VGSCollect {
     ///
     /// - Parameters:
     ///   - textFields: an array of `VGSTextField`s that should be unsubscribed.
-    public func unsubscribeTextFields(_ textFields: [VGSTextField]) {
+	internal func unsubscribeTextFields(_ textFields: [VGSTextField]) {
       self.unregisterTextFields(textField: textFields)
     }
   
     /// Unasubscribe  all `VGSTextField`s from `VGSCollect` instance.
-    public func unsubscribeAllTextFields() {
+	internal func unsubscribeAllTextFields() {
       self.unregisterAllTextFields()
     }
   
     // MARK: - Manage Files
   
     /// Detach files for associated `VGSCollect` instance.
-    public func cleanFiles() {
+	internal func cleanFiles() {
       self.unregisterAllFiles()
     }
 }

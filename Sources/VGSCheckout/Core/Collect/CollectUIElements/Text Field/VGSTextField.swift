@@ -177,7 +177,7 @@ internal class VGSTextField: UIView {
     if let collector = configuration.vgsCollector {
       vgsCollector = collector
       collector.registerTextFields(textField: [self])
-      VGSAnalyticsClient.shared.trackFormEvent(collector.formAnalyticsDetails, type: .fieldInit, extraData: ["field": fieldType.stringIdentifier])
+      VGSCheckoutAnalyticsClient.shared.trackFormEvent(collector.formAnalyticsDetails, type: .fieldInit, extraData: ["field": fieldType.stringIdentifier])
     }
   }
 

@@ -11,7 +11,7 @@ import UIKit
 #endif
 
 /// Organization vault environment.
-public enum Environment: String {
+internal enum Environment: String {
     
     /// Should be used for development and testing purpose.
     case sandbox
@@ -21,7 +21,7 @@ public enum Environment: String {
 }
 
 /// Type of `VGSTextField` configuration.
-public enum FieldType: Int, CaseIterable {
+internal enum FieldType: Int, CaseIterable {
     
     /// Field type that doesn't require any input formatting and validation.
     case none
@@ -43,7 +43,7 @@ public enum FieldType: Int, CaseIterable {
 }
 
 /// Type of `VGSTextField` input source.
-public enum VGSTextFieldInputSource {
+internal enum VGSTextFieldInputSource {
   
   /// UIKeyboard input type.
   case keyboard
