@@ -19,7 +19,7 @@ public protocol VGSCheckoutPaymentCardModelProtocol {
   var formatPattern: String { get set }
   var cardNumberLengths: [Int] { get set }
   var cvcLengths: [Int] { get set }
-  var checkSumAlgorithm: CheckSumAlgorithmType? { get set }
+  var checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? { get set }
   var brandIcon: UIImage? { get set }
   var cvcIcon: UIImage? { get set }
 }
@@ -43,7 +43,7 @@ public struct VGSPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
   public var cvcLengths: [Int]
   
   /// Check sum validation algorithm. For most brands  card number can be validated by `CheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
-  public var checkSumAlgorithm: CheckSumAlgorithmType?
+  public var checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType?
   
   /// Payment Card Number visual format pattern.
   /// - Note: format pattern length limits input length.

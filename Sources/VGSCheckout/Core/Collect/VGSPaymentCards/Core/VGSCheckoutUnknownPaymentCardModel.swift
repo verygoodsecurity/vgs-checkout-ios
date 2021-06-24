@@ -26,7 +26,7 @@ public struct VGSCheckoutUnknownPaymentCardModel {
   public var cvcLengths: [Int] = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCVCLengths
   
   /// Check sum validation algorithm. For most brands  card number can be validated by `CheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
-  public var checkSumAlgorithm: CheckSumAlgorithmType? = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCheckSumAlgorithm
+  public var checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCheckSumAlgorithm
   
   /// Unknown Payment Card Numbers visual format pattern. NOTE: format pattern length limits input length.
   public var formatPattern: String = VGSCheckoutPaymentCards.CardBrand.unknown.defaultFormatPattern

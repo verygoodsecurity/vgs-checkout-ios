@@ -149,7 +149,7 @@ extension VGSCheckoutPaymentCards.CardBrand {
         }
     }
   
-    var defaultCheckSumAlgorithm: CheckSumAlgorithmType? {
+    var defaultCheckSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? {
       switch self {
       case .unionpay:
         return nil

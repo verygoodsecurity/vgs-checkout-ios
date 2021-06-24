@@ -9,13 +9,13 @@
 import Foundation
 
 /// Check Sum Algorithm Types
-public enum CheckSumAlgorithmType {
+public enum VGSCheckoutCheckSumAlgorithmType {
   
   /// Luhn Algorithm
   case luhn
 }
 
-public extension CheckSumAlgorithmType {
+public extension VGSCheckoutCheckSumAlgorithmType {
   
   public func validate(_ input: String) -> Bool {
     switch self {
@@ -25,7 +25,7 @@ public extension CheckSumAlgorithmType {
   }
 }
 
-extension CheckSumAlgorithmType {
+extension VGSCheckoutCheckSumAlgorithmType {
   
   /// Validate input number via LuhnAlgorithm algorithm.
   static func validateWithLuhnAlgorithm(with cardNumber: String) -> Bool {

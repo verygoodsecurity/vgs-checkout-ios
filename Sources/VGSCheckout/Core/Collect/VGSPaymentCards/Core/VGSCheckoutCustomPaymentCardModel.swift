@@ -30,7 +30,7 @@ public struct VGSCheckoutCustomPaymentCardModel: VGSCheckoutPaymentCardModelProt
   public var cvcLengths: [Int]
   
   /// Check sum validation algorithm. For most brands  card number can be validated by `CheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
-  public var checkSumAlgorithm: CheckSumAlgorithmType?
+  public var checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType?
   
   /// Payment Card Number visual format pattern.
   /// - Note: format pattern length limits input length.
@@ -53,7 +53,7 @@ public struct VGSCheckoutCustomPaymentCardModel: VGSCheckoutPaymentCardModelProt
 	///   - cvcLengths: `[Int]` object, array of valid card number CVC. Default is `[3]`.
 	///   - checkSumAlgorithm: `CheckSumAlgorithmType?` object, should be valid checkSumAlgorithm object, default is `.luhn`.
 	///   - brandIcon: `UIImage?`, card image icon.
-  public init(name: String, regex: String, formatPattern: String, cardNumberLengths: [Int], cvcLengths: [Int] = [3], checkSumAlgorithm: CheckSumAlgorithmType? = .luhn, brandIcon: UIImage?) {
+  public init(name: String, regex: String, formatPattern: String, cardNumberLengths: [Int], cvcLengths: [Int] = [3], checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? = .luhn, brandIcon: UIImage?) {
     self.brand = .custom(brandName: name)
     self.name = name
     self.regex = regex

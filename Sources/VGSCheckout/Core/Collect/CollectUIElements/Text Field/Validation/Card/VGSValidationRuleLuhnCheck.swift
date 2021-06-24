@@ -7,9 +7,7 @@
 //
 
 import Foundation
-#if !COCOAPODS
-import VGSPaymentCards
-#endif
+
 /**
 Validate input in scope of matching Luhn algorithm.
 */
@@ -34,6 +32,6 @@ extension VGSValidationRuleLuhnCheck: VGSRuleValidator {
     guard let input = input else {
       return false
     }
-    return CheckSumAlgorithmType.luhn.validate(input)
+    return VGSCheckoutCheckSumAlgorithmType.luhn.validate(input)
   }
 }
