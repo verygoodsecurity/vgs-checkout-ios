@@ -9,7 +9,7 @@
 import Foundation
 
 /// Defines fieldName mapping to JSON.
-public enum VGSCollectFieldNameMappingPolicy {
+internal enum VGSCollectFieldNameMappingPolicy {
 
 	/**
 		Map fieldName to JSON without applying any transformations.
@@ -136,11 +136,11 @@ internal enum VGSCollectArrayMergePolicy {
 }
 
 /// Request options.
-public struct VGSCollectRequestOptions {
+internal struct VGSCollectRequestOptions {
 
 	/// Defines how to map fieldNames to JSON. Default is `.nestedJSON`.
-	public var fieldNameMappingPolicy: VGSCollectFieldNameMappingPolicy = .nestedJSON
+	internal var fieldNameMappingPolicy: VGSCollectFieldNameMappingPolicy = .nestedJSON
 
 	/// Initializer.
-	public init() {}
+	internal init() {}
 }
