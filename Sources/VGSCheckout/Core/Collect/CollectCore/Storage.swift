@@ -1,6 +1,6 @@
 //
 //  Storage.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

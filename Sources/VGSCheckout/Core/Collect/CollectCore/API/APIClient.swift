@@ -1,6 +1,6 @@
 //
 //  APIClient.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Vitalii Obertynskyi on 8/19/19.
 //  Copyright © 2019 Vitalii Obertynskyi. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  VGSCollect+network.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Vitalii Obertynskyi on 09.05.2020.
 //  Copyright © 2020 VGS. All rights reserved.

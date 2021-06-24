@@ -1,6 +1,6 @@
 //
 //  VGSForm.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Vitalii Obertynskyi on 8/26/19.
 //  Copyright © 2019 Vitalii Obertynskyi. All rights reserved.

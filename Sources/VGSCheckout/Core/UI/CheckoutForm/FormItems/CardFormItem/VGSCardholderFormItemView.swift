@@ -1,6 +1,6 @@
 //
 //  VGSCardholderFormItemView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

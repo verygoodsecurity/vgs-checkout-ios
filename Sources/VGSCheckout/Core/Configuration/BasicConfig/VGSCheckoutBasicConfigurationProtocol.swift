@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// VGSCheckout configuration, public interface.
+///  VGSCheckout configuration, public interface.
 public protocol VGSCheckoutConfigurationProtocol {}
 
 /// Internal protocol for VGSCheckout configuration.

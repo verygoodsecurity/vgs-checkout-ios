@@ -1,6 +1,6 @@
 //
 //  VGSCVCFormComponentView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

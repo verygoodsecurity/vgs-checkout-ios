@@ -1,6 +1,6 @@
 //
 //  VGSTextFieldDelegate.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Vitalii Obertynskyi on 22.02.2020.
 //  Copyright © 2020 VGS. All rights reserved.

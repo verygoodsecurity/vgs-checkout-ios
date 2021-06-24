@@ -1,6 +1,6 @@
 //
 //  MaskedTextField.swift
-//  VGSCollectSDK
+//  VGSCheckout
 
 #if os(iOS)
 import UIKit

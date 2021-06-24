@@ -1,6 +1,6 @@
 //
 //  VGSValidationRuleLengthMatch.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 08.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  APIHostnameValidator.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Copyright © 2020 VGS. All rights reserved.
 //

@@ -1,6 +1,6 @@
 //
 //  VGSExpDateConfiguration.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 22.01.2021.
 //  Copyright © 2021 VGS. All rights reserved.
