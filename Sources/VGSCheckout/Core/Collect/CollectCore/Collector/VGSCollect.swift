@@ -29,7 +29,7 @@ internal class VGSCollect {
     // MARK: Custom HTTP Headers
     
     /// Set your custom HTTP headers.
-    public var customHeaders: [String: String]? {
+    internal var customHeaders: [String: String]? {
         didSet {
             if customHeaders != oldValue {
                 apiClient.customHeader = customHeaders

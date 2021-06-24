@@ -75,6 +75,14 @@
 		4405DCA226847247004A83AD /* VGSCollectFieldNameMappingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC8B26847247004A83AD /* VGSCollectFieldNameMappingPolicy.swift */; };
 		4405DCA326847247004A83AD /* VGSDeepMergeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC8C26847247004A83AD /* VGSDeepMergeUtils.swift */; };
 		4405DCA426847247004A83AD /* VGSFieldNameSubscriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC8D26847247004A83AD /* VGSFieldNameSubscriptType.swift */; };
+		4405DCB126848B28004A83AD /* VGSPaymentCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCA726848B28004A83AD /* VGSPaymentCardModel.swift */; };
+		4405DCB226848B28004A83AD /* VGSPaymentCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCA826848B28004A83AD /* VGSPaymentCards.swift */; };
+		4405DCB326848B28004A83AD /* VGSCustomPaymentCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCA926848B28004A83AD /* VGSCustomPaymentCardModel.swift */; };
+		4405DCB426848B28004A83AD /* CardBrand+default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCAA26848B28004A83AD /* CardBrand+default.swift */; };
+		4405DCB526848B28004A83AD /* CardType+icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCAB26848B28004A83AD /* CardType+icon.swift */; };
+		4405DCB626848B28004A83AD /* VGSUnknownPaymentCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCAC26848B28004A83AD /* VGSUnknownPaymentCardModel.swift */; };
+		4405DCB826848B28004A83AD /* CheckSumAlgoritmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCB026848B28004A83AD /* CheckSumAlgoritmType.swift */; };
+		4405DCBA26848B45004A83AD /* CardIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4405DCB926848B45004A83AD /* CardIcon.xcassets */; };
 		4455C84C266E4420000CD666 /* VGSPayWithCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */; };
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
 		44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */; };
@@ -220,6 +228,14 @@
 		4405DC8B26847247004A83AD /* VGSCollectFieldNameMappingPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectFieldNameMappingPolicy.swift; sourceTree = "<group>"; };
 		4405DC8C26847247004A83AD /* VGSDeepMergeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSDeepMergeUtils.swift; sourceTree = "<group>"; };
 		4405DC8D26847247004A83AD /* VGSFieldNameSubscriptType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFieldNameSubscriptType.swift; sourceTree = "<group>"; };
+		4405DCA726848B28004A83AD /* VGSPaymentCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPaymentCardModel.swift; sourceTree = "<group>"; };
+		4405DCA826848B28004A83AD /* VGSPaymentCards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPaymentCards.swift; sourceTree = "<group>"; };
+		4405DCA926848B28004A83AD /* VGSCustomPaymentCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCustomPaymentCardModel.swift; sourceTree = "<group>"; };
+		4405DCAA26848B28004A83AD /* CardBrand+default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CardBrand+default.swift"; sourceTree = "<group>"; };
+		4405DCAB26848B28004A83AD /* CardType+icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CardType+icon.swift"; sourceTree = "<group>"; };
+		4405DCAC26848B28004A83AD /* VGSUnknownPaymentCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSUnknownPaymentCardModel.swift; sourceTree = "<group>"; };
+		4405DCB026848B28004A83AD /* CheckSumAlgoritmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSumAlgoritmType.swift; sourceTree = "<group>"; };
+		4405DCB926848B45004A83AD /* CardIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = CardIcon.xcassets; path = Sources/VGSCheckout/Core/Collect/VGSPaymentCards/Resources/CardIcon.xcassets; sourceTree = SOURCE_ROOT; };
 		4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPayWithCardHeaderView.swift; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
 		44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSHeaderBarView.swift; sourceTree = "<group>"; };
@@ -367,6 +383,7 @@
 			children = (
 				4405DBF826844AD8004A83AD /* CollectCore */,
 				4405DC2A26844B30004A83AD /* CollectUIElements */,
+				4405DCA526848B28004A83AD /* VGSPaymentCards */,
 			);
 			path = Collect;
 			sourceTree = "<group>";
@@ -599,6 +616,36 @@
 				4405DC8D26847247004A83AD /* VGSFieldNameSubscriptType.swift */,
 			);
 			path = Mappers;
+			sourceTree = "<group>";
+		};
+		4405DCA526848B28004A83AD /* VGSPaymentCards */ = {
+			isa = PBXGroup;
+			children = (
+				4405DCA626848B28004A83AD /* Core */,
+				4405DCAF26848B28004A83AD /* Enums */,
+			);
+			path = VGSPaymentCards;
+			sourceTree = "<group>";
+		};
+		4405DCA626848B28004A83AD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4405DCA726848B28004A83AD /* VGSPaymentCardModel.swift */,
+				4405DCA826848B28004A83AD /* VGSPaymentCards.swift */,
+				4405DCA926848B28004A83AD /* VGSCustomPaymentCardModel.swift */,
+				4405DCAA26848B28004A83AD /* CardBrand+default.swift */,
+				4405DCAB26848B28004A83AD /* CardType+icon.swift */,
+				4405DCAC26848B28004A83AD /* VGSUnknownPaymentCardModel.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4405DCAF26848B28004A83AD /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4405DCB026848B28004A83AD /* CheckSumAlgoritmType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		4455C84A266E4407000CD666 /* PayCardHeaderView */ = {
@@ -1067,6 +1114,7 @@
 		44EC95162669F01900CE04F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4405DCB926848B45004A83AD /* CardIcon.xcassets */,
 				44EC95172669F06000CE04F4 /* Media.xcassets */,
 			);
 			path = Resources;
@@ -1249,6 +1297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44EC95182669F06000CE04F4 /* Media.xcassets in Resources */,
+				4405DCBA26848B45004A83AD /* CardIcon.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,9 +1395,11 @@
 				4405DC2026844AD8004A83AD /* APIClient.swift in Sources */,
 				4405DC6526844B30004A83AD /* VGSTextField+CVC.swift in Sources */,
 				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
+				4405DCB226848B28004A83AD /* VGSPaymentCards.swift in Sources */,
 				4405DC9D26847247004A83AD /* VGSFormatSerializerProtocol.swift in Sources */,
 				44C4C8F02664B18B00195505 /* VGSPlaceholderFormItemView.swift in Sources */,
 				4405DCA226847247004A83AD /* VGSCollectFieldNameMappingPolicy.swift in Sources */,
+				4405DCB326848B28004A83AD /* VGSCustomPaymentCardModel.swift in Sources */,
 				44EC95142669EE8700CE04F4 /* VGSCheckoutRouteConfiguration.swift in Sources */,
 				44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */,
 				4405DC6C26844B30004A83AD /* VGSValidationRuleLength.swift in Sources */,
@@ -1387,10 +1438,12 @@
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
 				4405DC2326844AD8004A83AD /* APIClient+Utils.swift in Sources */,
 				4405DC6626844B30004A83AD /* VGSTextFieldDelegate.swift in Sources */,
+				4405DCB826848B28004A83AD /* CheckSumAlgoritmType.swift in Sources */,
 				4405DC9026847247004A83AD /* VGSCollectLogger.swift in Sources */,
 				44D520F226788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift in Sources */,
 				44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */,
 				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
+				4405DCB126848B28004A83AD /* VGSPaymentCardModel.swift in Sources */,
 				4405DC6326844B30004A83AD /* VGSCardTextField.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
 				4405DC6A26844B30004A83AD /* VGSValidationRulePattern.swift in Sources */,
@@ -1398,6 +1451,8 @@
 				4405DC2426844AD8004A83AD /* APIHostURLPolicy.swift in Sources */,
 				44C4C8F22664B18B00195505 /* VGSContainerItemView.swift in Sources */,
 				4405DC9826847247004A83AD /* Utils.swift in Sources */,
+				4405DCB426848B28004A83AD /* CardBrand+default.swift in Sources */,
+				4405DCB626848B28004A83AD /* VGSUnknownPaymentCardModel.swift in Sources */,
 				44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */,
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
 				4405DC5F26844B30004A83AD /* State.swift in Sources */,
@@ -1412,6 +1467,7 @@
 				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,
 				4405DC9E26847247004A83AD /* VGSExpDateSeparateSerializer.swift in Sources */,
 				4405DC1426844AD8004A83AD /* Storage.swift in Sources */,
+				4405DCB526848B28004A83AD /* CardType+icon.swift in Sources */,
 				4405DC2826844AD8004A83AD /* VGSAnalyticsClient.swift in Sources */,
 				4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */,
 				44C4C92C2665F8ED00195505 /* VGSAddCardUseCaseManager.swift in Sources */,
