@@ -38,42 +38,42 @@ internal protocol VGSTextFieldConfigurationProtocol: VGSBaseConfigurationProtoco
 }
 
 /// A class responsible for configuration VGSTextField.
-public class VGSConfiguration: VGSTextFieldConfigurationProtocol {
+internal class VGSConfiguration: VGSTextFieldConfigurationProtocol {
     
     // MARK: - Attributes
     
     /// Collect form that will be assiciated with VGSTextField.
-    public private(set) weak var vgsCollector: VGSCollect?
+	internal private(set) weak var vgsCollector: VGSCollect?
   
     /// Type of field congfiguration. Default is `FieldType.none`.
-    public var type: FieldType = .none
+	internal var type: FieldType = .none
     
     /// Name that will be associated with `VGSTextField` and used as a JSON key on send request with textfield data to your organozation vault.
-    public let fieldName: String
+	internal let fieldName: String
     
     /// Set if `VGSTextField` is required to be non-empty and non-nil on send request. Default is `false`.
-    public var isRequired: Bool = false
+	internal var isRequired: Bool = false
     
     /// Set if `VGSTextField` is required to be valid only on send request. Default is `false`.
-    public var isRequiredValidOnly: Bool = false
+	internal var isRequiredValidOnly: Bool = false
     
     /// Input data visual format pattern. If not applied, will be  set by default depending on field `type`.
-    public var formatPattern: String?
+	internal var formatPattern: String?
     
     /// String, used to replace not default `VGSConfiguration.formatPattern` characters in input text on send request.
-    public var divider: String?
+	internal var divider: String?
 
     /// Preferred UIKeyboardType for `VGSTextField`.  If not applied, will be set by default depending on field `type` parameter.
-    public var keyboardType: UIKeyboardType?
+	internal var keyboardType: UIKeyboardType?
     
     ///Preferred UIReturnKeyType for `VGSTextField`.
-    public var returnKeyType: UIReturnKeyType?
+	internal var returnKeyType: UIReturnKeyType?
     
     /// Preferred UIKeyboardAppearance for textfield. By default is `UIKeyboardAppearance.default`.
-    public var keyboardAppearance: UIKeyboardAppearance?
+	internal var keyboardAppearance: UIKeyboardAppearance?
   
     /// Validation rules for field input. Defines `State.isValide` result.
-    public var validationRules: VGSValidationRuleSet?
+	internal var validationRules: VGSValidationRuleSet?
            
     // MARK: - Initialization
     
@@ -82,7 +82,7 @@ public class VGSConfiguration: VGSTextFieldConfigurationProtocol {
     /// - Parameters:
     ///   - vgs: `VGSCollect` instance.
     ///   - fieldName: associated `fieldName`.
-    public init(collector vgs: VGSCollect, fieldName: String) {
+    internal init(collector vgs: VGSCollect, fieldName: String) {
         self.vgsCollector = vgs
         self.fieldName = fieldName
     }

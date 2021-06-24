@@ -12,22 +12,22 @@ import UIKit
 #endif
 
 /// A class responsible for configuration `VGSTextField` with `fieldType = .expDate`. Extends `VGSConfiguration` class.
-public final class VGSExpDateConfiguration: VGSConfiguration, VGSFormatSerializableProtocol {
+internal final class VGSExpDateConfiguration: VGSConfiguration, VGSFormatSerializableProtocol {
    
   /// Input Source type. Default is `VGSTextFieldInputSource.datePicker`.
-  public var inputSource: VGSTextFieldInputSource = .datePicker
+	internal var inputSource: VGSTextFieldInputSource = .datePicker
   
   /// Input date format to convert.
-  public var inputDateFormat: VGSCardExpDateFormat?
+	internal var inputDateFormat: VGSCardExpDateFormat?
   
   /// Output date format.
-  public var outputDateFormat: VGSCardExpDateFormat?
+	internal var outputDateFormat: VGSCardExpDateFormat?
   
   /// Output date format.
-  public var serializers: [VGSFormatSerializerProtocol] = []
+	internal var serializers: [VGSFormatSerializerProtocol] = []
   
   /// `FieldType.expDate` type of `VGSTextField` configuration.
-  override public var type: FieldType {
+  override internal var type: FieldType {
     get { return .expDate }
     set {}
   }

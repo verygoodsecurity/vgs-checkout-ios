@@ -12,7 +12,7 @@ import UIKit
 #endif
 
 /// An object you use for observing `VGSTextField` `State` and send data to your organization vault.
-public class VGSCollect {
+internal class VGSCollect {
     internal let apiClient: APIClient
     internal let storage = Storage()
     internal let regionalEnvironment: String
@@ -40,15 +40,15 @@ public class VGSCollect {
     // MARK: Observe VGSTextField states
     
     /// Observe only focused `VGSTextField` on editing events.
-    public var observeFieldState: ((_ textField: VGSTextField) -> Void)?
+		internal var observeFieldState: ((_ textField: VGSTextField) -> Void)?
     
     /// Observe  all `VGSTextField` on editing events.
-    public var observeStates: ((_ form: [VGSTextField]) -> Void)?
+		internal var observeStates: ((_ form: [VGSTextField]) -> Void)?
   
     // MARK: Get Registered VGSTextFields
     
     /// Returns array of `VGSTextField`s associated with `VGSCollect` instance.
-    public var textFields: [VGSTextField] {
+    internal var textFields: [VGSTextField] {
       return storage.textFields
     }
   

@@ -28,49 +28,49 @@ internal class VGSTextField: UIView {
     // MARK: - UI Attributes
     
     /// Textfield placeholder string.
-    public var placeholder: String? {
+	internal var placeholder: String? {
         didSet { textField.placeholder = placeholder }
     }
     
     /// Textfield attributedPlaceholder string.
-    public var attributedPlaceholder: NSAttributedString? {
+	internal var attributedPlaceholder: NSAttributedString? {
         didSet {
             textField.attributedPlaceholder = attributedPlaceholder
         }
     }
     
     /// `UIEdgeInsets` for text and placeholder inside `VGSTextField`.
-    public var padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+	internal var padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet { setMainPaddings() }
     }
     
     /// The technique to use for aligning the text.
-    public var textAlignment: NSTextAlignment = .natural {
+	internal var textAlignment: NSTextAlignment = .natural {
         didSet { textField.textAlignment = textAlignment }
     }
     
     /// Sets when the clear button shows up. Default is `UITextField.ViewMode.never`
-    public var clearButtonMode: UITextField.ViewMode = .never {
+	internal var clearButtonMode: UITextField.ViewMode = .never {
       didSet { textField.clearButtonMode = clearButtonMode }
     }
   
     /// Identifies whether the text object should disable text copying and in some cases hide the text being entered. Default is false.
-    public var isSecureTextEntry: Bool = false {
+	internal var isSecureTextEntry: Bool = false {
         didSet { textField.isSecureTextEntry = isSecureTextEntry }
     }
   
     /// Indicates whether `VGSTextField ` should automatically update its font when the device’s `UIContentSizeCategory` is changed.
-    public var adjustsFontForContentSizeCategory: Bool = false {
+	internal var adjustsFontForContentSizeCategory: Bool = false {
       didSet { textField.adjustsFontForContentSizeCategory = adjustsFontForContentSizeCategory }
     }
     
     /// Input Accessory View
-    public var keyboardAccessoryView: UIView? {
+	internal var keyboardAccessoryView: UIView? {
       didSet { textField.inputAccessoryView = keyboardAccessoryView }
     }
   
     /// Determines whether autocorrection is enabled or disabled during typing.
-    public var autocorrectionType: UITextAutocorrectionType = .default {
+	internal var autocorrectionType: UITextAutocorrectionType = .default {
       didSet {
         textField.autocorrectionType = autocorrectionType
       }
@@ -79,7 +79,7 @@ internal class VGSTextField: UIView {
     // MARK: - Functional Attributes
     
     /// Specifies `VGSTextField` configuration parameters to work with `VGSCollect`.
-    public var configuration: VGSConfiguration? {
+	internal var configuration: VGSConfiguration? {
         didSet {
             guard let configuration = configuration else {
               let message = "VGSTextField CONFIGURATION ERROR! VGSConfiguration is REQUIRED!!!"
@@ -92,7 +92,7 @@ internal class VGSTextField: UIView {
     }
     
     /// Delegates `VGSTextField` editing events. Default is `nil`.
-    public weak var delegate: VGSTextFieldDelegate?
+	internal weak var delegate: VGSTextFieldDelegate?
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -114,18 +114,18 @@ internal class VGSTextField: UIView {
     /// Set textfield default text.
     /// - Note: This will not change `State.isDirty` attribute.
     /// - Discussion: probably you should want to set field configuration before setting default value, so the input format will be update as required.
-    public func setDefaultText(_ text: String?) {
+	internal func setDefaultText(_ text: String?) {
       updateTextFieldInput(text)
     }
   
     /// :nodoc: Set textfield text.
-    public func setText(_ text: String?) {
+	internal func setText(_ text: String?) {
       isDirty = true
       updateTextFieldInput(text)
     }
 
     /// Removes input from field.
-    public func cleanText() {
+	internal func cleanText() {
       updateTextFieldInput("")
     }
   
@@ -133,7 +133,7 @@ internal class VGSTextField: UIView {
 
     /// Check if input text in two textfields is same. Returns `Bool`.
     /// - Note: Result will be based on raw text, mask and dividers will be ignored.
-    public func isContentEqual(_ textField: VGSTextField) -> Bool {
+		internal func isContentEqual(_ textField: VGSTextField) -> Bool {
       return self.textField.getSecureRawText == textField.textField.getSecureRawText
     }
   
@@ -202,10 +202,10 @@ internal extension VGSTextField {
 }
 
 // MARK: - Textfiled delegate
-internal extension VGSTextField: UITextFieldDelegate {
+extension VGSTextField: UITextFieldDelegate {
 
 	 /// :nodoc: Wrap native `UITextField` delegate method for `textFieldDidBeginEditing`.
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
+	internal func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldValueChanged()
         delegate?.vgsTextFieldDidBeginEditing?(self)
     }
@@ -217,7 +217,7 @@ internal extension VGSTextField: UITextFieldDelegate {
     }
 
 	  /// :nodoc: Wrap native `UITextField` delegate method for `didEndEditing`.
-    public func textFieldDidEndEditing(_ textField: UITextField) {
+	internal func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldValueChanged()
         delegate?.vgsTextFieldDidEndEditing?(self)
     }
@@ -229,7 +229,7 @@ internal extension VGSTextField: UITextFieldDelegate {
 }
 
 // MARK: - private API
-internal internal extension VGSTextField {
+internal extension VGSTextField {
     
     @objc
     func mainInitialization() {
