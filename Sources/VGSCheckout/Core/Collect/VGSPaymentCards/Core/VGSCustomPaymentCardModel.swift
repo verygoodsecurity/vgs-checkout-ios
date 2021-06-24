@@ -1,6 +1,6 @@
 //
 //  VGSCustomPaymentCardModel.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -12,10 +12,10 @@ import UIKit
 #endif
 
 /// Holds information for custom payment model.
-public struct VGSCustomPaymentCardModel: VGSPaymentCardModelProtocol {
+public struct VGSCheckoutCustomPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
   
   /// Payment Card Brand
-  public let brand: VGSPaymentCards.CardBrand
+  public let brand: VGSCheckoutPaymentCards.CardBrand
   
   /// Payment Card Name
   public var name: String

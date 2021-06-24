@@ -20,7 +20,7 @@ internal final class VGSCardTextField: VGSTextField {
     internal lazy var stackView = self.makeStackView()
     internal let stackSpacing: CGFloat = 8.0
     internal lazy var defaultUnknowBrandImage: UIImage? = {
-      return VGSPaymentCards.CardBrand.unknown.brandIcon
+      return VGSCheckoutPaymentCards.CardBrand.unknown.brandIcon
     }()
   
     // MARK: - Enum cases
@@ -50,7 +50,7 @@ internal final class VGSCardTextField: VGSTextField {
     
     // MARK: Custom card brand images
     /// Asks custom image for specific `VGSPaymentCards.CardBrand`
-    public var cardsIconSource: ((VGSPaymentCards.CardBrand) -> UIImage?)?
+    public var cardsIconSource: ((VGSCheckoutPaymentCards.CardBrand) -> UIImage?)?
     
     /// :nodoc:
     public override func didMoveToSuperview() {
@@ -117,7 +117,7 @@ internal extension VGSCardTextField {
        if let state = state as? CardState {
           cardIconView.image = (cardsIconSource == nil) ? state.cardBrand.brandIcon :  cardsIconSource?(state.cardBrand)
        } else {
-        cardIconView.image = VGSPaymentCards.unknown.brandIcon
+        cardIconView.image = VGSCheckoutPaymentCards.unknown.brandIcon
        }
     }
   

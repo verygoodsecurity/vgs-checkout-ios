@@ -1,6 +1,6 @@
 //
 //  CardBrand+icon.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Vitalii Obertynskyi on 27.11.2019.
 //  Copyright © 2019 VGS. All rights reserved.
@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 #endif
 
-extension VGSPaymentCards.CardBrand {
+extension VGSCheckoutPaymentCards.CardBrand {
     static var defaultUnknownBrandIcon = UIImage(named: "unknown", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
   
     static var defaultCVCIcon3Digits = UIImage(named: "cvc3", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
@@ -19,11 +19,11 @@ extension VGSPaymentCards.CardBrand {
     static var defaultCVCIcon4Digits = UIImage(named: "cvc4", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
   
     public var brandIcon: UIImage? {
-      return VGSPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.brandIcon ?? VGSPaymentCards.unknown.brandIcon
+      return VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.brandIcon ?? VGSCheckoutPaymentCards.unknown.brandIcon
     }
   
     public var cvcIcon: UIImage? {
-      return VGSPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.cvcIcon ?? VGSPaymentCards.unknown.cvcIcon
+      return VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.cvcIcon ?? VGSCheckoutPaymentCards.unknown.cvcIcon
     }
 
     var defaultBrandIcon: UIImage? {

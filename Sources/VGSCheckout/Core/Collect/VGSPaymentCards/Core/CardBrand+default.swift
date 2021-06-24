@@ -1,6 +1,6 @@
 //
 //  CardBrand+default.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 10.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Default CardBrand settings
-extension VGSPaymentCards.CardBrand {
+extension VGSCheckoutPaymentCards.CardBrand {
   
   /// Returns regex for specific card brand detection
   var defaultRegex: String {
@@ -95,10 +95,10 @@ extension VGSPaymentCards.CardBrand {
   
     public var cvcFormatPattern: String {
       var maxLength = 0
-      if let cardBrand = VGSPaymentCards.availableCardBrands.first(where: { $0.brand == self }) {
+      if let cardBrand = VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self }) {
         maxLength = cardBrand.cvcLengths.max() ?? 0
       } else {
-        maxLength = VGSPaymentCards.unknown.cvcLengths.max() ?? 0
+        maxLength = VGSCheckoutPaymentCards.unknown.cvcLengths.max() ?? 0
       }
       return String(repeating: "#", count: maxLength)
     }

@@ -1,6 +1,6 @@
 //
 //  VGSPrintingLogger.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

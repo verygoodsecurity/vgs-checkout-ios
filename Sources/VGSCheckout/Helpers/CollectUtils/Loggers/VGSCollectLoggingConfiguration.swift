@@ -1,6 +1,6 @@
 //
 //  VGSCollectLoggingConfiguration.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

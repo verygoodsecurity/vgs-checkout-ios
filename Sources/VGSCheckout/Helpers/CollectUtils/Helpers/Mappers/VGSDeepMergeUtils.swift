@@ -1,6 +1,6 @@
 //
 //  VGSDeepMergeUtils.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created on 04.03.2021.
 //  Copyright © 2021 VGS. All rights reserved.

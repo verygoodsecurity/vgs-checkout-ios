@@ -50,7 +50,7 @@ extension VGSValidationRulePaymentCard: VGSRuleValidator {
       return false
     }
     
-    let cardBrand = VGSPaymentCards.detectCardBrandFromAvailableCards(input: input)
+    let cardBrand = VGSCheckoutPaymentCards.detectCardBrandFromAvailableCards(input: input)
     
     if cardBrand != .unknown {
       
@@ -70,10 +70,10 @@ extension VGSValidationRulePaymentCard: VGSRuleValidator {
     return false
   }
   
-  internal func validateCardNumberAsCardBrand(_ cardBrand: VGSPaymentCards.CardBrand, number: String) -> Bool {
+  internal func validateCardNumberAsCardBrand(_ cardBrand: VGSCheckoutPaymentCards.CardBrand, number: String) -> Bool {
     
     /// Check if card brand in available card brands
-    guard let cardModel = VGSPaymentCards.getCardModelFromAvailableModels(brand: cardBrand) else {
+    guard let cardModel = VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: cardBrand) else {
       return false
     }
 
@@ -85,7 +85,7 @@ extension VGSValidationRulePaymentCard: VGSRuleValidator {
   }
   
   internal func validateCardNumberAsUnknownBrand(number: String) -> Bool {
-    let unknownBrandModel = VGSPaymentCards.unknown
+    let unknownBrandModel = VGSCheckoutPaymentCards.unknown
     if !NSPredicate(format: "SELF MATCHES %@", unknownBrandModel.regex).evaluate(with: number) {
         return false
     }

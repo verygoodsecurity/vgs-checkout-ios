@@ -66,7 +66,7 @@ internal final class VGSCVCTextField: VGSTextField {
     
     // MARK: Custom CVC images for specific card brands
     /// Asks custom image for specific `VGSPaymentCards.CardBrand`
-    public var cvcIconSource: ((VGSPaymentCards.CardBrand) -> UIImage?)?
+    public var cvcIconSource: ((VGSCheckoutPaymentCards.CardBrand) -> UIImage?)?
     
     /// :nodoc:
     public override func didMoveToSuperview() {
@@ -124,7 +124,7 @@ internal extension VGSCVCTextField {
     }
 
   
-    func updateCVCImage(for cardBrand: VGSPaymentCards.CardBrand) {
+    func updateCVCImage(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
         cvcIconImageView.image = (cvcIconSource == nil) ? cardBrand.cvcIcon :  cvcIconSource?(cardBrand)
     }
   

@@ -82,7 +82,7 @@ internal class CardState: State {
     internal(set) open var bin: String = ""
     
     /// Credit Card Brand of the card number from associated `VGSTextField` with field configuration type `FieldType.cardNumber`.
-    internal(set) open var cardBrand: VGSPaymentCards.CardBrand = .unknown
+    internal(set) open var cardBrand: VGSCheckoutPaymentCards.CardBrand = .unknown
         
     override init(tf: VGSTextField) {
         super.init(tf: tf)
@@ -91,7 +91,7 @@ internal class CardState: State {
             return
         }
         
-        self.cardBrand = VGSPaymentCards.detectCardBrandFromAvailableCards(input: input)
+        self.cardBrand = VGSCheckoutPaymentCards.detectCardBrandFromAvailableCards(input: input)
         if self.isValid {
           self.bin = String(input.prefix(6))
           self.last4 = (input.count) >= 12 ? String(input.suffix(4)) : ""

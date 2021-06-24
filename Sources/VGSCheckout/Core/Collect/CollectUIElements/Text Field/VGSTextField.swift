@@ -294,10 +294,10 @@ internal extension VGSTextField {
     // update card number and cvc format dynamically based on card brand
     if self.fieldType == .cardNumber, let cardState = self.state as? CardState {
         
-      if let cardModel = VGSPaymentCards.getCardModelFromAvailableModels(brand: cardState.cardBrand) {
+      if let cardModel = VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: cardState.cardBrand) {
         self.textField.formatPattern = cardModel.formatPattern
       } else {
-        self.textField.formatPattern = VGSPaymentCards.unknown.formatPattern
+        self.textField.formatPattern = VGSCheckoutPaymentCards.unknown.formatPattern
       }
       // change cvc format pattern and validation rules based on card brand
       if let cvcField = self.vgsCollector?.storage.textFields.filter({ $0.fieldType == .cvc }).first {

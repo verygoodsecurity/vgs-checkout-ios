@@ -1,6 +1,6 @@
 //
 //  VGSPaymentCards.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -12,7 +12,7 @@ import Foundation
 /// - Contains editable defined Payment Cards Models
 /// - Allows to add Custom Payment Cards Models
 /// - Allows to edit Unknown Payment Cards Models(brands not defined by SDK and Developer)
-public class VGSPaymentCards {
+public class VGSCheckoutPaymentCards {
     
   private init() {}
     
@@ -84,21 +84,21 @@ public class VGSPaymentCards {
     // MARK: - Unknown Payment Card Model
   
     ///  Unknown Brand Payment Card Model.  Can be used for specifing cards details when `VGSValidationRulePaymentCard` requires validating `CardBrand.unknown` cards.
-    public static var unknown = VGSUnknownPaymentCardModel()
+    public static var unknown = VGSCheckoutUnknownPaymentCardModel()
   
     // MARK: - Custom Payment Card Models
   
     /// Array of Custom Payment Card Models.
     /// - Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
-    public static var cutomPaymentCardModels = [VGSCustomPaymentCardModel]()
+    public static var cutomPaymentCardModels = [VGSCheckoutCustomPaymentCardModel]()
 
     /// An array of valid Card Brands, could include custom and default brands. If not set, will use `availableCardBrands` array instead.
     /// - Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
-    public static var validCardBrands: [VGSPaymentCardModelProtocol]?
+    public static var validCardBrands: [VGSCheckoutPaymentCardModelProtocol]?
 
     /// Array of Available Cards.
     /// -  Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
-    internal static var defaultCardModels: [VGSPaymentCardModelProtocol] {
+    internal static var defaultCardModels: [VGSCheckoutPaymentCardModelProtocol] {
                                             return  [ elo,
                                                       visaElectron,
                                                       maestro,
@@ -117,7 +117,7 @@ public class VGSPaymentCards {
     ///  Will return an array of `validCardBrands` when it's not nil.
     ///  Will return All Card Models(Custom + Default) if specific `validCardBrands` is nil.
     /// - Note: the order has impact on which card brand should be detected first by  `VGSPaymentCardModel.regex`
-     internal static var availableCardBrands: [VGSPaymentCardModelProtocol] {
+     internal static var availableCardBrands: [VGSCheckoutPaymentCardModelProtocol] {
       /// Check if uset setup an array of specific CardBrands that should be supported by SDK.
       if let userValidBrands = validCardBrands {
         return userValidBrands
@@ -128,16 +128,16 @@ public class VGSPaymentCards {
 }
 
 // MARK: - Attributes
-public extension VGSPaymentCards.CardBrand {
+public extension VGSCheckoutPaymentCards.CardBrand {
   
     /// String representation of `VGSPaymentCards.CardBrand` enum values.
     var stringValue: String {
-      return VGSPaymentCards.getCardModelFromAvailableModels(brand: self)?.name ?? VGSPaymentCards.unknown.name
+      return VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: self)?.name ?? VGSCheckoutPaymentCards.unknown.name
     }
 
     /// Returns array with valid card number lengths for specific `VGSPaymentCards.CardBrand`
     var cardLengths: [Int] {
-      return VGSPaymentCards.getCardModelFromAvailableModels(brand: self)?.cardNumberLengths ?? VGSPaymentCards.unknown.cardNumberLengths
+      return VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: self)?.cardNumberLengths ?? VGSCheckoutPaymentCards.unknown.cardNumberLengths
     }
   
     /// :nodoc:  Equatable protocol
@@ -165,13 +165,13 @@ public extension VGSPaymentCards.CardBrand {
     }
 }
 
-public extension VGSPaymentCards {
+public extension VGSCheckoutPaymentCards {
     
-    static func getCardModelFromAvailableModels(brand: VGSPaymentCards.CardBrand) -> VGSPaymentCardModelProtocol? {
+    static func getCardModelFromAvailableModels(brand: VGSCheckoutPaymentCards.CardBrand) -> VGSCheckoutPaymentCardModelProtocol? {
       return Self.availableCardBrands.first(where: { $0.brand == brand})
     }
 
-    static func detectCardBrandFromAvailableCards(input: String) -> VGSPaymentCards.CardBrand {
+    static func detectCardBrandFromAvailableCards(input: String) -> VGSCheckoutPaymentCards.CardBrand {
       for cardModel in Self.availableCardBrands {
           let predicate = NSPredicate(format: "SELF MATCHES %@", cardModel.regex)
           if predicate.evaluate(with: input) == true {

@@ -1,6 +1,6 @@
 //
-//  VGSPaymentCardModel.swift
-//  VGSCollectSDK
+//  VGSCheckoutCardModel.swift
+//  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -12,8 +12,8 @@ import UIKit
 #endif
 
 /// :nodoc: Payment Card Model Protocol
-public protocol VGSPaymentCardModelProtocol {
-  var brand: VGSPaymentCards.CardBrand { get }
+public protocol VGSCheckoutPaymentCardModelProtocol {
+  var brand: VGSCheckoutPaymentCards.CardBrand { get }
   var name: String { get set }
   var regex: String { get set }
   var formatPattern: String { get set }
@@ -25,10 +25,10 @@ public protocol VGSPaymentCardModelProtocol {
 }
 
 /// An object representing Payment Card
-public struct VGSPaymentCardModel: VGSPaymentCardModelProtocol {
+public struct VGSPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
   
   /// Payment Card Brand
-  public let brand: VGSPaymentCards.CardBrand
+  public let brand: VGSCheckoutPaymentCards.CardBrand
   
   /// Payment Card Name
   public var name: String
@@ -55,7 +55,7 @@ public struct VGSPaymentCardModel: VGSPaymentCardModelProtocol {
   /// Image, associated with CVC for Payment Card Brand.
   public var cvcIcon: UIImage?
   
-  init(brand: VGSPaymentCards.CardBrand) {
+  init(brand: VGSCheckoutPaymentCards.CardBrand) {
     self.brand = brand
     self.name = brand.defaultName
     self.regex = brand.defaultRegex

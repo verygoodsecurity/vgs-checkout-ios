@@ -1,6 +1,6 @@
 //
 //  VGSUnknownPaymentCardModel.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -12,28 +12,28 @@ import UIKit
 #endif
 
 /// An object representing Unknown Payment Cards - cards not defined in the SDK. Object is used when validation for`CardBrand.unknown` is set as `true`. Check `VGSValidationRulePaymentCard` for more details. Validation attributes can be edited through ``VGSPaymentCards.unknown` model.
-public struct VGSUnknownPaymentCardModel {
+public struct VGSCheckoutUnknownPaymentCardModel {
   
-  internal let name = VGSPaymentCards.CardBrand.unknown.defaultName
+  internal let name = VGSCheckoutPaymentCards.CardBrand.unknown.defaultName
   
   /// Regex validating that input contains digits only.
-  public let regex: String = VGSPaymentCards.CardBrand.unknown.defaultRegex
+  public let regex: String = VGSCheckoutPaymentCards.CardBrand.unknown.defaultRegex
 
   /// Valid Unknown Card Numbers Lengths
-  public var cardNumberLengths: [Int] = VGSPaymentCards.CardBrand.unknown.defaultCardLengths
+  public var cardNumberLengths: [Int] = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCardLengths
   
    /// Valid Unknown Card CVC/CVV Lengths. For most brands valid cvc lengths is [3], while for Amex is [4].  For unknown brands can be set as [3, 4]
-  public var cvcLengths: [Int] = VGSPaymentCards.CardBrand.unknown.defaultCVCLengths
+  public var cvcLengths: [Int] = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCVCLengths
   
   /// Check sum validation algorithm. For most brands  card number can be validated by `CheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
-  public var checkSumAlgorithm: CheckSumAlgorithmType? = VGSPaymentCards.CardBrand.unknown.defaultCheckSumAlgorithm
+  public var checkSumAlgorithm: CheckSumAlgorithmType? = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCheckSumAlgorithm
   
   /// Unknown Payment Card Numbers visual format pattern. NOTE: format pattern length limits input length.
-  public var formatPattern: String = VGSPaymentCards.CardBrand.unknown.defaultFormatPattern
+  public var formatPattern: String = VGSCheckoutPaymentCards.CardBrand.unknown.defaultFormatPattern
 
    /// Image, associated with Unknown Payment Card Brands.
-  public var brandIcon: UIImage? = VGSPaymentCards.CardBrand.unknown.defaultBrandIcon
+  public var brandIcon: UIImage? = VGSCheckoutPaymentCards.CardBrand.unknown.defaultBrandIcon
   
   /// Image, associated with CVC for Unknown Payment Card Brands.
-  public var cvcIcon: UIImage? = VGSPaymentCards.CardBrand.unknown.defaultCVCIcon
+  public var cvcIcon: UIImage? = VGSCheckoutPaymentCards.CardBrand.unknown.defaultCVCIcon
 }

@@ -1,6 +1,6 @@
 //
 //  CharacterSet+extension.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 17.12.2019.
 //

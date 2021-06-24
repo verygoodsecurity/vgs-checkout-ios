@@ -1,6 +1,6 @@
 //
 //  VGSLogEvent.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation

@@ -431,7 +431,7 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
-	internal func updateCVCPlaceholder(for cardBrand: VGSPaymentCards.CardBrand) {
+	internal func updateCVCPlaceholder(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
 		 guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
 			 return
 		 }
