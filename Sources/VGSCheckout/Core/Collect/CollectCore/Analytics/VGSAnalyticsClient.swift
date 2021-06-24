@@ -20,8 +20,8 @@ internal enum VGSAnalyticsEventType: String {
   case scan = "Scan"
 }
 
-/// Client responsably for managing and sending VGS Collect SDK analytics events.
-/// Note: we track only VGSCollectSDK usage and features statistics.
+/// Client responsably for managing and sending VGS Checkout SDK analytics events.
+/// Note: we track only VGSCheckout usage and features statistics.
 /// :nodoc:
 public class VGSCheckoutAnalyticsClient {
   
@@ -31,7 +31,7 @@ public class VGSCheckoutAnalyticsClient {
     case cancel = "Cancel"
   }
   
-  /// Shared `VGSAnalyticsClient` instance
+  /// Shared `VGSCheckoutAnalyticsClient` instance
   public static let shared = VGSCheckoutAnalyticsClient()
   
   /// Enable or disable VGS analytics tracking
