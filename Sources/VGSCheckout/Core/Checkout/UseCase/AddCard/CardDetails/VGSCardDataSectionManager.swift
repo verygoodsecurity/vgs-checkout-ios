@@ -7,10 +7,6 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
-#if canImport(VGSPaymentCards)
-import VGSPaymentCards
-#endif
 
 /// Form section delegate protocol.
 internal protocol VGSFormSectionPresenterDelegate: AnyObject {

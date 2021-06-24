@@ -7,7 +7,6 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
 
 internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 

@@ -6,7 +6,6 @@ import Foundation
 #if os(iOS)
 import UIKit
 #endif
-import VGSCollectSDK
 
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {

@@ -3,7 +3,6 @@
 //  VGSCheckout
 
 import Foundation
-import VGSCollectSDK
 
 internal extension VGSCollect {
 	/// Convenience init for `VGSCollect`.

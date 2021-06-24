@@ -7,7 +7,6 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
 
 /// Form view with scroll view and vertical stack view.
 internal class VGSFormView: UIView {
