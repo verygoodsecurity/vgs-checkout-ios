@@ -25,7 +25,7 @@ public protocol VGSCheckoutPaymentCardModelProtocol {
 }
 
 /// An object representing Payment Card
-public struct VGSPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
+public struct VGSCheckoutPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
   
   /// Payment Card Brand
   public let brand: VGSCheckoutPaymentCards.CardBrand

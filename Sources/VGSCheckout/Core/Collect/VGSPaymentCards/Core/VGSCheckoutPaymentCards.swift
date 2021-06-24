@@ -55,31 +55,31 @@ public class VGSCheckoutPaymentCards {
     // MARK: - Payment Card Models
   
     ///  Elo Payment Card Model
-    public static var elo = VGSPaymentCardModel(brand: .elo)
+    public static var elo = VGSCheckoutPaymentCardModel(brand: .elo)
     ///  Visa Electron Payment Card Model
-    public static var visaElectron = VGSPaymentCardModel(brand: .visaElectron)
+    public static var visaElectron = VGSCheckoutPaymentCardModel(brand: .visaElectron)
     ///  Maestro Payment Card Model
-    public static var maestro = VGSPaymentCardModel(brand: .maestro)
+    public static var maestro = VGSCheckoutPaymentCardModel(brand: .maestro)
     ///  Forbrugsforeningen Payment Card Model
-    public static var forbrugsforeningen = VGSPaymentCardModel(brand: .forbrugsforeningen)
+    public static var forbrugsforeningen = VGSCheckoutPaymentCardModel(brand: .forbrugsforeningen)
     ///  Dankort Payment Card Model
-    public static var dankort = VGSPaymentCardModel(brand: .dankort)
+    public static var dankort = VGSCheckoutPaymentCardModel(brand: .dankort)
     ///  Elo Payment Card Model
-    public static var visa = VGSPaymentCardModel(brand: .visa)
+    public static var visa = VGSCheckoutPaymentCardModel(brand: .visa)
     ///  Master Card Payment Card Model
-    public static var masterCard = VGSPaymentCardModel(brand: .mastercard)
+    public static var masterCard = VGSCheckoutPaymentCardModel(brand: .mastercard)
     ///  Amex Payment Card Model
-    public static var amex = VGSPaymentCardModel(brand: .amex)
+    public static var amex = VGSCheckoutPaymentCardModel(brand: .amex)
     ///  Hipercard Payment Card Model
-    public static var hipercard = VGSPaymentCardModel(brand: .hipercard)
+    public static var hipercard = VGSCheckoutPaymentCardModel(brand: .hipercard)
     ///  DinersClub Payment Card Model
-    public static var dinersClub = VGSPaymentCardModel(brand: .dinersClub)
+    public static var dinersClub = VGSCheckoutPaymentCardModel(brand: .dinersClub)
     ///  Discover Payment Card Model
-    public static var discover = VGSPaymentCardModel(brand: .discover)
+    public static var discover = VGSCheckoutPaymentCardModel(brand: .discover)
     ///  UnionPay Payment Card Model
-    public static var unionpay = VGSPaymentCardModel(brand: .unionpay)
+    public static var unionpay = VGSCheckoutPaymentCardModel(brand: .unionpay)
     ///  JCB Payment Card Model
-    public static var jcb = VGSPaymentCardModel(brand: .jcb)
+    public static var jcb = VGSCheckoutPaymentCardModel(brand: .jcb)
   
     // MARK: - Unknown Payment Card Model
   
