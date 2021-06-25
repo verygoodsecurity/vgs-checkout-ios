@@ -36,7 +36,8 @@ Pod::Spec.new do |spec|
   #set as default podspec to prevent from downloading additional modules
     core.source_files = "Sources/VGSCheckout", "Sources/VGSCheckout/**/*.{swift}", "Sources/VGSCheckout/**/*.{h, m}"
 		core.resource_bundles = {
-			'CheckoutResources' => ['Sources/VGSCheckout/Resources/*']
+			'CheckoutResources' => ['Sources/VGSCheckout/Resources/*'],
+			'CardIcon' => ['Sources/VGSCheckout/Resources/*']
 		}
   end
 

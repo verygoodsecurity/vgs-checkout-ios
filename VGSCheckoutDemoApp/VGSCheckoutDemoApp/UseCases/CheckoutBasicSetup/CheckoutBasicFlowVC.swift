@@ -8,8 +8,7 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
-//import VGSPaymentCards
-//import VGSCollectSDK
+import VGSCollectSDK
 
 class CheckoutBasicFlowVC: UIViewController {
 
@@ -70,6 +69,8 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutConfiguration)
+
+		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
 
 		/// Change default valid card number lengthes
 //		VGSPaymentCards.visa.cardNumberLengths = [16]
