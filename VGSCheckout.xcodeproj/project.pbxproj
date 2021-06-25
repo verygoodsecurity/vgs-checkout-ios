@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3286E0C6265EC19C001FECEB /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		3286E131265EC588001FECEB /* VGSCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3286E139265EC5DC001FECEB /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */; };
 		4405DC1426844AD8004A83AD /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBF926844AD8004A83AD /* Storage.swift */; };
 		4405DC1526844AD8004A83AD /* VGSErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFA26844AD8004A83AD /* VGSErrorInfo.swift */; };
 		4405DC1626844AD8004A83AD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFB26844AD8004A83AD /* Enums.swift */; };
@@ -83,6 +82,51 @@
 		4405DCB626848B28004A83AD /* VGSCheckoutUnknownPaymentCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCAC26848B28004A83AD /* VGSCheckoutUnknownPaymentCardModel.swift */; };
 		4405DCB826848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DCB026848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift */; };
 		4405DCBA26848B45004A83AD /* CardIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4405DCB926848B45004A83AD /* CardIcon.xcassets */; };
+		4405DD6F26859FAD004A83AD /* VGSDeepMergeUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3226859FAC004A83AD /* VGSDeepMergeUtilsTests.swift */; };
+		4405DD7026859FAD004A83AD /* VGSFieldNameToJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3326859FAC004A83AD /* VGSFieldNameToJSONTests.swift */; };
+		4405DD7126859FAD004A83AD /* VGSFlatJSONStructMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3426859FAC004A83AD /* VGSFlatJSONStructMappingTests.swift */; };
+		4405DD7226859FAD004A83AD /* VGSFieldNameMapUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3526859FAC004A83AD /* VGSFieldNameMapUtilsTests.swift */; };
+		4405DD7326859FAD004A83AD /* ExpDateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3926859FAC004A83AD /* ExpDateTextField.swift */; };
+		4405DD7426859FAD004A83AD /* VGSTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3A26859FAC004A83AD /* VGSTextFieldTests.swift */; };
+		4405DD7526859FAD004A83AD /* TextFieldSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3B26859FAC004A83AD /* TextFieldSecurity.swift */; };
+		4405DD7626859FAD004A83AD /* LuhnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3C26859FAC004A83AD /* LuhnTests.swift */; };
+		4405DD7726859FAD004A83AD /* MaskedTextFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3D26859FAC004A83AD /* MaskedTextFieldTest.swift */; };
+		4405DD7826859FAD004A83AD /* CardHolderNameFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3E26859FAC004A83AD /* CardHolderNameFieldTests.swift */; };
+		4405DD7926859FAD004A83AD /* ExpDateTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD3F26859FAC004A83AD /* ExpDateTextFieldTests.swift */; };
+		4405DD7A26859FAD004A83AD /* CVVTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4026859FAC004A83AD /* CVVTextFieldTests.swift */; };
+		4405DD7B26859FAD004A83AD /* CardNumerTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4126859FAC004A83AD /* CardNumerTextFieldTests.swift */; };
+		4405DD7C26859FAD004A83AD /* SSNTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4226859FAC004A83AD /* SSNTextFieldTests.swift */; };
+		4405DD7D26859FAD004A83AD /* CardTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4326859FAC004A83AD /* CardTextFieldTests.swift */; };
+		4405DD7E26859FAD004A83AD /* TextFielsStyleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4426859FAC004A83AD /* TextFielsStyleUI.swift */; };
+		4405DD7F26859FAD004A83AD /* ValidationRulesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4526859FAC004A83AD /* ValidationRulesTest.swift */; };
+		4405DD8026859FAD004A83AD /* VGSCollect+SatelliteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4626859FAC004A83AD /* VGSCollect+SatelliteTests.swift */; };
+		4405DD8126859FAD004A83AD /* VGSCollectSatelliteUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4726859FAC004A83AD /* VGSCollectSatelliteUtilsTests.swift */; };
+		4405DD8226859FAD004A83AD /* VGSAPIClientSatelliteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4826859FAC004A83AD /* VGSAPIClientSatelliteTests.swift */; };
+		4405DD8326859FAD004A83AD /* ApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4926859FAC004A83AD /* ApiClientTests.swift */; };
+		4405DD8426859FAD004A83AD /* StorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4A26859FAC004A83AD /* StorageTests.swift */; };
+		4405DD8526859FAD004A83AD /* JSONData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4D26859FAC004A83AD /* JSONData+Extensions.swift */; };
+		4405DD8626859FAD004A83AD /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD4E26859FAC004A83AD /* UtilsTest.swift */; };
+		4405DD8726859FAD004A83AD /* ExpDateConvertorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5026859FAC004A83AD /* ExpDateConvertorTests.swift */; };
+		4405DD8826859FAD004A83AD /* VGSExpDateSeparateSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5226859FAC004A83AD /* VGSExpDateSeparateSerializerTests.swift */; };
+		4405DD8926859FAD004A83AD /* VGSExpDateSerializersDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5326859FAC004A83AD /* VGSExpDateSerializersDataProvider.swift */; };
+		4405DD8A26859FAD004A83AD /* VGSExpirationDateTextFieldUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5426859FAC004A83AD /* VGSExpirationDateTextFieldUtilsTests.swift */; };
+		4405DD8B26859FAD004A83AD /* VGSCollectTest+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5526859FAC004A83AD /* VGSCollectTest+Validation.swift */; };
+		4405DD8C26859FAD004A83AD /* VGSCollectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5626859FAC004A83AD /* VGSCollectTests.swift */; };
+		4405DD8D26859FAD004A83AD /* _CardBrandDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5826859FAC004A83AD /* _CardBrandDataSource.swift */; };
+		4405DD8E26859FAD004A83AD /* PaymentCardsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5926859FAC004A83AD /* PaymentCardsTest.swift */; };
+		4405DD8F26859FAD004A83AD /* CardBrandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5A26859FAC004A83AD /* CardBrandTest.swift */; };
+		4405DD9026859FAD004A83AD /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */; };
+		4405DD9126859FAD004A83AD /* VGSCollectBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */; };
+		4405DD9226859FAD004A83AD /* APIHostnameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */; };
+		4405DD9326859FAD004A83AD /* DeepMergeMergeArrayTestJSONs.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6126859FAC004A83AD /* DeepMergeMergeArrayTestJSONs.json */; };
+		4405DD9426859FAD004A83AD /* FlatPolicyTestJSONs.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6326859FAC004A83AD /* FlatPolicyTestJSONs.json */; };
+		4405DD9526859FAD004A83AD /* OverwriteArraysTestJSONs.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6526859FAC004A83AD /* OverwriteArraysTestJSONs.json */; };
+		4405DD9626859FAD004A83AD /* VGSFieldNameToJSONTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6726859FAC004A83AD /* VGSFieldNameToJSONTestData.json */; };
+		4405DD9726859FAD004A83AD /* VGSExpDateSerialization_DefaultConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6926859FAC004A83AD /* VGSExpDateSerialization_DefaultConfig.json */; };
+		4405DD9826859FAD004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6A26859FAC004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json */; };
+		4405DD9926859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayOverwrite.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6B26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayOverwrite.json */; };
+		4405DD9A26859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6C26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json */; };
+		4405DD9B26859FAD004A83AD /* VGSExpDateSerialization_CustomConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */; };
 		4455C84C266E4420000CD666 /* VGSPayWithCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */; };
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
 		44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */; };
@@ -161,8 +205,6 @@
 		3286E0C5265EC19C001FECEB /* VGSCheckoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VGSCheckoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3286E12F265EC588001FECEB /* VGSCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSCheckout.h; sourceTree = "<group>"; };
 		3286E130265EC588001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTests.swift; sourceTree = "<group>"; };
-		3286E138265EC5DC001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4405DBF926844AD8004A83AD /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4405DBFA26844AD8004A83AD /* VGSErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSErrorInfo.swift; sourceTree = "<group>"; };
 		4405DBFB26844AD8004A83AD /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -236,6 +278,52 @@
 		4405DCAC26848B28004A83AD /* VGSCheckoutUnknownPaymentCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutUnknownPaymentCardModel.swift; sourceTree = "<group>"; };
 		4405DCB026848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCheckSumAlgorithmType.swift; sourceTree = "<group>"; };
 		4405DCB926848B45004A83AD /* CardIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = CardIcon.xcassets; path = Sources/VGSCheckout/Core/Collect/VGSPaymentCards/Resources/CardIcon.xcassets; sourceTree = SOURCE_ROOT; };
+		4405DD3226859FAC004A83AD /* VGSDeepMergeUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSDeepMergeUtilsTests.swift; sourceTree = "<group>"; };
+		4405DD3326859FAC004A83AD /* VGSFieldNameToJSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFieldNameToJSONTests.swift; sourceTree = "<group>"; };
+		4405DD3426859FAC004A83AD /* VGSFlatJSONStructMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFlatJSONStructMappingTests.swift; sourceTree = "<group>"; };
+		4405DD3526859FAC004A83AD /* VGSFieldNameMapUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFieldNameMapUtilsTests.swift; sourceTree = "<group>"; };
+		4405DD3926859FAC004A83AD /* ExpDateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpDateTextField.swift; sourceTree = "<group>"; };
+		4405DD3A26859FAC004A83AD /* VGSTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD3B26859FAC004A83AD /* TextFieldSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldSecurity.swift; sourceTree = "<group>"; };
+		4405DD3C26859FAC004A83AD /* LuhnTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuhnTests.swift; sourceTree = "<group>"; };
+		4405DD3D26859FAC004A83AD /* MaskedTextFieldTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskedTextFieldTest.swift; sourceTree = "<group>"; };
+		4405DD3E26859FAC004A83AD /* CardHolderNameFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolderNameFieldTests.swift; sourceTree = "<group>"; };
+		4405DD3F26859FAC004A83AD /* ExpDateTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpDateTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD4026859FAC004A83AD /* CVVTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVVTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD4126859FAC004A83AD /* CardNumerTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumerTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD4226859FAC004A83AD /* SSNTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSNTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD4326859FAC004A83AD /* CardTextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTextFieldTests.swift; sourceTree = "<group>"; };
+		4405DD4426859FAC004A83AD /* TextFielsStyleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFielsStyleUI.swift; sourceTree = "<group>"; };
+		4405DD4526859FAC004A83AD /* ValidationRulesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationRulesTest.swift; sourceTree = "<group>"; };
+		4405DD4626859FAC004A83AD /* VGSCollect+SatelliteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollect+SatelliteTests.swift"; sourceTree = "<group>"; };
+		4405DD4726859FAC004A83AD /* VGSCollectSatelliteUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectSatelliteUtilsTests.swift; sourceTree = "<group>"; };
+		4405DD4826859FAC004A83AD /* VGSAPIClientSatelliteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSAPIClientSatelliteTests.swift; sourceTree = "<group>"; };
+		4405DD4926859FAC004A83AD /* ApiClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClientTests.swift; sourceTree = "<group>"; };
+		4405DD4A26859FAC004A83AD /* StorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageTests.swift; sourceTree = "<group>"; };
+		4405DD4D26859FAC004A83AD /* JSONData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONData+Extensions.swift"; sourceTree = "<group>"; };
+		4405DD4E26859FAC004A83AD /* UtilsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
+		4405DD5026859FAC004A83AD /* ExpDateConvertorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpDateConvertorTests.swift; sourceTree = "<group>"; };
+		4405DD5226859FAC004A83AD /* VGSExpDateSeparateSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpDateSeparateSerializerTests.swift; sourceTree = "<group>"; };
+		4405DD5326859FAC004A83AD /* VGSExpDateSerializersDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpDateSerializersDataProvider.swift; sourceTree = "<group>"; };
+		4405DD5426859FAC004A83AD /* VGSExpirationDateTextFieldUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpirationDateTextFieldUtilsTests.swift; sourceTree = "<group>"; };
+		4405DD5526859FAC004A83AD /* VGSCollectTest+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollectTest+Validation.swift"; sourceTree = "<group>"; };
+		4405DD5626859FAC004A83AD /* VGSCollectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectTests.swift; sourceTree = "<group>"; };
+		4405DD5826859FAC004A83AD /* _CardBrandDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _CardBrandDataSource.swift; sourceTree = "<group>"; };
+		4405DD5926859FAC004A83AD /* PaymentCardsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCardsTest.swift; sourceTree = "<group>"; };
+		4405DD5A26859FAC004A83AD /* CardBrandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTest.swift; sourceTree = "<group>"; };
+		4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTests.swift; sourceTree = "<group>"; };
+		4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectBaseTestCase.swift; sourceTree = "<group>"; };
+		4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHostnameValidatorTests.swift; sourceTree = "<group>"; };
+		4405DD6126859FAC004A83AD /* DeepMergeMergeArrayTestJSONs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeepMergeMergeArrayTestJSONs.json; sourceTree = "<group>"; };
+		4405DD6326859FAC004A83AD /* FlatPolicyTestJSONs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FlatPolicyTestJSONs.json; sourceTree = "<group>"; };
+		4405DD6526859FAC004A83AD /* OverwriteArraysTestJSONs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OverwriteArraysTestJSONs.json; sourceTree = "<group>"; };
+		4405DD6726859FAC004A83AD /* VGSFieldNameToJSONTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSFieldNameToJSONTestData.json; sourceTree = "<group>"; };
+		4405DD6926859FAC004A83AD /* VGSExpDateSerialization_DefaultConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_DefaultConfig.json; sourceTree = "<group>"; };
+		4405DD6A26859FAC004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_CustomExpDateOutputConfig.json; sourceTree = "<group>"; };
+		4405DD6B26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayOverwrite.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_MapWithArrayOverwrite.json; sourceTree = "<group>"; };
+		4405DD6C26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_MapWithArrayMerge.json; sourceTree = "<group>"; };
+		4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_CustomConfig.json; sourceTree = "<group>"; };
+		4405DD6E26859FAC004A83AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPayWithCardHeaderView.swift; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
 		44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSHeaderBarView.swift; sourceTree = "<group>"; };
@@ -364,18 +452,9 @@
 		3286E135265EC5DC001FECEB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3286E136265EC5DC001FECEB /* VGSCheckoutTests */,
+				4405DD2F26859FAC004A83AD /* VGSCheckoutTests */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		3286E136265EC5DC001FECEB /* VGSCheckoutTests */ = {
-			isa = PBXGroup;
-			children = (
-				3286E137265EC5DC001FECEB /* VGSCheckoutTests.swift */,
-				3286E138265EC5DC001FECEB /* Info.plist */,
-			);
-			path = VGSCheckoutTests;
 			sourceTree = "<group>";
 		};
 		4405DBF726844AD8004A83AD /* Collect */ = {
@@ -646,6 +725,195 @@
 				4405DCB026848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		4405DD2F26859FAC004A83AD /* VGSCheckoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD3026859FAC004A83AD /* CollectUtilsTests */,
+				4405DD5E26859FAC004A83AD /* Resources */,
+				4405DD6E26859FAC004A83AD /* Info.plist */,
+			);
+			path = VGSCheckoutTests;
+			sourceTree = "<group>";
+		};
+		4405DD3026859FAC004A83AD /* CollectUtilsTests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD3126859FAC004A83AD /* DeepMergeUtils Tests */,
+				4405DD3726859FAC004A83AD /* Satellite Tests */,
+				4405DD4926859FAC004A83AD /* ApiClientTests.swift */,
+				4405DD4A26859FAC004A83AD /* StorageTests.swift */,
+				4405DD4B26859FAC004A83AD /* Test Helpers */,
+				4405DD4E26859FAC004A83AD /* UtilsTest.swift */,
+				4405DD4F26859FAC004A83AD /* ConvertorsTests */,
+				4405DD5126859FAC004A83AD /* SerializersTest */,
+				4405DD5526859FAC004A83AD /* VGSCollectTest+Validation.swift */,
+				4405DD5626859FAC004A83AD /* VGSCollectTests.swift */,
+				4405DD5726859FAC004A83AD /* Card Brand Tests */,
+				4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */,
+				4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */,
+				4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */,
+			);
+			path = CollectUtilsTests;
+			sourceTree = "<group>";
+		};
+		4405DD3126859FAC004A83AD /* DeepMergeUtils Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD3226859FAC004A83AD /* VGSDeepMergeUtilsTests.swift */,
+				4405DD3326859FAC004A83AD /* VGSFieldNameToJSONTests.swift */,
+				4405DD3426859FAC004A83AD /* VGSFlatJSONStructMappingTests.swift */,
+				4405DD3526859FAC004A83AD /* VGSFieldNameMapUtilsTests.swift */,
+				4405DD3626859FAC004A83AD /* TestJSONs */,
+			);
+			path = "DeepMergeUtils Tests";
+			sourceTree = "<group>";
+		};
+		4405DD3626859FAC004A83AD /* TestJSONs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TestJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD3726859FAC004A83AD /* Satellite Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD3826859FAC004A83AD /* Text Fields Tests */,
+				4405DD4626859FAC004A83AD /* VGSCollect+SatelliteTests.swift */,
+				4405DD4726859FAC004A83AD /* VGSCollectSatelliteUtilsTests.swift */,
+				4405DD4826859FAC004A83AD /* VGSAPIClientSatelliteTests.swift */,
+			);
+			path = "Satellite Tests";
+			sourceTree = "<group>";
+		};
+		4405DD3826859FAC004A83AD /* Text Fields Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD3926859FAC004A83AD /* ExpDateTextField.swift */,
+				4405DD3A26859FAC004A83AD /* VGSTextFieldTests.swift */,
+				4405DD3B26859FAC004A83AD /* TextFieldSecurity.swift */,
+				4405DD3C26859FAC004A83AD /* LuhnTests.swift */,
+				4405DD3D26859FAC004A83AD /* MaskedTextFieldTest.swift */,
+				4405DD3E26859FAC004A83AD /* CardHolderNameFieldTests.swift */,
+				4405DD3F26859FAC004A83AD /* ExpDateTextFieldTests.swift */,
+				4405DD4026859FAC004A83AD /* CVVTextFieldTests.swift */,
+				4405DD4126859FAC004A83AD /* CardNumerTextFieldTests.swift */,
+				4405DD4226859FAC004A83AD /* SSNTextFieldTests.swift */,
+				4405DD4326859FAC004A83AD /* CardTextFieldTests.swift */,
+				4405DD4426859FAC004A83AD /* TextFielsStyleUI.swift */,
+				4405DD4526859FAC004A83AD /* ValidationRulesTest.swift */,
+			);
+			path = "Text Fields Tests";
+			sourceTree = "<group>";
+		};
+		4405DD4B26859FAC004A83AD /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD4C26859FAC004A83AD /* JSON Helpers */,
+			);
+			path = "Test Helpers";
+			sourceTree = "<group>";
+		};
+		4405DD4C26859FAC004A83AD /* JSON Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD4D26859FAC004A83AD /* JSONData+Extensions.swift */,
+			);
+			path = "JSON Helpers";
+			sourceTree = "<group>";
+		};
+		4405DD4F26859FAC004A83AD /* ConvertorsTests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD5026859FAC004A83AD /* ExpDateConvertorTests.swift */,
+			);
+			path = ConvertorsTests;
+			sourceTree = "<group>";
+		};
+		4405DD5126859FAC004A83AD /* SerializersTest */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD5226859FAC004A83AD /* VGSExpDateSeparateSerializerTests.swift */,
+				4405DD5326859FAC004A83AD /* VGSExpDateSerializersDataProvider.swift */,
+				4405DD5426859FAC004A83AD /* VGSExpirationDateTextFieldUtilsTests.swift */,
+			);
+			path = SerializersTest;
+			sourceTree = "<group>";
+		};
+		4405DD5726859FAC004A83AD /* Card Brand Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD5826859FAC004A83AD /* _CardBrandDataSource.swift */,
+				4405DD5926859FAC004A83AD /* PaymentCardsTest.swift */,
+				4405DD5A26859FAC004A83AD /* CardBrandTest.swift */,
+			);
+			path = "Card Brand Tests";
+			sourceTree = "<group>";
+		};
+		4405DD5E26859FAC004A83AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD5F26859FAC004A83AD /* TestJSONs */,
+				4405DD6826859FAC004A83AD /* ExpDateSplitSerializerTestJSONs */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4405DD5F26859FAC004A83AD /* TestJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6026859FAC004A83AD /* DeepMergeTestJSONs */,
+				4405DD6226859FAC004A83AD /* FlatJSONs */,
+				4405DD6426859FAC004A83AD /* OverwriteArraysTestJSONs */,
+				4405DD6626859FAC004A83AD /* DotNotationJSONs */,
+			);
+			path = TestJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD6026859FAC004A83AD /* DeepMergeTestJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6126859FAC004A83AD /* DeepMergeMergeArrayTestJSONs.json */,
+			);
+			path = DeepMergeTestJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD6226859FAC004A83AD /* FlatJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6326859FAC004A83AD /* FlatPolicyTestJSONs.json */,
+			);
+			path = FlatJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD6426859FAC004A83AD /* OverwriteArraysTestJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6526859FAC004A83AD /* OverwriteArraysTestJSONs.json */,
+			);
+			path = OverwriteArraysTestJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD6626859FAC004A83AD /* DotNotationJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6726859FAC004A83AD /* VGSFieldNameToJSONTestData.json */,
+			);
+			path = DotNotationJSONs;
+			sourceTree = "<group>";
+		};
+		4405DD6826859FAC004A83AD /* ExpDateSplitSerializerTestJSONs */ = {
+			isa = PBXGroup;
+			children = (
+				4405DD6926859FAC004A83AD /* VGSExpDateSerialization_DefaultConfig.json */,
+				4405DD6A26859FAC004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json */,
+				4405DD6B26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayOverwrite.json */,
+				4405DD6C26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json */,
+				4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */,
+			);
+			path = ExpDateSplitSerializerTestJSONs;
 			sourceTree = "<group>";
 		};
 		4455C84A266E4407000CD666 /* PayCardHeaderView */ = {
@@ -1305,6 +1573,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4405DD9426859FAD004A83AD /* FlatPolicyTestJSONs.json in Resources */,
+				4405DD9926859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayOverwrite.json in Resources */,
+				4405DD9B26859FAD004A83AD /* VGSExpDateSerialization_CustomConfig.json in Resources */,
+				4405DD9726859FAD004A83AD /* VGSExpDateSerialization_DefaultConfig.json in Resources */,
+				4405DD9326859FAD004A83AD /* DeepMergeMergeArrayTestJSONs.json in Resources */,
+				4405DD9826859FAD004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json in Resources */,
+				4405DD9526859FAD004A83AD /* OverwriteArraysTestJSONs.json in Resources */,
+				4405DD9626859FAD004A83AD /* VGSFieldNameToJSONTestData.json in Resources */,
+				4405DD9A26859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1508,7 +1785,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3286E139265EC5DC001FECEB /* VGSCheckoutTests.swift in Sources */,
+				4405DD8926859FAD004A83AD /* VGSExpDateSerializersDataProvider.swift in Sources */,
+				4405DD7B26859FAD004A83AD /* CardNumerTextFieldTests.swift in Sources */,
+				4405DD6F26859FAD004A83AD /* VGSDeepMergeUtilsTests.swift in Sources */,
+				4405DD8C26859FAD004A83AD /* VGSCollectTests.swift in Sources */,
+				4405DD9026859FAD004A83AD /* VGSCheckoutTests.swift in Sources */,
+				4405DD8126859FAD004A83AD /* VGSCollectSatelliteUtilsTests.swift in Sources */,
+				4405DD7A26859FAD004A83AD /* CVVTextFieldTests.swift in Sources */,
+				4405DD8226859FAD004A83AD /* VGSAPIClientSatelliteTests.swift in Sources */,
+				4405DD7826859FAD004A83AD /* CardHolderNameFieldTests.swift in Sources */,
+				4405DD7226859FAD004A83AD /* VGSFieldNameMapUtilsTests.swift in Sources */,
+				4405DD7D26859FAD004A83AD /* CardTextFieldTests.swift in Sources */,
+				4405DD7126859FAD004A83AD /* VGSFlatJSONStructMappingTests.swift in Sources */,
+				4405DD8026859FAD004A83AD /* VGSCollect+SatelliteTests.swift in Sources */,
+				4405DD7326859FAD004A83AD /* ExpDateTextField.swift in Sources */,
+				4405DD8526859FAD004A83AD /* JSONData+Extensions.swift in Sources */,
+				4405DD8B26859FAD004A83AD /* VGSCollectTest+Validation.swift in Sources */,
+				4405DD7E26859FAD004A83AD /* TextFielsStyleUI.swift in Sources */,
+				4405DD8826859FAD004A83AD /* VGSExpDateSeparateSerializerTests.swift in Sources */,
+				4405DD7926859FAD004A83AD /* ExpDateTextFieldTests.swift in Sources */,
+				4405DD8426859FAD004A83AD /* StorageTests.swift in Sources */,
+				4405DD7626859FAD004A83AD /* LuhnTests.swift in Sources */,
+				4405DD7726859FAD004A83AD /* MaskedTextFieldTest.swift in Sources */,
+				4405DD8A26859FAD004A83AD /* VGSExpirationDateTextFieldUtilsTests.swift in Sources */,
+				4405DD7C26859FAD004A83AD /* SSNTextFieldTests.swift in Sources */,
+				4405DD9226859FAD004A83AD /* APIHostnameValidatorTests.swift in Sources */,
+				4405DD7426859FAD004A83AD /* VGSTextFieldTests.swift in Sources */,
+				4405DD8626859FAD004A83AD /* UtilsTest.swift in Sources */,
+				4405DD8726859FAD004A83AD /* ExpDateConvertorTests.swift in Sources */,
+				4405DD9126859FAD004A83AD /* VGSCollectBaseTestCase.swift in Sources */,
+				4405DD8D26859FAD004A83AD /* _CardBrandDataSource.swift in Sources */,
+				4405DD7026859FAD004A83AD /* VGSFieldNameToJSONTests.swift in Sources */,
+				4405DD8F26859FAD004A83AD /* CardBrandTest.swift in Sources */,
+				4405DD8E26859FAD004A83AD /* PaymentCardsTest.swift in Sources */,
+				4405DD8326859FAD004A83AD /* ApiClientTests.swift in Sources */,
+				4405DD7F26859FAD004A83AD /* ValidationRulesTest.swift in Sources */,
+				4405DD7526859FAD004A83AD /* TextFieldSecurity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
