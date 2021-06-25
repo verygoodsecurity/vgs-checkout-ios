@@ -9,7 +9,7 @@
 import Foundation
 
 ///:nodoc:  VGSCheckout Form Analytics Details
-public struct VGSCheckoutFormAnanlyticsDetails {
+internal struct VGSCheckoutFormAnanlyticsDetails {
   public let formId: String
   public let tenantId: String
   public let environment: String

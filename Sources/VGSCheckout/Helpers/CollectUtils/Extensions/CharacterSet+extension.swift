@@ -7,10 +7,10 @@
 
 import Foundation
 
-extension CharacterSet {
+internal extension CharacterSet {
 
 	  /// :nodoc: Ascii decimal digits set.
-    internal static var vgsAsciiDecimalDigits: CharacterSet {
+    static var vgsAsciiDecimalDigits: CharacterSet {
         return self.init(charactersIn: "0123456789")
     }
 }

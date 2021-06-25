@@ -1,5 +1,5 @@
 //
-//  VGSExpDateSeparateSerializer.swift
+//  VGSCheckoutExpDateSeparateSerializer.swift
 //  VGSCheckout
 //
 //  Created by Dima on 25.03.2021.
@@ -9,13 +9,13 @@
 import Foundation
 
 /// Expiration Date Separate serializer, split date string to components with separate fieldNames
-public struct VGSCheckoutExpDateSeparateSerializer: VGSCheckoutFormatSerializerProtocol {
+internal struct VGSCheckoutExpDateSeparateSerializer: VGSCheckoutFormatSerializerProtocol {
   
   /// Field Name that will be used as a JSON key with month value from expDate string on send request.
-  public let monthFieldName: String
+	internal let monthFieldName: String
   
   /// Field Name that will be used as a JSON key with year value from expDate string on send request.
-  public let yearFieldName: String
+	internal let yearFieldName: String
   
   // MARK: - Initialization
   
@@ -24,7 +24,7 @@ public struct VGSCheckoutExpDateSeparateSerializer: VGSCheckoutFormatSerializerP
   /// - Parameters:
   ///   - monthFieldName: key, that should be associated with month value in request JSON.
   ///   - yearFieldName: key, that should be associated with year value in request JSON.
-  public init(monthFieldName: String, yearFieldName: String) {
+  internal init(monthFieldName: String, yearFieldName: String) {
     self.monthFieldName = monthFieldName
     self.yearFieldName = yearFieldName
   }
