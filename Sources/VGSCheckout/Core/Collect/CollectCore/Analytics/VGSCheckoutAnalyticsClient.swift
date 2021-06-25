@@ -38,7 +38,7 @@ public class VGSCheckoutAnalyticsClient {
   public var shouldCollectAnalytics = false
   
   /// Uniq id that should stay the same during application rintime
-  public let vgsCollectSessionId = UUID().uuidString
+  public let vgsCheckoutSessionId = UUID().uuidString
   
   private init() {}
   
@@ -67,7 +67,7 @@ public class VGSCheckoutAnalyticsClient {
       }()
 
   /// :nodoc: Track events related to specific VGSCollect instance
-  internal func trackFormEvent(_ form: VGSFormAnanlyticsDetails, type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
+  internal func trackFormEvent(_ form: VGSCheckoutFormAnanlyticsDetails, type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
       let formDetails = ["formId": form.formId,
                          "tnt": form.tenantId,
                          "env": form.environment
@@ -98,7 +98,7 @@ public class VGSCheckoutAnalyticsClient {
       data["version"] = Utils.vgsCollectVersion
       data["source"] = "iosSDK"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
-      data["vgsCollectSessionId"] = vgsCollectSessionId
+      data["vgsCollectSessionId"] = vgsCheckoutSessionId
       sendAnalyticsRequest(data: data)
   }
 

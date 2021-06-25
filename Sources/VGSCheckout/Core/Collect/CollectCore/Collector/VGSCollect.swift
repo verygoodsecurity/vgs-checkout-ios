@@ -19,7 +19,7 @@ internal class VGSCollect {
     internal let tenantId: String
 
 	  /// :nodoc: Form analytics details.
-    internal (set) public var formAnalyticsDetails: VGSFormAnanlyticsDetails
+    internal (set) public var formAnalyticsDetails: VGSCheckoutFormAnanlyticsDetails
   
     /// Max file size limit by proxy. Is static and can't be changed!
     internal let maxFileSizeInternalLimitInBytes = 24_000_000
@@ -64,7 +64,7 @@ internal class VGSCollect {
 	internal init(id: String, environment: String, hostname: String? = nil, satellitePort: Int? = nil) {
       self.tenantId = id
       self.regionalEnvironment = environment
-      self.formAnalyticsDetails = VGSFormAnanlyticsDetails.init(formId: formId, tenantId: tenantId, environment: regionalEnvironment)
+      self.formAnalyticsDetails = VGSCheckoutFormAnanlyticsDetails.init(formId: formId, tenantId: tenantId, environment: regionalEnvironment)
       self.apiClient = APIClient(tenantId: id, regionalEnvironment: environment, hostname: hostname, formAnalyticsDetails: formAnalyticsDetails, satellitePort: satellitePort)
 
 			if case .satelliteURL = self.apiClient.hostURLPolicy {

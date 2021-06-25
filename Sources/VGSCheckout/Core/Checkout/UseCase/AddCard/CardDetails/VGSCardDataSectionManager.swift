@@ -210,7 +210,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		expDateConfiguration.type = .expDate
 		expDateConfiguration.inputDateFormat = .shortYear
 		expDateConfiguration.outputDateFormat = .longYear
-		expDateConfiguration.serializers = [VGSExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
+		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
 		expDateConfiguration.formatPattern = "##/##"
 		//expDateConfiguration.inputSource = .keyboard
 

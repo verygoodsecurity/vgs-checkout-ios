@@ -12,7 +12,7 @@ import UIKit
 #endif
 
 /// A class responsible for configuration `VGSTextField` with `fieldType = .expDate`. Extends `VGSConfiguration` class.
-internal final class VGSExpDateConfiguration: VGSConfiguration, VGSFormatSerializableProtocol {
+internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutFormatSerializableProtocol {
    
   /// Input Source type. Default is `VGSTextFieldInputSource.datePicker`.
 	internal var inputSource: VGSTextFieldInputSource = .datePicker
@@ -24,7 +24,7 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSFormatSeriali
 	internal var outputDateFormat: VGSCardExpDateFormat?
   
   /// Output date format.
-	internal var serializers: [VGSFormatSerializerProtocol] = []
+	internal var serializers: [VGSCheckoutFormatSerializerProtocol] = []
   
   /// `FieldType.expDate` type of `VGSTextField` configuration.
   override internal var type: FieldType {
@@ -38,7 +38,7 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSFormatSeriali
   internal func serialize(_ content: String) -> [String: Any] {
     var result = [String: Any]()
     for serializer in serializers {
-      if let serializer = serializer as? VGSExpDateSeparateSerializer {
+      if let serializer = serializer as? VGSCheckoutExpDateSeparateSerializer {
         /// remove dividers
         var dateDigitsString = content.digits
         

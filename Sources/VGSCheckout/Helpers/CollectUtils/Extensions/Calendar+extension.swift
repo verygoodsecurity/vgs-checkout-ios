@@ -25,7 +25,7 @@ internal extension Calendar {
 }
 
 /// :nodoc:
-public final class VGSCalendarUtils {
+public final class VGSCheckoutCalendarUtils {
 
 	public static var currentYear: Int {
 	 return Calendar(identifier: .gregorian).component(.year, from: Date())

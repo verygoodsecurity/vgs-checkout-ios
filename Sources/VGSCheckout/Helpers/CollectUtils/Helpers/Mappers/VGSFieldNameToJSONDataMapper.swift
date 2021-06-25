@@ -22,7 +22,7 @@ internal final class VGSFieldNameToJSONDataMapper {
       let fieldValue = field.getOutputText()
       
       /// Check if field value need serioalization
-      if let serialazable = field.configuration as? VGSFormatSerializableProtocol, serialazable.shouldSerialize {
+      if let serialazable = field.configuration as? VGSCheckoutFormatSerializableProtocol, serialazable.shouldSerialize {
         let serializationResult = serialazable.serialize(fieldValue ?? "")
         serializationResult.forEach { (componentFieldName, componentValue) in
           VGSFieldNameToJSONDataMapper.mapFieldNameToJSON(componentFieldName, value: componentValue as Any, json: &collectFieldsJSON)

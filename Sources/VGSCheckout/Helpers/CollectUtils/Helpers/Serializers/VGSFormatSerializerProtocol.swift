@@ -1,5 +1,5 @@
 //
-//  VGSFormatSerializerProtocol.swift
+//  VGSCheckoutFormatSerializerProtocol.swift
 //  VGSCheckout
 //
 //  Created by Dima on 25.03.2021.
@@ -9,12 +9,12 @@
 import Foundation
 
 /// Base protocol describing Content Serialization attributes
-public protocol VGSFormatSerializerProtocol {
+public protocol VGSCheckoutFormatSerializerProtocol {
 
 }
 
 /// Base protocol describing functionality for Content Serialization
-internal protocol VGSFormatSerializableProtocol {
+internal protocol VGSCheckoutFormatSerializableProtocol {
   func serialize(_ content: String) -> [String: Any]
   var shouldSerialize: Bool { get }
 }

@@ -28,9 +28,9 @@ public enum VGSCheckoutDataMergePolicy {
 				]
 		}
 
-	Completely overwrite extra data array with Collect Array data.
+	Completely overwrite extra data array with Checkout Array data.
 
-				// Collect fields JSON:
+				// Checkout fields JSON:
 				[
 				 { "cvc" : "555" }
 				]
@@ -66,7 +66,7 @@ public enum VGSCheckoutDataMergePolicy {
 
 	Merge arrays content at the same nested level if possible.
 
-				// Collect fields JSON:
+				// Checkout fields JSON:
 				[
 				 { "cvc" : "555" }
 				]

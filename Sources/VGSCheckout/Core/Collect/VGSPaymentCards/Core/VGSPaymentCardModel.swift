@@ -42,7 +42,7 @@ public struct VGSCheckoutPaymentCardModel: VGSCheckoutPaymentCardModelProtocol {
   /// Valid Card CVC/CVV Lengths. For most brands valid cvc lengths is [3], while for Amex is [4].  For unknown brands can be set as [3, 4]
   public var cvcLengths: [Int]
   
-  /// Check sum validation algorithm. For most brands  card number can be validated by `CheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
+  /// Check sum validation algorithm. For most brands  card number can be validated by `VGSCheckoutCheckSumAlgorithmType.luhn` algorithm. If `none` - result of Checksum Algorithm validation will be `true`.
   public var checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType?
   
   /// Payment Card Number visual format pattern.

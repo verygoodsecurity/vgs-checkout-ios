@@ -1,5 +1,5 @@
 //
-//  VGSFormAnanlyticsDetails.swift
+//  VGSCheckoutFormAnanlyticsDetails.swift
 //  VGSCheckout
 //
 //  Created by Dima on 26.11.2020.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-///:nodoc:  VGSCollect Form Analytics Details
-public struct VGSFormAnanlyticsDetails {
+///:nodoc:  VGSCheckout Form Analytics Details
+public struct VGSCheckoutFormAnanlyticsDetails {
   public let formId: String
   public let tenantId: String
   public let environment: String

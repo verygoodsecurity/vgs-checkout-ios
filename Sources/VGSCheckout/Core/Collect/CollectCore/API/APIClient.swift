@@ -20,7 +20,7 @@ internal class APIClient {
 	private let vaultUrl: URL?
 
 	/// Form analytics details.
-	private (set) internal var formAnalyticDetails: VGSFormAnanlyticsDetails
+	private (set) internal var formAnalyticDetails: VGSCheckoutFormAnanlyticsDetails
 
 	/// Base URL.
 	internal var baseURL: URL? {
@@ -45,7 +45,7 @@ internal class APIClient {
 		let trStatus = VGSCheckoutAnalyticsClient.shared.shouldCollectAnalytics ? "default" : "none"
 
 		return [
-			"vgs-client": "source=iosSDK&medium=vgs-collect&content=\(Utils.vgsCollectVersion)&osVersion=\(versionString)&vgsCollectSessionId=\(VGSCheckoutAnalyticsClient.shared.vgsCollectSessionId)&tr=\(trStatus)"
+			"vgs-client": "source=iosSDK&medium=vgs-collect&content=\(Utils.vgsCollectVersion)&osVersion=\(versionString)&vgsCollectSessionId=\(VGSCheckoutAnalyticsClient.shared.vgsCheckoutSessionId)&tr=\(trStatus)"
 		]
 	}()
 
@@ -56,7 +56,7 @@ internal class APIClient {
 	///   - hostname: `String?` object, should be valid hostname or `nil`.
 	///   - formAnalyticsDetails: `VGSFormAnanlyticsDetails` object, analytics data.
 	///   - satellitePort: `Int?` object, custom port for satellite configuration. **IMPORTANT! Use only with .sandbox environment!**.
-	required init(tenantId: String, regionalEnvironment: String, hostname: String?, formAnalyticsDetails: VGSFormAnanlyticsDetails, satellitePort: Int?) {
+	required init(tenantId: String, regionalEnvironment: String, hostname: String?, formAnalyticsDetails: VGSCheckoutFormAnanlyticsDetails, satellitePort: Int?) {
 		self.vaultUrl = Self.buildVaultURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment)
 		self.vaultId = tenantId
 		self.formAnalyticDetails = formAnalyticsDetails
