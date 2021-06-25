@@ -11,7 +11,7 @@ import XCTest
 @testable import VGSCheckout
 
 /// Tests for API cleint and satellite configuration: verify API URL policy setup.
-class VGSAPIClientSatelliteTests: VGSCollectBaseTestCase {
+class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 
 	/// Valid tenant ID.
 	let tenantID: String = "testID"
@@ -55,7 +55,7 @@ class VGSAPIClientSatelliteTests: VGSCollectBaseTestCase {
 		for index in 0..<testData.count {
 			let config = testData[index]
 
-			let mockedFormData = VGSFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
+			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(config.port!) should produce: \(config.url)"
 			let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 
@@ -94,7 +94,7 @@ class VGSAPIClientSatelliteTests: VGSCollectBaseTestCase {
 			if let port = config.port {
 				portText = "\(port)"
 			}
-			let mockedFormData = VGSFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
+			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(portText) should produce *nil*"
 			let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 

@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class CardHolderNameFieldTests: VGSCollectBaseTestCase {
+class CardHolderNameFieldTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     var cardHolderTextField: VGSTextField!
     

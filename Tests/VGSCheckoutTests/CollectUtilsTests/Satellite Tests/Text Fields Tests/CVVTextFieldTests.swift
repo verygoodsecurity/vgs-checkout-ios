@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class CVVTextFieldTests: VGSCollectBaseTestCase {
+class CVVTextFieldTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     var cvvTextField: VGSTextField!
     

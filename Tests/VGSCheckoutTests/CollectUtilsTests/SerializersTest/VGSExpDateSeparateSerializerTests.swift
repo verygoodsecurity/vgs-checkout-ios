@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import VGSCheckout
 
-class VGSExpDateSeparateSerializerTests: VGSCollectBaseTestCase {
+class VGSExpDateSeparateSerializerTests: VGSCheckoutBaseTestCase {
   var collector: VGSCollect!
   var textField: VGSExpDateTextField!
 
@@ -83,7 +83,7 @@ class VGSExpDateSeparateSerializerTests: VGSCollectBaseTestCase {
     config.formatPattern = "##/##"
     
     for test in testData {
-      config.serializers = [VGSExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
+      config.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
       textField.configuration = config
       textField.setText(test.fieldValue)
       
@@ -104,7 +104,7 @@ class VGSExpDateSeparateSerializerTests: VGSCollectBaseTestCase {
     config.divider = "-/-"
     
     for test in testData {
-      config.serializers = [VGSExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
+      config.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
       textField.configuration = config
       textField.setText(test.fieldValue)
       
@@ -150,7 +150,7 @@ class VGSExpDateSeparateSerializerTests: VGSCollectBaseTestCase {
 											]]
 
 		for test in testData {
-			config.serializers = [VGSExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
+			config.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
 			textField.configuration = config
 			textField.setText(test.fieldValue)
 
@@ -174,7 +174,7 @@ class VGSExpDateSeparateSerializerTests: VGSCollectBaseTestCase {
 											]]
 
 		for test in testData {
-			config.serializers = [VGSExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
+			config.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
 			textField.configuration = config
 			textField.setText(test.fieldValue)
 

@@ -7,7 +7,7 @@ import Foundation
 import XCTest
 @testable import VGSCheckout
 
-class VGSExpirationDateTextFieldUtilsTests: VGSCollectBaseTestCase {
+class VGSExpirationDateTextFieldUtilsTests: VGSCheckoutBaseTestCase {
 
 	struct TestDateFormatItem {
 		let month: Int

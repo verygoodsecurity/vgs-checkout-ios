@@ -11,7 +11,7 @@ import XCTest
 @testable import VGSCheckout
 
 /// Test collect configuration for satellite.
-class VGSCollectSatelliteTests: VGSCollectBaseTestCase {
+class VGSCollectSatelliteTests: VGSCheckoutBaseTestCase {
 	/// Valid tenant ID.
 	let tenantID: String = "testID"
 

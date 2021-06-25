@@ -116,7 +116,7 @@
 		4405DD8E26859FAD004A83AD /* PaymentCardsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5926859FAC004A83AD /* PaymentCardsTest.swift */; };
 		4405DD8F26859FAD004A83AD /* CardBrandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5A26859FAC004A83AD /* CardBrandTest.swift */; };
 		4405DD9026859FAD004A83AD /* VGSCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */; };
-		4405DD9126859FAD004A83AD /* VGSCollectBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */; };
+		4405DD9126859FAD004A83AD /* VGSCheckoutBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5C26859FAC004A83AD /* VGSCheckoutBaseTestCase.swift */; };
 		4405DD9226859FAD004A83AD /* APIHostnameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */; };
 		4405DD9326859FAD004A83AD /* DeepMergeMergeArrayTestJSONs.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6126859FAC004A83AD /* DeepMergeMergeArrayTestJSONs.json */; };
 		4405DD9426859FAD004A83AD /* FlatPolicyTestJSONs.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6326859FAC004A83AD /* FlatPolicyTestJSONs.json */; };
@@ -312,7 +312,7 @@
 		4405DD5926859FAC004A83AD /* PaymentCardsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCardsTest.swift; sourceTree = "<group>"; };
 		4405DD5A26859FAC004A83AD /* CardBrandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBrandTest.swift; sourceTree = "<group>"; };
 		4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTests.swift; sourceTree = "<group>"; };
-		4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectBaseTestCase.swift; sourceTree = "<group>"; };
+		4405DD5C26859FAC004A83AD /* VGSCheckoutBaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBaseTestCase.swift; sourceTree = "<group>"; };
 		4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHostnameValidatorTests.swift; sourceTree = "<group>"; };
 		4405DD6126859FAC004A83AD /* DeepMergeMergeArrayTestJSONs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeepMergeMergeArrayTestJSONs.json; sourceTree = "<group>"; };
 		4405DD6326859FAC004A83AD /* FlatPolicyTestJSONs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FlatPolicyTestJSONs.json; sourceTree = "<group>"; };
@@ -752,7 +752,7 @@
 				4405DD5626859FAC004A83AD /* VGSCollectTests.swift */,
 				4405DD5726859FAC004A83AD /* Card Brand Tests */,
 				4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */,
-				4405DD5C26859FAC004A83AD /* VGSCollectBaseTestCase.swift */,
+				4405DD5C26859FAC004A83AD /* VGSCheckoutBaseTestCase.swift */,
 				4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */,
 			);
 			path = CollectUtilsTests;
@@ -1813,7 +1813,7 @@
 				4405DD7426859FAD004A83AD /* VGSTextFieldTests.swift in Sources */,
 				4405DD8626859FAD004A83AD /* UtilsTest.swift in Sources */,
 				4405DD8726859FAD004A83AD /* ExpDateConvertorTests.swift in Sources */,
-				4405DD9126859FAD004A83AD /* VGSCollectBaseTestCase.swift in Sources */,
+				4405DD9126859FAD004A83AD /* VGSCheckoutBaseTestCase.swift in Sources */,
 				4405DD8D26859FAD004A83AD /* _CardBrandDataSource.swift in Sources */,
 				4405DD7026859FAD004A83AD /* VGSFieldNameToJSONTests.swift in Sources */,
 				4405DD8F26859FAD004A83AD /* CardBrandTest.swift in Sources */,

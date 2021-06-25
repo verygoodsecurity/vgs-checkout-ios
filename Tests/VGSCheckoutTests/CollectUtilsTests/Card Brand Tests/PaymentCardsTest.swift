@@ -10,7 +10,7 @@ import XCTest
 @testable import VGSCheckout
 @testable import VGSPaymentCards
 
-class PaymentCardsTest: VGSCollectBaseTestCase {
+class PaymentCardsTest: VGSCheckoutBaseTestCase {
   var collector: VGSCollect!
   var cardTextField: VGSTextField!
 
@@ -40,7 +40,7 @@ class PaymentCardsTest: VGSCollectBaseTestCase {
     cardTextField.setText("911111111111111111111111")
     
     if let state = cardTextField.state as? CardState {
-      XCTAssertTrue(state.cardBrand == VGSPaymentCards.CardBrand.visa)
+      XCTAssertTrue(state.cardBrand == VGSCheckoutPaymentCards.CardBrand.visa)
       XCTAssertTrue(state.cardBrand.stringValue == "cutomized-visa")
       XCTAssertTrue(state.cardBrand.cardLengths == [15])
       XCTAssertTrue(state.isValid)
@@ -54,7 +54,7 @@ class PaymentCardsTest: VGSCollectBaseTestCase {
     cardTextField.setText("900000000012")
     
     if let state = cardTextField.state as? CardState {
-      XCTAssertTrue(state.cardBrand == VGSPaymentCards.CardBrand.visa)
+      XCTAssertTrue(state.cardBrand == VGSCheckoutPaymentCards.CardBrand.visa)
       XCTAssertTrue(state.cardBrand.stringValue == "cutomized-visa")
       XCTAssertTrue(state.cardBrand.cardLengths == [12])
       XCTAssertTrue(state.isValid)
@@ -79,7 +79,7 @@ class PaymentCardsTest: VGSCollectBaseTestCase {
     cardTextField.setText("4111111")
     
     if let state = cardTextField.state as? CardState {
-      XCTAssertTrue(state.cardBrand == VGSPaymentCards.CardBrand.custom(brandName: customBrandName))
+      XCTAssertTrue(state.cardBrand == VGSCheckoutPaymentCards.CardBrand.custom(brandName: customBrandName))
     } else {
       XCTFail("Failt state card text files")
     }

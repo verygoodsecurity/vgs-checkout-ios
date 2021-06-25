@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class VGSCollectTests: VGSCollectBaseTestCase {
+class VGSCollectTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     
     override func setUp() {

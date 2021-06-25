@@ -10,7 +10,7 @@ import XCTest
 @testable import VGSCheckout
 @testable import VGSPaymentCards
 
-class LuhnTests: VGSCollectBaseTestCase {
+class LuhnTests: VGSCheckoutBaseTestCase {
     var textField: VGSTextField!
     let cardNumer = "4111111111111111"
     

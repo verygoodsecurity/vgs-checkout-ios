@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class ValidationRulesTest: VGSCollectBaseTestCase {
+class ValidationRulesTest: VGSCheckoutBaseTestCase {
 
     var form: VGSCollect!
     var textfield: VGSTextField!

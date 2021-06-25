@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class TextFieldSecurity: VGSCollectBaseTestCase {
+class TextFieldSecurity: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     var textField: VGSTextField!
     var cardNum = "4111 1111 1111 1111"

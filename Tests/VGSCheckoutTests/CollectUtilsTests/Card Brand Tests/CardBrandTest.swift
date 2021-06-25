@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class CardBrandTest: VGSCollectBaseTestCase {
+class CardBrandTest: VGSCheckoutBaseTestCase {
     var storage: VGSCollect!
     var cardTextField: VGSTextField!
     
@@ -27,7 +27,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     override func tearDown() {
         storage = nil
         cardTextField = nil
-        VGSPaymentCards.validCardBrands = nil
+        VGSCheckoutPaymentCards.validCardBrands = nil
     }
     
     func testCardBrandDetectionReturnsTrue() {
@@ -46,7 +46,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     }
     
     func testCardBrandDetectionByFirstDigitsReturnsTrue() {
-        let allBrands = VGSPaymentCards.availableCardBrands
+        let allBrands = VGSCheckoutPaymentCards.availableCardBrands
         allBrands.forEach { card in
           let numbers = card.brand.firsDigitsInCardNumber
             numbers.forEach { number in
@@ -61,7 +61,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     }
     
     func testValidCardsValidationReturnsTrue() {
-        let allBrands = VGSPaymentCards.availableCardBrands
+        let allBrands = VGSCheckoutPaymentCards.availableCardBrands
         allBrands.forEach { card in
             let numbers = card.brand.cardNumbers
             numbers.forEach { number in
@@ -77,7 +77,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     }
     
     func testNotFullCardsValidationReturnsFalse() {
-        let allBrands = VGSPaymentCards.availableCardBrands
+        let allBrands = VGSCheckoutPaymentCards.availableCardBrands
         allBrands.forEach { card in
           let numbers = card.brand.cardNumbers
             for number in numbers {
@@ -98,7 +98,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     }
     
     func testNotValidCardsValidationReturnsFalse() {
-        let allBrands = VGSPaymentCards.availableCardBrands.filter { $0.brand != .unionpay }
+        let allBrands = VGSCheckoutPaymentCards.availableCardBrands.filter { $0.brand != .unionpay }
         
         allBrands.forEach { card in
             let numbers = card.brand.cardNumbers
@@ -139,7 +139,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     func testCustomizedValidBrands() {
       
       /// Create custom brand model
-      let customBrandModel = VGSCustomPaymentCardModel(name: "custom-brand",
+      let customBrandModel = VGSCheckoutCustomPaymentCardModel(name: "custom-brand",
                                                  regex: "^91\\d*$",
                                                  formatPattern: "#### #### #### ####",
                                                  cardNumberLengths: [15],
@@ -148,17 +148,17 @@ class CardBrandTest: VGSCollectBaseTestCase {
                                                  brandIcon: nil)
       
       /// Set valid card brands
-      let validCardBrandModels: [VGSPaymentCardModelProtocol] = [VGSPaymentCards.visaElectron, VGSPaymentCards.visa, customBrandModel, VGSPaymentCards.masterCard, VGSPaymentCards.amex]
-      VGSPaymentCards.validCardBrands = validCardBrandModels
+      let validCardBrandModels: [VGSCheckoutPaymentCardModelProtocol] = [VGSCheckoutPaymentCards.visaElectron, VGSPaymentCards.visa, customBrandModel, VGSPaymentCards.masterCard, VGSPaymentCards.amex]
+      VGSCheckoutPaymentCards.validCardBrands = validCardBrandModels
       
       /// Check correct valid card brands setup
-      XCTAssert(VGSPaymentCards.validCardBrands?.count == validCardBrandModels.count, "VGSPaymentCards.validCardBrand array is not updated!!!")
+      XCTAssert(VGSCheckoutPaymentCards.validCardBrands?.count == validCardBrandModels.count, "VGSPaymentCards.validCardBrand array is not updated!!!")
       
       /// Array of valid card brands enum
       let validBrands = validCardBrandModels.map { $0.brand }
 
       /// Test cards - all card brands
-      var testBrandModels = VGSPaymentCards.defaultCardModels
+      var testBrandModels = VGSCheckoutPaymentCards.defaultCardModels
       
       /// Add custom brand to testModels
       testBrandModels.insert(customBrandModel, at: 0)
@@ -190,10 +190,10 @@ class CardBrandTest: VGSCollectBaseTestCase {
 
     func testCustomizedValidBrandsSetEmpty() {
       /// Set that all default card brands should be ignored
-      VGSPaymentCards.validCardBrands = []
+      VGSCheckoutPaymentCards.validCardBrands = []
       
       /// Get test cards for each default brands
-      let testCards = VGSPaymentCards.defaultCardModels.map {$0.brand.cardNumbers}.reduce([], +)
+      let testCards = VGSCheckoutPaymentCards.defaultCardModels.map {$0.brand.cardNumbers}.reduce([], +)
 
       for card in testCards {
         cardTextField.setText(card)
@@ -211,7 +211,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     
     let testCardNumber = "4111 1111 1111 1111"
     /// Create custom brand model that have regex similar to Visa
-    let customBrandModel = VGSCustomPaymentCardModel(name: "custom-brand",
+    let customBrandModel = VGSCheckoutCustomPaymentCardModel(name: "custom-brand",
                                                regex: "^41\\d*$",
                                                formatPattern: "#### #### #### ####",
                                                cardNumberLengths: [16],
@@ -220,7 +220,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
                                                brandIcon: nil)
     
     /// Set valid card brands - Visa first
-    VGSPaymentCards.validCardBrands = [ VGSPaymentCards.visa, customBrandModel]
+    VGSCheckoutPaymentCards.validCardBrands = [ VGSCheckoutPaymentCards.visa, customBrandModel]
 
     cardTextField.setText(testCardNumber)
     guard let state1 = cardTextField.state as? CardState else {
@@ -230,7 +230,7 @@ class CardBrandTest: VGSCollectBaseTestCase {
     XCTAssertTrue(state1.cardBrand == .visa)
     
     /// Set valid card brands - customBrandModel first
-    VGSPaymentCards.validCardBrands = [customBrandModel, VGSPaymentCards.visa]
+    VGSCheckoutPaymentCards.validCardBrands = [customBrandModel, VGSCheckoutPaymentCards.visa]
     
     cardTextField.setText(testCardNumber)
     

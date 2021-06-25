@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class ExpDateTextField: VGSCollectBaseTestCase {
+class ExpDateTextField: VGSCheckoutBaseTestCase {
 
     var collector: VGSCollect!
     var textField: VGSExpDateTextField!

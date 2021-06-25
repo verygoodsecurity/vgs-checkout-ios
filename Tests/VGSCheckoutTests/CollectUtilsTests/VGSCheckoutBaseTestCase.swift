@@ -1,5 +1,5 @@
 //
-//  VGSCollectBaseTestCase.swift
+//  VGSCheckoutBaseTestCase.swift
 //  VGSCheckoutTests
 //
 //  Created on 17.02.2021.
@@ -10,14 +10,14 @@ import Foundation
 import XCTest
 @testable import VGSCheckout
 
-/// Base VGSCollect test case for common setup.
-class VGSCollectBaseTestCase: XCTestCase {
+/// BaseVGSCheckout test case for common setup.
+class VGSCheckoutBaseTestCase: XCTestCase {
 
 	/// Setup collect before tests.
 	override class func setUp() {
 		super.setUp()
 
 		// Disable analytics in unit tests.
-		VGSAnalyticsClient.shared.shouldCollectAnalytics = false
+		VGSCheckoutAnalyticsClient.shared.shouldCollectAnalytics = false
 	}
 }

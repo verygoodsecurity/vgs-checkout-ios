@@ -9,7 +9,7 @@
 import XCTest
 @testable import VGSCheckout
 
-class SSNTextFieldTests: VGSCollectBaseTestCase {
+class SSNTextFieldTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     var ssnTextField: VGSTextField!
     
