@@ -31,7 +31,7 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
     }
     
     func testCardBrandDetectionReturnsTrue() {
-        let allBrands = VGSPaymentCards.availableCardBrands
+        let allBrands = VGSCheckoutPaymentCards.availableCardBrands
         allBrands.forEach { card in
           let numbers = card.brand.cardNumbers
             numbers.forEach { number in
@@ -123,7 +123,7 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
     }
     
     func testSpecificNotValidCardsValidationReturnsFalse() {
-        let numbers = VGSPaymentCards.specificNotValidCardNumbers
+        let numbers = VGSCheckoutPaymentCards.specificNotValidCardNumbers
         numbers.forEach { number in
             cardTextField.textField.secureText = number
             guard let state = cardTextField.state as? CardState else {
@@ -148,7 +148,7 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
                                                  brandIcon: nil)
       
       /// Set valid card brands
-      let validCardBrandModels: [VGSCheckoutPaymentCardModelProtocol] = [VGSCheckoutPaymentCards.visaElectron, VGSPaymentCards.visa, customBrandModel, VGSPaymentCards.masterCard, VGSPaymentCards.amex]
+      let validCardBrandModels: [VGSCheckoutPaymentCardModelProtocol] = [VGSCheckoutPaymentCards.visaElectron, VGSCheckoutPaymentCards.visa, customBrandModel, VGSCheckoutPaymentCards.masterCard, VGSCheckoutPaymentCards.amex]
       VGSCheckoutPaymentCards.validCardBrands = validCardBrandModels
       
       /// Check correct valid card brands setup

@@ -42,7 +42,7 @@ internal enum VGSErrorType: Int {
 		case invalidConfigurationURL = 1480
 }
 
-/// An error produced by `VGSCollectSDK`. Works similar to default `NSError` in iOS.
+/// An error produced by `VGSCheckout`. Works similar to default `NSError` in iOS.
 internal class VGSError: NSError {
     
     /// `VGSErrorType `-  required for each `VGSError` instance
@@ -64,6 +64,6 @@ internal class VGSError: NSError {
 	///   - info: `VGSErrorInfo?` object, error info, default is `nil`.
     internal required init(type: VGSErrorType, userInfo info: VGSErrorInfo? = nil) {
         self.type = type
-        super.init(domain: VGSCollectSDKErrorDomain, code: type.rawValue, userInfo: info?.asDictionary)
+        super.init(domain: VGSCheckoutErrorDomain, code: type.rawValue, userInfo: info?.asDictionary)
     }
 }

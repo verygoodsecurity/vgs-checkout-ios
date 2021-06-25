@@ -21,7 +21,7 @@ extension VGSCollect {
         - completion: response completion block, returns `VGSResponse`.
      
      - Note:
-        Errors can be returned in the `NSURLErrorDomain` and `VGSCollectSDKErrorDomain`.
+        Errors can be returned in the `NSURLErrorDomain` and `VGSCheckoutErrorDomain`.
     */
 	internal func sendData(path: String, method: HTTPMethod = .post, extraData: [String: Any]? = nil, requestOptions: VGSCollectRequestOptions = VGSCollectRequestOptions(), completion block: @escaping (VGSResponse) -> Void) {
       

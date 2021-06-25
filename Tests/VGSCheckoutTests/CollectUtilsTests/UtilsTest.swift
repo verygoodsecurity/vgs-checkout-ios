@@ -1,6 +1,6 @@
 //
 //  UtilsTest.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 10.03.2020.
 //  Copyright © 2020 VGS. All rights reserved.

@@ -128,7 +128,7 @@ class VGSTextFieldTests: VGSCheckoutBaseTestCase {
   
     let expDate2 = VGSExpDateTextField()
     let config2 = VGSExpDateConfiguration(collector: collector, fieldName: "expDate2")
-    config2.serializers = [VGSExpDateSeparateSerializer(monthFieldName: "month2", yearFieldName: "year2")]
+    config2.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "month2", yearFieldName: "year2")]
     expDate2.configuration = config2
   
     let input1 = "0225"

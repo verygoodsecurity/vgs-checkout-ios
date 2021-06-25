@@ -1,15 +1,11 @@
 //
 //  _CardBrandDataSource.swift
-//  VGSCollectSDK
-//
-//  Created by Vitalii Obertynskyi on 06.04.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
+//  VGSCheckout
 
 import Foundation
-@testable import VGSPaymentCards
+@testable import VGSCheckout
 
-extension VGSPaymentCards.CardBrand {
+extension VGSCheckoutPaymentCards.CardBrand {
     
     var cardNumbers: [String] {
         switch self {
@@ -239,7 +235,7 @@ extension VGSPaymentCards.CardBrand {
   }
 }
 
-extension VGSPaymentCards {
+extension VGSCheckoutPaymentCards {
     
     static var specificNotValidCardNumbers: [String] {
         return [

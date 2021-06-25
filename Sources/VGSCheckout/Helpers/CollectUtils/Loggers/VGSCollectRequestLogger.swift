@@ -16,13 +16,13 @@ internal class VGSCollectRequestLogger {
 
 		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
 
-		print("⬆️ Send VGSCollectSDK request url: \(stringFromURL(request.url))")
+		print("⬆️ Send VGSCheckout request url: \(stringFromURL(request.url))")
 		if let headers = request.allHTTPHeaderFields {
-			print("⬆️ Send VGSCollectSDK request headers:")
+			print("⬆️ Send VGSCheckout request headers:")
 			print(normalizeRequestHeadersForLogs(headers))
 		}
 		if let payloadValue = payload {
-			print("⬆️ Send VGSCollectSDK request payload:")
+			print("⬆️ Send VGSCheckout request payload:")
 			print(stringifyRawRequestPayloadForLogs(payloadValue))
 		}
 		print("------------------------------------")
@@ -39,18 +39,18 @@ internal class VGSCollectRequestLogger {
 		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
 
 		if let url = response?.url {
-			print("❗Failed ⬇️ VGSCollectSDK request url: \(stringFromURL(url))")
+			print("❗Failed ⬇️ VGSCheckout request url: \(stringFromURL(url))")
 		}
-		print("❗Failed ⬇️ VGSCollectSDK response status code: \(code)")
+		print("❗Failed ⬇️ VGSCheckout response status code: \(code)")
 		if let httpResponse = response as? HTTPURLResponse {
-			print("❗Failed ⬇️ VGSCollectSDK response headers:")
+			print("❗Failed ⬇️ VGSCheckout response headers:")
 			print(normalizeHeadersForLogs(httpResponse.allHeaderFields))
 		}
 		if let errorData = data {
 			if let bodyErrorText = String(data: errorData, encoding: String.Encoding.utf8) {
-				print("❗Failed ⬇️ VGSCollectSDK response extra info:")
+				print("❗Failed ⬇️ VGSCheckout response extra info:")
 				if bodyErrorText.count > maxTextCountToPrintLimit {
-					print("VGSCollectSDK response size is too big to print. Use debugger if needed.")
+					print("VGSCheckout response size is too big to print. Use debugger if needed.")
 				} else {
 					print("\(bodyErrorText)")
 				}
@@ -60,7 +60,7 @@ internal class VGSCollectRequestLogger {
 		// Track error.
 		let errorMessage = (error as NSError?)?.localizedDescription ?? ""
 
-		print("❗Failed ⬇️ VGSCollectSDK response error message: \(errorMessage)")
+		print("❗Failed ⬇️ VGSCheckout response error message: \(errorMessage)")
 		print("------------------------------------")
 	}
 
@@ -73,16 +73,16 @@ internal class VGSCollectRequestLogger {
 
 		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
 
-		print("✅ Success ⬇️ VGSCollectSDK request url: \(stringFromURL(response?.url))")
-		print("✅ Success ⬇️ VGSCollectSDK response code: \(code)")
+		print("✅ Success ⬇️ VGSCheckout request url: \(stringFromURL(response?.url))")
+		print("✅ Success ⬇️ VGSCheckout response code: \(code)")
 
 		if let httpResponse = response as? HTTPURLResponse {
-			print("✅ Success ⬇️ VGSCollectSDK response headers:")
+			print("✅ Success ⬇️ VGSCheckout response headers:")
 			print(normalizeHeadersForLogs(httpResponse.allHeaderFields))
 		}
 
     if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-        print("✅ Success ⬇️ VGSCollectSDK response JSON:")
+        print("✅ Success ⬇️ VGSCheckout response JSON:")
         print(stringifyJSONForLogs(jsonData))
       }
 		print("------------------------------------")
@@ -124,7 +124,7 @@ internal class VGSCollectRequestLogger {
 		if let json = try? JSONSerialization.data(withJSONObject: vgsJSON, options: .prettyPrinted) {
 			let stringToPrint = String(decoding: json, as: UTF8.self)
 			if stringToPrint.count > maxTextCountToPrintLimit {
-				return "VGSCollectSDK response size is too big to print. Use debugger if needed."
+				return "VGSCheckout response size is too big to print. Use debugger if needed."
 			} else {
 				return stringToPrint
 			}

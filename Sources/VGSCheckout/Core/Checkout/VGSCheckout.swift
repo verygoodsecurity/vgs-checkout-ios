@@ -11,7 +11,7 @@ import UIKit
 public class VGSCheckout {
 
 	deinit {
-		//VGSCollectLogger.loggerPrefix = "VGSCollectSDK"
+		//VGSCollectLogger.loggerPrefix = "VGSCheckout"
 	}
 
 	/// An object that acts as a `VGSCheckout` delegate.

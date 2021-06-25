@@ -11,7 +11,7 @@ import UIKit
 
 extension MaskedTextField {
 
-	  /// :nodoc: Disable custom target-action outside `VGSCollectSDK`.
+	  /// :nodoc: Disable custom target-action outside `VGSCheckout`.
     override public func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {}
 
 	  /// :nodoc: Replace native textfield delgate with custom.

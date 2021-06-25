@@ -126,7 +126,7 @@ class VGSExpDateSeparateSerializerTests: VGSCheckoutBaseTestCase {
     config.divider = "-/-"
     
     for test in testData {
-      config.serializers = [VGSExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
+      config.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: test.monthFieldName, yearFieldName: test.yearFieldName)]
       textField.configuration = config
       textField.setText(test.fieldValue)
       

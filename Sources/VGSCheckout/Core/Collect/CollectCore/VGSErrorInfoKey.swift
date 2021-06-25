@@ -11,8 +11,8 @@ import Foundation
 /// :nodoc: VGSError typealias for error info key.
 internal typealias VGSErrorInfoKey = String
 
-/// An error domain string used to produce `VGSError` from `VGSCollectSDK` -  **"vgscollect.sdk"**
-internal let VGSCollectSDKErrorDomain = "vgscollect.sdk"
+/// An error domain string used to produce `VGSError` from `VGSCheckout` -  **"vgscollect.sdk"**
+internal let VGSCheckoutErrorDomain = "vgscollect.sdk"
 
 // MARK: - VGSErrorInfoKeys
 

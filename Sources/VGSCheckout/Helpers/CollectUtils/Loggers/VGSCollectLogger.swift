@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// `VGSCollectLogger` encapsulates logging logic and debugging options for VGSCollectSDK. Use `.configuration` property to setup these options. `VGSCollectLogger` logging implies only printing logs to Xcode console. It doesn't save logs to persistent store/local file, also it doesn't send debugging logs to backend services.
+/// `VGSCollectLogger` encapsulates logging logic and debugging options for VGSCheckout. Use `.configuration` property to setup these options. `VGSCollectLogger` logging implies only printing logs to Xcode console. It doesn't save logs to persistent store/local file, also it doesn't send debugging logs to backend services.
 /// **IMPORTANT** You should NOT use logging in your production configuration for live apps.
 internal final class VGSCollectLogger {
 
@@ -23,7 +23,7 @@ internal final class VGSCollectLogger {
 	private var registeredLoggers = [VGSLogging]()
 
 	/// Thread safe container for registered loggers.
-	private let readWriteContainer: VGSReadWriteSafeContainer = VGSReadWriteSafeContainer(label: "VGSCollectSDK.Utils.Loggers")
+	private let readWriteContainer: VGSReadWriteSafeContainer = VGSReadWriteSafeContainer(label: "VGSCheckout.Utils.Loggers")
 
 	// MARK: - Initialization
 

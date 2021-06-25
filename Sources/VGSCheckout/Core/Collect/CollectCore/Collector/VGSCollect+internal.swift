@@ -142,11 +142,11 @@ internal extension VGSCollect {
       var environmentString = environment.rawValue
       if let region = region, !region.isEmpty {
           if !Self.regionValid(region) {
-            let eventText = "VGSCollectSDK CONFIGURATION ERROR: REGION STRING IS NOT VALID!!! region: \(region)"
+            let eventText = "VGSCheckout CONFIGURATION ERROR: REGION STRING IS NOT VALID!!! region: \(region)"
             let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
             VGSCollectLogger.shared.forwardLogEvent(event)
             
-            assert(Self.regionValid(region), "❗VGSCollectSDK CONFIGURATION ERROR:: REGION IS NOT VALID!!!")
+            assert(Self.regionValid(region), "❗VGSCheckout CONFIGURATION ERROR:: REGION IS NOT VALID!!!")
           }
           environmentString += "-" + region
       }

@@ -1,6 +1,6 @@
 //
 //  PaymentCardsTest.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
 //  Copyright © 2020 VGS. All rights reserved.
@@ -99,7 +99,7 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     cardTextField.setText("911111")
     
     if let state = cardTextField.state as? CardState {
-      XCTAssertTrue(state.cardBrand == VGSPaymentCards.CardBrand.custom(brandName: customBrandName2))
+      XCTAssertTrue(state.cardBrand == VGSCheckoutPaymentCards.CardBrand.custom(brandName: customBrandName2))
     } else {
       XCTFail("Failt state card text files")
     }
