@@ -3,7 +3,6 @@
 //  VGSCheckout
 
 import Foundation
-import VGSCollectSDK
 
 /// Request result completion.
 internal typealias VGSCheckoutRequestResultCompletion = (VGSCheckoutRequestResult) -> Void

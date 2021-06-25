@@ -3,7 +3,6 @@
 //  VGSCheckout
 
 import Foundation
-import VGSCollectSDK
 
 /// Holds logic for sending data to vault (non-multiplexing flow).
 internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerProtocol {

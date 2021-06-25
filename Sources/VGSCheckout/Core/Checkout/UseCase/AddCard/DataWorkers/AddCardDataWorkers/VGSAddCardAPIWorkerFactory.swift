@@ -3,7 +3,6 @@
 //  VGSCheckout
 
 import Foundation
-import VGSCollectSDK
 
 /// Factory class providers API workers for Add Card flow.
 internal class VGSAddCardAPIWorkerFactory {

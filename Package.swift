@@ -18,30 +18,29 @@ let package = Package(
 				name: "VGSCheckoutCardIOScanner",
 				targets: ["VGSCheckoutCardIOScanner"])
 	],
-	dependencies: [
-		.package(
-			name: "VGSCollectSDK",
-			url: "https://github.com/verygoodsecurity/vgs-collect-ios.git",
-			.branch("canary")
-		)
-	],
 	targets: [
 		// Targets are the basic building blocks of a package. A target can define a module or a test suite.
 		// Targets can depend on other targets in this package, and on products in packages which this package depends on.
 		.target(
 			name: "VGSCheckout",
-			dependencies: ["VGSCollectSDK"],
 			exclude: [
 				"VGSCheckout.h",
 				"Info.plist"
 			]),
 		.target(
 			name: "VGSCheckoutCardIOScanner",
-			dependencies: ["VGSCheckout",
-										.product(name: "VGSCardIOCollector", package: "VGSCollectSDK")],
-			path: "Sources/VGSCheckoutCardIOScanner/"),
+			path: "Sources/VGSCheckoutCardIOScanner/",
+			exclude: [
+				"CheckoutCardIOScanner.h",
+				"Info.plist",
+			]),
 		.testTarget(
-			name: "VGSCheckoutTests",
-			dependencies: ["VGSCheckout"]
-		)
+				name: "VGSCheckoutTests",
+				dependencies: ["VGSCheckout"],
+				exclude: [
+				"Info.plist",
+				"VGSCheckoutTests.xctestplan"
+				],
+				resources: [.process("Resources")]
+		),
 	])

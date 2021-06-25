@@ -6,7 +6,6 @@ import Foundation
 #if os(iOS)
 import UIKit
 #endif
-import VGSCollectSDK
 
 internal enum VGSAddCardFlowState {
 	case requestSubmitted(_ result: VGSCheckoutRequestResult)

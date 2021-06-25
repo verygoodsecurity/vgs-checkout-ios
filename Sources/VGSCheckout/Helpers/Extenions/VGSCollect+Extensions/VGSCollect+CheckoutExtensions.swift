@@ -3,7 +3,6 @@
 //  VGSCheckout
 
 import Foundation
-import VGSCollectSDK
 
 internal extension VGSCollect {
 	/// Convenience init for `VGSCollect`.
@@ -23,7 +22,7 @@ internal extension VGSCollect {
 			case .local(let localhost, let port):
 				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
 			}
-		case .multiplexing(let multiplexingConfig):
+		case .multiplexing:
 			self.init(id: vaultID, environment: environment)
 		}
 	}

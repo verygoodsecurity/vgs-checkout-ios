@@ -6,13 +6,12 @@ import Foundation
 #if os(iOS)
 import UIKit
 #endif
-import VGSCollectSDK
 
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
 
 	deinit {
-		//VGSCollectLogger.loggerPrefix = "VGSCollectSDK"
+		//VGSCollectLogger.loggerPrefix = "VGSCheckout"
 	}
 
 	/// An object that acts as a `VGSCheckout` delegate.

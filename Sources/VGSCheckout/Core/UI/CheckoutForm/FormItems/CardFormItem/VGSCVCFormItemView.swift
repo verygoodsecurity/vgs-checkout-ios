@@ -1,13 +1,12 @@
 //
 //  VGSCVCFormComponentView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
 
 internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
 

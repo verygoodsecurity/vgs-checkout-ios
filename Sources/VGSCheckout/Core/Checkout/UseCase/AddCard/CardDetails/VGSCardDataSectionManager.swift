@@ -7,10 +7,6 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
-#if canImport(VGSPaymentCards)
-import VGSPaymentCards
-#endif
 
 /// Form section delegate protocol.
 internal protocol VGSFormSectionPresenterDelegate: AnyObject {
@@ -214,7 +210,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		expDateConfiguration.type = .expDate
 		expDateConfiguration.inputDateFormat = .shortYear
 		expDateConfiguration.outputDateFormat = .longYear
-		expDateConfiguration.serializers = [VGSExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
+		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
 		expDateConfiguration.formatPattern = "##/##"
 		//expDateConfiguration.inputSource = .keyboard
 
@@ -435,7 +431,7 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
-	internal func updateCVCPlaceholder(for cardBrand: VGSPaymentCards.CardBrand) {
+	internal func updateCVCPlaceholder(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
 		 guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
 			 return
 		 }

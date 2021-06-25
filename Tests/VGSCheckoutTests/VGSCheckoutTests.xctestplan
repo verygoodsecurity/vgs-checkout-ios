@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "07893CD3-A56B-45A8-B0FC-5BA97C3796DE",
+      "name" : "Arabic",
+      "options" : {
+        "language" : "ar"
+      }
+    },
+    {
+      "id" : "9A2335AF-8BBC-431D-9F20-103AF9556B30",
+      "name" : "English",
+      "options" : {
+        "language" : "en"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:VGSCheckout.xcodeproj",
+        "identifier" : "3286E0C4265EC19C001FECEB",
+        "name" : "VGSCheckoutTests"
+      }
+    }
+  ],
+  "version" : 1
+}

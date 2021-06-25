@@ -1,13 +1,12 @@
 //
 //  VGSExpirationDateFormItemView.swift
-//  VGSCollectSDK
+//  VGSCheckout
 //
 
 import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCollectSDK
 
 internal enum VGSAddCardFormBlock {
 	case cardHolder
