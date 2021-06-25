@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 /// Test collect configuration for satellite.
 class VGSCollectSatelliteTests: VGSCollectBaseTestCase {

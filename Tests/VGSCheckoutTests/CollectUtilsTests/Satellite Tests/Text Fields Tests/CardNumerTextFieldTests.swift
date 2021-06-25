@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 class CardNumerTextFieldTests: VGSCollectBaseTestCase {
     var collector: VGSCollect!

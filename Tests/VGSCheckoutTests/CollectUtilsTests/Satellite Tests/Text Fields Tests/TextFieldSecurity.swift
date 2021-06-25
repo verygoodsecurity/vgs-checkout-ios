@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 class TextFieldSecurity: VGSCollectBaseTestCase {
     var collector: VGSCollect!

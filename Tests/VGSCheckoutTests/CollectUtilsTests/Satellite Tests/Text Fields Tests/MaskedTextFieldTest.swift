@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 class MaskedTextFieldTest: VGSCollectBaseTestCase {
     var collector: VGSCollect!

@@ -7,8 +7,7 @@
 //
 
 import XCTest
-@testable import VGSCollectSDK
-@testable import VGSPaymentCards
+@testable import VGSCheckout
 
 class CardBrandTest: VGSCollectBaseTestCase {
     var storage: VGSCollect!

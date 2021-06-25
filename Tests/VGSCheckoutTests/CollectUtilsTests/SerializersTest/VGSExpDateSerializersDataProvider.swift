@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 final class VGSExpDateSerializersDataProvider {
 

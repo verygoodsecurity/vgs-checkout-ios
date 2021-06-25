@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 class ExpDateConvertorTests: VGSCollectBaseTestCase {
   var collector: VGSCollect!

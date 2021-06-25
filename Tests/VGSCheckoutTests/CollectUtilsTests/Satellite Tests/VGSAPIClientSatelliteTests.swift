@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 
 /// Tests for API cleint and satellite configuration: verify API URL policy setup.
 class VGSAPIClientSatelliteTests: VGSCollectBaseTestCase {

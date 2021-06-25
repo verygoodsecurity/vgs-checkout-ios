@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import VGSCollectSDK
+@testable import VGSCheckout
 @testable import VGSPaymentCards
 
 class LuhnTests: VGSCollectBaseTestCase {
