@@ -29,9 +29,18 @@ let package = Package(
 			]),
 		.target(
 			name: "VGSCheckoutCardIOScanner",
-			path: "Sources/VGSCheckoutCardIOScanner/"),
+			path: "Sources/VGSCheckoutCardIOScanner/",
+			exclude: [
+				"CheckoutCardIOScanner.h",
+				"Info.plist",
+			]),
 		.testTarget(
-			name: "VGSCheckoutTests",
-			dependencies: ["VGSCheckout"]
-		)
+				name: "VGSCheckoutTests",
+				dependencies: ["VGSCheckout"],
+				exclude: [
+				"Info.plist",
+				"VGSCheckoutTests.xctestplan"
+				],
+				resources: [.process("Resources")]
+		),
 	])
