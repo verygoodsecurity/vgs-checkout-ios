@@ -324,6 +324,7 @@
 		4405DD6C26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_MapWithArrayMerge.json; sourceTree = "<group>"; };
 		4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = VGSExpDateSerialization_CustomConfig.json; sourceTree = "<group>"; };
 		4405DD6E26859FAC004A83AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4405DD9F2685B55C004A83AD /* VGSCheckoutTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VGSCheckoutTests.xctestplan; sourceTree = "<group>"; };
 		4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPayWithCardHeaderView.swift; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
 		44955C24266DE20500435FC6 /* VGSHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSHeaderBarView.swift; sourceTree = "<group>"; };
@@ -733,6 +734,7 @@
 				4405DD3026859FAC004A83AD /* CollectUtilsTests */,
 				4405DD5E26859FAC004A83AD /* Resources */,
 				4405DD6E26859FAC004A83AD /* Info.plist */,
+				4405DD9F2685B55C004A83AD /* VGSCheckoutTests.xctestplan */,
 			);
 			path = VGSCheckoutTests;
 			sourceTree = "<group>";
