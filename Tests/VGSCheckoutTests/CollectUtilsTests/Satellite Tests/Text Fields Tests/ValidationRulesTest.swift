@@ -1,10 +1,6 @@
 //
 //  ValidationRulesTest.swift
 //  VGSCheckout
-//
-//  Created by Dima on 24.06.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
 
 import XCTest
 @testable import VGSCheckout

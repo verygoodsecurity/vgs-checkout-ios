@@ -1,10 +1,6 @@
 //
 //  ValidationTests.swift
 //  VGSCheckoutTests
-//
-//  Created by Vitalii Obertynskyi on 9/17/19.
-//  Copyright © 2019 Vitalii Obertynskyi. All rights reserved.
-//
 
 import XCTest
 @testable import VGSCheckout

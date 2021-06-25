@@ -1,10 +1,6 @@
 //
 //  MaskedTextFieldTest.swift
 //  VGSCheckoutTests
-//
-//  Created by Dima on 27.01.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
 
 import XCTest
 @testable import VGSCheckout

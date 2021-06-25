@@ -1,10 +1,6 @@
 //
 //  APIHostnameValidatorTests.swift
 //  VGSCheckout
-//
-//  Created by Eugene on 20.11.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
 
 import Foundation
 import XCTest

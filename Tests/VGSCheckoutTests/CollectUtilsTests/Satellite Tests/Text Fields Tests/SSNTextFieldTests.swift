@@ -1,10 +1,6 @@
 //
 //  SSNTextFieldTests.swift
 //  VGSCheckoutTests
-//
-//  Created by Dima on 29.05.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
 
 import XCTest
 @testable import VGSCheckout
