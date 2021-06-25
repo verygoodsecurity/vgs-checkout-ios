@@ -1,9 +1,6 @@
 //
 //  VGSExpDateSerializersDataProvider.swift
 //  VGSCheckoutTests
-//
-//  Copyright © 2021 VGS. All rights reserved.
-//
 
 import Foundation
 import XCTest

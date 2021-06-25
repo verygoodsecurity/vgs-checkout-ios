@@ -1,10 +1,6 @@
 //
 //  VGSCheckoutBaseTestCase.swift
 //  VGSCheckoutTests
-//
-//  Created on 17.02.2021.
-//  Copyright © 2021 VGS. All rights reserved.
-//
 
 import Foundation
 import XCTest

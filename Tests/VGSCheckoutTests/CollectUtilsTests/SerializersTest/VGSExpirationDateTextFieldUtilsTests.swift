@@ -1,7 +1,6 @@
 //
 //  VGSExpirationDateTextFieldUtilsTests.swift
 //  VGSCheckoutTests
-//
 
 import Foundation
 import XCTest

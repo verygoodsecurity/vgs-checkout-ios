@@ -1,9 +1,6 @@
 //
 //  VGSCheckoutTests.swift
 //  VGSCheckoutTests
-//
-//  Created by Dima on 26.05.2021.
-//
 
 import XCTest
 @testable import VGSCheckout

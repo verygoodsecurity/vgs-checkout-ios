@@ -1,10 +1,6 @@
 //
 //  ExpDateConvertorTests.swift
 //  VGSCheckoutTests
-//
-//  Created by Dima on 22.01.2021.
-//  Copyright © 2021 VGS. All rights reserved.
-//
 
 import Foundation
 import XCTest
