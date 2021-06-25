@@ -181,7 +181,7 @@ internal class VGSCardDetailsFormView: UIView {
 			default:
 				break
 			}
-		case .multiplexing(let multiplexing):
+		case .multiplexing:
 			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 			rootStackView.addArrangedSubview(cardHolderDetailsView)
 			cardDetailsErrorLabel.isHidden = true
