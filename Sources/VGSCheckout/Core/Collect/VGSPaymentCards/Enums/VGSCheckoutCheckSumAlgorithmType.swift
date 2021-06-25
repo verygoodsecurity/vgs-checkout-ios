@@ -17,7 +17,7 @@ public enum VGSCheckoutCheckSumAlgorithmType {
 
 public extension VGSCheckoutCheckSumAlgorithmType {
   
-  public func validate(_ input: String) -> Bool {
+	func validate(_ input: String) -> Bool {
     switch self {
     case .luhn:
       return Self.validateWithLuhnAlgorithm(with: input)

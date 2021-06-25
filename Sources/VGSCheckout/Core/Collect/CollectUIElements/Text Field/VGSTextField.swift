@@ -183,17 +183,17 @@ internal class VGSTextField: UIView {
 internal extension VGSTextField {
     
     /// Make `VGSTextField` focused.
-    @discardableResult override public func becomeFirstResponder() -> Bool {
+    @discardableResult override func becomeFirstResponder() -> Bool {
         return textField.becomeFirstResponder()
     }
     
     /// Remove  focus from `VGSTextField`.
-    @discardableResult override public func resignFirstResponder() -> Bool {
+    @discardableResult override func resignFirstResponder() -> Bool {
         return textField.resignFirstResponder()
     }
     
     /// Check if `VGSTextField` is focused.
-    override public var isFirstResponder: Bool {
+    override var isFirstResponder: Bool {
         return textField.isFirstResponder
     }
 }
