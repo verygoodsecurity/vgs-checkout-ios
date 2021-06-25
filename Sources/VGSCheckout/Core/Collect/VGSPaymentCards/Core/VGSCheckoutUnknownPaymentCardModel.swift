@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 #endif
 
-/// An object representing Unknown Payment Cards - cards not defined in the SDK. Object is used when validation for`CardBrand.unknown` is set as `true`. Check `VGSValidationRulePaymentCard` for more details. Validation attributes can be edited through ``VGSPaymentCards.unknown` model.
+/// An object representing Unknown Payment Cards - cards not defined in the SDK. Object is used when validation for`CardBrand.unknown` is set as `true`. Check `VGSValidationRulePaymentCard` for more details. Validation attributes can be edited through ``VGSCheckoutPaymentCards.unknown` model.
 public struct VGSCheckoutUnknownPaymentCardModel {
   
   internal let name = VGSCheckoutPaymentCards.CardBrand.unknown.defaultName

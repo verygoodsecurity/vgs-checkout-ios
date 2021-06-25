@@ -1,6 +1,6 @@
 //
 //  ChecksumAlgoritmType.swift
-//  VGSPaymentCards
+//  VGSCheckoutPaymentCards
 //
 //  Created by Dima on 08.06.2021.
 //  Copyright © 2021 VGS. All rights reserved.

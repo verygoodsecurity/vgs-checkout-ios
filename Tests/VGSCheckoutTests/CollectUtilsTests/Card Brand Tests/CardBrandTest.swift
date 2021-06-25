@@ -152,7 +152,7 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
       VGSCheckoutPaymentCards.validCardBrands = validCardBrandModels
       
       /// Check correct valid card brands setup
-      XCTAssert(VGSCheckoutPaymentCards.validCardBrands?.count == validCardBrandModels.count, "VGSPaymentCards.validCardBrand array is not updated!!!")
+      XCTAssert(VGSCheckoutPaymentCards.validCardBrands?.count == validCardBrandModels.count, "VGSCheckoutPaymentCards.validCardBrand array is not updated!!!")
       
       /// Array of valid card brands enum
       let validBrands = validCardBrandModels.map { $0.brand }

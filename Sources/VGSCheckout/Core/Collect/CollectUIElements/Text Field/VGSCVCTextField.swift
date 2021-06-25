@@ -9,9 +9,6 @@
 #if os(iOS)
 import UIKit
 #endif
-#if !COCOAPODS
-import VGSPaymentCards
-#endif
 
 /// An object that displays an editable text area. Can be use instead of a `VGSTextField` when need to show CVC/CVV images for credit card brands.
 internal final class VGSCVCTextField: VGSTextField {
@@ -65,7 +62,7 @@ internal final class VGSCVCTextField: VGSTextField {
     }
     
     // MARK: Custom CVC images for specific card brands
-    /// Asks custom image for specific `VGSPaymentCards.CardBrand`
+    /// Asks custom image for specific `VGSCheckoutPaymentCards.CardBrand`
     public var cvcIconSource: ((VGSCheckoutPaymentCards.CardBrand) -> UIImage?)?
     
     /// :nodoc:

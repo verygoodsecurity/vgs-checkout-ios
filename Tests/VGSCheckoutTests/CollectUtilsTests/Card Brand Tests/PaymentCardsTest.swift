@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import VGSCheckout
-@testable import VGSPaymentCards
 
 class PaymentCardsTest: VGSCheckoutBaseTestCase {
   var collector: VGSCollect!
@@ -32,10 +31,10 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
   }
   
   func testEditingDefaultBrands() {
-    VGSPaymentCards.visa.name =  "cutomized-visa"
-    VGSPaymentCards.visa.regex = "^9\\d*$"
-    VGSPaymentCards.visa.formatPattern = "####-####-####-###"
-    VGSPaymentCards.visa.cardNumberLengths = [15]
+    VGSCheckoutPaymentCards.visa.name =  "cutomized-visa"
+    VGSCheckoutPaymentCards.visa.regex = "^9\\d*$"
+    VGSCheckoutPaymentCards.visa.formatPattern = "####-####-####-###"
+    VGSCheckoutPaymentCards.visa.cardNumberLengths = [15]
     
     cardTextField.setText("911111111111111111111111")
     
@@ -49,8 +48,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       XCTFail("Failt state card text files")
     }
     
-    VGSPaymentCards.visa.checkSumAlgorithm = .none
-    VGSPaymentCards.visa.cardNumberLengths = [12]
+    VGSCheckoutPaymentCards.visa.checkSumAlgorithm = .none
+    VGSCheckoutPaymentCards.visa.cardNumberLengths = [12]
     cardTextField.setText("900000000012")
     
     if let state = cardTextField.state as? CardState {
@@ -68,14 +67,14 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
   
   func testCustomBrandPriority() {
     let customBrandName = "custom-brand-1"
-    let customBrand = VGSCustomPaymentCardModel(name: customBrandName,
-                                                    regex: VGSPaymentCards.visa.regex,
+    let customBrand = VGSCheckoutCustomPaymentCardModel(name: customBrandName,
+                                                    regex: VGSCheckoutPaymentCards.visa.regex,
                                                     formatPattern: "#### #### #### ####",
                                                     cardNumberLengths: [15, 19],
                                                     cvcLengths: [5],
                                                     checkSumAlgorithm: .luhn,
                                                     brandIcon: nil)
-    VGSPaymentCards.cutomPaymentCardModels = [customBrand]
+    VGSCheckoutPaymentCards.cutomPaymentCardModels = [customBrand]
     cardTextField.setText("4111111")
     
     if let state = cardTextField.state as? CardState {
@@ -86,15 +85,15 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     
     let regex = "^9\\d*$"
     let customBrandName2 = "custom-brand-2"
-    let customBrand2 = VGSCustomPaymentCardModel(name: customBrandName2,
+    let customBrand2 = VGSCheckoutCustomPaymentCardModel(name: customBrandName2,
                                                     regex: regex,
                                                     formatPattern: "#### #### #### ####",
                                                     cardNumberLengths: [15, 19],
                                                     cvcLengths: [5],
                                                     checkSumAlgorithm: .luhn,
                                                     brandIcon: nil)
-    VGSPaymentCards.cutomPaymentCardModels = [customBrand2]
-    VGSPaymentCards.visa.regex = regex
+    VGSCheckoutPaymentCards.cutomPaymentCardModels = [customBrand2]
+    VGSCheckoutPaymentCards.visa.regex = regex
 
     cardTextField.setText("911111")
     
@@ -106,7 +105,7 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
   }
   
   func testCustomBrands() {
-    let customBrand1 = VGSCustomPaymentCardModel(name: "custom-brand-1",
+    let customBrand1 = VGSCheckoutCustomPaymentCardModel(name: "custom-brand-1",
                                                  regex: "^911\\d*$",
                                                  formatPattern: "#### #### #### ####",
                                                  cardNumberLengths: [15, 19],
@@ -114,7 +113,7 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
                                                  checkSumAlgorithm: .luhn,
                                                  brandIcon: nil)
     
-    let customBrand2 = VGSCustomPaymentCardModel(name: "custom-brand-2",
+    let customBrand2 = VGSCheckoutCustomPaymentCardModel(name: "custom-brand-2",
                                                  regex: "^922\\d*$",
                                                  formatPattern: "#### #### #### ####",
                                                  cardNumberLengths: Array(12...16),
@@ -122,7 +121,7 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
                                                  checkSumAlgorithm: .none,
                                                  brandIcon: nil)
     let customBrands = [customBrand1, customBrand2]
-    VGSPaymentCards.cutomPaymentCardModels = customBrands
+    VGSCheckoutPaymentCards.cutomPaymentCardModels = customBrands
     cardTextField.setText("9111 1111 1111 111")
     
     if let state = cardTextField.state as? CardState {
@@ -158,9 +157,9 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       } else {
         XCTFail("Failt state card text files")
       }
-      VGSPaymentCards.unknown.formatPattern = "#### #### #### #### #### ####"
-      VGSPaymentCards.unknown.cardNumberLengths = [15]
-      VGSPaymentCards.unknown.checkSumAlgorithm = .luhn
+      VGSCheckoutPaymentCards.unknown.formatPattern = "#### #### #### #### #### ####"
+      VGSCheckoutPaymentCards.unknown.cardNumberLengths = [15]
+      VGSCheckoutPaymentCards.unknown.checkSumAlgorithm = .luhn
       
       cardTextField.setText("9111 1111 1111 111")
       if let state = cardTextField.state as? CardState {
@@ -184,8 +183,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
         XCTFail("Failt state card text files")
       }
       
-      VGSPaymentCards.unknown.cardNumberLengths = Array(12...19)
-      VGSPaymentCards.unknown.checkSumAlgorithm = .none
+      VGSCheckoutPaymentCards.unknown.cardNumberLengths = Array(12...19)
+      VGSCheckoutPaymentCards.unknown.checkSumAlgorithm = .none
       
       cardTextField.setText("123456789012")
       if let state = cardTextField.state as? CardState {
@@ -216,9 +215,9 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     }
    
    func testAvailableBrands() {
-    XCTAssertTrue(VGSPaymentCards.availableCardBrands.count == VGSPaymentCards.defaultCardModels.count)
+    XCTAssertTrue(VGSCheckoutPaymentCards.availableCardBrands.count == VGSCheckoutPaymentCards.defaultCardModels.count)
 
-    let customBrand1 = VGSCustomPaymentCardModel(name: "custom-brand-1",
+    let customBrand1 = VGSCheckoutCustomPaymentCardModel(name: "custom-brand-1",
                                                  regex: "^9\\d*$",
                                                  formatPattern: "#### #### #### ####",
                                                  cardNumberLengths: [15, 19],
@@ -226,7 +225,7 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
                                                  checkSumAlgorithm: .luhn,
                                                  brandIcon: nil)
     
-    let customBrand2 = VGSCustomPaymentCardModel(name: "custom-brand-2",
+    let customBrand2 = VGSCheckoutCustomPaymentCardModel(name: "custom-brand-2",
                                                  regex: "^9\\d*$",
                                                  formatPattern: "#### #### #### ####",
                                                  cardNumberLengths: [15, 19],
@@ -234,25 +233,25 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
                                                  checkSumAlgorithm: .luhn,
                                                  brandIcon: nil)
     let customBrands = [customBrand1, customBrand2]
-    VGSPaymentCards.cutomPaymentCardModels = customBrands
-    XCTAssertTrue(VGSPaymentCards.availableCardBrands.count == VGSPaymentCards.defaultCardModels.count + customBrands.count)
+    VGSCheckoutPaymentCards.cutomPaymentCardModels = customBrands
+    XCTAssertTrue(VGSCheckoutPaymentCards.availableCardBrands.count == VGSCheckoutPaymentCards.defaultCardModels.count + customBrands.count)
    }
   
   func resetCardBrands() {
-    VGSPaymentCards.elo = VGSPaymentCardModel(brand: .elo)
-    VGSPaymentCards.visaElectron = VGSPaymentCardModel(brand: .visaElectron)
-    VGSPaymentCards.maestro = VGSPaymentCardModel(brand: .maestro)
-    VGSPaymentCards.forbrugsforeningen = VGSPaymentCardModel(brand: .forbrugsforeningen)
-    VGSPaymentCards.dankort = VGSPaymentCardModel(brand: .dankort)
-    VGSPaymentCards.visa = VGSPaymentCardModel(brand: .visa)
-    VGSPaymentCards.masterCard = VGSPaymentCardModel(brand: .mastercard)
-    VGSPaymentCards.amex = VGSPaymentCardModel(brand: .amex)
-    VGSPaymentCards.hipercard = VGSPaymentCardModel(brand: .hipercard)
-    VGSPaymentCards.dinersClub = VGSPaymentCardModel(brand: .dinersClub)
-    VGSPaymentCards.discover = VGSPaymentCardModel(brand: .discover)
-    VGSPaymentCards.unionpay = VGSPaymentCardModel(brand: .unionpay)
-    VGSPaymentCards.jcb = VGSPaymentCardModel(brand: .jcb)
+    VGSCheckoutPaymentCards.elo = VGSCheckoutPaymentCardModel(brand: .elo)
+    VGSCheckoutPaymentCards.visaElectron = VGSCheckoutPaymentCardModel(brand: .visaElectron)
+    VGSCheckoutPaymentCards.maestro = VGSCheckoutPaymentCardModel(brand: .maestro)
+    VGSCheckoutPaymentCards.forbrugsforeningen = VGSCheckoutPaymentCardModel(brand: .forbrugsforeningen)
+    VGSCheckoutPaymentCards.dankort = VGSCheckoutPaymentCardModel(brand: .dankort)
+    VGSCheckoutPaymentCards.visa = VGSCheckoutPaymentCardModel(brand: .visa)
+    VGSCheckoutPaymentCards.masterCard = VGSCheckoutPaymentCardModel(brand: .mastercard)
+    VGSCheckoutPaymentCards.amex = VGSCheckoutPaymentCardModel(brand: .amex)
+    VGSCheckoutPaymentCards.hipercard = VGSCheckoutPaymentCardModel(brand: .hipercard)
+    VGSCheckoutPaymentCards.dinersClub = VGSCheckoutPaymentCardModel(brand: .dinersClub)
+    VGSCheckoutPaymentCards.discover = VGSCheckoutPaymentCardModel(brand: .discover)
+    VGSCheckoutPaymentCards.unionpay = VGSCheckoutPaymentCardModel(brand: .unionpay)
+    VGSCheckoutPaymentCards.jcb = VGSCheckoutPaymentCardModel(brand: .jcb)
     
-    VGSPaymentCards.cutomPaymentCardModels = []
+    VGSCheckoutPaymentCards.cutomPaymentCardModels = []
   }
 }

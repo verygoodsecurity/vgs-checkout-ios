@@ -1,5 +1,5 @@
 //
-//  VGSPaymentCards.swift
+//  VGSCheckoutPaymentCards.swift
 //  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.
@@ -89,15 +89,15 @@ public class VGSCheckoutPaymentCards {
     // MARK: - Custom Payment Card Models
   
     /// Array of Custom Payment Card Models.
-    /// - Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
+    /// - Note: the order has impact on which card brand should be detected first by `VGSCheckoutPaymentCardModel.regex`.
     public static var cutomPaymentCardModels = [VGSCheckoutCustomPaymentCardModel]()
 
     /// An array of valid Card Brands, could include custom and default brands. If not set, will use `availableCardBrands` array instead.
-    /// - Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
+    /// - Note: the order has impact on which card brand should be detected first by `VGSCheckoutPaymentCardModel.regex`.
     public static var validCardBrands: [VGSCheckoutPaymentCardModelProtocol]?
 
     /// Array of Available Cards.
-    /// -  Note: the order has impact on which card brand should be detected first by `VGSPaymentCardModel.regex`.
+    /// -  Note: the order has impact on which card brand should be detected first by `VGSCheckoutPaymentCardModel.regex`.
     internal static var defaultCardModels: [VGSCheckoutPaymentCardModelProtocol] {
                                             return  [ elo,
                                                       visaElectron,
@@ -116,7 +116,7 @@ public class VGSCheckoutPaymentCards {
     /// Array of CardBrands that should be supported by SDK.
     ///  Will return an array of `validCardBrands` when it's not nil.
     ///  Will return All Card Models(Custom + Default) if specific `validCardBrands` is nil.
-    /// - Note: the order has impact on which card brand should be detected first by  `VGSPaymentCardModel.regex`
+    /// - Note: the order has impact on which card brand should be detected first by  `VGSCheckoutPaymentCardModel.regex`
      internal static var availableCardBrands: [VGSCheckoutPaymentCardModelProtocol] {
       /// Check if uset setup an array of specific CardBrands that should be supported by SDK.
       if let userValidBrands = validCardBrands {
@@ -130,12 +130,12 @@ public class VGSCheckoutPaymentCards {
 // MARK: - Attributes
 public extension VGSCheckoutPaymentCards.CardBrand {
   
-    /// String representation of `VGSPaymentCards.CardBrand` enum values.
+    /// String representation of `VGSCheckoutPaymentCards.CardBrand` enum values.
     var stringValue: String {
       return VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: self)?.name ?? VGSCheckoutPaymentCards.unknown.name
     }
 
-    /// Returns array with valid card number lengths for specific `VGSPaymentCards.CardBrand`
+    /// Returns array with valid card number lengths for specific `VGSCheckoutPaymentCards.CardBrand`
     var cardLengths: [Int] {
       return VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand: self)?.cardNumberLengths ?? VGSCheckoutPaymentCards.unknown.cardNumberLengths
     }

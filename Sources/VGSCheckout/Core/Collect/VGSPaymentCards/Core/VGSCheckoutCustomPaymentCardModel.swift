@@ -1,5 +1,5 @@
 //
-//  VGSCustomPaymentCardModel.swift
+//  VGSCheckoutCustomPaymentCardModel.swift
 //  VGSCheckout
 //
 //  Created by Dima on 09.07.2020.

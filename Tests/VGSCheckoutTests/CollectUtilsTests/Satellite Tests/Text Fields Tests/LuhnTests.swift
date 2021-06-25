@@ -1,14 +1,9 @@
 //
 //  LuhnTests.swift
 //  VGSCheckoutTests
-//
-//  Created by Vitalii Obertynskyi on 10/3/19.
-//  Copyright © 2019 Vitalii Obertynskyi. All rights reserved.
-//
 
 import XCTest
 @testable import VGSCheckout
-@testable import VGSPaymentCards
 
 class LuhnTests: VGSCheckoutBaseTestCase {
     var textField: VGSTextField!
@@ -24,15 +19,15 @@ class LuhnTests: VGSCheckoutBaseTestCase {
     }
 
     func test1() {
-        XCTAssert(VGSPaymentCards.detectCardBrandFromAvailableCards(input: cardNumer) == .visa)
+        XCTAssert(VGSCheckoutPaymentCards.detectCardBrandFromAvailableCards(input: cardNumer) == .visa)
     }
 
     func test4() {
-      XCTAssertTrue(CheckSumAlgorithmType.luhn.validate(cardNumer))
+      XCTAssertTrue(VGSCheckoutCheckSumAlgorithmType.luhn.validate(cardNumer))
     }
     
     func test5() {
-        let cardBrand = VGSPaymentCards.detectCardBrandFromAvailableCards(input: cardNumer)
+        let cardBrand = VGSCheckoutPaymentCards.detectCardBrandFromAvailableCards(input: cardNumer)
         XCTAssert(cardBrand.stringValue.lowercased() == "visa")
     }
 }
