@@ -239,6 +239,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.first_name")
 		firstNameConfiguration.type = .cardHolderName
 		firstNameConfiguration.keyboardType = .namePhonePad
+		firstNameConfiguration.returnKeyType = .next
 		/// Required to be not empty
 
 		cardHolderFirstName.textAlignment = .natural
@@ -248,6 +249,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.last_name")
 		lastNameConfiguration.type = .cardHolderName
 		lastNameConfiguration.keyboardType = .namePhonePad
+		lastNameConfiguration.returnKeyType = .next
 		/// Required to be not empty
 
 		cardHolderLastName.textAlignment = .natural
@@ -396,16 +398,13 @@ internal class VGSFormValidationHelper {
 	}
 
 	internal func focusToNextFieldIfNeeded(for textField: VGSTextField) {
-		// Do not switch focus for valid form.
-		guard isFormValid() else {return}
-
 		// Do not switch from last field.
 		if let last = formItems.last?.textField {
 			// Do not focus from card holder fields since its length does not have specific validation rule.
 			if textField.configuration?.type != .cardHolderName {
 				// Change focus only from valid field.
 				if textField !== last && textField.state.isValid {
-					// The entire form is filled in. Don't switch.
+					// The entire form is filled in and valid? Do not focus to the next field.
 					if isFormValid() {return}
 					navigateToNextTextField(from: textField)
 				}

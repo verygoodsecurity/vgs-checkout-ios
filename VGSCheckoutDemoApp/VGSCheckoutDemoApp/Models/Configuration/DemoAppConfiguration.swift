@@ -13,6 +13,7 @@ class DemoAppConfiguration {
 
 	/// no:doc
 	private init() {
+		// Fill data from *.xconfig for test and etc if *.xconfig is available. 
 		if let customVault = Bundle.main.object(forInfoDictionaryKey: "CUSTOM_VAULT") as? String {
 			self.vaultId = customVault
 		}
@@ -25,6 +26,7 @@ class DemoAppConfiguration {
 	/// Set your vault id here https://www.verygoodsecurity.com/terminology/nomenclature#vault
 	var vaultId = "vaultId"
 
+	/// Set vault id matching your multiplexing configuration
 	var multiplexingVaultId = "vaultId"
 
 	///  Set environment - `sandbox` for testing or `live` for production
