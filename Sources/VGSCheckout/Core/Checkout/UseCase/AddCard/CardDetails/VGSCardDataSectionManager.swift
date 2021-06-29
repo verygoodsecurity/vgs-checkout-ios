@@ -290,23 +290,29 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 		switch validationBehavior {
 		case .onFocus:
 			// Update error label ui.
-			if formValidationHelper.isCurrentFieldValid(textField) {
-				cardFormView.cardDetailsErrorLabel.isHidden = true
-				cardFormView.cardDetailsErrorLabel.text = ""
-			} else {
-				cardFormView.cardDetailsErrorLabel.isHidden = false
-				cardFormView.cardDetailsErrorLabel.text = "Validation error"
-			}
+//			if formValidationHelper.isCurrentFieldValid(textField) {
+//				cardFormView.cardDetailsErrorLabel.isHidden = true
+//				cardFormView.cardDetailsErrorLabel.text = ""
+//			} else {
+//				cardFormView.cardDetailsErrorLabel.isHidden = false
+//				cardFormView.cardDetailsErrorLabel.text = "Validation error"
+//			}
 
 			// Update the entire form state.
 			if formValidationHelper.isFormValid() {
+        cardFormView.cardDetailsErrorLabel.text = ""
+        cardFormView.cardDetailsErrorLabel.isHidden = true
 				state = .valid
 			} else {
 				state = .invalid
+        cardFormView.cardDetailsErrorLabel.text = self.formValidationHelper.getFormValidationError()
+        cardFormView.cardDetailsErrorLabel.isHidden = false
 			}
 
 			// Update form blocks UI.
 			let formBlocks = formValidationHelper.formBlocks
+      
+      /// Update each block error UI
 			formBlocks.forEach { formBlock in
 				let isFormBlockValid = self.formValidationHelper.isCardFormBlockValid(formBlock)
 				self.cardFormView.updateFormBlock(formBlock, isValid: isFormBlockValid)
@@ -348,6 +354,7 @@ internal class VGSFormValidationHelper {
 			if isValid {
 				formItem.formItemView.updateUI(for: .focused)
 			} else {
+        print(state.validationErrors)
 				formItem.formItemView.updateUI(for: .invalid)
 			}
 		default:
@@ -362,14 +369,44 @@ internal class VGSFormValidationHelper {
 				if textField.state.isValid {
 					formItem.formItemView.updateUI(for: .focused)
 				} else {
-					formItem.formItemView.updateUI(for: .invalid)
+          switch textField.fieldType {
+          case .cardNumber:
+            handleCardNumberFieldState(textField, formItem: formItem)
+          default:
+            handleAnyFieldState(textField, formItem: formItem)
+          }
+          return
 				}
 			}
 		case .onTextChange:
 			break
 		}
 	}
-
+  
+  internal func handleCardNumberFieldState(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+    if let cardState = field.state as? CardState {
+      /// TODO: can use 16(15 for amex) as default digits
+      if cardState.cardBrand.cardLengths.max() ?? 16 <= cardState.inputLength {
+        print(cardState.validationErrors)
+        formItem.formItemView.updateUI(for: .invalid)
+      } else {
+        formItem.formItemView.updateUI(for: .focused)
+      }
+    } else {
+      print(field.state.validationErrors)
+      formItem.formItemView.updateUI(for: .invalid)
+    }
+  }
+  
+  internal func handleAnyFieldState(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+    if field.state.isValid {
+      formItem.formItemView.updateUI(for: .focused)
+    } else {
+      print(field.state.validationErrors)
+      formItem.formItemView.updateUI(for: .invalid)
+    }
+  }
+  
 	internal func isCardFormBlockValid(_ formBlock: VGSAddCardFormBlock) -> Bool {
 		let cardHolderFormItems = formItems.filter({$0.fieldType.formBlock == formBlock})
 
@@ -388,6 +425,78 @@ internal class VGSFormValidationHelper {
 
 		return isValid
 	}
+  
+  internal func getFormValidationError() -> String? {
+    let invalidFields = self.formItems.filter{ !$0.textField.state.isValid && $0.textField.state.isDirty}
+    
+    guard invalidFields.count > 0, let firstErrorField = invalidFields.first else {
+      return nil
+    }
+    
+    /// Check if first field with error is focused
+    if firstErrorField.textField.isFocused  {
+      /// Check if field input is full required length
+      let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
+      if isFullLength {
+        /// If true - show field error
+        let errorText = self.getErrorMessageForFieldType(firstErrorField.fieldType)
+        return errorText
+      } else {
+        /// If false - show next field error
+        guard invalidFields.count > 1 else {
+          return nil
+        }
+        let secondErrorField = invalidFields[1]
+        let errorText = self.getErrorMessageForFieldType(secondErrorField.fieldType)
+        return errorText
+      }
+    } else {
+      /// Show error from first not valid field
+      let errorMessage = getErrorMessageForFieldType(firstErrorField.fieldType)
+      return errorMessage
+    }
+  }
+  
+  internal func getErrorMessageForFieldType(_ fieldType: VGSAddCardFormFieldType) -> String {
+    switch fieldType {
+    case .cardNumber:
+      return "Card Number should be valid"
+    case .expirationDate:
+      return "Expiration date should be valid"
+    case .cvc:
+      return "Secure Code should be valid"
+    default:
+      return "Card details should be valid"
+    }
+  }
+  
+  
+  internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldFormItemProtocol) -> Bool {
+    let inputLenght = formItem.textField.state.inputLength
+    
+    switch formItem.fieldType {
+    case .cardNumber:
+      if let cardState = formItem.textField.state as? CardState {
+        switch cardState.cardBrand {
+        case .amex:
+          return inputLenght >= 15
+        default:
+          return inputLenght >= 16
+        }
+      } else {
+        /// TODO: check required min length
+        return inputLenght == 16
+      }
+    case .expirationDate:
+      /// TODO: use format pattern instead?
+      return inputLenght >= 4
+    case .cvc:
+      /// TODO: use format pattern instead?
+      return inputLenght >= 3
+    default:
+      return false
+    }
+  }
 
 	internal func isStateValid(for formItems: [VGSTextFieldFormItemProtocol]) -> Bool {
 		var isValid = true
