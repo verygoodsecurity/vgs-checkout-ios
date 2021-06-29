@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -56,6 +56,7 @@
 		3286E108265EC30A001FECEB /* VGSCheckoutDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VGSCheckoutDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppUITests.swift; sourceTree = "<group>"; };
 		3286E10E265EC30A001FECEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4405DDA5268AE539004A83AD /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
 		441927C3265F62D10080B01E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		441927C4265F62D10080B01E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441927C6265F62D10080B01E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		3286E0E9265EC309001FECEB /* VGSCheckoutDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				4405DDA5268AE539004A83AD /* Secrets.xcconfig */,
 				441927C2265F62D10080B01E /* Application */,
 				441927CB265F62D10080B01E /* UseCases */,
 				441927C1265F62D10080B01E /* Models */,
@@ -361,7 +363,6 @@
 				8B3011A37CEB49FBB2C89591 /* Pods-VGSCheckoutDemoApp.debug.xcconfig */,
 				AE23B354E3B0A4A0A18925CB /* Pods-VGSCheckoutDemoApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -656,6 +657,7 @@
 /* Begin XCBuildConfiguration section */
 		3286E10F265EC30A001FECEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4405DDA5268AE539004A83AD /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

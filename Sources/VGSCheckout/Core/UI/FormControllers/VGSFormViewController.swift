@@ -43,9 +43,9 @@ internal class VGSFormViewController: UIViewController {
 
 		setupUI()
 		addListeners()
-//		formView.addGestureRecognizer(tapGestureRecognizer)
-//		tapGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
-//		tapGestureRecognizer.cancelsTouchesInView = false
+		formView.addGestureRecognizer(tapGestureRecognizer)
+		tapGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+		tapGestureRecognizer.cancelsTouchesInView = false
 	}
 
 	// MARK: - Helpers

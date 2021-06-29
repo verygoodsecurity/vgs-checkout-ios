@@ -33,6 +33,13 @@ internal class VGSHeaderBarView: UIView {
 		case fixed(_ layout: FixedBarLayout)
 	}
 
+	/// Defines close button style.
+	internal enum CloseButtonStyle {
+		case text
+		case customRounded
+		case image(_ image: UIImage)
+	}
+
 	/// Layout style.
 	internal var layoutStyle: LayoutStyle = .fixed(defaultLayout)
 
@@ -47,6 +54,9 @@ internal class VGSHeaderBarView: UIView {
 	/// Header bar view height.
 	internal static var maxHeight: CGFloat = 60
 
+	/// Close button style.
+	internal var closeButtonStyle: CloseButtonStyle
+
 	/// Close button.
 	internal lazy var button: VGSCustomRoundedButton = {
 		let button = VGSCustomRoundedButton(frame: .zero)
@@ -58,7 +68,8 @@ internal class VGSHeaderBarView: UIView {
 	// MARK: - Initialization
 
 	/// no:doc
-	init() {
+	init(closeButtonStyle: CloseButtonStyle = .text) {
+		self.closeButtonStyle = closeButtonStyle
 		super.init(frame: .zero)
 		setupUI()
 	}
@@ -84,7 +95,32 @@ internal class VGSHeaderBarView: UIView {
 
 	/// Setup UI and layout.
 	private func setupUI() {
+		let button: UIControl
+		switch closeButtonStyle {
+		case .customRounded:
+			let roundedButton = VGSCustomRoundedButton(frame: .zero)
+			roundedButton.updateStyle(with: .close)
+			roundedButton.radius = VGSHeaderBarView.defaultLayout.buttonRadius
+			button = roundedButton
+		case .text:
+			let textButton = UIButton(frame: .zero)
+			textButton.setTitle("Close", for: .normal)
+			textButton.setTitleColor(UIColor.systemBlue, for: .normal)
+			textButton.setTitleColor(UIColor.systemGray, for: .disabled)
+			textButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
+			textButton.titleLabel?.adjustsFontForContentSizeCategory = true
+
+			button = textButton
+		case .image(let image):
+			let imageButton = UIButton(frame: .zero)
+			imageButton.setImage(image, for: .normal)
+
+			button = imageButton
+		}
+
+		button.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(button)
+
 		switch layoutStyle {
 		case .fixed(let style):
 			let constraints = [
@@ -93,8 +129,6 @@ internal class VGSHeaderBarView: UIView {
 
 			]
 			NSLayoutConstraint.activate(constraints)
-			button.updateStyle(with: .close)
-			button.radius = style.buttonRadius
 		}
 
 		button.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)

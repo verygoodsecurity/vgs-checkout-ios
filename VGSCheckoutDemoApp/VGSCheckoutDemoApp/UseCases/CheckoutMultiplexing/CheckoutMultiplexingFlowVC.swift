@@ -58,8 +58,8 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		// Create multiplexing configuration.
 		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration()
 
-		// Init Checkout with vault and ID.
-		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: multiplexingConfiguration)
+		// Init Checkout with vaultID associated with your multiplexing configuration.
+		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, environment: DemoAppConfiguration.shared.environment, configuration: multiplexingConfiguration)
 
 		// Present checkout configuration.
 		vgsCheckout?.present(from: self)

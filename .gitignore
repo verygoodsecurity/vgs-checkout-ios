@@ -76,4 +76,5 @@ fastlane/test_output
 iOSInjectionProject/
 VGSCheckoutDemoApp/Pods
 *.xcworkspacedata
+*.xcconfig
 
