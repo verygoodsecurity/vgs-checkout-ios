@@ -15,7 +15,6 @@
 		4405DC1726844AD8004A83AD /* VGSCollect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFD26844AD8004A83AD /* VGSCollect.swift */; };
 		4405DC1826844AD8004A83AD /* VGSCollect+internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFE26844AD8004A83AD /* VGSCollect+internal.swift */; };
 		4405DC1926844AD8004A83AD /* VGSCollect+network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFF26844AD8004A83AD /* VGSCollect+network.swift */; };
-		4405DC1A26844AD8004A83AD /* VGSCollect+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC0026844AD8004A83AD /* VGSCollect+extension.swift */; };
 		4405DC1B26844AD8004A83AD /* VGSCollect+fieldNameMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC0126844AD8004A83AD /* VGSCollect+fieldNameMapping.swift */; };
 		4405DC1C26844AD8004A83AD /* VGSExpDateConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC0226844AD8004A83AD /* VGSExpDateConfiguration.swift */; };
 		4405DC1D26844AD8004A83AD /* VGSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC0326844AD8004A83AD /* VGSError.swift */; };
@@ -211,7 +210,6 @@
 		4405DBFD26844AD8004A83AD /* VGSCollect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollect.swift; sourceTree = "<group>"; };
 		4405DBFE26844AD8004A83AD /* VGSCollect+internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollect+internal.swift"; sourceTree = "<group>"; };
 		4405DBFF26844AD8004A83AD /* VGSCollect+network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollect+network.swift"; sourceTree = "<group>"; };
-		4405DC0026844AD8004A83AD /* VGSCollect+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollect+extension.swift"; sourceTree = "<group>"; };
 		4405DC0126844AD8004A83AD /* VGSCollect+fieldNameMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VGSCollect+fieldNameMapping.swift"; sourceTree = "<group>"; };
 		4405DC0226844AD8004A83AD /* VGSExpDateConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSExpDateConfiguration.swift; sourceTree = "<group>"; };
 		4405DC0326844AD8004A83AD /* VGSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSError.swift; sourceTree = "<group>"; };
@@ -491,7 +489,6 @@
 				4405DBFD26844AD8004A83AD /* VGSCollect.swift */,
 				4405DBFE26844AD8004A83AD /* VGSCollect+internal.swift */,
 				4405DBFF26844AD8004A83AD /* VGSCollect+network.swift */,
-				4405DC0026844AD8004A83AD /* VGSCollect+extension.swift */,
 				4405DC0126844AD8004A83AD /* VGSCollect+fieldNameMapping.swift */,
 			);
 			path = Collector;
@@ -1711,7 +1708,6 @@
 				4405DC2726844AD8004A83AD /* VGSConfiguration.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
 				4405DC9326847247004A83AD /* VGSCollectRequestLogger.swift in Sources */,
-				4405DC1A26844AD8004A83AD /* VGSCollect+extension.swift in Sources */,
 				4405DC6126844B30004A83AD /* MaskedTextField+security.swift in Sources */,
 				4405DC1726844AD8004A83AD /* VGSCollect.swift in Sources */,
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
