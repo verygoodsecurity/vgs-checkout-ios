@@ -138,7 +138,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
 		])
 
-		//expDateConfiguration.inputSource = .keyboard
+		expDateConfiguration.inputSource = .keyboard
 		expDateConfiguration.inputDateFormat = .shortYear
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
@@ -212,7 +212,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		expDateConfiguration.outputDateFormat = .longYear
 		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
 		expDateConfiguration.formatPattern = "##/##"
-		//expDateConfiguration.inputSource = .keyboard
+		expDateConfiguration.inputSource = .keyboard
 
 		/// Update validation rules
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
