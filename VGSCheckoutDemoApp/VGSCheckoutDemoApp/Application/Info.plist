@@ -36,6 +36,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CUSTOM_VAULT</key>
+	<string>$(CUSTOM_VAULT)</string>
+	<key>MULTIPLEXING_VAULT</key>
+	<string>$(MULTIPLEXING_VAULT)</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
