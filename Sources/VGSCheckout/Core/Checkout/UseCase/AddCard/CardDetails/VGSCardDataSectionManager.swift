@@ -405,6 +405,8 @@ internal class VGSFormValidationHelper {
 			if textField.configuration?.type != .cardHolderName {
 				// Change focus only from valid field.
 				if textField !== last && textField.state.isValid {
+					// The entire form is filled in. Don't switch.
+					if isFormValid() {return}
 					navigateToNextTextField(from: textField)
 				}
 			}
