@@ -7,8 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-
-
 /// Holds UI for add card section form.
 internal class VGSAddCardSectionFormView: VGSFormView {
 
@@ -66,7 +64,7 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 
 		super.init()
 
-		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 50, right: 16)
+		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 

@@ -159,6 +159,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			case .single(let fieldName):
 				let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: fieldName)
 				holderConfiguration.type = .cardHolderName
+				holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
+					VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+				])
 				holderConfiguration.returnKeyType = .next
 
 				if let cardHolderName = textFiedFormItems.first(where: {$0.fieldType == .cardholderName}) {
@@ -171,6 +174,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 					let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: firstName)
 					firstNameConfiguration.type = .cardHolderName
 					firstNameConfiguration.returnKeyType = .next
+					firstNameConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
 					firstNameFormItem.textField.textAlignment = .natural
 					firstNameFormItem.textField.configuration = firstNameConfiguration
@@ -178,6 +184,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 					let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: lastName)
 					lastNameConfiguration.type = .cardHolderName
 					lastNameConfiguration.returnKeyType = .next
+					lastNameConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
 					lastNameFormItem.textField.textAlignment = .natural
 					lastNameFormItem.textField.configuration = firstNameConfiguration
