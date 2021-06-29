@@ -289,6 +289,15 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 		switch validationBehavior {
 		case .onFocus:
+			// Update error label ui.
+			if formValidationHelper.isCurrentFieldValid(textField) {
+				cardFormView.cardDetailsErrorLabel.isHidden = true
+				cardFormView.cardDetailsErrorLabel.text = ""
+			} else {
+				cardFormView.cardDetailsErrorLabel.isHidden = false
+				cardFormView.cardDetailsErrorLabel.text = "Validation error"
+			}
+
 			// Update the entire form state.
 			if formValidationHelper.isFormValid() {
 				state = .valid
@@ -452,4 +461,15 @@ internal class VGSFormValidationHelper {
 			 cvcField.placeholder = "CVC"
 		 }
 	 }
+
+	internal func isCurrentFieldValid(_ textField: VGSTextField) -> Bool {
+		if !textField.state.isDirty {return false}
+
+		// We need to split incomple and invalid state.
+		if textField.state.inputLength > 5 {
+
+		}
+
+		return textField.state.isValid
+	}
 }
