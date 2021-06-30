@@ -43,6 +43,20 @@ internal enum VGSAddCardFormFieldType {
 			return .cardDetails
 		}
 	}
+
+	/// Empty field name error.
+	var emptyFieldNameError: String {
+		switch self {
+		case .cardholderName:
+			return "Cardholder is empty"
+		case .firstName:
+			return "First name is empty"
+		case .lastName:
+			return "Last name is empty"
+		default:
+			return "Field is empty"
+		}
+	}
 }
 
 internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtocol {
