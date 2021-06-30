@@ -86,16 +86,6 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
-	internal func isCardFormBlockValid(_ formBlock: VGSAddCardFormBlock) -> Bool {
-		let cardHolderFormItems = formItems.filter({$0.fieldType.formBlock == formBlock})
-
-		return isStateValid(for: cardHolderFormItems)
-	}
-
-	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldFormItemProtocol? {
-		return formItems.first(where: {$0.textField === textField})
-	}
-
 	internal func isFormValid() -> Bool {
 		let invalidFields = formItems.filter { textField in
 			return !textField.textField.state.isValid
@@ -171,9 +161,40 @@ internal class VGSFormValidationHelper {
 		return isValid
 	}
 
+	/// Form item containing current textField.
+	/// - Parameter textField: `VGSTextField` object,
+	/// - Returns: `VGSTextFieldFormItemProtocol?` object.
+	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldFormItemProtocol? {
+		return formItems.first(where: {$0.textField === textField})
+	}
+
+	/// All text fields.
 	internal var vgsTextFields: [VGSTextField] {
 		return formItems.map({return $0.textField})
 	}
+
+	/// All invalid text fields.
+	internal var invalidFields: [VGSTextField] {
+		return formItems.filter{ !$0.textField.state.isValid && $0.textField.state.isDirty}.map({return $0.textField})
+	}
+
+	// MARK: - Form blocks
+
+	/// Check whether form block contains valid fields.
+	/// - Parameter formBlock: `VGSAddCardFormBlock` object, form block type.
+	/// - Returns: `Bool` object, `true` if valid.
+	internal func isCardFormBlockValid(_ formBlock: VGSAddCardFormBlock) -> Bool {
+		let cardHolderFormItems = formItems.filter({$0.fieldType.formBlock == formBlock})
+
+		return isStateValid(for: cardHolderFormItems)
+	}
+
+	/// All form blocks.
+	internal var formBlocks: [VGSAddCardFormBlock] {
+		return Array(Set(formItems.map({return $0.fieldType.formBlock})))
+	}
+
+	// MARK: - Fields navigation.
 
 	/// Navigate to next TextField from TextFields
 	internal func navigateToNextTextField(from textField: VGSTextField) {
@@ -198,10 +219,6 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
-	internal var formBlocks: [VGSAddCardFormBlock] {
-		return Array(Set(formItems.map({return $0.fieldType.formBlock})))
-	}
-
 	internal func focusOnEndEditingOnReturn(for textField: VGSTextField) {
 		guard let formItem = fieldFormItem(for: textField) else {return}
 		switch formItem.fieldType {
@@ -212,13 +229,15 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
+	// MARK: - CVC Helpers
+
 	internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
 		if editingTextField.configuration?.type == .cardNumber, let cardState = editingTextField.state as? CardState {
 			updateCVCPlaceholder(for: cardState.cardBrand)
 		}
 	}
 
-	internal func updateCVCPlaceholder(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
+	private func updateCVCPlaceholder(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
 		 guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
 			 return
 		 }
