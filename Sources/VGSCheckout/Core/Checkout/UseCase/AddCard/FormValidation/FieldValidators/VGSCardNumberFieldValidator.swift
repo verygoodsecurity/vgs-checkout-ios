@@ -22,4 +22,21 @@ internal class VGSCardNumberFieldValidator: VGSFormTextFieldValidationProtocol {
 			return inputLength == 16
 		}
 	}
+
+	internal func isTextFieldInputValid(_ textField: VGSTextField) -> Bool {
+//		if let cardState = textField.state as? CardState {
+//			/// TODO: can use 16(15 for amex) as default digits
+//			if cardState.cardBrand.cardLengths.max() ?? 16 <= cardState.inputLength {
+//				print(cardState.validationErrors)
+//				formItem.formItemView.updateUI(for: .invalid)
+//			} else {
+//				formItem.formItemView.updateUI(for: .focused)
+//			}
+//		} else {
+//			print(field.state.validationErrors)
+//			formItem.formItemView.updateUI(for: .invalid)
+//		}
+
+		return false
+	}
 }

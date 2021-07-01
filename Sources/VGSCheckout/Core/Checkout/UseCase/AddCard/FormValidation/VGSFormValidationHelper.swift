@@ -21,6 +21,7 @@ internal class VGSFormValidationHelper {
 		switch validationBehaviour {
 		case .onFocus:
 			guard let formItem = fieldFormItem(for: textField) else {return}
+
 			let state = textField.state
 			// Don't update UI for non-edited field.
 			if !state.isDirty {
