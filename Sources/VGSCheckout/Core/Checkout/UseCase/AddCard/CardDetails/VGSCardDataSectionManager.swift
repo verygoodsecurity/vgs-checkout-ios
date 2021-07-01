@@ -293,12 +293,12 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 			// Update the entire form state.
 			if formValidationHelper.isFormValid() {
         cardFormView.cardDetailsErrorLabel.text = ""
-        cardFormView.cardDetailsErrorLabel.isHidden = true
+				cardFormView.isHiddenInCheckoutStackView = true
 				state = .valid
 			} else {
 				state = .invalid
         cardFormView.cardDetailsErrorLabel.text = self.formValidationHelper.getFormValidationError()
-        cardFormView.cardDetailsErrorLabel.isHidden = false
+        cardFormView.cardDetailsErrorLabel.isHiddenInCheckoutStackView = false
 			}
 
 			// Update form blocks UI.

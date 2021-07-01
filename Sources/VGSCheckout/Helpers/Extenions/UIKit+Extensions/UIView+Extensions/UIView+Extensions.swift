@@ -24,4 +24,16 @@ internal extension UIView {
 
 		NSLayoutConstraint.activate(constraints)
 	}
+
+	/// Hack to fix issue with hidden state in stack view https://stackoverflow.com/a/55161538
+	var isHiddenInCheckoutStackView: Bool {
+		get {
+			return isHidden
+		}
+		set {
+			if isHidden != newValue {
+				isHidden = newValue
+			}
+		}
+	}
 }

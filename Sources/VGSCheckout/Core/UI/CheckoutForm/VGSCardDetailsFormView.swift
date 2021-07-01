@@ -177,14 +177,14 @@ internal class VGSCardDetailsFormView: UIView {
 			case .visible:
 				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 				rootStackView.addArrangedSubview(cardHolderDetailsView)
-				cardDetailsErrorLabel.isHidden = true
+				cardDetailsErrorLabel.isHiddenInCheckoutStackView = true
 			default:
 				break
 			}
 		case .multiplexing:
 			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 			rootStackView.addArrangedSubview(cardHolderDetailsView)
-			cardDetailsErrorLabel.isHidden = true
+			cardDetailsErrorLabel.isHiddenInCheckoutStackView = true
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
@@ -204,7 +204,7 @@ internal class VGSCardDetailsFormView: UIView {
 		}
 
 		rootStackView.addArrangedSubview(cardDetailsErrorLabel)
-		cardDetailsErrorLabel.isHidden = true
+		cardDetailsErrorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
 		formItems = cardHolderDetailsView.formItems + [
