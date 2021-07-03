@@ -310,7 +310,8 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 				self.cardFormView.updateFormBlock(formBlock, isValid: isFormBlockValid)
 			}
 
-			formValidationHelper.focusToNextFieldIfNeeded(for: textField)
+      ///Temporary remove autofocus.
+//			formValidationHelper.focusToNextFieldIfNeeded(for: textField)
 		case .onTextChange:
 			break
 		}
