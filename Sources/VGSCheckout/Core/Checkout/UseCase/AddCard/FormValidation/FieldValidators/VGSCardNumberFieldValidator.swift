@@ -6,37 +6,24 @@ import Foundation
 
 internal class VGSCardNumberFieldValidator: VGSFormTextFieldValidationProtocol {
 
+  internal let DEFAULT_ANY_CARD_LENGHT = 16
+  internal let DEFAULT_AMEX_CARD_LENGHT = 15
+    
 	internal func isTextFieldInputComplete(_ textField: VGSTextField) -> Bool {
 
 		let inputLength = textField.state.inputLength
-
+    
 		if let cardState = textField.state as? CardState {
-			switch cardState.cardBrand {
-			case .amex:
-				return inputLength >= 15
-			default:
-				return inputLength >= 16
-			}
+      let maxCardBrandLength = getMaxValidLengthForCardBrand(cardState.cardBrand)
+      return inputLength == maxCardBrandLength
 		} else {
-			/// TODO: check required min length
-			return inputLength == 16
+			return inputLength == DEFAULT_ANY_CARD_LENGHT
 		}
 	}
+  
+  internal func getMaxValidLengthForCardBrand(_ cardBrand: VGSCheckoutPaymentCards.CardBrand) -> Int {
+    return cardBrand.cardLengths.max() ?? DEFAULT_ANY_CARD_LENGHT
+  }
 
-	internal func isTextFieldInputValid(_ textField: VGSTextField) -> Bool {
-//		if let cardState = textField.state as? CardState {
-//			/// TODO: can use 16(15 for amex) as default digits
-//			if cardState.cardBrand.cardLengths.max() ?? 16 <= cardState.inputLength {
-//				print(cardState.validationErrors)
-//				formItem.formItemView.updateUI(for: .invalid)
-//			} else {
-//				formItem.formItemView.updateUI(for: .focused)
-//			}
-//		} else {
-//			print(field.state.validationErrors)
-//			formItem.formItemView.updateUI(for: .invalid)
-//		}
 
-		return false
-	}
 }

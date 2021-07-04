@@ -12,12 +12,10 @@ internal class VGSExpDateFieldValidator: VGSFormTextFieldValidationProtocol {
 
 		let inputLength = textField.state.inputLength
 
-		guard let configurationFormatPattern = textField.configuration?.formatPattern else {
+    guard let configuration = textField.configuration as? VGSExpDateConfiguration, let dateFormat = configuration.inputDateFormat else {
 			assertionFailure("Configuration is not set for exp date field.")
 			return false
 		}
-
-		/// TODO: use format pattern instead?
-		return inputLength >= configurationFormatPattern.count
+    return inputLength == dateFormat.monthCharacters + dateFormat.yearCharacters
 	}
 }
