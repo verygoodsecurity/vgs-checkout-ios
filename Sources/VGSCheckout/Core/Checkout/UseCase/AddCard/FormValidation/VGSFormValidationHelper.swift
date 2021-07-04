@@ -17,98 +17,161 @@ internal class VGSFormValidationHelper {
 		self.validationBehaviour = validationBehaviour
 	}
 
-	internal func updateFieldUIOnEndEditing(for textField: VGSTextField) {
-		switch validationBehaviour {
-		case .onFocus:
-			guard let formItem = fieldFormItem(for: textField) else {return}
-
-			let state = textField.state
-			// Don't update UI for non-edited field.
-			if !state.isDirty {
-				formItem.formItemView.updateUI(for: .inactive)
-				return
-			}
-
-			let isValid = state.isValid
-
-			if isValid {
-				formItem.formItemView.updateUI(for: .focused)
-			} else {
-				print(state.validationErrors)
-				formItem.formItemView.updateUI(for: .invalid)
-			}
-		default:
-			break
-		}
-	}
-
-	internal func updateFieldUIOnTextChange(for textField: VGSTextField) {
+  // MARK: - Handle Form State
+  
+  // TODO: Change `VGSCardDetailsFormView` to protocol
+  /// Update Form View UI elements on editing.
+  internal func updateFormViewOnEditingTextField(_ view: VGSCardDetailsFormView, textField: VGSTextField) {
+    switch validationBehaviour {
+    case .onFocus:
+      /// Update form error message and ui state
+      let formError = getFirstFormValidationError()
+      updateFormViewWithError(view, formError: formError)
+      /// Update textfield UI state
+      updateFieldUIOnEditing(for: textField)
+    case .onTextChange:
+      return
+    }
+  }
+  
+  /// Update Form View UI elements on end editing.
+  internal func updateFormViewOnEndEditingTextField(_ view: VGSCardDetailsFormView, textField: VGSTextField) {
+    switch validationBehaviour {
+    case .onFocus:
+      /// Update form error message and grid state
+      let formError = getFirstFormValidationError()
+      updateFormViewWithError(view, formError: formError)
+      /// Update textfield UI state
+      updateFieldUIOnEndEditing(for: textField)
+    case .onTextChange:
+      return
+    }
+  }
+  
+  private func updateFormViewWithError(_ view: VGSCardDetailsFormView, formError: String?) {
+    /// Update Form with Error Message
+    if let error = formError {
+      view.cardDetailsErrorLabel.text = error
+      view.cardDetailsErrorLabel.isHiddenInCheckoutStackView = false
+      view.updateFormBlocks(formBlocks, isValid: false)
+    } else {
+      view.cardDetailsErrorLabel.text = ""
+//        view.isHiddenInCheckoutStackView = true
+      view.updateFormBlocks(formBlocks, isValid: true)
+    }
+  }
+  
+  // MARK: - Handle TextField State
+  
+  /// Update Form Item UI on Editing Event.
+	private func updateFieldUIOnEditing(for textField: VGSTextField) {
 		switch validationBehaviour {
 		case .onFocus:
 			if let formItem = fieldFormItem(for: textField) {
-				if textField.state.isValid {
-					formItem.formItemView.updateUI(for: .focused)
-				} else {
 					switch textField.fieldType {
 					case .cardNumber:
-						handleCardNumberFieldState(textField, formItem: formItem)
+            updateCardNumberFormItemOnEditingTextField(textField, formItem: formItem)
 					default:
-						handleAnyFieldState(textField, formItem: formItem)
+            updateAnyFormItemOnEditingTextField(textField, formItem: formItem)
 					}
 					return
-				}
 			}
 		case .onTextChange:
 			break
 		}
 	}
-
-	internal func handleCardNumberFieldState(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-		if let cardState = field.state as? CardState {
-			/// TODO: can use 16(15 for amex) as default digits
-			if cardState.cardBrand.cardLengths.max() ?? 16 <= cardState.inputLength {
-				print(cardState.validationErrors)
-				formItem.formItemView.updateUI(for: .invalid)
-			} else {
-				formItem.formItemView.updateUI(for: .focused)
-			}
-		} else {
-			print(field.state.validationErrors)
-			formItem.formItemView.updateUI(for: .invalid)
-		}
+  
+  /// Update FormItem UI on End Editing Event.
+  private func updateFieldUIOnEndEditing(for textField: VGSTextField) {
+    switch validationBehaviour {
+    case .onFocus:
+      guard let formItem = fieldFormItem(for: textField) else {return}
+      self.updateAnyFormItemOnEndEditTextField(textField, formItem: formItem)
+    default:
+      break
+    }
+  }
+  
+  /// Handle CardNumber field state during editing.
+	private func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+    
+    let isValidLenght = self.isInputRequiredLengthInFormItem(formItem)
+    // NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
+    let isValidState = field.state.isValid
+    
+    switch (isValidLenght,isValidState) {
+    case (false, _):
+      formItem.updateUI(for: .focused)
+    case (true, true):
+      formItem.updateUI(for: .valid)
+    case (true, false):
+      formItem.updateUI(for: .invalid)
+    }
 	}
 
-	internal func handleAnyFieldState(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-		if field.state.isValid {
-			formItem.formItemView.updateUI(for: .focused)
-		} else {
-			print(field.state.validationErrors)
-			formItem.formItemView.updateUI(for: .invalid)
-		}
-	}
+  /// Handle Any field state during editing.
+  private func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+    let isValidLenght = self.isInputRequiredLengthInFormItem(formItem)
+    let isValidState = field.state.isValid
 
+    switch (isValidLenght, isValidState) {
+    case (false, _):
+      formItem.updateUI(for: .focused)
+    case (true, true):
+      formItem.updateUI(for: .valid)
+    case (true, false):
+      formItem.updateUI(for: .invalid)
+    }
+	}
+  
+  /// Handle Any field state after it finish editing.
+  private func updateAnyFormItemOnEndEditTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+    let state = field.state
+
+    switch (state.isDirty, state.isValid) {
+    case (false, _):
+      formItem.updateUI(for: .inactive)
+    case (true, false):
+      formItem.updateUI(for: .invalid)
+      return
+    case (true, true):
+      formItem.updateUI(for: .focused)
+    }
+  }
+
+  // MARK: - Helpers
+  /// Returns false if any field state is invalid.
 	internal func isFormValid() -> Bool {
-		let invalidFields = formItems.filter { textField in
-			return !textField.textField.state.isValid
+		let invalidFields = formItems.filter { formItem in
+			return !formItem.textField.state.isValid
 		}
 		let isValid = invalidFields.isEmpty
 
 		return isValid
 	}
+  
+  /// Returns array of `VGSTextFieldFormItemProtocol` items with validation error.
+  internal func getFieldsWithValidationErros() -> [VGSTextFieldFormItemProtocol] {
+    let invalidFields = formItems.filter { formItem in
+      return !formItem.textField.state.isValid && formItem.textField.state.isDirty
+    }
+    return invalidFields
+  }
 
-	internal func getFormValidationError() -> String? {
-		let invalidFields = self.formItems.filter{ !$0.textField.state.isValid && $0.textField.state.isDirty}
+  /// Returns first error from  not valid, not active, dirty field.
+	internal func getFirstFormValidationError() -> String? {
+		let invalidFields = getFieldsWithValidationErros()
 
 		guard invalidFields.count > 0, let firstErrorField = invalidFields.first else {
 			return nil
 		}
 
 		/// Check if first field with error is focused
-		if firstErrorField.textField.isFocused  {
+		if firstErrorField.textField.isFirstResponder  {
 			/// Check if field input is full required length
 			let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
 			if isFullLength {
-				/// If true - show field error
+				/// If true - show field error1
 				let errorText = self.getErrorMessageForFieldType(firstErrorField.fieldType)
 				return errorText
 			} else {
@@ -229,24 +292,4 @@ internal class VGSFormValidationHelper {
 			break
 		}
 	}
-
-	// MARK: - CVC Helpers
-
-	internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
-		if editingTextField.configuration?.type == .cardNumber, let cardState = editingTextField.state as? CardState {
-			updateCVCPlaceholder(for: cardState.cardBrand)
-		}
-	}
-
-	private func updateCVCPlaceholder(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
-		 guard let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
-			 return
-		 }
-		 switch cardBrand {
-		 case .amex:
-			 cvcField.placeholder = "CVV"
-		 default:
-			 cvcField.placeholder = "CVC"
-		 }
-	 }
 }

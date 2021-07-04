@@ -61,6 +61,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
+  /// Validation manager.
 	internal let formValidationHelper: VGSFormValidationHelper
 
 	// MARK: - Initialization
@@ -273,51 +274,61 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			}
 		}
 	}
+  
+  /// Update Form Validation State.
+  func updateFormState() {
+    if formValidationHelper.isFormValid() {
+      state = .valid
+    } else {
+      state = .invalid
+    }
+  }
 }
 
 // MARK: - VGSTextFieldDelegate
 
 extension VGSCardDataSectionManager: VGSTextFieldDelegate {
-
+  
+  func vgsTextFieldDidChange(_ textField: VGSTextField) {
+    updateSecurityCodeFieldIfNeeded(for: textField)
+    formValidationHelper.updateFormViewOnEditingTextField(cardFormView, textField: textField)
+    updateFormState()
+  }
+  
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFieldUIOnEndEditing(for: textField)
-	}
-
-	func vgsTextFieldDidChange(_ textField: VGSTextField) {
-		formValidationHelper.updateFieldUIOnTextChange(for: textField)
-		formValidationHelper.updateSecurityCodeFieldIfNeeded(for: textField)
-
-		switch validationBehavior {
-		case .onFocus:
-
-			// Update the entire form state.
-			if formValidationHelper.isFormValid() {
-        cardFormView.cardDetailsErrorLabel.text = ""
-				cardFormView.isHiddenInCheckoutStackView = true
-				state = .valid
-			} else {
-				state = .invalid
-        cardFormView.cardDetailsErrorLabel.text = self.formValidationHelper.getFormValidationError()
-        cardFormView.cardDetailsErrorLabel.isHiddenInCheckoutStackView = false
-			}
-
-			// Update form blocks UI.
-			let formBlocks = formValidationHelper.formBlocks
-      
-      /// Update each block error UI
-			formBlocks.forEach { formBlock in
-				let isFormBlockValid = self.formValidationHelper.isCardFormBlockValid(formBlock)
-				self.cardFormView.updateFormBlock(formBlock, isValid: isFormBlockValid)
-			}
-
-      ///Temporary remove autofocus.
-//			formValidationHelper.focusToNextFieldIfNeeded(for: textField)
-		case .onTextChange:
-			break
-		}
+		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+    updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-		formValidationHelper.focusOnEndEditingOnReturn(for: textField)
+    formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+    updateFormState()
 	}
+}
+
+// MARK: - CVC Helpers
+
+extension VGSCardDataSectionManager {
+  
+  /// Check if CardBrand is changed and update cvc validation state if needed.
+  internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
+    guard editingTextField.configuration?.type == .cardNumber,
+       let cardState = editingTextField.state as? CardState,
+       let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
+      return
+    }
+    // Update Field Placeholder
+    updateCVCFieldPlaceholder(cvcField, cardBrand: cardState.cardBrand)
+    // Update UI for new CVC Field State
+    formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: cvcField)
+  }
+
+  private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {
+     switch cardBrand {
+     case .amex:
+       field.placeholder = "CVV"
+     default:
+      field.placeholder = "CVC"
+     }
+   }
 }

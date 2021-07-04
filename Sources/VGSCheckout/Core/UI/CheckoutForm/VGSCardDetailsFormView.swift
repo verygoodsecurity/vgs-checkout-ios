@@ -141,7 +141,15 @@ internal class VGSCardDetailsFormView: UIView {
 	}
 
 	// MARK: - Interface
+  
+  /// Update Array of form blocks with validation state.
+  internal func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool) {
+    formBlocks.forEach { formBlock in
+      updateFormBlock(formBlock, isValid: isValid)
+    }
+  }
 
+  /// Update Form block items UI with validation state.
 	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
 		switch block {
 		case .cardHolder:
