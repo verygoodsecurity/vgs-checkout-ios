@@ -170,6 +170,8 @@
 		44D5CF27268C440F00312108 /* VGSCardholderFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */; };
 		44D5CF29268C48D900312108 /* VGSFormFieldsValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF28268C48D900312108 /* VGSFormFieldsValidatorFactory.swift */; };
 		44D5CF2B268C495500312108 /* VGSFormTextFieldValidationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF2A268C495500312108 /* VGSFormTextFieldValidationProtocol.swift */; };
+		44E10A8526936235001F0D44 /* VGSCountryPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */; };
+		44E10A8626936235001F0D44 /* VGSPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8426936235001F0D44 /* VGSPickerTextField.swift */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -377,6 +379,8 @@
 		44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardholderFieldValidator.swift; sourceTree = "<group>"; };
 		44D5CF28268C48D900312108 /* VGSFormFieldsValidatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormFieldsValidatorFactory.swift; sourceTree = "<group>"; };
 		44D5CF2A268C495500312108 /* VGSFormTextFieldValidationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormTextFieldValidationProtocol.swift; sourceTree = "<group>"; };
+		44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCountryPickerTextField.swift; sourceTree = "<group>"; };
+		44E10A8426936235001F0D44 /* VGSPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPickerTextField.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -565,6 +569,7 @@
 		4405DC3926844B30004A83AD /* Text Field */ = {
 			isa = PBXGroup;
 			children = (
+				44E10A8226936235001F0D44 /* PickerFields */,
 				4405DC3A26844B30004A83AD /* VGSTextField.swift */,
 				4405DC3B26844B30004A83AD /* VGSExpDateTextField.swift */,
 				4405DC3C26844B30004A83AD /* VGSTextField+UIBuilder.swift */,
@@ -1281,6 +1286,15 @@
 			path = FieldValidators;
 			sourceTree = "<group>";
 		};
+		44E10A8226936235001F0D44 /* PickerFields */ = {
+			isa = PBXGroup;
+			children = (
+				44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */,
+				44E10A8426936235001F0D44 /* VGSPickerTextField.swift */,
+			);
+			path = PickerFields;
+			sourceTree = "<group>";
+		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1739,6 +1753,7 @@
 				4455C84C266E4420000CD666 /* VGSPayWithCardHeaderView.swift in Sources */,
 				4405DC2526844AD8004A83AD /* APIHostnameValidator.swift in Sources */,
 				4405DC2026844AD8004A83AD /* APIClient.swift in Sources */,
+				44E10A8626936235001F0D44 /* VGSPickerTextField.swift in Sources */,
 				44D5CF25268C3FB900312108 /* VGSCardCVCFieldValidator.swift in Sources */,
 				4405DC6526844B30004A83AD /* VGSTextField+CVC.swift in Sources */,
 				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
@@ -1798,6 +1813,7 @@
 				4405DCB126848B28004A83AD /* VGSPaymentCardModel.swift in Sources */,
 				4405DC6326844B30004A83AD /* VGSCardTextField.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
+				44E10A8526936235001F0D44 /* VGSCountryPickerTextField.swift in Sources */,
 				4405DC6A26844B30004A83AD /* VGSValidationRulePattern.swift in Sources */,
 				4405DC9726847247004A83AD /* String+extension.swift in Sources */,
 				4405DC2426844AD8004A83AD /* APIHostURLPolicy.swift in Sources */,

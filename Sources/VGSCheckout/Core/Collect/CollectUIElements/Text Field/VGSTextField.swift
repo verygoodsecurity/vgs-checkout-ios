@@ -65,6 +65,13 @@ internal class VGSTextField: UIView {
 	internal var keyboardAccessoryView: UIView? {
       didSet { textField.inputAccessoryView = keyboardAccessoryView }
     }
+
+	/// A Boolean value that determines whether the text field caret is hidden.
+	internal var isCaretHidden: Bool = false {
+		didSet {
+			textField.isCarretHidden = isCaretHidden
+		}
+	}
   
     /// Determines whether autocorrection is enabled or disabled during typing.
 	internal var autocorrectionType: UITextAutocorrectionType = .default {
