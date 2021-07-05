@@ -35,7 +35,16 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .valid:
 				addCardSectionFormView.payButton.status = .enabled
 			case .processing:
+				addCardSectionFormView.isUserInteractionEnabled = false
+				addCardSectionFormView.headerBarView.closeButton?.isEnabled = false
 				addCardSectionFormView.payButton.status = .processing
+				addCardSectionFormView.cardDetailsView.updateUIForProcessingState()
+
+				apiWorker.sendData {[weak self] requestResult in
+					guard let strongSelf = self else {return}
+					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+					strongSelf.delegate?.addCardFlowDidChange(with: state, in: strongSelf)
+				}
 			}
 		}
 	}
@@ -84,14 +93,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	// MARK: - Helpers
 
 	@objc fileprivate func payDidTap() {
-		addCardSectionFormView.isUserInteractionEnabled = false
-		addCardSectionFormView.payButton.status = .processing
-
-		apiWorker.sendData {[weak self] requestResult in
-			guard let strongSelf = self else {return}
-			let state = VGSAddCardFlowState.requestSubmitted(requestResult)
-			strongSelf.delegate?.addCardFlowDidChange(with: state, in: strongSelf)
-		}
+		state = .processing
 	}
 }
 
@@ -114,9 +116,9 @@ extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 	func stateDidChange(_ state: VGSFormSectionState) {
 		switch state {
 		case .invalid:
-			addCardSectionFormView.payButton.status = .disabled
+			self.state = .invalid
 		case .valid:
-			addCardSectionFormView.payButton.status = .enabled
+			self.state = .valid
 		}
 	}
 }

@@ -172,6 +172,33 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		}
 	}
 
+	/// Disable input view for processing state.
+	internal func updateUIForProcessingState() {
+		// Update grid view.
+		if #available(iOS 13, *) {
+			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
+			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+		} else {
+			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+		}
+
+		// Update form fields.
+		formItems.forEach { formItem in
+			if #available(iOS 13.0, *) {
+				formItem.formItemView.backgroundColor = .systemGroupedBackground
+				formItem.textField.textColor = UIColor.placeholderText
+				formItem.formItemView.hintComponentView.label.textColor = UIColor.placeholderText
+			} else {
+				formItem.formItemView.backgroundColor = .white
+				formItem.textField.textColor = .gray
+				formItem.formItemView.hintComponentView.label.textColor = .gray
+			}
+		}
+	}
+
 	// MARK: - Helpers
 
 	/// Setup UI and layout.

@@ -62,15 +62,14 @@ class CheckoutFlowMainView: UIView {
 	}()
 
 	/// Response label.
-	lazy var responseLabel: UILabel = {
-		let label = UILabel(frame: .zero)
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.numberOfLines = 0
+	lazy var responseTextView: UITextView = {
+		let textView = UITextView(frame: .zero)
+		textView.translatesAutoresizingMaskIntoConstraints = false
 
-		label.isHidden = true
-		label.font = UIFont.preferredFont(forTextStyle: .body)
+		textView.isHidden = true
+		textView.font = UIFont.preferredFont(forTextStyle: .body)
 
-		return label
+		return textView
 	}()
 
 	/// Shopping cart view.
@@ -116,7 +115,7 @@ class CheckoutFlowMainView: UIView {
 		buttonContainerView.paddings = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
 		buttonContainerView.addContentView(button)
 		stackView.addArrangedSubview(buttonContainerView)
-		stackView.addArrangedSubview(responseLabel)
+		stackView.addArrangedSubview(responseTextView)
 
 		stackView.addArrangedSubview(emptyBottomView)
 

@@ -112,8 +112,8 @@ extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
 			title = "Checkout status: Success!"
 			message = "status code is: \(statusCode)"
 			let text = DemoAppResponseParser.stringifySuccessResponse(from: data) ?? ""
-			mainView.responseLabel.isHidden = false
-			mainView.responseLabel.text = text
+			mainView.responseTextView.isHidden = false
+			mainView.responseTextView.text = text
 		case .failure(let statusCode, let data, let response, let error):
 			title = "Checkout status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
