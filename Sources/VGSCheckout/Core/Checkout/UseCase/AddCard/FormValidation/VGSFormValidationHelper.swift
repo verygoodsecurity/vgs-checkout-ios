@@ -39,7 +39,7 @@ internal class VGSFormValidationHelper {
     switch validationBehaviour {
     case .onFocus:
       /// Update form error message and ui state
-      let formError = getFirstFormValidationError()
+      let formError = firstFormValidationError()
 			updateFormViewWithError(view, with: formError)
       /// Update textfield UI state
       updateFieldUIOnEditing(for: textField)
@@ -53,7 +53,7 @@ internal class VGSFormValidationHelper {
     switch validationBehaviour {
     case .onFocus:
       /// Update form error message and grid state
-      let formError = getFirstFormValidationError()
+      let formError = firstFormValidationError()
 			updateFormViewWithError(view, with: formError)
       /// Update textfield UI state
       updateFieldUIOnEndEditing(for: textField)
@@ -124,8 +124,8 @@ internal class VGSFormValidationHelper {
 		return isValid
 	}
   
-  /// Returns array of `VGSTextFieldFormItemProtocol` items with validation error.
-  internal func getFieldsWithValidationErros() -> [VGSTextFieldFormItemProtocol] {
+  /// Array of `VGSTextFieldFormItemProtocol` items with validation error.
+	internal var fieldsWithvalidationErrors: [VGSTextFieldFormItemProtocol] {
     let invalidFields = formItems.filter { formItem in
       return !formItem.textField.state.isValid && formItem.textField.state.isDirty
     }
@@ -133,8 +133,8 @@ internal class VGSFormValidationHelper {
   }
 
   /// Returns first error from  not valid, not active, dirty field.
-	internal func getFirstFormValidationError() -> String? {
-		let invalidFields = getFieldsWithValidationErros()
+	internal func firstFormValidationError() -> String? {
+		let invalidFields = fieldsWithvalidationErrors
 
 		guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
 			return nil
