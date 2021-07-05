@@ -9,9 +9,17 @@ import UIKit
 
 /// Utility class that encapsulates fields validation logic.
 internal class VGSFormValidationHelper {
+
+	/// Form items.
 	internal let formItems: [VGSTextFieldFormItemProtocol]
+
+	/// Validation behavior block.
 	internal let validationBehaviour: VGSFormValidationBehaviour
 
+	/// Initializer.
+	/// - Parameters:
+	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
+	///   - validationBehaviour: `VGSFormValidationBehaviour` object, validation flow.
 	internal init(formItems: [VGSTextFieldFormItemProtocol], validationBehaviour: VGSFormValidationBehaviour) {
 		self.formItems = formItems
 		self.validationBehaviour = validationBehaviour
@@ -47,7 +55,11 @@ internal class VGSFormValidationHelper {
       return
     }
   }
-  
+
+	/// Update form view UI with error.
+	/// - Parameters:
+	///   - view: `VGSCardDetailsFormView` object, form view.
+	///   - formError: `String?` object, form error.
   private func updateFormViewWithError(_ view: VGSCardDetailsFormView, formError: String?) {
     /// Update Form with Error Message
     if let error = formError {
@@ -56,7 +68,6 @@ internal class VGSFormValidationHelper {
       view.updateFormBlocks(formBlocks, isValid: false)
     } else {
       view.cardDetailsErrorLabel.text = ""
-//        view.isHiddenInCheckoutStackView = true
       view.updateFormBlocks(formBlocks, isValid: true)
     }
   }
@@ -80,8 +91,9 @@ internal class VGSFormValidationHelper {
 			break
 		}
 	}
-  
-  /// Update FormItem UI on End Editing Event.
+
+	/// Update textfield and corresponding form item on end editing event.
+	/// - Parameter textField: `VGSTextField` object, textfield.
   private func updateFieldUIOnEndEditing(for textField: VGSTextField) {
     switch validationBehaviour {
     case .onFocus:
@@ -95,11 +107,11 @@ internal class VGSFormValidationHelper {
   /// Handle CardNumber field state during editing.
 	private func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
     
-    let isValidLenght = self.isInputRequiredLengthInFormItem(formItem)
+    let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
     // NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
     let isValidState = field.state.isValid
     
-    switch (isValidLenght,isValidState) {
+    switch (isValidLength ,isValidState) {
     case (false, _):
       formItem.updateUI(for: .focused)
     case (true, true):
@@ -111,10 +123,10 @@ internal class VGSFormValidationHelper {
 
   /// Handle Any field state during editing.
   private func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-    let isValidLenght = self.isInputRequiredLengthInFormItem(formItem)
+    let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
     let isValidState = field.state.isValid
 
-    switch (isValidLenght, isValidState) {
+    switch (isValidLength, isValidState) {
     case (false, _):
       formItem.updateUI(for: .focused)
     case (true, true):
@@ -140,7 +152,9 @@ internal class VGSFormValidationHelper {
   }
 
   // MARK: - Helpers
-  /// Returns false if any field state is invalid.
+
+	/// Check if form is valid.
+	/// - Returns: `Bool` object, true if form is valid.
 	internal func isFormValid() -> Bool {
 		let invalidFields = formItems.filter { formItem in
 			return !formItem.textField.state.isValid
@@ -166,13 +180,13 @@ internal class VGSFormValidationHelper {
 			return nil
 		}
 
-		/// Check if first field with error is focused
+		/// Check if first field with error is focused.
 		if firstErrorField.textField.isFirstResponder  {
 			/// Check if field input is full required length
 			let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
 			if isFullLength {
 				/// If true - show field error1
-				let errorText = self.getErrorMessageForFieldType(firstErrorField.fieldType)
+				let errorText = self.getErrorMessage(for: firstErrorField.fieldType)
 				return errorText
 			} else {
 				/// If false - show next field error
@@ -180,17 +194,20 @@ internal class VGSFormValidationHelper {
 					return nil
 				}
 				let secondErrorField = invalidFields[1]
-				let errorText = self.getErrorMessageForFieldType(secondErrorField.fieldType)
+				let errorText = self.getErrorMessage(for: secondErrorField.fieldType)
 				return errorText
 			}
 		} else {
 			/// Show error from first not valid field
-			let errorMessage = getErrorMessageForFieldType(firstErrorField.fieldType)
+			let errorMessage = getErrorMessage(for: firstErrorField.fieldType)
 			return errorMessage
 		}
 	}
 
-	internal func getErrorMessageForFieldType(_ fieldType: VGSAddCardFormFieldType) -> String {
+	/// Get error message for field type.
+	/// - Parameter fieldType: `VGSAddCardFormFieldType` object, field type.
+	/// - Returns: `String` object, contains with error message.
+	internal func getErrorMessage(for fieldType: VGSAddCardFormFieldType) -> String {
 		switch fieldType {
 		case .cardholderName, .firstName, .lastName:
 			return fieldType.emptyFieldNameError
@@ -205,12 +222,18 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
+	/// Check if input has required length.
+	/// - Parameter formItem: `VGSTextFieldFormItemProtocol` object, form item.
+	/// - Returns: `Bool` object, `true` if item has valid length.
 	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldFormItemProtocol) -> Bool {
 
 		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: formItem.fieldType)
 		return fieldValidator.isTextFieldInputComplete(formItem.textField)
 	}
 
+	/// Get state from form items array.
+	/// - Parameter formItems: `[VGSTextFieldFormItemProtocol]` object, `VGSTextFieldFormItemProtocol` items.
+	/// - Returns: `Bool` object, `true` if form is valid.
 	internal func isStateValid(for formItems: [VGSTextFieldFormItemProtocol]) -> Bool {
 		var isValid = true
 		formItems.forEach { formItem in
@@ -268,6 +291,8 @@ internal class VGSFormValidationHelper {
 		vgsTextFields[fieldIndex + 1].becomeFirstResponder()
 	}
 
+	/// Focus to next field if needed. Will be implemented soon.
+	/// - Parameter textField: `VGSTextField` object, field from what to switch.
 	internal func focusToNextFieldIfNeeded(for textField: VGSTextField) {
 		// Do not switch from last field.
 		if let last = formItems.last?.textField {
@@ -283,6 +308,8 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
+	/// Switch to the next field on next button. Next button is avaliable only for `cardholder` type.
+	/// - Parameter textField: `VGSTextField` object. Current text field.
 	internal func focusOnEndEditingOnReturn(for textField: VGSTextField) {
 		guard let formItem = fieldFormItem(for: textField) else {return}
 		switch formItem.fieldType {
