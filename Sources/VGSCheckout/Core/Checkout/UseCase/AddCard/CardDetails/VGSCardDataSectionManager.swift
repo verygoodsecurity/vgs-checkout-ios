@@ -92,11 +92,20 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			setupCardForm(withMultiplexing: multiplexingConfig)
 		}
 
+		let inputBlackTextColor: UIColor = {
+			if #available(iOS 13.0, *) {
+				return UIColor {(traits) -> UIColor in
+					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+				}
+			} else {
+				return .black
+			}
+		}()
+
 		vgsCollect.textFields.forEach { textField in
-			textField.textColor = UIColor.black
+			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-			textField.tintColor = .lightGray
 			textField.delegate = self
 		}
 
@@ -156,7 +165,6 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
 		cvcCardNum.placeholder = "CVC"
-		cvcCardNum.tintColor = .lightGray
 
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
 		if cardHolderOptions.fieldVisibility == .visible {
@@ -243,7 +251,6 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
 		cvcCardNum.placeholder = "CVC"
-		cvcCardNum.tintColor = .lightGray
 
 		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
 			assertionFailure("Invalid multiplexing setup!")
@@ -254,6 +261,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		firstNameConfiguration.type = .cardHolderName
 		firstNameConfiguration.keyboardType = .namePhonePad
 		firstNameConfiguration.returnKeyType = .next
+		firstNameConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
 		/// Required to be not empty
 
 		cardHolderFirstName.textAlignment = .natural
@@ -264,6 +274,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		lastNameConfiguration.type = .cardHolderName
 		lastNameConfiguration.keyboardType = .namePhonePad
 		lastNameConfiguration.returnKeyType = .next
+		lastNameConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
 		/// Required to be not empty
 
 		cardHolderLastName.textAlignment = .natural

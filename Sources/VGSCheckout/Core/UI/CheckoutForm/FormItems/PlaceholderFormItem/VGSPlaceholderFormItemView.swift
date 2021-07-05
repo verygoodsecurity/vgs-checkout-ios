@@ -64,6 +64,9 @@ internal class VGSPlaceholderFormItemView: UIView {
 
 		hintComponentView.addGestureRecognizer(tapGesture)
 		tapGesture.addTarget(self, action: #selector(handleTap))
+
+		layer.cornerRadius = 4
+		layer.masksToBounds = true
 	}
 
 	@objc fileprivate func handleTap() {

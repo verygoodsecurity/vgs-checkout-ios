@@ -12,13 +12,9 @@ import UIKit
 internal class VGSSeparatedStackView: UIStackView {
 
 	/// Border view.
-	private lazy var borderView: UIView = {
+	internal lazy var borderView: UIView = {
 		let view = UIView()
 		view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		//view.layer.shadowOffset = CGSize(width: 0, height: 2)
-		//view.layer.shadowColor = UIColor.gray.withAlphaComponent(0.3).cgColor
-		//view.layer.shadowOpacity = 0.05
-		view.layer.shadowRadius = 4
 
 		return view
 	}()

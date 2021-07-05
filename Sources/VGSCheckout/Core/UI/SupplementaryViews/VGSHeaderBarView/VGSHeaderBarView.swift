@@ -58,13 +58,7 @@ internal class VGSHeaderBarView: UIView {
 	internal var closeButtonStyle: CloseButtonStyle
 
 	/// Close button.
-	internal lazy var button: VGSCustomRoundedButton = {
-		let button = VGSCustomRoundedButton(frame: .zero)
-		button.translatesAutoresizingMaskIntoConstraints = false
-
-		return button
-	}()
-
+	internal var closeButton: UIControl?
 	// MARK: - Initialization
 
 	/// no:doc
@@ -104,9 +98,9 @@ internal class VGSHeaderBarView: UIView {
 			button = roundedButton
 		case .text:
 			let textButton = UIButton(frame: .zero)
-			textButton.setTitle("Close", for: .normal)
+			textButton.setTitle("Cancel", for: .normal)
 			textButton.setTitleColor(UIColor.systemBlue, for: .normal)
-			textButton.setTitleColor(UIColor.systemGray, for: .disabled)
+			textButton.setTitleColor(UIColor.gray, for: .disabled)
 			textButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
 			textButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
@@ -132,6 +126,8 @@ internal class VGSHeaderBarView: UIView {
 		}
 
 		button.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
+
+		closeButton = button
 	}
 
 	/// Tap action.
