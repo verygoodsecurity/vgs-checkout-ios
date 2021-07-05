@@ -18,4 +18,8 @@ internal class VGSExpDateFieldValidator: VGSFormTextFieldValidationProtocol {
 		}
     return inputLength == dateFormat.monthCharacters + dateFormat.yearCharacters
 	}
+
+	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return "Expiration date is not valid"
+	}
 }

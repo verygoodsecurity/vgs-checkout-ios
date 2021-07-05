@@ -114,7 +114,7 @@ internal class VGSFormValidationHelper {
     // NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
     let isValidState = field.state.isValid
     
-    switch (isValidLength ,isValidState) {
+    switch (isValidLength, isValidState) {
     case (false, _):
       formItem.updateUI(for: .focused)
     case (true, true):
@@ -183,45 +183,41 @@ internal class VGSFormValidationHelper {
 			return nil
 		}
 
+		let firstField = firstErrorField.textField
+		let firstFieldType = firstErrorField.fieldType
+
+		let firstFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: firstFieldType)
+
 		/// Check if first field with error is focused.
-		if firstErrorField.textField.isFirstResponder  {
+		if firstErrorField.textField.isFirstResponder {
+
 			/// Check if field input is full required length
 			let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
 			if isFullLength {
 				/// If true - show field error1
-				let errorText = self.getErrorMessage(for: firstErrorField.fieldType)
+				let errorText = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
 				return errorText
 			} else {
 				/// If false - show next field error
 				guard invalidFields.count > 1 else {
 					return nil
 				}
+
 				let secondErrorField = invalidFields[1]
-				let errorText = self.getErrorMessage(for: secondErrorField.fieldType)
+
+				let secondField = secondErrorField.textField
+				let secondFieldType = secondErrorField.fieldType
+
+				let secondFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: secondFieldType)
+
+				let errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
+				
 				return errorText
 			}
 		} else {
-			/// Show error from first not valid field
-			let errorMessage = getErrorMessage(for: firstErrorField.fieldType)
+			// Show error from first not valid field
+			let errorMessage = firstFieldValidator.errorMessage(for: firstErrorField.textField, fieldType: firstErrorField.fieldType)
 			return errorMessage
-		}
-	}
-
-	/// Get error message for field type.
-	/// - Parameter fieldType: `VGSAddCardFormFieldType` object, field type.
-	/// - Returns: `String` object, contains with error message.
-	internal func getErrorMessage(for fieldType: VGSAddCardFormFieldType) -> String {
-		switch fieldType {
-		case .cardholderName, .firstName, .lastName:
-			return fieldType.emptyFieldNameError
-		case .cardNumber:
-			return "Enter a valid card number"
-		case .expirationDate:
-			return "Expiration date is not valid"
-		case .cvc:
-			return "Security code is not valid"
-		default:
-			return "Card details should be valid"
 		}
 	}
 
@@ -249,11 +245,6 @@ internal class VGSFormValidationHelper {
 		}
 
 		return isValid
-	}
-
-	/// All invalid text fields.
-	internal var invalidFields: [VGSTextField] {
-		return formItems.filter{ !$0.textField.state.isValid && $0.textField.state.isDirty}.map({return $0.textField})
 	}
 
 	// MARK: - Form blocks

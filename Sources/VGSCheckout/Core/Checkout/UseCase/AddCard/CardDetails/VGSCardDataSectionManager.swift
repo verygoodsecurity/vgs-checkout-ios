@@ -64,6 +64,9 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
   /// Validation manager.
 	internal let formValidationHelper: VGSFormValidationHelper
 
+	/// Autofocus manager.
+	internal let autoFocusManager: VGSFormAutofocusManager
+
 	// MARK: - Initialization
 
 	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus) {
@@ -72,6 +75,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		self.validationBehavior = validationBehavior
 		self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument)
 		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
+		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
 
 		buildForm()
 	}
@@ -302,6 +306,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
     formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
     updateFormState()
 	}
 }

@@ -14,4 +14,8 @@ internal class VGSCardholderFieldValidator: VGSFormTextFieldValidationProtocol {
 
 		return inputLength == 1
 	}
+
+	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return fieldType.emptyFieldNameError
+	}
 }

@@ -22,4 +22,8 @@ internal class VGSCardCVCFieldValidator: VGSFormTextFieldValidationProtocol {
 
 		return inputLength == currentBrandFormatPattern.count
 	}
+
+	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return "Security code is not valid"
+	}
 }

@@ -24,4 +24,8 @@ internal class VGSCardNumberFieldValidator: VGSFormTextFieldValidationProtocol {
   internal func getMaxValidLength(for cardBrand: VGSCheckoutPaymentCards.CardBrand) -> Int {
     return cardBrand.cardLengths.max() ?? defaultAnyCardLength
   }
+
+	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return "Enter a valid card number"
+	}
 }

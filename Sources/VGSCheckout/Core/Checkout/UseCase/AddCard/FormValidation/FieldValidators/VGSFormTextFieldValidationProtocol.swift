@@ -6,9 +6,9 @@ import Foundation
 
 internal protocol VGSFormTextFieldValidationProtocol {
 	func isTextFieldInputComplete(_ textField: VGSTextField) -> Bool
-	func isTextFieldInputValid(_ textField: VGSTextField) -> Bool
+	func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String?
 }
 
 internal extension VGSFormTextFieldValidationProtocol {
-	func isTextFieldInputValid(_ textField: VGSTextField) -> Bool {return true}
+	func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {return nil}
 }
