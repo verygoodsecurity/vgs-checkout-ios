@@ -8,11 +8,14 @@ import Foundation
 import UIKit
 #endif
 
-internal struct VGSFieldGroup {
-	internal let fieldView: [[UIView]]
+/// Form View with group of fields.
+internal protocol VGSFormGroupViewProtocol: UIView {
+	var errorLabel: UILabel {get}
+	func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool)
 }
 
-internal class VGSCardDetailsFormView: UIView {
+/// Holds UI for card details.
+internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 
 	/// Defines field distribution.
 	internal enum FieldsDistribution {
@@ -25,7 +28,7 @@ internal class VGSCardDetailsFormView: UIView {
 	internal var formItems: [VGSTextFieldFormItemProtocol] = []
 
 	/// Displays error messages for invalid card details.
-	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+	internal let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
 	/// Fields distribution.
 	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
@@ -141,7 +144,15 @@ internal class VGSCardDetailsFormView: UIView {
 	}
 
 	// MARK: - Interface
+  
+  /// Update Array of form blocks with validation state.
+  internal func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool) {
+    formBlocks.forEach { formBlock in
+      updateFormBlock(formBlock, isValid: isValid)
+    }
+  }
 
+  /// Update Form block items UI with validation state.
 	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
 		switch block {
 		case .cardHolder:
@@ -177,14 +188,14 @@ internal class VGSCardDetailsFormView: UIView {
 			case .visible:
 				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 				rootStackView.addArrangedSubview(cardHolderDetailsView)
-				cardDetailsErrorLabel.isHidden = true
+				errorLabel.isHiddenInCheckoutStackView = true
 			default:
 				break
 			}
 		case .multiplexing:
 			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 			rootStackView.addArrangedSubview(cardHolderDetailsView)
-			cardDetailsErrorLabel.isHidden = true
+			errorLabel.isHiddenInCheckoutStackView = true
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
@@ -203,8 +214,8 @@ internal class VGSCardDetailsFormView: UIView {
 			setupAllInSingleLine()
 		}
 
-		rootStackView.addArrangedSubview(cardDetailsErrorLabel)
-		cardDetailsErrorLabel.isHidden = true
+		rootStackView.addArrangedSubview(errorLabel)
+		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
 		formItems = cardHolderDetailsView.formItems + [

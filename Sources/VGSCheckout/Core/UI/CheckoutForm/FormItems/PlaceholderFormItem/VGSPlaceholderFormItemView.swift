@@ -53,23 +53,6 @@ internal class VGSPlaceholderFormItemView: UIView {
 		fatalError("not implemented")
 	}
 
-	// MARK: - Interface
-
-	/// Update UI.
-	/// - Parameter validationState: `VGSCheckoutFormValidationState` object, form validation state.
-	internal func updateUI(for validationState: VGSCheckoutFormValidationState) {
-		switch validationState {
-		case .focused, .inactive:
-			hintComponentView.accessory = .none
-		case .valid:
-			hintComponentView.accessory = .valid
-		case .invalid:
-			hintComponentView.accessory = .invalid
-		case .disabled:
-			hintComponentView.accessory = .none
-		}
-	}
-
 	// MARK: - Helpers
 
 	/// Setup UI and basic layout.

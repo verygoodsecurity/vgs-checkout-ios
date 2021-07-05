@@ -78,15 +78,6 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 
 	// MARK: - Interface
 
-	internal func updateErrorUI(for errorText: String?, fieldType: VGSAddCardFormFieldType) {
-		guard let text = errorText else {
-			cardDetailsView.cardDetailsErrorLabel.isHidden = true
-			return
-		}
-		cardDetailsView.cardDetailsErrorLabel.isHidden = false
-		cardDetailsView.cardDetailsErrorLabel.text = text
-	}
-
 	// MARK: - Helpers
 
 	/// Setup UI and basic layout.
