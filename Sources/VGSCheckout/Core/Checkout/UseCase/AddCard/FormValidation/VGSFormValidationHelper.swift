@@ -19,6 +19,9 @@ internal class VGSFormValidationHelper {
 	/// `VGSFormItemsManager` class.
 	internal let formItemsManager: VGSFormItemsManager
 
+	/// Validation manger for form item views (textField + placeholder + error checkmark).
+	internal let formItemViewsValidationManager: VGSFormItemViewValidationManager = VGSFormItemViewValidationManager()
+
 	/// Initializer.
 	/// - Parameters:
 	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
@@ -85,9 +88,9 @@ internal class VGSFormValidationHelper {
 			if let formItem = formItemsManager.fieldFormItem(for: textField) {
 					switch textField.fieldType {
 					case .cardNumber:
-            updateCardNumberFormItemOnEditingTextField(textField, formItem: formItem)
+						formItemViewsValidationManager.updateCardNumberFormItemOnEditingTextField(textField, formItem: formItem)
 					default:
-            updateAnyFormItemOnEditingTextField(textField, formItem: formItem)
+						formItemViewsValidationManager.updateAnyFormItemOnEditingTextField(textField, formItem: formItem)
 					}
 					return
 			}
@@ -102,56 +105,9 @@ internal class VGSFormValidationHelper {
     switch validationBehaviour {
     case .onFocus:
 			guard let formItem = formItemsManager.fieldFormItem(for: textField) else {return}
-      self.updateAnyFormItemOnEndEditTextField(textField, formItem: formItem)
+			formItemViewsValidationManager.updateAnyFormItemOnEndEditTextField(textField, formItem: formItem)
     default:
       break
-    }
-  }
-  
-  /// Handle CardNumber field state during editing.
-	private func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-    
-    let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
-    // NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
-    let isValidState = field.state.isValid
-    
-    switch (isValidLength, isValidState) {
-    case (false, _):
-      formItem.updateUI(for: .focused)
-    case (true, true):
-      formItem.updateUI(for: .valid)
-    case (true, false):
-      formItem.updateUI(for: .invalid)
-    }
-	}
-
-  /// Handle Any field state during editing.
-  private func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-    let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
-    let isValidState = field.state.isValid
-
-    switch (isValidLength, isValidState) {
-    case (false, _):
-      formItem.updateUI(for: .focused)
-    case (true, true):
-      formItem.updateUI(for: .valid)
-    case (true, false):
-      formItem.updateUI(for: .invalid)
-    }
-	}
-  
-  /// Handle Any field state after it finish editing.
-  private func updateAnyFormItemOnEndEditTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-    let state = field.state
-
-    switch (state.isDirty, state.isValid) {
-    case (false, _):
-      formItem.updateUI(for: .inactive)
-    case (true, false):
-      formItem.updateUI(for: .invalid)
-      return
-    case (true, true):
-      formItem.updateUI(for: .focused)
     }
   }
 
@@ -180,7 +136,7 @@ internal class VGSFormValidationHelper {
 	internal func getFirstFormValidationError() -> String? {
 		let invalidFields = getFieldsWithValidationErros()
 
-		guard invalidFields.count > 0, let firstErrorField = invalidFields.first else {
+		guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
 			return nil
 		}
 

@@ -132,6 +132,7 @@
 		44955C2A266DF4D100435FC6 /* VGSCustomRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */; };
 		44985D482692D6A300A4BB42 /* VGSFormAutofocusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D472692D6A300A4BB42 /* VGSFormAutofocusManager.swift */; };
 		44985D4A2692D6D800A4BB42 /* VGSFormItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D492692D6D800A4BB42 /* VGSFormItemsManager.swift */; };
+		44985D4D2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D4C2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift */; };
 		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
 		44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */; };
 		44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BF2664B18B00195505 /* VGSFormView.swift */; };
@@ -338,6 +339,7 @@
 		44955C29266DF4D100435FC6 /* VGSCustomRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCustomRoundedButton.swift; sourceTree = "<group>"; };
 		44985D472692D6A300A4BB42 /* VGSFormAutofocusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormAutofocusManager.swift; sourceTree = "<group>"; };
 		44985D492692D6D800A4BB42 /* VGSFormItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormItemsManager.swift; sourceTree = "<group>"; };
+		44985D4C2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormItemViewValidationManager.swift; sourceTree = "<group>"; };
 		44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHeaderView.swift; sourceTree = "<group>"; };
 		44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardDetailsFormView.swift; sourceTree = "<group>"; };
 		44C4C8BF2664B18B00195505 /* VGSFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormView.swift; sourceTree = "<group>"; };
@@ -973,6 +975,14 @@
 			path = FormItemsManager;
 			sourceTree = "<group>";
 		};
+		44985D4B2692F01A00A4BB42 /* FormItemViewValidationManager */ = {
+			isa = PBXGroup;
+			children = (
+				44985D4C2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift */,
+			);
+			path = FormItemViewValidationManager;
+			sourceTree = "<group>";
+		};
 		44C4C8B92664B18A00195505 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,6 +1260,7 @@
 			isa = PBXGroup;
 			children = (
 				44D5CF1D268C381C00312108 /* VGSFormValidationHelper.swift */,
+				44985D4B2692F01A00A4BB42 /* FormItemViewValidationManager */,
 				44985D462692D67F00A4BB42 /* FormItemsManager */,
 				44985D452692D67500A4BB42 /* FormAutoFocusManager */,
 				44D5CF1F268C3C4B00312108 /* FieldValidators */,
@@ -1767,6 +1778,7 @@
 				4405DC6826844B30004A83AD /* VGSValidationRuleLuhnCheck.swift in Sources */,
 				4405DC8E26847247004A83AD /* VGSCollectLogLevel.swift in Sources */,
 				4405DC6E26844B30004A83AD /* VGSValidatior.swift in Sources */,
+				44985D4D2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift in Sources */,
 				4405DC6226844B30004A83AD /* VGSCVCTextField.swift in Sources */,
 				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
 				4405DCA326847247004A83AD /* VGSDeepMergeUtils.swift in Sources */,
