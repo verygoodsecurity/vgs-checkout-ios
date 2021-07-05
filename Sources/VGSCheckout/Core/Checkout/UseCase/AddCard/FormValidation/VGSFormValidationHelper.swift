@@ -37,7 +37,7 @@ internal class VGSFormValidationHelper {
     case .onFocus:
       /// Update form error message and ui state
       let formError = getFirstFormValidationError()
-      updateFormViewWithError(view, formError: formError)
+			updateFormViewWithError(view, with: formError)
       /// Update textfield UI state
       updateFieldUIOnEditing(for: textField)
     case .onTextChange:
@@ -51,7 +51,7 @@ internal class VGSFormValidationHelper {
     case .onFocus:
       /// Update form error message and grid state
       let formError = getFirstFormValidationError()
-      updateFormViewWithError(view, formError: formError)
+			updateFormViewWithError(view, with: formError)
       /// Update textfield UI state
       updateFieldUIOnEndEditing(for: textField)
     case .onTextChange:
@@ -63,7 +63,7 @@ internal class VGSFormValidationHelper {
 	/// - Parameters:
 	///   - view: `VGSFormGroupViewProtocol` object, form view.
 	///   - formError: `String?` object, form error.
-  private func updateFormViewWithError(_ view: VGSFormGroupViewProtocol, formError: String?) {
+  private func updateFormViewWithError(_ view: VGSFormGroupViewProtocol, with formError: String?) {
     /// Update Form with Error Message
     if let error = formError {
       view.errorLabel.text = error
@@ -71,6 +71,7 @@ internal class VGSFormValidationHelper {
 			view.updateFormBlocks(formItemsManager.formBlocks, isValid: false)
     } else {
       view.errorLabel.text = ""
+			view.errorLabel.isHiddenInCheckoutStackView = true
 			view.updateFormBlocks(formItemsManager.formBlocks, isValid: true)
     }
   }
@@ -211,7 +212,7 @@ internal class VGSFormValidationHelper {
 				let secondFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: secondFieldType)
 
 				let errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
-				
+
 				return errorText
 			}
 		} else {
