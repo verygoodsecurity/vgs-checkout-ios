@@ -69,6 +69,15 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		return view
 	}()
 
+	// TODO: - move to separe block for address.
+	/// Country form item.
+	internal lazy var countryFormItemView: VGSCountryFormItemView = {
+		let componentView = VGSCountryFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
 	/// Header view.
 	internal lazy var headerView: VGSCheckoutHeaderView = {
 		let headerView = VGSCheckoutHeaderView(frame: .zero)
@@ -217,14 +226,12 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 			case .visible:
 				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 				rootStackView.addArrangedSubview(cardHolderDetailsView)
-				errorLabel.isHiddenInCheckoutStackView = true
 			default:
 				break
 			}
 		case .multiplexing:
 			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
 			rootStackView.addArrangedSubview(cardHolderDetailsView)
-			errorLabel.isHiddenInCheckoutStackView = true
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
@@ -250,8 +257,12 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		formItems = cardHolderDetailsView.formItems + [
 			cardNumberFormItemView,
 			expDateFormItemView,
-			cvcFormItemView
+			cvcFormItemView,
+			//countryFormItemView
 		]
+
+		// Test country field
+		//verticalStackView.addArrangedSubview(countryFormItemView)
 
 		formItems.first?.textField.becomeFirstResponder()
 	}

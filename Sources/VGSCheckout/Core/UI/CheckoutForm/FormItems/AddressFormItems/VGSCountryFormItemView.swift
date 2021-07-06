@@ -7,27 +7,26 @@ import Foundation
 import UIKit
 #endif
 
+/// Holds UI for country form.
 internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	// MARK: - Vars
 
-	internal let fieldType: VGSAddCardFormFieldType = .cvc
+	internal let fieldType: VGSAddCardFormFieldType = .country
 
 	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
-		return cvcTextField
+		return countryTextField
 	}
 
-	lazy var cvcTextField: VGSCVCTextField = {
-		let field = VGSCVCTextField()
+	lazy var countryTextField: VGSCountryPickerTextField = {
+		let field = VGSCountryPickerTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false
 
-		field.placeholder = "CVC"
-
-		field.cvcIconSize = CGSize(width: 32, height: 20)
 		field.cornerRadius = 0
 		field.borderWidth = 0
+
 		return field
 	}()
 
@@ -50,7 +49,7 @@ internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		formItemView.translatesAutoresizingMaskIntoConstraints = false
 		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "Security code"
-		formItemView.stackView.addArrangedSubview(cvcTextField)
+		formItemView.hintComponentView.label.text = "Country"
+		formItemView.stackView.addArrangedSubview(countryTextField)
 	}
 }
