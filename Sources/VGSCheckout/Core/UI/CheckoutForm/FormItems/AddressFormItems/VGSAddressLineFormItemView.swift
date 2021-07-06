@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for country form.
+/// Holds UI for address line form item.
 internal class VGSAddressLineFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	// MARK: - Vars
