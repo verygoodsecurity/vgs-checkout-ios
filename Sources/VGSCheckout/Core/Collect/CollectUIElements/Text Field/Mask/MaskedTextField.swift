@@ -101,7 +101,18 @@ internal class MaskedTextField: UITextField {
         self.undoManager?.removeAllActions()
         self.formatText()
     }
-    
+
+		/// A Boolean value that determines whether the text field caret is hidden.
+		internal var isCarretHidden = false
+
+		override func caretRect(for position: UITextPosition) -> CGRect {
+			if isCarretHidden {
+				return .zero
+			} else {
+				return super.caretRect(for: position)
+			}
+		}
+
     fileprivate func getOnlyDigitsString(_ string: String) -> String {
         let charactersArray = string.components(separatedBy: CharacterSet.vgsAsciiDecimalDigits.inverted)
         return charactersArray.joined(separator: "")
