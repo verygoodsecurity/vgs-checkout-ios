@@ -20,7 +20,7 @@ internal class VGSFormFieldsValidatorFactory {
 			return VGSExpDateFieldValidator()
 		case .cvc:
 			return VGSCardCVCFieldValidator()
-		case .country:
+		case .country, .addressLine1, .addressLine2:
 			// TODO: - add country validator
 			return VGSCardNumberFieldValidator()
 		}

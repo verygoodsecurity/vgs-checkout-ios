@@ -57,6 +57,8 @@ internal enum VGSAddCardFormFieldType {
 	case firstName
 	case lastName
 	case country
+	case addressLine1
+	case addressLine2
 
 	var formBlock: VGSAddCardFormBlock {
 		switch self {
@@ -64,7 +66,7 @@ internal enum VGSAddCardFormFieldType {
 			return .cardHolder
 		case .cardNumber, .expirationDate, .cvc:
 			return .cardDetails
-		case .country:
+		case .country, .addressLine1, .addressLine2:
 			return .addressInfo
 		}
 	}
