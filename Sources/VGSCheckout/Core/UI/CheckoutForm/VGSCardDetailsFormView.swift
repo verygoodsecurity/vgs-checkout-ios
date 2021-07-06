@@ -169,6 +169,8 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 				verticalStackView.separatorColor = UIColor.red
 				horizonalStackView.separatorColor = UIColor.red
 			}
+		case .addressInfo:
+			break
 		}
 	}
 

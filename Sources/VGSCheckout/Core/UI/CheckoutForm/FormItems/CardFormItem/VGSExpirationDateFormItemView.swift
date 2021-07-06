@@ -11,6 +11,7 @@ import UIKit
 internal enum VGSAddCardFormBlock {
 	case cardHolder
 	case cardDetails
+	case addressInfo
 }
 
 internal enum VGSCheckoutFormValidationState {
@@ -55,6 +56,7 @@ internal enum VGSAddCardFormFieldType {
 	case cardholderName
 	case firstName
 	case lastName
+	case country
 
 	var formBlock: VGSAddCardFormBlock {
 		switch self {
@@ -62,6 +64,8 @@ internal enum VGSAddCardFormFieldType {
 			return .cardHolder
 		case .cardNumber, .expirationDate, .cvc:
 			return .cardDetails
+		case .country:
+			return .addressInfo
 		}
 	}
 
