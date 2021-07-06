@@ -178,6 +178,7 @@
 		44E10A9026945912001F0D44 /* VGSBillingAddressDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8F26945912001F0D44 /* VGSBillingAddressDetailsView.swift */; };
 		44E10A9226945D14001F0D44 /* VGSAddressLineFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A9126945D14001F0D44 /* VGSAddressLineFormItemView.swift */; };
 		44E10A9426945F75001F0D44 /* VGSCityFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A9326945F75001F0D44 /* VGSCityFormItemView.swift */; };
+		44E10A96269463FD001F0D44 /* VGSStateFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A95269463FD001F0D44 /* VGSStateFormItemView.swift */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -393,6 +394,7 @@
 		44E10A8F26945912001F0D44 /* VGSBillingAddressDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSBillingAddressDetailsView.swift; sourceTree = "<group>"; };
 		44E10A9126945D14001F0D44 /* VGSAddressLineFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLineFormItemView.swift; sourceTree = "<group>"; };
 		44E10A9326945F75001F0D44 /* VGSCityFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCityFormItemView.swift; sourceTree = "<group>"; };
+		44E10A95269463FD001F0D44 /* VGSStateFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSStateFormItemView.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -1325,6 +1327,7 @@
 				44E10A8D26936512001F0D44 /* VGSCountryFormItemView.swift */,
 				44E10A9126945D14001F0D44 /* VGSAddressLineFormItemView.swift */,
 				44E10A9326945F75001F0D44 /* VGSCityFormItemView.swift */,
+				44E10A95269463FD001F0D44 /* VGSStateFormItemView.swift */,
 			);
 			path = AddressFormItems;
 			sourceTree = "<group>";
@@ -1865,6 +1868,7 @@
 				4405DC1C26844AD8004A83AD /* VGSExpDateConfiguration.swift in Sources */,
 				44E10A8E26936512001F0D44 /* VGSCountryFormItemView.swift in Sources */,
 				4405DC9626847247004A83AD /* Calendar+extension.swift in Sources */,
+				44E10A96269463FD001F0D44 /* VGSStateFormItemView.swift in Sources */,
 				4405DC6B26844B30004A83AD /* VGSValidationRuleLengthMatch.swift in Sources */,
 				44E10A9026945912001F0D44 /* VGSBillingAddressDetailsView.swift in Sources */,
 				44C4C9092664ECD200195505 /* VGSCheckoutConfiguration.swift in Sources */,
