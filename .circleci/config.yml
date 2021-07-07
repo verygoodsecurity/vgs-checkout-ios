@@ -13,7 +13,7 @@ jobs:
           name: Run Tests iOS 13-14
           command: >
             cd Tests/VGSCheckoutTests/Resources/MockedData &&
-            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} VGSCheckoutTestConfig.plist && cd .. && cd .. && cd .. && xcodebuild test -project VGSCheckout.xcodeproj -scheme VGSCheckoutTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.2' -testPlan VGSCheckoutTests
+            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} VGSCheckoutTestConfig.plist && cd .. && cd .. cd .. && cd .. && xcodebuild test -project VGSCheckout.xcodeproj -scheme VGSCheckoutTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.2' -testPlan VGSCheckoutTests
 
 workflows:
   version: 2
