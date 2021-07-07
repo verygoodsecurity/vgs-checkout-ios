@@ -17,9 +17,18 @@ final class VGSCheckoutMockedDataProvider {
 	}
 
 	func setupMockedData() {
-			guard let path = Bundle.main.path(forResource: "VGSCheckoutTestConfig", ofType: "plist") else {
+
+			#if SWIFT_PACKAGE
+				let bundle = Bundle.module
+			#else
+				let bundle = Bundle(for: type(of: VGSCollectTestBundleHelper()))
+			#endif
+
+
+
+			guard let path = bundle.path(forResource: "VGSCheckoutTestConfig", ofType: "plist") else {
 					print("Path not found")
-					XCTFail("VGSCheckoutTestConfig not found")
+					XCTFail("VGSCheckoutTestConfig not found: bundle: \(bundle)")
 					return
 			}
 
