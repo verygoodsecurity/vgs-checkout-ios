@@ -1038,8 +1038,8 @@
 		44C4C8BD2664B18A00195505 /* CheckoutForm */ = {
 			isa = PBXGroup;
 			children = (
-				44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */,
-				44E10A8F26945912001F0D44 /* VGSBillingAddressDetailsView.swift */,
+				44E10A9A26956277001F0D44 /* AddressDetails */,
+				44E10A9926956270001F0D44 /* CardDetails */,
 				44C4C8BF2664B18B00195505 /* VGSFormView.swift */,
 				44C4C8C02664B18B00195505 /* VGSCheckoutItem.swift */,
 				44C4C8C12664B18B00195505 /* FormItems */,
@@ -1333,6 +1333,22 @@
 				44E10A9726946BE4001F0D44 /* VGSZipCodeFormItemView.swift */,
 			);
 			path = AddressFormItems;
+			sourceTree = "<group>";
+		};
+		44E10A9926956270001F0D44 /* CardDetails */ = {
+			isa = PBXGroup;
+			children = (
+				44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */,
+			);
+			path = CardDetails;
+			sourceTree = "<group>";
+		};
+		44E10A9A26956277001F0D44 /* AddressDetails */ = {
+			isa = PBXGroup;
+			children = (
+				44E10A8F26945912001F0D44 /* VGSBillingAddressDetailsView.swift */,
+			);
+			path = AddressDetails;
 			sourceTree = "<group>";
 		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {
