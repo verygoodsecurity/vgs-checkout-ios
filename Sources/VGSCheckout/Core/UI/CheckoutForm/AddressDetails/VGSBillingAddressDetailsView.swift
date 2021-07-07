@@ -238,5 +238,11 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 			stateFormItemView,
 			zipFormItemView
 		]
+
+		// Setup insets.
+		formItems.forEach { formItem in
+			formItem.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+			formItem.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+		}
 	}
 }

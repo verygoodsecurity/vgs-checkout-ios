@@ -98,7 +98,7 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 			payButtonContainerView.addContentView(payButton)
 
 			backgroundStackView.addArrangedSubview(cardDetailsView)
-			backgroundStackView.addArrangedSubview(billingAddressView)
+			//backgroundStackView.addArrangedSubview(billingAddressView)
 			
 			backgroundStackView.addArrangedSubview(payButtonContainerView)
 		}

@@ -83,22 +83,22 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-			textField.delegate = self
+			//textField.delegate = self
 		}
 
 		for item in textFiedFormItems {
-			item.formItemView.delegate = self
+			//	item.formItemView.delegate = self
 		}
 	}
 
 	// MARK: - Helpers
 
 	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
-		//VGSCardDataFormConfigurationManager.setupCardForm(with: vaultConfiguration, vgsCollect: vgsCollect, cardFormView: cardFormView)
+	//	VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
 	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
-		//VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardFormView: cardFormView)
+	//	VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {
