@@ -28,6 +28,7 @@ final class VGSCheckoutMockedDataProvider {
 					return
 			}
 
-			vaultID = dictionary["COLLECT_UNIT_TESTS_VAULT_ID"] as? String ?? ""
+			vaultID = dictionary["vaultID"] as? String ?? ""
+		  print("vaultID in mock data: \(vaultID)")
 		}
 }
