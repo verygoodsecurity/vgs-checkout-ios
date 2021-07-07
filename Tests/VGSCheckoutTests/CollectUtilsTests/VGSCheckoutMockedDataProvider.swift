@@ -19,7 +19,7 @@ final class VGSCheckoutMockedDataProvider {
 	func setupMockedData() {
 			guard let path = Bundle.main.path(forResource: "VGSCheckoutTestConfig", ofType: "plist") else {
 					print("Path not found")
-					XCTFail("Test vault ID not found")
+					XCTFail("VGSCheckoutTestConfig not found")
 					return
 			}
 
