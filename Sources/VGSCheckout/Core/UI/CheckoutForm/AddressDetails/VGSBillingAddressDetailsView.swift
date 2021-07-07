@@ -7,55 +7,58 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for card details.
+/// Holds UI for address details.
 internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 	/// Form items.
 	internal var formItems: [VGSTextFieldFormItemProtocol] = []
 
-	/// Displays error messages for invalid card details.
+	/// Displays error messages for invalid adrdress details.
 	internal let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
-	/// Card number view.
-	internal lazy var cardNumberFormItemView: VGSCardNumberFormItemView = {
-		let componentView = VGSCardNumberFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// Exp date view.
-	internal lazy var expDateFormItemView: VGSExpirationDateFormItemView = {
-		let componentView = VGSExpirationDateFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// CVC view.
-	internal lazy var cvcFormItemView: VGSCVCFormItemView = {
-		let componentView = VGSCVCFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// Card holder view.
-	internal let cardHolderDetailsView: VGSCardHolderDetailsView
-
-	/// Container view for header to add insets.
-	internal lazy var headerContainerView: VGSContainerItemView = {
-		let view = VGSContainerItemView(frame: .zero)
-		view.translatesAutoresizingMaskIntoConstraints = false
-		view.paddings = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-
-		return view
-	}()
-
-	// TODO: - move to separe block for address.
-	/// Country form item.
+	/// Country form item view.
 	internal lazy var countryFormItemView: VGSCountryFormItemView = {
 		let componentView = VGSCountryFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// Address line 1 form item view.
+	internal lazy var addressLine1FormItemView: VGSAddressLineFormItemView = {
+		let componentView = VGSAddressLineFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// Address line 2 form item view.
+	internal lazy var addressLine2FormItemView: VGSAddressLineFormItemView = {
+		let componentView = VGSAddressLineFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// City form item view.
+	internal lazy var cityItemFormView: VGSCityFormItemView = {
+		let componentView = VGSCityFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// State form item view.
+	internal lazy var stateFormItemView: VGSStateFormItemView = {
+		let componentView = VGSStateFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// ZIP form item view.
+	internal lazy var zipFormItemView: VGSZipCodeFormItemView = {
+		let componentView = VGSZipCodeFormItemView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
@@ -101,8 +104,8 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		return stackView
 	}()
 
-	/// Horizontal stack view for exp date and cvc.
-	internal lazy var horizonalStackView: VGSSeparatedStackView = {
+	/// Horizontal stack view for state and cvc.
+	internal lazy var stateAndZipStackView: VGSSeparatedStackView = {
 		let stackView = VGSSeparatedStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -124,7 +127,6 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
 	init(paymentInstrument: VGSPaymentInstrument) {
 		self.paymentInstrument = paymentInstrument
-		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
 		super.init(frame: .zero)
 
 		setupUI()
@@ -146,38 +148,38 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 	/// Update Form block items UI with validation state.
 	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
-		switch block {
-		case .cardHolder:
-			if isValid {
-				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-			} else {
-				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
-			}
-		case .cardDetails:
-			if isValid {
-				verticalStackView.separatorColor = UIColor.gray
-				horizonalStackView.separatorColor = UIColor.gray
-			} else {
-				verticalStackView.separatorColor = UIColor.red
-				horizonalStackView.separatorColor = UIColor.red
-			}
-		case .addressInfo:
-			break
-		}
+//		switch block {
+//		case .cardHolder:
+//			if isValid {
+//				cardHolderDetaailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+//			} else {
+//				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
+//			}
+//		case .cardDetails:
+//			if isValid {
+//				verticalStackView.separatorColor = UIColor.gray
+//				horizonalStackView.separatorColor = UIColor.gray
+//			} else {
+//				verticalStackView.separatorColor = UIColor.red
+//				horizonalStackView.separatorColor = UIColor.red
+//			}
+//		case .addressInfo:
+//			break
+//		}
 	}
 
 	/// Disable input view for processing state.
 	internal func updateUIForProcessingState() {
 		// Update grid view.
-		if #available(iOS 13, *) {
-			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-		} else {
-			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-		}
+//		if #available(iOS 13, *) {
+//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
+//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+//		} else {
+//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+//		}
 
 		// Update form fields.
 		formItems.forEach { formItem in
@@ -200,44 +202,24 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		addSubview(rootStackView)
 		rootStackView.checkout_constraintViewToSuperviewEdges()
 
-		headerContainerView.addContentView(headerView)
-		rootStackView.addArrangedSubview(headerContainerView)
-
-		switch paymentInstrument {
-		case .vault(let configuration):
-			switch configuration.cardHolderFieldOptions.fieldVisibility {
-			case .visible:
-				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
-				rootStackView.addArrangedSubview(cardHolderDetailsView)
-			default:
-				break
-			}
-		case .multiplexing:
-			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
-			rootStackView.addArrangedSubview(cardHolderDetailsView)
-		}
+		//headerContainerView.addContentView(headerView)
+		//rootStackView.addArrangedSubview(headerContainerView)
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-		cardNumberFormItemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		cardNumberFormItemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
-
-		verticalStackView.addArrangedSubview(cardNumberFormItemView)
+		verticalStackView.addArrangedSubview(countryFormItemView)
 
 		rootStackView.addArrangedSubview(errorLabel)
 		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
-		formItems = cardHolderDetailsView.formItems + [
-			cardNumberFormItemView,
-			expDateFormItemView,
-			cvcFormItemView,
-			//countryFormItemView
+		formItems = [
+			countryFormItemView,
+			addressLine1FormItemView,
+			addressLine2FormItemView,
+			cityItemFormView,
+			stateFormItemView,
+			zipFormItemView
 		]
-
-		// Test country field
-		//verticalStackView.addArrangedSubview(countryFormItemView)
-
-		formItems.first?.textField.becomeFirstResponder()
 	}
 }
