@@ -16,6 +16,15 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 	/// Displays error messages for invalid adrdress details.
 	internal let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
 
+	/// Container view for header to add insets.
+	internal lazy var headerContainerView: VGSContainerItemView = {
+		let view = VGSContainerItemView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.paddings = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+
+		return view
+	}()
+
 	/// Country form item view.
 	internal lazy var countryFormItemView: VGSCountryFormItemView = {
 		let componentView = VGSCountryFormItemView(frame: .zero)
@@ -202,12 +211,20 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		addSubview(rootStackView)
 		rootStackView.checkout_constraintViewToSuperviewEdges()
 
-		//headerContainerView.addContentView(headerView)
-		//rootStackView.addArrangedSubview(headerContainerView)
+		headerContainerView.addContentView(headerView)
+		rootStackView.addArrangedSubview(headerContainerView)
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
 		verticalStackView.addArrangedSubview(countryFormItemView)
+		verticalStackView.addArrangedSubview(addressLine1FormItemView)
+		verticalStackView.addArrangedSubview(addressLine2FormItemView)
+		verticalStackView.addArrangedSubview(cityItemFormView)
+
+		stateAndZipStackView.addArrangedSubview(stateFormItemView)
+		stateAndZipStackView.addArrangedSubview(zipFormItemView)
+
+		verticalStackView.addArrangedSubview(stateAndZipStackView)
 
 		rootStackView.addArrangedSubview(errorLabel)
 		errorLabel.isHiddenInCheckoutStackView = true
