@@ -24,8 +24,6 @@ final class VGSCheckoutMockedDataProvider {
 				let bundle = Bundle(for: type(of: VGSCollectTestBundleHelper()))
 			#endif
 
-
-
 			guard let path = bundle.path(forResource: "VGSCheckoutTestConfig", ofType: "plist") else {
 					print("Path not found")
 					XCTFail("VGSCheckoutTestConfig not found: bundle: \(bundle)")
