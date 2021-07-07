@@ -54,13 +54,17 @@ internal class VGSAddCardSectionFormView: VGSFormView {
   /// Card details view.
 	internal let cardDetailsView: VGSCardDetailsFormView
 
+	/// Billing address view.
+	internal let billingAddressView: VGSBillingAddressDetailsView
+
 	// MARK: - Initialization
 
 	/// Initializer.
-	internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsFormView, viewLayoutStyle: LayoutStyle = .fullScreen) {
+	internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsFormView, billingAddressView: VGSBillingAddressDetailsView, viewLayoutStyle: LayoutStyle = .fullScreen) {
 		self.paymentInstrument = paymentInstrument
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsView = cardDetailsView
+		self.billingAddressView = billingAddressView
 
 		super.init()
 
@@ -94,6 +98,8 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 			payButtonContainerView.addContentView(payButton)
 
 			backgroundStackView.addArrangedSubview(cardDetailsView)
+			backgroundStackView.addArrangedSubview(billingAddressView)
+			
 			backgroundStackView.addArrangedSubview(payButtonContainerView)
 		}
 	}

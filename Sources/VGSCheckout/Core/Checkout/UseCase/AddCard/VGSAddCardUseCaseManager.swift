@@ -55,6 +55,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	/// Manager for card data logic.
 	internal let cardDataSectionManager: VGSCardDataSectionManager
 
+	/// Manager for billing address logic.
+	internal let addressDataSectionManager: VGSAddressDataSectionManager
+
 	/// Add card main view.
 	internal let addCardSectionFormView: VGSAddCardSectionFormView
 
@@ -73,7 +76,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
-		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, viewLayoutStyle: .fullScreen)
+		self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+
+		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen)
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 		super.init()
 		self.addCardSectionFormView.payButton.status = .disabled
