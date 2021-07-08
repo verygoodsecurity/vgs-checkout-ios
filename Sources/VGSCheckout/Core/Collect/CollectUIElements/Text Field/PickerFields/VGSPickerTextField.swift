@@ -38,6 +38,12 @@ internal class VGSPickerTextField: VGSTextField {
 		autocorrectionType = .no
 	}
 
+	override var configuration: VGSConfiguration? {
+		didSet {
+			setupPickerView()
+		}
+	}
+
 	/// Setup toolbar.
 	internal func setupToolBar() {
 		let toolbar = UIToolbar()
@@ -59,7 +65,7 @@ internal class VGSPickerTextField: VGSTextField {
 	/// Setup picker view.
 	internal func setupPickerView() {
 		pickerView.delegate = self
-		if let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration {
+		if let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration {
 			pickerView.dataSource = pickerConfiguration.dataProvider
 		}
 		textField.inputView = pickerView
@@ -79,7 +85,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 	func pickerView(
 		_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int
 	) -> NSAttributedString? {
-		guard let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration else {return nil}
+		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return nil}
 		guard let title = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row) else {
 			return nil
 		}
@@ -89,7 +95,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 	}
 
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		guard let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration else {return}
+		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return}
 		let selectedText = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row)
 		textField.secureText = selectedText
 
@@ -99,7 +105,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 }
 
 /// A class responsible for configuration `VGSTextField` with `fieldType = .none`. Extends `VGSConfiguration` class.
-internal final class VGSPickerDataSourceConfiguration: VGSConfiguration {
+internal final class VGSPickerTextFieldConfiguration: VGSConfiguration {
 
 	/// Data provider for picker view.
 	internal var dataProvider: VGSPickerDataSourceProvider?

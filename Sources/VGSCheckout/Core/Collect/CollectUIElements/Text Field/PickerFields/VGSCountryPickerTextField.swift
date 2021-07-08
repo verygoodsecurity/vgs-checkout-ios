@@ -13,6 +13,10 @@ internal class VGSCountryPickerTextField: VGSPickerTextField {
 	override func mainInitialization() {
 		super.mainInitialization()
 
+		selectFirstRow()
+	}
+
+	internal func selectFirstRow() {
 		pickerView.selectRow(0, inComponent: 0, animated: false)
 		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
 	}
