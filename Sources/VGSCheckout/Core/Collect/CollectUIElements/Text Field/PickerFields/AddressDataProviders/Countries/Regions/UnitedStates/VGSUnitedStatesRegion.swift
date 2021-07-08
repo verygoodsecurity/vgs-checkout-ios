@@ -4,7 +4,7 @@
 
 import Foundation
 
-internal enum VGSUnitedStatesRegion : String, CaseIterable {
+internal enum VGSUnitedStatesRegion: String, CaseIterable {
 		case alabama            = "AL"
 		case alaska             = "AK"
 		case arizona            = "AZ"
@@ -57,7 +57,7 @@ internal enum VGSUnitedStatesRegion : String, CaseIterable {
 		case wisconsin          = "WI"
 		case wyoming            = "WY"
 
-		var displayName: String {
+		var displayNameLocalized: String {
 				switch self {
 				case .alabama: return NSLocalizedString("Alabama", comment: "")
 				case .alaska: return NSLocalizedString("Alaska", comment: "")
