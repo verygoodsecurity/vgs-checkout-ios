@@ -9,7 +9,7 @@ class ApiClientTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
         
     override func setUp() {
-        collector = VGSCollect(id: "tntva5wfdrp", environment: .sandbox)
+        collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID, environment: .sandbox)
     }
 
     func testSendCardToEchoServer() {

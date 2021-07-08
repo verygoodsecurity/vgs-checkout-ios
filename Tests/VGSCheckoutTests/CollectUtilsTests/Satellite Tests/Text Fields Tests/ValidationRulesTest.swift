@@ -12,7 +12,7 @@ class ValidationRulesTest: VGSCheckoutBaseTestCase {
     
     override func setUp() {
 			super.setUp()
-      form = VGSCollect(id: "tntva5wfdrp")
+      form = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
       textfield = VGSTextField()
     }
 

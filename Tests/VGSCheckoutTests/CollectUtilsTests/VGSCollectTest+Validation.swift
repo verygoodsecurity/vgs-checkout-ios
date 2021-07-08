@@ -10,7 +10,7 @@ class VGSCollectValidationTests: XCTestCase {
     var collector: VGSCollect!
     
     override func setUp() {
-        collector = VGSCollect(id: "tntva5wfdrp")
+        collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
     }
     
     override func tearDown() {
