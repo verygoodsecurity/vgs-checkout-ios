@@ -31,7 +31,7 @@ final class VGSCheckoutMockedDataProvider {
 			}
 
 			guard let dictionary = NSDictionary(contentsOfFile: path) else {
-					XCTFail("Test vault ID not found")
+					XCTFail("Test vault ID not found!")
 					return
 			}
 
