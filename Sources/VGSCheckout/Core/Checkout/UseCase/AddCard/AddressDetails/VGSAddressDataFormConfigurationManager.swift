@@ -20,11 +20,15 @@ internal class VGSAddressDataFormConfigurationManager {
 		let stateTextField = addressFormView.stateFormItemView.stateTextField
 		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
 
-		let countryConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "country")
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
+		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
 
 		countryTextField.configuration = countryConfiguration
+
+		// Force select first row in picker.
+		countryTextField.selectFirstRow()
 
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
 		addressLine1Configuration.type = .none
