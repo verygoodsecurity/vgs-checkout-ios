@@ -11,7 +11,7 @@ class ExpDateTextFieldTests: VGSCheckoutBaseTestCase {
     
     override func setUp() {
 			  super.setUp()
-        collector = VGSCollect(id: "tntva5wfdrp")
+			collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
         expDateTextField = VGSTextField()
         expDateTextField.textField.secureText = "1223"
     }

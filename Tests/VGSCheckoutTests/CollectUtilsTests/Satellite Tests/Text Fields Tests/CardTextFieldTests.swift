@@ -12,7 +12,7 @@ class CardTextFieldTests: VGSCheckoutBaseTestCase {
     
     override func setUp() {
 			  super.setUp()
-        form = VGSCollect(id: "tntva5wfdrp")
+        form = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
         let config = VGSConfiguration(collector: form, fieldName: "cardNumber")
         config.type = .cardNumber
         cardTextField = VGSCardTextField()

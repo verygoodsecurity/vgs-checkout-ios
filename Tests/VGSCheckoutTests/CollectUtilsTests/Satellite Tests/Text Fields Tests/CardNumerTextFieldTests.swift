@@ -11,7 +11,7 @@ class CardNumerTextFieldTests: VGSCheckoutBaseTestCase {
     
     override func setUp() {
 			  super.setUp()
-        collector = VGSCollect(id: "tntva5wfdrp")
+			collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
         
         cardNumerTextField = VGSTextField()
         

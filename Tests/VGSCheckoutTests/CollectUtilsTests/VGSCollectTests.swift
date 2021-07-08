@@ -9,7 +9,7 @@ class VGSCollectTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
     
     override func setUp() {
-        collector = VGSCollect(id: "tntva5wfdrp")
+        collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
     }
 
     override func tearDown() {
@@ -107,16 +107,7 @@ class VGSCollectTests: VGSCheckoutBaseTestCase {
         XCTAssertNotNil(collector.customHeaders)
         XCTAssert(collector.customHeaders![headerKey] == headerValue)
     }
-    
-    func testJail() {
-        XCTAssertFalse(VGSCollect.isJailbroken())
-    }
-    
-    func testCanOpen() {
-        let path = "."
-        XCTAssertTrue(VGSCollect.canOpen(path: path))
-    }
-    
+        
     func testRegistrationSingleTextField() {
         let config = VGSConfiguration(collector: collector, fieldName: "test")
         let tf = VGSCardTextField()
@@ -135,7 +126,7 @@ class VGSCollectTests: VGSCheckoutBaseTestCase {
       
       let fieldsCount = 5
 
-      collector = VGSCollect(id: "tntva5wfdrp")
+      collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID)
       
       for _ in 0..<fieldsCount {
         let config = VGSConfiguration(collector: collector, fieldName: "test")

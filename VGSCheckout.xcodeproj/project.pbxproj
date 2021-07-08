@@ -182,6 +182,8 @@
 		44E10A9826946BE4001F0D44 /* VGSZipCodeFormItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A9726946BE4001F0D44 /* VGSZipCodeFormItemView.swift */; };
 		44E10A9D2695716F001F0D44 /* VGSAddressDataSectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A9C2695716F001F0D44 /* VGSAddressDataSectionManager.swift */; };
 		44E10AA0269579C9001F0D44 /* VGSAddressDataFormConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A9F269579C9001F0D44 /* VGSAddressDataFormConfigurationManager.swift */; };
+		44E10AA32695C0F1001F0D44 /* VGSCheckoutTestConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AA22695C0F1001F0D44 /* VGSCheckoutTestConfig.plist */; };
+		44E10AA52695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AA42695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -401,6 +403,8 @@
 		44E10A9726946BE4001F0D44 /* VGSZipCodeFormItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSZipCodeFormItemView.swift; sourceTree = "<group>"; };
 		44E10A9C2695716F001F0D44 /* VGSAddressDataSectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressDataSectionManager.swift; sourceTree = "<group>"; };
 		44E10A9F269579C9001F0D44 /* VGSAddressDataFormConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressDataFormConfigurationManager.swift; sourceTree = "<group>"; };
+		44E10AA22695C0F1001F0D44 /* VGSCheckoutTestConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = VGSCheckoutTestConfig.plist; sourceTree = "<group>"; };
+		44E10AA42695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMockedDataProvider.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -798,6 +802,7 @@
 				4405DD5B26859FAC004A83AD /* VGSCheckoutTests.swift */,
 				4405DD5C26859FAC004A83AD /* VGSCheckoutBaseTestCase.swift */,
 				4405DD5D26859FAC004A83AD /* APIHostnameValidatorTests.swift */,
+				44E10AA42695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift */,
 			);
 			path = CollectUtilsTests;
 			sourceTree = "<group>";
@@ -899,6 +904,7 @@
 		4405DD5E26859FAC004A83AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44E10AA12695C0BF001F0D44 /* MockedData */,
 				4405DD5F26859FAC004A83AD /* TestJSONs */,
 				4405DD6826859FAC004A83AD /* ExpDateSplitSerializerTestJSONs */,
 			);
@@ -1364,6 +1370,14 @@
 			path = AddressDetails;
 			sourceTree = "<group>";
 		};
+		44E10AA12695C0BF001F0D44 /* MockedData */ = {
+			isa = PBXGroup;
+			children = (
+				44E10AA22695C0F1001F0D44 /* VGSCheckoutTestConfig.plist */,
+			);
+			path = MockedData;
+			sourceTree = "<group>";
+		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1733,6 +1747,7 @@
 				4405DD9326859FAD004A83AD /* DeepMergeMergeArrayTestJSONs.json in Resources */,
 				4405DD9826859FAD004A83AD /* VGSExpDateSerialization_CustomExpDateOutputConfig.json in Resources */,
 				4405DD9526859FAD004A83AD /* OverwriteArraysTestJSONs.json in Resources */,
+				44E10AA32695C0F1001F0D44 /* VGSCheckoutTestConfig.plist in Resources */,
 				4405DD9626859FAD004A83AD /* VGSFieldNameToJSONTestData.json in Resources */,
 				4405DD9A26859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json in Resources */,
 			);
@@ -1967,6 +1982,7 @@
 				4405DD8126859FAD004A83AD /* VGSCollectSatelliteUtilsTests.swift in Sources */,
 				4405DD7A26859FAD004A83AD /* CVVTextFieldTests.swift in Sources */,
 				4405DD8226859FAD004A83AD /* VGSAPIClientSatelliteTests.swift in Sources */,
+				44E10AA52695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift in Sources */,
 				4405DD7826859FAD004A83AD /* CardHolderNameFieldTests.swift in Sources */,
 				4405DD7226859FAD004A83AD /* VGSFieldNameMapUtilsTests.swift in Sources */,
 				4405DD7D26859FAD004A83AD /* CardTextFieldTests.swift in Sources */,
