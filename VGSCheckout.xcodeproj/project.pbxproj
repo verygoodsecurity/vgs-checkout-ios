@@ -1399,8 +1399,24 @@
 			isa = PBXGroup;
 			children = (
 				44E10AAD2696DCCB001F0D44 /* VGSCountriesISO.swift */,
+				44E10AAF2696DD50001F0D44 /* Regions */,
 			);
 			path = Countries;
+			sourceTree = "<group>";
+		};
+		44E10AAF2696DD50001F0D44 /* Regions */ = {
+			isa = PBXGroup;
+			children = (
+				44E10AB02696DD59001F0D44 /* UnitedStates */,
+			);
+			path = Regions;
+			sourceTree = "<group>";
+		};
+		44E10AB02696DD59001F0D44 /* UnitedStates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UnitedStates;
 			sourceTree = "<group>";
 		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {

@@ -29,10 +29,24 @@ internal class VGSRegionModelUS: VGSBaseRegionModelProtocol {
 
 internal class VGSAddressRegionProvider {
 	static func provideRegions(for countryCode: String) -> [VGSBaseRegionModelProtocol] {
-		return []
+
+		let iso = VGSCountriesISO.self
+		switch countryCode {
+		case iso.us.rawValue:
+			return []
+		case iso.ca.rawValue:
+			return []
+		case
+		default:
+			<#code#>
+		}
+
+
+		return [
+
+		]
 	}
 }
-
 
 internal class VGSStateDataSourceProvider {
 
