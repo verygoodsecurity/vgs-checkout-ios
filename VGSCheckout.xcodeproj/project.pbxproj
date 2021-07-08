@@ -187,6 +187,8 @@
 		44E10AA92696C2E9001F0D44 /* VGSRegionPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AA82696C2E9001F0D44 /* VGSRegionPickerTextField.swift */; };
 		44E10AAB2696C346001F0D44 /* VGSStateDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AAA2696C346001F0D44 /* VGSStateDataSourceProvider.swift */; };
 		44E10AAE2696DCCB001F0D44 /* VGSCountriesISO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AAD2696DCCB001F0D44 /* VGSCountriesISO.swift */; };
+		44E10AB22696DED4001F0D44 /* VGSUnitedStatesRegionDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AB12696DED4001F0D44 /* VGSUnitedStatesRegionDataProvider.swift */; };
+		44E10AB42696DF08001F0D44 /* VGSUnitedStatesRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AB32696DF08001F0D44 /* VGSUnitedStatesRegion.swift */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -411,6 +413,8 @@
 		44E10AA82696C2E9001F0D44 /* VGSRegionPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSRegionPickerTextField.swift; sourceTree = "<group>"; };
 		44E10AAA2696C346001F0D44 /* VGSStateDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSStateDataSourceProvider.swift; sourceTree = "<group>"; };
 		44E10AAD2696DCCB001F0D44 /* VGSCountriesISO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCountriesISO.swift; sourceTree = "<group>"; };
+		44E10AB12696DED4001F0D44 /* VGSUnitedStatesRegionDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUnitedStatesRegionDataProvider.swift; sourceTree = "<group>"; };
+		44E10AB32696DF08001F0D44 /* VGSUnitedStatesRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUnitedStatesRegion.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -1335,9 +1339,9 @@
 		44E10A872693638D001F0D44 /* AddressDataProviders */ = {
 			isa = PBXGroup;
 			children = (
-				44E10AAC2696DCBA001F0D44 /* Countries */,
 				44E10A88269363A0001F0D44 /* VGSAddressDataProvider.swift */,
 				44E10AAA2696C346001F0D44 /* VGSStateDataSourceProvider.swift */,
+				44E10AAC2696DCBA001F0D44 /* Countries */,
 			);
 			path = AddressDataProviders;
 			sourceTree = "<group>";
@@ -1415,6 +1419,8 @@
 		44E10AB02696DD59001F0D44 /* UnitedStates */ = {
 			isa = PBXGroup;
 			children = (
+				44E10AB12696DED4001F0D44 /* VGSUnitedStatesRegionDataProvider.swift */,
+				44E10AB32696DF08001F0D44 /* VGSUnitedStatesRegion.swift */,
 			);
 			path = UnitedStates;
 			sourceTree = "<group>";
@@ -1876,6 +1882,7 @@
 				44EC95122669EE8700CE04F4 /* VGSCheckoutDataMergePolicy.swift in Sources */,
 				44E10AA0269579C9001F0D44 /* VGSAddressDataFormConfigurationManager.swift in Sources */,
 				44C4C8F52664B18B00195505 /* VGSSubmitButton.swift in Sources */,
+				44E10AB22696DED4001F0D44 /* VGSUnitedStatesRegionDataProvider.swift in Sources */,
 				44C4C8F32664B18B00195505 /* VGSSeparatedStackView.swift in Sources */,
 				4455C84C266E4420000CD666 /* VGSPayWithCardHeaderView.swift in Sources */,
 				4405DC2526844AD8004A83AD /* APIHostnameValidator.swift in Sources */,
@@ -1995,6 +2002,7 @@
 				4405DC6726844B30004A83AD /* VGSValidationRulePaymentCard.swift in Sources */,
 				44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */,
 				44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */,
+				44E10AB42696DF08001F0D44 /* VGSUnitedStatesRegion.swift in Sources */,
 				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
 				4405DC1926844AD8004A83AD /* VGSCollect+network.swift in Sources */,
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,

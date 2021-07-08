@@ -36,11 +36,9 @@ internal class VGSAddressRegionProvider {
 			return []
 		case iso.ca.rawValue:
 			return []
-		case
 		default:
-			<#code#>
+			return []
 		}
-
 
 		return [
 
