@@ -96,7 +96,8 @@ internal class VGSAddressRegionProvider {
 
 		for item in jsonArray {
 			if let json = item as? JsonData {
-				if let region = VGSAddressRegionModel(json: json) {
+				if var region = VGSAddressRegionModel(json: json) {
+					region.regionType = regionType(for: countryCode)
 					regions.append(region)
 				}
 			}
