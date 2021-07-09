@@ -137,7 +137,7 @@ internal class VGSAddressRegionProvider {
 	}
 }
 
-final class VGSRegionsDataSourceProvider {
+final class VGSRegionsDataSourceProvider: VGSPickerTextFieldDataSourceProtocol {
 
 	private let countryCode: String
 

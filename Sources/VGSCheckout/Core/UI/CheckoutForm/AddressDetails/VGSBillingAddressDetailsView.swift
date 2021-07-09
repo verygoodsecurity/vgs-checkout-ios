@@ -57,9 +57,17 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		return componentView
 	}()
 
-	/// State form item view.
-	internal lazy var stateFormItemView: VGSStateFormItemView = {
+	/// region form item view.
+	internal lazy var regionFormItemView: VGSStateFormItemView = {
 		let componentView = VGSStateFormItemView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
+	/// State form item view.
+	internal lazy var statePickerFormItemView: VGSStatePickerFormItemView = {
+		let componentView = VGSStatePickerFormItemView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
@@ -221,7 +229,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		verticalStackView.addArrangedSubview(addressLine2FormItemView)
 		verticalStackView.addArrangedSubview(cityItemFormView)
 
-		stateAndZipStackView.addArrangedSubview(stateFormItemView)
+		stateAndZipStackView.addArrangedSubview(statePickerFormItemView)
 		stateAndZipStackView.addArrangedSubview(zipFormItemView)
 
 		verticalStackView.addArrangedSubview(stateAndZipStackView)
@@ -235,7 +243,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 			addressLine1FormItemView,
 			addressLine2FormItemView,
 			cityItemFormView,
-			stateFormItemView,
+			statePickerFormItemView,
 			zipFormItemView
 		]
 
