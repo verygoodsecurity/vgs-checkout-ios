@@ -7,7 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-
 internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourceProtocol {
 	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {
 		guard row >= 0,
