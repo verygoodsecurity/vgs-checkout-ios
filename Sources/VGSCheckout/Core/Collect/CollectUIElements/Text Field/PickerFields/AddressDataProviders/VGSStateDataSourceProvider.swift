@@ -145,9 +145,9 @@ final class VGSRegionsDataSourceProvider: VGSPickerTextFieldDataSourceProtocol {
 		self.countryCode = countryCode
 	}
 
-	var regions: [VGSAddressRegionModel] {
+	lazy var regions: [VGSAddressRegionModel] = {
 		return VGSAddressRegionProvider.provideRegions(for: countryCode)
-	}
+	}()
 
 	func numberOfRows() -> Int {
 		return regions.count

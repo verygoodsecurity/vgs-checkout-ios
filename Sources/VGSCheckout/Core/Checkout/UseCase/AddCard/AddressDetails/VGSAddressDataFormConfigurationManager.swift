@@ -64,7 +64,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 
 		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
-		let regionsDataSource = VGSRegionsDataSourceProvider(with: "us")
+		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
 		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
 		statePickerConfiguration.dataProvider = regionsDataSourceProvider
 		statePickerConfiguration.type = .none
