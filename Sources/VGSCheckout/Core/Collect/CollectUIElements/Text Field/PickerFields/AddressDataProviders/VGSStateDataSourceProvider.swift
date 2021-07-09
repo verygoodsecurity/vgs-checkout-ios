@@ -136,3 +136,40 @@ internal class VGSAddressRegionProvider {
 		return VGSCountriesISO(rawValue: countryCode) ?? .us
 	}
 }
+
+final class VGSRegionDataSourceProvider {
+
+	private let countryCode: String
+
+	init(with countryCode: String) {
+		self.countryCode = countryCode
+	}
+
+	var regions: [VGSAddressRegionModel] {
+		return VGSAddressRegionProvider.provideRegions(for: countryCode)
+	}
+
+	func numberOfRows() -> Int {
+		return regions.count
+	}
+
+	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {
+		guard row >= 0,
+					row < regions.count
+		else {
+			return nil
+		}
+
+		return regions[row].displayName
+	}
+
+	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int) -> String? {
+		guard row >= 0,
+					row < regions.count
+		else {
+			return nil
+		}
+
+		return regions[row].code
+	}
+}
