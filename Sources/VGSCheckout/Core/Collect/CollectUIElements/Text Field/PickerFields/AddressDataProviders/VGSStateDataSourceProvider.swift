@@ -125,9 +125,9 @@ internal class VGSAddressRegionProvider {
 	}
 
 	static func regionType(for countryCode: String) -> VGSAddressRegionType {
-		let countryISO = countryISO(for: countryCode)
+		let countryISOValue = countryISO(for: countryCode)
 
-		switch countryISO {
+		switch countryISOValue {
 		case .us:
 			return .state
 		case .ca:
