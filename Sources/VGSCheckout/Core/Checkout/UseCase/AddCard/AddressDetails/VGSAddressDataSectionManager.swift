@@ -83,11 +83,11 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-			//textField.delegate = self
+		  textField.delegate = self
 		}
 
 		for item in textFiedFormItems {
-			//	item.formItemView.delegate = self
+			item.formItemView.delegate = self
 		}
 	}
 
@@ -117,6 +117,18 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 //			state = .invalid
 //		}
 	}
+
+	var currentSelectedCountry: VGSCountriesISO = .us {
+		didSet {
+
+		}
+	}
+
+	var currentSelectedState: VGSAddressRegionModel? = nil {
+		didSet {
+
+		}
+	}
 }
 
 // MARK: - VGSTextFieldDelegate
@@ -138,5 +150,30 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 //		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
 //		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
 		updateFormState()
+	}
+
+	func pickerAddressDidUpdate(in field: VGSTextField, fieldType: VGSAddCardFormFieldType) {
+		guard let pickerField = field as? VGSPickerTextField else {
+			return
+		}
+
+		switch fieldType {
+		case .country:
+			break
+		case .state:
+			break
+		default:
+			break
+		}
+	}
+
+	func updateStateField(with countryISO: VGSCountriesISO) {
+		switch countryISO {
+		case .us:
+			// Reload state data source.
+			break
+		default:
+			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField
+		}
 	}
 }
