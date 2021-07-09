@@ -81,7 +81,7 @@ internal struct VGSAddressRegionModel {
 	static let nameKey = "name"
 
 	init?(json: JsonData) {
-		guard let name = json[VGSAddressRegionModel.codeKey] as? String, let code =  json[VGSAddressRegionModel.nameKey] as? String else {
+		guard let name = json[VGSAddressRegionModel.nameKey] as? String, let code =  json[VGSAddressRegionModel.codeKey] as? String else {
 			return nil
 		}
 
