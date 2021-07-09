@@ -14,6 +14,17 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 /// Text field with picker view input.
 internal class VGSPickerTextField: VGSTextField {
 
+	enum InputMode {
+		case picker
+		case textField
+	}
+
+	internal var mode: InputMode = InputMode.picker {
+		didSet {
+			updateUI()
+		}
+	}
+
 	/// Picker delegate.
 	internal weak var pickerSelectionDelegate: VGSPickerTextFieldSelectionDelegate?
 
@@ -26,16 +37,7 @@ internal class VGSPickerTextField: VGSTextField {
 	override func mainInitialization() {
 		super.mainInitialization()
 
-		// Hide caret for picker view text field.
-		isCaretHidden = true
-
-		setupToolBar()
-		setupPickerView()
-		setupRightView()
-
-		/// Disable autocorrection and tintColor for picker.
-		tintColor = .clear
-		autocorrectionType = .no
+		updateUI(for: .picker)
 	}
 
 	override var configuration: VGSConfiguration? {
@@ -74,6 +76,27 @@ internal class VGSPickerTextField: VGSTextField {
 			pickerView.dataSource = pickerConfiguration.dataProvider
 		}
 		textField.inputView = pickerView
+	}
+
+	internal func updateUI(for mode: InputMode) {
+		switch mode {
+		case .picker:
+			// Hide caret for picker view text field.
+			isCaretHidden = true
+
+			setupToolBar()
+			setupPickerView()
+			setupRightView()
+
+			/// Disable autocorrection and tintColor for picker.
+			tintColor = .clear
+			autocorrectionType = .no
+		case .textField:
+			// Hide caret for picker view text field.
+			isCaretHidden = false
+			textField.inputView = nil
+			autocorrectionType = .no
+		}
 	}
 
 	// MARK: - Actions
