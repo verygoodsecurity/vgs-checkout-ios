@@ -21,7 +21,7 @@ internal class VGSPickerTextField: VGSTextField {
 
 	internal var mode: InputMode = InputMode.picker {
 		didSet {
-			updateUI()
+			updateUI(for: mode)
 		}
 	}
 
