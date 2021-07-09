@@ -213,16 +213,19 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
 		guard let text = textValue else {return}
 		if pickerTextField === countryPickerField {
-			var currentCode: String = ""
+			var currentCountryCode: String = ""
 
-			for region in currentRegions {
-				if region.code == text {
-					currentCode = region.code
-					print("currentCode found \(currentCode)")
+			print("currentRegions: \(currentRegions)")
+
+			for country in VGSAddressDataProvider.provideCountries() {
+				if country.name == text {
+					currentCountryCode = country.code
+					print("currentCode found \(currentCountryCode)")
 				}
 			}
 
-			if let newCountry = VGSCountriesISO(rawValue: currentCode) {
+			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
+				print("update states with new country: \(newCountry)")
 				updateStateField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
