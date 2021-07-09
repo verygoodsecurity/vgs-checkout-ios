@@ -1452,7 +1452,6 @@
 		44E10AB926970A04001F0D44 /* US */ = {
 			isa = PBXGroup;
 			children = (
-				44E10ABA26970A37001F0D44 /* VGSUnitedStatesRegions.json */,
 			);
 			path = US;
 			sourceTree = "<group>";
@@ -1460,7 +1459,6 @@
 		44E10ABC26970DDE001F0D44 /* Canada */ = {
 			isa = PBXGroup;
 			children = (
-				44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */,
 			);
 			path = Canada;
 			sourceTree = "<group>";
@@ -1636,9 +1634,11 @@
 		44EC95162669F01900CE04F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */,
+				44E10ABA26970A37001F0D44 /* VGSUnitedStatesRegions.json */,
 				44E10AB8269709FD001F0D44 /* Regions */,
-				4405DDA02685E699004A83AD /* CardIcon.xcassets */,
 				44EC95172669F06000CE04F4 /* Media.xcassets */,
+				4405DDA02685E699004A83AD /* CardIcon.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

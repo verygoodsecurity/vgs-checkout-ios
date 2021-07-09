@@ -17,9 +17,14 @@ internal typealias JSONArray = [Any]
 extension JSONArray {
 	init?(jsonFileName: String) {
 
-		guard let bundle = BundleUtils.shared.resourcesBundle, let path = bundle.path(forResource: jsonFileName, ofType: "json") else {
+		guard let bundle = BundleUtils.shared.resourcesBundle else {
 			assertionFailure("Bundle not found!")
 			return nil
+		}
+
+		guard let path = bundle.path(forResource: jsonFileName, ofType: "json") else {
+		assertionFailure("file \(jsonFileName) not found!")
+		return nil
 		}
 
 		do {
