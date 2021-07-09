@@ -7,47 +7,33 @@ import Foundation
 import UIKit
 #endif
 
-///// Text field with picker view input.
-//internal class VGSCountryPickerTextField: VGSPickerTextField {
+///
+//internal class VGSStatePickerDataSource: NSObject, VGSPickerTextFieldDataSourceProtocol {
+//	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {
+//		guard row >= 0,
+//					row < countries.count
+//		else {
+//			return nil
+//		}
 //
-//	override func mainInitialization() {
-//		super.mainInitialization()
-//
-//		selectFirstRow()
+//		return countries[row].name
 //	}
 //
-//	internal func selectFirstRow() {
-//		pickerView.selectRow(0, inComponent: 0, animated: false)
-//		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+//	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int) -> String? {
+//		guard row >= 0,
+//					row < countries.count
+//		else {
+//			return nil
+//		}
+//
+//		return countries[row].code
+//	}
+//
+//	lazy var countries: [VGSAddressDataProvider.CountryModel] = {
+//		return VGSAddressDataProvider.provideCountries()
+//	}()
+//
+//	func numberOfRows() -> Int {
+//		return countries.count
 //	}
 //}
-
-internal class VGSStatePickerDataSource: NSObject, VGSPickerTextFieldDataSourceProtocol {
-	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {
-		guard row >= 0,
-					row < countries.count
-		else {
-			return nil
-		}
-
-		return countries[row].name
-	}
-
-	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int) -> String? {
-		guard row >= 0,
-					row < countries.count
-		else {
-			return nil
-		}
-
-		return countries[row].code
-	}
-
-	lazy var countries: [VGSAddressDataProvider.CountryModel] = {
-		return VGSAddressDataProvider.provideCountries()
-	}()
-
-	func numberOfRows() -> Int {
-		return countries.count
-	}
-}
