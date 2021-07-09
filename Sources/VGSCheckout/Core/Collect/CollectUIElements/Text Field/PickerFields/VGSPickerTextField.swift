@@ -15,7 +15,7 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 internal class VGSPickerTextField: VGSTextField {
 
 	/// Defines input mode type.
-	enum InputMode {
+	internal enum InputMode {
 
 		/// Picker view input.
 		case picker

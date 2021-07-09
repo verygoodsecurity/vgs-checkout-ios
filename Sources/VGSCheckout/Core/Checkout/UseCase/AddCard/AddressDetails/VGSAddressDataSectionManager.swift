@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds logic for billing addres setup and handling events.
-final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {
+final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
 
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -89,6 +89,9 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 		for item in textFiedFormItems {
 			item.formItemView.delegate = self
 		}
+
+		statePickerField?.pickerSelectionDelegate = self
+		countryPickerField?.pickerSelectionDelegate = self
 	}
 
 	// MARK: - Helpers
@@ -128,6 +131,18 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 		didSet {
 
 		}
+	}
+
+	var countryPickerField: VGSPickerTextField? {
+		guard let countryTextField = textFiedFormItems.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
+
+		return countryTextField
+	}
+
+	var statePickerField: VGSPickerTextField? {
+		guard let stateTextField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
+
+		return stateTextField
 	}
 }
 
@@ -171,9 +186,30 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 		guard let stateField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return}
 		switch countryISO {
 		case .us:
-			break
+			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
+				let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
+				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+				config.dataProvider = regionsDataSourceProvider
+			}
+		case .ca:
+			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
+				let regionsDataSource = VGSRegionsDataSourceProvider(with: "CA")
+				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+				config.dataProvider = regionsDataSourceProvider
+			}
 		default:
 			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField
+		}
+	}
+
+	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
+		guard let text = textValue else {return}
+		if pickerTextField === countryPickerField {
+			if let newCountry = VGSCountriesISO(rawValue: text) {
+				updateStateField(with: newCountry)
+			}
+		} else if pickerTextField === statePickerField {
+
 		}
 	}
 }
