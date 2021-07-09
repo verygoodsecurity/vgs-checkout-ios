@@ -144,6 +144,14 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 		return stateTextField
 	}
+
+	var currentRegions: [VGSAddressRegionModel] {
+		guard let config = countryPickerField?.configuration as? VGSPickerTextFieldConfiguration, let dataSource = config.dataProvider?.dataSource as? VGSRegionsDataSourceProvider else {
+			return []
+		}
+
+		return dataSource.regions
+	}
 }
 
 // MARK: - VGSTextFieldDelegate
@@ -183,7 +191,7 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 	}
 
 	func updateStateField(with countryISO: VGSCountriesISO) {
-		guard let stateField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return}
+		guard let stateField = statePickerField else {return}
 		switch countryISO {
 		case .us:
 			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
@@ -205,7 +213,16 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
 		guard let text = textValue else {return}
 		if pickerTextField === countryPickerField {
-			if let newCountry = VGSCountriesISO(rawValue: text) {
+			var currentCode: String = ""
+
+			for region in currentRegions {
+				if region.code == text {
+					currentCode = region.code
+					print("currentCode found \(currentCode)")
+				}
+			}
+
+			if let newCountry = VGSCountriesISO(rawValue: currentCode) {
 				updateStateField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
