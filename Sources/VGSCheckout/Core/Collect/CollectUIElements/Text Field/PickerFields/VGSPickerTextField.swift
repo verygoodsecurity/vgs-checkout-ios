@@ -14,11 +14,17 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 /// Text field with picker view input.
 internal class VGSPickerTextField: VGSTextField {
 
+	/// Defines input mode type.
 	enum InputMode {
+
+		/// Picker view input.
 		case picker
+
+		/// Text field input.
 		case textField
 	}
 
+	/// Input mode.
 	internal var mode: InputMode = InputMode.picker {
 		didSet {
 			updateUI(for: mode)
@@ -46,6 +52,7 @@ internal class VGSPickerTextField: VGSTextField {
 		}
 	}
 
+	/// Force select first row.
 	internal func selectFirstRow() {
 		pickerView.selectRow(0, inComponent: 0, animated: false)
 		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
@@ -78,6 +85,8 @@ internal class VGSPickerTextField: VGSTextField {
 		textField.inputView = pickerView
 	}
 
+	/// Update UI for input mode.
+	/// - Parameter mode: `InputMode` object, input mode.
 	internal func updateUI(for mode: InputMode) {
 		switch mode {
 		case .picker:
