@@ -137,7 +137,7 @@ internal class VGSAddressRegionProvider {
 	}
 }
 
-final class VGSRegionDataSourceProvider {
+final class VGSRegionsDataSourceProvider {
 
 	private let countryCode: String
 

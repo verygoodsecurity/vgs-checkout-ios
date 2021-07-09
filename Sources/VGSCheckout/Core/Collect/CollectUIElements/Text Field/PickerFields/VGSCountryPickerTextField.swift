@@ -7,20 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-/// Text field with picker view input.
-internal class VGSCountryPickerTextField: VGSPickerTextField {
-
-	override func mainInitialization() {
-		super.mainInitialization()
-
-		selectFirstRow()
-	}
-
-	internal func selectFirstRow() {
-		pickerView.selectRow(0, inComponent: 0, animated: false)
-		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
-	}
-}
 
 internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourceProtocol {
 	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {

@@ -44,6 +44,11 @@ internal class VGSPickerTextField: VGSTextField {
 		}
 	}
 
+	internal func selectFirstRow() {
+		pickerView.selectRow(0, inComponent: 0, animated: false)
+		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+	}
+
 	/// Setup toolbar.
 	internal func setupToolBar() {
 		let toolbar = UIToolbar()

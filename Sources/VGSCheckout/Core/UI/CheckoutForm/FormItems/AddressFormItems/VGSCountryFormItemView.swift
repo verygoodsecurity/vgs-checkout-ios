@@ -20,8 +20,8 @@ internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		return countryTextField
 	}
 
-	lazy var countryTextField: VGSCountryPickerTextField = {
-		let field = VGSCountryPickerTextField()
+	lazy var countryTextField: VGSPickerTextField = {
+		let field = VGSPickerTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false
 
 		field.cornerRadius = 0
