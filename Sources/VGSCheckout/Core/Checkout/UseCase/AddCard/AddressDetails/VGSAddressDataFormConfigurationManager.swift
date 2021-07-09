@@ -99,6 +99,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
+		addressLine1Configuration.returnKeyType = .next
 
 		addressLine1TextField.placeholder = "Address line 1"
 
@@ -107,6 +108,9 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = true
+		addressLine2Configuration.returnKeyType = .next
+
+		addressFormView.addressLine2FormItemView.formItemView.hintLabel.text = "Address line 2 (Optional)"
 
 		addressLine2TextField.configuration = addressLine2Configuration
 
@@ -119,6 +123,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityTextField.configuration = cityConfiguration
 
 		cityTextField.placeholder = "City"
+		cityConfiguration.returnKeyType = .next
 
 		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "state")
 		stateConfiguration.type = .none
