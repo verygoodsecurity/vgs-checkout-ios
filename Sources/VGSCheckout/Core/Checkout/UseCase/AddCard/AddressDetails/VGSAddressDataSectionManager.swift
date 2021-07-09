@@ -10,14 +10,17 @@ import UIKit
 /// Holds logic for billing addres setup and handling events.
 final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
 
+	/// Delegate.
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
+	/// Form section state.
 	internal var state: VGSFormSectionState = .invalid {
 		didSet {
 			delegate?.stateDidChange(state)
 		}
 	}
 
+	/// Validation behavior.
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
@@ -90,6 +93,7 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 			item.formItemView.delegate = self
 		}
 
+		// Set picker fields delegate.
 		statePickerField?.pickerSelectionDelegate = self
 		countryPickerField?.pickerSelectionDelegate = self
 	}
@@ -203,7 +207,9 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
 				let regionsDataSource = VGSRegionsDataSourceProvider(with: "CA")
 				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+				print("regionsDataSource.regions: \(regionsDataSource.regions)")
 				config.dataProvider = regionsDataSourceProvider
+				stateField.configuration = config
 			}
 		default:
 			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField

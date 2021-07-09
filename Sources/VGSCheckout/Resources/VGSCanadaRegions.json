@@ -1,4 +1,4 @@
-{
+[
 	{
 			"name": "Alberta",
 			"abbreviation": "AB"
@@ -51,4 +51,4 @@
 			"name": "Yukon",
 			"abbreviation": "YT"
 	}
-}
+]
