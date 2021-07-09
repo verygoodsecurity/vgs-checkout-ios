@@ -168,9 +168,9 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 	}
 
 	func updateStateField(with countryISO: VGSCountriesISO) {
+		guard let stateField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return}
 		switch countryISO {
 		case .us:
-			// Reload state data source.
 			break
 		default:
 			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField
