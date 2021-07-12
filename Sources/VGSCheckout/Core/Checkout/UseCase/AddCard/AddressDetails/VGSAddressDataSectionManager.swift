@@ -185,18 +185,10 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 	func updateStateField(with countryISO: VGSCountriesISO) {
 		guard let stateField = statePickerField else {return}
 		switch countryISO {
-		case .us:
+		case .us, .ca:
 			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
-				let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
+				let regionsDataSource = VGSRegionsDataSourceProvider(with: countryISO.rawValue)
 				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
-				config.dataProvider = regionsDataSourceProvider
-				stateField.configuration = config
-			}
-		case .ca:
-			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
-				let regionsDataSource = VGSRegionsDataSourceProvider(with: "CA")
-				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
-				print("regionsDataSource.regions: \(regionsDataSource.regions)")
 				config.dataProvider = regionsDataSourceProvider
 				stateField.configuration = config
 			}
