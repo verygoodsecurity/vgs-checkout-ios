@@ -125,18 +125,6 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 //		}
 	}
 
-	var currentSelectedCountry: VGSCountriesISO = .us {
-		didSet {
-
-		}
-	}
-
-	var currentSelectedState: VGSAddressRegionModel? = nil {
-		didSet {
-
-		}
-	}
-
 	var countryPickerField: VGSPickerTextField? {
 		guard let countryTextField = textFiedFormItems.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
 
