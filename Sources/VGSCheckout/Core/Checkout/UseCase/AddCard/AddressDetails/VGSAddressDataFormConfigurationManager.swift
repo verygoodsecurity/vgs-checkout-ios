@@ -72,6 +72,9 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		statePickerTextField.configuration = statePickerConfiguration
 
+		// Force select first state.
+		statePickerTextField.selectFirstRow()
+
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "zip")
 		zipConfiguration.type = .none
 		zipConfiguration.isRequiredValidOnly = true

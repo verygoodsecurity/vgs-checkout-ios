@@ -202,6 +202,7 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 				let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
 				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
 				config.dataProvider = regionsDataSourceProvider
+				stateField.configuration = config
 			}
 		case .ca:
 			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
