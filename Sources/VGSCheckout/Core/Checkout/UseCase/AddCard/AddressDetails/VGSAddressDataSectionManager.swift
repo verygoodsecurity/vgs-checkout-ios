@@ -224,7 +224,7 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 
 			print("currentRegions: \(currentRegions)")
 
-			for country in VGSAddressDataProvider.provideCountries() {
+			for country in VGSAddressCountriesDataProvider.provideCountries() {
 				if country.name == text {
 					currentCountryCode = country.code
 					print("currentCode found \(currentCountryCode)")

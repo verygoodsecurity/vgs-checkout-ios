@@ -1,16 +1,23 @@
 //
-//  VGSAddressDataProvider.swift
+//  VGSAddressCountriesDataProvider.swift
 //  VGSCheckout
 
 import Foundation
 
-internal class VGSAddressDataProvider {
+/// Countries provider for country address field.
+internal class VGSAddressCountriesDataProvider {
 
+	/// Holds model for country object.
 	struct CountryModel {
+		/// Country ISO code.
 		let code: String
+
+		/// Country display name.
 		let name: String
 	}
 
+	/// Provide all countries.
+	/// - Returns: `[CountryModel]`, array of `CountryModel`.
 	static func provideCountries() -> [CountryModel] {
 		let currentCountryCode = Locale.autoupdatingCurrent.regionCode
 		let locale = NSLocale.autoupdatingCurrent
