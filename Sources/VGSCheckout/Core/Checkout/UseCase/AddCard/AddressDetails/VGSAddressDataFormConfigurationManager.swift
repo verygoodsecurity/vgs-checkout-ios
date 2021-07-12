@@ -54,14 +54,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.placeholder = "City"
 
-//		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "state")
-//		stateConfiguration.type = .none
-//		stateConfiguration.isRequiredValidOnly = true
-//
-//		stateTextField.placeholder = "State"
-//
-//		stateTextField.configuration = stateConfiguration
-
 
 		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
 		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")

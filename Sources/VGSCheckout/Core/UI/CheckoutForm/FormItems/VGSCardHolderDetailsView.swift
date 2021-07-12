@@ -78,8 +78,8 @@ internal class VGSCardHolderDetailsView: UIView {
 					itemView.formItemView.hintComponentView.label.text = "Cardholder"
 
 					formItems = [itemView]
-				case .splitted:
-					setupSplittedFieldName()
+//				case .splitted:
+//					setupSplittedFieldName()
 				}
 			}
 		case .multiplexing(let multiplexing):

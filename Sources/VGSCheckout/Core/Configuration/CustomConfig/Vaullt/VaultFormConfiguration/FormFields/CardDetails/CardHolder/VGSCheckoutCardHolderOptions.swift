@@ -22,13 +22,13 @@ public struct VGSCheckoutCardHolderOptions {
 		*/
 		case single(_ cardHolder: String)
 
-		/**
-		Display card holder as a single field.
-
-		- Parameter: firstName: `String` object. Should be valid `fieldName` for first name used in route configuration.
-		- Parameter: lastName: `String` object. Should be valid `fieldName` for last name used in route configuration.
-		*/
-		case splitted(_ firstName: String, lastName: String)
+//		/**
+//		Display card holder as a single field.
+//
+//		- Parameter: firstName: `String` object. Should be valid `fieldName` for first name used in route configuration.
+//		- Parameter: lastName: `String` object. Should be valid `fieldName` for last name used in route configuration.
+//		*/
+//		case splitted(_ firstName: String, lastName: String)
 	}
 
 	/// no:doc

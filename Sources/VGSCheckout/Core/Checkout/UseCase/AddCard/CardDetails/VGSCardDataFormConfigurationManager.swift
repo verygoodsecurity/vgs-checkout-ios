@@ -78,6 +78,7 @@ internal class VGSCardDataFormConfigurationManager {
 					cardHolderName.textField.textAlignment = .natural
 					cardHolderName.textField.configuration = holderConfiguration
 				}
+			/*
 			case .splitted(let firstName, lastName: let lastName):
 				if let firstNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .firstName}), let lastNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .lastName})  {
 
@@ -101,6 +102,7 @@ internal class VGSCardDataFormConfigurationManager {
 					lastNameFormItem.textField.textAlignment = .natural
 					lastNameFormItem.textField.configuration = firstNameConfiguration
 				}
+			*/
 			}
 		}
 	}
