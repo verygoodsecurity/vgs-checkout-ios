@@ -8,16 +8,19 @@ import UIKit
 #endif
 
 /// Holds logic for billing addres setup and handling events.
-final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {
+final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
 
+	/// Delegate.
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
+	/// Form section state.
 	internal var state: VGSFormSectionState = .invalid {
 		didSet {
 			delegate?.stateDidChange(state)
 		}
 	}
 
+	/// Validation behavior.
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
@@ -83,22 +86,26 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-			//textField.delegate = self
+		  textField.delegate = self
 		}
 
 		for item in textFiedFormItems {
-			//	item.formItemView.delegate = self
+			item.formItemView.delegate = self
 		}
+
+		// Set picker fields delegate.
+		statePickerField?.pickerSelectionDelegate = self
+		countryPickerField?.pickerSelectionDelegate = self
 	}
 
 	// MARK: - Helpers
 
 	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
-	//	VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
+		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
 	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
-	//	VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
+		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {
@@ -116,6 +123,26 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 //		} else {
 //			state = .invalid
 //		}
+	}
+
+	var countryPickerField: VGSPickerTextField? {
+		guard let countryTextField = textFiedFormItems.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
+
+		return countryTextField
+	}
+
+	var statePickerField: VGSPickerTextField? {
+		guard let stateTextField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
+
+		return stateTextField
+	}
+
+	var currentRegions: [VGSAddressRegionModel] {
+		guard let config = countryPickerField?.configuration as? VGSPickerTextFieldConfiguration, let dataSource = config.dataProvider?.dataSource as? VGSRegionsDataSourceProvider else {
+			return []
+		}
+
+		return dataSource.regions
 	}
 }
 
@@ -138,5 +165,58 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 //		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
 //		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
 		updateFormState()
+	}
+
+	func pickerAddressDidUpdate(in field: VGSTextField, fieldType: VGSAddCardFormFieldType) {
+		guard let pickerField = field as? VGSPickerTextField else {
+			return
+		}
+
+		switch fieldType {
+		case .country:
+			break
+		case .state:
+			break
+		default:
+			break
+		}
+	}
+
+	func updateStateField(with countryISO: VGSCountriesISO) {
+		guard let stateField = statePickerField else {return}
+		switch countryISO {
+		case .us, .ca:
+			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
+				let regionsDataSource = VGSRegionsDataSourceProvider(with: countryISO.rawValue)
+				let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+				config.dataProvider = regionsDataSourceProvider
+				stateField.configuration = config
+			}
+		default:
+			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField
+		}
+	}
+
+	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
+		guard let text = textValue else {return}
+		if pickerTextField === countryPickerField {
+			var currentCountryCode: String = ""
+
+			print("currentRegions: \(currentRegions)")
+
+			for country in VGSAddressCountriesDataProvider.provideCountries() {
+				if country.name == text {
+					currentCountryCode = country.code
+					print("currentCode found \(currentCountryCode)")
+				}
+			}
+
+			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
+				print("update states with new country: \(newCountry)")
+				updateStateField(with: newCountry)
+			}
+		} else if pickerTextField === statePickerField {
+
+		}
 	}
 }

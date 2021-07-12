@@ -14,6 +14,23 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 /// Text field with picker view input.
 internal class VGSPickerTextField: VGSTextField {
 
+	/// Defines input mode type.
+	internal enum InputMode {
+
+		/// Picker view input.
+		case picker
+
+		/// Text field input.
+		case textField
+	}
+
+	/// Input mode.
+	internal var mode: InputMode = InputMode.picker {
+		didSet {
+			updateUI(for: mode)
+		}
+	}
+
 	/// Picker delegate.
 	internal weak var pickerSelectionDelegate: VGSPickerTextFieldSelectionDelegate?
 
@@ -26,16 +43,19 @@ internal class VGSPickerTextField: VGSTextField {
 	override func mainInitialization() {
 		super.mainInitialization()
 
-		// Hide caret for picker view text field.
-		isCaretHidden = true
+		updateUI(for: .picker)
+	}
 
-		setupToolBar()
-		setupPickerView()
-		setupRightView()
+	override var configuration: VGSConfiguration? {
+		didSet {
+			setupPickerView()
+		}
+	}
 
-		/// Disable autocorrection and tintColor for picker.
-		tintColor = .clear
-		autocorrectionType = .no
+	/// Force select first row.
+	internal func selectFirstRow() {
+		pickerView.selectRow(0, inComponent: 0, animated: false)
+		pickerView(pickerView, didSelectRow: 0, inComponent: 0)
 	}
 
 	/// Setup toolbar.
@@ -59,10 +79,33 @@ internal class VGSPickerTextField: VGSTextField {
 	/// Setup picker view.
 	internal func setupPickerView() {
 		pickerView.delegate = self
-		if let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration {
+		if let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration {
 			pickerView.dataSource = pickerConfiguration.dataProvider
 		}
 		textField.inputView = pickerView
+	}
+
+	/// Update UI for input mode.
+	/// - Parameter mode: `InputMode` object, input mode.
+	internal func updateUI(for mode: InputMode) {
+		switch mode {
+		case .picker:
+			// Hide caret for picker view text field.
+			isCaretHidden = true
+
+			setupToolBar()
+			setupPickerView()
+			setupRightView()
+
+			/// Disable autocorrection and tintColor for picker.
+			tintColor = .clear
+			autocorrectionType = .no
+		case .textField:
+			// Hide caret for picker view text field.
+			isCaretHidden = false
+			textField.inputView = nil
+			autocorrectionType = .no
+		}
 	}
 
 	// MARK: - Actions
@@ -79,7 +122,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 	func pickerView(
 		_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int
 	) -> NSAttributedString? {
-		guard let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration else {return nil}
+		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return nil}
 		guard let title = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row) else {
 			return nil
 		}
@@ -89,7 +132,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 	}
 
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		guard let pickerConfiguration = configuration as? VGSPickerDataSourceConfiguration else {return}
+		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return}
 		let selectedText = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row)
 		textField.secureText = selectedText
 
@@ -99,7 +142,7 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 }
 
 /// A class responsible for configuration `VGSTextField` with `fieldType = .none`. Extends `VGSConfiguration` class.
-internal final class VGSPickerDataSourceConfiguration: VGSConfiguration {
+internal final class VGSPickerTextFieldConfiguration: VGSConfiguration {
 
 	/// Data provider for picker view.
 	internal var dataProvider: VGSPickerDataSourceProvider?

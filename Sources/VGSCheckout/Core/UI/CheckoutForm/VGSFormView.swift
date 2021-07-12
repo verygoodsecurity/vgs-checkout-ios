@@ -47,6 +47,8 @@ internal class VGSFormView: UIView {
 		let scrollView = UIScrollView()
 		scrollView.translatesAutoresizingMaskIntoConstraints = false
 
+		scrollView.showsVerticalScrollIndicator = false
+
 		return scrollView
 	}()
 

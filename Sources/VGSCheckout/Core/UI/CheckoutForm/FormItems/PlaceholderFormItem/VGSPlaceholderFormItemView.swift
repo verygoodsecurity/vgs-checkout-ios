@@ -39,6 +39,11 @@ internal class VGSPlaceholderFormItemView: UIView {
 		return view
 	}()
 
+	/// Hint label.
+	internal var hintLabel: UILabel {
+		return hintComponentView.label
+	}
+
 	// MARK: - Initialization
 
 	/// :nodoc:

@@ -17,14 +17,18 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
 		let addressLine2TextField = addressFormView.addressLine2FormItemView.addressLineTextField
 		let cityTextField = addressFormView.cityItemFormView.cityTextField
-		let stateTextField = addressFormView.stateFormItemView.stateTextField
+		let statePickerTextField = addressFormView.statePickerFormItemView.statePickerTextField
 		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
 
-		let countryConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "country")
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
+		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
 
 		countryTextField.configuration = countryConfiguration
+
+		// Force select first row in picker.
+		countryTextField.selectFirstRow()
 
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
 		addressLine1Configuration.type = .none
@@ -50,13 +54,18 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.placeholder = "City"
 
-		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "state")
-		stateConfiguration.type = .none
-		stateConfiguration.isRequiredValidOnly = true
 
-		stateTextField.placeholder = "State"
+		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
+		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
+		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+		statePickerConfiguration.dataProvider = regionsDataSourceProvider
+		statePickerConfiguration.type = .none
+		statePickerConfiguration.isRequiredValidOnly = true
 
-		stateTextField.configuration = stateConfiguration
+		statePickerTextField.configuration = statePickerConfiguration
+
+		// Force select first state.
+		statePickerTextField.selectFirstRow()
 
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "zip")
 		zipConfiguration.type = .none
@@ -73,7 +82,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
 		let addressLine2TextField = addressFormView.addressLine2FormItemView.addressLineTextField
 		let cityTextField = addressFormView.cityItemFormView.cityTextField
-		let stateTextField = addressFormView.stateFormItemView.stateTextField
+		let stateTextField = addressFormView.statePickerFormItemView.statePickerTextField
 		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
 
 		let countryConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "country")
@@ -85,6 +94,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
+		addressLine1Configuration.returnKeyType = .next
 
 		addressLine1TextField.placeholder = "Address line 1"
 
@@ -93,6 +103,9 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = true
+		addressLine2Configuration.returnKeyType = .next
+
+		addressFormView.addressLine2FormItemView.formItemView.hintLabel.text = "Address line 2 (Optional)"
 
 		addressLine2TextField.configuration = addressLine2Configuration
 
@@ -105,6 +118,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityTextField.configuration = cityConfiguration
 
 		cityTextField.placeholder = "City"
+		cityConfiguration.returnKeyType = .next
 
 		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "state")
 		stateConfiguration.type = .none
