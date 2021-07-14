@@ -8,41 +8,42 @@ import Foundation
 import UIKit
 #endif
 
-struct VGSCheckoutTheme {
-	struct CardPaymentTheme {
-		struct PaymentButton {
-			static var backgroundColor: UIColor = UIColor.systemPurple
-			static var opacity: CGFloat = 0.60
-			static var titleOpacity: CGFloat = 0.8
-			static var successColor: UIColor = UIColor.systemGreen
-			static var cornerRadius: CGFloat = 6
-		}
-	}
+
+public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutErrorLabelThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
+  
 }
 
-//public struct VGSCheckoutUITheme {
-//	public var textFieldTheme = VGSCheckoutTextFieldTheme()
-//
-//	public var colorTheme: VGSCheckoutColorThemeProtocol?
-//}
+/// TextField Theme protocol
+public protocol VGSCheckoutTextFieldThemeProtocol {
+  /// Colors.
+  var textFieldBackgroundColor: UIColor { get set }
+  var textFieldBorderColor: UIColor { get set }
+  var textFieldBorderErrorColor: UIColor { get set }
 
-//public protocol VGSCheckoutColorThemeProtocol {
-//		var textFieldTextColor: UIColor {get}
-//	  
-//		var text1: UIColor { get } // heading
-//		var text2: UIColor { get } // body
-//		var text3: UIColor { get } // system
-//		var secondaryText1: UIColor { get }
-//		var main1: UIColor { get } // backgrounds
-//		var main2: UIColor { get } // cells, default buttons
-//		var tint1: UIColor { get } // border
-//		var neutral1: UIColor { get } //
-//		var disabled1: UIColor { get }
-//		var error1: UIColor { get }
-//		var success1: UIColor { get } // success message icon and navbar
-//}
-//
-//
-//public struct VGSCheckoutTextFieldTheme {
-//	public var font: UIFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.systemFont(ofSize: 14))
-//}
+  var textFieldTextColor: UIColor { get set }
+  var textFieldPlaceholderColor: UIColor { get set }
+  
+  /// Fonts.
+  var textFieldTextFont: UIFont { get set }
+  var textFieldPlaceholderFont: UIFont { get set }
+}
+
+
+/// Checkout main view Theme protocol
+public protocol VGSCheckoutViewThemeProtocol {
+  var checkoutViewBackgroundColor: UIColor { get set }
+}
+
+/// Checkout errorLabel Theme protocol
+public protocol VGSCheckoutErrorLabelThemeProtocol {
+  var checkoutErrorLabelFont: UIFont { get set }
+  var checkoutErrorLabelTextColor: UIColor { get set }
+}
+
+/// Checkout Submit Button Theme protocol
+public protocol VGSCheckoutSubmitButtonThemeProtocol {
+  var checkoutSubmitButtonBackgroundColor: UIColor { get set }
+  var checkoutSubmitButtonSuccessBackgroundColor: UIColor { get set }
+  var checkoutSubmitButtonTitleColor: UIColor { get set }
+  var checkoutSubmitButtonTitleFont: UIFont { get set }
+}
