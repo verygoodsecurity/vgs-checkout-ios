@@ -10,11 +10,13 @@ import UIKit
 /// Holds UI for address details.
 internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
+  internal var uiTheme: VGSCheckoutThemeProtocol
+
 	/// Form items.
 	internal var formItems: [VGSTextFieldFormItemProtocol] = []
-
+  
 	/// Displays error messages for invalid adrdress details.
-	internal let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+  internal let errorLabel: UILabel
 
 	/// Container view for header to add insets.
 	internal lazy var headerContainerView: VGSContainerItemView = {
@@ -142,8 +144,10 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 	/// Initialization.
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
-	init(paymentInstrument: VGSPaymentInstrument) {
+  init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
+    self.uiTheme = uiTheme
+    self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
 		super.init(frame: .zero)
 
 		setupUI()
