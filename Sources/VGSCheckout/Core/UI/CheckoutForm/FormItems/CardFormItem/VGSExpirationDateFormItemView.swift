@@ -76,13 +76,23 @@ internal enum VGSAddCardFormFieldType {
 
 	/// Empty field name error.
 	var emptyFieldNameError: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: emptyFieldNameLocalizationKey)
+	}
+
+	private var emptyFieldNameLocalizationKey: String {
 		switch self {
 		case .cardholderName:
-			return "Cardholder is empty"
+			return "vgs_checkout_card_holder_empty_error"
 		case .firstName:
-			return "First name is empty"
+			return "vgs_checkout_card_holder_empty_error"
 		case .lastName:
-			return "Last name is empty"
+			return "vgs_checkout_card_holder_empty_error"
+		case .cardNumber:
+			return "vgs_checkout_card_number_empty_error"
+		case .expirationDate:
+			return "vgs_checkout_card_expiration_date_empty_error"
+		case .cvc:
+			return "vgs_checkout_card_verification_code_invalid_error"
 		default:
 			return "Field is empty"
 		}
@@ -105,7 +115,7 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtoc
 		let field = VGSExpDateTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false
 
-		field.placeholder = "MM/YY"
+		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 
 		field.cornerRadius = 0
 		field.borderWidth = 0
@@ -131,7 +141,7 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtoc
 		formItemView.translatesAutoresizingMaskIntoConstraints = false
 		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "Expiration date"
+		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
 		formItemView.stackView.addArrangedSubview(expDateTextField)
 	}
 }

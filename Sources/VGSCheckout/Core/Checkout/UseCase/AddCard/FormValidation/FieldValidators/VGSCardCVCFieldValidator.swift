@@ -24,6 +24,10 @@ internal class VGSCardCVCFieldValidator: VGSFormTextFieldValidationProtocol {
 	}
 
 	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return "Security code is not valid"
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_verification_code_invalid_error")
+	}
+
+	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_verification_code_empty_error")
 	}
 }

@@ -51,7 +51,7 @@ internal class VGSCardholderFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		formItemView.translatesAutoresizingMaskIntoConstraints = false
 		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "Cardholder"
+		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
 		formItemView.stackView.addArrangedSubview(cardHolderName)
 	}
 }

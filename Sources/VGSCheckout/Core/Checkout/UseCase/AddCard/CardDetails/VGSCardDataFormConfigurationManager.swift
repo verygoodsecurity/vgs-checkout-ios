@@ -60,7 +60,7 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
-		cvcCardNum.placeholder = "CVC"
+		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 		cvcCardNum.tintColor = .lightGray
 
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
@@ -151,7 +151,7 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
-		cvcCardNum.placeholder = "CVC"
+		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 		cvcCardNum.tintColor = .lightGray
 
 		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {

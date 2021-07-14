@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  VGSCheckout
+*/
+
+/* Card details section title. */
+"vgs_checkout_form_card_details_title" = "Card Details";
+
+/* Card holder name field subtitle. */
+"vgs_checkout_card_holder_subtitle" = "Name on card";
+
+/* Card number field subtitle. */
+"vgs_checkout_card_number_subtitle" = "Card number";
+
+/* Expiration date field subtitle. */
+"vgs_checkout_expiration_date_subtitle" = "Expiration date";
+
+/* Security code field subtitle. */
+"vgs_checkout_security_code_subtitle" = "Security code";
+
+/* Card holder field placeholder text. */
+"vgs_checkout_card_holder_hint" = "Joe Business";
+
+/* Card number field placeholder text. */
+"vgs_checkout_card_number_hint" = "1234 1234 1234 1234";
+
+/* Card exp date field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "MM/YY";
+
+/* Card CVC field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "CVC";
+
+/* Card CVV field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "CVV";
+
+/* Pay button text. */
+"vgs_checkout_pay_button_title" = "Pay";
+
+/* Payment Processing label title. */
+"vgs_checkout_pay_button_processing_title" = "Payment Processing...";
+
+/* Empty card holder name error. */
+"vgs_checkout_card_holder_empty_error" = "Name is empty";
+
+/* Invalid card number error. */
+"vgs_checkout_card_number_invalid_error" = "Enter a valid card number";
+
+/* Invalid card number error. */
+"vgs_checkout_card_number_empty_error" = "Card number is empty";
+
+/* Invalid card expiration date error. */
+"vgs_checkout_card_expiration_date_invalid_error" = "Expiration date is not valid";
+
+/* Empty card expiration date error. */
+"vgs_checkout_card_expiration_date_empty_error" = "Expiration date is empty";
+
+/* Invalid card verification code error. */
+"vgs_checkout_card_verification_code_invalid_error" = "Security code is not valid";
+
+/* Empty card verification code error. */
+"vgs_checkout_card_verification_code_empty_error" = "Security code is empty";
+
+/* Cancel button title on checkout screen */
+"vgs_checkout_cancel_button_title" = "Cancel";

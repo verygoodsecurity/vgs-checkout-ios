@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  VGSCheckoutDemoApp
+
+*/
+
+/* Card details section title. */
+"vgs_checkout_form_card_details_title" = "Ваша карточка";

@@ -24,7 +24,7 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		let field = VGSCardTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false
 
-		field.placeholder = "4111 1111 1111 1111"
+		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
 
 		field.adjustsFontForContentSizeCategory = true
 		field.cardIconSize = CGSize(width: 32, height: 20)
@@ -52,7 +52,7 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 		formItemView.translatesAutoresizingMaskIntoConstraints = false
 		formItemView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "Card number"
+		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
 		formItemView.stackView.addArrangedSubview(cardTextField)
 	}
 }
