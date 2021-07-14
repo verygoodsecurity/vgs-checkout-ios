@@ -17,7 +17,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   
   public var textFieldBorderColor: UIColor = .systemGray
   
-  public var textFieldTextColor: UIColor = .vgs_inputBlackTextColor
+  public var textFieldTextColor: UIColor = .vgsInputBlackTextColor
   
   public var textFieldPlaceholderColor: UIColor = .systemGray
   
@@ -29,7 +29,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   
   /// Checkout View attributes
 
-  public var checkoutViewBackgroundColor: UIColor = .vgs_systemBackground
+  public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
 
 	/// Form section title (Card details, Billing address etc).
 	public var checkoutFormSectionTitle: UIFont = .preferredFont(forTextStyle: .subheadline)
@@ -55,14 +55,14 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 // Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
 
 public extension UIColor {
-	static var vgs_systemBackground: UIColor {
+	static var vgsSystemBackground: UIColor {
 			if #available(iOS 13, *) {
 					return .systemBackground
 			}
 			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 	}
 
-	static var vgs_inputBlackTextColor: UIColor {
+	static var vgsInputBlackTextColor: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor {(traits) -> UIColor in
 				return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black

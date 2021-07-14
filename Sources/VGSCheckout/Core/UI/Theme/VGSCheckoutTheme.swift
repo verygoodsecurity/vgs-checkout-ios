@@ -8,7 +8,6 @@ import Foundation
 import UIKit
 #endif
 
-
 public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutErrorLabelThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
   
 }

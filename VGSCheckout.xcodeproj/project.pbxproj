@@ -190,6 +190,7 @@
 		44E10ABE26970DF6001F0D44 /* VGSCanadaRegions.json in Resources */ = {isa = PBXBuildFile; fileRef = 44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */; };
 		44E10AC0269C067E001F0D44 /* CollectJSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10ABF269C067E001F0D44 /* CollectJSON+Extensions.swift */; };
 		44E10AC2269C07EF001F0D44 /* CollectJSONArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AC1269C07EF001F0D44 /* CollectJSONArray+Extensions.swift */; };
+		44E10AD6269EEF28001F0D44 /* VGSCheckoutDefaultUITheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AD5269EEF28001F0D44 /* VGSCheckoutDefaultUITheme.swift */; };
 		44EBEBFC266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */; };
 		44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */; };
 		44EBEC03266F8DF500270953 /* VGSAddCardSectionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */; };
@@ -417,6 +418,7 @@
 		44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VGSCanadaRegions.json; sourceTree = "<group>"; };
 		44E10ABF269C067E001F0D44 /* CollectJSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectJSON+Extensions.swift"; sourceTree = "<group>"; };
 		44E10AC1269C07EF001F0D44 /* CollectJSONArray+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectJSONArray+Extensions.swift"; sourceTree = "<group>"; };
+		44E10AD5269EEF28001F0D44 /* VGSCheckoutDefaultUITheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDefaultUITheme.swift; sourceTree = "<group>"; };
 		44EBEBFB266F8B1800270953 /* VGSCheckoutFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutFlowCoordinator.swift; sourceTree = "<group>"; };
 		44EBEBFE266F8CDC00270953 /* VGSCollect+CheckoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollect+CheckoutExtensions.swift"; sourceTree = "<group>"; };
 		44EBEC02266F8DF500270953 /* VGSAddCardSectionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardSectionFormView.swift; sourceTree = "<group>"; };
@@ -1194,6 +1196,7 @@
 			isa = PBXGroup;
 			children = (
 				44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */,
+				44E10AD5269EEF28001F0D44 /* VGSCheckoutDefaultUITheme.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -1405,24 +1408,8 @@
 		44E10AB8269709FD001F0D44 /* Regions */ = {
 			isa = PBXGroup;
 			children = (
-				44E10ABC26970DDE001F0D44 /* Canada */,
-				44E10AB926970A04001F0D44 /* US */,
 			);
 			path = Regions;
-			sourceTree = "<group>";
-		};
-		44E10AB926970A04001F0D44 /* US */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = US;
-			sourceTree = "<group>";
-		};
-		44E10ABC26970DDE001F0D44 /* Canada */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Canada;
 			sourceTree = "<group>";
 		};
 		44EBEBF7266F89AE00270953 /* UseCase */ = {
@@ -1942,6 +1929,7 @@
 				4405DCA326847247004A83AD /* VGSDeepMergeUtils.swift in Sources */,
 				4405DC2726844AD8004A83AD /* VGSConfiguration.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
+				44E10AD6269EEF28001F0D44 /* VGSCheckoutDefaultUITheme.swift in Sources */,
 				4405DC9326847247004A83AD /* VGSCollectRequestLogger.swift in Sources */,
 				4405DC6126844B30004A83AD /* MaskedTextField+security.swift in Sources */,
 				4405DC1726844AD8004A83AD /* VGSCollect.swift in Sources */,
