@@ -112,8 +112,10 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 	}
 }
 
+// MARK: - VGSSubmitButtonDelegateProtocol
+
 extension VGSAddCardSectionFormView: VGSSubmitButtonDelegateProtocol {
-  func buttonStatusDidChanged() {
-    payButton.updateUI(with: uiTheme)
+	func statusDidChange(in button: VGSSubmitButton) {
+    button.updateUI(with: uiTheme)
   }
 }

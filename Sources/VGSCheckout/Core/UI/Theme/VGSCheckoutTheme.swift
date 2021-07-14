@@ -32,6 +32,7 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 /// Checkout main view Theme protocol
 public protocol VGSCheckoutViewThemeProtocol {
   var checkoutViewBackgroundColor: UIColor { get set }
+	var checkoutFormSectionTitle: UIFont {get set}
 }
 
 /// Checkout errorLabel Theme protocol

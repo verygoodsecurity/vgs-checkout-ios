@@ -8,9 +8,11 @@ import Foundation
 import UIKit
 #endif
 
+/// Delegate for submit button status changes.
+internal protocol VGSSubmitButtonDelegateProtocol: AnyObject {
 
-protocol VGSSubmitButtonDelegateProtocol: AnyObject {
-  func buttonStatusDidChanged()
+	/// Notify delegate that button status was changed.
+	func statusDidChange(in button: VGSSubmitButton)
 }
 
 /// Control for payment submit button.
@@ -135,7 +137,7 @@ internal class VGSSubmitButton: UIControl {
 	/// Control status.
 	internal var status: SubmitState = .disabled {
 		didSet {
-      delegate?.buttonStatusDidChanged()
+			delegate?.statusDidChange(in: self)
 		}
 	}
 

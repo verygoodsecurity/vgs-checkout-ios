@@ -12,7 +12,7 @@ import UIKit
 internal struct VGSCheckoutHeaderViewModel {
 
 	/// Attributed title.
-	internal let attibutedTitle: NSAttributedString
+	internal let text: String
 }
 
 /// Header view.
@@ -59,8 +59,10 @@ internal class VGSCheckoutHeaderView: UIView {
 
 	/// Configure with header view model.
 	/// - Parameter model: `VGSCheckoutHeaderViewModel` object, view model.
-	internal func configure(with model: VGSCheckoutHeaderViewModel) {
-		titleLabel.attributedText = model.attibutedTitle
+	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
+	internal func configure(with model: VGSCheckoutHeaderViewModel, uiTheme: VGSCheckoutThemeProtocol) {
+		titleLabel.text = model.text
+		titleLabel.font = uiTheme.checkoutFormSectionTitle
 	}
 
 	// MARK: - Helpers

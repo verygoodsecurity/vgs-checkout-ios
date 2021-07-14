@@ -88,10 +88,10 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		let headerView = VGSCheckoutHeaderView(frame: .zero)
 		headerView.translatesAutoresizingMaskIntoConstraints = false
 
-		let title = NSMutableAttributedString(string: "Billing Address")
-		let model = VGSCheckoutHeaderViewModel(attibutedTitle: title)
+		let title = "Billing Address"
+		let model = VGSCheckoutHeaderViewModel(text: title)
 
-		headerView.configure(with: model)
+		headerView.configure(with: model, uiTheme: uiTheme)
 
 		return headerView
 	}()

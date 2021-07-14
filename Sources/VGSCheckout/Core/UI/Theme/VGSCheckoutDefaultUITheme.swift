@@ -13,23 +13,26 @@ import UIKit
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   
   /// TextField attributes
-  public var textFieldBackgroundColor: UIColor = .lightGray
+  public var textFieldBackgroundColor: UIColor = .systemGray
   
-  public var textFieldBorderColor: UIColor = .gray
+  public var textFieldBorderColor: UIColor = .systemGray
   
-  public var textFieldTextColor: UIColor = .black
+  public var textFieldTextColor: UIColor = .vgs_inputBlackTextColor
   
-  public var textFieldPlaceholderColor: UIColor = .lightGray
+  public var textFieldPlaceholderColor: UIColor = .systemGray
   
-  public var textFieldBorderErrorColor: UIColor = .red
+  public var textFieldBorderErrorColor: UIColor = .systemRed
   
-  public var textFieldTextFont: UIFont = UIFont.systemFont(ofSize: 16)
+  public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
   
-  public var textFieldPlaceholderFont: UIFont =  UIFont.systemFont(ofSize: 16)
+	public var textFieldPlaceholderFont: UIFont =  UIFont.preferredFont(forTextStyle: .body)
   
   /// Checkout View attributes
 
-  public var checkoutViewBackgroundColor: UIColor = .white
+  public var checkoutViewBackgroundColor: UIColor = .vgs_systemBackground
+
+	/// Form section title (Card details, Billing address etc).
+	public var checkoutFormSectionTitle: UIFont = .preferredFont(forTextStyle: .subheadline)
   
   /// Error Label attributes
   public var checkoutErrorLabelFont: UIFont = .preferredFont(forTextStyle: .footnote)
@@ -42,8 +45,31 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   
   public var checkoutSubmitButtonSuccessBackgroundColor: UIColor = .systemGreen
   
-  public var checkoutSubmitButtonTitleColor: UIColor = .white.withAlphaComponent(0.6)
+  public var checkoutSubmitButtonTitleColor: UIColor = .lightText.withAlphaComponent(0.6)
   
   public var checkoutSubmitButtonTitleFont: UIFont = .preferredFont(forTextStyle: .callout)
+}
+
+// This code is taken from https://github.com/noahsark769/ColorCompatibility
+// Thanks to Noah Gilmore.
+// Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
+
+public extension UIColor {
+	static var vgs_systemBackground: UIColor {
+			if #available(iOS 13, *) {
+					return .systemBackground
+			}
+			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+	}
+
+	static var vgs_inputBlackTextColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor {(traits) -> UIColor in
+				return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+			}
+		} else {
+			return .black
+		}
+	}
 }
 

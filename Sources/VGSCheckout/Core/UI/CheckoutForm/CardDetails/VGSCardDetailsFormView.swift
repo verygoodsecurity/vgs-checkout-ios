@@ -86,10 +86,10 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		let headerView = VGSCheckoutHeaderView(frame: .zero)
 		headerView.translatesAutoresizingMaskIntoConstraints = false
 
-		let title = NSMutableAttributedString(string: "Card Details")
-		let model = VGSCheckoutHeaderViewModel(attibutedTitle: title)
+		let title = "Card Details"
+		let model = VGSCheckoutHeaderViewModel(text: title)
 
-		headerView.configure(with: model)
+		headerView.configure(with: model, uiTheme: uiTheme)
 
 		return headerView
 	}()
