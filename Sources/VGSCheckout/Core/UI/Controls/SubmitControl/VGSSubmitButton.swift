@@ -8,6 +8,11 @@ import Foundation
 import UIKit
 #endif
 
+
+protocol VGSSubmitButtonDelegateProtocol: AnyObject {
+  func buttonStatusDidChanged()
+}
+
 /// Control for payment submit button.
 internal class VGSSubmitButton: UIControl {
 
@@ -26,7 +31,9 @@ internal class VGSSubmitButton: UIControl {
 		case loader
 		case lockImage
 	}
-
+  
+  weak var delegate: VGSSubmitButtonDelegateProtocol?
+  
 	/// Current icon accessory style.
 	internal var iconAccessory: LeftIconAccessory = .lockImage {
 		didSet {
@@ -97,9 +104,6 @@ internal class VGSSubmitButton: UIControl {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.text = "PAY"
-		//label.backgroundColor = .yellow
-
-		label.font = UIFont.preferredFont(forTextStyle: .callout)
 		return label
 	}()
 
@@ -131,7 +135,7 @@ internal class VGSSubmitButton: UIControl {
 	/// Control status.
 	internal var status: SubmitState = .disabled {
 		didSet {
-			updateUI()
+      delegate?.buttonStatusDidChanged()
 		}
 	}
 
@@ -141,8 +145,6 @@ internal class VGSSubmitButton: UIControl {
 		super.init(frame: frame)
 
 		setupUI()
-
-		updateUI()
 	}
 
 	required init?(coder: NSCoder) {
@@ -178,28 +180,27 @@ internal class VGSSubmitButton: UIControl {
 	}
 
 	/// Update UI.
-	fileprivate func updateUI() {
-		let theme = VGSCheckoutTheme.CardPaymentTheme.PaymentButton.self
+  internal func updateUI(with uiTheme: VGSCheckoutSubmitButtonThemeProtocol) {
 
-		layer.cornerRadius = theme.cornerRadius
+    layer.cornerRadius = 6.0
 		layer.masksToBounds = true
 
 		switch status {
 		case .disabled:
 			isUserInteractionEnabled = false
 			backgroundColor =
-				theme.backgroundColor.withAlphaComponent(theme.opacity)
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-			titleLabel.textColor = UIColor.white.withAlphaComponent(theme.titleOpacity)
+        uiTheme.checkoutSubmitButtonBackgroundColor
+      titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+      titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = "Pay"
-			lockImageView.alpha = theme.titleOpacity
+      lockImageView.alpha = 0.6
 			titleLabel.textAlignment = .center
 			activityIndicatorView.stopAnimating()
 			iconAccessory = .lockImage
 		case .enabled:
 			isUserInteractionEnabled = true
 			backgroundColor =
-				theme.backgroundColor
+        uiTheme.checkoutSubmitButtonBackgroundColor
 			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
 			titleLabel.textColor = UIColor.white
 			titleLabel.text = "Pay"
@@ -210,9 +211,9 @@ internal class VGSSubmitButton: UIControl {
 		case .processing:
 			isUserInteractionEnabled = false
 			backgroundColor =
-				theme.backgroundColor.withAlphaComponent(theme.opacity)
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-			titleLabel.textColor = UIColor.white.withAlphaComponent(theme.titleOpacity)
+        uiTheme.checkoutSubmitButtonBackgroundColor
+			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+      titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = "Processing"
 			titleLabel.textAlignment = .center
 			activityIndicatorView.startAnimating()
@@ -223,7 +224,7 @@ internal class VGSSubmitButton: UIControl {
 			self.iconAccessory = .none
 			UIView.animate(withDuration: 0.3, delay: 0, options: []) {
 				self.titleLabel.text = "Success"
-				self.backgroundColor = theme.successColor
+        self.backgroundColor = uiTheme.checkoutSubmitButtonSuccessBackgroundColor
 				self.titleLabel.textColor = UIColor.white
 				self.titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
 			} completion: { isFinished in
