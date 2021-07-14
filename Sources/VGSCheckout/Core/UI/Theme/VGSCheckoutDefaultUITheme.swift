@@ -41,11 +41,11 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   
   /// Submit button attributes
   
-  public var checkoutSubmitButtonBackgroundColor: UIColor = .systemPurple.withAlphaComponent(0.6)
+  public var checkoutSubmitButtonBackgroundColor: UIColor = UIColor.systemPurple.withAlphaComponent(0.6)
   
   public var checkoutSubmitButtonSuccessBackgroundColor: UIColor = .systemGreen
   
-  public var checkoutSubmitButtonTitleColor: UIColor = .lightText.withAlphaComponent(0.6)
+  public var checkoutSubmitButtonTitleColor: UIColor = UIColor.lightText.withAlphaComponent(0.6)
   
   public var checkoutSubmitButtonTitleFont: UIFont = .preferredFont(forTextStyle: .callout)
 }
