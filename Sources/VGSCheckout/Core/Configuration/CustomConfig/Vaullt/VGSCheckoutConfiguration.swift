@@ -10,6 +10,9 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
 	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
 
+  ///
+  public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+  
 	/// Form configuration options. Check `VGSCheckoutFormConfiguration` for default settings.
 	internal var formConfiguration: VGSCheckoutFormConfiguration = VGSCheckoutFormConfiguration()
 
