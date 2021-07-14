@@ -9,7 +9,7 @@ import UIKit
 
 /// Holds logic for billing addres setup and handling events.
 final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
-
+  
 	/// Delegate.
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -49,11 +49,11 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus) {
+  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-		self.billingAddressFormView = VGSBillingAddressDetailsView(paymentInstrument: paymentInstrument)
+    self.billingAddressFormView = VGSBillingAddressDetailsView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
 //		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
 //		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
 
@@ -82,7 +82,7 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 			}
 		}()
 
-		vgsCollect.textFields.forEach { textField in
+    vgsTextFields.forEach { textField in
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true

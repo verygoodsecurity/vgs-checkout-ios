@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 #endif
 
+
 /// A drop-in class that presents a checkout form for a customer to complete payment.
 public class VGSCheckout {
 
@@ -47,11 +48,11 @@ public class VGSCheckout {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-		self.vaultID = vaultID
+    self.vaultID = vaultID
 		self.environment = environment
 		self.paymentInstrument = paymetInstrument
 		self.vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: paymetInstrument)
-		self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect)
+    self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect, uiTheme: configuration.uiTheme)
 		addCardUseCaseManager.delegate = self
 	}
 

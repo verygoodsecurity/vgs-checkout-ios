@@ -9,10 +9,7 @@ import UIKit
 
 /// Utility class that encapsulates fields validation logic.
 internal class VGSFormValidationHelper {
-
-	/// Form items.
-	internal let formItems: [VGSTextFieldFormItemProtocol]
-
+  
 	/// Validation behavior block.
 	internal let validationBehaviour: VGSFormValidationBehaviour
 
@@ -27,7 +24,6 @@ internal class VGSFormValidationHelper {
 	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
 	///   - validationBehaviour: `VGSFormValidationBehaviour` object, validation flow.
 	internal init(formItems: [VGSTextFieldFormItemProtocol], validationBehaviour: VGSFormValidationBehaviour) {
-		self.formItems = formItems
 		self.validationBehaviour = validationBehaviour
 		self.formItemsManager = VGSFormItemsManager(formItems: formItems)
 	}
@@ -116,7 +112,7 @@ internal class VGSFormValidationHelper {
 	/// Check if form is valid.
 	/// - Returns: `Bool` object, true if form is valid.
 	internal func isFormValid() -> Bool {
-		let invalidFields = formItems.filter { formItem in
+    let invalidFields = formItemsManager.formItems.filter { formItem in
 			return !formItem.textField.state.isValid
 		}
 		let isValid = invalidFields.isEmpty
@@ -126,7 +122,7 @@ internal class VGSFormValidationHelper {
   
   /// Array of `VGSTextFieldFormItemProtocol` items with validation error.
 	internal var fieldsWithvalidationErrors: [VGSTextFieldFormItemProtocol] {
-    let invalidFields = formItems.filter { formItem in
+    let invalidFields = formItemsManager.formItems.filter { formItem in
       return !formItem.textField.state.isValid && formItem.textField.state.isDirty
     }
     return invalidFields
@@ -210,7 +206,7 @@ internal class VGSFormValidationHelper {
 	/// - Parameter formBlock: `VGSAddCardFormBlock` object, form block type.
 	/// - Returns: `Bool` object, `true` if valid.
 	internal func isCardFormBlockValid(_ formBlock: VGSAddCardFormBlock) -> Bool {
-		let cardHolderFormItems = formItems.filter({$0.fieldType.formBlock == formBlock})
+    let cardHolderFormItems = formItemsManager.formItems.filter({$0.fieldType.formBlock == formBlock})
 
 		return isStateValid(for: cardHolderFormItems)
 	}

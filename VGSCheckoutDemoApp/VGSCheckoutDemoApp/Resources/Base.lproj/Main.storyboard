@@ -38,7 +38,7 @@
                         <sections>
                             <tableViewSection id="uPp-Pa-b44">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="qqo-Kp-oMW" rowHeight="55" style="IBUITableViewCellStyleDefault" id="TsH-BT-tnh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="qqo-Kp-oMW" style="IBUITableViewCellStyleDefault" id="TsH-BT-tnh">
                                         <rect key="frame" x="20" y="18" width="374" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TsH-BT-tnh" id="qNW-JX-mrE">
@@ -58,7 +58,7 @@
                                             <segue destination="1di-nm-31V" kind="push" id="QNS-JW-D5q"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="AdE-xd-e73" rowHeight="55" style="IBUITableViewCellStyleDefault" id="0oo-xf-m60">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="AdE-xd-e73" style="IBUITableViewCellStyleDefault" id="0oo-xf-m60">
                                         <rect key="frame" x="20" y="73" width="374" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0oo-xf-m60" id="7A4-PA-vZC">

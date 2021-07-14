@@ -6,13 +6,18 @@
 import Foundation
 
 ///  VGSCheckout configuration, public interface.
-public protocol VGSCheckoutConfigurationProtocol {}
+public protocol VGSCheckoutConfigurationProtocol {
+  
+  /// UI elements configuration theme.
+  var uiTheme: VGSCheckoutThemeProtocol {get}
+}
 
 /// Internal protocol for VGSCheckout configuration.
 internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol {
 
 	/// Payment flow type.
 	var paymentFlowType: VGSPaymentFlowIdentifier {get}
+  
 }
 
 /// Defines payment flow identifiers.

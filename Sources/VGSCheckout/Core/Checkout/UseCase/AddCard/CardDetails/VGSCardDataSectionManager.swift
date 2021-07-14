@@ -31,8 +31,8 @@ internal enum VGSFormValidationBehaviour {
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {
-
+final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {  
+  
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
 	internal var state: VGSFormSectionState = .invalid {
@@ -66,20 +66,21 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 
 	/// Autofocus manager.
 	internal let autoFocusManager: VGSFormAutofocusManager
-
+  
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus) {
+internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-		self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument)
+    self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
 		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
 		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
 
 		buildForm()
 	}
 
+  
 	// MARK: - Interface
 
 	internal func buildForm() {
@@ -92,27 +93,23 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			setupCardForm(with: multiplexingConfig)
 		}
 
-		let inputBlackTextColor: UIColor = {
-			if #available(iOS 13.0, *) {
-				return UIColor {(traits) -> UIColor in
-					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-				}
-			} else {
-				return .black
-			}
-		}()
-
-		vgsCollect.textFields.forEach { textField in
-			textField.textColor = inputBlackTextColor
-			textField.font = UIFont.preferredFont(forTextStyle: .body)
-			textField.adjustsFontForContentSizeCategory = true
-			textField.delegate = self
-		}
-
-		for item in textFiedFormItems {
-			item.formItemView.delegate = self
-		}
+//		let inputBlackTextColor: UIColor = {
+//			if #available(iOS 13.0, *) {
+//				return UIColor {(traits) -> UIColor in
+//					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+//				}
+//			} else {
+//				return .black
+//			}
+//		}()
+    
+    for item in textFiedFormItems {
+      item.formItemView.delegate = self
+      item.textField.delegate = self
+    }
 	}
+  
+  
 
 	// MARK: - Helpers
 
