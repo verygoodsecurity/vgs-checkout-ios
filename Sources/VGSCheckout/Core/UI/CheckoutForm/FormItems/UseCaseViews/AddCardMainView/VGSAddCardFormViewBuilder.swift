@@ -28,11 +28,13 @@ internal class VGSAddCardFormViewBuilder {
 		return stackView
 	}
 
-	static func buildPaymentButton() -> VGSSubmitButton {
+  static func buildPaymentButton(with uiTheme: VGSCheckoutSubmitButtonThemeProtocol, delegate: VGSSubmitButtonDelegateProtocol? = nil) -> VGSSubmitButton {
 		let button = VGSSubmitButton(frame: .zero)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
-
+    button.titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+    button.delegate = delegate
+    button.updateUI(with: uiTheme)
 		return button
 	}
 
@@ -46,12 +48,12 @@ internal class VGSAddCardFormViewBuilder {
 
 	/// Build error label.
 	/// - Returns: `UILabel` for error message.
-	static func buildErrorLabel() -> UILabel {
+  static func buildErrorLabel(with uiTheme: VGSCheckoutErrorLabelThemeProtocol) -> UILabel {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.adjustsFontForContentSizeCategory = true
-		label.font = .preferredFont(forTextStyle: .footnote)
-		label.textColor = .systemRed
+    label.font = uiTheme.checkoutErrorLabelFont
+		label.textColor = uiTheme.checkoutErrorLabelTextColor
 		label.numberOfLines = 0
 
 		return label

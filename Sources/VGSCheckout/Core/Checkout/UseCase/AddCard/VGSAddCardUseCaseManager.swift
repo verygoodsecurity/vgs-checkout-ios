@@ -66,19 +66,19 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// API worker, sends data with current payment instrument.
 	internal let apiWorker: VGSAddCreditCardAPIWorkerProtocol
-
+  
 	// MARK: - Initialization
 
-	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect) {
+  init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
 		VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
 		VGSCollectLogger.shared.configuration.level = .info
 
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
+    self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme)
 		self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus)
 
-		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen)
+		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 		super.init()
 		self.addCardSectionFormView.payButton.status = .disabled

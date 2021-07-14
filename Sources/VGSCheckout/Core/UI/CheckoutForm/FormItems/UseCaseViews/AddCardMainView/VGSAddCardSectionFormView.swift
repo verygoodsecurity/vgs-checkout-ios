@@ -10,6 +10,8 @@ import UIKit
 /// Holds UI for add card section form.
 internal class VGSAddCardSectionFormView: VGSFormView {
 
+  
+
 	/// Defines layout style.
 	internal enum LayoutStyle {
 		case fullScreen
@@ -24,7 +26,7 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 	internal let viewLayoutStyle: LayoutStyle
 
 	/// Displays error messages for invalid card details.
-	internal let cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+  internal let cardDetailsErrorLabel: UILabel
 
 	/// Header bar view.
 	internal lazy var headerBarView: VGSHeaderBarView = {
@@ -46,7 +48,7 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
 
 	/// Pay button.
-	internal let payButton: VGSSubmitButton = VGSAddCardFormViewBuilder.buildPaymentButton()
+	internal let payButton: VGSSubmitButton
 
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
@@ -57,17 +59,22 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 	/// Billing address view.
 	internal let billingAddressView: VGSBillingAddressDetailsView
 
+  internal let uiTheme: VGSCheckoutThemeProtocol
 	// MARK: - Initialization
 
 	/// Initializer.
-	internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsFormView, billingAddressView: VGSBillingAddressDetailsView, viewLayoutStyle: LayoutStyle = .fullScreen) {
+  internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsFormView, billingAddressView: VGSBillingAddressDetailsView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
+    self.uiTheme = uiTheme
+    self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
+    self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
+
 		self.paymentInstrument = paymentInstrument
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsView = cardDetailsView
 		self.billingAddressView = billingAddressView
-
 		super.init()
 
+    self.payButton.delegate = self
 		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
@@ -103,4 +110,10 @@ internal class VGSAddCardSectionFormView: VGSFormView {
 			backgroundStackView.addArrangedSubview(payButtonContainerView)
 		}
 	}
+}
+
+extension VGSAddCardSectionFormView: VGSSubmitButtonDelegateProtocol {
+  func buttonStatusDidChanged() {
+    payButton.updateUI(with: uiTheme)
+  }
 }

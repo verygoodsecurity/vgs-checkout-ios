@@ -11,6 +11,7 @@ import UIKit
 /// Form View with group of fields.
 internal protocol VGSFormGroupViewProtocol: UIView {
 	var errorLabel: UILabel {get}
+  var uiTheme: VGSCheckoutThemeProtocol {get}
 	func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool)
 }
 
@@ -24,11 +25,13 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		case singleLineAll
 	}
 
+  internal var uiTheme: VGSCheckoutThemeProtocol
+
 	/// Form items.
 	internal var formItems: [VGSTextFieldFormItemProtocol] = []
 
 	/// Displays error messages for invalid card details.
-	internal let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+  internal let errorLabel: UILabel
 
 	/// Fields distribution.
 	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
@@ -113,7 +116,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		stackView.borderViewCornerRadius = 4
 		
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+    stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -127,7 +130,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		stackView.axis = .horizontal
 
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+    stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -139,9 +142,12 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 
 	/// Initialization.
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
-	init(paymentInstrument: VGSPaymentInstrument) {
+  init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
+    self.uiTheme = uiTheme
+    self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
 		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
+    
 		super.init(frame: .zero)
 
 		setupUI()
@@ -166,22 +172,24 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		switch block {
 		case .cardHolder:
 			if isValid {
-				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+        cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderColor
 			} else {
-				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
+				cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderErrorColor
 			}
 		case .cardDetails:
 			if isValid {
-				verticalStackView.separatorColor = UIColor.gray
-				horizonalStackView.separatorColor = UIColor.gray
+				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
+				horizonalStackView.separatorColor = uiTheme.textFieldBorderColor
 			} else {
-				verticalStackView.separatorColor = UIColor.red
-				horizonalStackView.separatorColor = UIColor.red
+				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+				horizonalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
 			}
 		case .addressInfo:
 			break
 		}
 	}
+  
+  /// TODO: Add option to set UI for ProcessingState ???
 
 	/// Disable input view for processing state.
 	internal func updateUIForProcessingState() {
@@ -264,6 +272,14 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		// Test country field
 		//verticalStackView.addArrangedSubview(countryFormItemView)
 
+    /// Set UI Theme
+    for item in formItems {
+      /// Text Field UI
+      item.textField.textColor = uiTheme.textFieldTextColor
+      item.textField.font = uiTheme.textFieldTextFont
+      item.textField.adjustsFontForContentSizeCategory = true
+    }
+    
 		formItems.first?.textField.becomeFirstResponder()
 	}
 
