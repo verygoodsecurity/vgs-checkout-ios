@@ -62,3 +62,6 @@
 
 /* Cancel button title on checkout screen */
 "vgs_checkout_cancel_button_title" = "Cancel";
+
+/* Done button title on picker. */
+"vgs_checkout_picker_toolbar_done_button_title" = "Done";

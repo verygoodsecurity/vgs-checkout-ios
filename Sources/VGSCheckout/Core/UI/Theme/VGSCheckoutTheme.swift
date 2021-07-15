@@ -42,7 +42,6 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
   var textFieldPlaceholderFont: UIFont { get set }
 }
 
-
 /// Defines Checkout main view UI Theme.
 public protocol VGSCheckoutViewThemeProtocol {
 
