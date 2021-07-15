@@ -8,9 +8,16 @@ import Foundation
 import UIKit
 #endif
 
+/// Defines UI form blocks.
 internal enum VGSAddCardFormBlock {
+
+  /// Card holder.
 	case cardHolder
+
+	/// Card details.
 	case cardDetails
+
+	/// Address info.
 	case addressInfo
 }
 
@@ -49,20 +56,46 @@ extension VGSTextFieldFormItemProtocol {
   }
 }
 
+/// Defines checkout field types.
 internal enum VGSAddCardFormFieldType {
+
+	/// Card number.
 	case cardNumber
+
+	/// Expiration date.
 	case expirationDate
+
+	/// Security code (CVC/CVV).
 	case cvc
+
+	/// Card holder name.
 	case cardholderName
+
+	/// First name.
 	case firstName
+
+	/// Last name.
 	case lastName
+
+	/// Country.
 	case country
+
+	/// Address line 1.
 	case addressLine1
+
+	/// Address line 2.
 	case addressLine2
+
+	/// City.
 	case city
+
+	/// State/region/county/province.
 	case state
+
+	/// Zip/postal code.
 	case zipCode
 
+	/// Corresponding form block.
 	var formBlock: VGSAddCardFormBlock {
 		switch self {
 		case .cardholderName, .firstName, .lastName:
@@ -79,6 +112,7 @@ internal enum VGSAddCardFormFieldType {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: emptyFieldNameLocalizationKey)
 	}
 
+	/// Localizable string key.
 	private var emptyFieldNameLocalizationKey: String {
 		switch self {
 		case .cardholderName:
