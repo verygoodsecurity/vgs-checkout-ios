@@ -65,3 +65,15 @@
 
 /* Done button title on picker. */
 "vgs_checkout_picker_toolbar_done_button_title" = "Done";
+
+/* Empty city field in address info code error. */
+"vgs_checkout_address_info_city_empty_error" = "City is empty";
+
+/* Empty address line 1 in address info code error. */
+"vgs_checkout_address_info_line1_empty_error" = "Address line 1 is empty";
+
+/* Empty region in address info code error. */
+"vgs_checkout_address_info_region_empty_error" = "Region is empty";
+
+/* Empty ZIP code in address info code error. */
+"vgs_checkout_address_info_zipcode_empty_error" = "Zipcode is empty";
