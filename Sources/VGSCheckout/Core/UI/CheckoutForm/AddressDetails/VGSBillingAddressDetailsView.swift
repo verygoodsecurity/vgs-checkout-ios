@@ -10,6 +10,7 @@ import UIKit
 /// Holds UI for address details.
 internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
+	/// UI Theme.
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
@@ -169,38 +170,26 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 	/// Update Form block items UI with validation state.
 	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
-//		switch block {
-//		case .cardHolder:
-//			if isValid {
-//				cardHolderDetaailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			} else {
-//				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
-//			}
-//		case .cardDetails:
-//			if isValid {
-//				verticalStackView.separatorColor = UIColor.gray
-//				horizonalStackView.separatorColor = UIColor.gray
-//			} else {
-//				verticalStackView.separatorColor = UIColor.red
-//				horizonalStackView.separatorColor = UIColor.red
-//			}
-//		case .addressInfo:
-//			break
-//		}
+		switch block {
+		case .addressInfo:
+			if isValid {
+				verticalStackView.separatorColor = UIColor.gray
+			} else {
+				verticalStackView.separatorColor = UIColor.red
+			}
+		default:
+		 break
+		}
 	}
 
-	/// Disable input view for processing state.
+	/// Disable input views for processing state.
 	internal func updateUIForProcessingState() {
-		// Update grid view.
-//		if #available(iOS 13, *) {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//		} else {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//		}
+		 /// Update grid view.
+		if #available(iOS 13, *) {
+			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+		} else {
+			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+		}
 
 		// Update form fields.
 		formItems.forEach { formItem in
