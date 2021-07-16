@@ -77,3 +77,6 @@
 
 /* Empty ZIP code in address info code error. */
 "vgs_checkout_address_info_zipcode_empty_error" = "Zipcode is empty";
+
+/* Empty postal code in address info code error. */
+"vgs_checkout_address_info_zipcode_empty_error" = "Postal code is empty";
