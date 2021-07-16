@@ -40,22 +40,22 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
-//
-//	/// Validation manager.
-//	internal let formValidationHelper: VGSFormValidationHelper
-//
-//	/// Autofocus manager.
-//	internal let autoFocusManager: VGSFormAutofocusManager
+
+	/// Validation manager.
+	internal let formValidationHelper: VGSFormValidationHelper
+
+	/// Autofocus manager.
+	internal let autoFocusManager: VGSFormAutofocusManager
 
 	// MARK: - Initialization
 
-  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol) {
+  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFormAutofocusManager) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
     self.billingAddressFormView = VGSBillingAddressDetailsView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
-//		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
-//		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
+		self.formValidationHelper = formValidationHelper
+		self.autoFocusManager = autoFocusManager
 
 		buildForm()
 	}

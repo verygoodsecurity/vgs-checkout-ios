@@ -75,11 +75,22 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-    self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme)
-    self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme)
+
+		let formValidationHelper = VGSFormValidationHelper(formItems: [], validationBehaviour: .onFocus)
+		let autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: []))
+
+		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+
+		self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
 		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+
+
+		formValidationHelper.formItemsManager.appendFormItems(self.cardDataSectionManager.cardFormView.formItems)
+		formValidationHelper.formItemsManager.appendFormItems(self.addressDataSectionManager.billingAddressFormView.formItems)
+
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
+
 		super.init()
 		self.addCardSectionFormView.payButton.status = .disabled
 	}

@@ -11,7 +11,7 @@ import UIKit
 internal class VGSFormItemsManager {
 
 	/// Form items.
-	internal let formItems: [VGSTextFieldFormItemProtocol]
+	private (set) internal var formItems: [VGSTextFieldFormItemProtocol]
 
 	/// Initializer.
 	/// - Parameters:
@@ -35,5 +35,11 @@ internal class VGSFormItemsManager {
 	/// All form blocks.
 	internal var formBlocks: [VGSAddCardFormBlock] {
 		return Array(Set(formItems.map({return $0.fieldType.formBlock})))
+	}
+
+	/// Append form items.
+	/// - Parameter items: `[VGSTextFieldFormItemProtocol]` object, array of form items.
+	internal func appendFormItems(_ items:[VGSTextFieldFormItemProtocol]) {
+		formItems = formItems + items
 	}
 }
