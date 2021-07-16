@@ -119,7 +119,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		stackView.borderViewCornerRadius = 4
 
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -133,7 +133,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		stackView.axis = .horizontal
 
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -173,15 +173,16 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		switch block {
 		case .addressInfo:
 			if isValid {
-				verticalStackView.separatorColor = UIColor.gray
+				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
 			} else {
-				verticalStackView.separatorColor = UIColor.red
+				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
 			}
 		default:
 		 break
 		}
 	}
 
+	// TODO: - refactor duplicated code for processing state styles.
 	/// Disable input views for processing state.
 	internal func updateUIForProcessingState() {
 		 /// Update grid view.
@@ -240,10 +241,13 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 			zipFormItemView
 		]
 
-		// Setup insets.
+		// Setup insets and UI Theme.
 		formItems.forEach { formItem in
 			formItem.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 			formItem.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+			formItem.textField.textColor = uiTheme.textFieldTextColor
+			formItem.textField.font = uiTheme.textFieldTextFont
+			formItem.textField.adjustsFontForContentSizeCategory = true
 		}
 	}
 }
