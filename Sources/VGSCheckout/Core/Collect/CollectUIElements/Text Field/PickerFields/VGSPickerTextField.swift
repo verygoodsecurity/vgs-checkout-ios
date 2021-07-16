@@ -31,6 +31,9 @@ internal class VGSPickerTextField: VGSTextField {
 		}
 	}
 
+	/// Previous tint color.
+	internal var previousTintColor: UIColor?
+
 	/// Picker delegate.
 	internal weak var pickerSelectionDelegate: VGSPickerTextFieldSelectionDelegate?
 
@@ -99,6 +102,7 @@ internal class VGSPickerTextField: VGSTextField {
 			setupRightView()
 
 			/// Disable autocorrection and tintColor for picker.
+			previousTintColor = tintColor
 			tintColor = .clear
 			autocorrectionType = .no
 		case .textField:
@@ -106,6 +110,8 @@ internal class VGSPickerTextField: VGSTextField {
 			isCaretHidden = false
 			textField.inputView = nil
 			autocorrectionType = .no
+			tintColor = previousTintColor
+			textField.rightViewMode = .never
 		}
 	}
 

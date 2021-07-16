@@ -152,8 +152,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
-//		updateSecurityCodeFieldIfNeeded(for: textField)
-		formValidationHelper.updateFormViewOnEndEditingTextField(textField: textField)
+		formValidationHelper.updateFormViewOnEditingTextField(textField: textField)
 		updateFormState()
 	}
 
@@ -214,7 +213,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
-				updateStateField(with: newCountry)
+				//updateStateField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
 

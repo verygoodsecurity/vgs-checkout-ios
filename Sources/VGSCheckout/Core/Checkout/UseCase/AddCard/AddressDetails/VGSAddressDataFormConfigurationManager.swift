@@ -56,16 +56,19 @@ internal class VGSAddressDataFormConfigurationManager {
 
 
 		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
-		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
-		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
-		statePickerConfiguration.dataProvider = regionsDataSourceProvider
+//		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
+//		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+//		statePickerConfiguration.dataProvider = regionsDataSourceProvider
 		statePickerConfiguration.type = .none
 		statePickerConfiguration.isRequiredValidOnly = true
 
 		statePickerTextField.configuration = statePickerConfiguration
 
+		statePickerTextField.placeholder = "State"
+		statePickerTextField.mode = .textField
+
 		// Force select first state.
-		statePickerTextField.selectFirstRow()
+//		statePickerTextField.selectFirstRow()
 
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "zip")
 		zipConfiguration.type = .none
