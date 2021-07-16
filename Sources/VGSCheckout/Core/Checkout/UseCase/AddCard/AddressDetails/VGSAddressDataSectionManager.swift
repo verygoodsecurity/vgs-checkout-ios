@@ -1,5 +1,5 @@
 //
-//  VGSAddressDataSectionManager.swift
+//  VGSAddressDataSectionViewModel.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds logic for billing addres setup and handling events.
-final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
+final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
   
 	/// Delegate.
 	weak var delegate: VGSFormSectionPresenterDelegate?
@@ -149,7 +149,7 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
+extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 //		updateSecurityCodeFieldIfNeeded(for: textField)

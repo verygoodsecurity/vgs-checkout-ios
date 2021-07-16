@@ -44,14 +44,6 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		return componentView
 	}()
 
-	/// Address line 2 form item view.
-	internal lazy var addressLine2FormItemView: VGSAddressLineFormItemView = {
-		let componentView = VGSAddressLineFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
 	/// City form item view.
 	internal lazy var cityItemFormView: VGSCityFormItemView = {
 		let componentView = VGSCityFormItemView(frame: .zero)
@@ -220,7 +212,6 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 		verticalStackView.addArrangedSubview(countryFormItemView)
 		verticalStackView.addArrangedSubview(addressLine1FormItemView)
-		verticalStackView.addArrangedSubview(addressLine2FormItemView)
 		verticalStackView.addArrangedSubview(cityItemFormView)
 
 		stateAndZipStackView.addArrangedSubview(statePickerFormItemView)
@@ -235,7 +226,6 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		formItems = [
 			countryFormItemView,
 			addressLine1FormItemView,
-			addressLine2FormItemView,
 			cityItemFormView,
 			statePickerFormItemView,
 			zipFormItemView

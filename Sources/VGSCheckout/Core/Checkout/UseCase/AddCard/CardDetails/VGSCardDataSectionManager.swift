@@ -1,5 +1,5 @@
 //
-//  VGSCardDataSectionManager.swift
+//  VGSCardDataSectionViewModel.swift
 //  VGSCheckout
 //
 
@@ -31,7 +31,7 @@ internal enum VGSFormValidationBehaviour {
 }
 
 /// Holds logic for card form setup and handling events.
-final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {  
+final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate {  
   
 	weak var delegate: VGSFormSectionPresenterDelegate?
 
@@ -132,7 +132,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSCardDataSectionManager: VGSTextFieldDelegate {
+extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
   
   func vgsTextFieldDidChange(_ textField: VGSTextField) {
     updateSecurityCodeFieldIfNeeded(for: textField)
@@ -154,7 +154,7 @@ extension VGSCardDataSectionManager: VGSTextFieldDelegate {
 
 // MARK: - CVC Helpers
 
-extension VGSCardDataSectionManager {
+extension VGSCardDataSectionViewModel {
   
   /// Check if CardBrand is changed and update cvc validation state if needed.
   internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {

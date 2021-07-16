@@ -53,10 +53,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	internal let paymentInstrument: VGSPaymentInstrument
 
 	/// Manager for card data logic.
-	internal let cardDataSectionManager: VGSCardDataSectionManager
+	internal let cardDataSectionManager: VGSCardDataSectionViewModel
 
 	/// Manager for billing address logic.
-	internal let addressDataSectionManager: VGSAddressDataSectionManager
+	internal let addressDataSectionManager: VGSAddressDataSectionViewModel
 
 	/// Add card main view.
 	internal let addCardSectionFormView: VGSAddCardSectionFormView
@@ -79,9 +79,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		let formValidationHelper = VGSFormValidationHelper(formItems: [], validationBehaviour: .onFocus)
 		let autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: []))
 
-		self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+		self.cardDataSectionManager = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
-		self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+		self.addressDataSectionManager = VGSAddressDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
 		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 

@@ -15,7 +15,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFormItemView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FormItemView.addressLineTextField
 		let cityTextField = addressFormView.cityItemFormView.cityTextField
 		let statePickerTextField = addressFormView.statePickerFormItemView.statePickerTextField
 		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
@@ -42,20 +41,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1TextField.placeholder = "Address line 1"
 
 		addressLine1TextField.configuration = addressLine1Configuration
-
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
-		addressLine2Configuration.type = .none
-		addressLine2Configuration.isRequiredValidOnly = false
-		addressLine2Configuration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 0, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-		addressLine1Configuration.returnKeyType = .next
-
-
-		addressLine2TextField.configuration = addressLine2Configuration
-
-		addressLine2TextField.placeholder = "Address line 2 (Optional)"
-		addressFormView.addressLine2FormItemView.formItemView.hintLabel.text = "Address line 2 (Optional)"
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
@@ -99,7 +84,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFormItemView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FormItemView.addressLineTextField
 		let cityTextField = addressFormView.cityItemFormView.cityTextField
 		let stateTextField = addressFormView.statePickerFormItemView.statePickerTextField
 		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
@@ -118,17 +102,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1TextField.placeholder = "Address line 1"
 
 		addressLine1TextField.configuration = addressLine1Configuration
-
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
-		addressLine2Configuration.type = .none
-		addressLine2Configuration.isRequiredValidOnly = true
-		addressLine2Configuration.returnKeyType = .next
-
-		addressFormView.addressLine2FormItemView.formItemView.hintLabel.text = "Address line 2 (Optional)"
-
-		addressLine2TextField.configuration = addressLine2Configuration
-
-		addressLine2TextField.placeholder = "Address line 2 (Optional)"
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
