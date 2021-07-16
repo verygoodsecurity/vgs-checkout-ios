@@ -119,11 +119,11 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	/// Update Form Validation State.
 	func updateFormState() {
-//		if formValidationHelper.isFormValid() {
-//			state = .valid
-//		} else {
-//			state = .invalid
-//		}
+		if formValidationHelper.isFormValid() {
+			state = .valid
+		} else {
+			state = .invalid
+		}
 	}
 
 	var countryPickerField: VGSPickerTextField? {

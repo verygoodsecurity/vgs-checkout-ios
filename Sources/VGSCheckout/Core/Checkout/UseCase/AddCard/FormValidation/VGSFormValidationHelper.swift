@@ -45,7 +45,15 @@ internal class VGSFormValidationHelper {
 			for formError in formErrors {
 				let formViewSection = formError.formViewSection
 				if let view = formSectionView(for: formViewSection) {
+					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
 					updateFormViewWithError(view, with: formError.errorMessage)
+				}
+			}
+
+			/// Reset all errors.
+			if formErrors.isEmpty {
+				formItemsManager.formViews.forEach { formView in
+					updateFormViewWithError(formView, with: nil)
 				}
 			}
 
@@ -67,7 +75,15 @@ internal class VGSFormValidationHelper {
 			for formError in formErrors {
 				let formViewSection = formError.formViewSection
 				if let view = formSectionView(for: formViewSection) {
+					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
 					updateFormViewWithError(view, with: formError.errorMessage)
+				}
+			}
+
+			/// Reset all errors.
+			if formErrors.isEmpty {
+				formItemsManager.formViews.forEach { formView in
+					updateFormViewWithError(formView, with: nil)
 				}
 			}
 			
@@ -169,67 +185,67 @@ internal class VGSFormValidationHelper {
 		return state.isEmpty && state.isDirty
 	}
 
-  /// Returns first error from  not valid, not active, dirty field.
-	internal func firstFormValidationError(for formSection: VGSFormSection) -> String? {
-		let invalidFields = fieldsWithvalidationErrors
-
-		guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
-			return nil
-		}
-
-		let firstField = firstErrorField.textField
-		let firstFieldType = firstErrorField.fieldType
-
-		let firstFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: firstFieldType)
-
-		/// Check if first field with error is focused.
-		if firstErrorField.textField.isFirstResponder {
-
-			/// Check if field input is full required length
-			let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
-			if isFullLength {
-				/// If true - show field error1
-				let errorText = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
-				return errorText
-			} else {
-				/// If false - show next field error
-				guard invalidFields.count > 1 else {
-					return nil
-				}
-
-				let secondErrorField = invalidFields[1]
-
-				let secondField = secondErrorField.textField
-				let secondFieldType = secondErrorField.fieldType
-
-				let secondFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: secondFieldType)
-
-				var errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
-
-				// Show empty error error if field is empty and dirty.
-				if isEmptyAndDirtyTextField(secondField) {
-					errorText = secondFieldValidator.emptyErrorMessage(for: secondField, fieldType: secondFieldType)
-				}
-
-				return errorText
-			}
-		} else {
-			// Show error from first not valid field
-			var errorMessage = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
-
-			if isEmptyAndDirtyTextField(firstField) {
-				errorMessage = firstFieldValidator.emptyErrorMessage(for: firstField, fieldType: firstFieldType)
-			}
-
-			return errorMessage
-		}
-	}
+//  /// Returns first error from  not valid, not active, dirty field.
+//	internal func firstFormValidationError(for formSection: VGSFormSection) -> String? {
+//		let invalidFields = fieldsWithvalidationErrors
+//
+//		guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
+//			return nil
+//		}
+//
+//		let firstField = firstErrorField.textField
+//		let firstFieldType = firstErrorField.fieldType
+//
+//		let firstFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: firstFieldType)
+//
+//		/// Check if first field with error is focused.
+//		if firstErrorField.textField.isFirstResponder {
+//
+//			/// Check if field input is full required length
+//			let isFullLength = isInputRequiredLengthInFormItem(firstErrorField)
+//			if isFullLength {
+//				/// If true - show field error1
+//				let errorText = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
+//				return errorText
+//			} else {
+//				/// If false - show next field error
+//				guard invalidFields.count > 1 else {
+//					return nil
+//				}
+//
+//				let secondErrorField = invalidFields[1]
+//
+//				let secondField = secondErrorField.textField
+//				let secondFieldType = secondErrorField.fieldType
+//
+//				let secondFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: secondFieldType)
+//
+//				var errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
+//
+//				// Show empty error error if field is empty and dirty.
+//				if isEmptyAndDirtyTextField(secondField) {
+//					errorText = secondFieldValidator.emptyErrorMessage(for: secondField, fieldType: secondFieldType)
+//				}
+//
+//				return errorText
+//			}
+//		} else {
+//			// Show error from first not valid field
+//			var errorMessage = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
+//
+//			if isEmptyAndDirtyTextField(firstField) {
+//				errorMessage = firstFieldValidator.emptyErrorMessage(for: firstField, fieldType: firstFieldType)
+//			}
+//
+//			return errorMessage
+//		}
+//	}
 
 	/// Returns first error from  not valid, not active, dirty field.
 	internal func formValidationErrors() -> [FormError] {
 		let invalidFields = fieldsWithvalidationErrors
 
-		guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
+		guard !invalidFields.isEmpty else {
 			return []
 		}
 
