@@ -136,17 +136,17 @@ extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
   
   func vgsTextFieldDidChange(_ textField: VGSTextField) {
     updateSecurityCodeFieldIfNeeded(for: textField)
-    formValidationHelper.updateFormViewOnEditingTextField(cardFormView, textField: textField)
+    formValidationHelper.updateFormViewOnEditingTextField(textField: textField)
     updateFormState()
   }
   
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField( textField: textField)
     updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-    formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+    formValidationHelper.updateFormViewOnEndEditingTextField( textField: textField)
 		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
     updateFormState()
 	}
@@ -166,7 +166,7 @@ extension VGSCardDataSectionViewModel {
     // Update Field Placeholder
     updateCVCFieldPlaceholder(cvcField, cardBrand: cardState.cardBrand)
     // Update UI for new CVC Field State
-    formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: cvcField)
+    formValidationHelper.updateFormViewOnEndEditingTextField( textField: cvcField)
   }
 
   private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {

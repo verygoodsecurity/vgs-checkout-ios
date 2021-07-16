@@ -153,17 +153,17 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 //		updateSecurityCodeFieldIfNeeded(for: textField)
-		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(textField: textField)
 //		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
 		updateFormState()
 	}

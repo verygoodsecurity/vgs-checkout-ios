@@ -13,6 +13,9 @@ internal class VGSFormItemsManager {
 	/// Form items.
 	private (set) internal var formItems: [VGSTextFieldFormItemProtocol]
 
+	/// Form section views.
+	private (set) internal var formViews: [VGSFormGroupViewProtocol] = []
+
 	/// Initializer.
 	/// - Parameters:
 	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
@@ -39,7 +42,13 @@ internal class VGSFormItemsManager {
 
 	/// Append form items.
 	/// - Parameter items: `[VGSTextFieldFormItemProtocol]` object, array of form items.
-	internal func appendFormItems(_ items:[VGSTextFieldFormItemProtocol]) {
+	internal func appendFormItems(_ items: [VGSTextFieldFormItemProtocol]) {
 		formItems = formItems + items
+	}
+
+	/// Append form section views.
+	/// - Parameter views: `[VGSTextFieldFormItemProtocol]` object, array of form section views.
+	internal func appendFormSectionViews(_ views: [VGSFormGroupViewProtocol]) {
+		formViews = formViews + views
 	}
 }

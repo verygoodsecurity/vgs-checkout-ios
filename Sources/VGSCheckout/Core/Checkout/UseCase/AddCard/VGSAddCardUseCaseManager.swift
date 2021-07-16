@@ -89,6 +89,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		formValidationHelper.formItemsManager.appendFormItems(self.cardDataSectionManager.cardFormView.formItems)
 		formValidationHelper.formItemsManager.appendFormItems(self.addressDataSectionManager.billingAddressFormView.formItems)
 
+		formValidationHelper.formItemsManager.appendFormSectionViews([cardDataSectionManager.cardFormView, addressDataSectionManager.billingAddressFormView])
+
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 
 		super.init()

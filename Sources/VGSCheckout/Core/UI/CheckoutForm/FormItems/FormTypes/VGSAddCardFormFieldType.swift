@@ -55,6 +55,16 @@ internal enum VGSAddCardFormFieldType {
 		}
 	}
 
+	/// Corresponding form section.
+	internal var formSection: VGSFormSection {
+		switch self {
+		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
+			return .card
+		case .country, .addressLine1, .addressLine2, .city, .state, .zipCode:
+			return .billingAddress
+		}
+	}
+
 	/// Empty field name error.
 	internal var emptyFieldNameError: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: emptyFieldNameLocalizationKey)
