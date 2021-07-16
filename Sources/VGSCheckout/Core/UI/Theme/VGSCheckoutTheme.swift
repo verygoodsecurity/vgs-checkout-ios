@@ -27,19 +27,19 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 	/// The textfield’s error border color.
   var textFieldBorderErrorColor: UIColor { get set }
 
+	/// The text color of the textfield hint (above the text field).
+	var textFieldHintTextColor: UIColor { get set }
+
 	/// The text color of the textfield.
   var textFieldTextColor: UIColor { get set }
 
-	/// The text color of the textfield placeholder. NOT USED!!!
-  var textFieldPlaceholderColor: UIColor { get set }
-  
   /// Fonts.
 
 	/// The font of the textfield.
   var textFieldTextFont: UIFont { get set }
 
-	/// The font of the textfield placeholder. NOT USED!!!
-  var textFieldPlaceholderFont: UIFont { get set }
+	/// The font of the textfield hint (above the text field).
+	var textFieldHintTextFont: UIFont { get set }
 }
 
 /// Defines Checkout main view UI Theme.

@@ -11,22 +11,22 @@ import UIKit
 
 /// Default Checkout UI Theme settings
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
-  
+
   /// TextField attributes
   public var textFieldBackgroundColor: UIColor = .systemGray
   
   public var textFieldBorderColor: UIColor = .systemGray
   
   public var textFieldTextColor: UIColor = .vgsInputBlackTextColor
-  
-  public var textFieldPlaceholderColor: UIColor = .systemGray
-  
+
   public var textFieldBorderErrorColor: UIColor = .systemRed
   
   public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
-  
-	public var textFieldPlaceholderFont: UIFont =  UIFont.preferredFont(forTextStyle: .body)
-  
+
+	public var textFieldHintTextColor: UIColor = .vgsInputBlackTextColor
+
+	public var textFieldHintTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+
   /// Checkout View attributes
 
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
