@@ -98,7 +98,7 @@ internal class VGSHeaderBarView: UIView {
 			button = roundedButton
 		case .text:
 			let textButton = UIButton(frame: .zero)
-			textButton.setTitle("Cancel", for: .normal)
+			textButton.setTitle(VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title"), for: .normal)
 			textButton.setTitleColor(UIColor.systemBlue, for: .normal)
 			textButton.setTitleColor(UIColor.gray, for: .disabled)
 			textButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2)

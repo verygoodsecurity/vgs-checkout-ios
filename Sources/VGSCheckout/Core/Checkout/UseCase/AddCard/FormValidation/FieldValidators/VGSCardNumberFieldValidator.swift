@@ -26,6 +26,10 @@ internal class VGSCardNumberFieldValidator: VGSFormTextFieldValidationProtocol {
   }
 
 	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return "Enter a valid card number"
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_invalid_error")
+	}
+
+	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_empty_error")
 	}
 }

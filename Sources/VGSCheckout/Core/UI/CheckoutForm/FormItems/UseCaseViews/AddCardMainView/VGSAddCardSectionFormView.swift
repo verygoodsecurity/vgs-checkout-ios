@@ -10,8 +10,6 @@ import UIKit
 /// Holds UI for add card section form.
 internal class VGSAddCardSectionFormView: VGSFormView {
 
-  
-
 	/// Defines layout style.
 	internal enum LayoutStyle {
 		case fullScreen

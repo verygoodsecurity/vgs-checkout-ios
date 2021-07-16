@@ -128,6 +128,14 @@ internal class VGSFormValidationHelper {
     return invalidFields
   }
 
+	/// Return boolean flag if field is empty and dirty.
+	/// - Parameter textField: `VGSTextField` object, text field.
+	/// - Returns: `Bool` object, `true` if field is empty and dirty.
+	internal func isEmptyAndDirtyTextField(_ textField: VGSTextField) -> Bool {
+		let state = textField.state
+		return state.isEmpty && state.isDirty
+	}
+
   /// Returns first error from  not valid, not active, dirty field.
 	internal func firstFormValidationError() -> String? {
 		let invalidFields = fieldsWithvalidationErrors
@@ -163,13 +171,23 @@ internal class VGSFormValidationHelper {
 
 				let secondFieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: secondFieldType)
 
-				let errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
+				var errorText = secondFieldValidator.errorMessage(for: secondField, fieldType: secondFieldType)
+
+				// Show empty error error if field is empty and dirty.
+				if isEmptyAndDirtyTextField(secondField) {
+					errorText = secondFieldValidator.emptyErrorMessage(for: secondField, fieldType: secondFieldType)
+				}
 
 				return errorText
 			}
 		} else {
 			// Show error from first not valid field
-			let errorMessage = firstFieldValidator.errorMessage(for: firstErrorField.textField, fieldType: firstErrorField.fieldType)
+			var errorMessage = firstFieldValidator.errorMessage(for: firstField, fieldType: firstFieldType)
+
+			if isEmptyAndDirtyTextField(firstField) {
+				errorMessage = firstFieldValidator.emptyErrorMessage(for: firstField, fieldType: firstFieldType)
+			}
+
 			return errorMessage
 		}
 	}

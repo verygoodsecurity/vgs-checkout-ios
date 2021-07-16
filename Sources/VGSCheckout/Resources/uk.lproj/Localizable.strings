@@ -1,0 +1,67 @@
+/* 
+  Localizable.strings
+  VGSCheckout
+*/
+
+/* Card details section title. */
+"vgs_checkout_form_card_details_title" = "Картка";
+
+/* Card holder name field subtitle. */
+"vgs_checkout_card_holder_subtitle" = "Ім'я, Прізвище";
+
+/* Card number field subtitle. */
+"vgs_checkout_card_number_subtitle" = "Номер картки";
+
+/* Expiration date field subtitle. */
+"vgs_checkout_expiration_date_subtitle" = "Термін дії";
+
+/* Security code field subtitle. */
+"vgs_checkout_security_code_subtitle" = "CVV";
+
+/* Card holder field placeholder text. */
+"vgs_checkout_card_holder_hint" = "Іван Іванов";
+
+/* Card number field placeholder text. */
+"vgs_checkout_card_number_hint" = "1234 1234 1234 1234";
+
+/* Card exp date field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "MM/YY";
+
+/* Card CVC field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "CVC";
+
+/* Card CVV field placeholder text. */
+"vgs_checkout_card_expiration_date_hint" = "CVV";
+
+/* Pay button text. */
+"vgs_checkout_pay_button_title" = "Сплатити";
+
+/* Payment Processing label title. */
+"vgs_checkout_pay_button_processing_title" = "Платіж в обробці...";
+
+/* Empty card holder name error. */
+"vgs_checkout_card_holder_empty_error" = "Ім'я не має бути пустим";
+
+/* Invalid card number error. */
+"vgs_checkout_card_number_invalid_error" = "Неправильний номер картки";
+
+/* Invalid card number error. */
+"vgs_checkout_card_number_empty_error" = "Введіть номер картки";
+
+/* Invalid card expiration date error. */
+"vgs_checkout_card_expiration_date_invalid_error" = "Неправильний термін дії";
+
+/* Empty card expiration date error. */
+"vgs_checkout_card_expiration_date_empty_error" = "Введіть термін дії картки";
+
+/* Invalid card verification code error. */
+"vgs_checkout_card_verification_code_invalid_error" = "Неправильний CVV";
+
+/* Empty card verification code error. */
+"vgs_checkout_card_verification_code_empty_error" = "Введіть CVV";
+
+/* Cancel button title on checkout screen */
+"vgs_checkout_cancel_button_title" = "Скасувати";
+
+/* Done button title on picker. */
+"vgs_checkout_picker_toolbar_done_button_title" = "Ок";

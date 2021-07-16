@@ -61,7 +61,8 @@ internal class VGSPickerTextField: VGSTextField {
 	/// Setup toolbar.
 	internal func setupToolBar() {
 		let toolbar = UIToolbar()
-		let doneButton = UIBarButtonItem(title: "Done", style: .plain,
+		let doneButtonTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_picker_toolbar_done_button_title")
+		let doneButton = UIBarButtonItem(title: doneButtonTitle, style: .plain,
 																		 target: self, action: #selector(self.doneButtonDidTap))
 		toolbar.setItems([doneButton], animated: false)
 		toolbar.sizeToFit()

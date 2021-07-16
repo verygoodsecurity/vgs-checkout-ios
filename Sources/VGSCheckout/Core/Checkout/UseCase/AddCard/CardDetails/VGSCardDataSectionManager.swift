@@ -181,9 +181,9 @@ extension VGSCardDataSectionManager {
   private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {
      switch cardBrand {
      case .amex:
-       field.placeholder = "CVV"
+       field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
      default:
-      field.placeholder = "CVC"
+      field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
      }
    }
 }

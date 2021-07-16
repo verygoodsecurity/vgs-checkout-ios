@@ -20,6 +20,10 @@ internal class VGSExpDateFieldValidator: VGSFormTextFieldValidationProtocol {
 	}
 
 	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return "Expiration date is not valid"
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_invalid_error")
+	}
+
+	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_empty_error")
 	}
 }

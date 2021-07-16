@@ -194,7 +194,7 @@ internal class VGSSubmitButton: UIControl {
         uiTheme.checkoutSubmitButtonBackgroundColor
       titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
       titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
-			titleLabel.text = "Pay"
+			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_title")
       lockImageView.alpha = 0.6
 			titleLabel.textAlignment = .center
 			activityIndicatorView.stopAnimating()
@@ -205,7 +205,7 @@ internal class VGSSubmitButton: UIControl {
         uiTheme.checkoutSubmitButtonBackgroundColor
 			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
 			titleLabel.textColor = UIColor.white
-			titleLabel.text = "Pay"
+			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_title")
 			titleLabel.textAlignment = .center
 			lockImageView.alpha = 1
 			activityIndicatorView.stopAnimating()
@@ -216,7 +216,7 @@ internal class VGSSubmitButton: UIControl {
         uiTheme.checkoutSubmitButtonBackgroundColor
 			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
       titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
-			titleLabel.text = "Processing"
+			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_processing_title")
 			titleLabel.textAlignment = .center
 			activityIndicatorView.startAnimating()
 			iconAccessory = .loader
@@ -237,7 +237,7 @@ internal class VGSSubmitButton: UIControl {
 }
 
 /// Progress view.
-class VGSProgressView: UIView {
+internal class VGSProgressView: UIView {
 
 	// MARK: - Vars
 
@@ -245,7 +245,7 @@ class VGSProgressView: UIView {
 	internal let progressLayer = CAShapeLayer()
 
 	/// Animation duration.
-	private let animationDuration = 0.35
+	private let animationDuration = 0.32
 
 	// MARK: - Initialization
 
@@ -294,11 +294,11 @@ class VGSProgressView: UIView {
 		let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
 		strokeAnimation.duration = 1.0
 		strokeAnimation.fromValue = 0
-		strokeAnimation.toValue = 0.7
+		strokeAnimation.toValue = 0.6
 		strokeAnimation.timingFunction = CAMediaTimingFunction(
 			name: CAMediaTimingFunctionName.easeOut)
 
-		progressLayer.strokeEnd = 0.7
+		progressLayer.strokeEnd = 0.6
 		progressLayer.add(strokeAnimation, forKey: "animateCircle")
 		let progressAnimation = CABasicAnimation(keyPath: "transform.rotation")
 		progressAnimation.byValue = 2.0 * Float.pi
@@ -314,7 +314,7 @@ class VGSProgressView: UIView {
 		// Close the circle
 		let endProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
 		endProgressAnimation.duration = animationDuration
-		endProgressAnimation.fromValue = 0.7
+		endProgressAnimation.fromValue = 0.6
 		endProgressAnimation.toValue = 1
 		endProgressAnimation.timingFunction = CAMediaTimingFunction(
 			name: CAMediaTimingFunctionName.easeInEaseOut)

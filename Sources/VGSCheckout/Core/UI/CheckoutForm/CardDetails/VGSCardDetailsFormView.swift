@@ -86,7 +86,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		let headerView = VGSCheckoutHeaderView(frame: .zero)
 		headerView.translatesAutoresizingMaskIntoConstraints = false
 
-		let title = "Card Details"
+		let title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_form_card_details_title")
 		let model = VGSCheckoutHeaderViewModel(text: title)
 
 		headerView.configure(with: model, uiTheme: uiTheme)

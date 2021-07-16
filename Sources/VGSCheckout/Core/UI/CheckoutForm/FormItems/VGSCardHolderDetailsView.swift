@@ -69,22 +69,26 @@ internal class VGSCardHolderDetailsView: UIView {
 			if cardHolderDetails.fieldVisibility == .visible {
 				switch cardHolderDetails.fieldNameType {
 				case .single:
-					let itemView = VGSCardholderFormItemView(frame: .zero)
-					cardHolderNameStackView.addArrangedSubview(itemView)
-					itemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-					itemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
-
-					itemView.cardHolderName.placeholder = "John Doe"
-					itemView.formItemView.hintComponentView.label.text = "Cardholder"
-
-					formItems = [itemView]
+					setupSingleFieldName()
 //				case .splitted:
 //					setupSplittedFieldName()
 				}
 			}
 		case .multiplexing(let multiplexing):
-			setupSplittedFieldName()
+			setupSingleFieldName()
 		}
+	}
+
+	private func setupSingleFieldName() {
+		let itemView = VGSCardholderFormItemView(frame: .zero)
+		cardHolderNameStackView.addArrangedSubview(itemView)
+		itemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		itemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+
+		itemView.cardHolderName.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
+		itemView.formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
+
+		formItems = [itemView]
 	}
 
 	/// Setup splitted card holder fields.

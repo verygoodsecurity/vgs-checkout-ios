@@ -32,7 +32,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
 
 	/// Form section title (Card details, Billing address etc).
-	public var checkoutFormSectionTitle: UIFont = .preferredFont(forTextStyle: .subheadline)
+	public var checkoutFormSectionTitleFont: UIFont = .preferredFont(forTextStyle: .subheadline)
   
   /// Error Label attributes
   public var checkoutErrorLabelFont: UIFont = .preferredFont(forTextStyle: .footnote)
@@ -72,4 +72,3 @@ public extension UIColor {
 		}
 	}
 }
-

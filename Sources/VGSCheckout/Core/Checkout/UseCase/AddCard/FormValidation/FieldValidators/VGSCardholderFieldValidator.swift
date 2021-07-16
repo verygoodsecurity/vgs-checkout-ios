@@ -18,4 +18,8 @@ internal class VGSCardholderFieldValidator: VGSFormTextFieldValidationProtocol {
 	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
 		return fieldType.emptyFieldNameError
 	}
+
+	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_empty_error")
+	}
 }
