@@ -7,6 +7,21 @@ import Foundation
 /// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
+	/// `String` object, organization vault id.
+	public let vaultID: String
+
+	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	public let environment: String
+
+	/// Configuration initializer.
+	/// - Parameters:
+	///   - vaultID: `String` object, organization vault id.
+	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	public init(vaultID: String, environment: String) {
+		self.vaultID = vaultID
+		self.environment = environment
+	}
+
 	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
 	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
 
@@ -18,9 +33,6 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
-
-	/// Initialization.
-	public init() {}
 
 	/// Card number field options.
 	public var cardNumberFieldOptions: VGSCheckoutCardNumberOptions {

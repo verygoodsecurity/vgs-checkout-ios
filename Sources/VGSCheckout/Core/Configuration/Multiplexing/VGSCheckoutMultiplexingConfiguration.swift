@@ -7,6 +7,10 @@ import Foundation
 /// Holds configuration for multiplexing payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
+	public init(vaultID: String, environment: String) {
+
+	}
+
   /// Checkout UI elements  configuration.
   public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
 
@@ -15,4 +19,6 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 
 	/// Initialization.
 	public init() {}
+
+
 }

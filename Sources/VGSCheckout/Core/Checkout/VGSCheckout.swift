@@ -7,13 +7,8 @@ import Foundation
 import UIKit
 #endif
 
-
-/// A drop-in class that presents a checkout form for a customer to complete payment.
+/// A drop-in class that presents a checkout form for financial operations: add card, payment processing etc.
 public class VGSCheckout {
-
-	deinit {
-		//VGSCollectLogger.loggerPrefix = "VGSCheckout"
-	}
 
 	/// An object that acts as a `VGSCheckout` delegate.
 	public weak var delegate: VGSCheckoutDelegate?
