@@ -58,7 +58,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 		// Create custom configuration.
-		var checkoutConfiguration = VGSCheckoutConfiguration()
+		var checkoutConfiguration = VGSCheckoutConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
 
 		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
 		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
@@ -68,7 +68,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.routeConfiguration.path = "post"
 
 		// Init Checkout with vault and ID.
-		vgsCheckout = VGSCheckout(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment, configuration: checkoutConfiguration)
+		vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)
 
 		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
 
