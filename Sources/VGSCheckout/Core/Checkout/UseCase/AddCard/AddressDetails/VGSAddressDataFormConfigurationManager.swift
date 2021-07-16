@@ -33,6 +33,11 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
+		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		addressLine1Configuration.returnKeyType = .next
+
 
 		addressLine1TextField.placeholder = "Address line 1"
 
@@ -40,7 +45,12 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
 		addressLine2Configuration.type = .none
-		addressLine2Configuration.isRequiredValidOnly = true
+		addressLine2Configuration.isRequiredValidOnly = false
+		addressLine2Configuration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		addressLine1Configuration.returnKeyType = .next
+
 
 		addressLine2TextField.configuration = addressLine2Configuration
 
@@ -49,6 +59,10 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
 		cityConfiguration.isRequiredValidOnly = true
+		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		addressLine1Configuration.returnKeyType = .next
 
 		cityTextField.configuration = cityConfiguration
 
@@ -70,6 +84,10 @@ internal class VGSAddressDataFormConfigurationManager {
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "zip")
 		zipConfiguration.type = .none
 		zipConfiguration.isRequiredValidOnly = true
+		zipConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		zipConfiguration.returnKeyType = .done
 
 		zipTextField.placeholder = "ZIP CODE"
 
@@ -123,6 +141,10 @@ internal class VGSAddressDataFormConfigurationManager {
 		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "state")
 		stateConfiguration.type = .none
 		stateConfiguration.isRequiredValidOnly = true
+		stateConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		stateConfiguration.returnKeyType = .next
 
 		stateTextField.placeholder = "State"
 
