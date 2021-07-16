@@ -25,6 +25,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		case singleLineAll
 	}
 
+	/// UI theme object.
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
@@ -70,15 +71,6 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 		view.paddings = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 
 		return view
-	}()
-
-	// TODO: - move to separe block for address.
-	/// Country form item.
-	internal lazy var countryFormItemView: VGSCountryFormItemView = {
-		let componentView = VGSCountryFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
 	}()
 
 	/// Header view.
@@ -266,11 +258,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 			cardNumberFormItemView,
 			expDateFormItemView,
 			cvcFormItemView,
-			//countryFormItemView
 		]
-
-		// Test country field
-		//verticalStackView.addArrangedSubview(countryFormItemView)
 
     /// Set UI Theme
     for item in formItems {

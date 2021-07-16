@@ -41,6 +41,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		}
 	}
 
+	/// Validation behaviour.
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
@@ -51,6 +52,7 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		return cardFormView.formItems
 	}
 
+	/// Text fields.
 	var vgsTextFields: [VGSTextField] {
 		return textFiedFormItems.map({return $0.textField})
 	}
@@ -82,7 +84,6 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 		buildForm()
 	}
 
-  
 	// MARK: - Interface
 
 	internal func buildForm() {
@@ -95,23 +96,11 @@ final internal class VGSCardDataSectionManager: VGSBaseFormSectionProtocol, VGSP
 			setupCardForm(with: multiplexingConfig)
 		}
 
-//		let inputBlackTextColor: UIColor = {
-//			if #available(iOS 13.0, *) {
-//				return UIColor {(traits) -> UIColor in
-//					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-//				}
-//			} else {
-//				return .black
-//			}
-//		}()
-    
     for item in textFiedFormItems {
       item.formItemView.delegate = self
       item.textField.delegate = self
     }
 	}
-  
-  
 
 	// MARK: - Helpers
 
