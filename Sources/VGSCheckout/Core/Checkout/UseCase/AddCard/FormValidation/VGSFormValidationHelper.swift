@@ -295,10 +295,14 @@ internal class VGSFormValidationHelper {
 		return isStateValid(for: cardHolderFormItems)
 	}
 
+	/// Current form sections.
 	internal var formSections: Set<VGSFormSection> {
 		return Set(formItemsManager.formItems.map({$0.fieldType.formSection}))
 	}
 
+	/// Form view for form section.
+	/// - Parameter formSection: `VGSFormSection` object, form section type.
+	/// - Returns: `VGSFormGroupViewProtocol?` object, form view.
 	internal func formSectionView(for formSection: VGSFormSection) -> VGSFormGroupViewProtocol? {
 		for view in formItemsManager.formViews {
 			switch formSection {
