@@ -31,6 +31,7 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 		return billingAddressFormView.formItems
 	}
 
+	/// Text fields.
 	var vgsTextFields: [VGSTextField] {
 		return textFiedFormItems.map({return $0.textField})
 	}
@@ -152,17 +153,17 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
 //		updateSecurityCodeFieldIfNeeded(for: textField)
-//		formValidationHelper.updateFormViewOnEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-//		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-//		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormViewOnEndEditingTextField(billingAddressFormView, textField: textField)
 //		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
 		updateFormState()
 	}
