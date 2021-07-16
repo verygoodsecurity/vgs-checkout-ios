@@ -4,6 +4,7 @@
 
 import Foundation
 
+/// Region field validator.
 internal class VGSAddressRegionFieldValidator: VGSFormTextFieldValidationProtocol {
 
 	// MARK: - VGSFormTextFieldValidationProtocol
@@ -20,6 +21,6 @@ internal class VGSAddressRegionFieldValidator: VGSFormTextFieldValidationProtoco
 	}
 
 	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_empty_error")
+		return fieldType.emptyFieldNameError
 	}
 }

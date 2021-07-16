@@ -44,7 +44,7 @@ internal enum VGSAddCardFormFieldType {
 	case zipCode
 
 	/// Corresponding form block.
-	var formBlock: VGSAddCardFormBlock {
+	internal var formBlock: VGSAddCardFormBlock {
 		switch self {
 		case .cardholderName, .firstName, .lastName:
 			return .cardHolder
@@ -56,7 +56,7 @@ internal enum VGSAddCardFormFieldType {
 	}
 
 	/// Empty field name error.
-	var emptyFieldNameError: String {
+	internal var emptyFieldNameError: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: emptyFieldNameLocalizationKey)
 	}
 

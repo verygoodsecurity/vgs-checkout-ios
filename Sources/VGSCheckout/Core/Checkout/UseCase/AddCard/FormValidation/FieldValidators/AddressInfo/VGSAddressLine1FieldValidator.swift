@@ -4,6 +4,7 @@
 
 import Foundation
 
+/// Address line 1 field validator.
 internal class VGSAddressLine1FieldValidator: VGSFormTextFieldValidationProtocol {
 
 	// MARK: - VGSFormTextFieldValidationProtocol
@@ -20,6 +21,6 @@ internal class VGSAddressLine1FieldValidator: VGSFormTextFieldValidationProtocol
 	}
 
 	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_empty_error")
+		return fieldType.emptyFieldNameError
 	}
 }
