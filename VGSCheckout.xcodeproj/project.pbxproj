@@ -133,6 +133,11 @@
 		44985D482692D6A300A4BB42 /* VGSFormAutofocusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D472692D6A300A4BB42 /* VGSFormAutofocusManager.swift */; };
 		44985D4A2692D6D800A4BB42 /* VGSFormItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D492692D6D800A4BB42 /* VGSFormItemsManager.swift */; };
 		44985D4D2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44985D4C2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift */; };
+		44A2A37626A14FAF002B974B /* VGSAddressLine1FieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2A37526A14FAF002B974B /* VGSAddressLine1FieldValidator.swift */; };
+		44A2A37826A14FD2002B974B /* VGSAddressLine2FieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2A37726A14FD2002B974B /* VGSAddressLine2FieldValidator.swift */; };
+		44A2A37A26A15008002B974B /* VGSCityFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2A37926A15008002B974B /* VGSCityFieldValidator.swift */; };
+		44A2A37C26A15056002B974B /* VGSAddressRegionFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2A37B26A15056002B974B /* VGSAddressRegionFieldValidator.swift */; };
+		44A2A37E26A15085002B974B /* VGSZipCodeFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A2A37D26A15085002B974B /* VGSZipCodeFieldValidator.swift */; };
 		44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */; };
 		44C4C8E02664B18B00195505 /* VGSCardDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */; };
 		44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C8BF2664B18B00195505 /* VGSFormView.swift */; };
@@ -367,6 +372,11 @@
 		44985D472692D6A300A4BB42 /* VGSFormAutofocusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormAutofocusManager.swift; sourceTree = "<group>"; };
 		44985D492692D6D800A4BB42 /* VGSFormItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormItemsManager.swift; sourceTree = "<group>"; };
 		44985D4C2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormItemViewValidationManager.swift; sourceTree = "<group>"; };
+		44A2A37526A14FAF002B974B /* VGSAddressLine1FieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLine1FieldValidator.swift; sourceTree = "<group>"; };
+		44A2A37726A14FD2002B974B /* VGSAddressLine2FieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLine2FieldValidator.swift; sourceTree = "<group>"; };
+		44A2A37926A15008002B974B /* VGSCityFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCityFieldValidator.swift; sourceTree = "<group>"; };
+		44A2A37B26A15056002B974B /* VGSAddressRegionFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressRegionFieldValidator.swift; sourceTree = "<group>"; };
+		44A2A37D26A15085002B974B /* VGSZipCodeFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSZipCodeFieldValidator.swift; sourceTree = "<group>"; };
 		44C4C8BC2664B18A00195505 /* VGSCheckoutHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutHeaderView.swift; sourceTree = "<group>"; };
 		44C4C8BE2664B18A00195505 /* VGSCardDetailsFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardDetailsFormView.swift; sourceTree = "<group>"; };
 		44C4C8BF2664B18B00195505 /* VGSFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSFormView.swift; sourceTree = "<group>"; };
@@ -1043,6 +1053,29 @@
 			path = FormItemViewValidationManager;
 			sourceTree = "<group>";
 		};
+		44A2A37326A14F62002B974B /* CardNumber */ = {
+			isa = PBXGroup;
+			children = (
+				44D5CF20268C3C7E00312108 /* VGSCardNumberFieldValidator.swift */,
+				44D5CF22268C3E2800312108 /* VGSExpDateFieldValidator.swift */,
+				44D5CF24268C3FB900312108 /* VGSCardCVCFieldValidator.swift */,
+				44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */,
+			);
+			path = CardNumber;
+			sourceTree = "<group>";
+		};
+		44A2A37426A14F73002B974B /* AddressInfo */ = {
+			isa = PBXGroup;
+			children = (
+				44A2A37526A14FAF002B974B /* VGSAddressLine1FieldValidator.swift */,
+				44A2A37726A14FD2002B974B /* VGSAddressLine2FieldValidator.swift */,
+				44A2A37926A15008002B974B /* VGSCityFieldValidator.swift */,
+				44A2A37B26A15056002B974B /* VGSAddressRegionFieldValidator.swift */,
+				44A2A37D26A15085002B974B /* VGSZipCodeFieldValidator.swift */,
+			);
+			path = AddressInfo;
+			sourceTree = "<group>";
+		};
 		44C4C8B92664B18A00195505 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1338,11 +1371,9 @@
 			isa = PBXGroup;
 			children = (
 				44D5CF28268C48D900312108 /* VGSFormFieldsValidatorFactory.swift */,
-				44D5CF20268C3C7E00312108 /* VGSCardNumberFieldValidator.swift */,
-				44D5CF22268C3E2800312108 /* VGSExpDateFieldValidator.swift */,
-				44D5CF24268C3FB900312108 /* VGSCardCVCFieldValidator.swift */,
-				44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */,
 				44D5CF2A268C495500312108 /* VGSFormTextFieldValidationProtocol.swift */,
+				44A2A37326A14F62002B974B /* CardNumber */,
+				44A2A37426A14F73002B974B /* AddressInfo */,
 			);
 			path = FieldValidators;
 			sourceTree = "<group>";
@@ -1935,6 +1966,7 @@
 				44C4C92E2665F9F800195505 /* VGSAddCardFormViewBuilder.swift in Sources */,
 				44E10AC2269C07EF001F0D44 /* CollectJSONArray+Extensions.swift in Sources */,
 				4405DC5C26844B30004A83AD /* VGSTextField.swift in Sources */,
+				44A2A37E26A15085002B974B /* VGSZipCodeFieldValidator.swift in Sources */,
 				44C4C8EB2664B18B00195505 /* VGSCVCFormItemView.swift in Sources */,
 				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
 				4405DC9126847247004A83AD /* VGSCollectPrintingLogger.swift in Sources */,
@@ -1956,6 +1988,7 @@
 				44985D4D2692F03C00A4BB42 /* VGSFormItemViewValidationManager.swift in Sources */,
 				4405DC6226844B30004A83AD /* VGSCVCTextField.swift in Sources */,
 				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
+				44A2A37826A14FD2002B974B /* VGSAddressLine2FieldValidator.swift in Sources */,
 				4405DCA326847247004A83AD /* VGSDeepMergeUtils.swift in Sources */,
 				4405DC2726844AD8004A83AD /* VGSConfiguration.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
@@ -2011,6 +2044,7 @@
 				4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */,
 				44C4C92C2665F8ED00195505 /* VGSAddCardUseCaseManager.swift in Sources */,
 				4405DC6F26844B30004A83AD /* VGSValidationError.swift in Sources */,
+				44A2A37626A14FAF002B974B /* VGSAddressLine1FieldValidator.swift in Sources */,
 				44955C25266DE20500435FC6 /* VGSHeaderBarView.swift in Sources */,
 				44E10AD8269F02D3001F0D44 /* VGSCheckoutDefaultUITheme.swift in Sources */,
 				4405DC2126844AD8004A83AD /* VGSResponse.swift in Sources */,
@@ -2023,6 +2057,7 @@
 				4405DC1B26844AD8004A83AD /* VGSCollect+fieldNameMapping.swift in Sources */,
 				4405DC6D26844B30004A83AD /* VGSValidationRule.swift in Sources */,
 				44D520D926772937005AB588 /* VGSAddCardAPIWorkerFactory.swift in Sources */,
+				44A2A37A26A15008002B974B /* VGSCityFieldValidator.swift in Sources */,
 				4405DC1626844AD8004A83AD /* Enums.swift in Sources */,
 				44D5CF2B268C495500312108 /* VGSFormTextFieldValidationProtocol.swift in Sources */,
 				4405DC6726844B30004A83AD /* VGSValidationRulePaymentCard.swift in Sources */,
@@ -2033,6 +2068,7 @@
 				44C4C8F12664B18B00195505 /* VGSFormHintView.swift in Sources */,
 				44EC950226690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift in Sources */,
 				44C4C8ED2664B18B00195505 /* VGSCardNumberFormItemView.swift in Sources */,
+				44A2A37C26A15056002B974B /* VGSAddressRegionFieldValidator.swift in Sources */,
 				44E10ADF26A020F7001F0D44 /* VGSTextFieldFormItemProtocol.swift in Sources */,
 				44C4C92A26651DCD00195505 /* VGSCardDataSectionManager.swift in Sources */,
 				4405DCA426847247004A83AD /* VGSFieldNameSubscriptType.swift in Sources */,

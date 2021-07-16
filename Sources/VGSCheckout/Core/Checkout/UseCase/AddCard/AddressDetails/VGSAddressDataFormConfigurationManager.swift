@@ -47,7 +47,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2Configuration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+			VGSValidationRuleLength(min: 0, max: 64, error: VGSValidationErrorType.length.rawValue)
 		])
 		addressLine1Configuration.returnKeyType = .next
 
@@ -55,6 +55,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine2TextField.configuration = addressLine2Configuration
 
 		addressLine2TextField.placeholder = "Address line 2 (Optional)"
+		addressFormView.addressLine2FormItemView.formItemView.hintLabel.text = "Address line 2 (Optional)"
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
