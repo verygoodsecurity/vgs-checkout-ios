@@ -75,6 +75,14 @@ internal enum VGSAddCardFormFieldType {
 			return "vgs_checkout_card_expiration_date_empty_error"
 		case .cvc:
 			return "vgs_checkout_card_verification_code_invalid_error"
+		case .addressLine1:
+			return "vgs_checkout_address_info_line1_empty_error"
+		case .city:
+			return "vgs_checkout_address_info_city_empty_error"
+		case .state:
+			return "vgs_checkout_address_info_region_empty_error"
+		case .zipCode:
+			return "vgs_checkout_address_info_zipcode_empty_error"
 		default:
 			return "Field is empty"
 		}
