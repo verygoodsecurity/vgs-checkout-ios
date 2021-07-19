@@ -262,10 +262,7 @@ internal class VGSCardDetailsFormView: UIView, VGSFormGroupViewProtocol {
 
     /// Set UI Theme
     for item in formItems {
-      /// Text Field UI
-      item.textField.textColor = uiTheme.textFieldTextColor
-      item.textField.font = uiTheme.textFieldTextFont
-      item.textField.adjustsFontForContentSizeCategory = true
+			item.updateStyle(with: uiTheme)
     }
     
 		formItems.first?.textField.becomeFirstResponder()

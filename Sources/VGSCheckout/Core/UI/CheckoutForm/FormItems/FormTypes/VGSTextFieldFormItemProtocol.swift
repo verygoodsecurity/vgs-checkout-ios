@@ -29,6 +29,16 @@ extension VGSTextFieldFormItemProtocol {
 			formItemView.hintComponentView.accessory = .none
 		}
 	}
+
+	/// Update styles with ui theme.
+	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
+	func updateStyle(with uiTheme: VGSCheckoutThemeProtocol) {
+		textField.textColor = uiTheme.textFieldTextColor
+		textField.font = uiTheme.textFieldTextFont
+		textField.adjustsFontForContentSizeCategory = true
+		formItemView.hintLabel.textColor = uiTheme.textFieldHintTextColor
+		formItemView.hintLabel.font = uiTheme.textFieldHintTextFont
+	}
 }
 
 internal enum VGSCheckoutFormValidationState {

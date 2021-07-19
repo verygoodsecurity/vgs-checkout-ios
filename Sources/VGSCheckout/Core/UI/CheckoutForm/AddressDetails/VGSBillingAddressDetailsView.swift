@@ -233,11 +233,9 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 		// Setup insets and UI Theme.
 		formItems.forEach { formItem in
+			formItem.updateStyle(with: uiTheme)
 			formItem.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 			formItem.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
-			formItem.textField.textColor = uiTheme.textFieldTextColor
-			formItem.textField.font = uiTheme.textFieldTextFont
-			formItem.textField.adjustsFontForContentSizeCategory = true
 		}
 	}
 }
