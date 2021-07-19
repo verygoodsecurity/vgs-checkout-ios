@@ -154,29 +154,21 @@ internal class VGSCardDataFormConfigurationManager {
 		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 		cvcCardNum.tintColor = .lightGray
 
-		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
+		guard let cardHolderName = textFiedFormItems.first(where: {$0.fieldType == .cardholderName}) else {
 			assertionFailure("Invalid multiplexing setup!")
 			return
 		}
 
-		let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.first_name")
-		firstNameConfiguration.type = .cardHolderName
-		firstNameConfiguration.keyboardType = .namePhonePad
-		firstNameConfiguration.returnKeyType = .next
-		/// Required to be not empty
+		cardHolderName.textField.textAlignment = .natural
+		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.cardholder")
+		holderConfiguration.type = .cardHolderName
+		holderConfiguration.type = .cardHolderName
+		holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		holderConfiguration.keyboardType = .namePhonePad
+		holderConfiguration.returnKeyType = .next
 
-		cardHolderFirstName.textAlignment = .natural
-		cardHolderFirstName.configuration = firstNameConfiguration
-		cardHolderFirstName.placeholder = "First Name"
-
-		let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.last_name")
-		lastNameConfiguration.type = .cardHolderName
-		lastNameConfiguration.keyboardType = .namePhonePad
-		lastNameConfiguration.returnKeyType = .next
-		/// Required to be not empty
-
-		cardHolderLastName.textAlignment = .natural
-		cardHolderLastName.configuration = lastNameConfiguration
-		cardHolderLastName.placeholder = "Last Name"
+		cardHolderName.textField.configuration = holderConfiguration
 	}
 }
