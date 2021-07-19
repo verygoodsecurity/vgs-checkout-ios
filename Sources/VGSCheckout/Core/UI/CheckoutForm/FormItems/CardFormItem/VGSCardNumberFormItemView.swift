@@ -1,5 +1,5 @@
 //
-//  VGSCardNumberFormItemView.swift
+//  VGSCardNumberFieldView.swift
 //  VGSCheckoutSDK
 //
 
@@ -8,13 +8,13 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .cardNumber
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cardTextField
@@ -48,11 +48,11 @@ internal class VGSCardNumberFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
-		formItemView.stackView.addArrangedSubview(cardTextField)
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
+		placeholderView.stackView.addArrangedSubview(cardTextField)
 	}
 }

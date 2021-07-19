@@ -1,11 +1,11 @@
 //
-//  VGSAddCardFormBlock.swift
+//  VGSAddCardSectionBlock.swift
 //  VGSCheckout
 
 import Foundation
 
 /// Defines UI form blocks.
-internal enum VGSAddCardFormBlock {
+internal enum VGSAddCardSectionBlock {
 
 	/// Card holder.
 	case cardHolder

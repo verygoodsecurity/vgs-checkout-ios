@@ -8,13 +8,13 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .cvc
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cvcTextField
@@ -47,11 +47,11 @@ internal class VGSCVCFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
-		formItemView.stackView.addArrangedSubview(cvcTextField)
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
+		placeholderView.stackView.addArrangedSubview(cvcTextField)
 	}
 }

@@ -11,13 +11,13 @@ import UIKit
 /// Encapsulates address form setup with collect.
 internal class VGSAddressDataFormConfigurationManager {
 
-	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsView) {
+	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
-		let countryTextField = addressFormView.countryFormItemView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
-		let cityTextField = addressFormView.cityItemFormView.cityTextField
-		let statePickerTextField = addressFormView.statePickerFormItemView.statePickerTextField
-		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
+		let countryTextField = addressFormView.countryFieldView.countryTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let cityTextField = addressFormView.cityFieldView.cityTextField
+		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
+		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -83,13 +83,13 @@ internal class VGSAddressDataFormConfigurationManager {
 		zipTextField.configuration = zipConfiguration
 	}
 
-	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsView) {
+	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
-		let countryTextField = addressFormView.countryFormItemView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
-		let cityTextField = addressFormView.cityItemFormView.cityTextField
-		let stateTextField = addressFormView.statePickerFormItemView.statePickerTextField
-		let zipTextField = addressFormView.zipFormItemView.zipCodeTextField
+		let countryTextField = addressFormView.countryFieldView.countryTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let cityTextField = addressFormView.cityFieldView.cityTextField
+		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
+		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
 
 		let countryConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "country")
 		countryConfiguration.type = .none
