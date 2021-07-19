@@ -27,3 +27,29 @@ internal extension UIColor {
 				 self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
 		 }
 }
+
+// This code is taken from https://github.com/noahsark769/ColorCompatibility
+// Thanks to Noah Gilmore.
+// Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
+
+public extension UIColor {
+
+	/// System background color (white).
+	static var vgsSystemBackground: UIColor {
+			if #available(iOS 13, *) {
+					return .systemBackground
+			}
+			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+	}
+
+	/// Input text color (black).
+	static var vgsInputBlackTextColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor {(traits) -> UIColor in
+				return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+			}
+		} else {
+			return .black
+		}
+	}
+}
