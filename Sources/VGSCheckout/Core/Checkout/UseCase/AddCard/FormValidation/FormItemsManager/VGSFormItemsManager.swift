@@ -11,22 +11,22 @@ import UIKit
 internal class VGSFormItemsManager {
 
 	/// Form items.
-	private (set) internal var formItems: [VGSTextFieldFormItemProtocol]
+	private (set) internal var formItems: [VGSTextFieldViewProtocol]
 
 	/// Form section views.
-	private (set) internal var formViews: [VGSFormGroupViewProtocol] = []
+	private (set) internal var formViews: [VGSFormSectionViewProtocol] = []
 
 	/// Initializer.
 	/// - Parameters:
 	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
-	internal init(formItems: [VGSTextFieldFormItemProtocol]) {
+	internal init(formItems: [VGSTextFieldViewProtocol]) {
 		self.formItems = formItems
 	}
 
 	/// Form item containing current textField.
 	/// - Parameter textField: `VGSTextField` object,
 	/// - Returns: `VGSTextFieldFormItemProtocol?` object.
-	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldFormItemProtocol? {
+	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldViewProtocol? {
 		return formItems.first(where: {$0.textField === textField})
 	}
 
@@ -42,13 +42,13 @@ internal class VGSFormItemsManager {
 
 	/// Append form items.
 	/// - Parameter items: `[VGSTextFieldFormItemProtocol]` object, array of form items.
-	internal func appendFormItems(_ items: [VGSTextFieldFormItemProtocol]) {
+	internal func appendFormItems(_ items: [VGSTextFieldViewProtocol]) {
 		formItems = formItems + items
 	}
 
 	/// Append form section views.
 	/// - Parameter views: `[VGSTextFieldFormItemProtocol]` object, array of form section views.
-	internal func appendFormSectionViews(_ views: [VGSFormGroupViewProtocol]) {
+	internal func appendFormSectionViews(_ views: [VGSFormSectionViewProtocol]) {
 		formViews = formViews + views
 	}
 }

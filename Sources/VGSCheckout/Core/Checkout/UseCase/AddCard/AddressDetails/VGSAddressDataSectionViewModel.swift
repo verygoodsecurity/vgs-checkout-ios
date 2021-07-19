@@ -24,10 +24,10 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
-	internal let billingAddressFormView: VGSBillingAddressDetailsView
+	internal let billingAddressFormView: VGSBillingAddressDetailsSectionView
 
 	/// Text field form items in add card section.
-	var textFiedFormItems: [VGSTextFieldFormItemProtocol] {
+	var textFiedFormItems: [VGSTextFieldViewProtocol] {
 		return billingAddressFormView.formItems
 	}
 
@@ -54,7 +54,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-    self.billingAddressFormView = VGSBillingAddressDetailsView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
+    self.billingAddressFormView = VGSBillingAddressDetailsSectionView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
 		self.formValidationHelper = formValidationHelper
 		self.autoFocusManager = autoFocusManager
 
@@ -91,7 +91,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		}
 
 		for item in textFiedFormItems {
-			item.formItemView.delegate = self
+			item.fieldView.delegate = self
 		}
 
 		// Set picker fields delegate.
@@ -111,7 +111,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {
 		for item in textFiedFormItems {
-			if item.formItemView === formView {
+			if item.fieldView === formView {
 				item.textField.becomeFirstResponder()
 			}
 		}

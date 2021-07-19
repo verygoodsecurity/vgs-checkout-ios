@@ -11,7 +11,7 @@ import UIKit
 internal final class VGSFormItemViewValidationManager {
 
 	/// Handle CardNumber field state during editing.
-	internal func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+	internal func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldViewProtocol) {
 
 		let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
 		// NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
@@ -28,7 +28,7 @@ internal final class VGSFormItemViewValidationManager {
 	}
 
 	/// Handle Any field state during editing.
-	internal func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+	internal func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldViewProtocol) {
 		let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
 		let isValidState = field.state.isValid
 
@@ -43,7 +43,7 @@ internal final class VGSFormItemViewValidationManager {
 	}
 
 	/// Handle Any field state after it finish editing.
-	internal func updateAnyFormItemOnEndEditTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+	internal func updateAnyFormItemOnEndEditTextField(_ field: VGSTextField, formItem: VGSTextFieldViewProtocol) {
 		let state = field.state
 
 		switch (state.isDirty, state.isValid) {
@@ -60,7 +60,7 @@ internal final class VGSFormItemViewValidationManager {
 	/// Check if input has required length.
 	/// - Parameter formItem: `VGSTextFieldFormItemProtocol` object, form item.
 	/// - Returns: `Bool` object, `true` if item has valid length.
-	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldFormItemProtocol) -> Bool {
+	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldViewProtocol) -> Bool {
 
 		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: formItem.fieldType)
 		return fieldValidator.isTextFieldInputComplete(formItem.textField)

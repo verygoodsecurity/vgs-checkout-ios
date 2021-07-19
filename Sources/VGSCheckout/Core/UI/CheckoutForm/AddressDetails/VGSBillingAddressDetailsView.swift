@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for address details.
-internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
+internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 	/// UI Theme.
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldFormItemProtocol] = []
+	internal var formItems: [VGSTextFieldViewProtocol] = []
   
 	/// Displays error messages for invalid adrdress details.
   internal let errorLabel: UILabel
@@ -187,13 +187,13 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		// Update form fields.
 		formItems.forEach { formItem in
 			if #available(iOS 13.0, *) {
-				formItem.formItemView.backgroundColor = .systemGroupedBackground
+				formItem.fieldView.backgroundColor = .systemGroupedBackground
 				formItem.textField.textColor = UIColor.placeholderText
-				formItem.formItemView.hintComponentView.label.textColor = UIColor.placeholderText
+				formItem.fieldView.hintComponentView.label.textColor = UIColor.placeholderText
 			} else {
-				formItem.formItemView.backgroundColor = .white
+				formItem.fieldView.backgroundColor = .white
 				formItem.textField.textColor = .gray
-				formItem.formItemView.hintComponentView.label.textColor = .gray
+				formItem.fieldView.hintComponentView.label.textColor = .gray
 			}
 		}
 	}
@@ -234,8 +234,8 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		// Setup insets and UI Theme.
 		formItems.forEach { formItem in
 			formItem.updateStyle(with: uiTheme)
-			formItem.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			formItem.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+			formItem.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+			formItem.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}
 }

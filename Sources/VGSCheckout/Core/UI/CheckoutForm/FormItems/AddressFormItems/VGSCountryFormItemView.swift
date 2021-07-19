@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for country form.
-internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCountryFormItemView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .country
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return countryTextField
@@ -45,23 +45,23 @@ internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(fieldView)
+		fieldView.translatesAutoresizingMaskIntoConstraints = false
+		fieldView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintLabel.text = "Country"
-		formItemView.stackView.addArrangedSubview(countryTextField)
+		fieldView.hintLabel.text = "Country"
+		fieldView.stackView.addArrangedSubview(countryTextField)
 	}
 }
 
 /// Holds UI for state picker form.
-internal class VGSStatePickerFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSStatePickerFormItemView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .state
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return statePickerTextField
@@ -92,11 +92,11 @@ internal class VGSStatePickerFormItemView: UIView, VGSTextFieldFormItemProtocol 
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(fieldView)
+		fieldView.translatesAutoresizingMaskIntoConstraints = false
+		fieldView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintLabel.text = "State"
-		formItemView.stackView.addArrangedSubview(statePickerTextField)
+		fieldView.hintLabel.text = "State"
+		fieldView.stackView.addArrangedSubview(statePickerTextField)
 	}
 }

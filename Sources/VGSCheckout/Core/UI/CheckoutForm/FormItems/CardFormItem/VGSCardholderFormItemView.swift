@@ -8,11 +8,11 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSCardholderFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCardholderFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cardHolderName
@@ -47,11 +47,11 @@ internal class VGSCardholderFormItemView: UIView, VGSTextFieldFormItemProtocol {
 
 	/// Setup UI.
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(fieldView)
+		fieldView.translatesAutoresizingMaskIntoConstraints = false
+		fieldView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
-		formItemView.stackView.addArrangedSubview(cardHolderName)
+		fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
+		fieldView.stackView.addArrangedSubview(cardHolderName)
 	}
 }

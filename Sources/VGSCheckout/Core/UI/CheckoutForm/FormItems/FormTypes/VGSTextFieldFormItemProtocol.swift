@@ -4,8 +4,8 @@
 
 import Foundation
 
-internal protocol VGSTextFieldFormItemProtocol: AnyObject {
-	var formItemView: VGSPlaceholderFormItemView {get}
+internal protocol VGSTextFieldViewProtocol: AnyObject {
+	var fieldView: VGSPlaceholderFormItemView {get}
 	var textField: VGSTextField {get}
 	var fieldType: VGSAddCardFormFieldType {get}
 
@@ -13,7 +13,7 @@ internal protocol VGSTextFieldFormItemProtocol: AnyObject {
 }
 
 /// TODO: Move to base class?
-extension VGSTextFieldFormItemProtocol {
+extension VGSTextFieldViewProtocol {
 
 	// MARK: - Interface
 
@@ -22,11 +22,11 @@ extension VGSTextFieldFormItemProtocol {
 	func updateUI(for validationState: VGSCheckoutFormValidationState) {
 		switch validationState {
 		case .focused, .inactive, .valid:
-			formItemView.hintComponentView.accessory = .none
+			fieldView.hintComponentView.accessory = .none
 		case .invalid:
-			formItemView.hintComponentView.accessory = .invalid
+			fieldView.hintComponentView.accessory = .invalid
 		case .disabled:
-			formItemView.hintComponentView.accessory = .none
+			fieldView.hintComponentView.accessory = .none
 		}
 	}
 
@@ -36,8 +36,8 @@ extension VGSTextFieldFormItemProtocol {
 		textField.textColor = uiTheme.textFieldTextColor
 		textField.font = uiTheme.textFieldTextFont
 		textField.adjustsFontForContentSizeCategory = true
-		formItemView.hintLabel.textColor = uiTheme.textFieldHintTextColor
-		formItemView.hintLabel.font = uiTheme.textFieldHintTextFont
+		fieldView.hintLabel.textColor = uiTheme.textFieldHintTextColor
+		fieldView.hintLabel.font = uiTheme.textFieldHintTextFont
 	}
 }
 

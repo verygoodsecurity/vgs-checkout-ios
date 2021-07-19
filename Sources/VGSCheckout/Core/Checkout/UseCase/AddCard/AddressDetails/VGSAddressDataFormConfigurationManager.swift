@@ -11,7 +11,7 @@ import UIKit
 /// Encapsulates address form setup with collect.
 internal class VGSAddressDataFormConfigurationManager {
 
-	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsView) {
+	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFormItemView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField
@@ -83,7 +83,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		zipTextField.configuration = zipConfiguration
 	}
 
-	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsView) {
+	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFormItemView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FormItemView.addressLineTextField

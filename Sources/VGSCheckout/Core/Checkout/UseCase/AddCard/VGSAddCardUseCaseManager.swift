@@ -38,7 +38,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.isUserInteractionEnabled = false
 				addCardSectionFormView.headerBarView.closeButton?.isEnabled = false
 				addCardSectionFormView.payButton.status = .processing
-				addCardSectionFormView.cardDetailsView.updateUIForProcessingState()
+				addCardSectionFormView.cardDetailsSectionView.updateUIForProcessingState()
 
 				apiWorker.sendData {[weak self] requestResult in
 					guard let strongSelf = self else {return}
@@ -48,7 +48,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			}
 		}
 	}
-
+ 
 	/// Payment instrument.
 	internal let paymentInstrument: VGSPaymentInstrument
 
@@ -59,7 +59,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	internal let addressDataSectionViewModel: VGSAddressDataSectionViewModel
 
 	/// Add card main view.
-	internal let addCardSectionFormView: VGSAddCardSectionFormView
+	internal let addCardSectionFormView: VGSAddCardFormView
 
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
@@ -87,7 +87,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
-		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardFormView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardFormView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
 
 		formValidationHelper.formItemsManager.appendFormItems(self.cardDataSectionViewModel.cardFormView.formItems)

@@ -11,7 +11,7 @@ import UIKit
 internal class VGSCardHolderDetailsView: UIView {
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldFormItemProtocol] = []
+	internal var formItems: [VGSTextFieldViewProtocol] = []
 
 	/// Defines field distribution in card details section.
 	internal enum FieldsDistribution {
@@ -80,13 +80,13 @@ internal class VGSCardHolderDetailsView: UIView {
 	}
 
 	private func setupSingleFieldName() {
-		let itemView = VGSCardholderFormItemView(frame: .zero)
+		let itemView = VGSCardholderFieldView(frame: .zero)
 		cardHolderNameStackView.addArrangedSubview(itemView)
-		itemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		itemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+		itemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		itemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		itemView.cardHolderName.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
-		itemView.formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
+		itemView.fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
 
 		formItems = [itemView]
 	}
@@ -94,8 +94,8 @@ internal class VGSCardHolderDetailsView: UIView {
 	/// Setup splitted card holder fields.
 	private func setupSplittedFieldName() {
 
-		let firstNameItemView = VGSCardholderFormItemView(frame: .zero)
-		let lastNameItemView = VGSCardholderFormItemView(frame: .zero)
+		let firstNameItemView = VGSCardholderFieldView(frame: .zero)
+		let lastNameItemView = VGSCardholderFieldView(frame: .zero)
 
 		firstNameItemView.cardHolderName.placeholder = "John"
 		lastNameItemView.cardHolderName.placeholder = "Doe"
@@ -112,14 +112,14 @@ internal class VGSCardHolderDetailsView: UIView {
 
 		formItems = [firstNameItemView, lastNameItemView]
 
-		firstNameItemView.formItemView.hintComponentView.label.text = "First Name"
-		lastNameItemView.formItemView.hintComponentView.label.text = "Last Name"
+		firstNameItemView.fieldView.hintComponentView.label.text = "First Name"
+		lastNameItemView.fieldView.hintComponentView.label.text = "Last Name"
 
-		firstNameItemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		firstNameItemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+		firstNameItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		firstNameItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		lastNameItemView.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		lastNameItemView.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+		lastNameItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		lastNameItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		cardHolderNameStackView.addArrangedSubview(firstNameItemView)
 		cardHolderNameStackView.addArrangedSubview(lastNameItemView)

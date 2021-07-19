@@ -28,7 +28,7 @@ internal class VGSFormValidationHelper {
 	/// - Parameters:
 	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
 	///   - validationBehaviour: `VGSFormValidationBehaviour` object, validation flow.
-	internal init(formItems: [VGSTextFieldFormItemProtocol], validationBehaviour: VGSFormValidationBehaviour) {
+	internal init(formItems: [VGSTextFieldViewProtocol], validationBehaviour: VGSFormValidationBehaviour) {
 		self.validationBehaviour = validationBehaviour
 		self.formItemsManager = VGSFormItemsManager(formItems: formItems)
 	}
@@ -98,7 +98,7 @@ internal class VGSFormValidationHelper {
 	/// - Parameters:
 	///   - view: `VGSFormGroupViewProtocol` object, form view.
 	///   - formError: `String?` object, form error.
-  private func updateFormViewWithError(_ view: VGSFormGroupViewProtocol, with formError: String?) {
+  private func updateFormViewWithError(_ view: VGSFormSectionViewProtocol, with formError: String?) {
     /// Update Form with Error Message
     if let error = formError {
       view.errorLabel.text = error
@@ -157,7 +157,7 @@ internal class VGSFormValidationHelper {
 	}
   
   /// Array of `VGSTextFieldFormItemProtocol` items with validation error.
-	internal var fieldsWithvalidationErrors: [VGSTextFieldFormItemProtocol] {
+	internal var fieldsWithvalidationErrors: [VGSTextFieldViewProtocol] {
     let invalidFields = formItemsManager.formItems.filter { formItem in
       return !formItem.textField.state.isValid && formItem.textField.state.isDirty
     }
@@ -165,7 +165,7 @@ internal class VGSFormValidationHelper {
   }
 
 	/// Array of `VGSTextFieldFormItemProtocol` items with validation error.
-	internal func fieldsWithvalidationErrors(for formSection: VGSFormSection) -> [VGSTextFieldFormItemProtocol] {
+	internal func fieldsWithvalidationErrors(for formSection: VGSFormSection) -> [VGSTextFieldViewProtocol] {
 		let formSectionItems = formItemsManager.formItems.filter { formItem in
 			return formItem.fieldType.formSection == formSection
 		}
@@ -261,7 +261,7 @@ internal class VGSFormValidationHelper {
 	/// Check if input has required length.
 	/// - Parameter formItem: `VGSTextFieldFormItemProtocol` object, form item.
 	/// - Returns: `Bool` object, `true` if item has valid length.
-	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldFormItemProtocol) -> Bool {
+	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldViewProtocol) -> Bool {
 
 		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: formItem.fieldType)
 		return fieldValidator.isTextFieldInputComplete(formItem.textField)
@@ -270,7 +270,7 @@ internal class VGSFormValidationHelper {
 	/// Get state from form items array.
 	/// - Parameter formItems: `[VGSTextFieldFormItemProtocol]` object, `VGSTextFieldFormItemProtocol` items.
 	/// - Returns: `Bool` object, `true` if form is valid.
-	internal func isStateValid(for formItems: [VGSTextFieldFormItemProtocol]) -> Bool {
+	internal func isStateValid(for formItems: [VGSTextFieldViewProtocol]) -> Bool {
 		var isValid = true
 		formItems.forEach { formItem in
 			let state = formItem.textField.state
@@ -303,15 +303,15 @@ internal class VGSFormValidationHelper {
 	/// Form view for form section.
 	/// - Parameter formSection: `VGSFormSection` object, form section type.
 	/// - Returns: `VGSFormGroupViewProtocol?` object, form view.
-	internal func formSectionView(for formSection: VGSFormSection) -> VGSFormGroupViewProtocol? {
+	internal func formSectionView(for formSection: VGSFormSection) -> VGSFormSectionViewProtocol? {
 		for view in formItemsManager.formViews {
 			switch formSection {
 			case .card:
-				if view is VGSCardDetailsFormView {
+				if view is VGSCardDetailsSectionView {
 					return view
 				}
 			case .billingAddress:
-				if view is VGSBillingAddressDetailsView {
+				if view is VGSBillingAddressDetailsSectionView {
 					return view
 				}
 			}

@@ -45,10 +45,10 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
-	internal let cardFormView: VGSCardDetailsFormView
+	internal let cardFormView: VGSCardDetailsSectionView
 
 	/// Text field form items in add card section.
-	var textFiedFormItems: [VGSTextFieldFormItemProtocol] {
+	var textFiedFormItems: [VGSTextFieldViewProtocol] {
 		return cardFormView.formItems
 	}
 
@@ -75,7 +75,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-    self.cardFormView = VGSCardDetailsFormView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
+    self.cardFormView = VGSCardDetailsSectionView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
 		self.formValidationHelper = formValidationHelper
 		self.autoFocusManager = autoFocusManager
 //		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
@@ -97,7 +97,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 		}
 
     for item in textFiedFormItems {
-      item.formItemView.delegate = self
+      item.fieldView.delegate = self
       item.textField.delegate = self
     }
 	}
@@ -114,7 +114,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 	func didTap(in formView: VGSPlaceholderFormItemView) {
 		for item in textFiedFormItems {
-			if item.formItemView === formView {
+			if item.fieldView === formView {
 				item.textField.becomeFirstResponder()
 			}
 		}

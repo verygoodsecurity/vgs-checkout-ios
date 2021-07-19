@@ -8,11 +8,11 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
 
 	var textField: VGSTextField {
 		return expDateTextField
@@ -46,11 +46,11 @@ internal class VGSExpirationDateFormItemView: UIView, VGSTextFieldFormItemProtoc
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(fieldView)
+		fieldView.translatesAutoresizingMaskIntoConstraints = false
+		fieldView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
-		formItemView.stackView.addArrangedSubview(expDateTextField)
+		fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
+		fieldView.stackView.addArrangedSubview(expDateTextField)
 	}
 }
