@@ -55,6 +55,8 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 // Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
 
 public extension UIColor {
+
+	/// System background color (white).
 	static var vgsSystemBackground: UIColor {
 			if #available(iOS 13, *) {
 					return .systemBackground
@@ -62,6 +64,7 @@ public extension UIColor {
 			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 	}
 
+	/// Input text color (black).
 	static var vgsInputBlackTextColor: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor {(traits) -> UIColor in
