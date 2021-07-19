@@ -66,6 +66,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// API worker, sends data with current payment instrument.
 	internal let apiWorker: VGSAddCreditCardAPIWorkerProtocol
+
+	/// UI Theme.
+	internal let uiTheme: VGSCheckoutThemeProtocol
   
 	// MARK: - Initialization
 
@@ -75,6 +78,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
+		self.uiTheme = uiTheme
 
 		let formValidationHelper = VGSFormValidationHelper(formItems: [], validationBehaviour: .onFocus)
 		let autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: []))
@@ -105,6 +109,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		addCardSectionFormView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardDataSectionViewModel.delegate = self
 		addressDataSectionViewModel.delegate = self
+
+		viewController.view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 
 		return viewController
 	}
