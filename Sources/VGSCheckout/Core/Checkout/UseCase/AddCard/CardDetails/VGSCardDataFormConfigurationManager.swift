@@ -160,7 +160,7 @@ internal class VGSCardDataFormConfigurationManager {
 		}
 
 		cardHolderName.textField.textAlignment = .natural
-		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.cardholder")
+		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.name")
 		holderConfiguration.type = .cardHolderName
 		holderConfiguration.type = .cardHolderName
 		holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
