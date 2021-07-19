@@ -14,7 +14,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
 
 	internal let fieldType: VGSAddCardFormFieldType = .cvc
 
-	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cvcTextField
@@ -47,11 +47,11 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(fieldView)
-		fieldView.translatesAutoresizingMaskIntoConstraints = false
-		fieldView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
-		fieldView.stackView.addArrangedSubview(cvcTextField)
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
+		placeholderView.stackView.addArrangedSubview(cvcTextField)
 	}
 }

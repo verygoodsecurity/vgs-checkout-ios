@@ -12,7 +12,7 @@ import UIKit
 internal protocol VGSFormSectionViewProtocol: UIView {
 	var errorLabel: UILabel {get}
   var uiTheme: VGSCheckoutThemeProtocol {get}
-	func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool)
+	func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool)
 }
 
 /// Holds UI for card details.
@@ -29,7 +29,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldViewProtocol] = []
+	internal var fieldViews: [VGSTextFieldViewProtocol] = []
 
 	/// Displays error messages for invalid card details.
   internal let errorLabel: UILabel
@@ -38,7 +38,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
 
 	/// Card number view.
-	internal lazy var cardNumberFormItemView: VGSCardNumberFieldView = {
+	internal lazy var cardNumberFieldView: VGSCardNumberFieldView = {
 		let componentView = VGSCardNumberFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 		
@@ -46,7 +46,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}()
 
 	/// Exp date view.
-	internal lazy var expDateFormItemView: VGSExpirationDateFieldView = {
+	internal lazy var expDateFieldView: VGSExpirationDateFieldView = {
 		let componentView = VGSExpirationDateFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -54,7 +54,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}()
 
 	/// CVC view.
-	internal lazy var cvcFormItemView: VGSCVCFieldView = {
+	internal lazy var cvcFieldView: VGSCVCFieldView = {
 		let componentView = VGSCVCFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -153,14 +153,14 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	// MARK: - Interface
   
   /// Update Array of form blocks with validation state.
-  internal func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool) {
-    formBlocks.forEach { formBlock in
-      updateFormBlock(formBlock, isValid: isValid)
+  internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
+    sectionBlocks.forEach { sectionBlock in
+      updateSectionBlock(sectionBlock, isValid: isValid)
     }
   }
 
   /// Update Form block items UI with validation state.
-	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
+	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
 		switch block {
 		case .cardHolder:
 			if isValid {
@@ -197,15 +197,15 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		}
 
 		// Update form fields.
-		formItems.forEach { formItem in
+		fieldViews.forEach { fieldView in
 			if #available(iOS 13.0, *) {
-				formItem.fieldView.backgroundColor = .systemGroupedBackground
-				formItem.textField.textColor = UIColor.placeholderText
-				formItem.fieldView.hintComponentView.label.textColor = UIColor.placeholderText
+				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
+				fieldView.textField.textColor = UIColor.placeholderText
+				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
 			} else {
-				formItem.fieldView.backgroundColor = .white
-				formItem.textField.textColor = .gray
-				formItem.fieldView.hintComponentView.label.textColor = .gray
+				fieldView.placeholderView.backgroundColor = .white
+				fieldView.textField.textColor = .gray
+				fieldView.placeholderView.hintComponentView.label.textColor = .gray
 			}
 		}
 	}
@@ -236,10 +236,10 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-    cardNumberFormItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-    cardNumberFormItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+    cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+    cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		verticalStackView.addArrangedSubview(cardNumberFormItemView)
+		verticalStackView.addArrangedSubview(cardNumberFieldView)
 
 		switch fieldsDistribution {
 		case .singleLineDateAndCVC:
@@ -254,18 +254,18 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
-		formItems = cardHolderDetailsView.formItems + [
-			cardNumberFormItemView,
-			expDateFormItemView,
-			cvcFormItemView,
+		fieldViews = cardHolderDetailsView.fildViews + [
+			cardNumberFieldView,
+			expDateFieldView,
+			cvcFieldView,
 		]
 
     /// Set UI Theme
-    for item in formItems {
+    for item in fieldViews {
 			item.updateStyle(with: uiTheme)
     }
     
-		formItems.first?.textField.becomeFirstResponder()
+		fieldViews.first?.textField.becomeFirstResponder()
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {
@@ -275,27 +275,27 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 			horizonalStackView.axis = .vertical
 		}
 
-		expDateFormItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		expDateFormItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		cvcFormItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		cvcFormItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		horizonalStackView.addArrangedSubview(expDateFormItemView)
-		horizonalStackView.addArrangedSubview(cvcFormItemView)
+		horizonalStackView.addArrangedSubview(expDateFieldView)
+		horizonalStackView.addArrangedSubview(cvcFieldView)
 
 		verticalStackView.addArrangedSubview(horizonalStackView)
 	}
 
 	private func setupAllInSingleLine() {
-		expDateFormItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		expDateFormItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		cvcFormItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		cvcFormItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		verticalStackView.axis = .horizontal
-		verticalStackView.addArrangedSubview(expDateFormItemView)
-		verticalStackView.addArrangedSubview(cvcFormItemView)
+		verticalStackView.addArrangedSubview(expDateFieldView)
+		verticalStackView.addArrangedSubview(cvcFieldView)
 	}
 }

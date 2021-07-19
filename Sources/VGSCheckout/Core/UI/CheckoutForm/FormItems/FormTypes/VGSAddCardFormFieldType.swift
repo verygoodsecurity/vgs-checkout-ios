@@ -44,7 +44,7 @@ internal enum VGSAddCardFormFieldType {
 	case zipCode
 
 	/// Corresponding form block.
-	internal var formBlock: VGSAddCardFormBlock {
+	internal var sectionBlock: VGSAddCardSectionBlock {
 		switch self {
 		case .cardholderName, .firstName, .lastName:
 			return .cardHolder

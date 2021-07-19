@@ -14,7 +14,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldViewProtocol] = []
+	internal var fieldViews: [VGSTextFieldViewProtocol] = []
   
 	/// Displays error messages for invalid adrdress details.
   internal let errorLabel: UILabel
@@ -29,48 +29,48 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Country form item view.
-	internal lazy var countryFormItemView: VGSCountryFormItemView = {
-		let componentView = VGSCountryFormItemView(frame: .zero)
+	internal lazy var countryFieldView: VGSCountryFieldView = {
+		let componentView = VGSCountryFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FormItemView: VGSAddressLineFormItemView = {
-		let componentView = VGSAddressLineFormItemView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSAddressLineFieldView = {
+		let componentView = VGSAddressLineFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// City form item view.
-	internal lazy var cityItemFormView: VGSCityFormItemView = {
-		let componentView = VGSCityFormItemView(frame: .zero)
+	internal lazy var cityFieldView: VGSCityFieldView = {
+		let componentView = VGSCityFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// region form item view.
-	internal lazy var regionFormItemView: VGSStateFormItemView = {
-		let componentView = VGSStateFormItemView(frame: .zero)
+	internal lazy var regionFieldView: VGSStateFieldView = {
+		let componentView = VGSStateFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// State form item view.
-	internal lazy var statePickerFormItemView: VGSStatePickerFormItemView = {
-		let componentView = VGSStatePickerFormItemView(frame: .zero)
+	internal lazy var statePickerFieldView: VGSStatePickerFieldView = {
+		let componentView = VGSStatePickerFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// ZIP form item view.
-	internal lazy var zipFormItemView: VGSZipCodeFormItemView = {
-		let componentView = VGSZipCodeFormItemView(frame: .zero)
+	internal lazy var zipFieldView: VGSZipCodeFieldView = {
+		let componentView = VGSZipCodeFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
@@ -154,14 +154,14 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	// MARK: - Interface
 
 	/// Update Array of form blocks with validation state.
-	internal func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool) {
-		formBlocks.forEach { formBlock in
-			updateFormBlock(formBlock, isValid: isValid)
+	internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
+		sectionBlocks.forEach { sectionBlock in
+      updateSectionBlock(sectionBlock, isValid: isValid)
 		}
 	}
 
 	/// Update Form block items UI with validation state.
-	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
+	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
 		switch block {
 		case .addressInfo:
 			if isValid {
@@ -185,15 +185,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		}
 
 		// Update form fields.
-		formItems.forEach { formItem in
+		fieldViews.forEach { fieldView in
 			if #available(iOS 13.0, *) {
-				formItem.fieldView.backgroundColor = .systemGroupedBackground
-				formItem.textField.textColor = UIColor.placeholderText
-				formItem.fieldView.hintComponentView.label.textColor = UIColor.placeholderText
+				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
+				fieldView.textField.textColor = UIColor.placeholderText
+				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
 			} else {
-				formItem.fieldView.backgroundColor = .white
-				formItem.textField.textColor = .gray
-				formItem.fieldView.hintComponentView.label.textColor = .gray
+				fieldView.placeholderView.backgroundColor = .white
+				fieldView.textField.textColor = .gray
+				fieldView.placeholderView.hintComponentView.label.textColor = .gray
 			}
 		}
 	}
@@ -210,12 +210,12 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-		verticalStackView.addArrangedSubview(countryFormItemView)
-		verticalStackView.addArrangedSubview(addressLine1FormItemView)
-		verticalStackView.addArrangedSubview(cityItemFormView)
+		verticalStackView.addArrangedSubview(countryFieldView)
+		verticalStackView.addArrangedSubview(addressLine1FieldView)
+		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndZipStackView.addArrangedSubview(statePickerFormItemView)
-		stateAndZipStackView.addArrangedSubview(zipFormItemView)
+		stateAndZipStackView.addArrangedSubview(statePickerFieldView)
+		stateAndZipStackView.addArrangedSubview(zipFieldView)
 
 		verticalStackView.addArrangedSubview(stateAndZipStackView)
 
@@ -223,19 +223,19 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
-		formItems = [
-			countryFormItemView,
-			addressLine1FormItemView,
-			cityItemFormView,
-			statePickerFormItemView,
-			zipFormItemView
+		fieldViews = [
+			countryFieldView,
+			addressLine1FieldView,
+			cityFieldView,
+			statePickerFieldView,
+			zipFieldView
 		]
 
 		// Setup insets and UI Theme.
-		formItems.forEach { formItem in
-			formItem.updateStyle(with: uiTheme)
-			formItem.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			formItem.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		fieldViews.forEach { fieldView in
+			fieldView.updateStyle(with: uiTheme)
+			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}
 }

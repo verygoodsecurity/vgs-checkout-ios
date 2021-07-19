@@ -1,11 +1,11 @@
 //
-//  VGSTextFieldFormItemProtocol.swift
+//  VGSTextFieldViewProtocol.swift
 //  VGSCheckout
 
 import Foundation
 
 internal protocol VGSTextFieldViewProtocol: AnyObject {
-	var fieldView: VGSPlaceholderFormItemView {get}
+	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
 	var fieldType: VGSAddCardFormFieldType {get}
 
@@ -22,11 +22,11 @@ extension VGSTextFieldViewProtocol {
 	func updateUI(for validationState: VGSCheckoutFormValidationState) {
 		switch validationState {
 		case .focused, .inactive, .valid:
-			fieldView.hintComponentView.accessory = .none
+			placeholderView.hintComponentView.accessory = .none
 		case .invalid:
-			fieldView.hintComponentView.accessory = .invalid
+			placeholderView.hintComponentView.accessory = .invalid
 		case .disabled:
-			fieldView.hintComponentView.accessory = .none
+			placeholderView.hintComponentView.accessory = .none
 		}
 	}
 
@@ -36,8 +36,8 @@ extension VGSTextFieldViewProtocol {
 		textField.textColor = uiTheme.textFieldTextColor
 		textField.font = uiTheme.textFieldTextFont
 		textField.adjustsFontForContentSizeCategory = true
-		fieldView.hintLabel.textColor = uiTheme.textFieldHintTextColor
-		fieldView.hintLabel.font = uiTheme.textFieldHintTextFont
+		placeholderView.hintLabel.textColor = uiTheme.textFieldHintTextColor
+		placeholderView.hintLabel.font = uiTheme.textFieldHintTextFont
 	}
 }
 

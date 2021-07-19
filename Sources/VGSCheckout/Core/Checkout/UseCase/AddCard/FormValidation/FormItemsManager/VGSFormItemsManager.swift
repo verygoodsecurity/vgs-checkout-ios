@@ -1,5 +1,5 @@
 //
-//  VGSFormItemsManager.swift
+//  VGSFieldViewsManager.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,47 +8,47 @@ import UIKit
 #endif
 
 /// Holds utils for managing form items.
-internal class VGSFormItemsManager {
+internal class VGSFieldViewsManager {
 
 	/// Form items.
-	private (set) internal var formItems: [VGSTextFieldViewProtocol]
+	private (set) internal var fieldViews: [VGSTextFieldViewProtocol]
 
 	/// Form section views.
-	private (set) internal var formViews: [VGSFormSectionViewProtocol] = []
+	private (set) internal var formSectionViews: [VGSFormSectionViewProtocol] = []
 
 	/// Initializer.
 	/// - Parameters:
-	///   - formItems: `[VGSTextFieldFormItemProtocol]` object, an array of `VGSTextFieldFormItemProtocol` items.
-	internal init(formItems: [VGSTextFieldViewProtocol]) {
-		self.formItems = formItems
+	///   - fieldViews: `[VGSTextFieldViewProtocol]` object, an array of `VGSTextFieldViewProtocol` items.
+	internal init(fieldViews: [VGSTextFieldViewProtocol]) {
+		self.fieldViews = fieldViews
 	}
 
 	/// Form item containing current textField.
 	/// - Parameter textField: `VGSTextField` object,
-	/// - Returns: `VGSTextFieldFormItemProtocol?` object.
-	internal func fieldFormItem(for textField: VGSTextField) -> VGSTextFieldViewProtocol? {
-		return formItems.first(where: {$0.textField === textField})
+	/// - Returns: `VGSTextFieldViewProtocol?` object.
+	internal func fieldView(with textField: VGSTextField) -> VGSTextFieldViewProtocol? {
+		return fieldViews.first(where: {$0.textField === textField})
 	}
 
 	/// All text fields.
 	internal var vgsTextFields: [VGSTextField] {
-		return formItems.map({return $0.textField})
+		return fieldViews.map({return $0.textField})
 	}
 
 	/// All form blocks.
-	internal var formBlocks: [VGSAddCardFormBlock] {
-		return Array(Set(formItems.map({return $0.fieldType.formBlock})))
+	internal var sectionBlocks: [VGSAddCardSectionBlock] {
+		return Array(Set(fieldViews.map({return $0.fieldType.sectionBlock})))
 	}
 
 	/// Append form items.
-	/// - Parameter items: `[VGSTextFieldFormItemProtocol]` object, array of form items.
-	internal func appendFormItems(_ items: [VGSTextFieldViewProtocol]) {
-		formItems = formItems + items
+	/// - Parameter items: `[VGSTextFieldViewProtocol]` object, array of form items.
+	internal func appendFieldViews(_ views: [VGSTextFieldViewProtocol]) {
+		fieldViews = fieldViews + views
 	}
 
 	/// Append form section views.
-	/// - Parameter views: `[VGSTextFieldFormItemProtocol]` object, array of form section views.
+	/// - Parameter views: `[VGSTextFieldViewProtocol]` object, array of form section views.
 	internal func appendFormSectionViews(_ views: [VGSFormSectionViewProtocol]) {
-		formViews = formViews + views
+		formSectionViews = formSectionViews + views
 	}
 }

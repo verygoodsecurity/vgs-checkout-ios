@@ -11,7 +11,7 @@ import UIKit
 internal class VGSCardHolderDetailsView: UIView {
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldViewProtocol] = []
+	internal var fildViews: [VGSTextFieldViewProtocol] = []
 
 	/// Defines field distribution in card details section.
 	internal enum FieldsDistribution {
@@ -82,13 +82,13 @@ internal class VGSCardHolderDetailsView: UIView {
 	private func setupSingleFieldName() {
 		let itemView = VGSCardholderFieldView(frame: .zero)
 		cardHolderNameStackView.addArrangedSubview(itemView)
-		itemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		itemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		itemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		itemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		itemView.cardHolderName.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
-		itemView.fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
+		itemView.placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
 
-		formItems = [itemView]
+		fildViews = [itemView]
 	}
 
 	/// Setup splitted card holder fields.
@@ -110,16 +110,16 @@ internal class VGSCardHolderDetailsView: UIView {
 			cardHolderNameStackView.axis = .vertical
 		}
 
-		formItems = [firstNameItemView, lastNameItemView]
+		fildViews = [firstNameItemView, lastNameItemView]
 
-		firstNameItemView.fieldView.hintComponentView.label.text = "First Name"
-		lastNameItemView.fieldView.hintComponentView.label.text = "Last Name"
+		firstNameItemView.placeholderView.hintComponentView.label.text = "First Name"
+		lastNameItemView.placeholderView.hintComponentView.label.text = "Last Name"
 
-		firstNameItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		firstNameItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		firstNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		firstNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		lastNameItemView.fieldView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		lastNameItemView.fieldView.stackView.isLayoutMarginsRelativeArrangement = true
+		lastNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		lastNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
 		cardHolderNameStackView.addArrangedSubview(firstNameItemView)
 		cardHolderNameStackView.addArrangedSubview(lastNameItemView)

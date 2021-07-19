@@ -80,20 +80,20 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
 
-		let formValidationHelper = VGSFormValidationHelper(formItems: [], validationBehaviour: .onFocus)
-		let autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: []))
+		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: .onFocus)
+		let autoFocusManager = VGSFieldAutofocusManager(fieldViewsManager: VGSFieldViewsManager(fieldViews: []))
 
 		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
 		self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
-		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardFormView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
 
-		formValidationHelper.formItemsManager.appendFormItems(self.cardDataSectionViewModel.cardFormView.formItems)
-		formValidationHelper.formItemsManager.appendFormItems(self.addressDataSectionViewModel.billingAddressFormView.formItems)
+		formValidationHelper.fieldViewsManager.appendFieldViews(self.cardDataSectionViewModel.cardDetailsSectionView.fieldViews)
+		formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
 
-		formValidationHelper.formItemsManager.appendFormSectionViews([cardDataSectionViewModel.cardFormView, addressDataSectionViewModel.billingAddressFormView])
+		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView, addressDataSectionViewModel.billingAddressFormView])
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 
@@ -135,7 +135,7 @@ extension VGSAddCardUseCaseManager: VGSHeaderBarViewDelegate {
 	}
 }
 
-// MARK: - VGSFormItemControllerDelegate
+// MARK: - VGSFormSectionPresenterDelegate
 
 extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 	func stateDidChange(_ state: VGSFormSectionState) {

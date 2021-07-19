@@ -8,23 +8,23 @@ import UIKit
 #endif
 
 /// Encapsulates logic for autofocus feature.
-internal class VGSFormAutofocusManager {
+internal class VGSFieldAutofocusManager {
 
-	/// `VGSFormItemsManager` object.
-	internal let formItemsManager: VGSFormItemsManager
+	/// `VGSFieldViewsManager` object.
+	internal let fieldViewsManager: VGSFieldViewsManager
 
 	/// Initializer.
-	/// - Parameter formItemsManager: `VGSFormItemsManager` object.
-	internal init(formItemsManager: VGSFormItemsManager) {
-		self.formItemsManager = formItemsManager
+	/// - Parameter fieldViewsManager: `VGSFieldViewsManager` object.
+	internal init(fieldViewsManager: VGSFieldViewsManager) {
+		self.fieldViewsManager = fieldViewsManager
 	}
 
 	/// Navigate to next TextField from TextFields
 	internal func navigateToNextTextField(from textField: VGSTextField) {
-		guard let fieldIndex = formItemsManager.vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (formItemsManager.vgsTextFields.count - 1) else {
+		guard let fieldIndex = fieldViewsManager.vgsTextFields.firstIndex(where: { $0 == textField }), fieldIndex < (fieldViewsManager.vgsTextFields.count - 1) else {
 			return
 		}
-		formItemsManager.vgsTextFields[fieldIndex + 1].becomeFirstResponder()
+		fieldViewsManager.vgsTextFields[fieldIndex + 1].becomeFirstResponder()
 	}
 
 	/// Focus to next field if needed. Will be implemented soon.
@@ -32,7 +32,7 @@ internal class VGSFormAutofocusManager {
 	/// - Parameter isFormValid: `Bool` object, indicates if form is valid.
 	internal func focusToNextFieldIfNeeded(for textField: VGSTextField, isFormValid: Bool) {
 		// Do not switch from last field.
-		if let last = formItemsManager.formItems.last?.textField {
+		if let last = fieldViewsManager.fieldViews.last?.textField {
 			// Do not focus from card holder fields since its length does not have specific validation rule.
 			if textField.configuration?.type != .cardHolderName {
 				// Change focus only from valid field.
@@ -48,8 +48,8 @@ internal class VGSFormAutofocusManager {
 	/// Switch to the next field on next button. Next button is avaliable only for `cardholder` type.
 	/// - Parameter textField: `VGSTextField` object. Current text field.
 	internal func focusOnEndEditingOnReturn(for textField: VGSTextField) {
-		guard let formItem = formItemsManager.fieldFormItem(for: textField) else {return}
-		switch formItem.fieldType {
+		guard let fieldView = fieldViewsManager.fieldView(with: textField) else {return}
+		switch fieldView.fieldType {
 		case .cardholderName, .firstName, .lastName:
 			navigateToNextTextField(from: textField)
 		default:

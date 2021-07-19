@@ -1,5 +1,5 @@
 //
-//  VGSExpirationDateFormItemView.swift
+//  VGSExpirationDateFieldView.swift
 //  VGSCheckout
 //
 
@@ -12,7 +12,7 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
-	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return expDateTextField
@@ -46,11 +46,11 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(fieldView)
-		fieldView.translatesAutoresizingMaskIntoConstraints = false
-		fieldView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		fieldView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
-		fieldView.stackView.addArrangedSubview(expDateTextField)
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
+		placeholderView.stackView.addArrangedSubview(expDateTextField)
 	}
 }

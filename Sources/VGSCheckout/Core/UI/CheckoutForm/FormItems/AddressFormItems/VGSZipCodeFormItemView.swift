@@ -1,5 +1,5 @@
 //
-//  VGSZipCodeFormItemView.swift
+//  VGSZipCodeFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -9,13 +9,13 @@ import UIKit
 #endif
 
 /// Holds UI for zip code form item.
-internal class VGSZipCodeFormItemView: UIView, VGSTextFieldViewProtocol {
+internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal var fieldType: VGSAddCardFormFieldType = .state
 
-	let fieldView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return zipCodeTextField
@@ -46,11 +46,11 @@ internal class VGSZipCodeFormItemView: UIView, VGSTextFieldViewProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(fieldView)
-		fieldView.translatesAutoresizingMaskIntoConstraints = false
-		fieldView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		fieldView.hintComponentView.label.text = "ZIP"
-		fieldView.stackView.addArrangedSubview(zipCodeTextField)
+		placeholderView.hintComponentView.label.text = "ZIP"
+		placeholderView.stackView.addArrangedSubview(zipCodeTextField)
 	}
 }
