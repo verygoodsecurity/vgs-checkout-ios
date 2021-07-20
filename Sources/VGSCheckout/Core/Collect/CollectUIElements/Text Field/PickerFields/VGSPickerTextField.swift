@@ -14,6 +14,21 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 /// Text field with picker view input.
 internal class VGSPickerTextField: VGSTextField {
 
+	/// Selected value from picker (can mismatch with actual displayed text - like we need to send country code instead of displayed name).
+	fileprivate var lastSelectedPickerValue: String?
+
+	/// Selected output value (can mismatch with actual displayed text).
+	internal var selectedOutputValue: String? {
+		switch mode {
+		case .textField:
+			// For text field use output text (displayed text).
+			return getOutputText()
+		case .picker:
+			// Use selected value from picker.
+			return lastSelectedPickerValue
+		}
+	}
+
 	/// Defines input mode type.
 	internal enum InputMode {
 
