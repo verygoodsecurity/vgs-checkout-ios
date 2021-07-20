@@ -38,7 +38,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.isUserInteractionEnabled = false
 				addCardSectionFormView.headerBarView.closeButton?.isEnabled = false
 				addCardSectionFormView.payButton.status = .processing
-				addCardSectionFormView.cardDetailsView.updateUIForProcessingState()
+				addCardSectionFormView.cardDetailsSectionView.updateUIForProcessingState()
 
 				apiWorker.sendData {[weak self] requestResult in
 					guard let strongSelf = self else {return}
@@ -48,24 +48,27 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			}
 		}
 	}
-
+ 
 	/// Payment instrument.
 	internal let paymentInstrument: VGSPaymentInstrument
 
 	/// Manager for card data logic.
-	internal let cardDataSectionManager: VGSCardDataSectionManager
+	internal let cardDataSectionViewModel: VGSCardDataSectionViewModel
 
 	/// Manager for billing address logic.
-	internal let addressDataSectionManager: VGSAddressDataSectionManager
+	internal let addressDataSectionViewModel: VGSAddressDataSectionViewModel
 
 	/// Add card main view.
-	internal let addCardSectionFormView: VGSAddCardSectionFormView
+	internal let addCardSectionFormView: VGSAddCardFormView
 
 	/// `VGSCollect` object.
 	internal let vgsCollect: VGSCollect
 
 	/// API worker, sends data with current payment instrument.
 	internal let apiWorker: VGSAddCreditCardAPIWorkerProtocol
+
+	/// UI Theme.
+	internal let uiTheme: VGSCheckoutThemeProtocol
   
 	// MARK: - Initialization
 
@@ -75,11 +78,25 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
-    self.cardDataSectionManager = VGSCardDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme)
-    self.addressDataSectionManager = VGSAddressDataSectionManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme)
+		self.uiTheme = uiTheme
 
-		self.addCardSectionFormView = VGSAddCardSectionFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionManager.cardFormView, billingAddressView: addressDataSectionManager.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: .onFocus)
+		let autoFocusManager = VGSFieldAutofocusManager(fieldViewsManager: VGSFieldViewsManager(fieldViews: []))
+
+		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+
+		self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+
+		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+
+
+		formValidationHelper.fieldViewsManager.appendFieldViews(self.cardDataSectionViewModel.cardDetailsSectionView.fieldViews)
+		formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+
+		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView, addressDataSectionViewModel.billingAddressFormView])
+
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
+
 		super.init()
 		self.addCardSectionFormView.payButton.status = .disabled
 	}
@@ -90,7 +107,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		let viewController = VGSFormViewController(formView: addCardSectionFormView)
 
 		addCardSectionFormView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
-		cardDataSectionManager.delegate = self
+		cardDataSectionViewModel.delegate = self
+		addressDataSectionViewModel.delegate = self
+
+		viewController.view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 
 		return viewController
 	}
@@ -115,7 +135,7 @@ extension VGSAddCardUseCaseManager: VGSHeaderBarViewDelegate {
 	}
 }
 
-// MARK: - VGSFormItemControllerDelegate
+// MARK: - VGSFormSectionPresenterDelegate
 
 extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 	func stateDidChange(_ state: VGSFormSectionState) {

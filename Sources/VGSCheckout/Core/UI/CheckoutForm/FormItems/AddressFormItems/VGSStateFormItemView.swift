@@ -1,5 +1,5 @@
 //
-//  VGSStateFormItemView.swift
+//  VGSStateFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for state form item.
-internal class VGSStateFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSStateFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal var fieldType: VGSAddCardFormFieldType = .state
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return stateTextField
@@ -45,11 +45,11 @@ internal class VGSStateFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "State"
-		formItemView.stackView.addArrangedSubview(stateTextField)
+		placeholderView.hintComponentView.label.text = "State"
+		placeholderView.stackView.addArrangedSubview(stateTextField)
 	}
 }

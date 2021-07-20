@@ -1,5 +1,5 @@
 //
-//  VGSCityFormItemView.swift
+//  VGSCityFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for city form item.
-internal class VGSCityFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCityFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal var fieldType: VGSAddCardFormFieldType = .city
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return cityTextField
@@ -45,11 +45,11 @@ internal class VGSCityFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "City"
-		formItemView.stackView.addArrangedSubview(cityTextField)
+		placeholderView.hintComponentView.label.text = "City"
+		placeholderView.stackView.addArrangedSubview(cityTextField)
 	}
 }

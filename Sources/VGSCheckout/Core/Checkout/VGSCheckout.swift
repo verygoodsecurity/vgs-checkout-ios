@@ -7,22 +7,11 @@ import Foundation
 import UIKit
 #endif
 
-
-/// A drop-in class that presents a checkout form for a customer to complete payment.
+/// A drop-in class that presents a checkout form for financial operations: add card, payment processing etc.
 public class VGSCheckout {
-
-	deinit {
-		//VGSCollectLogger.loggerPrefix = "VGSCheckout"
-	}
 
 	/// An object that acts as a `VGSCheckout` delegate.
 	public weak var delegate: VGSCheckoutDelegate?
-
-	/// `String` object, organization vault id.
-	internal let vaultID: String
-
-	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox").
-	internal let environment: String
 
 	/// Payment instrument.
 	internal let paymentInstrument: VGSPaymentInstrument
@@ -40,18 +29,14 @@ public class VGSCheckout {
 
 	/// Initialization.
 	/// - Parameters:
-	///   - vaultID: `String` object, organization vault id.
-	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	///   - configuration: `VGSCheckoutConfigurationProtocol` object, should be valid checkout configuration.
-	public init(vaultID: String, environment: String = "sandbox", configuration: VGSCheckoutConfigurationProtocol) {
+	public init(configuration: VGSCheckoutConfigurationProtocol) {
 		guard let paymetInstrument = VGSPaymentInstrument(configuration: configuration) else {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-    self.vaultID = vaultID
-		self.environment = environment
 		self.paymentInstrument = paymetInstrument
-		self.vgsCollect = VGSCollect(vaultID: vaultID, environment: environment, paymentFlow: paymetInstrument)
+		self.vgsCollect = VGSCollect(vaultID: configuration.vaultID, environment: configuration.environment, paymentFlow: paymetInstrument)
     self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect, uiTheme: configuration.uiTheme)
 		addCardUseCaseManager.delegate = self
 	}

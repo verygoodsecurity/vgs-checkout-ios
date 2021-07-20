@@ -8,12 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for address details.
-internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
+internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
+	/// UI Theme.
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
-	internal var formItems: [VGSTextFieldFormItemProtocol] = []
+	internal var fieldViews: [VGSTextFieldViewProtocol] = []
   
 	/// Displays error messages for invalid adrdress details.
   internal let errorLabel: UILabel
@@ -28,56 +29,48 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 	}()
 
 	/// Country form item view.
-	internal lazy var countryFormItemView: VGSCountryFormItemView = {
-		let componentView = VGSCountryFormItemView(frame: .zero)
+	internal lazy var countryFieldView: VGSCountryFieldView = {
+		let componentView = VGSCountryFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FormItemView: VGSAddressLineFormItemView = {
-		let componentView = VGSAddressLineFormItemView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// Address line 2 form item view.
-	internal lazy var addressLine2FormItemView: VGSAddressLineFormItemView = {
-		let componentView = VGSAddressLineFormItemView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSAddressLineFieldView = {
+		let componentView = VGSAddressLineFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// City form item view.
-	internal lazy var cityItemFormView: VGSCityFormItemView = {
-		let componentView = VGSCityFormItemView(frame: .zero)
+	internal lazy var cityFieldView: VGSCityFieldView = {
+		let componentView = VGSCityFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// region form item view.
-	internal lazy var regionFormItemView: VGSStateFormItemView = {
-		let componentView = VGSStateFormItemView(frame: .zero)
+	internal lazy var regionFieldView: VGSStateFieldView = {
+		let componentView = VGSStateFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// State form item view.
-	internal lazy var statePickerFormItemView: VGSStatePickerFormItemView = {
-		let componentView = VGSStatePickerFormItemView(frame: .zero)
+	internal lazy var statePickerFieldView: VGSStatePickerFieldView = {
+		let componentView = VGSStatePickerFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
 	}()
 
 	/// ZIP form item view.
-	internal lazy var zipFormItemView: VGSZipCodeFormItemView = {
-		let componentView = VGSZipCodeFormItemView(frame: .zero)
+	internal lazy var zipFieldView: VGSZipCodeFieldView = {
+		let componentView = VGSZipCodeFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView
@@ -118,7 +111,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		stackView.borderViewCornerRadius = 4
 
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -132,7 +125,7 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		stackView.axis = .horizontal
 
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
+		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -161,57 +154,46 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 	// MARK: - Interface
 
 	/// Update Array of form blocks with validation state.
-	internal func updateFormBlocks(_ formBlocks: [VGSAddCardFormBlock], isValid: Bool) {
-		formBlocks.forEach { formBlock in
-			updateFormBlock(formBlock, isValid: isValid)
+	internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
+		sectionBlocks.forEach { sectionBlock in
+      updateSectionBlock(sectionBlock, isValid: isValid)
 		}
 	}
 
 	/// Update Form block items UI with validation state.
-	internal func updateFormBlock(_ block: VGSAddCardFormBlock, isValid: Bool) {
-//		switch block {
-//		case .cardHolder:
-//			if isValid {
-//				cardHolderDetaailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			} else {
-//				cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.red
-//			}
-//		case .cardDetails:
-//			if isValid {
-//				verticalStackView.separatorColor = UIColor.gray
-//				horizonalStackView.separatorColor = UIColor.gray
-//			} else {
-//				verticalStackView.separatorColor = UIColor.red
-//				horizonalStackView.separatorColor = UIColor.red
-//			}
-//		case .addressInfo:
-//			break
-//		}
+	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
+		switch block {
+		case .addressInfo:
+			if isValid {
+				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
+			} else {
+				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+			}
+		default:
+		 break
+		}
 	}
 
-	/// Disable input view for processing state.
+	// TODO: - refactor duplicated code for processing state styles.
+	/// Disable input views for processing state.
 	internal func updateUIForProcessingState() {
-		// Update grid view.
-//		if #available(iOS 13, *) {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//		} else {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//		}
+		 /// Update grid view.
+		if #available(iOS 13, *) {
+			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+		} else {
+			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+		}
 
 		// Update form fields.
-		formItems.forEach { formItem in
+		fieldViews.forEach { fieldView in
 			if #available(iOS 13.0, *) {
-				formItem.formItemView.backgroundColor = .systemGroupedBackground
-				formItem.textField.textColor = UIColor.placeholderText
-				formItem.formItemView.hintComponentView.label.textColor = UIColor.placeholderText
+				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
+				fieldView.textField.textColor = UIColor.placeholderText
+				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
 			} else {
-				formItem.formItemView.backgroundColor = .white
-				formItem.textField.textColor = .gray
-				formItem.formItemView.hintComponentView.label.textColor = .gray
+				fieldView.placeholderView.backgroundColor = .white
+				fieldView.textField.textColor = .gray
+				fieldView.placeholderView.hintComponentView.label.textColor = .gray
 			}
 		}
 	}
@@ -228,13 +210,12 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-		verticalStackView.addArrangedSubview(countryFormItemView)
-		verticalStackView.addArrangedSubview(addressLine1FormItemView)
-		verticalStackView.addArrangedSubview(addressLine2FormItemView)
-		verticalStackView.addArrangedSubview(cityItemFormView)
+		verticalStackView.addArrangedSubview(countryFieldView)
+		verticalStackView.addArrangedSubview(addressLine1FieldView)
+		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndZipStackView.addArrangedSubview(statePickerFormItemView)
-		stateAndZipStackView.addArrangedSubview(zipFormItemView)
+		stateAndZipStackView.addArrangedSubview(statePickerFieldView)
+		stateAndZipStackView.addArrangedSubview(zipFieldView)
 
 		verticalStackView.addArrangedSubview(stateAndZipStackView)
 
@@ -242,19 +223,19 @@ internal class VGSBillingAddressDetailsView: UIView, VGSFormGroupViewProtocol {
 		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
-		formItems = [
-			countryFormItemView,
-			addressLine1FormItemView,
-			addressLine2FormItemView,
-			cityItemFormView,
-			statePickerFormItemView,
-			zipFormItemView
+		fieldViews = [
+			countryFieldView,
+			addressLine1FieldView,
+			cityFieldView,
+			statePickerFieldView,
+			zipFieldView
 		]
 
-		// Setup insets.
-		formItems.forEach { formItem in
-			formItem.formItemView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-			formItem.formItemView.stackView.isLayoutMarginsRelativeArrangement = true
+		// Setup insets and UI Theme.
+		fieldViews.forEach { fieldView in
+			fieldView.updateStyle(with: uiTheme)
+			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}
 }

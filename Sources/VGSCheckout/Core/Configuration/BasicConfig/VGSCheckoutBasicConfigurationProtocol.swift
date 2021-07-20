@@ -10,6 +10,18 @@ public protocol VGSCheckoutConfigurationProtocol {
   
   /// UI elements configuration theme.
   var uiTheme: VGSCheckoutThemeProtocol {get}
+
+	/// `String` object, organization vault id.
+	var vaultID: String {get}
+
+	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	var environment: String {get}
+
+	/// Configuration initializer.
+	/// - Parameters:
+	///   - vaultID: `String` object, organization vault id.
+	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	init(vaultID: String, environment: String)
 }
 
 /// Internal protocol for VGSCheckout configuration.

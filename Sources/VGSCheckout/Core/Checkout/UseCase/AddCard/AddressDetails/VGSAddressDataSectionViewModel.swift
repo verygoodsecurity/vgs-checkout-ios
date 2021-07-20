@@ -1,5 +1,5 @@
 //
-//  VGSAddressDataSectionManager.swift
+//  VGSAddressDataSectionViewModel.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds logic for billing addres setup and handling events.
-final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, VGSPlaceholderFormItemViewDelegate, VGSPickerTextFieldSelectionDelegate {
+final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol, VGSPlaceholderFieldViewDelegate, VGSPickerTextFieldSelectionDelegate {
   
 	/// Delegate.
 	weak var delegate: VGSFormSectionPresenterDelegate?
@@ -24,15 +24,16 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 	internal let validationBehavior: VGSFormValidationBehaviour
 
 	/// Card form view.
-	internal let billingAddressFormView: VGSBillingAddressDetailsView
+	internal let billingAddressFormView: VGSBillingAddressDetailsSectionView
 
 	/// Text field form items in add card section.
-	var textFiedFormItems: [VGSTextFieldFormItemProtocol] {
-		return billingAddressFormView.formItems
+	var fieldViews: [VGSTextFieldViewProtocol] {
+		return billingAddressFormView.fieldViews
 	}
 
+	/// Text fields.
 	var vgsTextFields: [VGSTextField] {
-		return textFiedFormItems.map({return $0.textField})
+		return fieldViews.map({return $0.textField})
 	}
 
 	/// Configuration type.
@@ -40,22 +41,22 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
-//
-//	/// Validation manager.
-//	internal let formValidationHelper: VGSFormValidationHelper
-//
-//	/// Autofocus manager.
-//	internal let autoFocusManager: VGSFormAutofocusManager
+
+	/// Validation manager.
+	internal let formValidationHelper: VGSFormValidationHelper
+
+	/// Autofocus manager.
+	internal let autoFocusManager: VGSFieldAutofocusManager
 
 	// MARK: - Initialization
 
-  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol) {
+  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
-    self.billingAddressFormView = VGSBillingAddressDetailsView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
-//		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
-//		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
+    self.billingAddressFormView = VGSBillingAddressDetailsSectionView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
+		self.formValidationHelper = formValidationHelper
+		self.autoFocusManager = autoFocusManager
 
 		buildForm()
 	}
@@ -89,8 +90,8 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 		  textField.delegate = self
 		}
 
-		for item in textFiedFormItems {
-			item.formItemView.delegate = self
+		for item in fieldViews {
+			item.placeholderView.delegate = self
 		}
 
 		// Set picker fields delegate.
@@ -108,9 +109,9 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
-	func didTap(in formView: VGSPlaceholderFormItemView) {
-		for item in textFiedFormItems {
-			if item.formItemView === formView {
+	func didTap(in formView: VGSPlaceholderFieldView) {
+		for item in fieldViews {
+			if item.placeholderView === formView {
 				item.textField.becomeFirstResponder()
 			}
 		}
@@ -118,21 +119,21 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 	/// Update Form Validation State.
 	func updateFormState() {
-//		if formValidationHelper.isFormValid() {
-//			state = .valid
-//		} else {
-//			state = .invalid
-//		}
+		if formValidationHelper.isFormValid() {
+			state = .valid
+		} else {
+			state = .invalid
+		}
 	}
 
 	var countryPickerField: VGSPickerTextField? {
-		guard let countryTextField = textFiedFormItems.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
+		guard let countryTextField = fieldViews.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
 
 		return countryTextField
 	}
 
 	var statePickerField: VGSPickerTextField? {
-		guard let stateTextField = textFiedFormItems.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
+		guard let stateTextField = fieldViews.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
 
 		return stateTextField
 	}
@@ -148,21 +149,20 @@ final internal class VGSAddressDataSectionManager: VGSBaseFormSectionProtocol, V
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
+extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 	func vgsTextFieldDidChange(_ textField: VGSTextField) {
-//		updateSecurityCodeFieldIfNeeded(for: textField)
-//		formValidationHelper.updateFormViewOnEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormSectionViewOnEditingTextField(textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-//		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
 		updateFormState()
 	}
 
 	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-//		formValidationHelper.updateFormViewOnEndEditingTextField(cardFormView, textField: textField)
+		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
 //		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
 		updateFormState()
 	}
@@ -193,7 +193,7 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 				stateField.configuration = config
 			}
 		default:
-			billingAddressFormView.statePickerFormItemView.statePickerTextField.mode = .textField
+			billingAddressFormView.statePickerFieldView.statePickerTextField.mode = .textField
 		}
 	}
 
@@ -213,7 +213,7 @@ extension VGSAddressDataSectionManager: VGSTextFieldDelegate {
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
-				updateStateField(with: newCountry)
+				//updateStateField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
 

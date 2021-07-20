@@ -1,5 +1,5 @@
 //
-//  VGSPlaceholderFormItemView.swift
+//  VGSPlaceholderFieldView.swift
 //  VGSCheckout
 //
 
@@ -8,16 +8,16 @@ import Foundation
 import UIKit
 #endif
 
-internal protocol VGSPlaceholderFormItemViewDelegate: AnyObject {
-	func didTap(in formView: VGSPlaceholderFormItemView)
+internal protocol VGSPlaceholderFieldViewDelegate: AnyObject {
+	func didTap(in formView: VGSPlaceholderFieldView)
 }
 
 /// View for placeholder item in form.
-internal class VGSPlaceholderFormItemView: UIView {
+internal class VGSPlaceholderFieldView: UIView {
 
 	// MARK: - Vars
 
-	weak var delegate: VGSPlaceholderFormItemViewDelegate?
+	weak var delegate: VGSPlaceholderFieldViewDelegate?
 
 	internal let tapGesture = UITapGestureRecognizer()
 

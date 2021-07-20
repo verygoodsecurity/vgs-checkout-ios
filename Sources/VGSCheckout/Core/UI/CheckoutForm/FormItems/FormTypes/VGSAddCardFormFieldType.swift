@@ -44,7 +44,7 @@ internal enum VGSAddCardFormFieldType {
 	case zipCode
 
 	/// Corresponding form block.
-	var formBlock: VGSAddCardFormBlock {
+	internal var sectionBlock: VGSAddCardSectionBlock {
 		switch self {
 		case .cardholderName, .firstName, .lastName:
 			return .cardHolder
@@ -55,8 +55,18 @@ internal enum VGSAddCardFormFieldType {
 		}
 	}
 
+	/// Corresponding form section.
+	internal var formSection: VGSFormSection {
+		switch self {
+		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
+			return .card
+		case .country, .addressLine1, .addressLine2, .city, .state, .zipCode:
+			return .billingAddress
+		}
+	}
+
 	/// Empty field name error.
-	var emptyFieldNameError: String {
+	internal var emptyFieldNameError: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: emptyFieldNameLocalizationKey)
 	}
 
@@ -75,6 +85,14 @@ internal enum VGSAddCardFormFieldType {
 			return "vgs_checkout_card_expiration_date_empty_error"
 		case .cvc:
 			return "vgs_checkout_card_verification_code_invalid_error"
+		case .addressLine1:
+			return "vgs_checkout_address_info_line1_empty_error"
+		case .city:
+			return "vgs_checkout_address_info_city_empty_error"
+		case .state:
+			return "vgs_checkout_address_info_region_empty_error"
+		case .zipCode:
+			return "vgs_checkout_address_info_zipcode_empty_error"
 		default:
 			return "Field is empty"
 		}

@@ -20,8 +20,18 @@ internal class VGSFormFieldsValidatorFactory {
 			return VGSExpDateFieldValidator()
 		case .cvc:
 			return VGSCardCVCFieldValidator()
-		case .country, .addressLine1, .addressLine2, .city, .state, .zipCode:
-			// TODO: - add country validator
+		case .addressLine1:
+			return VGSAddressLine1FieldValidator()
+		case .addressLine2:
+			return VGSAddressLine2FieldValidator()
+		case .city:
+			return VGSCityFieldValidator()
+		case .state:
+			return VGSAddressRegionFieldValidator()
+		case .zipCode:
+			return VGSZipCodeFieldValidator()
+		case .country:
+			// TODO: - add country validator?
 			return VGSCardNumberFieldValidator()
 		}
 	}

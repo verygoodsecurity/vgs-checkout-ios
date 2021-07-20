@@ -9,66 +9,53 @@ import Foundation
 import UIKit
 #endif
 
-/// Default Checkout UI Theme settings
+/// Default Checkout UI Theme settings.
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
-  
-  /// TextField attributes
-  public var textFieldBackgroundColor: UIColor = .systemGray
-  
-  public var textFieldBorderColor: UIColor = .systemGray
-  
-  public var textFieldTextColor: UIColor = .vgsInputBlackTextColor
-  
-  public var textFieldPlaceholderColor: UIColor = .systemGray
-  
-  public var textFieldBorderErrorColor: UIColor = .systemRed
-  
-  public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
-  
-	public var textFieldPlaceholderFont: UIFont =  UIFont.preferredFont(forTextStyle: .body)
-  
-  /// Checkout View attributes
 
+  /// The textfield’s background color. Default is `.systemGray`.
+  public var textFieldBackgroundColor: UIColor = .systemGray
+
+	/// The textfield’s border background color. Default is `.systemGray`.
+  public var textFieldBorderColor: UIColor = .systemGray
+
+	/// The text color of the textfield. Default is `.vgsInputBlackTextColor` (black).
+  public var textFieldTextColor: UIColor = .vgsInputBlackTextColor
+
+	/// The textfield’s error border color. Default is `.systemRed`.
+  public var textFieldBorderErrorColor: UIColor = .systemRed
+
+	/// The font of the textfield. Default is `.body`.
+  public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+
+	/// The text color of the textfield hint (above the text field). Default is `.vgsInputBlackTextColor` (black).
+	public var textFieldHintTextColor: UIColor = .vgsInputBlackTextColor
+
+	/// The font of the textfield hint (above the text field). Default is `.body`.
+	public var textFieldHintTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+
+	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
 
-	/// Form section title (Card details, Billing address etc).
-	public var checkoutFormSectionTitleFont: UIFont = .preferredFont(forTextStyle: .subheadline)
-  
-  /// Error Label attributes
+	/// The font of the section title. Default is `.headline`.
+	public var checkoutFormSectionTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+
+	/// The font of the error label. Default is `.footnote`.
   public var checkoutErrorLabelFont: UIFont = .preferredFont(forTextStyle: .footnote)
-  
+
+	/// The text color of the error label. Default is `.systemRed`.
   public var checkoutErrorLabelTextColor: UIColor = .systemRed
   
   /// Submit button attributes
-  
+
+	/// The background color of the submit button. Default is `.purple` with alpha.
   public var checkoutSubmitButtonBackgroundColor: UIColor = UIColor.systemPurple.withAlphaComponent(0.6)
-  
+
+	/// The background color of the submit button on success. Default is `.systemGreen`.
   public var checkoutSubmitButtonSuccessBackgroundColor: UIColor = .systemGreen
-  
+
+	/// The text color of the submit button title. Default is `.light` with alpha.
   public var checkoutSubmitButtonTitleColor: UIColor = UIColor.lightText.withAlphaComponent(0.6)
-  
+
+	/// The font of the submit button title. Default is `.callout`.
   public var checkoutSubmitButtonTitleFont: UIFont = .preferredFont(forTextStyle: .callout)
-}
-
-// This code is taken from https://github.com/noahsark769/ColorCompatibility
-// Thanks to Noah Gilmore.
-// Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
-
-public extension UIColor {
-	static var vgsSystemBackground: UIColor {
-			if #available(iOS 13, *) {
-					return .systemBackground
-			}
-			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-	}
-
-	static var vgsInputBlackTextColor: UIColor {
-		if #available(iOS 13.0, *) {
-			return UIColor {(traits) -> UIColor in
-				return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-			}
-		} else {
-			return .black
-		}
-	}
 }

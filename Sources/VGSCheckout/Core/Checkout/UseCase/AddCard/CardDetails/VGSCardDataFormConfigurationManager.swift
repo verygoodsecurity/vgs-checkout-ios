@@ -10,16 +10,16 @@ import UIKit
 /// Encapsulates form setup with collect.
 internal class VGSCardDataFormConfigurationManager {
 
-	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, cardFormView: VGSCardDetailsFormView) {
-		let textFiedFormItems = cardFormView.formItems
+	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
+		let fieldViews = cardSectionView.fieldViews
 
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
 		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
 
-		let cardNumber = cardFormView.cardNumberFormItemView.cardTextField
-		let expCardDate = cardFormView.expDateFormItemView.expDateTextField
-		let cvcCardNum = cardFormView.cvcFormItemView.cvcTextField
+		let cardNumber = cardSectionView.cardNumberFieldView.cardTextField
+		let expCardDate = cardSectionView.expDateFieldView.expDateTextField
+		let cvcCardNum = cardSectionView.cvcFieldView.cvcTextField
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
 		cardConfiguration.type = .cardNumber
@@ -74,13 +74,13 @@ internal class VGSCardDataFormConfigurationManager {
 				])
 				holderConfiguration.returnKeyType = .next
 
-				if let cardHolderName = textFiedFormItems.first(where: {$0.fieldType == .cardholderName}) {
+				if let cardHolderName = fieldViews.first(where: {$0.fieldType == .cardholderName}) {
 					cardHolderName.textField.textAlignment = .natural
 					cardHolderName.textField.configuration = holderConfiguration
 				}
-			/*
+      /*
 			case .splitted(let firstName, lastName: let lastName):
-				if let firstNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .firstName}), let lastNameFormItem = textFiedFormItems.first(where: {$0.fieldType == .lastName})  {
+				if let firstNameFieldView = fieldViews.first(where: {$0.fieldType == .firstName}), let lastNameFieldView = fieldViews.first(where: {$0.fieldType == .lastName})  {
 
 					let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: firstName)
 					firstNameConfiguration.type = .cardHolderName
@@ -89,8 +89,8 @@ internal class VGSCardDataFormConfigurationManager {
 						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 					])
 
-					firstNameFormItem.textField.textAlignment = .natural
-					firstNameFormItem.textField.configuration = firstNameConfiguration
+					firstNameFieldView.textField.textAlignment = .natural
+					firstNameFieldView.textField.configuration = firstNameConfiguration
 
 					let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: lastName)
 					lastNameConfiguration.type = .cardHolderName
@@ -99,21 +99,21 @@ internal class VGSCardDataFormConfigurationManager {
 						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 					])
 
-					lastNameFormItem.textField.textAlignment = .natural
-					lastNameFormItem.textField.configuration = firstNameConfiguration
+					lastNameFieldView.textField.textAlignment = .natural
+					lastNameFieldView.textField.configuration = firstNameConfiguration
 				}
-			*/
+       */
 			}
 		}
 	}
 
-	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardFormView: VGSCardDetailsFormView) {
+	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardFormView: VGSCardDetailsSectionView) {
 
-		let textFiedFormItems = cardFormView.formItems
+		let fieldViews = cardFormView.fieldViews
 
-		let cardNumber = cardFormView.cardNumberFormItemView.cardTextField
-		let expCardDate = cardFormView.expDateFormItemView.expDateTextField
-		let cvcCardNum = cardFormView.cvcFormItemView.cvcTextField
+		let cardNumber = cardFormView.cardNumberFieldView.cardTextField
+		let expCardDate = cardFormView.expDateFieldView.expDateTextField
+		let cvcCardNum = cardFormView.cvcFieldView.cvcTextField
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.number")
 		cardConfiguration.type = .cardNumber
@@ -154,29 +154,21 @@ internal class VGSCardDataFormConfigurationManager {
 		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 		cvcCardNum.tintColor = .lightGray
 
-		guard let cardHolderFirstName = textFiedFormItems.first(where: {$0.fieldType == .firstName})?.textField, let cardHolderLastName = textFiedFormItems.first(where: {$0.fieldType == .lastName})?.textField else {
+		guard let cardHolderName = fieldViews.first(where: {$0.fieldType == .cardholderName}) else {
 			assertionFailure("Invalid multiplexing setup!")
 			return
 		}
 
-		let firstNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.first_name")
-		firstNameConfiguration.type = .cardHolderName
-		firstNameConfiguration.keyboardType = .namePhonePad
-		firstNameConfiguration.returnKeyType = .next
-		/// Required to be not empty
+		cardHolderName.textField.textAlignment = .natural
+		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.name")
+		holderConfiguration.type = .cardHolderName
+		holderConfiguration.type = .cardHolderName
+		holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		holderConfiguration.keyboardType = .namePhonePad
+		holderConfiguration.returnKeyType = .next
 
-		cardHolderFirstName.textAlignment = .natural
-		cardHolderFirstName.configuration = firstNameConfiguration
-		cardHolderFirstName.placeholder = "First Name"
-
-		let lastNameConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.last_name")
-		lastNameConfiguration.type = .cardHolderName
-		lastNameConfiguration.keyboardType = .namePhonePad
-		lastNameConfiguration.returnKeyType = .next
-		/// Required to be not empty
-
-		cardHolderLastName.textAlignment = .natural
-		cardHolderLastName.configuration = lastNameConfiguration
-		cardHolderLastName.placeholder = "Last Name"
+		cardHolderName.textField.configuration = holderConfiguration
 	}
 }

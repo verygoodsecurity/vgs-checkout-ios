@@ -1,5 +1,5 @@
 //
-//  VGSCountryFormItemView.swift
+//  VGSCountryFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for country form.
-internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .country
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return countryTextField
@@ -45,23 +45,23 @@ internal class VGSCountryFormItemView: UIView, VGSTextFieldFormItemProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintLabel.text = "Country"
-		formItemView.stackView.addArrangedSubview(countryTextField)
+		placeholderView.hintLabel.text = "Country"
+		placeholderView.stackView.addArrangedSubview(countryTextField)
 	}
 }
 
 /// Holds UI for state picker form.
-internal class VGSStatePickerFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSStatePickerFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal let fieldType: VGSAddCardFormFieldType = .state
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return statePickerTextField
@@ -92,11 +92,11 @@ internal class VGSStatePickerFormItemView: UIView, VGSTextFieldFormItemProtocol 
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintLabel.text = "State"
-		formItemView.stackView.addArrangedSubview(statePickerTextField)
+		placeholderView.hintLabel.text = "State"
+		placeholderView.stackView.addArrangedSubview(statePickerTextField)
 	}
 }

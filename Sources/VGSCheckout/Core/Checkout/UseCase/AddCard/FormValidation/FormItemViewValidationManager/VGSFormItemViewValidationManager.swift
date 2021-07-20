@@ -1,5 +1,5 @@
 //
-//  VGSFormItemViewValidationManager.swift
+//  VGSFieldViewValidationManager.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,61 +8,61 @@ import UIKit
 #endif
 
 /// Holds logic for updating form item views.
-internal final class VGSFormItemViewValidationManager {
+internal final class VGSFieldViewValidationManager {
 
 	/// Handle CardNumber field state during editing.
-	internal func updateCardNumberFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+	internal func updateCardNumberFieldViewOnEditingTextField(_ field: VGSTextField, fieldView: VGSTextFieldViewProtocol) {
 
-		let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
+		let isValidLength = self.isInputRequiredLengthInFieldView(fieldView)
 		// NOTE: same first digits in card number can be valid for 13, 16 and 19 digits
 		let isValidState = field.state.isValid
 
 		switch (isValidLength, isValidState) {
 		case (false, _):
-			formItem.updateUI(for: .focused)
+			fieldView.updateUI(for: .focused)
 		case (true, true):
-			formItem.updateUI(for: .valid)
+			fieldView.updateUI(for: .valid)
 		case (true, false):
-			formItem.updateUI(for: .invalid)
+			fieldView.updateUI(for: .invalid)
 		}
 	}
 
 	/// Handle Any field state during editing.
-	internal func updateAnyFormItemOnEditingTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
-		let isValidLength = self.isInputRequiredLengthInFormItem(formItem)
+	internal func updateAnyFieldViewOnEditingTextField(_ field: VGSTextField, fieldView: VGSTextFieldViewProtocol) {
+		let isValidLength = self.isInputRequiredLengthInFieldView(fieldView)
 		let isValidState = field.state.isValid
 
 		switch (isValidLength, isValidState) {
 		case (false, _):
-			formItem.updateUI(for: .focused)
+			fieldView.updateUI(for: .focused)
 		case (true, true):
-			formItem.updateUI(for: .valid)
+			fieldView.updateUI(for: .valid)
 		case (true, false):
-			formItem.updateUI(for: .invalid)
+			fieldView.updateUI(for: .invalid)
 		}
 	}
 
 	/// Handle Any field state after it finish editing.
-	internal func updateAnyFormItemOnEndEditTextField(_ field: VGSTextField, formItem: VGSTextFieldFormItemProtocol) {
+	internal func updateAnyFieldViewOnEndEditTextField(_ field: VGSTextField, fieldView: VGSTextFieldViewProtocol) {
 		let state = field.state
 
 		switch (state.isDirty, state.isValid) {
 		case (false, _):
-			formItem.updateUI(for: .inactive)
+			fieldView.updateUI(for: .inactive)
 		case (true, false):
-			formItem.updateUI(for: .invalid)
+			fieldView.updateUI(for: .invalid)
 			return
 		case (true, true):
-			formItem.updateUI(for: .focused)
+			fieldView.updateUI(for: .focused)
 		}
 	}
 
 	/// Check if input has required length.
-	/// - Parameter formItem: `VGSTextFieldFormItemProtocol` object, form item.
+	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, form item.
 	/// - Returns: `Bool` object, `true` if item has valid length.
-	internal func isInputRequiredLengthInFormItem(_ formItem: VGSTextFieldFormItemProtocol) -> Bool {
+	internal func isInputRequiredLengthInFieldView(_ fieldView: VGSTextFieldViewProtocol) -> Bool {
 
-		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: formItem.fieldType)
-		return fieldValidator.isTextFieldInputComplete(formItem.textField)
+		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: fieldView.fieldType)
+		return fieldValidator.isTextFieldInputComplete(fieldView.textField)
 	}
 }

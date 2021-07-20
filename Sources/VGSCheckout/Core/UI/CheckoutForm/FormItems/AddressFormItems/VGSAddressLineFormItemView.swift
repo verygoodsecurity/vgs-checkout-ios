@@ -1,5 +1,5 @@
 //
-//  VGSAddressLineFormItemView.swift
+//  VGSAddressLineFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,13 +8,13 @@ import UIKit
 #endif
 
 /// Holds UI for address line form item.
-internal class VGSAddressLineFormItemView: UIView, VGSTextFieldFormItemProtocol {
+internal class VGSAddressLineFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
 	internal var fieldType: VGSAddCardFormFieldType = .addressLine1
 
-	let formItemView = VGSPlaceholderFormItemView(frame: .zero)
+	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
 		return addressLineTextField
@@ -45,11 +45,11 @@ internal class VGSAddressLineFormItemView: UIView, VGSTextFieldFormItemProtocol 
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(formItemView)
-		formItemView.translatesAutoresizingMaskIntoConstraints = false
-		formItemView.checkout_constraintViewToSuperviewEdges()
+		addSubview(placeholderView)
+		placeholderView.translatesAutoresizingMaskIntoConstraints = false
+		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		formItemView.hintComponentView.label.text = "Address Line 1"
-		formItemView.stackView.addArrangedSubview(addressLineTextField)
+		placeholderView.hintComponentView.label.text = "Address Line 1"
+		placeholderView.stackView.addArrangedSubview(addressLineTextField)
 	}
 }
