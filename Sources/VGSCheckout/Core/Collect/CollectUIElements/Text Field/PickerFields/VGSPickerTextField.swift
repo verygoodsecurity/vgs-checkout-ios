@@ -67,7 +67,7 @@ internal class VGSPickerTextField: VGSTextField {
 		let doneButtonTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_picker_toolbar_done_button_title")
 		let doneButton = UIBarButtonItem(title: doneButtonTitle, style: .plain,
 																		 target: self, action: #selector(self.doneButtonDidTap))
-		toolbar.setItems([doneButton], animated: false)
+		toolbar.setItems([UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton], animated: false)
 		toolbar.sizeToFit()
 		toolbar.setContentHuggingPriority(.defaultLow, for: .horizontal)
 		textField.inputAccessoryView = toolbar
