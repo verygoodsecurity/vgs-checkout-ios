@@ -106,6 +106,26 @@ internal class VGSAddressDataFormConfigurationManager {
 	},
 	*/
 
+	/*
+
+	name: John Doe
+									 number: 41111111111111
+									 exp_month: 10
+									 exp_year: 2030
+									 cvc: 123,
+									 billing_address:
+										 name: John Doe
+										 company: John Doe Company
+										 address1: 555 Unblock Us St
+										 address2: M13 9PL
+										 city: New York
+										 region: NY
+										 country: US
+										 postal_code: 12301
+										 phone: '+14842634673'
+
+	*/
+
 	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
@@ -114,11 +134,15 @@ internal class VGSAddressDataFormConfigurationManager {
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
 
-		let countryConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
+		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
 
 		countryTextField.configuration = countryConfiguration
+
+		// Force select first row in picker.
+		countryTextField.selectFirstRow()
 
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.address1")
 		addressLine1Configuration.type = .none
@@ -149,6 +173,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		stateTextField.placeholder = "State"
 
 		stateTextField.configuration = stateConfiguration
+		stateTextField.mode = .textField
 
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
 		zipConfiguration.type = .none
