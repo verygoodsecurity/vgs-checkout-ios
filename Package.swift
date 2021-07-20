@@ -6,6 +6,7 @@ import PackageDescription
 
 let package = Package(
 	name: "VGSCheckout",
+	defaultLocalization: "en",
 	platforms: [
 		.iOS(.v11),
 	],
@@ -26,7 +27,7 @@ let package = Package(
 			exclude: [
 				"VGSCheckout.h",
 				"Info.plist"
-			]),
+			], resources: [.process("Resources/VGSCanadaRegions.json"), .process("Resources/VGSVGSUnitedStatesRegions.json")]),
 		.target(
 			name: "VGSCheckoutCardIOScanner",
 			path: "Sources/VGSCheckoutCardIOScanner/",
