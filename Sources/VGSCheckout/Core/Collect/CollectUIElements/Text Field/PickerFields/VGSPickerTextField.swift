@@ -15,7 +15,7 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 internal class VGSPickerTextField: VGSTextField {
 
 	/// Selected value from picker (can mismatch with actual displayed text - like we need to send country code instead of displayed name).
-	fileprivate var lastSelectedPickerValue: String?
+	fileprivate var selectedPickerValue: String?
 
 	/// Selected output value (can mismatch with actual displayed text).
 	internal var selectedOutputValue: String? {
@@ -25,7 +25,7 @@ internal class VGSPickerTextField: VGSTextField {
 			return getOutputText()
 		case .picker:
 			// Use selected value from picker.
-			return lastSelectedPickerValue
+			return selectedPickerValue
 		}
 	}
 
@@ -157,8 +157,10 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return}
 		let selectedText = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row)
 		textField.secureText = selectedText
+		selectedPickerValue = pickerConfiguration.dataProvider?.dataSource.pickerField(self, selectedValueForRow: row)
 
 		pickerSelectionDelegate?.userDidSelectValue(selectedText, in: self)
+
 		placeholder = nil
 	}
 }
@@ -203,6 +205,6 @@ internal class VGSPickerDataSourceProvider: NSObject, UIPickerViewDataSource {
 internal protocol VGSPickerTextFieldDataSourceProtocol {
 	func numberOfRows() -> Int
 	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String?
-	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int)
+	func pickerField(_ pickerField: VGSPickerTextField, selectedValueForRow row: Int)
 	-> String?
 }

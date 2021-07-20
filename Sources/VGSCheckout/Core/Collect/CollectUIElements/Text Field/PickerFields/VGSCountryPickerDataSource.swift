@@ -1,5 +1,5 @@
 //
-//  VGSCountryPickerTextField.swift
+//  VGSCountryPickerDataSource.swift
 //  VGSCheckout
 
 import Foundation
@@ -19,7 +19,7 @@ internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourc
 		return countries[row].name
 	}
 
-	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int) -> String? {
+	func pickerField(_ pickerField: VGSPickerTextField, selectedValueForRow row: Int) -> String? {
 		guard row >= 0,
 					row < countries.count
 		else {
