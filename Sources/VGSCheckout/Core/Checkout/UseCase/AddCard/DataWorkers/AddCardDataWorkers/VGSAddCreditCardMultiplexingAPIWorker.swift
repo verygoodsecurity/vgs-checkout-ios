@@ -35,8 +35,16 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 		}
 
 		let extraMultiplexingData: [String: Any] = [
-			"billing_address": [
-				"name": name,
+			"data": [
+				"type": "financial_instruments",
+				"attributes": [
+					"instrument_type": "card",
+					"details": [
+						"billing_address": [
+							"name" : name
+						]
+					]
+				]
 		]]
 
 		let multiplexingPath = "/api/financial_instruments"

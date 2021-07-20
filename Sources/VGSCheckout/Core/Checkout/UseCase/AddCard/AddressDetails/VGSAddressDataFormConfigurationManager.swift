@@ -134,7 +134,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
 
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
@@ -144,7 +144,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		// Force select first row in picker.
 		countryTextField.selectFirstRow()
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.address1")
+		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.address1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
 		addressLine1Configuration.returnKeyType = .next
@@ -153,7 +153,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.city")
+		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.city")
 		cityConfiguration.type = .none
 		cityConfiguration.isRequiredValidOnly = true
 
@@ -162,7 +162,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityTextField.placeholder = "City"
 		cityConfiguration.returnKeyType = .next
 
-		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.region")
+		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
 		stateConfiguration.type = .none
 		stateConfiguration.isRequiredValidOnly = true
 		stateConfiguration.validationRules = VGSValidationRuleSet(rules: [
@@ -175,7 +175,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		stateTextField.configuration = stateConfiguration
 		stateTextField.mode = .textField
 
-		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
+		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.postal_code")
 		zipConfiguration.type = .none
 		zipConfiguration.isRequiredValidOnly = true
 

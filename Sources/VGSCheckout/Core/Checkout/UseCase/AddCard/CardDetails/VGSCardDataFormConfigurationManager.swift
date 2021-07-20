@@ -138,7 +138,7 @@ internal class VGSCardDataFormConfigurationManager {
 		let expCardDate = cardFormView.expDateFieldView.expDateTextField
 		let cvcCardNum = cardFormView.cvcFieldView.cvcTextField
 
-		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "number")
+		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.number")
 		cardConfiguration.type = .cardNumber
 		cardConfiguration.isRequiredValidOnly = true
 
@@ -156,7 +156,7 @@ internal class VGSCardDataFormConfigurationManager {
 		expDateConfiguration.type = .expDate
 		expDateConfiguration.inputDateFormat = .shortYear
 		expDateConfiguration.outputDateFormat = .longYear
-		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "exp_month", yearFieldName: "exp_year")]
+		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.exp_month", yearFieldName: "data.attributes.details.exp_year")]
 		expDateConfiguration.formatPattern = "##/##"
 		expDateConfiguration.inputSource = .keyboard
 
@@ -169,7 +169,7 @@ internal class VGSCardDataFormConfigurationManager {
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
 
-		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "cvc")
+		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.cvc")
 		cvcConfiguration.type = .cvc
 
 		cvcCardNum.configuration = cvcConfiguration
@@ -183,7 +183,7 @@ internal class VGSCardDataFormConfigurationManager {
 		}
 
 		cardHolderName.textField.textAlignment = .natural
-		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "name")
+		let holderConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.name")
 		holderConfiguration.type = .cardHolderName
 		holderConfiguration.type = .cardHolderName
 		holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
