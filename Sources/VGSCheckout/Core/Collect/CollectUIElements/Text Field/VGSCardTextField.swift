@@ -31,6 +31,12 @@ internal final class VGSCardTextField: VGSTextField {
     }
     
     // MARK: Attributes
+  
+    /// Card brand icon visibility..
+    public var isIconHidden: Bool = false {
+      didSet { updateCardImageView(hidden: isIconHidden)}
+    }
+  
     /// Card brand icon position inside `VGSCardTextField`.
     public var cardIconLocation = CardIconLocation.right {
       didSet {
@@ -62,7 +68,7 @@ internal extension VGSCardTextField {
     override func mainInitialization() {
         super.mainInitialization()
         
-        setupCardIconView()
+        buildCardIconView()
         setCardIconAtLocation(cardIconLocation)
         updateCardImage()
     }
@@ -110,15 +116,31 @@ internal extension VGSCardTextField {
         updateCardImage()
     }
   
+    func updateCardImageView(hidden: Bool)  {
+      if hidden {
+        cardIconView.removeFromSuperview()
+      } else {
+        buildCardIconView()
+        setCardIconAtLocation(cardIconLocation)
+        updateCardImage()
+      }
+    }
+  
     func updateCardImage() {
-       if let state = state as? CardState {
-          cardIconView.image = (cardsIconSource == nil) ? state.cardBrand.brandIcon :  cardsIconSource?(state.cardBrand)
-       } else {
+      guard !isIconHidden else {
+        return
+      }
+      if let state = state as? CardState {
+         cardIconView.image = (cardsIconSource == nil) ? state.cardBrand.brandIcon :  cardsIconSource?(state.cardBrand)
+      } else {
         cardIconView.image = VGSCheckoutPaymentCards.unknown.brandIcon
-       }
+      }
     }
   
     func setCardIconAtLocation(_ location: CardIconLocation) {
+        guard !isIconHidden else {
+          return
+        }
         cardIconView.removeFromSuperview()
         switch location {
         case .left:
@@ -129,6 +151,9 @@ internal extension VGSCardTextField {
     }
     
     func updateCardIconViewSize() {
+        guard !isIconHidden else {
+          return
+        }
         if let widthConstraint = cardIconView.constraints.filter({ $0.identifier == "widthConstraint" }).first {
             widthConstraint.constant = cardIconSize.width
         }
@@ -138,7 +163,7 @@ internal extension VGSCardTextField {
     }
     
     // make image view for a card brand icon
-    private func setupCardIconView() {
+    private func buildCardIconView() {
         cardIconView.translatesAutoresizingMaskIntoConstraints = false
         cardIconView.contentMode = .scaleAspectFit
         let widthConstraint = NSLayoutConstraint(item: cardIconView,

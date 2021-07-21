@@ -31,6 +31,7 @@ internal class VGSCardDataFormConfigurationManager {
 		])
 		cardNumber.configuration = cardConfiguration
 		cardNumber.placeholder = "4111 1111 1111 1111"
+    cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
 
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .right
