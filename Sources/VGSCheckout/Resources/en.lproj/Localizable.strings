@@ -96,7 +96,7 @@
 /* Postal code field subtitle in address info. */
 "vgs_checkout_address_info_postal_code_subtitle" = "Postal code";
 
-
+// Address section
 
 /* Address line 1 field placeholder in address info. */
 "vgs_checkout_address_info_address_line1_hint" = "Address line 1";
@@ -125,9 +125,7 @@
 /* Postal code field placeholder in address info. */
 "vgs_checkout_address_info_postal_code_hint" = "12345";
 
-
-
-
+// Address Errors
 
 /* Empty city field in address info code error. */
 "vgs_checkout_address_info_city_empty_error" = "City is empty";
@@ -138,17 +136,26 @@
 /* Empty region in address info code error. */
 "vgs_checkout_address_info_region_empty_error" = "Region is empty";
 
-/* Empty state in address info code error. */
+/* Empty state (US) in address info code error. */
 "vgs_checkout_address_info_state_empty_error" = "State is empty";
 
-/* Empty province in address info code error. */
+/* Empty province (CA) in address info code error. */
 "vgs_checkout_address_info_province_empty_error" = "Province is empty";
 
-/* Empty county in address info code error. */
+/* Empty county (UK) in address info code error. */
 "vgs_checkout_address_info_county_empty_error" = "County is empty";
 
-/* Empty ZIP code in address info code error. */
-"vgs_checkout_address_info_zipcode_empty_error" = "Zipcode is empty";
+/* Empty suburb (NZ) in address info code error. */
+"vgs_checkout_address_info_suburb_empty_error" = "Suburb is empty";
 
-/* Empty postal code in address info code error. */
+/* Empty ZIP code in address info code error. */
+"vgs_checkout_address_info_zipcode_empty_error" = "ZIP is empty";
+
+/* Empty Postal code code in address info code error. */
 "vgs_checkout_address_info_zipcode_empty_error" = "Postal code is empty";
+
+/* Invalid ZIP code in address info code error. */
+"vgs_checkout_address_info_zipcode_empty_error" = "ZIP is invalid";
+
+/* Invalid postal code in address info code error. */
+"vgs_checkout_address_info_zipcode_empty_error" = "Postal code is invalid";
