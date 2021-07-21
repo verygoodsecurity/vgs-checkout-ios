@@ -81,6 +81,9 @@
 /* State (US) field subtitle in address info. */
 "vgs_checkout_address_info_region_type_state_subtitle" = "State";
 
+/* Suburb (NZ) field subtitle in address info. */
+"vgs_checkout_address_info_region_type_suburb_subtitle" = "Suburb";
+
 /* Province (Canada) field subtitle in address info. */
 "vgs_checkout_address_info_region_type_province_subtitle" = "Province";
 
@@ -92,6 +95,35 @@
 
 /* Postal code field subtitle in address info. */
 "vgs_checkout_address_info_postal_code_subtitle" = "Postal code";
+
+
+
+/* Address line 1 field placeholder in address info. */
+"vgs_checkout_address_info_address_line1_hint" = "Address line 1";
+
+/* Address line 2 field placeholder in address info. */
+"vgs_checkout_address_info_address_line2_hint" = "Address line 2 (Optional)";
+
+/* City field placeholder in address info. */
+"vgs_checkout_address_info_city_hint" = "City";
+
+/* State (US) field placeholder in address info. */
+"vgs_checkout_address_info_region_type_state_hint" = "State";
+
+/* Suburb (NZ) field placeholder in address info. */
+"vgs_checkout_address_info_region_type_suburb_hint" = "Suburb";
+
+/* Province (Canada) field placeholder in address info. */
+"vgs_checkout_address_info_region_type_province_hint" = "Province";
+
+/* County (UK) field placeholder in address info. */
+"vgs_checkout_address_info_region_type_county_hint" = "County";
+
+/* Zip (US) field placeholder in address info. */
+"vgs_checkout_address_info_address_zip_hint" = "12345";
+
+/* Postal code field placeholder in address info. */
+"vgs_checkout_address_info_postal_code_hint" = "12345";
 
 
 
