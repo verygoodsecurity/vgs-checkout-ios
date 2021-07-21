@@ -12,6 +12,9 @@ public struct VGSCheckoutCVCOptions {
 
 	/// Field visibiliby, default is `.visible`.
 	public var fieldVisibility: VGSCheckoutFieldVisibility = .visible
+  
+  /// CVC Icon visibility configuration.
+  public var isIconHidden: Bool = false
 
 	/// no:doc
 	public init() {}

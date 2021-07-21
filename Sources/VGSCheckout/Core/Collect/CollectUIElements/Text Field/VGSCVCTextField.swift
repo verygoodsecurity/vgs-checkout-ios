@@ -47,6 +47,12 @@ internal final class VGSCVCTextField: VGSTextField {
     }
     
     // MARK: Attributes
+  
+    /// CVC icon visibility.
+    public var isIconHidden: Bool = false {
+      didSet { updateCardImageView(hidden: isIconHidden)}
+    }
+  
     /// CVC icon position inside `VGSCardTextField`.
     public var cvcIconLocation = CVCIconLocation.right {
       didSet {
@@ -122,10 +128,16 @@ internal extension VGSCVCTextField {
 
   
     func updateCVCImage(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
+        guard !isIconHidden else {
+          return
+        }
         cvcIconImageView.image = (cvcIconSource == nil) ? cardBrand.cvcIcon :  cvcIconSource?(cardBrand)
     }
   
     func setCVCIconAtLocation(_ location: CVCIconLocation) {
+        guard !isIconHidden else {
+          return
+        }
         cvcIconContainerView.removeFromSuperview()
         switch location {
         case .left:
@@ -148,7 +160,9 @@ internal extension VGSCVCTextField {
     
     // Make image view for a card brand icon
     private func setupCVCIconView() {
-
+      guard !isIconHidden else {
+        return
+      }
       // Update only card image view width and height constraint.
       cvcIconImageView.translatesAutoresizingMaskIntoConstraints = false
       cvcIconImageView.contentMode = .scaleAspectFit
@@ -169,5 +183,15 @@ internal extension VGSCVCTextField {
                                                 constant: cvcIconSize.height)
       heightConstraint.identifier = "heightConstraint"
       cvcIconImageView.addConstraints([widthConstraint, heightConstraint])
+    }
+  
+    func updateCardImageView(hidden: Bool)  {
+      if hidden {
+        cvcIconImageView.removeFromSuperview()
+      } else {
+        setupCVCIconView()
+        setCVCIconAtLocation(cvcIconLocation)
+        updateCVCImage(for: .unknown)
+      }
     }
 }
