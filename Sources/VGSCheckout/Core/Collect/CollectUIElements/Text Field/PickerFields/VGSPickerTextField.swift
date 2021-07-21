@@ -124,6 +124,7 @@ internal class VGSPickerTextField: VGSTextField {
 			// Hide caret for picker view text field.
 			isCaretHidden = false
 			textField.inputView = nil
+			textField.inputAccessoryView = nil
 			autocorrectionType = .no
 			tintColor = previousTintColor
 			textField.rightViewMode = .never
