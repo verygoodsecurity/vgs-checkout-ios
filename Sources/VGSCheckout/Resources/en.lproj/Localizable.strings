@@ -152,10 +152,10 @@
 "vgs_checkout_address_info_zipcode_empty_error" = "ZIP is empty";
 
 /* Empty Postal code code in address info code error. */
-"vgs_checkout_address_info_zipcode_empty_error" = "Postal code is empty";
+"vgs_checkout_address_info_postal_code_empty_error" = "Postal code is empty";
 
 /* Invalid ZIP code in address info code error. */
-"vgs_checkout_address_info_zipcode_empty_error" = "ZIP is invalid";
+"vgs_checkout_address_info_zipcode_invalid_error" = "ZIP is invalid";
 
 /* Invalid postal code in address info code error. */
-"vgs_checkout_address_info_zipcode_empty_error" = "Postal code is invalid";
+"vgs_checkout_address_info_postal_code_invalid_error" = "Postal code is invalid";
