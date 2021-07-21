@@ -204,7 +204,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 			print("currentRegions: \(currentRegions)")
 
-			for country in VGSAddressCountriesDataProvider.provideCountries() {
+			for country in VGSAddressCountriesDataProvider.provideSupportedCountries() {
 				if country.name == text {
 					currentCountryCode = country.code
 					print("currentCode found \(currentCountryCode)")
