@@ -107,6 +107,29 @@ internal class VGSCardDataFormConfigurationManager {
 		}
 	}
 
+	/*
+	{
+		name,
+		number,
+		exp_month,
+		exp_year,
+		cvc,
+		billing_address: {
+			name, //require
+			company,
+			address1, //require
+			address2,
+			city, //require
+			region, //require (Principal subdivision in ISO 3166-2)
+			country, //require (Country code in ISO 3166-1 alpha-2)
+			state,
+			country,
+			postal_code, //require
+			phone,
+		},
+	},
+	*/
+
 	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardFormView: VGSCardDetailsSectionView) {
 
 		let fieldViews = cardFormView.fieldViews
@@ -129,11 +152,11 @@ internal class VGSCardDataFormConfigurationManager {
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .right
 
-		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "data.attributes.details")
+		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "")
 		expDateConfiguration.type = .expDate
 		expDateConfiguration.inputDateFormat = .shortYear
 		expDateConfiguration.outputDateFormat = .longYear
-		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.month", yearFieldName: "data.attributes.details.year")]
+		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "data.attributes.details.exp_month", yearFieldName: "data.attributes.details.exp_year")]
 		expDateConfiguration.formatPattern = "##/##"
 		expDateConfiguration.inputSource = .keyboard
 
@@ -146,7 +169,7 @@ internal class VGSCardDataFormConfigurationManager {
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
 
-		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.verification_value")
+		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.cvc")
 		cvcConfiguration.type = .cvc
 
 		cvcCardNum.configuration = cvcConfiguration

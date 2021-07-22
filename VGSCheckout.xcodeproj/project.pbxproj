@@ -175,7 +175,7 @@
 		44D5CF27268C440F00312108 /* VGSCardholderFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */; };
 		44D5CF29268C48D900312108 /* VGSFormFieldsValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF28268C48D900312108 /* VGSFormFieldsValidatorFactory.swift */; };
 		44D5CF2B268C495500312108 /* VGSFormTextFieldValidationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF2A268C495500312108 /* VGSFormTextFieldValidationProtocol.swift */; };
-		44E10A8526936235001F0D44 /* VGSCountryPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */; };
+		44E10A8526936235001F0D44 /* VGSCountryPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8326936235001F0D44 /* VGSCountryPickerDataSource.swift */; };
 		44E10A8626936235001F0D44 /* VGSPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8426936235001F0D44 /* VGSPickerTextField.swift */; };
 		44E10A89269363A0001F0D44 /* VGSAddressDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A88269363A0001F0D44 /* VGSAddressDataProvider.swift */; };
 		44E10A8B2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10A8A2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift */; };
@@ -414,7 +414,7 @@
 		44D5CF26268C440F00312108 /* VGSCardholderFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardholderFieldValidator.swift; sourceTree = "<group>"; };
 		44D5CF28268C48D900312108 /* VGSFormFieldsValidatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormFieldsValidatorFactory.swift; sourceTree = "<group>"; };
 		44D5CF2A268C495500312108 /* VGSFormTextFieldValidationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormTextFieldValidationProtocol.swift; sourceTree = "<group>"; };
-		44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCountryPickerTextField.swift; sourceTree = "<group>"; };
+		44E10A8326936235001F0D44 /* VGSCountryPickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCountryPickerDataSource.swift; sourceTree = "<group>"; };
 		44E10A8426936235001F0D44 /* VGSPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPickerTextField.swift; sourceTree = "<group>"; };
 		44E10A88269363A0001F0D44 /* VGSAddressDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressDataProvider.swift; sourceTree = "<group>"; };
 		44E10A8A2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCardDataFormConfigurationManager.swift; sourceTree = "<group>"; };
@@ -1382,7 +1382,7 @@
 			isa = PBXGroup;
 			children = (
 				44E10A872693638D001F0D44 /* AddressDataProviders */,
-				44E10A8326936235001F0D44 /* VGSCountryPickerTextField.swift */,
+				44E10A8326936235001F0D44 /* VGSCountryPickerDataSource.swift */,
 				44E10A8426936235001F0D44 /* VGSPickerTextField.swift */,
 			);
 			path = PickerFields;
@@ -2007,7 +2007,7 @@
 				4405DCB126848B28004A83AD /* VGSPaymentCardModel.swift in Sources */,
 				4405DC6326844B30004A83AD /* VGSCardTextField.swift in Sources */,
 				44C4C8EE2664B18B00195505 /* VGSExpirationDateFormItemView.swift in Sources */,
-				44E10A8526936235001F0D44 /* VGSCountryPickerTextField.swift in Sources */,
+				44E10A8526936235001F0D44 /* VGSCountryPickerDataSource.swift in Sources */,
 				4405DC6A26844B30004A83AD /* VGSValidationRulePattern.swift in Sources */,
 				4405DC9726847247004A83AD /* String+extension.swift in Sources */,
 				4405DC2426844AD8004A83AD /* APIHostURLPolicy.swift in Sources */,

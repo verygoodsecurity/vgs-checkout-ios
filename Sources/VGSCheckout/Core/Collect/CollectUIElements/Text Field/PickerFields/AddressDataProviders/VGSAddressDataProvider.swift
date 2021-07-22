@@ -16,9 +16,15 @@ internal class VGSAddressCountriesDataProvider {
 		let name: String
 	}
 
+	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
+
+	static func provideSupportedCountries() -> [CountryModel] {
+		return provideCountries().filter({supportedCodes.contains($0.code)})
+	}
+
 	/// Provide all countries.
 	/// - Returns: `[CountryModel]`, array of `CountryModel`.
-	static func provideCountries() -> [CountryModel] {
+	private static func provideCountries() -> [CountryModel] {
 		let currentCountryCode = Locale.autoupdatingCurrent.regionCode
 		let locale = NSLocale.autoupdatingCurrent
 

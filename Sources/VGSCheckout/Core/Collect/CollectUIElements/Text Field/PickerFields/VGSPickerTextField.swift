@@ -14,6 +14,21 @@ internal protocol VGSPickerTextFieldSelectionDelegate: AnyObject {
 /// Text field with picker view input.
 internal class VGSPickerTextField: VGSTextField {
 
+	/// Selected value from picker (can mismatch with actual displayed text - like we need to send country code instead of displayed name).
+	fileprivate var selectedPickerValue: String?
+
+	/// Selected output value (can mismatch with actual displayed text).
+	internal var selectedOutputValue: String? {
+		switch mode {
+		case .textField:
+			// For text field use output text (displayed text).
+			return getOutputText()
+		case .picker:
+			// Use selected value from picker.
+			return selectedPickerValue
+		}
+	}
+
 	/// Defines input mode type.
 	internal enum InputMode {
 
@@ -67,7 +82,7 @@ internal class VGSPickerTextField: VGSTextField {
 		let doneButtonTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_picker_toolbar_done_button_title")
 		let doneButton = UIBarButtonItem(title: doneButtonTitle, style: .plain,
 																		 target: self, action: #selector(self.doneButtonDidTap))
-		toolbar.setItems([doneButton], animated: false)
+		toolbar.setItems([UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), doneButton], animated: false)
 		toolbar.sizeToFit()
 		toolbar.setContentHuggingPriority(.defaultLow, for: .horizontal)
 		textField.inputAccessoryView = toolbar
@@ -109,6 +124,7 @@ internal class VGSPickerTextField: VGSTextField {
 			// Hide caret for picker view text field.
 			isCaretHidden = false
 			textField.inputView = nil
+			textField.inputAccessoryView = nil
 			autocorrectionType = .no
 			tintColor = previousTintColor
 			textField.rightViewMode = .never
@@ -142,8 +158,10 @@ extension VGSPickerTextField: UIPickerViewDelegate {
 		guard let pickerConfiguration = configuration as? VGSPickerTextFieldConfiguration else {return}
 		let selectedText = pickerConfiguration.dataProvider?.dataSource.pickerField(self, titleForRow: row)
 		textField.secureText = selectedText
+		selectedPickerValue = pickerConfiguration.dataProvider?.dataSource.pickerField(self, selectedValueForRow: row)
 
 		pickerSelectionDelegate?.userDidSelectValue(selectedText, in: self)
+
 		placeholder = nil
 	}
 }
@@ -188,6 +206,6 @@ internal class VGSPickerDataSourceProvider: NSObject, UIPickerViewDataSource {
 internal protocol VGSPickerTextFieldDataSourceProtocol {
 	func numberOfRows() -> Int
 	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String?
-	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int)
+	func pickerField(_ pickerField: VGSPickerTextField, selectedValueForRow row: Int)
 	-> String?
 }

@@ -108,7 +108,7 @@ final class VGSRegionsDataSourceProvider: VGSPickerTextFieldDataSourceProtocol {
 		return regions[row].displayName
 	}
 
-	func pickerField(_ pickerField: VGSPickerTextField, inputValueForRow row: Int) -> String? {
+	func pickerField(_ pickerField: VGSPickerTextField, selectedValueForRow row: Int) -> String? {
 		guard row >= 0,
 					row < regions.count
 		else {

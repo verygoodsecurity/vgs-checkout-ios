@@ -98,7 +98,10 @@ internal extension VGSCollect {
 	  /// - Returns: `BodyData` from collect fields.
 	static func mapFieldsDataToBody(from textFields: [VGSTextField]) -> BodyData {
 			let textFieldsData: BodyData = textFields.reduce(into: BodyData()) { (dict, element) in
-				let output = element.getOutputText()
+				var output = element.getOutputText()
+				if let pickerField = element as? VGSPickerTextField {
+					output = pickerField.selectedOutputValue
+				}
 
 				/// Check if any serialization should be done before data will be send
 				if let serialazable = element.configuration as? VGSCheckoutFormatSerializableProtocol, serialazable.shouldSerialize {

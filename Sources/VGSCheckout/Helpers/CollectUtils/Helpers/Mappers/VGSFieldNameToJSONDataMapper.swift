@@ -19,7 +19,10 @@ internal final class VGSFieldNameToJSONDataMapper {
     
 		for field in textFields {
       let fieldName = field.fieldName
-      let fieldValue = field.getOutputText()
+      var fieldValue = field.getOutputText()
+			if let pickerField = field as? VGSPickerTextField {
+				fieldValue = pickerField.selectedOutputValue
+			}
       
       /// Check if field value need serioalization
       if let serialazable = field.configuration as? VGSCheckoutFormatSerializableProtocol, serialazable.shouldSerialize {
