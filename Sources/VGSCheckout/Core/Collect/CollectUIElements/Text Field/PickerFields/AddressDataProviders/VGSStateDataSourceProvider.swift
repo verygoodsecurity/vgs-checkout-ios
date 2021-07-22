@@ -4,11 +4,49 @@
 
 import Foundation
 
+/// Address region type.
 internal enum VGSAddressRegionType {
+
+	/// State (US).
 	case state
+
+	/// Province (Canada)
 	case province
+
+	/// County (United Kingdom)
 	case county
+
+	/// Suburb (New Zealanad)
 	case suburb
+
+	/// Localized text field placeholder.
+	internal var lozalizedPlaceholder: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+	}
+
+	/// Localized text field hint.
+	internal var lozalizedHint: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+	}
+
+	/// Localized empty text error.
+	internal var lozalizedEmptyError: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+	}
+
+	/// Localized key placeholder key.
+	private var localizationPlaceholderKey: String {
+		switch self {
+		case .state:
+			return "vgs_checkout_address_info_region_type_state_hint"
+		case .province:
+			return "vgs_checkout_address_info_region_type_province_hint"
+		case .county:
+			return "vgs_checkout_address_info_region_type_county_hint"
+		case .suburb:
+			return "vgs_checkout_address_info_region_type_suburb_hint"
+		}
+	}
 }
 
 internal struct VGSAddressRegionModel {
