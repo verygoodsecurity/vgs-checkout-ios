@@ -31,6 +31,7 @@ internal class VGSCardDataFormConfigurationManager {
 		])
 		cardNumber.configuration = cardConfiguration
 		cardNumber.placeholder = "4111 1111 1111 1111"
+    cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
 
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .right
@@ -60,6 +61,7 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
+    cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
 		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 		cvcCardNum.tintColor = .lightGray
 
