@@ -10,13 +10,13 @@ internal enum VGSAddressRegionType {
 	/// State (US).
 	case state
 
-	/// Province (Canada)
+	/// Province (Canada).
 	case province
 
-	/// County (United Kingdom)
+	/// County (United Kingdom).
 	case county
 
-	/// Suburb (New Zealanad)
+	/// Suburb (New Zealand).
 	case suburb
 
 	/// Localized text field placeholder.
@@ -26,7 +26,7 @@ internal enum VGSAddressRegionType {
 
 	/// Localized text field hint.
 	internal var lozalizedHint: String {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationFieldHintKey)
 	}
 
 	/// Localized empty text error.
@@ -61,6 +61,20 @@ internal enum VGSAddressRegionType {
 			return "vgs_checkout_address_info_region_type_county_hint"
 		case .suburb:
 			return "vgs_checkout_address_info_region_type_suburb_hint"
+		}
+	}
+
+	/// Localized key for label above the text field.
+	private var localizationFieldHintKey: String {
+		switch self {
+		case .state:
+			return "vgs_checkout_address_info_region_type_state_subtitle"
+		case .province:
+			return "vgs_checkout_address_info_region_type_province_subtitle"
+		case .county:
+			return "vgs_checkout_address_info_region_type_county_subtitle"
+		case .suburb:
+			return "vgs_checkout_address_info_region_type_suburb_subtitle"
 		}
 	}
 }
