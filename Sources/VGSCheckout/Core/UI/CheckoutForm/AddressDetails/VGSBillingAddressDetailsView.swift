@@ -44,6 +44,14 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		return componentView
 	}()
 
+	/// Address line 2 form item view.
+	internal lazy var addressLine2FieldView: VGSAddressLineFieldView = {
+		let componentView = VGSAddressLineFieldView(frame: .zero)
+		componentView.translatesAutoresizingMaskIntoConstraints = false
+
+		return componentView
+	}()
+
 	/// City form item view.
 	internal lazy var cityFieldView: VGSCityFieldView = {
 		let componentView = VGSCityFieldView(frame: .zero)
@@ -212,6 +220,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		verticalStackView.addArrangedSubview(countryFieldView)
 		verticalStackView.addArrangedSubview(addressLine1FieldView)
+		verticalStackView.addArrangedSubview(addressLine2FieldView)
 		verticalStackView.addArrangedSubview(cityFieldView)
 
 		stateAndZipStackView.addArrangedSubview(statePickerFieldView)
@@ -226,6 +235,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		fieldViews = [
 			countryFieldView,
 			addressLine1FieldView,
+			addressLine2FieldView,
 			cityFieldView,
 			statePickerFieldView,
 			zipFieldView

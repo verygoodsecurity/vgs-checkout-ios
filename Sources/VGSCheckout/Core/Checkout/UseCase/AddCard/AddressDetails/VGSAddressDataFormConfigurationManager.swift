@@ -15,6 +15,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
@@ -41,6 +42,15 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1TextField.placeholder = "Address line 1"
 
 		addressLine1TextField.configuration = addressLine1Configuration
+
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
+		addressLine2Configuration.type = .none
+		addressLine2Configuration.isRequiredValidOnly = false
+		addressLine2Configuration.returnKeyType = .next
+
+		addressLine2TextField.placeholder = "Address line 2 (Optional)"
+
+		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
@@ -130,6 +140,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
@@ -150,8 +161,16 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1Configuration.returnKeyType = .next
 
 		addressLine1TextField.placeholder = "Address line 1"
-
 		addressLine1TextField.configuration = addressLine1Configuration
+
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
+		addressLine2Configuration.type = .none
+		addressLine2Configuration.isRequiredValidOnly = false
+		addressLine2Configuration.returnKeyType = .next
+
+		addressLine2TextField.placeholder = "Address line 2 (Optional)"
+
+		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.city")
 		cityConfiguration.type = .none
