@@ -45,7 +45,7 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 /// Defines Checkout main view UI Theme.
 public protocol VGSCheckoutViewThemeProtocol {
 
-	/// The view's background color. NOT USED!!!
+	/// The view's background color.
   var checkoutViewBackgroundColor: UIColor { get set }
 
 	/// The font of the section title.
