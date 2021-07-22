@@ -45,6 +45,8 @@ internal enum VGSAddressRegionType {
 			return .county
 		case .ca:
 			return .province
+		case .nz:
+			return .suburb
 		default:
 			return .state
 		}

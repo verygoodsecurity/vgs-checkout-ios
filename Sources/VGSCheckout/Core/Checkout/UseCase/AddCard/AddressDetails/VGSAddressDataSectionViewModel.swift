@@ -126,19 +126,26 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		}
 	}
 
-	var countryPickerField: VGSPickerTextField? {
+	/// Country picker field.
+	fileprivate var countryPickerField: VGSPickerTextField? {
 		guard let countryTextField = fieldViews.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
 
 		return countryTextField
 	}
 
-	var statePickerField: VGSPickerTextField? {
+	/// State field view.
+	fileprivate var stateFieldView: VGSTextFieldViewProtocol? {
+		return fieldViews.first(where: {$0.fieldType == .state})
+	}
+
+	/// State picker field.
+	fileprivate var statePickerField: VGSPickerTextField? {
 		guard let stateTextField = fieldViews.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
 
 		return stateTextField
 	}
 
-	var currentRegions: [VGSAddressRegionModel] {
+	fileprivate var currentRegions: [VGSAddressRegionModel] {
 		guard let config = countryPickerField?.configuration as? VGSPickerTextFieldConfiguration, let dataSource = config.dataProvider?.dataSource as? VGSRegionsDataSourceProvider else {
 			return []
 		}
@@ -183,7 +190,13 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 	}
 
 	func updateStateField(with countryISO: VGSCountriesISO) {
-		guard let stateField = statePickerField else {return}
+		guard let stateField = statePickerField, let stateTextFieldView = self.stateFieldView else {return}
+
+		let countryRegion = VGSAddressRegionType.regionType(for: countryISO)
+		stateTextFieldView.placeholderView.hintLabel.text = countryRegion.lozalizedHint
+		stateField.placeholder = countryRegion.lozalizedPlaceholder
+
+		/*
 		switch countryISO {
 		case .us, .ca:
 			if let config = stateField.configuration as? VGSPickerTextFieldConfiguration {
@@ -195,6 +208,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 		default:
 			billingAddressFormView.statePickerFieldView.statePickerTextField.mode = .textField
 		}
+	  */
 	}
 
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
@@ -213,7 +227,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
-				//updateStateField(with: newCountry)
+				updateStateField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
 
