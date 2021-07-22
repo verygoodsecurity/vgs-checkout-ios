@@ -6,14 +6,13 @@ import Foundation
 
 internal enum VGSAddressRegionType {
 	case state
-	case region
 	case province
 	case county
-	case general
+	case suburb
 }
 
 internal struct VGSAddressRegionModel {
-	var regionType: VGSAddressRegionType = .region
+	var regionType: VGSAddressRegionType = .state
 	let displayName: String
 	let code: String
 
@@ -73,7 +72,7 @@ internal class VGSAddressRegionProvider {
 		case .ca:
 			return .province
 		default:
-			return .general
+			return .state
 		}
 	}
 
