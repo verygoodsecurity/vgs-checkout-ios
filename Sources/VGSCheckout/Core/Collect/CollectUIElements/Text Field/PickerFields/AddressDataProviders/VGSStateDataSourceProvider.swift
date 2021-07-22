@@ -34,6 +34,22 @@ internal enum VGSAddressRegionType {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
 	}
 
+	/// Region type for country ISO.
+	/// - Parameter countryISO: `VGSCountriesISO` object, country ISO.
+	/// - Returns: `VGSAddressRegionType` matching specified country.
+	internal static func regionType(for countryISO: VGSCountriesISO) -> VGSAddressRegionType {
+		switch countryISO {
+		case .us, .au:
+			return .state
+		case .gb:
+			return .county
+		case .ca:
+			return .province
+		default:
+			return .state
+		}
+	}
+
 	/// Localized key placeholder key.
 	private var localizationPlaceholderKey: String {
 		switch self {
