@@ -49,7 +49,7 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 		placeholderView.translatesAutoresizingMaskIntoConstraints = false
 		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderView.hintLabel.text = "Country"
+		placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_country_subtitle")
 		placeholderView.stackView.addArrangedSubview(countryTextField)
 	}
 }
@@ -74,6 +74,8 @@ internal class VGSStatePickerFieldView: UIView, VGSTextFieldViewProtocol {
 		field.cornerRadius = 0
 		field.borderWidth = 0
 
+		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_subtitle")
+
 		return field
 	}()
 
@@ -96,7 +98,7 @@ internal class VGSStatePickerFieldView: UIView, VGSTextFieldViewProtocol {
 		placeholderView.translatesAutoresizingMaskIntoConstraints = false
 		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderView.hintLabel.text = "State"
+		placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_hint")
 		placeholderView.stackView.addArrangedSubview(statePickerTextField)
 	}
 }
