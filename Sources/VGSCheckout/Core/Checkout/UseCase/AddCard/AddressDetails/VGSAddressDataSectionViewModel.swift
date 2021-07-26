@@ -218,7 +218,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 	func updateZipField(with countryISO: VGSCountriesISO) {
 		guard let zipTextFieldView = zipFieldView else {return}
-		VGSZipCodeFieldView.updateUI(for: zipTextFieldView, countryISOCode: countryISO)
+		VGSPostalCodeFieldView.updateUI(for: zipTextFieldView, countryISOCode: countryISO)
 	}
 
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {

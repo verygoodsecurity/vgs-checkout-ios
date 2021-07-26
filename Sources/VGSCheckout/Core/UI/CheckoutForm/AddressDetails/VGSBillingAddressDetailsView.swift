@@ -77,8 +77,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// ZIP form item view.
-	internal lazy var zipFieldView: VGSZipCodeFieldView = {
-		let componentView = VGSZipCodeFieldView(frame: .zero)
+	internal lazy var zipFieldView: VGSPostalCodeFieldView = {
+		let componentView = VGSPostalCodeFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
 		return componentView

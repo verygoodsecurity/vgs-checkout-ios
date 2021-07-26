@@ -18,7 +18,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
+		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -85,7 +85,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		zipTextField.configuration = zipConfiguration
 
-		VGSZipCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 
 	/*
@@ -138,7 +138,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
+		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -192,6 +192,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		zipTextField.configuration = zipConfiguration
 
-		VGSZipCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 }
