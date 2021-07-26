@@ -4,16 +4,85 @@
 
 import Foundation
 
+/// Address region type.
 internal enum VGSAddressRegionType {
+
+	/// State (US).
 	case state
-	case region
+
+	/// Province (Canada).
 	case province
+
+	/// County (United Kingdom).
 	case county
-	case general
+
+	/// Suburb (New Zealand).
+	case suburb
+
+	/// Localized text field placeholder.
+	internal var lozalizedPlaceholder: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+	}
+
+	/// Localized text field hint.
+	internal var lozalizedHint: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationFieldHintKey)
+	}
+
+	/// Localized empty text error.
+	internal var lozalizedEmptyError: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: localizationPlaceholderKey)
+	}
+
+	/// Region type for country ISO.
+	/// - Parameter countryISO: `VGSCountriesISO` object, country ISO.
+	/// - Returns: `VGSAddressRegionType` matching specified country.
+	internal static func regionType(for countryISO: VGSCountriesISO) -> VGSAddressRegionType {
+		switch countryISO {
+		case .us, .au:
+			return .state
+		case .gb:
+			return .county
+		case .ca:
+			return .province
+		case .nz:
+			return .suburb
+		default:
+			return .state
+		}
+	}
+
+	/// Localized key placeholder key.
+	private var localizationPlaceholderKey: String {
+		switch self {
+		case .state:
+			return "vgs_checkout_address_info_region_type_state_hint"
+		case .province:
+			return "vgs_checkout_address_info_region_type_province_hint"
+		case .county:
+			return "vgs_checkout_address_info_region_type_county_hint"
+		case .suburb:
+			return "vgs_checkout_address_info_region_type_suburb_hint"
+		}
+	}
+
+	/// Localized key for label above the text field.
+	private var localizationFieldHintKey: String {
+		switch self {
+		case .state:
+			return "vgs_checkout_address_info_region_type_state_subtitle"
+		case .province:
+			return "vgs_checkout_address_info_region_type_province_subtitle"
+		case .county:
+			return "vgs_checkout_address_info_region_type_county_subtitle"
+		case .suburb:
+			return "vgs_checkout_address_info_region_type_suburb_subtitle"
+		}
+	}
 }
 
 internal struct VGSAddressRegionModel {
-	var regionType: VGSAddressRegionType = .region
+	var regionType: VGSAddressRegionType = .state
 	let displayName: String
 	let code: String
 
@@ -73,7 +142,7 @@ internal class VGSAddressRegionProvider {
 		case .ca:
 			return .province
 		default:
-			return .general
+			return .state
 		}
 	}
 

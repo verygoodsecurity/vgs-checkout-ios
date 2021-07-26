@@ -41,7 +41,7 @@ internal enum VGSAddCardFormFieldType {
 	case state
 
 	/// Zip/postal code.
-	case zipCode
+	case postalCode
 
 	/// Corresponding form block.
 	internal var sectionBlock: VGSAddCardSectionBlock {
@@ -50,7 +50,7 @@ internal enum VGSAddCardFormFieldType {
 			return .cardHolder
 		case .cardNumber, .expirationDate, .cvc:
 			return .cardDetails
-		case .country, .addressLine1, .addressLine2, .city, .state, .zipCode:
+		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
 			return .addressInfo
 		}
 	}
@@ -60,7 +60,7 @@ internal enum VGSAddCardFormFieldType {
 		switch self {
 		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
 			return .card
-		case .country, .addressLine1, .addressLine2, .city, .state, .zipCode:
+		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
 			return .billingAddress
 		}
 	}
@@ -91,7 +91,7 @@ internal enum VGSAddCardFormFieldType {
 			return "vgs_checkout_address_info_city_empty_error"
 		case .state:
 			return "vgs_checkout_address_info_region_empty_error"
-		case .zipCode:
+		case .postalCode:
 			return "vgs_checkout_address_info_zipcode_empty_error"
 		default:
 			return "Field is empty"

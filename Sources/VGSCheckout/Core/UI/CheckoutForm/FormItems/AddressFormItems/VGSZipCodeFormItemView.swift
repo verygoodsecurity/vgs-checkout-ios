@@ -1,5 +1,5 @@
 //
-//  VGSZipCodeFieldView.swift
+//  VGSPostalCodeFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -8,20 +8,20 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for zip code form item.
-internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
+/// Holds UI for postal code field view.
+internal class VGSPostalCodeFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
-	internal var fieldType: VGSAddCardFormFieldType = .state
+	internal var fieldType: VGSAddCardFormFieldType = .postalCode
 
 	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
 	var textField: VGSTextField {
-		return zipCodeTextField
+		return postalCodeTextField
 	}
 
-	lazy var zipCodeTextField: VGSTextField = {
+	lazy var postalCodeTextField: VGSTextField = {
 		let field = VGSTextField()
 		field.translatesAutoresizingMaskIntoConstraints = false
 
@@ -43,6 +43,19 @@ internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	// MARK: - Interface
+
+	/// Updates UI for postal code field view.
+	/// - Parameters:
+	///   - fieldView: `VGSTextFieldViewProtocol` object, field view.
+	///   - countryISOCode: `VGSCountriesISO` object, country iso code.
+	internal static func updateUI(for fieldView: VGSTextFieldViewProtocol,  countryISOCode: VGSCountriesISO) {
+		let postalCode = VGSAddressPostalCode.postalCode(for: countryISOCode)
+
+		fieldView.placeholderView.hintLabel.text = postalCode.textFieldHint
+		fieldView.textField.placeholder = postalCode.textFieldPlaceholder
+	}
+
 	// MARK: - Helpers
 
 	private func buildUI() {
@@ -51,6 +64,6 @@ internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
 		placeholderView.checkout_constraintViewToSuperviewEdges()
 
 		placeholderView.hintComponentView.label.text = "ZIP"
-		placeholderView.stackView.addArrangedSubview(zipCodeTextField)
+		placeholderView.stackView.addArrangedSubview(postalCodeTextField)
 	}
 }

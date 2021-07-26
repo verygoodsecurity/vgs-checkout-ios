@@ -15,9 +15,10 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
+		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -37,10 +38,18 @@ internal class VGSAddressDataFormConfigurationManager {
 		])
 		addressLine1Configuration.returnKeyType = .next
 
-
-		addressLine1TextField.placeholder = "Address line 1"
-
 		addressLine1TextField.configuration = addressLine1Configuration
+
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
+		addressLine2Configuration.type = .none
+		addressLine2Configuration.isRequiredValidOnly = false
+		addressLine2Configuration.returnKeyType = .next
+
+		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+
+
+		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
 		cityConfiguration.type = .none
@@ -52,9 +61,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.configuration = cityConfiguration
 
-		cityTextField.placeholder = "City"
-
-
 		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
 //		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
 //		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
@@ -64,7 +70,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		statePickerTextField.configuration = statePickerConfiguration
 
-		statePickerTextField.placeholder = "State"
 		statePickerTextField.mode = .textField
 
 		// Force select first state.
@@ -78,9 +83,9 @@ internal class VGSAddressDataFormConfigurationManager {
 		])
 		zipConfiguration.returnKeyType = .done
 
-		zipTextField.placeholder = "ZIP CODE"
-
 		zipTextField.configuration = zipConfiguration
+
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 
 	/*
@@ -130,9 +135,10 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.zipCodeTextField
+		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -149,9 +155,17 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1Configuration.isRequiredValidOnly = true
 		addressLine1Configuration.returnKeyType = .next
 
-		addressLine1TextField.placeholder = "Address line 1"
-
 		addressLine1TextField.configuration = addressLine1Configuration
+
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
+		addressLine2Configuration.type = .none
+		addressLine2Configuration.isRequiredValidOnly = false
+		addressLine2Configuration.returnKeyType = .next
+
+		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+
+		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.city")
 		cityConfiguration.type = .none
@@ -159,7 +173,6 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.configuration = cityConfiguration
 
-		cityTextField.placeholder = "City"
 		cityConfiguration.returnKeyType = .next
 
 		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
@@ -170,8 +183,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		])
 		stateConfiguration.returnKeyType = .next
 
-		stateTextField.placeholder = "State"
-
 		stateTextField.configuration = stateConfiguration
 		stateTextField.mode = .textField
 
@@ -179,8 +190,8 @@ internal class VGSAddressDataFormConfigurationManager {
 		zipConfiguration.type = .none
 		zipConfiguration.isRequiredValidOnly = true
 
-		zipTextField.placeholder = "ZIP CODE"
-
 		zipTextField.configuration = zipConfiguration
+
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 }

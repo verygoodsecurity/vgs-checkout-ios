@@ -28,7 +28,7 @@ internal class VGSFormFieldsValidatorFactory {
 			return VGSCityFieldValidator()
 		case .state:
 			return VGSAddressRegionFieldValidator()
-		case .zipCode:
+		case .postalCode:
 			return VGSZipCodeFieldValidator()
 		case .country:
 			// TODO: - add country validator?

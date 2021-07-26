@@ -27,6 +27,8 @@ internal class VGSCityFieldView: UIView, VGSTextFieldViewProtocol {
 		field.cornerRadius = 0
 		field.borderWidth = 0
 
+		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_hint")
+
 		return field
 	}()
 
@@ -49,7 +51,7 @@ internal class VGSCityFieldView: UIView, VGSTextFieldViewProtocol {
 		placeholderView.translatesAutoresizingMaskIntoConstraints = false
 		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderView.hintComponentView.label.text = "City"
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_subtitle")
 		placeholderView.stackView.addArrangedSubview(cityTextField)
 	}
 }

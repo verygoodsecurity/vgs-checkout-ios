@@ -27,6 +27,8 @@ internal class VGSAddressLineFieldView: UIView, VGSTextFieldViewProtocol {
 		field.cornerRadius = 0
 		field.borderWidth = 0
 
+		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_hint")
+
 		return field
 	}()
 
@@ -49,7 +51,8 @@ internal class VGSAddressLineFieldView: UIView, VGSTextFieldViewProtocol {
 		placeholderView.translatesAutoresizingMaskIntoConstraints = false
 		placeholderView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderView.hintComponentView.label.text = "Address Line 1"
+		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_subtitle")
+
 		placeholderView.stackView.addArrangedSubview(addressLineTextField)
 	}
 }

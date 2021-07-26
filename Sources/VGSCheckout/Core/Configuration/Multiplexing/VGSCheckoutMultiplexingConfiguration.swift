@@ -13,6 +13,9 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
+	/// Billing address options.
+	public var billingAddressOptions: VGSCheckoutMultiplexingBillingAddressOptions = VGSCheckoutMultiplexingBillingAddressOptions()
+
 	/// Configuration initializer.
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
