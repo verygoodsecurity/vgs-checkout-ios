@@ -30,6 +30,16 @@ internal enum VGSAddressPostalCode {
 		}
 	}
 
+	/// Empty postal code error text.
+	internal var emptyErrorText: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.localizedEmptyErrorKey)
+	}
+
+	/// Invalid postal code error text.
+	internal var invalidErrorText: String {
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.localizedInvalidErrorKey)
+	}
+
 	/// Text field placeholder.
 	internal var textFieldPlaceholder: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.localizedPlaceholderKey)
@@ -52,7 +62,7 @@ internal enum VGSAddressPostalCode {
 		}
 	}
 
-	/// Localization key for postal code placeholder.
+	/// Localization key for postal code hint (above the text field).
 	private var localizedHintKey: String {
 		switch self {
 		case .zip:
@@ -64,7 +74,7 @@ internal enum VGSAddressPostalCode {
 		}
 	}
 
-	/// Localization key for postal code empty error.
+	/// Localization key for postal code empty error text.
 	private var localizedEmptyErrorKey: String {
 		switch self {
 		case .zip:
@@ -76,7 +86,7 @@ internal enum VGSAddressPostalCode {
 		}
 	}
 
-	/// Localization key for postal code invalid error.
+	/// Localization key for postal code invalid error text.
 	private var localizedInvalidErrorKey: String {
 		switch self {
 		case .zip:
