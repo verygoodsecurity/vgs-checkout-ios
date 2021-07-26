@@ -13,7 +13,7 @@ internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
 
 	// MARK: - Vars
 
-	internal var fieldType: VGSAddCardFormFieldType = .state
+	internal var fieldType: VGSAddCardFormFieldType = .postalCode
 
 	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
@@ -41,6 +41,19 @@ internal class VGSZipCodeFieldView: UIView, VGSTextFieldViewProtocol {
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	// MARK: - Interface
+
+	/// Updates UI for postal code field view.
+	/// - Parameters:
+	///   - fieldView: `VGSTextFieldViewProtocol` object, field view.
+	///   - countryISOCode: `VGSCountriesISO` object, country iso code.
+	internal static func updateUI(for fieldView: VGSTextFieldViewProtocol,  countryISOCode: VGSCountriesISO) {
+		let postalCode = VGSAddressPostalCode.postalCode(for: countryISOCode)
+
+		fieldView.placeholderView.hintLabel.text = postalCode.textFieldHint
+		fieldView.textField.placeholder = postalCode.textFieldPlaceholder
 	}
 
 	// MARK: - Helpers

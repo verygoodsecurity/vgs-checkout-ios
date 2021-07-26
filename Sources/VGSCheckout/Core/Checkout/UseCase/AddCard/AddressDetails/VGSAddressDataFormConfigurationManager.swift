@@ -84,6 +84,8 @@ internal class VGSAddressDataFormConfigurationManager {
 		zipConfiguration.returnKeyType = .done
 
 		zipTextField.configuration = zipConfiguration
+
+		VGSZipCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 
 	/*
@@ -189,5 +191,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		zipConfiguration.isRequiredValidOnly = true
 
 		zipTextField.configuration = zipConfiguration
+
+		VGSZipCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 }

@@ -123,7 +123,7 @@
 "vgs_checkout_address_info_address_zip_hint" = "12345";
 
 /* Postal code field placeholder in address info. */
-"vgs_checkout_address_info_postal_code_hint" = "12345";
+"vgs_checkout_address_info_postal_code_hint" = "Postal code";
 
 // Address Errors
 

@@ -46,7 +46,7 @@ internal enum VGSAddressPostalCode {
 	}
 
 	/// Text field hint (text above the text field).
-	internal var textField: String {
+	internal var textFieldHint: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.localizedHintKey)
 	}
 
