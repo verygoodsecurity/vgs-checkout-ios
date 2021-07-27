@@ -237,6 +237,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
+				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect)
 				updateStateField(with: newCountry)
 				updateZipField(with: newCountry)
 			}

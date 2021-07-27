@@ -194,4 +194,39 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
+
+	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect) {
+		switch paymentInstrument {
+		case .vault:
+			break
+		case .multiplexing:
+			// If country does not support Address verification hide all other fields and unregister them from collect.
+			// Otherwise register and show fields again. Only for multiplexing flow.
+			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
+
+			if isAddressVerificationAvailable {
+				addressFormView.fieldViews.forEach { fieldView in
+					let fieldType = fieldView.fieldType
+					switch fieldType {
+					case .addressLine1, .addressLine2, .city, .state, .postalCode:
+						fieldView.placeholderView.isHiddenInCheckoutStackView = false
+						vgsCollect.registerTextFields(textField: [fieldView.textField])
+					default:
+						break
+					}
+				}
+			} else {
+				addressFormView.fieldViews.forEach { fieldView in
+					let fieldType = fieldView.fieldType
+					switch fieldType {
+					case .addressLine1, .addressLine2, .city, .state, .postalCode:
+						fieldView.placeholderView.isHiddenInCheckoutStackView = true
+						vgsCollect.unsubscribeTextField(fieldView.textField)
+					default:
+						break
+					}
+				}
+			}
+		}
+	}
 }
