@@ -132,4 +132,15 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 			formConfiguration.addressOptions.postalCodeOptions = newValue
 		}
 	}
+
+	/// Billing address mode.
+	public var billingAddressMode: VGSCheckoutBillingAddressMode {
+		get {
+			return formConfiguration.billingAddressMode
+		}
+
+		set {
+			formConfiguration.billingAddressMode = newValue
+		}
+	}
 }
