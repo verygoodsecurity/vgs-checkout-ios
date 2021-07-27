@@ -4,8 +4,8 @@
 
 import Foundation
 
-/// Zip code field validator.
-internal class VGSZipCodeFieldValidator: VGSFormTextFieldValidationProtocol {
+/// Postal Code/Zip field validator.
+internal class VGSPostalCodeFieldValidator: VGSFormTextFieldValidationProtocol {
 
 	// MARK: - VGSFormTextFieldValidationProtocol
 

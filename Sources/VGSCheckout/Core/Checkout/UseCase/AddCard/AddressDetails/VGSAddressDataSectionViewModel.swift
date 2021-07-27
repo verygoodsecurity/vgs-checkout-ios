@@ -139,7 +139,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	}
 
 	/// State field view.
-	fileprivate var zipFieldView: VGSTextFieldViewProtocol? {
+	fileprivate var postalCodeFieldView: VGSTextFieldViewProtocol? {
 		return fieldViews.first(where: {$0.fieldType == .postalCode})
 	}
 
@@ -216,9 +216,9 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 	  */
 	}
 
-	func updateZipField(with countryISO: VGSCountriesISO) {
-		guard let zipTextFieldView = zipFieldView else {return}
-		VGSPostalCodeFieldView.updateUI(for: zipTextFieldView, countryISOCode: countryISO)
+	func updatePostalCodeField(with countryISO: VGSCountriesISO) {
+		guard let postalCodeTextFieldView = postalCodeFieldView else {return}
+		VGSPostalCodeFieldView.updateUI(for: postalCodeTextFieldView, countryISOCode: countryISO)
 	}
 
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
@@ -243,10 +243,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 //				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 //
 				updateStateField(with: newCountry)
-				updateZipField(with: newCountry)
-
-				// After changing country some fields can be changes - revalidate form.
-//				updateFormState()
+				updatePostalCodeField(with: newCountry)
 			}
 		} else if pickerTextField === statePickerField {
 

@@ -29,7 +29,7 @@ internal class VGSFormFieldsValidatorFactory {
 		case .state:
 			return VGSAddressRegionFieldValidator()
 		case .postalCode:
-			return VGSZipCodeFieldValidator()
+			return VGSPostalCodeFieldValidator()
 		case .country:
 			// TODO: - add country validator?
 			return VGSCardNumberFieldValidator()
