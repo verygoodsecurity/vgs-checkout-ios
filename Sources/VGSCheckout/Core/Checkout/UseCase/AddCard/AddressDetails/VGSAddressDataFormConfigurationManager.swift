@@ -205,22 +205,28 @@ internal class VGSAddressDataFormConfigurationManager {
 			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
 
 			if isAddressVerificationAvailable {
+				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = false
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {
 					case .addressLine1, .addressLine2, .city, .state, .postalCode:
-						fieldView.placeholderView.isHiddenInCheckoutStackView = false
+						if let view = fieldView as? UIView {
+							view.isHiddenInCheckoutStackView = false
+						}
 						vgsCollect.registerTextFields(textField: [fieldView.textField])
 					default:
 						break
 					}
 				}
 			} else {
+				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = true
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {
 					case .addressLine1, .addressLine2, .city, .state, .postalCode:
-						fieldView.placeholderView.isHiddenInCheckoutStackView = true
+						if let view = fieldView as? UIView {
+							view.isHiddenInCheckoutStackView = true
+						}
 						vgsCollect.unsubscribeTextField(fieldView.textField)
 					default:
 						break
