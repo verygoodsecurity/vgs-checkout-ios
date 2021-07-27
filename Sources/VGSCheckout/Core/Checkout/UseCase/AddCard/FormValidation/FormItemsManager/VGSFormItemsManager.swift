@@ -46,9 +46,15 @@ internal class VGSFieldViewsManager {
 		fieldViews = fieldViews + views
 	}
 
-	/// Append form section views.
+	/// Appends form section views.
 	/// - Parameter views: `[VGSTextFieldViewProtocol]` object, array of form section views.
 	internal func appendFormSectionViews(_ views: [VGSFormSectionViewProtocol]) {
 		formSectionViews = formSectionViews + views
+	}
+
+	/// Removes field view from validation manager.
+	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field to remove.
+	internal func removeFieldView(_ fieldView: VGSTextFieldViewProtocol) {
+		fieldViews = fieldViews.filter({$0 !== fieldView})
 	}
 }

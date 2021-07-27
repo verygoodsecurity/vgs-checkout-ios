@@ -195,7 +195,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
 
-	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect) {
+	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
 		switch paymentInstrument {
 		case .vault:
 			break
@@ -218,6 +218,9 @@ internal class VGSAddressDataFormConfigurationManager {
 						break
 					}
 				}
+
+				// Add address fields to validation manager again in the correct order.
+				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView, addressFormView.statePickerFieldView, addressFormView.zipFieldView])
 			} else {
 				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = true
 				addressFormView.fieldViews.forEach { fieldView in
@@ -227,6 +230,7 @@ internal class VGSAddressDataFormConfigurationManager {
 						if let view = fieldView as? UIView {
 							view.isHiddenInCheckoutStackView = true
 						}
+						formValidationHelper.fieldViewsManager.removeFieldView(fieldView)
 						vgsCollect.unsubscribeTextField(fieldView.textField)
 					default:
 						break
