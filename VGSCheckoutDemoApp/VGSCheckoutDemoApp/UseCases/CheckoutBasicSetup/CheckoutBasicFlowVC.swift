@@ -65,6 +65,14 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
+		checkoutConfiguration.billingAddressMode = .fullAddress
+
+		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "country"
+		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "city"
+		checkoutConfiguration.billingAddressLine1FieldOptions.fieldName = "addressLine1"
+		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "addressLine2"
+		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "postal_code"
+
 		checkoutConfiguration.routeConfiguration.path = "post"
 
 		// Init Checkout with vault and ID.
