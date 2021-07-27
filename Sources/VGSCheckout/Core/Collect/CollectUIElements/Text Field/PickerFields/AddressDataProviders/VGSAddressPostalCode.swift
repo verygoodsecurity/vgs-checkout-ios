@@ -16,20 +16,6 @@ internal enum VGSAddressPostalCode {
 	/// Postal code (other countries except US).
 	case postalCode
 
-	/// Postal code for specified country.
-	/// - Parameter countryISO: `VGSCountriesISO` object, country ISO code.
-	/// - Returns: `VGSAddressPostalCode` object, corresponding postal code type for country.
-	internal static func postalCode(for countryISO: VGSCountriesISO) -> VGSAddressPostalCode {
-		switch countryISO {
-		case .us:
-			return .zip
-		case .ca, .gb, .au, .nz:
-			return .postalCode
-		default:
-			return .noPostalCode
-		}
-	}
-
 	/// Empty postal code error text.
 	internal var emptyErrorText: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.localizedEmptyErrorKey)
