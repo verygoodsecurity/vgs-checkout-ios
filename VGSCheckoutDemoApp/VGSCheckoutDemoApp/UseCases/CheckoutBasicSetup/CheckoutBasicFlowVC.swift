@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
-import VGSCollectSDK
+//import VGSCollectSDK
 
 class CheckoutBasicFlowVC: UIViewController {
 
