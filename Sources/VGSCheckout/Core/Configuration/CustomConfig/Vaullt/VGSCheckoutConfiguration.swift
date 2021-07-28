@@ -90,7 +90,7 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 	}
 
 	/// Billing address, address line 1 field options.
-	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressAddressLine1Options {
+	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressLine1Options {
 		get {
 			return formConfiguration.addressOptions.addressLine1Options
 		}
@@ -101,7 +101,7 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 	}
 
 	/// Billing address, address line 2 field options.
-	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressAddressLine2Options {
+	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressLine2Options {
 		get {
 			return formConfiguration.addressOptions.addressLine2Options
 		}
