@@ -67,11 +67,13 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 		checkoutConfiguration.billingAddressMode = .fullAddress
 
-		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "country"
-		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "city"
-		checkoutConfiguration.billingAddressLine1FieldOptions.fieldName = "addressLine1"
-		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "addressLine2"
-		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "postal_code"
+		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
+		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "billing_address.city"
+		checkoutConfiguration.billingAddressLine1FieldOptions.fieldName = "billing_address.addressLine1"
+		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "billing_address.addressLine2"
+		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "billing_address.postal_code"
+
+		checkoutConfiguration.routeConfiguration.requestOptions.mergePolicy = .nestedJSON
 
 		checkoutConfiguration.routeConfiguration.path = "post"
 
