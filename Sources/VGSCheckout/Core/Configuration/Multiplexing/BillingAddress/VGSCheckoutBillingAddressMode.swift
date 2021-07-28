@@ -7,9 +7,9 @@ import Foundation
 /// Defines billing address mode.
 public enum VGSCheckoutBillingAddressMode {
 
-	/// Displays all fields for billing address. 
-	case fullAddress
+	/// Billing address is hidden in form.
+	case noAddress
 
-	/// Displays required fields to minimize input.
-	case requiredOnly
+	/// Display all fields for billing address.
+	case fullAddress
 }

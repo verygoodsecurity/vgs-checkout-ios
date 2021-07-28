@@ -237,8 +237,16 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
+
+				// Uncomment this code to enable other countries without AWS support
+
+//				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
+//
 				updateStateField(with: newCountry)
 				updateZipField(with: newCountry)
+
+				// After changing country some fields can be changes - revalidate form.
+//				updateFormState()
 			}
 		} else if pickerTextField === statePickerField {
 

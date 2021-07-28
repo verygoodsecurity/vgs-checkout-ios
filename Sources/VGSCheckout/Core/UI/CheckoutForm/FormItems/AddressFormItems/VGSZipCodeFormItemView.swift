@@ -50,7 +50,7 @@ internal class VGSPostalCodeFieldView: UIView, VGSTextFieldViewProtocol {
 	///   - fieldView: `VGSTextFieldViewProtocol` object, field view.
 	///   - countryISOCode: `VGSCountriesISO` object, country iso code.
 	internal static func updateUI(for fieldView: VGSTextFieldViewProtocol,  countryISOCode: VGSCountriesISO) {
-		let postalCode = VGSAddressPostalCode.postalCode(for: countryISOCode)
+		let postalCode = VGSBillingAddressUtils.postalCode(for: countryISOCode)
 
 		fieldView.placeholderView.hintLabel.text = postalCode.textFieldHint
 		fieldView.textField.placeholder = postalCode.textFieldPlaceholder

@@ -194,4 +194,49 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
 	}
+
+	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
+		switch paymentInstrument {
+		case .vault:
+			break
+		case .multiplexing:
+			// If country does not support Address verification hide all other fields and unregister them from collect.
+			// Otherwise register and show fields again. Only for multiplexing flow.
+			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
+
+			if isAddressVerificationAvailable {
+				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = false
+				addressFormView.fieldViews.forEach { fieldView in
+					let fieldType = fieldView.fieldType
+					switch fieldType {
+					case .addressLine1, .addressLine2, .city, .state, .postalCode:
+						if let view = fieldView as? UIView {
+							view.isHiddenInCheckoutStackView = false
+						}
+						vgsCollect.registerTextFields(textField: [fieldView.textField])
+					default:
+						break
+					}
+				}
+
+				// Add address fields to validation manager again in the correct order.
+				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView, addressFormView.statePickerFieldView, addressFormView.zipFieldView])
+			} else {
+				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = true
+				addressFormView.fieldViews.forEach { fieldView in
+					let fieldType = fieldView.fieldType
+					switch fieldType {
+					case .addressLine1, .addressLine2, .city, .state, .postalCode:
+						if let view = fieldView as? UIView {
+							view.isHiddenInCheckoutStackView = true
+						}
+						formValidationHelper.fieldViewsManager.removeFieldView(fieldView)
+						vgsCollect.unsubscribeTextField(fieldView.textField)
+					default:
+						break
+					}
+				}
+			}
+		}
+	}
 }

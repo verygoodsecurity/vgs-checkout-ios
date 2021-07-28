@@ -77,4 +77,70 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 			formConfiguration.cardOptions.cvcOptions = newValue
 		}
 	}
+
+	/// Billing address country field options.
+	public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
+		get {
+			return formConfiguration.addressOptions.countryOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.countryOptions = newValue
+		}
+	}
+
+	/// Billing address, address line 1 field options.
+	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressLine1Options {
+		get {
+			return formConfiguration.addressOptions.addressLine1Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine1Options = newValue
+		}
+	}
+
+	/// Billing address, address line 2 field options.
+	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressLine2Options {
+		get {
+			return formConfiguration.addressOptions.addressLine2Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine2Options = newValue
+		}
+	}
+
+	/// Billing address city field options.
+	public var billingAddressCityFieldOptions: VGSCheckoutBillingAddressCityOptions {
+		get {
+			return formConfiguration.addressOptions.cityOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.cityOptions = newValue
+		}
+	}
+
+	/// Billing address postal code field options.
+	public var billingAddressPostalCodeFieldOptions: VGSCheckoutBillingAddressPostalCodeOptions {
+		get {
+			return formConfiguration.addressOptions.postalCodeOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.postalCodeOptions = newValue
+		}
+	}
+
+	/// Billing address mode.
+	public var billingAddressMode: VGSCheckoutBillingAddressMode {
+		get {
+			return formConfiguration.billingAddressMode
+		}
+
+		set {
+			formConfiguration.billingAddressMode = newValue
+		}
+	}
 }
