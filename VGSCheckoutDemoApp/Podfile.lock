@@ -1,0 +1,18 @@
+PODS:
+  - VGSCheckout (0.0.1):
+    - VGSCheckout/Core (= 0.0.1)
+  - VGSCheckout/Core (0.0.1)
+
+DEPENDENCIES:
+  - VGSCheckout (from `../`)
+
+EXTERNAL SOURCES:
+  VGSCheckout:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  VGSCheckout: 6d8a63cf0a9ce42f99ac797bd0d8a7349c3ea170
+
+PODFILE CHECKSUM: be6a16e64f8251c6cb89414f1508b7675f6f1c3e
+
+COCOAPODS: 1.10.1

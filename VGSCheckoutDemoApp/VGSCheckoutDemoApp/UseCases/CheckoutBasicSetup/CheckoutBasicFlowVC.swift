@@ -78,7 +78,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)
 
-		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
+		//VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
 
 		/// Change default valid card number lengthes
 //		VGSPaymentCards.visa.cardNumberLengths = [16]

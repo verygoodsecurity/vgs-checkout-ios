@@ -79,6 +79,8 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		// Disable state field for now
 
+		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
+
 //		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
 ////		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
 ////		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
@@ -194,6 +196,8 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityConfiguration.returnKeyType = .next
 
 		// Disable state field for now
+
+		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
 //
 //		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
 //		stateConfiguration.type = .none
