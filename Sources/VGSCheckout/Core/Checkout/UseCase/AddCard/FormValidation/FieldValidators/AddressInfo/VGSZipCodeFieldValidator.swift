@@ -17,7 +17,10 @@ internal class VGSPostalCodeFieldValidator: VGSFormTextFieldValidationProtocol {
 	}
 
 	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return fieldType.emptyFieldNameError
+        guard let errorMessage = textField.state.validationErrors.first else {
+            return nil
+        }
+        return errorMessage
 	}
 
 	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
@@ -32,21 +35,25 @@ internal class VGSPostalCodeValidationRulesFactory {
         let rules: [VGSValidationRuleProtocol]
         switch countryISO {
         case .us:
-            rules = [VGSValidationRulePattern(pattern: "^([0-9]{5})(?:-([0-9]{4}))?$", error: "postal code error")]
+            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+                                              error: VGSAddressPostalCode.zip.invalidErrorText)]
         case .ca:
-            rules = [VGSValidationRulePattern(pattern: "^([ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ])\\s*([0-9][ABCEGHJKLMNPRSTVWXYZ][0-9])$", error: "postal code error")]
+            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         case .au:
-            rules = [VGSValidationRulePattern(pattern: "^\\d{4}$", error: "postal code error")]
+            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         case .nz:
-            rules = [VGSValidationRulePattern(pattern: "^\\d{4}$", error: "postal code error")]
+            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         case .gb:
-            rules = [VGSValidationRuleLength(min: 1, max: 64, error: "length error")]
+            rules = [VGSValidationRuleLength(min: 1, max: 32,
+                                             error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         default:
-            rules = [VGSValidationRuleLength(min: 1, max: 64, error: "length error")]
+            rules = [VGSValidationRuleLength(min: 1, max: 32,
+                                             error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         }
         return rules
     }
-    
-    
 }
 
