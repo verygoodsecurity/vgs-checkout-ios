@@ -20,7 +20,23 @@ internal class VGSAddressDataFormConfigurationManager {
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
 
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "country")
+		let addressMode = vaultConfiguration.formConfiguration.billingAddressMode
+
+		let countryOptions = vaultConfiguration.billingAddressCountryFieldOptions
+		let addressLine1Options = vaultConfiguration.billingAddressLine1FieldOptions
+		let addressLine2Options = vaultConfiguration.billingAddressLine2FieldOptions
+		let cityOptions = vaultConfiguration.billingAddressCityFieldOptions
+		let postalCodeOptions = vaultConfiguration.billingAddressPostalCodeFieldOptions
+
+		switch addressMode {
+		case .noAddress:
+			addressFormView.isHidden = true
+			return
+		case .fullAddress:
+			break
+		}
+
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
@@ -30,7 +46,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		// Force select first row in picker.
 		countryTextField.selectFirstRow()
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine1")
+		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
 		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
@@ -40,7 +56,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "adddressLine2")
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2Configuration.returnKeyType = .next
@@ -51,7 +67,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		addressLine2TextField.configuration = addressLine2Configuration
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "city")
+		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
 		cityConfiguration.type = .none
 		cityConfiguration.isRequiredValidOnly = true
 		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
@@ -61,21 +77,25 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.configuration = cityConfiguration
 
-		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
-//		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
-//		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
-//		statePickerConfiguration.dataProvider = regionsDataSourceProvider
-		statePickerConfiguration.type = .none
-		statePickerConfiguration.isRequiredValidOnly = true
+		// Disable state field for now
 
-		statePickerTextField.configuration = statePickerConfiguration
+		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
 
-		statePickerTextField.mode = .textField
+//		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
+////		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
+////		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
+////		statePickerConfiguration.dataProvider = regionsDataSourceProvider
+//		statePickerConfiguration.type = .none
+//		statePickerConfiguration.isRequiredValidOnly = true
+//
+//		statePickerTextField.configuration = statePickerConfiguration
+//
+//		statePickerTextField.mode = .textField
 
 		// Force select first state.
 //		statePickerTextField.selectFirstRow()
 
-		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "zip")
+		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
 		zipConfiguration.type = .none
 		zipConfiguration.isRequiredValidOnly = true
 		zipConfiguration.validationRules = VGSValidationRuleSet(rules: [
@@ -175,16 +195,20 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityConfiguration.returnKeyType = .next
 
-		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
-		stateConfiguration.type = .none
-		stateConfiguration.isRequiredValidOnly = true
-		stateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-		stateConfiguration.returnKeyType = .next
+		// Disable state field for now
 
-		stateTextField.configuration = stateConfiguration
-		stateTextField.mode = .textField
+		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
+//
+//		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
+//		stateConfiguration.type = .none
+//		stateConfiguration.isRequiredValidOnly = true
+//		stateConfiguration.validationRules = VGSValidationRuleSet(rules: [
+//			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+//		])
+//		stateConfiguration.returnKeyType = .next
+//
+//		stateTextField.configuration = stateConfiguration
+//		stateTextField.mode = .textField
 
 		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.postal_code")
 		zipConfiguration.type = .none

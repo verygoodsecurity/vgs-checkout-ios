@@ -89,11 +89,23 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
+		// TODO: - move form validation setup to a separate func?
 
 		formValidationHelper.fieldViewsManager.appendFieldViews(self.cardDataSectionViewModel.cardDetailsSectionView.fieldViews)
-		formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView])
 
-		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView, addressDataSectionViewModel.billingAddressFormView])
+		switch paymentInstrument {
+		case .vault(let vaultConfiguration):
+			switch vaultConfiguration.billingAddressMode {
+			case .fullAddress:
+				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+				formValidationHelper.fieldViewsManager.appendFormSectionViews([ addressDataSectionViewModel.billingAddressFormView])
+			default:
+				break
+			}
+		default:
+			break
+		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 
