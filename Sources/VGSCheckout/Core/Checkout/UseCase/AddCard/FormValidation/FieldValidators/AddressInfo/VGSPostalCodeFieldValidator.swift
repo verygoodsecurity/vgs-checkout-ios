@@ -37,13 +37,7 @@ internal class VGSPostalCodeValidationRulesFactory {
         case .us:
             rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
                                               error: VGSAddressPostalCode.zip.invalidErrorText)]
-        case .ca:
-            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
-                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
-        case .au:
-            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
-                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
-        case .nz:
+        case .ca, .au, .nz:
             rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
                                               error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         case .gb:
