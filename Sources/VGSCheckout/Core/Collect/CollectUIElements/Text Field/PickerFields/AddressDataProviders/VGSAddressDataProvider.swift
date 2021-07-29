@@ -19,7 +19,11 @@ internal class VGSAddressCountriesDataProvider {
 	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
 
 	static func provideSupportedCountries() -> [CountryModel] {
-		return provideCountries().filter({supportedCodes.contains($0.code)})
+        /// filter valid coutries
+        let filtered = provideCountries().filter({ supportedCodes.contains($0.code) })
+        /// sort valid coutries in same order as `supportedCodes`
+        let filteredAndSorted = filtered.sorted(by: { supportedCodes.firstIndex(of: $0.code)! < supportedCodes.firstIndex(of: $1.code)! })
+        return filteredAndSorted
 	}
 
 	/// Provide all countries.
