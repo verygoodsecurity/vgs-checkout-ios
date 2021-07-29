@@ -73,6 +73,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "billing_address.addressLine2"
 		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "billing_address.postal_code"
 
+		// Produce nested json for fields with `.` notation.
 		checkoutConfiguration.routeConfiguration.requestOptions.mergePolicy = .nestedJSON
 
 		checkoutConfiguration.routeConfiguration.path = "post"
