@@ -1,5 +1,5 @@
 //
-//  VGSZipCodeFieldValidator.swift
+//  VGSPostalCodeFieldValidator.swift
 //  VGSCheckout
 
 import Foundation
