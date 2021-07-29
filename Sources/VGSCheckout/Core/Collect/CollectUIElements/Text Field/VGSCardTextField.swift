@@ -20,7 +20,22 @@ internal final class VGSCardTextField: VGSTextField {
       return VGSCheckoutPaymentCards.CardBrand.unknown.brandIcon
     }()
 
-	  
+	/// Card number image view container.
+	internal lazy var cardIconContainerView: UIView = {
+		let view = UIView()
+		view.backgroundColor = .clear
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.addSubview(cardIconView)
+
+		// Center cardIconImageView in container view.
+		cardIconView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+		cardIconView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+		// Container view width should be equal to cvcIconImageView.width. Container view doesn't infer its own intristicContentSize. So stackView cannot get widths from simpleView without this.
+		view.widthAnchor.constraint(equalTo: cardIconView.widthAnchor).isActive = true
+
+		return view
+	}()
   
     // MARK: - Enum cases
     /// Available Card brand icon positions enum.
@@ -143,12 +158,12 @@ internal extension VGSCardTextField {
         guard !isIconHidden else {
           return
         }
-        cardIconView.removeFromSuperview()
+				cardIconContainerView.removeFromSuperview()
         switch location {
         case .left:
-            stackView.insertArrangedSubview(cardIconView, at: 0)
+            stackView.insertArrangedSubview(cardIconContainerView, at: 0)
         case .right:
-            stackView.addArrangedSubview(cardIconView)
+            stackView.addArrangedSubview(cardIconContainerView)
         }
     }
     
