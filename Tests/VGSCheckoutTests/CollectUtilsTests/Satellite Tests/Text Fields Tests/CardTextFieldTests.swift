@@ -64,20 +64,21 @@ class CardTextFieldTests: VGSCheckoutBaseTestCase {
         cardTextField.textField.secureText = cardNum
         cardTextField.focusOn()
         cardTextField.cardIconView.layoutSubviews()
-        
+
         // right icon
         cardTextField.cardIconLocation = .right
         cardTextField.cardIconSize = iconSize
+
         XCTAssertNotNil(cardTextField.cardIconView)
         XCTAssertNotNil(cardTextField.stackView.arrangedSubviews.count > 1)
-        XCTAssertTrue(cardTextField.stackView.arrangedSubviews.firstIndex(of: cardTextField.cardIconView) == 1)
+        XCTAssertTrue(cardTextField.stackView.arrangedSubviews.firstIndex(of: cardTextField.cardIconContainerView) == 1)
         
         // left icon
         cardTextField.cardIconLocation = .left
         cardTextField.cardIconSize = iconSize
         XCTAssertNotNil(cardTextField.cardIconView)
         XCTAssertNotNil(cardTextField.stackView.arrangedSubviews.count > 1)
-        XCTAssertTrue(cardTextField.stackView.arrangedSubviews.firstIndex(of: cardTextField.cardIconView) == 0)
+        XCTAssertTrue(cardTextField.stackView.arrangedSubviews.firstIndex(of: cardTextField.cardIconContainerView) == 0)
     }
     
     func disable_testInput16() {
