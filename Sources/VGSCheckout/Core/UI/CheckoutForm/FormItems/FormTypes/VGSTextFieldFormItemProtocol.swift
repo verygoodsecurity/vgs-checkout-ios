@@ -35,6 +35,7 @@ extension VGSTextFieldViewProtocol {
 	func updateStyle(with uiTheme: VGSCheckoutThemeProtocol) {
 		textField.textColor = uiTheme.textFieldTextColor
 		textField.font = uiTheme.textFieldTextFont
+		print("textField.fieldType: \(textField)")
 		textField.adjustsFontForContentSizeCategory = true
 		placeholderView.hintLabel.textColor = uiTheme.textFieldHintTextColor
 		placeholderView.hintLabel.font = uiTheme.textFieldHintTextFont

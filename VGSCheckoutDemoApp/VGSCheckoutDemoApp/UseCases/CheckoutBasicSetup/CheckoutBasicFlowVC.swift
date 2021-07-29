@@ -61,6 +61,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		var checkoutConfiguration = VGSCheckoutConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
 
 		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
+		checkoutConfiguration.cardNumberFieldOptions.isIconHidden = true
 		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
 		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"

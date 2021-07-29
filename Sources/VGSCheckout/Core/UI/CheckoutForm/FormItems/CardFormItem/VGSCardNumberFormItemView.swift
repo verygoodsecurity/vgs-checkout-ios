@@ -26,10 +26,11 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
 
 		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
 
-		field.adjustsFontForContentSizeCategory = true
 		field.cardIconSize = CGSize(width: 32, height: 20)
+		field.isCaretHidden = true
 		field.cornerRadius = 0
 		field.borderWidth = 0
+		
 		return field
 	}()
 

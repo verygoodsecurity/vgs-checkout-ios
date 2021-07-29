@@ -19,6 +19,8 @@ internal final class VGSCardTextField: VGSTextField {
     internal lazy var defaultUnknowBrandImage: UIImage? = {
       return VGSCheckoutPaymentCards.CardBrand.unknown.brandIcon
     }()
+
+	  
   
     // MARK: - Enum cases
     /// Available Card brand icon positions enum.
