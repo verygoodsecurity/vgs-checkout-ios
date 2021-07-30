@@ -18,7 +18,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
 
 		let addressMode = vaultConfiguration.formConfiguration.billingAddressMode
 
@@ -95,17 +95,20 @@ internal class VGSAddressDataFormConfigurationManager {
 		// Force select first state.
 //		statePickerTextField.selectFirstRow()
 
-		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
-		zipConfiguration.type = .none
-		zipConfiguration.isRequiredValidOnly = true
-		zipConfiguration.validationRules = VGSValidationRuleSet(rules: [
+		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
+		postalCodeConfiguration.type = .none
+		postalCodeConfiguration.isRequiredValidOnly = true
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 		])
-		zipConfiguration.returnKeyType = .done
+		postalCodeConfiguration.returnKeyType = .done
 
-		zipTextField.configuration = zipConfiguration
+		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
+		postalCodeTextField.configuration = postalCodeConfiguration
+
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
 	}
 
 	/*
@@ -158,7 +161,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
 		let cityTextField = addressFormView.cityFieldView.cityTextField
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let zipTextField = addressFormView.zipFieldView.postalCodeTextField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -210,13 +213,21 @@ internal class VGSAddressDataFormConfigurationManager {
 //		stateTextField.configuration = stateConfiguration
 //		stateTextField.mode = .textField
 
-		let zipConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.postal_code")
-		zipConfiguration.type = .none
-		zipConfiguration.isRequiredValidOnly = true
+		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.postal_code")
+		postalCodeConfiguration.type = .none
+		postalCodeConfiguration.isRequiredValidOnly = true
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		postalCodeConfiguration.returnKeyType = .done
 
-		zipTextField.configuration = zipConfiguration
+		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.zipFieldView, countryISOCode: .us)
+		postalCodeTextField.configuration = postalCodeConfiguration
+
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
+
 	}
 
 	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
@@ -229,7 +240,7 @@ internal class VGSAddressDataFormConfigurationManager {
 			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
 
 			if isAddressVerificationAvailable {
-				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = false
+				addressFormView.stateAndPostalCodeStackView.isHiddenInCheckoutStackView = false
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {
@@ -244,9 +255,9 @@ internal class VGSAddressDataFormConfigurationManager {
 				}
 
 				// Add address fields to validation manager again in the correct order.
-				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView, addressFormView.statePickerFieldView, addressFormView.zipFieldView])
+				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView, addressFormView.statePickerFieldView, addressFormView.postalCodeFieldView])
 			} else {
-				addressFormView.stateAndZipStackView.isHiddenInCheckoutStackView = true
+				addressFormView.stateAndPostalCodeStackView.isHiddenInCheckoutStackView = true
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {

@@ -139,7 +139,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	}
 
 	/// State field view.
-	fileprivate var zipFieldView: VGSTextFieldViewProtocol? {
+	fileprivate var postalCodeFieldView: VGSTextFieldViewProtocol? {
 		return fieldViews.first(where: {$0.fieldType == .postalCode})
 	}
 
@@ -216,9 +216,12 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 	  */
 	}
 
-	func updateZipField(with countryISO: VGSCountriesISO) {
-		guard let zipTextFieldView = zipFieldView else {return}
-		VGSPostalCodeFieldView.updateUI(for: zipTextFieldView, countryISOCode: countryISO)
+	func updatePostalCodeField(with countryISO: VGSCountriesISO) {
+		guard let postalCodeTextFieldView = postalCodeFieldView else {return}
+        /// update validation rules for country
+        postalCodeTextFieldView.textField.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: countryISO))
+        /// update UI state
+		VGSPostalCodeFieldView.updateUI(for: postalCodeTextFieldView, countryISOCode: countryISO)
 	}
 
 	func userDidSelectValue(_ textValue: String?, in pickerTextField: VGSPickerTextField) {
@@ -243,10 +246,13 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 //				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 //
 				updateStateField(with: newCountry)
-				updateZipField(with: newCountry)
+				updatePostalCodeField(with: newCountry)
 
-				// After changing country some fields can be changes - revalidate form.
-//				updateFormState()
+				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new files configuration.
+				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
+				
+				// Revalidate the entire form - on switching countries previous postal code can be invalid now.
+				updateFormState()
 			}
 		} else if pickerTextField === statePickerField {
 

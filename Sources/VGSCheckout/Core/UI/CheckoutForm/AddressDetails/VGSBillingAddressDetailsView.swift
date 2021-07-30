@@ -76,8 +76,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		return componentView
 	}()
 
-	/// ZIP form item view.
-	internal lazy var zipFieldView: VGSPostalCodeFieldView = {
+	/// Postal Code/Zip form item view.
+	internal lazy var postalCodeFieldView: VGSPostalCodeFieldView = {
 		let componentView = VGSPostalCodeFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -125,7 +125,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Horizontal stack view for state and cvc.
-	internal lazy var stateAndZipStackView: VGSSeparatedStackView = {
+	internal lazy var stateAndPostalCodeStackView: VGSSeparatedStackView = {
 		let stackView = VGSSeparatedStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -223,10 +223,10 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		verticalStackView.addArrangedSubview(addressLine2FieldView)
 		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndZipStackView.addArrangedSubview(statePickerFieldView)
-		stateAndZipStackView.addArrangedSubview(zipFieldView)
+		stateAndPostalCodeStackView.addArrangedSubview(statePickerFieldView)
+		stateAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
-		verticalStackView.addArrangedSubview(stateAndZipStackView)
+		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
 
 		rootStackView.addArrangedSubview(errorLabel)
 		errorLabel.isHiddenInCheckoutStackView = true
@@ -238,7 +238,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 			addressLine2FieldView,
 			cityFieldView,
 			statePickerFieldView,
-			zipFieldView
+			postalCodeFieldView
 		]
 
 		// Setup insets and UI Theme.

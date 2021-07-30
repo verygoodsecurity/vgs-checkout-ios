@@ -16,16 +16,44 @@ internal class VGSAddressCountriesDataProvider {
 		let name: String
 	}
 
+	/// Countries with address verification support.
 	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
 
+	/// First country in picker.
+	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us
+
+	/// First country model in picker.
+	private static var firstCountryModel: CountryModel? {
+		let locale = NSLocale.autoupdatingCurrent
+		let identifier = Locale.identifier(fromComponents: [
+			NSLocale.Key.countryCode.rawValue: defaultFirstCountryCode.rawValue
+		])
+
+		if let countryName = (locale as NSLocale).displayName(
+				forKey: .identifier, value: identifier) {
+			return CountryModel(code: defaultFirstCountryCode.rawValue, name: countryName)
+		} else {
+			return nil
+		}
+	}
+
+	/// List of available countries in alphabetical order. US will be on the top of the list.
 	static func provideSupportedCountries() -> [CountryModel] {
-		return provideCountries().filter({supportedCodes.contains($0.code)})
+		// Filter valid coutries.
+	  let filtered = provideCountries().filter({ supportedCodes.contains($0.code) })
+
+		// Insert selected country on the top of the list.
+		if let model = firstCountryModel {
+			let unsortedFiltered = filtered.filter{($0.code != defaultFirstCountryCode.rawValue)}
+			return [model] + unsortedFiltered
+		} else {
+			return filtered
+		}
 	}
 
 	/// Provide all countries.
 	/// - Returns: `[CountryModel]`, array of `CountryModel`.
 	private static func provideCountries() -> [CountryModel] {
-		let currentCountryCode = Locale.autoupdatingCurrent.regionCode
 		let locale = NSLocale.autoupdatingCurrent
 
 		let unsorted = Locale.isoRegionCodes.compactMap { (code) -> (String, String)? in
@@ -40,19 +68,12 @@ internal class VGSAddressCountriesDataProvider {
 			}
 		}.map({return CountryModel(code: $0, name: $1)})
 
+		// Sort all countries in alphabetical order.
 		return unsorted.sorted { (country1, country2) -> Bool in
-			let code1 = country1.code
-			let code2 = country2.code
 
-			if code1 == currentCountryCode {
-				return true
-			} else if code2 == currentCountryCode {
-				return false
-			} else {
-				let name1 = country1.name
-				let name2 = country2.name
-				return name1.compare(name2) == .orderedAscending ? true : false
-			}
+			let name1 = country1.name
+			let name2 = country2.name
+			return name1.compare(name2) == .orderedAscending ? true : false
 		}
 	}
 }

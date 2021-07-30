@@ -8,7 +8,6 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
-//import VGSCollectSDK
 
 class CheckoutBasicFlowVC: UIViewController {
 
@@ -65,7 +64,8 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
-		checkoutConfiguration.billingAddressMode = .fullAddress
+        checkoutConfiguration.billingAddressMode = .fullAddress
+        
 
 		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
 		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "billing_address.city"
