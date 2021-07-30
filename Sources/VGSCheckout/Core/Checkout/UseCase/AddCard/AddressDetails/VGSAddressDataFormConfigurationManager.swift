@@ -103,9 +103,12 @@ internal class VGSAddressDataFormConfigurationManager {
 		])
 		postalCodeConfiguration.returnKeyType = .done
 
+		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
+
 		postalCodeTextField.configuration = postalCodeConfiguration
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: .us)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
 	}
 
 	/*
@@ -213,10 +216,18 @@ internal class VGSAddressDataFormConfigurationManager {
 		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.postal_code")
 		postalCodeConfiguration.type = .none
 		postalCodeConfiguration.isRequiredValidOnly = true
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+		])
+		postalCodeConfiguration.returnKeyType = .done
+
+		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
 
 		postalCodeTextField.configuration = postalCodeConfiguration
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: .us)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
+
 	}
 
 	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {

@@ -20,18 +20,18 @@ internal class VGSAddressCountriesDataProvider {
 	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
 
 	/// First country in picker.
-	private static let defaultFirstCountryCode = "US"
+	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us
 
 	/// First country model in picker.
 	private static var firstCountryModel: CountryModel? {
 		let locale = NSLocale.autoupdatingCurrent
 		let identifier = Locale.identifier(fromComponents: [
-			NSLocale.Key.countryCode.rawValue: defaultFirstCountryCode
+			NSLocale.Key.countryCode.rawValue: defaultFirstCountryCode.rawValue
 		])
 
 		if let countryName = (locale as NSLocale).displayName(
 				forKey: .identifier, value: identifier) {
-			return CountryModel(code: defaultFirstCountryCode, name: countryName)
+			return CountryModel(code: defaultFirstCountryCode.rawValue, name: countryName)
 		} else {
 			return nil
 		}
@@ -44,7 +44,7 @@ internal class VGSAddressCountriesDataProvider {
 
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
-			let unsortedFiltered = filtered.filter{($0.code != defaultFirstCountryCode)}
+			let unsortedFiltered = filtered.filter{($0.code != defaultFirstCountryCode.rawValue)}
 			return [model] + unsortedFiltered
 		} else {
 			return filtered

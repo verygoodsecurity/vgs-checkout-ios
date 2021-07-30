@@ -24,27 +24,36 @@ internal class VGSPostalCodeFieldValidator: VGSFormTextFieldValidationProtocol {
 	}
 
 	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
-		return fieldType.emptyFieldNameError
+		guard let errorMessage = textField.state.validationErrors.first else {
+				return nil
+		}
+		return errorMessage
 	}
 }
 
 internal class VGSPostalCodeValidationRulesFactory {
+
+	internal static let emptyPostalCodeRule = VGSValidationRuleLength(min: 1,
+																	 error: VGSAddressPostalCode.postalCode.emptyErrorText)
+
+	internal static let emptyZipCodeRule = VGSValidationRuleLength(min: 1,
+																 error: VGSAddressPostalCode.zip.emptyErrorText)
     
     internal static func validationRules(for countryISO: VGSCountriesISO) -> [VGSValidationRuleProtocol] {
         
         let rules: [VGSValidationRuleProtocol]
         switch countryISO {
         case .us:
-            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+            rules = [emptyZipCodeRule, VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
                                               error: VGSAddressPostalCode.zip.invalidErrorText)]
         case .ca, .au, .nz:
-            rules = [VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
+            rules = [emptyPostalCodeRule, VGSValidationRulePattern(pattern: countryISO.postalCodePattern,
                                               error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         case .gb:
-            rules = [VGSValidationRuleLength(min: 1, max: 32,
+            rules = [emptyPostalCodeRule, VGSValidationRuleLength(min: 1, max: 32,
                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         default:
-            rules = [VGSValidationRuleLength(min: 1, max: 32,
+            rules = [emptyPostalCodeRule, VGSValidationRuleLength(min: 1, max: 32,
                                              error: VGSAddressPostalCode.postalCode.invalidErrorText)]
         }
         return rules
