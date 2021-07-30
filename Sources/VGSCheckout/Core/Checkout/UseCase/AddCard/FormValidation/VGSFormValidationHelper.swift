@@ -124,6 +124,18 @@ internal class VGSFormValidationHelper {
 					default:
 						fieldViewsValidationManager.updateAnyFieldViewOnEditingTextField(textField, fieldView: fieldView)
 					}
+
+
+				switch fieldView.fieldType {
+				case .country:
+					if let postalCodeView = fieldViewsManager.fieldViews.first(where: {$0.fieldType == .postalCode}) {
+
+						// Refresh postal code field view on switching country.
+						fieldViewsValidationManager.updateAnyFieldViewOnEditingTextField(textField, fieldView: postalCodeView)
+					}
+				default:
+					break
+				}
 					return
 			}
 		case .onTextChange:

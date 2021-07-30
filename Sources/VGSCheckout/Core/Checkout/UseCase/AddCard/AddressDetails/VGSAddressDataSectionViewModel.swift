@@ -247,6 +247,12 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
 //
 				updateStateField(with: newCountry)
 				updatePostalCodeField(with: newCountry)
+
+				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new files configuration.
+				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
+				
+				// Revalidate the entire form - on switching countries previous postal code can be invalid now.
+				updateFormState()
 			}
 		} else if pickerTextField === statePickerField {
 
