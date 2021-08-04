@@ -9,7 +9,7 @@ import UIKit
 #endif
 
 /// Form component for hint.
-internal class VGSFormHintView: UIView {
+internal class VGSFieldHintView: UIView {
 
 	// MARK: - Vars
 
