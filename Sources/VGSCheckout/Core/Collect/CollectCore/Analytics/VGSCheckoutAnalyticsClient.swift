@@ -47,6 +47,9 @@ public class VGSCheckoutAnalyticsClient {
   internal let defaultHttpHeaders: HTTPHeaders = {
     return ["Content-Type": "application/x-www-form-urlencoded" ]
   }()
+
+	/// URL session object with `.ephemeral` configuration.
+	internal let urlSession = URLSession(configuration: .ephemeral)
   
   internal static let userAgentData: [String: Any] = {
       let version = ProcessInfo.processInfo.operatingSystemVersion
@@ -138,6 +141,6 @@ internal extension VGSCheckoutAnalyticsClient {
       let encodedJSON = jsonData?.base64EncodedData()
       request.httpBody = encodedJSON
       // Send data
-      URLSession.shared.dataTask(with: request).resume()
+			urlSession.dataTask(with: request).resume()
   }
 }
