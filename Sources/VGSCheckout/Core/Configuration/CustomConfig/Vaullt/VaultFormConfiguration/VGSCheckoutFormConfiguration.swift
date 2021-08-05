@@ -13,8 +13,8 @@ public struct VGSCheckoutFormConfiguration {
 	/// Address options.
 	public var addressOptions = VGSCheckoutBillingAddressOptions()
 
-	/// Billing address mode. Default is `.noAddress` - address section is hidden and `addressOptions` will be ignored.
-	public var billingAddressMode: VGSCheckoutBillingAddressMode = .noAddress
+	/// Billing address visibility. Default is `.hidden` - address section is hidden and `addressOptions` fields will be ignored.
+	public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility = .hidden
 
 	/// no:doc
 	public init() {}
