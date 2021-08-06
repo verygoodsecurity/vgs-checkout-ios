@@ -133,14 +133,14 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 		}
 	}
 
-	/// Billing address mode.
-	public var billingAddressMode: VGSCheckoutBillingAddressMode {
+	/// Billing address visibility.
+	public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
 		get {
-			return formConfiguration.billingAddressMode
+			return formConfiguration.billingAddressVisibility
 		}
 
 		set {
-			formConfiguration.billingAddressMode = newValue
+			formConfiguration.billingAddressVisibility = newValue
 		}
 	}
 }

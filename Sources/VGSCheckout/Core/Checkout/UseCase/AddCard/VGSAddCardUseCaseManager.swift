@@ -96,8 +96,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		switch paymentInstrument {
 		case .vault(let vaultConfiguration):
-			switch vaultConfiguration.billingAddressMode {
-			case .fullAddress:
+			switch vaultConfiguration.billingAddressVisibility {
+			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
 				formValidationHelper.fieldViewsManager.appendFormSectionViews([ addressDataSectionViewModel.billingAddressFormView])
 			default:

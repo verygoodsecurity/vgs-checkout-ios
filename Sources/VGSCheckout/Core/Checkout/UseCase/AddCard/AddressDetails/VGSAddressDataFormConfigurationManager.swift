@@ -20,7 +20,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
 		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
 
-		let addressMode = vaultConfiguration.formConfiguration.billingAddressMode
+		let addressVisibility = vaultConfiguration.formConfiguration.billingAddressVisibility
 
 		let countryOptions = vaultConfiguration.billingAddressCountryFieldOptions
 		let addressLine1Options = vaultConfiguration.billingAddressLine1FieldOptions
@@ -28,11 +28,11 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityOptions = vaultConfiguration.billingAddressCityFieldOptions
 		let postalCodeOptions = vaultConfiguration.billingAddressPostalCodeFieldOptions
 
-		switch addressMode {
-		case .noAddress:
+		switch addressVisibility {
+		case .hidden:
 			addressFormView.isHidden = true
 			return
-		case .fullAddress:
+		case .visible:
 			break
 		}
 
