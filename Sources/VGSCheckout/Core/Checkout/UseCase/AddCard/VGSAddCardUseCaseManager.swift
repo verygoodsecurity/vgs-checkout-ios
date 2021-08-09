@@ -34,6 +34,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.payButton.status = .disabled
 			case .valid:
 				addCardSectionFormView.payButton.status = .enabled
+
+				addCardSectionFormView.isUserInteractionEnabled = true
+				addCardSectionFormView.headerBarView.closeButton?.isEnabled = true
+				addCardSectionFormView.payButton.status = .enabled
 			case .processing:
 				addCardSectionFormView.isUserInteractionEnabled = false
 				addCardSectionFormView.headerBarView.closeButton?.isEnabled = false
