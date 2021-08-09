@@ -13,12 +13,6 @@ public class VGSCheckout {
 	/// An object that acts as a `VGSCheckout` delegate.
 	public weak var delegate: VGSCheckoutDelegate?
 
-	/// Payment instrument.
-	internal let paymentInstrument: VGSPaymentInstrument
-
-	/// Collect instance.
-	internal let vgsCollect: VGSCollect
-
 	/// Checkout coordinator.
 	fileprivate var checkoutCoordinator = VGSCheckoutFlowCoordinator()
 
@@ -31,13 +25,12 @@ public class VGSCheckout {
 	/// - Parameters:
 	///   - configuration: `VGSCheckoutConfigurationProtocol` object, should be valid checkout configuration.
 	public init(configuration: VGSCheckoutConfigurationProtocol) {
-		guard let paymetInstrument = VGSPaymentInstrument(configuration: configuration) else {
+		guard let paymentInstrument = VGSPaymentInstrument(configuration: configuration) else {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-		self.paymentInstrument = paymetInstrument
-		self.vgsCollect = VGSCollect(vaultID: configuration.vaultID, environment: configuration.environment, paymentFlow: paymetInstrument)
-    self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymetInstrument, vgsCollect: vgsCollect, uiTheme: configuration.uiTheme)
+		let vgsCollect = VGSCollect(vaultID: configuration.vaultID, environment: configuration.environment, paymentFlow: paymentInstrument)
+    self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, uiTheme: configuration.uiTheme)
 		addCardUseCaseManager.delegate = self
 	}
 

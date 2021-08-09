@@ -36,9 +36,6 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		return fieldViews.map({return $0.textField})
 	}
 
-	/// Configuration type.
-	internal let paymentInstrument: VGSPaymentInstrument
-
 	/// VGSCollect instance.
 	internal let vgsCollect: VGSCollect
 
@@ -49,29 +46,33 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	internal let autoFocusManager: VGSFieldAutofocusManager
 
 	// MARK: - Initialization
+  
+  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+    self.vgsCollect = vgsCollect
+    self.validationBehavior = validationBehavior
+    self.billingAddressFormView = VGSBillingAddressDetailsSectionView(uiTheme: uiTheme)
+    self.formValidationHelper = formValidationHelper
+    self.autoFocusManager = autoFocusManager
+  }
 
-  internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-		self.paymentInstrument = paymentInstrument
-		self.vgsCollect = vgsCollect
-		self.validationBehavior = validationBehavior
-    self.billingAddressFormView = VGSBillingAddressDetailsSectionView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
-		self.formValidationHelper = formValidationHelper
-		self.autoFocusManager = autoFocusManager
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
-		buildForm()
+    setupCardForm(vaultConfiguration: configuration)
+    buildForm()
 	}
+  
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
+
+    setupCardForm(multiplexingConfiguration: configuration)
+    buildForm()
+  }
 
 	// MARK: - Interface
 
-	internal func buildForm() {
+  internal func buildForm() {
 		billingAddressFormView.translatesAutoresizingMaskIntoConstraints = false
-
-		switch paymentInstrument {
-		case .vault(let configuration):
-			setupCardForm(with: configuration)
-		case .multiplexing(let multiplexingConfig):
-			setupCardForm(with: multiplexingConfig)
-		}
 
 		let inputBlackTextColor: UIColor = {
 			if #available(iOS 13.0, *) {
@@ -101,11 +102,11 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Helpers
 
-	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
+	private func setupCardForm(vaultConfiguration: VGSCheckoutConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
-	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
+	private func setupCardForm(multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 

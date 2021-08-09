@@ -20,7 +20,7 @@ internal protocol VGSAddCardUseCaseManagerDelegate: AnyObject {
 internal class VGSAddCardUseCaseManager: NSObject {
 
 	internal weak var delegate: VGSAddCardUseCaseManagerDelegate?
-
+  
 	enum FormState {
 		case invalid
 		case valid
@@ -85,9 +85,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
-		self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+    switch paymentInstrument {
+    case .vault(let configuration):
+      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+    case .multiplexing(let configuration):
+      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+    }
 
-		self.addCardSectionFormView = VGSAddCardFormView(paymentInstrument: paymentInstrument, cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
+		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
 		// TODO: - move form validation setup to a separate func?
 

@@ -17,9 +17,6 @@ internal class VGSAddCardFormView: VGSFormView {
 
 	// MARK: - Vars
 
-	/// Payment instrument.
-	internal let paymentInstrument: VGSPaymentInstrument
-
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
@@ -61,12 +58,11 @@ internal class VGSAddCardFormView: VGSFormView {
 	// MARK: - Initialization
 
 	/// Initializer.
-  internal init(paymentInstrument: VGSPaymentInstrument, cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
+  internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
     self.uiTheme = uiTheme
     self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
     self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
-		self.paymentInstrument = paymentInstrument
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsSectionView = cardDetailsView
 		self.billingAddressSectionView = billingAddressView

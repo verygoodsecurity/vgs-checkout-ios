@@ -138,15 +138,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		return stackView
 	}()
 
-	/// Payment instrument.
-	fileprivate let paymentInstrument: VGSPaymentInstrument
-
 	// MARK: - Initialization
 
 	/// Initialization.
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
-  init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
-		self.paymentInstrument = paymentInstrument
+  init(uiTheme: VGSCheckoutThemeProtocol) {
     self.uiTheme = uiTheme
     self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
 		super.init(frame: .zero)

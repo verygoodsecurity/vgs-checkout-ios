@@ -32,8 +32,8 @@ internal class VGSPlaceholderFieldView: UIView {
 	}()
 
 	/// Hint component view.
-	internal lazy var hintComponentView: VGSFormHintView = {
-		let view = VGSFormHintView(frame: .zero)
+	internal lazy var hintComponentView: VGSFieldHintView = {
+		let view = VGSFieldHintView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
 
 		return view

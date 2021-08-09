@@ -11,5 +11,5 @@ public enum VGSCheckoutFieldVisibility {
 	case visible
 
 	/// Field is hidden.
-	case invisible
+	case hidden
 }
