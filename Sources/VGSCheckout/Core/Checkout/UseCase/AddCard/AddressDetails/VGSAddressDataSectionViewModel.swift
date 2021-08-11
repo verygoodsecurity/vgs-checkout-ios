@@ -128,30 +128,30 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	}
 
 	/// Country picker field.
-	fileprivate var countryPickerField: VGSPickerTextField? {
+  internal var countryPickerField: VGSPickerTextField? {
 		guard let countryTextField = fieldViews.first(where: {$0.fieldType == .country})?.textField as? VGSPickerTextField else {return nil}
 
 		return countryTextField
 	}
 
 	/// State field view.
-	fileprivate var stateFieldView: VGSTextFieldViewProtocol? {
+  internal var stateFieldView: VGSTextFieldViewProtocol? {
 		return fieldViews.first(where: {$0.fieldType == .state})
 	}
 
 	/// State field view.
-	fileprivate var postalCodeFieldView: VGSTextFieldViewProtocol? {
+  internal var postalCodeFieldView: VGSTextFieldViewProtocol? {
 		return fieldViews.first(where: {$0.fieldType == .postalCode})
 	}
 
 	/// State picker field.
-	fileprivate var statePickerField: VGSPickerTextField? {
+  internal var statePickerField: VGSPickerTextField? {
 		guard let stateTextField = fieldViews.first(where: {$0.fieldType == .state})?.textField as? VGSPickerTextField else {return nil}
 
 		return stateTextField
 	}
 
-	fileprivate var currentRegions: [VGSAddressRegionModel] {
+  internal var currentRegions: [VGSAddressRegionModel] {
 		guard let config = countryPickerField?.configuration as? VGSPickerTextFieldConfiguration, let dataSource = config.dataProvider?.dataSource as? VGSRegionsDataSourceProvider else {
 			return []
 		}

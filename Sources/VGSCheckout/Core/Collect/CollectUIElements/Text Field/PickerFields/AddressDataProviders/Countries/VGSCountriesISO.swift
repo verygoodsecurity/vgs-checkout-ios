@@ -527,10 +527,10 @@ internal extension VGSCountriesISO {
     
     var postalCodePattern: String {
         switch self {
-            case .us: return "^([0-9]{5})(?:-([0-9]{4}))?$"
-            case .ca: return "^([ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ])\\s*([0-9][ABCEGHJKLMNPRSTVWXYZ][0-9])$"
-            case .au: return "^\\d{4}$"
-            case .nz: return "^\\d{4}$"
+          case .us: return "^([0-9]{5})(?:-([0-9]{4}))?$"
+          case .ca: return "^([ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ])\\s*([0-9][ABCEGHJKLMNPRSTVWXYZ][0-9])$"
+          case .au: return "^\\d{4}$"
+          case .nz: return "^\\d{4}$"
         default: return ""
         }
     }
