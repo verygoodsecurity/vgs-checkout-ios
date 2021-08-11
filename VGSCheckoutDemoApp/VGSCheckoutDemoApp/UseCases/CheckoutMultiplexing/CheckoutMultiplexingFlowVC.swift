@@ -71,6 +71,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 // MARK: - VGSCheckoutDelegate
 
 extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
+
 	func checkoutDidCancel() {
 
 		let alert = UIAlertController(title: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)

@@ -64,7 +64,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
-		checkoutConfiguration.billingAddressVisibility = .visible
+		checkoutConfiguration.billingAddressVisibility = .hidden
         
 		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
 		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "billing_address.city"
@@ -72,10 +72,12 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "billing_address.addressLine2"
 		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "billing_address.postal_code"
 
+		checkoutConfiguration.routeConfiguration.path = "blabla"
+
 		// Produce nested json for fields with `.` notation.
 		checkoutConfiguration.routeConfiguration.requestOptions.mergePolicy = .nestedJSON
 
-		checkoutConfiguration.routeConfiguration.path = "post"
+		//checkoutConfiguration.routeConfiguration.path = "post"
 
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)

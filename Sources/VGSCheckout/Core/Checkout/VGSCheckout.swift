@@ -64,20 +64,18 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 				case .success:
 					break
 				case .failure(let code, let data, _, let error):
-					if let networkError = error as? NSError, let viewController = checkoutCoordinator.rootController {
-						/// Check if some network error.
-						if networkError.domain == NSURLErrorDomain {
-							VGSDialogHelper.showOkDialog(with: "Something went wrong", message: networkError.localizedDescription, okActionTitle: "Ok", in: viewController, completion: {
-								/// Reset UI state to normal.
-								self.addCardUseCaseManager.state = .valid
-							})
-							return
+					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
+						VGSDialogHelper.showOkDialog(with: "Something went wrong", message: responseError.localizedDescription, okActionTitle: "Ok", in: viewController, completion: {
+							// Reset UI state to valid (previous state before submit).
+							self.addCardUseCaseManager.state = .valid
+						})
+					} else {
+						// Close
+						checkoutCoordinator.dismissRootViewController {
+							self.delegate?.checkoutDidFinish(with: requestResult)
 						}
 					}
-				}
-			checkoutCoordinator.dismissRootViewController {
-				self.delegate?.checkoutDidFinish(with: requestResult)
-			}
+			 }
 		}
 	}
 }

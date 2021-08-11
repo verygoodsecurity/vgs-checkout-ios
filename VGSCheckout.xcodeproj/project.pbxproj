@@ -233,6 +233,7 @@
 		44ECE615265FF596006C160B /* VGSCheckoutCardIOScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE612265FF596006C160B /* VGSCheckoutCardIOScanner.swift */; };
 		44ECE616265FF596006C160B /* CheckoutCardIOScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */; };
 		44FF1A6226C1362800BA85AF /* VGSDialogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF1A6126C1362800BA85AF /* VGSDialogHelper.swift */; };
+		44FF1A6526C3864500BA85AF /* VGSCheckoutErrorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF1A6426C3864500BA85AF /* VGSCheckoutErrorUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -485,6 +486,7 @@
 		44ECE613265FF596006C160B /* CheckoutCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutCardIOScanner.h; sourceTree = "<group>"; };
 		44ECE614265FF596006C160B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44FF1A6126C1362800BA85AF /* VGSDialogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSDialogHelper.swift; sourceTree = "<group>"; };
+		44FF1A6426C3864500BA85AF /* VGSCheckoutErrorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutErrorUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1282,6 +1284,7 @@
 		44C4C8F62664B1CE00195505 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				44FF1A6326C3862900BA85AF /* ErrorUtils */,
 				44FF1A6026C1361600BA85AF /* DialogHelper */,
 				44E10AC9269D44EF001F0D44 /* LocalizationUtils */,
 				4405DC7026847247004A83AD /* CollectUtils */,
@@ -1791,6 +1794,14 @@
 			path = DialogHelper;
 			sourceTree = "<group>";
 		};
+		44FF1A6326C3862900BA85AF /* ErrorUtils */ = {
+			isa = PBXGroup;
+			children = (
+				44FF1A6426C3864500BA85AF /* VGSCheckoutErrorUtils.swift */,
+			);
+			path = ErrorUtils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2135,6 +2146,7 @@
 				4405DC9F26847247004A83AD /* VGSExpirationDateTextFieldUtils.swift in Sources */,
 				44E10A9D2695716F001F0D44 /* VGSAddressDataSectionViewModel.swift in Sources */,
 				4405DC9926847247004A83AD /* URL+Extensions.swift in Sources */,
+				44FF1A6526C3864500BA85AF /* VGSCheckoutErrorUtils.swift in Sources */,
 				44E10AAB2696C346001F0D44 /* VGSStateDataSourceProvider.swift in Sources */,
 				44C4C9012664BA5A00195505 /* VGSCheckoutTheme.swift in Sources */,
 				44985D482692D6A300A4BB42 /* VGSFieldAutofocusManager.swift in Sources */,
