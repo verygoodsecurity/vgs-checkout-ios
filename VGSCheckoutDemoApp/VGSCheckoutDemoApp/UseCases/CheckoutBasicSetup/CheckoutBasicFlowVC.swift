@@ -64,7 +64,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
 		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
 
-		checkoutConfiguration.billingAddressVisibility = .hidden
+		checkoutConfiguration.billingAddressVisibility = .visible
         
 		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
 		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "billing_address.city"
