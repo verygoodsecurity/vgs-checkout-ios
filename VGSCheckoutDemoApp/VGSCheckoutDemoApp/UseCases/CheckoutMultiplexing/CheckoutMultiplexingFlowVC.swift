@@ -56,7 +56,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 		// Create multiplexing configuration.
-		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, environment: DemoAppConfiguration.shared.environment)
+		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: "<MULTIPLEXING_TOKEN>", environment: DemoAppConfiguration.shared.environment)
 
 		// Init Checkout with vaultID associated with your multiplexing configuration.
 		vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
@@ -71,6 +71,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 // MARK: - VGSCheckoutDelegate
 
 extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
+
 	func checkoutDidCancel() {
 
 		let alert = UIAlertController(title: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)

@@ -13,12 +13,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
+	/// Multiplexing token.
+	private (set) public var token: String
+
 	/// Configuration initializer.
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
+	///   - token: `String` object, should be valid token for multiplexing.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init(vaultID: String, environment: String) {
+	public init(vaultID: String, token: String, environment: String = "sandbox") {
 		self.vaultID = vaultID
+		self.token = token
 		self.environment = environment
 	}
 

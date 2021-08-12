@@ -60,9 +60,24 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 				self.delegate?.checkoutDidCancel()
 			})
 		case .requestSubmitted(let requestResult):
-			checkoutCoordinator.dismissRootViewController {
-				self.delegate?.checkoutDidFinish(with: requestResult)
-			}
+				switch requestResult {
+				case .success:
+					checkoutCoordinator.dismissRootViewController {
+						self.delegate?.checkoutDidFinish(with: requestResult)
+					}
+				case .failure(_, _, _, let error):
+					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
+						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {
+							// Reset UI state to valid (previous state before submit).
+							self.addCardUseCaseManager.state = .valid
+						})
+					} else {
+						// Close
+						checkoutCoordinator.dismissRootViewController {
+							self.delegate?.checkoutDidFinish(with: requestResult)
+						}
+					}
+			 }
 		}
 	}
 }

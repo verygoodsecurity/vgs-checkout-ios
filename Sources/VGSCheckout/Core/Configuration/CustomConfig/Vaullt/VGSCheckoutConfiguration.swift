@@ -17,7 +17,7 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init(vaultID: String, environment: String) {
+	public init(vaultID: String, environment: String = "sandbox") {
 		self.vaultID = vaultID
 		self.environment = environment
 	}

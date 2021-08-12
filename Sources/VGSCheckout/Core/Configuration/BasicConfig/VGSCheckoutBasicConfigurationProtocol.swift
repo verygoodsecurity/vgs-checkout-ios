@@ -16,12 +16,6 @@ public protocol VGSCheckoutConfigurationProtocol {
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	var environment: String {get}
-
-	/// Configuration initializer.
-	/// - Parameters:
-	///   - vaultID: `String` object, organization vault id.
-	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	init(vaultID: String, environment: String)
 }
 
 /// Internal protocol for VGSCheckout configuration.
