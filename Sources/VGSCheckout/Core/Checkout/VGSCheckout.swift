@@ -63,9 +63,9 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 				switch requestResult {
 				case .success:
 					break
-				case .failure(let code, let data, _, let error):
+				case .failure(_, _, _, let error):
 					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
-						VGSDialogHelper.showOkDialog(with: "Something went wrong", message: responseError.localizedDescription, okActionTitle: "Ok", in: viewController, completion: {
+						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {
 							// Reset UI state to valid (previous state before submit).
 							self.addCardUseCaseManager.state = .valid
 						})

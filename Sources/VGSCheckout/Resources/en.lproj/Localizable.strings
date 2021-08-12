@@ -159,3 +159,9 @@
 
 /* Invalid postal code in address info code error. */
 "vgs_checkout_address_info_postal_code_invalid_error" = "Postal code is invalid";
+
+/* General error for error popup title. */
+"vgs_checkout_error_dialog_title_something_went_wrong_error" = "Something went wrong";
+
+/* General OK button title for error popup title. */
+"vgs_checkout_error_dialog_ok_button_ttile" = "Ok";
