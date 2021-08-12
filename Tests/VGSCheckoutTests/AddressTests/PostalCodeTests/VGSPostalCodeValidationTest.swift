@@ -8,7 +8,7 @@ import XCTest
 @testable import VGSCheckout
 
 /// Test postal codes validation
-class VGSPostalCodeValidationTest: XCTestCase {
+class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   
   struct CountryStrings {
     let placeholder: String
