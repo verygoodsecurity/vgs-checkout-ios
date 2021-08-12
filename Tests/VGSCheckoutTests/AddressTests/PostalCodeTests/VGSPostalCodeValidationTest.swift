@@ -10,8 +10,18 @@ import XCTest
 /// Test postal codes validation
 class VGSPostalCodeValidationTest: XCTestCase {
   
+  struct CountryStrings {
+    let placeholder: String
+    let invalidErrorText: String
+    let emptyErrorText: String
+  }
+  
   var configuration: VGSCheckoutConfiguration!
   var checkout: VGSCheckout!
+  
+  lazy var testCountryData: [VGSCountriesISO: CountryStrings] = {
+    return prepareCountryStringsData()
+  }()
   
   override func setUp() {
     super.setUp()
@@ -79,6 +89,31 @@ class VGSPostalCodeValidationTest: XCTestCase {
         XCTAssertFalse(postalCodeField.state.isValid, "VALIDATION ERROR: \(postalCode) - postal code is valid for country \(country), but should be invalid!")
       }
     }
+  }
+  
+  func testDynamicPlaceholderChanges() {
+    guard let postalCodeField = checkout.addCardUseCaseManager.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+      XCTFail("ERROR: NO PostalCodeField")
+      return
+    }
+      
+    for (country, countryData) in testCountryData {
+      checkout.addCardUseCaseManager.addressDataSectionViewModel.updatePostalCodeField(with: country)
+      XCTAssertTrue(postalCodeField.textField.placeholder == countryData.placeholder, "Placeholder error: wrong placeholder for country \(country) - \(String(describing: postalCodeField.textField.placeholder))")
+    }
+  }
+  
+  private func prepareCountryStringsData() -> [VGSCountriesISO: CountryStrings] {
+    return [
+      VGSCountriesISO.us: CountryStrings(placeholder:
+                                                    VGSAddressPostalCode.zip.textFieldPlaceholder,
+                                                  invalidErrorText: VGSAddressPostalCode.zip.invalidErrorText,
+                                                  emptyErrorText: VGSAddressPostalCode.zip.emptyErrorText),
+      VGSCountriesISO.gb: CountryStrings(placeholder:
+                                                    VGSAddressPostalCode.postalCode.textFieldPlaceholder,
+                                                  invalidErrorText: VGSAddressPostalCode.postalCode.invalidErrorText,
+                                                  emptyErrorText: VGSAddressPostalCode.postalCode.emptyErrorText)
+    ]
   }
   
 }
