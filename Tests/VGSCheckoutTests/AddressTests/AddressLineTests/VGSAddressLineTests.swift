@@ -8,7 +8,7 @@ import XCTest
 @testable import VGSCheckout
 
 /// Test postal codes validation
-class AddressLineTests: XCTestCase {
+class VGSAddressLineTests: XCTestCase {
   
   var configuration: VGSCheckoutConfiguration!
   var checkout: VGSCheckout!
