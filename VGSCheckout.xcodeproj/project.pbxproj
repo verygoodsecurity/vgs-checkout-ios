@@ -11,6 +11,9 @@
 		03B674A026B308EC0001E5AD /* VGSPostalCodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */; };
 		3286E0C6265EC19C001FECEB /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
 		3286E131265EC588001FECEB /* VGSCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32CC737E26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */; };
+		32CC738026C11222006E9DCD /* _VGSCountryISOPostalCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */; };
+		32CF756D26C3B067008DB455 /* VGSAddressLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */; };
 		4405DC1426844AD8004A83AD /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBF926844AD8004A83AD /* Storage.swift */; };
 		4405DC1526844AD8004A83AD /* VGSErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFA26844AD8004A83AD /* VGSErrorInfo.swift */; };
 		4405DC1626844AD8004A83AD /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DBFB26844AD8004A83AD /* Enums.swift */; };
@@ -260,6 +263,9 @@
 		3286E0C5265EC19C001FECEB /* VGSCheckoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VGSCheckoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3286E12F265EC588001FECEB /* VGSCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSCheckout.h; sourceTree = "<group>"; };
 		3286E130265EC588001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeValidationTest.swift; sourceTree = "<group>"; };
+		32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VGSCountryISOPostalCodes.swift; sourceTree = "<group>"; };
+		32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLineTests.swift; sourceTree = "<group>"; };
 		4405DBF926844AD8004A83AD /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4405DBFA26844AD8004A83AD /* VGSErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSErrorInfo.swift; sourceTree = "<group>"; };
 		4405DBFB26844AD8004A83AD /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -565,6 +571,32 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		32CC737926C10E35006E9DCD /* AddressTests */ = {
+			isa = PBXGroup;
+			children = (
+				32CC737A26C10F3C006E9DCD /* PostalCodeTests */,
+				32CF756B26C3B053008DB455 /* AddressLineTests */,
+			);
+			path = AddressTests;
+			sourceTree = "<group>";
+		};
+		32CC737A26C10F3C006E9DCD /* PostalCodeTests */ = {
+			isa = PBXGroup;
+			children = (
+				32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */,
+				32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */,
+			);
+			path = PostalCodeTests;
+			sourceTree = "<group>";
+		};
+		32CF756B26C3B053008DB455 /* AddressLineTests */ = {
+			isa = PBXGroup;
+			children = (
+				32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */,
+			);
+			path = AddressLineTests;
+			sourceTree = "<group>";
+		};
 		4405DBF726844AD8004A83AD /* Collect */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +872,7 @@
 		4405DD2F26859FAC004A83AD /* VGSCheckoutTests */ = {
 			isa = PBXGroup;
 			children = (
+				32CC737926C10E35006E9DCD /* AddressTests */,
 				4405DD3026859FAC004A83AD /* CollectUtilsTests */,
 				4405DD5E26859FAC004A83AD /* Resources */,
 				4405DD6E26859FAC004A83AD /* Info.plist */,
@@ -2216,11 +2249,14 @@
 				4405DD8126859FAD004A83AD /* VGSCollectSatelliteUtilsTests.swift in Sources */,
 				4405DD7A26859FAD004A83AD /* CVVTextFieldTests.swift in Sources */,
 				4405DD8226859FAD004A83AD /* VGSAPIClientSatelliteTests.swift in Sources */,
+				32CC737E26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift in Sources */,
 				44E10AA52695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift in Sources */,
 				4405DD7826859FAD004A83AD /* CardHolderNameFieldTests.swift in Sources */,
 				4405DD7226859FAD004A83AD /* VGSFieldNameMapUtilsTests.swift in Sources */,
 				4405DD7D26859FAD004A83AD /* CardTextFieldTests.swift in Sources */,
 				4405DD7126859FAD004A83AD /* VGSFlatJSONStructMappingTests.swift in Sources */,
+				32CF756D26C3B067008DB455 /* VGSAddressLineTests.swift in Sources */,
+				32CC738026C11222006E9DCD /* _VGSCountryISOPostalCodes.swift in Sources */,
 				4405DD8026859FAD004A83AD /* VGSCollect+SatelliteTests.swift in Sources */,
 				4405DD7326859FAD004A83AD /* ExpDateTextField.swift in Sources */,
 				4405DD8526859FAD004A83AD /* JSONData+Extensions.swift in Sources */,
