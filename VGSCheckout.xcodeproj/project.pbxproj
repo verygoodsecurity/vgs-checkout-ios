@@ -264,6 +264,7 @@
 		32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeValidationTest.swift; sourceTree = "<group>"; };
 		32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VGSCountryISOPostalCodes.swift; sourceTree = "<group>"; };
 		32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLineTests.swift; sourceTree = "<group>"; };
+		4403861D26C6251D0056F2BA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4405DBF926844AD8004A83AD /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		4405DBFA26844AD8004A83AD /* VGSErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSErrorInfo.swift; sourceTree = "<group>"; };
 		4405DBFB26844AD8004A83AD /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -1926,6 +1927,7 @@
 				en,
 				Base,
 				uk,
+				ar,
 			);
 			mainGroup = 3286E0B2265EC19C001FECEB;
 			packageReferences = (
@@ -2289,6 +2291,7 @@
 			children = (
 				44E10AC6269C3E02001F0D44 /* en */,
 				44E10AC8269C3E0D001F0D44 /* uk */,
+				4403861D26C6251D0056F2BA /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

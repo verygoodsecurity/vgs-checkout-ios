@@ -99,6 +99,9 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
       
     for (country, countryData) in testCountryData {
       checkout.addCardUseCaseManager.addressDataSectionViewModel.updatePostalCodeField(with: country)
+
+			print("postalCodeField.textField.placeholder: \(postalCodeField.textField.placeholder)")
+
       XCTAssertTrue(postalCodeField.textField.placeholder == countryData.placeholder, "Placeholder error: wrong placeholder for country \(country) - \(String(describing: postalCodeField.textField.placeholder))")
     }
   }
