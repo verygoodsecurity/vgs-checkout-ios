@@ -9,4 +9,6 @@ target 'VGSCheckoutDemoApp' do
 
   pod 'VGSCheckout', :path => "../"
 
+	pod 'SVProgressHUD'
+
 end

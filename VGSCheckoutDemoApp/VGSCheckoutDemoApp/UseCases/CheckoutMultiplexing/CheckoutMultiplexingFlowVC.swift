@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckout
+import SVProgressHUD
 
 class CheckoutMultiplexingFlowVC: UIViewController {
 
@@ -56,6 +57,9 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 
+		// Start progress hud animation until token is fetched.
+		SVProgressHUD.show()
+
 		// Use your own backend to fetch access_token token.
 		var request = URLRequest(url: URL(string:  DemoAppConfiguration.shared.multiplexingServicePath)!)
 		request.httpMethod = "POST"
@@ -67,26 +71,34 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 										as? [String: Any],
 								let token = json["access_token"] as? String else {
 								// Handle error
-								return
+
+							DispatchQueue.main.async {[weak self] in
+								SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+							}
+
+							return
 						}
 
-					print("access_token: \(token)")
+					let multipexingToken = token
+					DispatchQueue.main.async {[weak self] in
+						print("access_token: \(token)")
+						SVProgressHUD.dismiss()
+						guard let strongSelf = self else {return}
+
+						// Create multiplexing configuration with token.
+						let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: multipexingToken, environment: DemoAppConfiguration.shared.environment)
+
+						// Init Checkout with vaultID associated with your multiplexing configuration.
+						strongSelf.vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
+
+						// Present checkout configuration.
+						strongSelf.vgsCheckout?.present(from: strongSelf)
+
+						strongSelf.vgsCheckout?.delegate = strongSelf
+					}
+
 				})
 		task.resume()
-		return
-
-
-
-		// Create multiplexing configuration.
-		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: "<MULTIPLEXING_TOKEN>", environment: DemoAppConfiguration.shared.environment)
-
-		// Init Checkout with vaultID associated with your multiplexing configuration.
-		vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
-
-		// Present checkout configuration.
-		vgsCheckout?.present(from: self)
-
-		vgsCheckout?.delegate = self
 	}
 }
 
