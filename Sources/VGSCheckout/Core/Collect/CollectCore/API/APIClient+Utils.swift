@@ -46,3 +46,16 @@ internal extension APIClient {
 		return url
 	}
 }
+
+internal final class VGSCheckoutVaultURLBuilder {
+
+	internal static func buildVaultURL(for paymentInstrument: VGSPaymentInstrument, tenantId: String, regionalEnvironment: String) -> URL? {
+
+		switch paymentInstrument {
+		case .vault(let configuration):
+			return APIClient.buildVaultURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment)
+		case .multiplexing(let configuration):
+			return nil
+		}
+	}
+}
