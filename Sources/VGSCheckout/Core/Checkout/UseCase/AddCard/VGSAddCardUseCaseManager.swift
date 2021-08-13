@@ -115,8 +115,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			default:
 				break
 			}
-		default:
-			break
+		case .multiplexing:
+			formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+			formValidationHelper.fieldViewsManager.appendFormSectionViews([ addressDataSectionViewModel.billingAddressFormView])
 		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)

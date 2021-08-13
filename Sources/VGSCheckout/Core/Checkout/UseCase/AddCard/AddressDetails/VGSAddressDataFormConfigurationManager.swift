@@ -216,14 +216,10 @@ internal class VGSAddressDataFormConfigurationManager {
 		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
 		postalCodeConfiguration.type = .none
 		postalCodeConfiguration.isRequiredValidOnly = true
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
 		postalCodeConfiguration.returnKeyType = .done
 
 		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
 		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
-
 		postalCodeTextField.configuration = postalCodeConfiguration
 
 		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
