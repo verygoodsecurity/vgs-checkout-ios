@@ -23,7 +23,7 @@ internal extension VGSCollect {
 				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
 			}
 		case .multiplexing:
-			self.init(id: vaultID, environment: environment)
+			self.init(id: vaultID, environment: environment, isMultiplexing: true)
 		}
 	}
 }
