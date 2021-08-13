@@ -34,24 +34,24 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 			name = field.getOutputText() ?? ""
 		}
 
-		let extraMultiplexingData: [String: Any] = [
-			"data": [
-				"type": "financial_instruments",
-				"attributes": [
-					"instrument_type": "card",
-					"details": [
-						"billing_address": [
-							"name" : name
-						]
-					]
-				]
-		]]
+//		let extraMultiplexingData: [String: Any] = [
+//			"data": [
+//				"type": "financial_instruments",
+//				"attributes": [
+//					"instrument_type": "card",
+//					"details": [
+//						"billing_address": [
+//							"name" : name
+//						]
+//					]
+//				]
+//		]]
 
 		vgsCollect.apiClient.customHeader = ["Authorization" : "Bearer \(multiplexingConfiguration.token)"]
 
 		let multiplexingPath = "/financial_instruments"
 
-		vgsCollect.sendData(path: multiplexingPath, method: .post, extraData: extraMultiplexingData) { response in
+		vgsCollect.sendData(path: multiplexingPath, method: .post) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response)
