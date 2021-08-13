@@ -55,6 +55,28 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
+
+		// Use your own backend to fetch access_token token.
+		var request = URLRequest(url: URL(string:  DemoAppConfiguration.shared.multiplexingServicePath)!)
+		request.httpMethod = "POST"
+		let task = URLSession.shared.dataTask(
+				with: request,
+				completionHandler: { [weak self] (data, response, error) in
+						guard let data = data,
+								let json = try? JSONSerialization.jsonObject(with: data, options: [])
+										as? [String: Any],
+								let token = json["access_token"] as? String else {
+								// Handle error
+								return
+						}
+
+					print("access_token: \(token)")
+				})
+		task.resume()
+		return
+
+
+
 		// Create multiplexing configuration.
 		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: "<MULTIPLEXING_TOKEN>", environment: DemoAppConfiguration.shared.environment)
 
