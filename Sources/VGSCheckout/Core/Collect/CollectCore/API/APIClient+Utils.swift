@@ -17,18 +17,12 @@ internal extension APIClient {
 
 		// Check environment is valid.
 		if !VGSCollect.regionalEnironmentStringValid(regionalEnvironment) {
-			let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
-			let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
-			assert(VGSCollect.regionalEnironmentStringValid(regionalEnvironment), "❗VGSCheckout CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!!")
+			logInvalidEnironmentEvent(regionalEnvironment)
 		}
 
 		// Check tenant is valid.
 		if !VGSCollect.tenantIDValid(tenantId) {
-			let eventText = "CONFIGURATION ERROR: TENANT ID IS NOT VALID OR NOT SET!!! tenant: \(tenantId)"
-			let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
-			assert(VGSCollect.tenantIDValid(tenantId), "❗VGSCheckout CONFIGURATION ERROR: : TENANT ID IS NOT VALID!!!")
+			logInvalidVaultIDEvent(tenantId)
 		}
 
 		let strUrl = "https://" + tenantId + "." + regionalEnvironment + ".verygoodproxy.com"
@@ -44,6 +38,20 @@ internal extension APIClient {
 			return nil
 		}
 		return url
+	}
+
+	static func logInvalidEnironmentEvent(_ regionalEnvironment: String) {
+		let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
+		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
+		VGSCollectLogger.shared.forwardLogEvent(event)
+		assert(VGSCollect.regionalEnironmentStringValid(regionalEnvironment), "❗VGSCheckout CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!!")
+	}
+
+	static func logInvalidVaultIDEvent(_ vaultID: String) {
+		let eventText = "CONFIGURATION ERROR: VAULT ID IS NOT VALID OR NOT SET!!! vaultID: \(vaultID)"
+		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
+		VGSCollectLogger.shared.forwardLogEvent(event)
+		assert(VGSCollect.tenantIDValid(vaultID), "❗VGSCheckout CONFIGURATION ERROR: : VAULT ID IS NOT VALID!!!")
 	}
 }
 
