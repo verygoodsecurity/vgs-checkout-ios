@@ -61,7 +61,7 @@ internal class APIClient {
 	///   - satellitePort: `Int?` object, custom port for satellite configuration. **IMPORTANT! Use only with .sandbox environment!**.
 	required init(tenantId: String, regionalEnvironment: String, hostname: String?, formAnalyticsDetails: VGSCheckoutFormAnanlyticsDetails, satellitePort: Int?, isMultiplexing: Bool = false) {
 		if isMultiplexing {
-			self.vaultUrl = Self.buildMultipexingURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment)
+			self.vaultUrl = APIClient.buildVaultURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment)
 		} else {
 			self.vaultUrl = APIClient.buildVaultURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment)
 		}

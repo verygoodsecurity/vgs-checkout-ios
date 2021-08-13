@@ -49,7 +49,7 @@ internal extension APIClient {
 
 		// https://<VAULT_ID>.multiplexing.<DATA_ENVIRONMENT>.verygoodsecurity.app/
 
-		let multiplexingURLStr = "https://" + tenantId + ".multiplexing." + regionalEnvironment + ".verygoodproxy.app"
+		let multiplexingURLStr = "https://" + tenantId + ".multiplexing." + regionalEnvironment + ".verygoodsecurity.app"
 
 		// Check vault url is valid.
 		guard let url = URL(string: multiplexingURLStr) else {

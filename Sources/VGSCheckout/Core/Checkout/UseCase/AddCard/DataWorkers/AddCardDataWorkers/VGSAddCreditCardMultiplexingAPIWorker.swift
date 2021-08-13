@@ -47,7 +47,9 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 				]
 		]]
 
-		let multiplexingPath = "/api/financial_instruments"
+		vgsCollect.apiClient.customHeader = ["Authorization" : "Bearer \(multiplexingConfiguration.token)"]
+
+		let multiplexingPath = "/financial_instruments"
 
 		vgsCollect.sendData(path: multiplexingPath, method: .post, extraData: extraMultiplexingData) { response in
 			switch response {
