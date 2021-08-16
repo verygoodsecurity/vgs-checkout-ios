@@ -65,7 +65,7 @@ internal class VGSCollect {
       self.tenantId = id
       self.regionalEnvironment = environment
       self.formAnalyticsDetails = VGSCheckoutFormAnanlyticsDetails.init(formId: formId, tenantId: tenantId, environment: regionalEnvironment)
-      self.apiClient = APIClient(tenantId: id, regionalEnvironment: environment, hostname: hostname, formAnalyticsDetails: formAnalyticsDetails, satellitePort: satellitePort)
+		self.apiClient = APIClient(tenantId: id, regionalEnvironment: environment, hostname: hostname, formAnalyticsDetails: formAnalyticsDetails, satellitePort: satellitePort)
 
 			if case .satelliteURL = self.apiClient.hostURLPolicy {
 				self.formAnalyticsDetails.isSatelliteMode = true
@@ -82,7 +82,7 @@ internal class VGSCollect {
 	  ///   - satellitePort: `Int?` object, custom port for satellite configuration. Default is `nil`. **IMPORTANT! Use only with .sandbox environment! Hostname should be specified for valid http://localhost or in local IP format http://192.168.X.X**.
 	internal convenience init(id: String, environment: Environment = .sandbox, dataRegion: String? = nil, hostname: String? = nil, satellitePort: Int? = nil) {
       let env = Self.generateRegionalEnvironmentString(environment, region: dataRegion)
-      self.init(id: id, environment: env, hostname: hostname, satellitePort: satellitePort)
+		self.init(id: id, environment: env, hostname: hostname, satellitePort: satellitePort)
     }
 
     // MARK: - Manage VGSTextFields

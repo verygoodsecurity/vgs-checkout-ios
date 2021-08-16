@@ -13,36 +13,60 @@ internal extension APIClient {
 	// MARK: - Vault Url
 
 	/// Generates API URL with vault id, environment and data region.
+	/// - Parameters:
+	///   - tenantId: `String` object, should be valid vaultID.
+	///   - regionalEnvironment: `String` object, should be valid  regionalEnvironment.
+	/// - Returns: `URL?` object, url or `nil` for invalid configuration.
 	static func buildVaultURL(tenantId: String, regionalEnvironment: String) -> URL? {
 
 		// Check environment is valid.
 		if !VGSCollect.regionalEnironmentStringValid(regionalEnvironment) {
-			let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
-			let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
-			assert(VGSCollect.regionalEnironmentStringValid(regionalEnvironment), "❗VGSCheckout CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!!")
+			logInvalidEnironmentEvent(regionalEnvironment)
 		}
 
 		// Check tenant is valid.
 		if !VGSCollect.tenantIDValid(tenantId) {
-			let eventText = "CONFIGURATION ERROR: TENANT ID IS NOT VALID OR NOT SET!!! tenant: \(tenantId)"
-			let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
-			assert(VGSCollect.tenantIDValid(tenantId), "❗VGSCheckout CONFIGURATION ERROR: : TENANT ID IS NOT VALID!!!")
+			logInvalidVaultIDEvent(tenantId)
 		}
 
 		let strUrl = "https://" + tenantId + "." + regionalEnvironment + ".verygoodproxy.com"
 
 		// Check vault url is valid.
 		guard let url = URL(string: strUrl) else {
-			assertionFailure("❗VGSCheckout CONFIGURATION ERROR: : NOT VALID ORGANIZATION PARAMETERS!!!")
-
-			let eventText = "CONFIGURATION ERROR: NOT VALID ORGANIZATION PARAMETERS!!! tenantID: \(tenantId), environment: \(regionalEnvironment)"
-			let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			APIClient.logCannotBuildURLEvent(for: tenantId, regionalEnvironment: regionalEnvironment)
 
 			return nil
 		}
 		return url
+	}
+
+	/// Logs invalid environment event.
+	/// - Parameter regionalEnvironment: `String` object, invalid regionalEnvironment.
+	static func logInvalidEnironmentEvent(_ regionalEnvironment: String) {
+		let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
+		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
+		VGSCollectLogger.shared.forwardLogEvent(event)
+		assert(VGSCollect.regionalEnironmentStringValid(regionalEnvironment), "❗VGSCheckout CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!!")
+	}
+
+	/// Logs invalid vaultID event.
+	/// - Parameter vaultID: `String` object, invalid vaultID.
+	static func logInvalidVaultIDEvent(_ vaultID: String) {
+		let eventText = "CONFIGURATION ERROR: VAULT ID IS NOT VALID OR NOT SET!!! vaultID: \(vaultID)"
+		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
+		VGSCollectLogger.shared.forwardLogEvent(event)
+		assert(VGSCollect.tenantIDValid(vaultID), "❗VGSCheckout CONFIGURATION ERROR: : VAULT ID IS NOT VALID!!!")
+	}
+
+	/// Logs invalid configuration for vault URL.
+	/// - Parameters:
+	///   - vaultID: `String` object, invalid vaultID.
+	///   - regionalEnvironment: `String` object, invalid regionalEnvironment.
+	static func logCannotBuildURLEvent(for vaultID: String, regionalEnvironment: String) {
+		assertionFailure("❗VGSCheckout CONFIGURATION ERROR: : NOT VALID ORGANIZATION PARAMETERS!!!")
+
+		let eventText = "CONFIGURATION ERROR: NOT VALID ORGANIZATION PARAMETERS!!! vaultID: \(vaultID), environment: \(regionalEnvironment)"
+		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
+		VGSCollectLogger.shared.forwardLogEvent(event)
 	}
 }

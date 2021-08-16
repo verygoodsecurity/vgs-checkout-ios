@@ -26,30 +26,11 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 
 	func sendData(with completion: @escaping VGSCheckoutRequestResultCompletion) {
 
+		vgsCollect.apiClient.customHeader = ["Authorization" : "Bearer \(multiplexingConfiguration.token)"]
 
-		var name = ""
-		if let field = vgsCollect.textFields.first(where: { textField in
-			textField.fieldType == .cardHolderName
-		}) {
-			name = field.getOutputText() ?? ""
-		}
+		let multiplexingPath = "/financial_instruments"
 
-		let extraMultiplexingData: [String: Any] = [
-			"data": [
-				"type": "financial_instruments",
-				"attributes": [
-					"instrument_type": "card",
-					"details": [
-						"billing_address": [
-							"name" : name
-						]
-					]
-				]
-		]]
-
-		let multiplexingPath = "/api/financial_instruments"
-
-		vgsCollect.sendData(path: multiplexingPath, method: .post, extraData: extraMultiplexingData) { response in
+		vgsCollect.sendData(path: multiplexingPath, method: .post) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response)

@@ -21,14 +21,21 @@ class DemoAppConfiguration {
 		if let multiplexingVault = Bundle.main.object(forInfoDictionaryKey: "MULTIPLEXING_VAULT") as? String {
 			self.multiplexingVaultId = multiplexingVault
 		}
+
+		if let multiplexingServicePath = Bundle.main.object(forInfoDictionaryKey: "MULTIPLEXING_SERVICE_URL") as? String {
+			self.multiplexingServicePath = "https://" + multiplexingServicePath
+		}
 	}
 
 	/// Set your vault id here https://www.verygoodsecurity.com/terminology/nomenclature#vault
 	var vaultId = "vaultId"
 
-	/// Set vault id matching your multiplexing configuration
+	/// Set vault id matching your multiplexing configuration.
 	var multiplexingVaultId = "vaultId"
 
-	///  Set environment - `sandbox` for testing or `live` for production
+	/// Set environment - `sandbox` for testing or `live` for production.
 	var environment = "sandbox"
+
+	/// Path to backend URL to fetch token for multipexing.
+	var multiplexingServicePath = ""
 }
