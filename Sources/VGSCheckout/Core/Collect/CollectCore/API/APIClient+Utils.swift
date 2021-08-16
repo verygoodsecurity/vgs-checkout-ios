@@ -36,31 +36,6 @@ internal extension APIClient {
 		return url
 	}
 
-	static func buildMultipexingURL(tenantId: String, regionalEnvironment: String) -> URL? {
-		// Check environment is valid.
-		if !VGSCollect.regionalEnironmentStringValid(regionalEnvironment) {
-			APIClient.logInvalidEnironmentEvent(regionalEnvironment)
-		}
-
-		// Check tenant is valid.
-		if !VGSCollect.tenantIDValid(tenantId) {
-			APIClient.logInvalidVaultIDEvent(tenantId)
-		}
-
-		// https://<VAULT_ID>.multiplexing.<DATA_ENVIRONMENT>.verygoodsecurity.app/
-
-		let multiplexingURLStr = "https://" + tenantId + ".multiplexing." + regionalEnvironment + ".verygoodsecurity.app"
-
-		// Check vault url is valid.
-		guard let url = URL(string: multiplexingURLStr) else {
-			APIClient.logCannotBuildURLEvent(for: tenantId, regionalEnvironment: regionalEnvironment)
-
-			return nil
-		}
-
-		return url
-	}
-
 	static func logInvalidEnironmentEvent(_ regionalEnvironment: String) {
 		let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)

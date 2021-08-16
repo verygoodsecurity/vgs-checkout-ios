@@ -80,9 +80,9 @@ internal class VGSCollect {
     ///   - dataRegion: `String` object, id of data storage region (e.g. "eu-123").
     ///   - hostname: `String` object, custom Hostname, if not set, data will be sent to Vault Url. Default is `nil`.
 	  ///   - satellitePort: `Int?` object, custom port for satellite configuration. Default is `nil`. **IMPORTANT! Use only with .sandbox environment! Hostname should be specified for valid http://localhost or in local IP format http://192.168.X.X**.
-	internal convenience init(id: String, environment: Environment = .sandbox, dataRegion: String? = nil, hostname: String? = nil, satellitePort: Int? = nil, isMultiplexing: Bool = false) {
+	internal convenience init(id: String, environment: Environment = .sandbox, dataRegion: String? = nil, hostname: String? = nil, satellitePort: Int? = nil) {
       let env = Self.generateRegionalEnvironmentString(environment, region: dataRegion)
-		self.init(id: id, environment: env, hostname: hostname, satellitePort: satellitePort, isMultiplexing: isMultiplexing)
+		self.init(id: id, environment: env, hostname: hostname, satellitePort: satellitePort)
     }
 
     // MARK: - Manage VGSTextFields
