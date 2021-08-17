@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3286E102265EC309001FECEB /* VGSCheckoutDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E101265EC309001FECEB /* VGSCheckoutDemoAppTests.swift */; };
 		3286E10D265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */; };
+		4403862026CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */; };
 		441927CD265F62D10080B01E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927C3265F62D10080B01E /* AppDelegate.swift */; };
 		441927CF265F62D10080B01E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 441927C6265F62D10080B01E /* Assets.xcassets */; };
 		441927D0265F62D10080B01E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 441927C7265F62D10080B01E /* LaunchScreen.storyboard */; };
@@ -57,6 +58,7 @@
 		3286E108265EC30A001FECEB /* VGSCheckoutDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VGSCheckoutDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppUITests.swift; sourceTree = "<group>"; };
 		3286E10E265EC30A001FECEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutDemoDialogHelper.swift; sourceTree = "<group>"; };
 		4405DDA5268AE539004A83AD /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
 		441927C3265F62D10080B01E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		441927C4265F62D10080B01E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 				3286E10E265EC30A001FECEB /* Info.plist */,
 			);
 			path = VGSCheckoutDemoAppUITests;
+			sourceTree = "<group>";
+		};
+		4403861E26CBCA440056F2BA /* DialogHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */,
+			);
+			path = DialogHelper;
 			sourceTree = "<group>";
 		};
 		441927BD265F62D10080B01E /* Helpers */ = {
@@ -325,6 +335,7 @@
 		44D520DA2677301E005AB588 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4403861E26CBCA440056F2BA /* DialogHelper */,
 				44D520DB26773025005AB588 /* ResponseParsers */,
 			);
 			path = Utils;
@@ -597,6 +608,7 @@
 			files = (
 				441927CD265F62D10080B01E /* AppDelegate.swift in Sources */,
 				441927DA265F65040080B01E /* ShoppingCartItemView.swift in Sources */,
+				4403862026CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift in Sources */,
 				441927E0265F67DE0080B01E /* ShoppingCartView.swift in Sources */,
 				44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */,
 				441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */,
