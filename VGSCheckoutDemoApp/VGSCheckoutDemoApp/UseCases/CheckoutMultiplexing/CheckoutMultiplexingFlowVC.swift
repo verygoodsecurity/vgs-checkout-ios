@@ -11,6 +11,10 @@ import SVProgressHUD
 
 class CheckoutMultiplexingFlowVC: UIViewController {
 
+	typealias FetchTokenCompletionSuccess = (_ token: String) -> Void
+
+	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> Void
+
 	// MARK: - Vars
 
 	/// Checkout instance.
@@ -101,13 +105,13 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		task.resume()
 	}
 
-	typealias FetchTokenCompletionSuccess = (_ token: String) -> ()
-
-	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> ()
-
+	/// Fetch multiplexing token from your own backend.
+	/// - Parameters:
+	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
+	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
 	fileprivate func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
-		// Use your own backend to fetch access_token token.
 
+		// Use your own backend to fetch access_token token.
 		var request = URLRequest(url: URL(string:  DemoAppConfiguration.shared.multiplexingServicePath)!)
 		request.httpMethod = "POST"
 		let task = URLSession.shared.dataTask(
@@ -125,26 +129,10 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 						}
 
 					let multipexingToken = token
+				  print("access_token: \(token)")
 					DispatchQueue.main.async {[weak self] in
 						success(multipexingToken)
-
-
-//						print("access_token: \(token)")
-//						SVProgressHUD.dismiss()
-//						guard let strongSelf = self else {return}
-//
-//						// Create multiplexing configuration with token.
-//						let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: multipexingToken, environment: DemoAppConfiguration.shared.environment)
-//
-//						// Init Checkout with vaultID associated with your multiplexing configuration.
-//						strongSelf.vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
-//
-//						// Present checkout configuration.
-//						strongSelf.vgsCheckout?.present(from: strongSelf)
-//
-//						strongSelf.vgsCheckout?.delegate = strongSelf
-					}
-
+				  }
 				})
 		task.resume()
 	}

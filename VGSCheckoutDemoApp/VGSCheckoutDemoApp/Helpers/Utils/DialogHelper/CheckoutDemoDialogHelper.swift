@@ -48,7 +48,32 @@ class CheckoutDemoDialogHelper {
 		viewController.present(alert, animated: true, completion: nil)
 	}
 
-	static func displayRetryDialog(with title: String, message: String, retryCompletion: (() -> Void)?) {
-		
+	/// Presents retry dialog with cancel and completion action.
+	/// - Parameters:
+	///   - title: `String` object, alert title text.
+	///   - message: `String` object, alert message text.
+	///   - viewController: `UIViewController` object, controller to present alert from.
+	///   - retryCompletion: `(() -> Void)?` object, completion block triggered on retry alert action button tap.
+	static func displayRetryDialog(with title: String, message: String, in viewController: UIViewController, retryCompletion: (() -> Void)?) {
+
+		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+		if let popoverController = alert.popoverPresentationController {
+			popoverController.sourceView = viewController.view //to set the source of your alert
+			popoverController.sourceRect = CGRect(x: viewController.view.bounds.midX, y: viewController.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+		}
+
+		let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+		}
+
+		let retryAction = UIAlertAction(title: "Try again", style: .default) { _ in
+			(retryCompletion)?()
+		}
+
+		alert.addAction(cancelAction)
+		alert.addAction(retryAction)
+
+		viewController.present(alert, animated: true, completion: nil)
 	}
 }
