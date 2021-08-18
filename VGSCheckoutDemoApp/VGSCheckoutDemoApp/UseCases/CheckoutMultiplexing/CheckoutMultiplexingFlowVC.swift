@@ -63,46 +63,16 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Start progress hud animation until token is fetched.
 		SVProgressHUD.show()
+		fetchMultiplexingToken { token in
+			SVProgressHUD.dismiss()
 
-		// Use your own backend to fetch access_token token.
-		var request = URLRequest(url: URL(string:  DemoAppConfiguration.shared.multiplexingServicePath)!)
-		request.httpMethod = "POST"
-		let task = URLSession.shared.dataTask(
-				with: request,
-				completionHandler: { [weak self] (data, response, error) in
-						guard let data = data,
-								let json = try? JSONSerialization.jsonObject(with: data, options: [])
-										as? [String: Any],
-								let token = json["access_token"] as? String else {
-								// Handle error
+			// Uncomment the line below to simulate 401 error - set incorrent token to multiplexing.
+			let invalidToken = "Some invalid token"
 
-							DispatchQueue.main.async {[weak self] in
-								SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
-							}
-
-							return
-						}
-
-					let multipexingToken = token
-					DispatchQueue.main.async {[weak self] in
-						print("access_token: \(token)")
-						SVProgressHUD.dismiss()
-						guard let strongSelf = self else {return}
-
-						// Create multiplexing configuration with token.
-						let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: multipexingToken, environment: DemoAppConfiguration.shared.environment)
-
-						// Init Checkout with vaultID associated with your multiplexing configuration.
-						strongSelf.vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
-
-						// Present checkout configuration.
-						strongSelf.vgsCheckout?.present(from: strongSelf)
-
-						strongSelf.vgsCheckout?.delegate = strongSelf
-					}
-
-				})
-		task.resume()
+			self.presentMultiplexingCheckout(with: invalidToken)
+		} failure: { errorText in
+			SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+		}
 	}
 
 	/// Fetch multiplexing token from your own backend.
@@ -135,6 +105,19 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 				  }
 				})
 		task.resume()
+	}
+
+	fileprivate func presentMultiplexingCheckout(with token: String) {
+		// Create multiplexing configuration with token.
+		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment)
+
+		// Init Checkout with vaultID associated with your multiplexing configuration.
+		vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
+
+		// Present checkout configuration.
+		vgsCheckout?.present(from: self)
+
+		vgsCheckout?.delegate = self
 	}
 }
 
@@ -172,6 +155,21 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 		case .failure(let statusCode, let data, let response, let error):
 			title = "Checkout Multiplexing status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
+
+			// If not authorized - suggest user to retry and refetch token.
+			if statusCode == 401 {
+				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
+					SVProgressHUD.show()
+					self.fetchMultiplexingToken { token in
+						SVProgressHUD.dismiss()
+						self.presentMultiplexingCheckout(with: token)
+					} failure: { errorMessage in
+						SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+					}
+				}
+
+				return
+			}
 		}
 
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
