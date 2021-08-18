@@ -11,8 +11,10 @@ import SVProgressHUD
 
 class CheckoutMultiplexingFlowVC: UIViewController {
 
+	/// Succcess completion for token fetch.
 	typealias FetchTokenCompletionSuccess = (_ token: String) -> Void
 
+	/// Fail completion for token fetch.
 	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> Void
 
 	// MARK: - Vars
@@ -66,10 +68,10 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		fetchMultiplexingToken { token in
 			SVProgressHUD.dismiss()
 
-			// Uncomment the line below to simulate 401 error - set incorrent token to multiplexing.
-			let invalidToken = "Some invalid token"
+			// Uncomment the line below to simulate 401 error and set invalid token to multiplexing.
+			// let invalidToken = "Some invalid token"
 
-			self.presentMultiplexingCheckout(with: invalidToken)
+			self.presentMultiplexingCheckout(with: token)
 		} failure: { errorText in
 			SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
 		}
@@ -107,6 +109,8 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		task.resume()
 	}
 
+	/// Presents multiplexing checkout flow.
+	/// - Parameter token: `String` object, should be valid multiplexing token.
 	fileprivate func presentMultiplexingCheckout(with token: String) {
 		// Create multiplexing configuration with token.
 		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment)
