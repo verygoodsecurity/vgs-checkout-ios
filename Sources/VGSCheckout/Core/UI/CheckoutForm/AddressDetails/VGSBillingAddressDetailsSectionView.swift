@@ -32,32 +32,40 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	internal lazy var countryFieldView: VGSCountryFieldView = {
 		let componentView = VGSCountryFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
-
+        componentView.fieldType = .country
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_country_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_acountry_hint")
 		return componentView
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FieldView: VGSAddressLineFieldView = {
-		let componentView = VGSAddressLineFieldView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSErrorFieldView = {
+		let componentView = VGSErrorFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
-
+        componentView.fieldType = .addressLine1
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_hint")
 		return componentView
 	}()
 
 	/// Address line 2 form item view.
-	internal lazy var addressLine2FieldView: VGSAddressLineFieldView = {
-		let componentView = VGSAddressLineFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var addressLine2FieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .addressLine2
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+        return componentView
 	}()
 
 	/// City form item view.
-	internal lazy var cityFieldView: VGSCityFieldView = {
-		let componentView = VGSCityFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var cityFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .city
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_hint")
+        return componentView
 	}()
 
 	/// region form item view.
@@ -77,11 +85,13 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Postal Code/Zip form item view.
-	internal lazy var postalCodeFieldView: VGSPostalCodeFieldView = {
-		let componentView = VGSPostalCodeFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var postalCodeFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .postalCode
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_hint")
+        return componentView
 	}()
 
 	/// Header view.
@@ -115,11 +125,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = true
-		stackView.borderViewCornerRadius = 4
+		stackView.hasBorderView = false
+//		stackView.borderViewCornerRadius = 4
 
-		stackView.spacing = 1
-		stackView.separatorColor = uiTheme.textFieldBorderColor
+//		stackView.spacing = 1
+//		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -131,9 +141,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-
+        stackView.hasBorderView = false
 		stackView.spacing = 1
-		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -166,16 +175,16 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-		switch block {
-		case .addressInfo:
-			if isValid {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-			} else {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-			}
-		default:
-		 break
-		}
+//		switch block {
+//		case .addressInfo:
+//			if isValid {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
+//			} else {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+//			}
+//		default:
+//		 break
+//		}
 	}
 
 	// TODO: - refactor duplicated code for processing state styles.
@@ -224,8 +233,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
 
-		rootStackView.addArrangedSubview(errorLabel)
-		errorLabel.isHiddenInCheckoutStackView = true
+//		rootStackView.addArrangedSubview(errorLabel)
+		errorLabel.isHiddenInCheckoutStackView = false
 
 		// Gather all form items.
 		fieldViews = [

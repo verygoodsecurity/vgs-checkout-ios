@@ -8,51 +8,85 @@ import UIKit
 #endif
 
 /// Holds UI for address line form item.
-internal class VGSAddressLineFieldView: UIView, VGSTextFieldViewProtocol {
+internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
 
-	// MARK: - Vars
+    // MARK: - Attributes
 
-	internal var fieldType: VGSAddCardFormFieldType = .addressLine1
+    /// TODO: remove hardcoded value
+    internal var fieldType: VGSAddCardFormFieldType = .addressLine1
+    
+    internal var placeholder: String? {
+        set {
+            textField.placeholder = newValue
+        }
+        get {
+            return textField.placeholder
+        }
+    }
+    
+    internal var subtitle: String? {
+        set {
+            placeholderView.hintComponentView.label.text = newValue
+        }
+        get {
+            return placeholderView.hintComponentView.label.text
+        }
+    }
 
-	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
+    // MARK: - Views
+    let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-	var textField: VGSTextField {
-		return addressLineTextField
-	}
+    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+    
+    /// Stack view.
+    internal lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
 
-	lazy var addressLineTextField: VGSTextField = {
-		let field = VGSTextField()
-		field.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
 
-		field.cornerRadius = 0
-		field.borderWidth = 0
+    lazy var textField: VGSTextField = {
+        let field = VGSTextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.cornerRadius = 0
+        field.borderWidth = 0
+        return field
+    }()
 
-		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_hint")
+    // MARK: - Initialization
 
-		return field
-	}()
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
 
-	// MARK: - Initialization
+        buildUI()
+    }
 
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-		buildUI()
-	}
+    // MARK: - Helpers
 
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+    private func buildUI() {
+        addSubview(stackView)
+        stackView.checkout_constraintViewToSuperviewEdges()
 
-	// MARK: - Helpers
+        stackView.addArrangedSubview(placeholderView)
+        buildPlaceholderUI()
 
-	private func buildUI() {
-		addSubview(placeholderView)
-		placeholderView.translatesAutoresizingMaskIntoConstraints = false
-		placeholderView.checkout_constraintViewToSuperviewEdges()
-
-		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_subtitle")
-
-		placeholderView.stackView.addArrangedSubview(addressLineTextField)
-	}
+        stackView.addArrangedSubview(errorLabel)
+        errorLabel.text = "tyt mozhe buty vasha erorka"
+        errorLabel.isHiddenInCheckoutStackView = false
+    }
+    
+    private func buildPlaceholderUI() {
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.stackView.addArrangedSubview(textField)
+        placeholderView.layer.borderColor = UIColor.lightGray.cgColor
+        placeholderView.layer.borderWidth = 1
+        placeholderView.layer.cornerRadius = 6
+    }
 }

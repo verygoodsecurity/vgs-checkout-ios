@@ -14,11 +14,11 @@ internal class VGSAddressDataFormConfigurationManager {
 	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
-		let cityTextField = addressFormView.cityFieldView.cityTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.textField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.textField
+		let cityTextField = addressFormView.cityFieldView.textField
 		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
 		let addressVisibility = vaultConfiguration.formConfiguration.billingAddressVisibility
 
@@ -157,11 +157,11 @@ internal class VGSAddressDataFormConfigurationManager {
 	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
-		let cityTextField = addressFormView.cityFieldView.cityTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.textField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.textField
+		let cityTextField = addressFormView.cityFieldView.textField
 		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -184,10 +184,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2Configuration.returnKeyType = .next
-
-		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
-		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
-
 		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.city")

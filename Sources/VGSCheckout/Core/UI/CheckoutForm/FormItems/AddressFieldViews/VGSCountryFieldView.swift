@@ -10,12 +10,34 @@ import UIKit
 /// Holds UI for country form.
 internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 
-	// MARK: - Vars
+	// MARK: - Attributes
 
-	internal let fieldType: VGSAddCardFormFieldType = .country
+	internal var fieldType: VGSAddCardFormFieldType = .country
+
+    internal var placeholder: String? {
+        set {
+            textField.placeholder = newValue
+        }
+        get {
+            return textField.placeholder
+        }
+    }
+    
+    internal var subtitle: String? {
+        set {
+            placeholderView.hintComponentView.label.text = newValue
+        }
+        get {
+            return placeholderView.hintComponentView.label.text
+        }
+    }
+    
+    // MARK: - Views
 
 	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
+    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+    
 	var textField: VGSTextField {
 		return countryTextField
 	}
@@ -29,6 +51,16 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 
 		return field
 	}()
+    
+    /// Stack view.
+    internal lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+
+        return stackView
+    }()
 
 	// MARK: - Initialization
 
@@ -45,15 +77,27 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 	// MARK: - Helpers
 
 	private func buildUI() {
-		addSubview(placeholderView)
-		placeholderView.translatesAutoresizingMaskIntoConstraints = false
-		placeholderView.checkout_constraintViewToSuperviewEdges()
+        addSubview(stackView)
+        stackView.checkout_constraintViewToSuperviewEdges()
 
-		placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_country_subtitle")
-		placeholderView.stackView.addArrangedSubview(countryTextField)
+        stackView.addArrangedSubview(placeholderView)
+        buildPlaceholderUI()
+
+        stackView.addArrangedSubview(errorLabel)
+        errorLabel.text = " "
+        errorLabel.isHiddenInCheckoutStackView = false
 	}
+    
+    private func buildPlaceholderUI() {
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.stackView.addArrangedSubview(textField)
+        placeholderView.layer.borderColor = UIColor.lightGray.cgColor
+        placeholderView.layer.borderWidth = 1
+        placeholderView.layer.cornerRadius = 6
+    }
 }
 
+/// TODO:  add error label to state picker
 /// Holds UI for state picker form.
 internal class VGSStatePickerFieldView: UIView, VGSTextFieldViewProtocol {
 
