@@ -14,14 +14,8 @@ internal class VGSAddCardFormViewBuilder {
 	static func buildBackgroundStackView() -> UIStackView {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-
 		stackView.axis = .vertical
 		stackView.distribution = .fill
-
-		stackView.layer.cornerRadius = 4
-		stackView.layer.borderColor = UIColor(hexString: "#C8D0DB").cgColor
-		stackView.layer.borderWidth = 1
-
 		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 
@@ -52,10 +46,23 @@ internal class VGSAddCardFormViewBuilder {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.adjustsFontForContentSizeCategory = true
-    label.font = uiTheme.checkoutErrorLabelFont
+        label.font = uiTheme.checkoutErrorLabelFont
 		label.textColor = uiTheme.checkoutErrorLabelTextColor
 		label.numberOfLines = 0
 
 		return label
 	}
+    
+    /// Build error label.
+    /// - Returns: `UILabel` for error message.
+  static func buildErrorLabel() -> UILabel {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .red
+        label.numberOfLines = 0
+
+        return label
+    }
 }

@@ -28,10 +28,10 @@
 "vgs_checkout_card_expiration_date_hint" = "MM/YY";
 
 /* Card CVC field placeholder text. */
-"vgs_checkout_card_expiration_date_hint" = "CVC";
+"vgs_checkout_security_code_hint" = "CVC";
 
 /* Card CVV field placeholder text. */
-"vgs_checkout_card_expiration_date_hint" = "CVV";
+"vgs_checkout_card_security_code_hint_amex" = "CVV";
 
 /* Pay button text. */
 "vgs_checkout_pay_button_title" = "Pay";

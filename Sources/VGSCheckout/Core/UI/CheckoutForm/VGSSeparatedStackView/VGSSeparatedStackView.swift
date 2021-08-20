@@ -29,14 +29,6 @@ internal class VGSSeparatedStackView: UIStackView {
 		}
 	}
 
-	/// Separator stroke color.
-	internal var separatorColor: UIColor = UIColor.gray {
-		didSet {
-			borderView.layer.borderColor = separatorColor.cgColor
-			separatorsShapeLayer.strokeColor = separatorColor.cgColor
-		}
-	}
-
 	/// CALayer for separators.
 	private let separatorsShapeLayer = CAShapeLayer()
 

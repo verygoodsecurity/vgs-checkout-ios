@@ -59,16 +59,16 @@ internal class VGSAddCardFormView: VGSFormView {
 
 	/// Initializer.
   internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
-    self.uiTheme = uiTheme
-    self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
-    self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
+        self.uiTheme = uiTheme
+        self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
+        self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsSectionView = cardDetailsView
 		self.billingAddressSectionView = billingAddressView
 		super.init()
 
-    self.payButton.delegate = self
+        self.payButton.delegate = self
 		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
