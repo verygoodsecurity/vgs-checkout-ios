@@ -17,9 +17,13 @@ internal class VGSCardDataFormConfigurationManager {
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
 		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
 
-		let cardNumber = cardSectionView.cardNumberFieldView.cardTextField
-		let expCardDate = cardSectionView.expDateFieldView.expDateTextField
-		let cvcCardNum = cardSectionView.cvcFieldView.cvcTextField
+        guard let cardNumber = cardSectionView.cardNumberFieldView.textField as? VGSCardTextField,
+              let expCardDate = cardSectionView.expDateFieldView.textField as? VGSExpDateTextField,
+              let cvcCardNum = cardSectionView.cvcFieldView.textField as? VGSCVCTextField
+              else {
+            return
+        }
+				
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
 		cardConfiguration.type = .cardNumber
@@ -31,10 +35,10 @@ internal class VGSCardDataFormConfigurationManager {
 		])
 		cardNumber.configuration = cardConfiguration
 		cardNumber.placeholder = "4111 1111 1111 1111"
-    cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
+        cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
 
 		cardNumber.textAlignment = .natural
-		cardNumber.cardIconLocation = .right
+		cardNumber.cardIconLocation = .left
 
 		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
 		expDateConfiguration.isRequiredValidOnly = true
@@ -61,7 +65,8 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
-    cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
+        cvcCardNum.cvcIconLocation = .left
+        cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
 		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
 
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
@@ -131,13 +136,16 @@ internal class VGSCardDataFormConfigurationManager {
 	},
 	*/
 
-	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardFormView: VGSCardDetailsSectionView) {
+	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
 
-		let fieldViews = cardFormView.fieldViews
+		let fieldViews = cardSectionView.fieldViews
 
-		let cardNumber = cardFormView.cardNumberFieldView.cardTextField
-		let expCardDate = cardFormView.expDateFieldView.expDateTextField
-		let cvcCardNum = cardFormView.cvcFieldView.cvcTextField
+        guard let cardNumber = cardSectionView.cardNumberFieldView.textField as? VGSCardTextField,
+              let expCardDate = cardSectionView.expDateFieldView.textField as? VGSExpDateTextField,
+              let cvcCardNum = cardSectionView.cvcFieldView.textField as? VGSCVCTextField
+              else {
+            return
+        }
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.number")
 		cardConfiguration.type = .cardNumber
@@ -151,7 +159,7 @@ internal class VGSCardDataFormConfigurationManager {
 		cardNumber.placeholder = "4111 1111 1111 1111"
 
 		cardNumber.textAlignment = .natural
-		cardNumber.cardIconLocation = .right
+		cardNumber.cardIconLocation = .left
 
 		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "")
 		expDateConfiguration.type = .expDate

@@ -9,49 +9,85 @@ import UIKit
 #endif
 
 internal class VGSCardholderFieldView: UIView, VGSTextFieldViewProtocol {
+    
+    // MARK: - Attributes
+    internal var fieldType: VGSAddCardFormFieldType = .cardholderName
+    
+    internal var placeholder: String? {
+        set {
+            textField.placeholder = newValue
+        }
+        get {
+            return textField.placeholder
+        }
+    }
+    
+    internal var subtitle: String? {
+        set {
+            placeholderView.hintComponentView.label.text = newValue
+        }
+        get {
+            return placeholderView.hintComponentView.label.text
+        }
+    }
 
-	// MARK: - Vars
+    // MARK: - Views
+    let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
+    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+    
+    /// Stack view.
+    internal lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        return stackView
+    }()
 
-	var textField: VGSTextField {
-		return cardHolderName
-	}
+    var textField: VGSTextField {
+        return cardHolderTextField
+    }
+    
+    private lazy var cardHolderTextField: VGSTextField = {
+        let field = VGSTextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.cornerRadius = 0
+        field.borderWidth = 0
+        return field
+    }()
 
-	var fieldType: VGSAddCardFormFieldType = .cardholderName
+    // MARK: - Initialization
 
-	lazy var cardHolderName: VGSTextField = {
-		let field = VGSTextField()
-		field.translatesAutoresizingMaskIntoConstraints = false
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
 
-		field.placeholder = "Cardholder"
+        buildUI()
+    }
 
-		field.cornerRadius = 0
-		field.borderWidth = 0
-		return field
-	}()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-	// MARK: - Initialization
+    // MARK: - Helpers
 
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
+    private func buildUI() {
+        addSubview(stackView)
+        stackView.checkout_constraintViewToSuperviewEdges()
 
-		buildUI()
-	}
+        stackView.addArrangedSubview(placeholderView)
+        buildPlaceholderUI()
 
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	// MARK: - Helpers
-
-	/// Setup UI.
-	private func buildUI() {
-		addSubview(placeholderView)
-		placeholderView.translatesAutoresizingMaskIntoConstraints = false
-		placeholderView.checkout_constraintViewToSuperviewEdges()
-
-		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
-		placeholderView.stackView.addArrangedSubview(cardHolderName)
-	}
+        stackView.addArrangedSubview(errorLabel)
+        errorLabel.text = "tyt mozhe buty vasha erorka"
+        errorLabel.isHiddenInCheckoutStackView = false
+    }
+    
+    private func buildPlaceholderUI() {
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.stackView.addArrangedSubview(textField)
+        placeholderView.layer.borderColor = UIColor.lightGray.cgColor
+        placeholderView.layer.borderWidth = 1
+        placeholderView.layer.cornerRadius = 6
+    }
 }

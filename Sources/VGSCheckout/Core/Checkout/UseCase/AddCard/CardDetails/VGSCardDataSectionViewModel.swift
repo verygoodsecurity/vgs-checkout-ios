@@ -109,7 +109,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	}
 
 	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
-		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardFormView: cardDetailsSectionView)
+		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
 	func didTap(in formView: VGSPlaceholderFieldView) {

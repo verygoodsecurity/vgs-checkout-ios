@@ -11,7 +11,7 @@ import UIKit
 /// Form View with group of fields.
 internal protocol VGSFormSectionViewProtocol: UIView {
 	var errorLabel: UILabel {get}
-  var uiTheme: VGSCheckoutThemeProtocol {get}
+    var uiTheme: VGSCheckoutThemeProtocol {get}
 	func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool)
 }
 
@@ -39,25 +39,32 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 	/// Card number view.
 	internal lazy var cardNumberFieldView: VGSCardNumberFieldView = {
-		let componentView = VGSCardNumberFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-		
-		return componentView
+        let componentView = VGSCardNumberFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .cardNumber
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
+        return componentView
 	}()
 
 	/// Exp date view.
 	internal lazy var expDateFieldView: VGSExpirationDateFieldView = {
-		let componentView = VGSExpirationDateFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+        
+        let componentView = VGSExpirationDateFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .expirationDate
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
+        return componentView
 	}()
 
 	/// CVC view.
 	internal lazy var cvcFieldView: VGSCVCFieldView = {
 		let componentView = VGSCVCFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
-
+        componentView.fieldType = .cvc
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_hint")
 		return componentView
 	}()
 
@@ -104,11 +111,10 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = true
+		stackView.hasBorderView = false
 		stackView.borderViewCornerRadius = 4
-		
 		stackView.spacing = 1
-    stackView.separatorColor = uiTheme.textFieldBorderColor
+//        stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -117,12 +123,10 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	internal lazy var horizonalStackView: VGSSeparatedStackView = {
 		let stackView = VGSSeparatedStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-
-		stackView.spacing = 1
-    stackView.separatorColor = uiTheme.textFieldBorderColor
+        stackView.hasBorderView = false
+		stackView.spacing = 20
 
 		return stackView
 	}()
@@ -161,40 +165,40 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
   /// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-		switch block {
-		case .cardHolder:
-			if isValid {
-        cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderColor
-			} else {
-				cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-			}
-		case .cardDetails:
-			if isValid {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-				horizonalStackView.separatorColor = uiTheme.textFieldBorderColor
-			} else {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-				horizonalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-			}
-		case .addressInfo:
-			break
-		}
+//		switch block {
+//		case .cardHolder:
+//			if isValid {
+//        cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderColor
+//			} else {
+//				cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+//			}
+//		case .cardDetails:
+//			if isValid {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
+//				horizonalStackView.separatorColor = uiTheme.textFieldBorderColor
+//			} else {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+//				horizonalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+//			}
+//		case .addressInfo:
+//			break
+//		}
 	}
   
   /// TODO: Add option to set UI for ProcessingState ???
 
 	/// Disable input view for processing state.
 	internal func updateUIForProcessingState() {
-		// Update grid view.
-		if #available(iOS 13, *) {
-			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-		} else {
-			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-		}
+//		// Update grid view.
+//		if #available(iOS 13, *) {
+//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
+//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
+//		} else {
+//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
+//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
+//		}
 
 		// Update form fields.
 		fieldViews.forEach { fieldView in

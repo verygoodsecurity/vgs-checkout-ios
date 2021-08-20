@@ -10,49 +10,85 @@ import UIKit
 
 internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
 
-	// MARK: - Vars
+    // MARK: - Attributes
 
-	internal let fieldType: VGSAddCardFormFieldType = .cardNumber
+    internal var fieldType: VGSAddCardFormFieldType = .cardNumber
+    
+    internal var placeholder: String? {
+        set {
+            textField.placeholder = newValue
+        }
+        get {
+            return textField.placeholder
+        }
+    }
+    
+    internal var subtitle: String? {
+        set {
+            placeholderView.hintComponentView.label.text = newValue
+        }
+        get {
+            return placeholderView.hintComponentView.label.text
+        }
+    }
 
-	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
+    // MARK: - Views
+    let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-	var textField: VGSTextField {
-		return cardTextField
-	}
+    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+    
+    /// Stack view.
+    internal lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        return stackView
+    }()
 
-	lazy var cardTextField: VGSCardTextField = {
-		let field = VGSCardTextField()
-		field.translatesAutoresizingMaskIntoConstraints = false
+    var textField: VGSTextField {
+        return cardTextField
+    }
+    
+    private lazy var cardTextField: VGSCardTextField = {
+        let field = VGSCardTextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.cornerRadius = 0
+        field.borderWidth = 0
+        return field
+    }()
 
-		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
+    // MARK: - Initialization
 
-		field.cardIconSize = CGSize(width: 32, height: 20)
-		field.cornerRadius = 0
-		field.borderWidth = 0
-		
-		return field
-	}()
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
 
-	// MARK: - Initialization
+        buildUI()
+    }
 
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-		buildUI()
-	}
+    // MARK: - Helpers
 
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+    private func buildUI() {
+        addSubview(stackView)
+        stackView.checkout_constraintViewToSuperviewEdges()
 
-	// MARK: - Helpers
+        stackView.addArrangedSubview(placeholderView)
+        buildPlaceholderUI()
 
-	private func buildUI() {
-		addSubview(placeholderView)
-		placeholderView.translatesAutoresizingMaskIntoConstraints = false
-		placeholderView.checkout_constraintViewToSuperviewEdges()
-
-		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
-		placeholderView.stackView.addArrangedSubview(cardTextField)
-	}
+        stackView.addArrangedSubview(errorLabel)
+        errorLabel.text = "tyt mozhe buty vasha erorka"
+        errorLabel.isHiddenInCheckoutStackView = false
+    }
+    
+    private func buildPlaceholderUI() {
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.stackView.addArrangedSubview(textField)
+        placeholderView.layer.borderColor = UIColor.lightGray.cgColor
+        placeholderView.layer.borderWidth = 1
+        placeholderView.layer.cornerRadius = 6
+    }
 }
