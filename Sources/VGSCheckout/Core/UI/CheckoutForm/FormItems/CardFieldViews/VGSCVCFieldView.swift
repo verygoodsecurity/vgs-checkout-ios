@@ -53,6 +53,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
     private lazy var cvcTextField: VGSCVCTextField = {
         let field = VGSCVCTextField()
         field.translatesAutoresizingMaskIntoConstraints = false
+        field.cvcIconSize = CGSize.checkout_fieldIconSize
         field.cornerRadius = 0
         field.borderWidth = 0
         return field
