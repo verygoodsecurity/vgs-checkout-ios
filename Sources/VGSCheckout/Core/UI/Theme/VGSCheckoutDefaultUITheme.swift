@@ -48,7 +48,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   /// Submit button attributes
 
 	/// The background color of the submit button. Default is `.purple` with alpha.
-  public var checkoutSubmitButtonBackgroundColor: UIColor = UIColor.systemPurple.withAlphaComponent(0.6)
+  public var checkoutSubmitButtonBackgroundColor: UIColor = UIColor.systemBlue
 
 	/// The background color of the submit button on success. Default is `.systemGreen`.
   public var checkoutSubmitButtonSuccessBackgroundColor: UIColor = .systemGreen

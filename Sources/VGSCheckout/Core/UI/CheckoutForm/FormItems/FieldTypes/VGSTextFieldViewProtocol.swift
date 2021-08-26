@@ -7,8 +7,9 @@ import Foundation
 internal protocol VGSTextFieldViewProtocol: AnyObject {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
+    var errorLabel: UILabel {get}
 	var fieldType: VGSAddCardFormFieldType {get}
-
+    
 	func updateUI(for validationState: VGSCheckoutFormValidationState)
 }
 

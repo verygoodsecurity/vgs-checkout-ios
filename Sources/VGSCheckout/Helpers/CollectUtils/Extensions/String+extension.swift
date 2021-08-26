@@ -69,4 +69,6 @@ internal extension String {
 
 		return path
 	}
+    
+    static let checkout_emptyErrorText = " "
 }

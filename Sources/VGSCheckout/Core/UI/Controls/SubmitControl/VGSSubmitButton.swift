@@ -135,7 +135,7 @@ internal class VGSSubmitButton: UIControl {
 	}
 
 	/// Control status.
-	internal var status: SubmitState = .disabled {
+	internal var status: SubmitState = .enabled {
 		didSet {
 			delegate?.statusDidChange(in: self)
 		}

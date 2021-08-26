@@ -20,9 +20,6 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
-	/// Displays error messages for invalid card details.
-  internal let cardDetailsErrorLabel: UILabel
-
 	/// Header bar view.
 	internal lazy var headerBarView: VGSHeaderBarView = {
 		let view = VGSHeaderBarView()
@@ -60,7 +57,6 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Initializer.
   internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
         self.uiTheme = uiTheme
-        self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
         self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
 		self.viewLayoutStyle = viewLayoutStyle

@@ -78,7 +78,7 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
         buildPlaceholderUI()
 
         stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = "tyt mozhe buty vasha erorka"
+        errorLabel.text = String.checkout_emptyErrorText
         errorLabel.isHiddenInCheckoutStackView = false
     }
     

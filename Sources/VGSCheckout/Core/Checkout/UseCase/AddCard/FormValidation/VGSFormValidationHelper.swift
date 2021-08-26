@@ -38,7 +38,7 @@ internal class VGSFormValidationHelper {
   /// Update Form View UI elements on editing.
   internal func updateFormSectionViewOnEditingTextField(textField: VGSTextField) {
     switch validationBehaviour {
-    case .onFocus:
+    case .onEdit:
       /// Update form error message and ui state
       let formErrors = formValidationErrors()
 
@@ -59,7 +59,7 @@ internal class VGSFormValidationHelper {
 
       /// Update textfield UI state
       updateFieldViewUIOnEditing(with: textField)
-    case .onTextChange:
+    case .onSubmit:
       return
     }
   }
@@ -67,7 +67,7 @@ internal class VGSFormValidationHelper {
   /// Update Form View UI elements on end editing.
   internal func updateFormSectionViewOnEndEditingTextField(textField: VGSTextField) {
     switch validationBehaviour {
-    case .onFocus:
+    case .onEdit:
       /// Update form error message and grid state
 			/// Update form error message and ui state
 			let formErrors = formValidationErrors()
@@ -89,10 +89,40 @@ internal class VGSFormValidationHelper {
 			
       /// Update textfield UI state
       updateFieldViewUIOnEndEditing(with: textField)
-    case .onTextChange:
+    case .onSubmit:
       return
     }
   }
+    
+    internal func updateFormSectionViewOnSubmit() {
+        let invalidTextViews = fieldViewsWithValidationErrors
+        
+        for textView in invalidTextViews {
+            let error = textView.textField.state.validationErrors.first
+            textView.errorLabel.text = error
+        }
+        
+        /// Update form error message and ui state
+//        let formErrors = fieldViewsWithValidationErrors
+//
+//          for formError in formErrors {
+//              let formViewSection = formError.formViewSection
+//              if let view = formSectionView(for: formViewSection) {
+//                  print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
+//                  updateFormSectionViewWithError(view, with: formError.errorMessage)
+//              }
+//          }
+//
+//          /// Reset all errors.
+//          if formErrors.isEmpty {
+//              fieldViewsManager.formSectionViews.forEach { formView in
+//                  updateFormSectionViewWithError(formView, with: nil)
+//              }
+//          }
+
+//        /// Update textfield UI state
+//        updateFieldViewUIOnEditing(with: textField)
+    }
 
 	/// Update form view UI with error.
 	/// - Parameters:
@@ -116,7 +146,7 @@ internal class VGSFormValidationHelper {
   /// Update Form Item UI on Editing Event.
 	private func updateFieldViewUIOnEditing(with textField: VGSTextField) {
 		switch validationBehaviour {
-		case .onFocus:
+		case .onEdit:
 			if let fieldView = fieldViewsManager.fieldView(with: textField) {
 					switch textField.fieldType {
 					case .cardNumber:
@@ -138,7 +168,7 @@ internal class VGSFormValidationHelper {
 				}
 					return
 			}
-		case .onTextChange:
+		case .onSubmit:
 			break
 		}
 	}
@@ -147,7 +177,7 @@ internal class VGSFormValidationHelper {
 	/// - Parameter textField: `VGSTextField` object, textfield.
   private func updateFieldViewUIOnEndEditing(with textField: VGSTextField) {
     switch validationBehaviour {
-    case .onFocus:
+    case .onEdit:
 			guard let fieldView = fieldViewsManager.fieldView(with: textField) else {return}
 			fieldViewsValidationManager.updateAnyFieldViewOnEndEditTextField(textField, fieldView: fieldView)
     default:
@@ -170,9 +200,9 @@ internal class VGSFormValidationHelper {
   
   /// Array of `VGSTextFieldViewProtocol` items with validation error.
 	internal var fieldViewsWithValidationErrors: [VGSTextFieldViewProtocol] {
-    let invalidFields = fieldViewsManager.fieldViews.filter { fieldView in
-      return !fieldView.textField.state.isValid && fieldView.textField.state.isDirty
-    }
+        let invalidFields = fieldViewsManager.fieldViews.filter { fieldView in
+          return !fieldView.textField.state.isValid
+        }
     return invalidFields
   }
 
@@ -196,6 +226,22 @@ internal class VGSFormValidationHelper {
 		let state = textField.state
 		return state.isEmpty && state.isDirty
 	}
+    
+//    internal func allFormErrors() ->  [FormError] {
+//        let invalidFields = fieldViewsWithValidationErrors
+//        var formErrors = [FormError]()
+//        let currentFormSections = formSections
+//
+//        for section in currentFormSections {
+//            let invalidFields = fieldViewsWithValidationErrors(in: section)
+//
+//            for field in invalidFields {
+//
+//                let formError = FormError(formViewSection: section, errorMessage: errorText)
+//                formErrors.append(formError)
+//            }
+//        }
+//    }
 
 	/// Returns first error from  not valid, not active, dirty field.
 	internal func formValidationErrors() -> [FormError] {
@@ -211,7 +257,7 @@ internal class VGSFormValidationHelper {
 		for section in currentFormSections {
 			let invalidFields = fieldViewsWithValidationErrors(in: section)
 
-			guard !invalidFields.isEmpty, let firstErrorField = invalidFields.first else {
+			guard let firstErrorField = invalidFields.first else {
 				continue
 			}
 

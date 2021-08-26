@@ -47,7 +47,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Initialization
   
-  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.vgsCollect = vgsCollect
     self.validationBehavior = validationBehavior
     self.billingAddressFormView = VGSBillingAddressDetailsSectionView(uiTheme: uiTheme)
@@ -55,14 +55,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     self.autoFocusManager = autoFocusManager
   }
 
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupCardForm(vaultConfiguration: configuration)
     buildForm()
 	}
   
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupCardForm(multiplexingConfiguration: configuration)
