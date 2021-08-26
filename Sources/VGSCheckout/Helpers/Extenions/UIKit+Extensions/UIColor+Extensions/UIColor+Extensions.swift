@@ -37,9 +37,9 @@ public extension UIColor {
 	/// System background color (white).
 	static var vgsSystemBackground: UIColor {
 			if #available(iOS 13, *) {
-					return .systemBackground
+                return .systemGroupedBackground
 			}
-			return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return .groupTableViewBackground
 	}
 
 	/// Input text color (black).

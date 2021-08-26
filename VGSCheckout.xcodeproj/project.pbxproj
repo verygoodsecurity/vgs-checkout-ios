@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034834B026D76F8E00AE59F7 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */; };
 		03B6749E26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */; };
 		03B674A026B308EC0001E5AD /* VGSPostalCodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */; };
 		3286E0C6265EC19C001FECEB /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
@@ -256,6 +257,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldValidator.swift; sourceTree = "<group>"; };
 		03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldView.swift; sourceTree = "<group>"; };
 		3286E0BC265EC19C001FECEB /* VGSCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -520,6 +522,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		034834AE26D76F6B00AE59F7 /* CGSize+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */,
+			);
+			path = "CGSize+Extensions";
+			sourceTree = "<group>";
+		};
 		3286E0B2265EC19C001FECEB = {
 			isa = PBXGroup;
 			children = (
@@ -1337,6 +1347,7 @@
 		44C4C8F82664B1DD00195505 /* UIKit+Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				034834AE26D76F6B00AE59F7 /* CGSize+Extensions */,
 				44C4C8FC2664B3A500195505 /* UIColor+Extensions */,
 				44C4C8F92664B1E700195505 /* UIView+Extensions */,
 			);
@@ -2139,6 +2150,7 @@
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
 				4405DC2326844AD8004A83AD /* APIClient+Utils.swift in Sources */,
 				4405DC6626844B30004A83AD /* VGSTextFieldDelegate.swift in Sources */,
+				034834B026D76F8E00AE59F7 /* CGSize+Extensions.swift in Sources */,
 				4405DCB826848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift in Sources */,
 				44E10A8B2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift in Sources */,
 				4405DC9026847247004A83AD /* VGSCollectLogger.swift in Sources */,

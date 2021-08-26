@@ -18,7 +18,7 @@ internal class VGSAddCardFormViewBuilder {
 		stackView.distribution = .fill
 		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
-
+        stackView.spacing = 20
 		return stackView
 	}
 

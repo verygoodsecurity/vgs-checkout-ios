@@ -131,7 +131,6 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		addCardSectionFormView.headerBarView.delegate = self
 		let viewController = VGSFormViewController(formView: addCardSectionFormView)
-
 		addCardSectionFormView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardDataSectionViewModel.delegate = self
 		addressDataSectionViewModel.delegate = self

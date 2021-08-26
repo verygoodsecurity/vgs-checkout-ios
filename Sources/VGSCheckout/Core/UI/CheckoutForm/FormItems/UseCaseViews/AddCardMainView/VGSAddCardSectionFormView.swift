@@ -69,7 +69,7 @@ internal class VGSAddCardFormView: VGSFormView {
 		super.init()
 
         self.payButton.delegate = self
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
+		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 
@@ -91,9 +91,9 @@ internal class VGSAddCardFormView: VGSFormView {
 		case .fullScreen:
 			addFormItemView(headerBarView)
 
-			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
-			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
-			addFormItemView(payWithCardHeaderView)
+//			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
+//			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
+//			addFormItemView(payWithCardHeaderView)
 
 			addFormItemView(backgroundStackView)
 			payButtonContainerView.addContentView(payButton)
