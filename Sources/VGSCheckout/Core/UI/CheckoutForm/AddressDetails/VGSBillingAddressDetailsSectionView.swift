@@ -69,20 +69,14 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// region form item view.
-	internal lazy var regionFieldView: VGSStateFieldView = {
-		let componentView = VGSStateFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// State form item view.
-	internal lazy var statePickerFieldView: VGSStatePickerFieldView = {
-		let componentView = VGSStatePickerFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
+	internal lazy var regionFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .state
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_hint")
+        return componentView
+    }()
 
 	/// Postal Code/Zip form item view.
 	internal lazy var postalCodeFieldView: VGSErrorFieldView = {
@@ -228,7 +222,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		verticalStackView.addArrangedSubview(addressLine2FieldView)
 		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndPostalCodeStackView.addArrangedSubview(statePickerFieldView)
 		stateAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
 		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
@@ -242,7 +235,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 			addressLine1FieldView,
 			addressLine2FieldView,
 			cityFieldView,
-			statePickerFieldView,
 			postalCodeFieldView
 		]
 

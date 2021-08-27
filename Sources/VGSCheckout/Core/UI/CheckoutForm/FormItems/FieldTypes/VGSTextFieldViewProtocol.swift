@@ -3,6 +3,9 @@
 //  VGSCheckout
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 internal protocol VGSTextFieldViewProtocol: AnyObject {
 	var placeholderView: VGSPlaceholderFieldView {get}
