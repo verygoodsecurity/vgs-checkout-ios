@@ -19,6 +19,14 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	/// Displays error messages for invalid adrdress details.
   internal let errorLabel: UILabel
 
+    /// Container view
+    private lazy var containerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
 	/// Container view for header to add insets.
 	internal lazy var headerContainerView: VGSContainerItemView = {
 		let view = VGSContainerItemView(frame: .zero)
@@ -209,9 +217,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Setup UI and layout.
 	private func setupUI() {
-		addSubview(rootStackView)
-		rootStackView.checkout_constraintViewToSuperviewEdges()
-
+        /// TODO: Change to system colors
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 8
+        
+        addSubview(containerView)
+        containerView.checkout_defaultSectionViewConstraints()
+        
+        containerView.addSubview(rootStackView)
+        rootStackView.checkout_constraintViewToSuperviewEdges()
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 

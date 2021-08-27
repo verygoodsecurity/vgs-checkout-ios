@@ -29,7 +29,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
   internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
-	internal var fieldViews: [VGSTextFieldViewProtocol] = []
+    internal var fieldViews: [VGSTextFieldViewProtocol] = []
 
 	/// Displays error messages for invalid card details.
   internal let errorLabel: UILabel
@@ -94,7 +94,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}()
 
 	/// Root stack view.
-	internal lazy var rootStackView: UIStackView = {
+	private lazy var rootStackView: UIStackView = {
 		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
@@ -104,6 +104,14 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 		return stackView
 	}()
+    
+    /// Container view
+    private lazy var containerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
 
 	/// Vertical stack view for all fields.
 	internal lazy var verticalStackView: VGSSeparatedStackView = {
@@ -218,7 +226,14 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 	/// Setup UI and layout.
 	private func setupUI() {
-		addSubview(rootStackView)
+        /// TODO: Change to system colors
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 8
+        
+        addSubview(containerView)
+        containerView.checkout_defaultSectionViewConstraints()
+        
+        containerView.addSubview(rootStackView)
 		rootStackView.checkout_constraintViewToSuperviewEdges()
 
 		headerContainerView.addContentView(headerView)
