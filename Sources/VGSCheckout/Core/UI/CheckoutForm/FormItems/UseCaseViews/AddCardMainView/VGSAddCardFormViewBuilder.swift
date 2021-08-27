@@ -61,8 +61,7 @@ internal class VGSAddCardFormViewBuilder {
         label.adjustsFontForContentSizeCategory = true
         label.font = .systemFont(ofSize: 14)
         label.textColor = .red
-        label.numberOfLines = 0
-
+        label.numberOfLines = 1
         return label
     }
 }

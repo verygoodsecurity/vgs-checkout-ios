@@ -98,8 +98,9 @@ internal class VGSFormValidationHelper {
         let invalidTextViews = fieldViewsWithValidationErrors
         
         for textView in invalidTextViews {
-            let error = textView.textField.state.validationErrors.first
-            textView.errorLabel.text = error
+            let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: textView.fieldType)
+            let errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
+            textView.errorLabel.text = errorMessage
         }
         
         /// Update form error message and ui state
