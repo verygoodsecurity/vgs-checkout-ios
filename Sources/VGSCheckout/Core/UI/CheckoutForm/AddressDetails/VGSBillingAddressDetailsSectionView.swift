@@ -15,9 +15,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Form items.
 	internal var fieldViews: [VGSTextFieldViewProtocol] = []
-  
-	/// Displays error messages for invalid adrdress details.
-  internal let errorLabel: UILabel
 
     /// Container view
     private lazy var containerView: UIView = {
@@ -155,7 +152,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
   init(uiTheme: VGSCheckoutThemeProtocol) {
     self.uiTheme = uiTheme
-    self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
 		super.init(frame: .zero)
 
 		setupUI()
@@ -239,9 +235,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		stateAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
 		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
-
-//		rootStackView.addArrangedSubview(errorLabel)
-		errorLabel.isHiddenInCheckoutStackView = false
 
 		// Gather all form items.
 		fieldViews = [

@@ -39,26 +39,27 @@ internal class VGSFormValidationHelper {
   internal func updateFormSectionViewOnEditingTextField(textField: VGSTextField) {
     switch validationBehaviour {
     case .onEdit:
-      /// Update form error message and ui state
-      let formErrors = formValidationErrors()
-
-			for formError in formErrors {
-				let formViewSection = formError.formViewSection
-				if let view = formSectionView(for: formViewSection) {
-					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
-					updateFormSectionViewWithError(view, with: formError.errorMessage)
-				}
-			}
-
-			/// Reset all errors.
-			if formErrors.isEmpty {
-				fieldViewsManager.formSectionViews.forEach { formView in
-					updateFormSectionViewWithError(formView, with: nil)
-				}
-			}
-
-      /// Update textfield UI state
-      updateFieldViewUIOnEditing(with: textField)
+//      /// Update form error message and ui state
+//      let formErrors = formValidationErrors()
+//
+//			for formError in formErrors {
+//				let formViewSection = formError.formViewSection
+//				if let view = formSectionView(for: formViewSection) {
+//					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
+//					updateFormSectionViewWithError(view, with: formError.errorMessage)
+//				}
+//			}
+//
+//			/// Reset all errors.
+//			if formErrors.isEmpty {
+//				fieldViewsManager.formSectionViews.forEach { formView in
+//					updateFormSectionViewWithError(formView, with: nil)
+//				}
+//			}
+//
+//      /// Update textfield UI state
+//      updateFieldViewUIOnEditing(with: textField)
+    return
     case .onSubmit:
       return
     }
@@ -68,27 +69,28 @@ internal class VGSFormValidationHelper {
   internal func updateFormSectionViewOnEndEditingTextField(textField: VGSTextField) {
     switch validationBehaviour {
     case .onEdit:
-      /// Update form error message and grid state
-			/// Update form error message and ui state
-			let formErrors = formValidationErrors()
-
-			for formError in formErrors {
-				let formViewSection = formError.formViewSection
-				if let view = formSectionView(for: formViewSection) {
-					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
-					updateFormSectionViewWithError(view, with: formError.errorMessage)
-				}
-			}
-
-			/// Reset all errors.
-			if formErrors.isEmpty {
-				fieldViewsManager.formSectionViews.forEach { formView in
-					updateFormSectionViewWithError(formView, with: nil)
-				}
-			}
-			
-      /// Update textfield UI state
-      updateFieldViewUIOnEndEditing(with: textField)
+//      /// Update form error message and grid state
+//			/// Update form error message and ui state
+//			let formErrors = formValidationErrors()
+//
+//			for formError in formErrors {
+//				let formViewSection = formError.formViewSection
+//				if let view = formSectionView(for: formViewSection) {
+//					print("view: \(view) errorMessage: \(formError.errorMessage ?? "No error!!!")")
+//					updateFormSectionViewWithError(view, with: formError.errorMessage)
+//				}
+//			}
+//
+//			/// Reset all errors.
+//			if formErrors.isEmpty {
+//				fieldViewsManager.formSectionViews.forEach { formView in
+//					updateFormSectionViewWithError(formView, with: nil)
+//				}
+//			}
+//
+//      /// Update textfield UI state
+//      updateFieldViewUIOnEndEditing(with: textField)
+        return
     case .onSubmit:
       return
     }
@@ -124,23 +126,6 @@ internal class VGSFormValidationHelper {
 //        /// Update textfield UI state
 //        updateFieldViewUIOnEditing(with: textField)
     }
-
-	/// Update form view UI with error.
-	/// - Parameters:
-	///   - view: `VGSFormGroupViewProtocol` object, form view.
-	///   - formError: `String?` object, form error.
-  private func updateFormSectionViewWithError(_ view: VGSFormSectionViewProtocol, with formError: String?) {
-    /// Update Form with Error Message
-    if let error = formError {
-      view.errorLabel.text = error
-      view.errorLabel.isHiddenInCheckoutStackView = false
-			view.updateSectionBlocks(fieldViewsManager.sectionBlocks, isValid: false)
-    } else {
-      view.errorLabel.text = ""
-			view.errorLabel.isHiddenInCheckoutStackView = true
-			view.updateSectionBlocks(fieldViewsManager.sectionBlocks, isValid: true)
-    }
-  }
   
   // MARK: - Handle TextField State
   

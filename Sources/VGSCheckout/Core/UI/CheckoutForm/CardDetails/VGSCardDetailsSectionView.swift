@@ -10,7 +10,6 @@ import UIKit
 
 /// Form View with group of fields.
 internal protocol VGSFormSectionViewProtocol: UIView {
-	var errorLabel: UILabel {get}
     var uiTheme: VGSCheckoutThemeProtocol {get}
 	func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool)
 }
@@ -31,8 +30,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	/// Form items.
     internal var fieldViews: [VGSTextFieldViewProtocol] = []
 
-	/// Displays error messages for invalid card details.
-  internal let errorLabel: UILabel
 
 	/// Fields distribution.
 	internal var fieldsDistribution: FieldsDistribution = .singleLineDateAndCVC
@@ -149,7 +146,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
   init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
     self.uiTheme = uiTheme
-    self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
 		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
     
 		super.init(frame: .zero)
@@ -268,9 +264,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		case .singleLineAll:
 			setupAllInSingleLine()
 		}
-
-		rootStackView.addArrangedSubview(errorLabel)
-		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
 		fieldViews = cardHolderDetailsView.fildViews + [
