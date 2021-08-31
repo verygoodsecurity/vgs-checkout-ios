@@ -13,8 +13,71 @@ public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGS
   
 }
 
+public protocol VGSCheckoutTextFieldThemeAdapterProtocol {
+    
+    func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol
+}
+
+extension VGSCheckoutTextFieldThemeAdapterProtocol {
+    public func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol {
+        switch state {
+        case .initial, .valid:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                    textFieldBorderColor: theme.textFieldBorderColor,
+                                                    textFieldHintTextColor: theme.textFieldHintTextColor,
+                                                    textFieldTextColor: theme.textFieldTextColor,
+                                                    textFieldTextFont: theme.textFieldTextFont,
+                                                    textFieldHintTextFont: theme.textFieldHintTextFont)
+        default:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                   textFieldBorderColor: theme.textFieldBorderColor,
+                                                   textFieldHintTextColor: theme.textFieldErrorColor,
+                                                   textFieldTextColor: theme.textFieldTextColor,
+                                                   textFieldTextFont: theme.textFieldTextFont,
+                                                   textFieldHintTextFont: theme.textFieldHintTextFont)
+        }
+    }
+}
+
+public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
+    /// The textfield’s background color. NOT USED!!!
+  var textFieldBackgroundColor: UIColor { get set }
+
+    /// The textfield’s border background color.
+  var textFieldBorderColor: UIColor { get set }
+
+
+    /// The text color of the textfield hint (above the text field).
+    var textFieldHintTextColor: UIColor { get set }
+
+    /// The text color of the textfield.
+  var textFieldTextColor: UIColor { get set }
+
+  /// Fonts.
+
+    /// The font of the textfield.
+  var textFieldTextFont: UIFont { get set }
+
+    /// The font of the textfield hint (above the text field).
+    var textFieldHintTextFont: UIFont { get set }
+}
+
+struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesProtocol {
+    var textFieldBackgroundColor: UIColor
+    
+    var textFieldBorderColor: UIColor
+        
+    var textFieldHintTextColor: UIColor
+    
+    var textFieldTextColor: UIColor
+    
+    var textFieldTextFont: UIFont
+    
+    var textFieldHintTextFont: UIFont
+}
+
 /// Defines UI Theme for text field.
-public protocol VGSCheckoutTextFieldThemeProtocol {
+public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdapterProtocol {
 
 	/// Colors.
 
@@ -24,8 +87,11 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 	/// The textfield’s border background color.
   var textFieldBorderColor: UIColor { get set }
 
-	/// The textfield’s error border color.
-  var textFieldBorderErrorColor: UIColor { get set }
+	/// The textfield’s elements error  color.
+  var textFieldErrorColor: UIColor { get set }
+    
+    /// The textfield’s elements focus  color.
+  var textFieldFocusColor: UIColor { get set }
 
 	/// The text color of the textfield hint (above the text field).
 	var textFieldHintTextColor: UIColor { get set }
