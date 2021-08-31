@@ -19,11 +19,11 @@ internal final class VGSFieldViewValidationManager {
 
 		switch (isValidLength, isValidState) {
 		case (false, _):
-			fieldView.updateUI(for: .focused)
+            fieldView.updateUI(for: .focused)
 		case (true, true):
-			fieldView.updateUI(for: .valid)
+            fieldView.updateUI(for: .valid)
 		case (true, false):
-			fieldView.updateUI(for: .invalid)
+            fieldView.updateUI(for: .invalid)
 		}
 	}
 
@@ -34,11 +34,11 @@ internal final class VGSFieldViewValidationManager {
 
 		switch (isValidLength, isValidState) {
 		case (false, _):
-			fieldView.updateUI(for: .focused)
+            fieldView.updateUI(for: .focused)
 		case (true, true):
-			fieldView.updateUI(for: .valid)
+            fieldView.updateUI(for:  .valid)
 		case (true, false):
-			fieldView.updateUI(for: .invalid)
+            fieldView.updateUI(for: .invalid)
 		}
 	}
 
@@ -48,7 +48,8 @@ internal final class VGSFieldViewValidationManager {
 
 		switch (state.isDirty, state.isValid) {
 		case (false, _):
-			fieldView.updateUI(for: .inactive)
+			fieldView.updateUI(for: .initial)
+            return
 		case (true, false):
 			fieldView.updateUI(for: .invalid)
 			return

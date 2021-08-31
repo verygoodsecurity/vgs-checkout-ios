@@ -9,6 +9,10 @@ import UIKit
 #endif
 
 internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
+    var delegate: VGSTextFieldViewDelegate?
+    
+    var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
+    
 
     // MARK: - Attributes
 
@@ -63,7 +67,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-
+        textField.delegate = self
         buildUI()
     }
 
@@ -91,5 +95,23 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
         placeholderView.layer.borderColor = UIColor.lightGray.cgColor
         placeholderView.layer.borderWidth = 1
         placeholderView.layer.cornerRadius = 6
+    }
+}
+
+extension VGSCVCFieldView: VGSTextFieldDelegate {
+    func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidBeginEditing(self)
+    }
+    
+    func vgsTextFieldDidChange(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewdDidChange(self)
+    }
+    
+    func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditing(self)
+    }
+    
+    func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditingOnReturn(self)
     }
 }

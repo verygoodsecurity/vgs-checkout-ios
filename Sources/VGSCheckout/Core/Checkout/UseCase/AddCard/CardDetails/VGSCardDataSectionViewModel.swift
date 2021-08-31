@@ -96,10 +96,10 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 			setupCardForm(with: multiplexingConfig)
 		}
 
-    for item in fieldViews {
-      item.placeholderView.delegate = self
-      item.textField.delegate = self
-    }
+        for item in fieldViews {
+          item.placeholderView.delegate = self
+          item.delegate = self
+        }
 	}
 
 	// MARK: - Helpers
@@ -132,24 +132,26 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
-  
-  func vgsTextFieldDidChange(_ textField: VGSTextField) {
-    updateSecurityCodeFieldIfNeeded(for: textField)
-    formValidationHelper.updateFormSectionViewOnEditingTextField(textField: textField)
-    updateFormState()
-  }
-  
-	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: textField)
-    updateFormState()
-	}
+extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
+    func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
 
-	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-    formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: textField)
-		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
-    updateFormState()
-	}
+    }
+    
+    func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditingOnReturn(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
+        updateSecurityCodeFieldIfNeeded(for: fieldView)
+        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
+        updateFormState()
+    }
 }
 
 // MARK: - CVC Helpers
@@ -157,16 +159,17 @@ extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
 extension VGSCardDataSectionViewModel {
   
   /// Check if CardBrand is changed and update cvc validation state if needed.
-  internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
-    guard editingTextField.configuration?.type == .cardNumber,
-       let cardState = editingTextField.state as? CardState,
-       let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
-      return
+  internal func updateSecurityCodeFieldIfNeeded(for textView: VGSTextFieldViewProtocol) {
+    guard textView.fieldType == .cardNumber,
+          let cardState = textView.textField.state as? CardState,
+          let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}),
+          let cvcFieldView = fieldViews.first(where: {$0.textField == cvcField}) else {
+        return
     }
     // Update Field Placeholder
     updateCVCFieldPlaceholder(cvcField, cardBrand: cardState.cardBrand)
     // Update UI for new CVC Field State
-    formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: cvcField)
+    formValidationHelper.updateFieldViewOnEndEditing(cvcFieldView)
   }
 
   private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {

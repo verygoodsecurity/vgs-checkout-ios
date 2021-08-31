@@ -25,7 +25,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}
 
 	/// UI theme object.
-  internal var uiTheme: VGSCheckoutThemeProtocol
+    internal var uiTheme: VGSCheckoutThemeProtocol
 
 	/// Form items.
     internal var fieldViews: [VGSTextFieldViewProtocol] = []
@@ -39,6 +39,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
         let componentView = VGSCardNumberFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .cardNumber
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
         return componentView
@@ -50,6 +51,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
         let componentView = VGSExpirationDateFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .expirationDate
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_expiration_date_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
         return componentView
@@ -60,13 +62,22 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		let componentView = VGSCVCFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .cvc
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_hint")
 		return componentView
 	}()
-
-	/// Card holder view.
-	internal let cardHolderDetailsView: VGSCardHolderDetailsView
+    
+    /// Card holder view.
+    internal lazy var cardHolderFieldView: VGSCardholderFieldView = {
+        let componentView = VGSCardholderFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .cardholderName
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
+        return componentView
+    }()
 
 	/// Container view for header to add insets.
 	internal lazy var headerContainerView: VGSContainerItemView = {
@@ -145,9 +156,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
   init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
-    self.uiTheme = uiTheme
-		self.cardHolderDetailsView = VGSCardHolderDetailsView(paymentInstrument: paymentInstrument)
-    
+        self.uiTheme = uiTheme
 		super.init(frame: .zero)
 
 		setupUI()
@@ -239,21 +248,21 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		case .vault(let configuration):
 			switch configuration.cardHolderFieldOptions.fieldVisibility {
 			case .visible:
-				cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
-				rootStackView.addArrangedSubview(cardHolderDetailsView)
+				rootStackView.addArrangedSubview(cardHolderFieldView)
 			default:
 				break
 			}
 		case .multiplexing:
-			cardHolderDetailsView.translatesAutoresizingMaskIntoConstraints = false
-			rootStackView.addArrangedSubview(cardHolderDetailsView)
+			rootStackView.addArrangedSubview(cardHolderFieldView)
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-    cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-    cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+        cardHolderFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        cardHolderFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
+        cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		verticalStackView.addArrangedSubview(cardNumberFieldView)
 
 		switch fieldsDistribution {
@@ -266,16 +275,19 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		}
 
 		// Gather all form items.
-		fieldViews = cardHolderDetailsView.fildViews + [
+		fieldViews = [
+            cardHolderFieldView,
 			cardNumberFieldView,
 			expDateFieldView,
 			cvcFieldView,
 		]
 
     /// Set UI Theme
-    for item in fieldViews {
-			item.updateStyle(with: uiTheme)
-    }
+        fieldViews.forEach { item in
+            item.updateUI(for: .initial)
+        }
+        
+        
     
 		fieldViews.first?.textField.becomeFirstResponder()
 	}

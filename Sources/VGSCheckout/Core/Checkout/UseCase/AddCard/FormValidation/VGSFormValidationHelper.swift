@@ -36,7 +36,7 @@ internal class VGSFormValidationHelper {
   // MARK: - Handle Form State
 
   /// Update Form View UI elements on editing.
-  internal func updateFormSectionViewOnEditingTextField(textField: VGSTextField) {
+  internal func updateFieldViewOnEditingTextField(_ fieldView: VGSTextFieldViewProtocol) {
     switch validationBehaviour {
     case .onEdit:
 //      /// Update form error message and ui state
@@ -61,12 +61,14 @@ internal class VGSFormValidationHelper {
 //      updateFieldViewUIOnEditing(with: textField)
     return
     case .onSubmit:
+        fieldView.errorLabel.text = String.checkout_emptyErrorText
+        fieldView.updateUI(for: .valid)
       return
     }
   }
   
   /// Update Form View UI elements on end editing.
-  internal func updateFormSectionViewOnEndEditingTextField(textField: VGSTextField) {
+  internal func updateFieldViewOnEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
     switch validationBehaviour {
     case .onEdit:
 //      /// Update form error message and grid state
@@ -103,6 +105,7 @@ internal class VGSFormValidationHelper {
             let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: textView.fieldType)
             let errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
             textView.errorLabel.text = errorMessage
+            textView.updateUI(for: .invalid)
         }
         
         /// Update form error message and ui state

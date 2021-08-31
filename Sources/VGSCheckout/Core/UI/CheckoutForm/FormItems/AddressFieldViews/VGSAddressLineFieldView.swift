@@ -9,7 +9,10 @@ import UIKit
 
 /// Holds UI for address line form item.
 internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
-
+    var delegate: VGSTextFieldViewDelegate?
+    
+    var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
+    
     // MARK: - Attributes
 
     /// TODO: remove hardcoded value
@@ -60,7 +63,7 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-
+        textField.delegate = self
         buildUI()
     }
 
@@ -88,5 +91,23 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
         placeholderView.layer.borderColor = UIColor.lightGray.cgColor
         placeholderView.layer.borderWidth = 1
         placeholderView.layer.cornerRadius = 6
+    }
+}
+
+extension VGSErrorFieldView: VGSTextFieldDelegate {
+    func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidBeginEditing(self)
+    }
+    
+    func vgsTextFieldDidChange(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewdDidChange(self)
+    }
+    
+    func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditing(self)
+    }
+    
+    func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditingOnReturn(self)
     }
 }

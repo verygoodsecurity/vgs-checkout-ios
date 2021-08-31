@@ -84,15 +84,15 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 			}
 		}()
 
-    vgsTextFields.forEach { textField in
+        vgsTextFields.forEach { textField in
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-		  textField.delegate = self
 		}
 
 		for item in fieldViews {
 			item.placeholderView.delegate = self
+            item.delegate = self
 		}
 
 		// Set picker fields delegate.
@@ -162,23 +162,25 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
+extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
+    func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
 
-	func vgsTextFieldDidChange(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEditingTextField(textField: textField)
-		updateFormState()
-	}
-
-	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
-		updateFormState()
-	}
-
-	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
-//		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
-		updateFormState()
-	}
+    }
+    
+    func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditingOnReturn(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
+        updateFormState()
+    }
 
 	func pickerAddressDidUpdate(in field: VGSTextField, fieldType: VGSAddCardFormFieldType) {
 		guard let pickerField = field as? VGSPickerTextField else {

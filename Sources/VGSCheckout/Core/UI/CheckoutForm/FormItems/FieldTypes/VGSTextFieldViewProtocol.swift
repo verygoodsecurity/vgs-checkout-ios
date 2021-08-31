@@ -7,49 +7,57 @@ import Foundation
 import UIKit
 #endif
 
-internal protocol VGSTextFieldViewProtocol: AnyObject {
+internal protocol VGSTextFieldViewDelegate {
+    
+    // MARK: - Handle user ineraction with `VGSTextFieldViewProtocol`
+    
+    /// `VGSTextFieldViewProtocol` did become first responder.
+    func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol)
+    
+    /// `VGSTextFieldViewProtocol` did resign first responder.
+    func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol)
+    
+    /// `VGSTextFieldViewProtocol` did resign first responder on Return button pressed.
+    func vgsFieldViewDidEndEditingOnReturn(_ fieldView: VGSTextFieldViewProtocol)
+    
+    /// `VGSTextFieldViewProtocol` input changed.
+    func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol)
+}
+
+
+internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigurationProtocol {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
     var errorLabel: UILabel {get}
 	var fieldType: VGSAddCardFormFieldType {get}
     
-	func updateUI(for validationState: VGSCheckoutFormValidationState)
+    var delegate: VGSTextFieldViewDelegate? {get set}
 }
 
-/// TODO: Move to base class?
-extension VGSTextFieldViewProtocol {
 
-	// MARK: - Interface
-
-	/// Update UI.
-	/// - Parameter validationState: `VGSCheckoutFormValidationState` object, form validation state.
-	func updateUI(for validationState: VGSCheckoutFormValidationState) {
-		switch validationState {
-		case .focused, .inactive, .valid:
-			placeholderView.hintComponentView.accessory = .none
-		case .invalid:
-			placeholderView.hintComponentView.accessory = .invalid
-		case .disabled:
-			placeholderView.hintComponentView.accessory = .none
-		}
-	}
-
-	/// Update styles with ui theme.
-	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
-	func updateStyle(with uiTheme: VGSCheckoutThemeProtocol) {
-		textField.textColor = uiTheme.textFieldTextColor
-		textField.font = uiTheme.textFieldTextFont
-		print("textField.fieldType: \(textField)")
-		textField.adjustsFontForContentSizeCategory = true
-		placeholderView.hintLabel.textColor = uiTheme.textFieldHintTextColor
-		placeholderView.hintLabel.font = uiTheme.textFieldHintTextFont
-	}
+internal protocol VGSTextFieldViewUIConfigurationProtocol {
+    var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler? {get set}    
+    func updateUI(for uiState: VGSCheckoutFieldUIState)
 }
 
-internal enum VGSCheckoutFormValidationState {
-	case inactive
+extension VGSTextFieldViewUIConfigurationProtocol {
+    func updateUI(for uiState: VGSCheckoutFieldUIState) {
+        switch uiState {
+        case .initial:
+            uiConfigurationHandler?.initial()
+        case .valid:
+            uiConfigurationHandler?.valid()
+        case .invalid:
+            uiConfigurationHandler?.invalid()
+        case .focused:
+            uiConfigurationHandler?.focused()
+        }
+    }
+}
+
+public enum VGSCheckoutFieldUIState {
+    case initial
 	case focused
 	case valid
 	case invalid
-	case disabled
 }

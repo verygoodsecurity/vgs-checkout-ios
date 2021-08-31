@@ -38,6 +38,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		let componentView = VGSCountryFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .country
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_country_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_acountry_hint")
 		return componentView
@@ -48,6 +49,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		let componentView = VGSErrorFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine1
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_hint")
 		return componentView
@@ -58,6 +60,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
         let componentView = VGSErrorFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine2
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
         return componentView
@@ -68,6 +71,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
         let componentView = VGSErrorFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .city
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_hint")
         return componentView
@@ -78,6 +82,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
         let componentView = VGSErrorFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .state
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_hint")
         return componentView
@@ -88,6 +93,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
         let componentView = VGSErrorFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .postalCode
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_subtitle")
         componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_hint")
         return componentView
@@ -151,7 +157,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	/// Initialization.
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
   init(uiTheme: VGSCheckoutThemeProtocol) {
-    self.uiTheme = uiTheme
+        self.uiTheme = uiTheme
 		super.init(frame: .zero)
 
 		setupUI()
@@ -247,7 +253,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
-			fieldView.updateStyle(with: uiTheme)
+            fieldView.updateUI(for: .initial)
 			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		}
