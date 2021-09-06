@@ -9,12 +9,100 @@ import UIKit
 #endif
 
 /// Defines basic UI Theme.
-public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutErrorLabelThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
+public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
   
 }
 
+public protocol VGSCheckoutTextFieldThemeAdapterProtocol {
+    
+    func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol
+}
+
+extension VGSCheckoutTextFieldThemeAdapterProtocol {
+    public func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol {
+        switch state {
+        case .initial, .valid:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                    textFieldBorderColor: theme.textFieldBorderColor,
+                                                    textFieldHintTextColor: theme.textFieldHintTextColor,
+                                                    textFieldTextColor: theme.textFieldTextColor,
+                                                    textFieldTextFont: theme.textFieldTextFont,
+                                                    textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+        case .focused:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                    textFieldBorderColor: theme.textFieldBorderColor,
+                                                    textFieldHintTextColor: theme.textFieldFocusColor,
+                                                    textFieldTextColor: theme.textFieldTextColor,
+                                                    textFieldTextFont: theme.textFieldTextFont,
+                                                    textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+            
+        default:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                   textFieldBorderColor: theme.textFieldBorderColor,
+                                                   textFieldHintTextColor: theme.textFieldErrorColor,
+                                                   textFieldTextColor: theme.textFieldTextColor,
+                                                   textFieldTextFont: theme.textFieldTextFont,
+                                                   textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                   textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                   textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+        }
+    }
+}
+
+public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
+    /// The textfield’s background color. NOT USED!!!
+  var textFieldBackgroundColor: UIColor { get set }
+
+    /// The textfield’s border background color.
+  var textFieldBorderColor: UIColor { get set }
+
+
+    /// The text color of the textfield hint (above the text field).
+    var textFieldHintTextColor: UIColor { get set }
+
+    /// The text color of the textfield.
+  var textFieldTextColor: UIColor { get set }
+    
+    /// The text color of the error label.
+  var textFieldErrorLabelTextColor: UIColor { get set }
+
+  /// Fonts.
+
+    /// The font of the textfield.
+  var textFieldTextFont: UIFont { get set }
+
+    /// The font of the textfield hint (above the text field).
+    var textFieldHintTextFont: UIFont { get set }
+    
+    /// The font of the error label.
+    var textFieldErrorLabelFont: UIFont { get set }
+}
+
+struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesProtocol {
+
+    var textFieldBackgroundColor: UIColor
+    
+    var textFieldBorderColor: UIColor
+        
+    var textFieldHintTextColor: UIColor
+    
+    var textFieldTextColor: UIColor
+    
+    var textFieldTextFont: UIFont
+    
+    var textFieldHintTextFont: UIFont
+    
+    var textFieldErrorLabelTextColor: UIColor
+    
+    var textFieldErrorLabelFont: UIFont
+}
+
 /// Defines UI Theme for text field.
-public protocol VGSCheckoutTextFieldThemeProtocol {
+public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdapterProtocol {
 
 	/// Colors.
 
@@ -24,8 +112,11 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 	/// The textfield’s border background color.
   var textFieldBorderColor: UIColor { get set }
 
-	/// The textfield’s error border color.
-  var textFieldBorderErrorColor: UIColor { get set }
+	/// The textfield’s elements error  color.
+  var textFieldErrorColor: UIColor { get set }
+    
+    /// The textfield’s elements focus  color.
+  var textFieldFocusColor: UIColor { get set }
 
 	/// The text color of the textfield hint (above the text field).
 	var textFieldHintTextColor: UIColor { get set }
@@ -40,6 +131,9 @@ public protocol VGSCheckoutTextFieldThemeProtocol {
 
 	/// The font of the textfield hint (above the text field).
 	var textFieldHintTextFont: UIFont { get set }
+    
+    /// The font of the error label.
+    var textFieldErrorLabelFont: UIFont { get set }
 }
 
 /// Defines Checkout main view UI Theme.
@@ -50,16 +144,6 @@ public protocol VGSCheckoutViewThemeProtocol {
 
 	/// The font of the section title.
 	var checkoutFormSectionTitleFont: UIFont {get set}
-}
-
-/// Defines Checkout error label UI Theme.
-public protocol VGSCheckoutErrorLabelThemeProtocol {
-
-	/// The font of the error label.
-  var checkoutErrorLabelFont: UIFont { get set }
-
-	/// The text color of the error label.
-  var checkoutErrorLabelTextColor: UIColor { get set }
 }
 
 /// Defines Checkout submit button UI Theme.

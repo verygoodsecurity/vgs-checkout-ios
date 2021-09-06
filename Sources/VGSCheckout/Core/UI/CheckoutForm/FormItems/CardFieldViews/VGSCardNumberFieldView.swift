@@ -9,50 +9,109 @@ import UIKit
 #endif
 
 internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
+    var delegate: VGSTextFieldViewDelegate?
+    
+    var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
 
-	// MARK: - Vars
+    // MARK: - Attributes
 
-	internal let fieldType: VGSAddCardFormFieldType = .cardNumber
+    internal var fieldType: VGSAddCardFormFieldType = .cardNumber
+    
+    internal var placeholder: String? {
+        set {
+            textField.placeholder = newValue
+        }
+        get {
+            return textField.placeholder
+        }
+    }
+    
+    internal var subtitle: String? {
+        set {
+            placeholderView.hintComponentView.label.text = newValue
+        }
+        get {
+            return placeholderView.hintComponentView.label.text
+        }
+    }
 
-	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
+    // MARK: - Views
+    let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-	var textField: VGSTextField {
-		return cardTextField
-	}
+    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+    
+    /// Stack view.
+    internal lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        return stackView
+    }()
 
-	lazy var cardTextField: VGSCardTextField = {
-		let field = VGSCardTextField()
-		field.translatesAutoresizingMaskIntoConstraints = false
+    var textField: VGSTextField {
+        return cardTextField
+    }
+    
+    private lazy var cardTextField: VGSCardTextField = {
+        let field = VGSCardTextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.cardIconSize = CGSize.checkout_fieldIconSize
+        field.cornerRadius = 0
+        field.borderWidth = 0
+        return field
+    }()
 
-		field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_hint")
+    // MARK: - Initialization
 
-		field.cardIconSize = CGSize(width: 32, height: 20)
-		field.cornerRadius = 0
-		field.borderWidth = 0
-		
-		return field
-	}()
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        textField.delegate = self
+        buildUI()
+    }
 
-	// MARK: - Initialization
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
+    // MARK: - Helpers
 
-		buildUI()
-	}
+    private func buildUI() {
+        addSubview(stackView)
+        stackView.checkout_constraintViewToSuperviewEdges()
 
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
+        stackView.addArrangedSubview(placeholderView)
+        buildPlaceholderUI()
 
-	// MARK: - Helpers
+        stackView.addArrangedSubview(errorLabel)
+        errorLabel.text = String.checkout_emptyErrorText
+        errorLabel.isHiddenInCheckoutStackView = false
+    }
+    
+    private func buildPlaceholderUI() {
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.stackView.addArrangedSubview(textField)
+        placeholderView.layer.borderColor = UIColor.lightGray.cgColor
+        placeholderView.layer.borderWidth = 1
+        placeholderView.layer.cornerRadius = 6
+    }
+}
 
-	private func buildUI() {
-		addSubview(placeholderView)
-		placeholderView.translatesAutoresizingMaskIntoConstraints = false
-		placeholderView.checkout_constraintViewToSuperviewEdges()
-
-		placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_subtitle")
-		placeholderView.stackView.addArrangedSubview(cardTextField)
-	}
+extension VGSCardNumberFieldView: VGSTextFieldDelegate {
+    func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidBeginEditing(self)
+    }
+    
+    func vgsTextFieldDidChange(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewdDidChange(self)
+    }
+    
+    func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditing(self)
+    }
+    
+    func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
+        delegate?.vgsFieldViewDidEndEditingOnReturn(self)
+    }
 }

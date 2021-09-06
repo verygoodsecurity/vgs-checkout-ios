@@ -39,7 +39,6 @@ internal class VGSFormView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.alignment = .fill
-
 		return stackView
 	}()
 

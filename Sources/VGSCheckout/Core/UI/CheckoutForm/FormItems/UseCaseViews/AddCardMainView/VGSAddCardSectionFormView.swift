@@ -20,9 +20,6 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
-	/// Displays error messages for invalid card details.
-  internal let cardDetailsErrorLabel: UILabel
-
 	/// Header bar view.
 	internal lazy var headerBarView: VGSHeaderBarView = {
 		let view = VGSHeaderBarView()
@@ -59,17 +56,16 @@ internal class VGSAddCardFormView: VGSFormView {
 
 	/// Initializer.
   internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
-    self.uiTheme = uiTheme
-    self.cardDetailsErrorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
-    self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
+        self.uiTheme = uiTheme
+        self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsSectionView = cardDetailsView
 		self.billingAddressSectionView = billingAddressView
 		super.init()
 
-    self.payButton.delegate = self
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 50, right: 16)
+        self.payButton.delegate = self
+		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 
@@ -91,9 +87,9 @@ internal class VGSAddCardFormView: VGSFormView {
 		case .fullScreen:
 			addFormItemView(headerBarView)
 
-			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
-			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
-			addFormItemView(payWithCardHeaderView)
+//			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
+//			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
+//			addFormItemView(payWithCardHeaderView)
 
 			addFormItemView(backgroundStackView)
 			payButtonContainerView.addContentView(payButton)

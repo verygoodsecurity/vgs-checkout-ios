@@ -31,10 +31,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		didSet {
 			switch state {
 			case .invalid:
-				addCardSectionFormView.payButton.status = .disabled
-			case .valid:
 				addCardSectionFormView.payButton.status = .enabled
-
+                return
+			case .valid:
 				addCardSectionFormView.isUserInteractionEnabled = true
 				addCardSectionFormView.headerBarView.closeButton?.isEnabled = true
 				addCardSectionFormView.payButton.status = .enabled
@@ -87,16 +86,16 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
 
-		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: .onFocus)
+		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: .onSubmit)
 		let autoFocusManager = VGSFieldAutofocusManager(fieldViewsManager: VGSFieldViewsManager(fieldViews: []))
 
-		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
     switch paymentInstrument {
     case .vault(let configuration):
-      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
     case .multiplexing(let configuration):
-      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onFocus, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
     }
 
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
@@ -124,14 +123,13 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 
 		super.init()
-		self.addCardSectionFormView.payButton.status = .disabled
+		self.addCardSectionFormView.payButton.status = .enabled
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
 
 		addCardSectionFormView.headerBarView.delegate = self
 		let viewController = VGSFormViewController(formView: addCardSectionFormView)
-
 		addCardSectionFormView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardDataSectionViewModel.delegate = self
 		addressDataSectionViewModel.delegate = self
@@ -144,8 +142,20 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	// MARK: - Helpers
 
 	@objc fileprivate func payDidTap() {
-		state = .processing
+        switch state {
+        case .valid:
+            state = .processing
+        case .invalid:
+            showFormValidationErrors()
+        default:
+            return
+        }
 	}
+    
+    private func showFormValidationErrors() {
+        cardDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
+        addressDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
+    }
 }
 
 // MARK: - VGSHeaderBarViewDelegate

@@ -7,16 +7,16 @@
 "vgs_checkout_form_card_details_title" = "Card Details";
 
 /* Card holder name field subtitle. */
-"vgs_checkout_card_holder_subtitle" = "Name on card";
+"vgs_checkout_card_holder_subtitle" = "NAME ON CARD";
 
 /* Card number field subtitle. */
-"vgs_checkout_card_number_subtitle" = "Card number";
+"vgs_checkout_card_number_subtitle" = "CARD NUMBER";
 
 /* Expiration date field subtitle. */
-"vgs_checkout_expiration_date_subtitle" = "Expiration date";
+"vgs_checkout_expiration_date_subtitle" = "EXPIRATION DATE";
 
 /* Security code field subtitle. */
-"vgs_checkout_security_code_subtitle" = "Security code";
+"vgs_checkout_security_code_subtitle" = "SECURITY CODE";
 
 /* Card holder field placeholder text. */
 "vgs_checkout_card_holder_hint" = "Joe Business";
@@ -28,10 +28,10 @@
 "vgs_checkout_card_expiration_date_hint" = "MM/YY";
 
 /* Card CVC field placeholder text. */
-"vgs_checkout_card_expiration_date_hint" = "CVC";
+"vgs_checkout_security_code" = "CVC";
 
 /* Card CVV field placeholder text. */
-"vgs_checkout_card_expiration_date_hint" = "CVV";
+"vgs_checkout_security_code_amex" = "CVV";
 
 /* Pay button text. */
 "vgs_checkout_pay_button_title" = "Pay";
@@ -67,34 +67,34 @@
 "vgs_checkout_picker_toolbar_done_button_title" = "Done";
 
 /* Country field subtitle in address info. */
-"vgs_checkout_address_info_country_subtitle" = "Country";
+"vgs_checkout_address_info_country_subtitle" = "COUNTRY";
 
 /* Address line 1 field subtitle in address info. */
-"vgs_checkout_address_info_address_line1_subtitle" = "Address line 1";
+"vgs_checkout_address_info_address_line1_subtitle" = "ADDRESS LINE 1";
 
 /* Address line 2 field subtitle in address info. */
-"vgs_checkout_address_info_address_line2_subtitle" = "Address line 2 (Optional)";
+"vgs_checkout_address_info_address_line2_subtitle" = "ADDRESS LINE 2 (OPTIONAL)";
 
 /* City field subtitle in address info. */
-"vgs_checkout_address_info_city_subtitle" = "City";
+"vgs_checkout_address_info_city_subtitle" = "CITY";
 
 /* State (US) field subtitle in address info. */
-"vgs_checkout_address_info_region_type_state_subtitle" = "State";
+"vgs_checkout_address_info_region_type_state_subtitle" = "STATE";
 
 /* Suburb (NZ) field subtitle in address info. */
-"vgs_checkout_address_info_region_type_suburb_subtitle" = "Suburb";
+"vgs_checkout_address_info_region_type_suburb_subtitle" = "SUBURB";
 
 /* Province (Canada) field subtitle in address info. */
-"vgs_checkout_address_info_region_type_province_subtitle" = "Province";
+"vgs_checkout_address_info_region_type_province_subtitle" = "PROVINCE";
 
 /* County (UK) field subtitle in address info. */
-"vgs_checkout_address_info_region_type_county_subtitle" = "County";
+"vgs_checkout_address_info_region_type_county_subtitle" = "COUNTRY";
 
 /* Zip (US) field subtitle in address info. */
 "vgs_checkout_address_info_address_zip_subtitle" = "ZIP";
 
 /* Postal code field subtitle in address info. */
-"vgs_checkout_address_info_postal_code_subtitle" = "Postal code";
+"vgs_checkout_address_info_postal_code_subtitle" = "POSTAL CODE";
 
 // Address section
 

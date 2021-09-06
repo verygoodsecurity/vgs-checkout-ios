@@ -15,10 +15,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Form items.
 	internal var fieldViews: [VGSTextFieldViewProtocol] = []
-  
-	/// Displays error messages for invalid adrdress details.
-  internal let errorLabel: UILabel
 
+    /// Container view
+    private lazy var containerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
 	/// Container view for header to add insets.
 	internal lazy var headerContainerView: VGSContainerItemView = {
 		let view = VGSContainerItemView(frame: .zero)
@@ -32,56 +37,66 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	internal lazy var countryFieldView: VGSCountryFieldView = {
 		let componentView = VGSCountryFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
-
+        componentView.fieldType = .country
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_country_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_acountry_hint")
 		return componentView
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FieldView: VGSAddressLineFieldView = {
-		let componentView = VGSAddressLineFieldView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSErrorFieldView = {
+		let componentView = VGSErrorFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
-
+        componentView.fieldType = .addressLine1
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line1_hint")
 		return componentView
 	}()
 
 	/// Address line 2 form item view.
-	internal lazy var addressLine2FieldView: VGSAddressLineFieldView = {
-		let componentView = VGSAddressLineFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var addressLine2FieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .addressLine2
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+        return componentView
 	}()
 
 	/// City form item view.
-	internal lazy var cityFieldView: VGSCityFieldView = {
-		let componentView = VGSCityFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var cityFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .city
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_city_hint")
+        return componentView
 	}()
 
 	/// region form item view.
-	internal lazy var regionFieldView: VGSStateFieldView = {
-		let componentView = VGSStateFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
-
-	/// State form item view.
-	internal lazy var statePickerFieldView: VGSStatePickerFieldView = {
-		let componentView = VGSStatePickerFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
-	}()
+	internal lazy var regionFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .state
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_region_type_state_hint")
+        return componentView
+    }()
 
 	/// Postal Code/Zip form item view.
-	internal lazy var postalCodeFieldView: VGSPostalCodeFieldView = {
-		let componentView = VGSPostalCodeFieldView(frame: .zero)
-		componentView.translatesAutoresizingMaskIntoConstraints = false
-
-		return componentView
+	internal lazy var postalCodeFieldView: VGSErrorFieldView = {
+        let componentView = VGSErrorFieldView(frame: .zero)
+        componentView.translatesAutoresizingMaskIntoConstraints = false
+        componentView.fieldType = .postalCode
+        componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
+        componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_subtitle")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_postal_code_hint")
+        return componentView
 	}()
 
 	/// Header view.
@@ -115,11 +130,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = true
-		stackView.borderViewCornerRadius = 4
+		stackView.hasBorderView = false
+//		stackView.borderViewCornerRadius = 4
 
-		stackView.spacing = 1
-		stackView.separatorColor = uiTheme.textFieldBorderColor
+//		stackView.spacing = 1
+//		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -131,9 +146,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-
+        stackView.hasBorderView = false
 		stackView.spacing = 1
-		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
@@ -143,8 +157,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	/// Initialization.
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
   init(uiTheme: VGSCheckoutThemeProtocol) {
-    self.uiTheme = uiTheme
-    self.errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel(with: uiTheme)
+        self.uiTheme = uiTheme
 		super.init(frame: .zero)
 
 		setupUI()
@@ -166,16 +179,16 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-		switch block {
-		case .addressInfo:
-			if isValid {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-			} else {
-				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-			}
-		default:
-		 break
-		}
+//		switch block {
+//		case .addressInfo:
+//			if isValid {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
+//			} else {
+//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
+//			}
+//		default:
+//		 break
+//		}
 	}
 
 	// TODO: - refactor duplicated code for processing state styles.
@@ -206,9 +219,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Setup UI and layout.
 	private func setupUI() {
-		addSubview(rootStackView)
-		rootStackView.checkout_constraintViewToSuperviewEdges()
-
+        /// TODO: Change to system colors
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 8
+        
+        addSubview(containerView)
+        containerView.checkout_defaultSectionViewConstraints()
+        
+        containerView.addSubview(rootStackView)
+        rootStackView.checkout_constraintViewToSuperviewEdges()
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 
@@ -219,13 +238,9 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		verticalStackView.addArrangedSubview(addressLine2FieldView)
 		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndPostalCodeStackView.addArrangedSubview(statePickerFieldView)
 		stateAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
 		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
-
-		rootStackView.addArrangedSubview(errorLabel)
-		errorLabel.isHiddenInCheckoutStackView = true
 
 		// Gather all form items.
 		fieldViews = [
@@ -233,13 +248,12 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 			addressLine1FieldView,
 			addressLine2FieldView,
 			cityFieldView,
-			statePickerFieldView,
 			postalCodeFieldView
 		]
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
-			fieldView.updateStyle(with: uiTheme)
+            fieldView.updateUI(for: .initial)
 			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		}

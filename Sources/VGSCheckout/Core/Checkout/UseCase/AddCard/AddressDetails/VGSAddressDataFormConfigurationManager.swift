@@ -14,11 +14,10 @@ internal class VGSAddressDataFormConfigurationManager {
 	internal static func setupAddressForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
-		let cityTextField = addressFormView.cityFieldView.cityTextField
-		let statePickerTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.textField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.textField
+		let cityTextField = addressFormView.cityFieldView.textField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
 		let addressVisibility = vaultConfiguration.formConfiguration.billingAddressVisibility
 
@@ -76,24 +75,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1Configuration.returnKeyType = .next
 
 		cityTextField.configuration = cityConfiguration
-
-		// Disable state field for now
-
-		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
-
-//		let statePickerConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "state")
-////		let regionsDataSource = VGSRegionsDataSourceProvider(with: "US")
-////		let regionsDataSourceProvider = VGSPickerDataSourceProvider(dataSource: regionsDataSource)
-////		statePickerConfiguration.dataProvider = regionsDataSourceProvider
-//		statePickerConfiguration.type = .none
-//		statePickerConfiguration.isRequiredValidOnly = true
-//
-//		statePickerTextField.configuration = statePickerConfiguration
-//
-//		statePickerTextField.mode = .textField
-
-		// Force select first state.
-//		statePickerTextField.selectFirstRow()
 
 		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
 		postalCodeConfiguration.type = .none
@@ -157,11 +138,10 @@ internal class VGSAddressDataFormConfigurationManager {
 	internal static func setupAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
-		let addressLine1TextField = addressFormView.addressLine1FieldView.addressLineTextField
-		let addressLine2TextField = addressFormView.addressLine2FieldView.addressLineTextField
-		let cityTextField = addressFormView.cityFieldView.cityTextField
-		let stateTextField = addressFormView.statePickerFieldView.statePickerTextField
-		let postalCodeTextField = addressFormView.postalCodeFieldView.postalCodeTextField
+		let addressLine1TextField = addressFormView.addressLine1FieldView.textField
+		let addressLine2TextField = addressFormView.addressLine2FieldView.textField
+		let cityTextField = addressFormView.cityFieldView.textField
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
@@ -184,10 +164,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2Configuration.returnKeyType = .next
-
-		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
-		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
-
 		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.city")
@@ -197,21 +173,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityTextField.configuration = cityConfiguration
 
 		cityConfiguration.returnKeyType = .next
-
-		// Disable state field for now
-
-		addressFormView.statePickerFieldView.isHiddenInCheckoutStackView = true
-//
-//		let stateConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "data.attributes.details.billing_address.region")
-//		stateConfiguration.type = .none
-//		stateConfiguration.isRequiredValidOnly = true
-//		stateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-//			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-//		])
-//		stateConfiguration.returnKeyType = .next
-//
-//		stateTextField.configuration = stateConfiguration
-//		stateTextField.mode = .textField
 
 		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
 		postalCodeConfiguration.type = .none
@@ -251,7 +212,7 @@ internal class VGSAddressDataFormConfigurationManager {
 				}
 
 				// Add address fields to validation manager again in the correct order.
-				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView, addressFormView.statePickerFieldView, addressFormView.postalCodeFieldView])
+				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView,  addressFormView.postalCodeFieldView])
 			} else {
 				addressFormView.stateAndPostalCodeStackView.isHiddenInCheckoutStackView = true
 				addressFormView.fieldViews.forEach { fieldView in

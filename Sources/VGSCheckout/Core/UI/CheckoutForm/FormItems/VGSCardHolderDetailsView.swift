@@ -29,16 +29,11 @@ internal class VGSCardHolderDetailsView: UIView {
 	internal lazy var cardHolderNameStackView: VGSSeparatedStackView = {
 		let stackView = VGSSeparatedStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-
-		stackView.hasBorderView = true
+		stackView.hasBorderView = false
 		stackView.borderViewCornerRadius = 4
-
 		stackView.spacing = 1
-		stackView.separatorColor = UIColor.gray
-
 		return stackView
 	}()
 
@@ -85,43 +80,43 @@ internal class VGSCardHolderDetailsView: UIView {
 		itemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 		itemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		itemView.cardHolderName.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
+		itemView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_hint")
 		itemView.placeholderView.hintComponentView.label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_holder_subtitle")
 
 		fildViews = [itemView]
 	}
 
-	/// Setup splitted card holder fields.
-	private func setupSplittedFieldName() {
-
-		let firstNameItemView = VGSCardholderFieldView(frame: .zero)
-		let lastNameItemView = VGSCardholderFieldView(frame: .zero)
-
-		firstNameItemView.cardHolderName.placeholder = "John"
-		lastNameItemView.cardHolderName.placeholder = "Doe"
-
-		firstNameItemView.fieldType = .firstName
-		lastNameItemView.fieldType = .lastName
-
-		switch fieldsDistribution {
-		case .singleLine:
-			cardHolderNameStackView.axis = .horizontal
-		case .doubleLine:
-			cardHolderNameStackView.axis = .vertical
-		}
-
-		fildViews = [firstNameItemView, lastNameItemView]
-
-		firstNameItemView.placeholderView.hintComponentView.label.text = "First Name"
-		lastNameItemView.placeholderView.hintComponentView.label.text = "Last Name"
-
-		firstNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		firstNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
-
-		lastNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-		lastNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
-
-		cardHolderNameStackView.addArrangedSubview(firstNameItemView)
-		cardHolderNameStackView.addArrangedSubview(lastNameItemView)
-	}
+//	/// Setup splitted card holder fields.
+//	private func setupSplittedFieldName() {
+//
+//		let firstNameItemView = VGSCardholderFieldView(frame: .zero)
+//		let lastNameItemView = VGSCardholderFieldView(frame: .zero)
+//
+//		firstNameItemView.cardHolderName.placeholder = "John"
+//		lastNameItemView.cardHolderName.placeholder = "Doe"
+//
+//		firstNameItemView.fieldType = .firstName
+//		lastNameItemView.fieldType = .lastName
+//
+//		switch fieldsDistribution {
+//		case .singleLine:
+//			cardHolderNameStackView.axis = .horizontal
+//		case .doubleLine:
+//			cardHolderNameStackView.axis = .vertical
+//		}
+//
+//		fildViews = [firstNameItemView, lastNameItemView]
+//
+//		firstNameItemView.placeholderView.hintComponentView.label.text = "First Name"
+//		lastNameItemView.placeholderView.hintComponentView.label.text = "Last Name"
+//
+//		firstNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+//		firstNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+//
+//		lastNameItemView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+//		lastNameItemView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+//
+//		cardHolderNameStackView.addArrangedSubview(firstNameItemView)
+//		cardHolderNameStackView.addArrangedSubview(lastNameItemView)
+//	}
 }

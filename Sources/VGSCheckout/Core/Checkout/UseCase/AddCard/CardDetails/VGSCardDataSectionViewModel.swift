@@ -26,8 +26,8 @@ internal enum VGSFormSectionState {
 
 /// Defines validation behavior.
 internal enum VGSFormValidationBehaviour {
-	case onFocus
-	case onTextChange
+	case onSubmit
+	case onEdit
 }
 
 /// Holds logic for card form setup and handling events.
@@ -71,7 +71,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
   
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
@@ -96,10 +96,10 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 			setupCardForm(with: multiplexingConfig)
 		}
 
-    for item in fieldViews {
-      item.placeholderView.delegate = self
-      item.textField.delegate = self
-    }
+        for item in fieldViews {
+          item.placeholderView.delegate = self
+          item.delegate = self
+        }
 	}
 
 	// MARK: - Helpers
@@ -109,7 +109,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	}
 
 	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
-		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardFormView: cardDetailsSectionView)
+		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
 	func didTap(in formView: VGSPlaceholderFieldView) {
@@ -132,24 +132,27 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
-  
-  func vgsTextFieldDidChange(_ textField: VGSTextField) {
-    updateSecurityCodeFieldIfNeeded(for: textField)
-    formValidationHelper.updateFormSectionViewOnEditingTextField(textField: textField)
-    updateFormState()
-  }
-  
-	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: textField)
-    updateFormState()
-	}
-
-	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-    formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: textField)
-		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
-    updateFormState()
-	}
+extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
+    func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnBeginEditingTextField(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditingOnReturn(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
+        updateSecurityCodeFieldIfNeeded(for: fieldView)
+        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
+        updateFormState()
+    }
 }
 
 // MARK: - CVC Helpers
@@ -157,24 +160,25 @@ extension VGSCardDataSectionViewModel: VGSTextFieldDelegate {
 extension VGSCardDataSectionViewModel {
   
   /// Check if CardBrand is changed and update cvc validation state if needed.
-  internal func updateSecurityCodeFieldIfNeeded(for editingTextField: VGSTextField) {
-    guard editingTextField.configuration?.type == .cardNumber,
-       let cardState = editingTextField.state as? CardState,
-       let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}) else {
-      return
+  internal func updateSecurityCodeFieldIfNeeded(for textView: VGSTextFieldViewProtocol) {
+    guard textView.fieldType == .cardNumber,
+          let cardState = textView.textField.state as? CardState,
+          let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}),
+          let cvcFieldView = fieldViews.first(where: {$0.textField == cvcField}) else {
+        return
     }
     // Update Field Placeholder
     updateCVCFieldPlaceholder(cvcField, cardBrand: cardState.cardBrand)
     // Update UI for new CVC Field State
-    formValidationHelper.updateFormSectionViewOnEndEditingTextField( textField: cvcField)
+    formValidationHelper.updateFieldViewOnEndEditing(cvcFieldView)
   }
 
   private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {
      switch cardBrand {
      case .amex:
-       field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
+       field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_amex")
      default:
-      field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
+      field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
      }
    }
 }

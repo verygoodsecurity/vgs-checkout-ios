@@ -47,7 +47,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Initialization
   
-  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.vgsCollect = vgsCollect
     self.validationBehavior = validationBehavior
     self.billingAddressFormView = VGSBillingAddressDetailsSectionView(uiTheme: uiTheme)
@@ -55,14 +55,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     self.autoFocusManager = autoFocusManager
   }
 
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupCardForm(vaultConfiguration: configuration)
     buildForm()
 	}
   
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onFocus, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupCardForm(multiplexingConfiguration: configuration)
@@ -84,15 +84,15 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 			}
 		}()
 
-    vgsTextFields.forEach { textField in
+        vgsTextFields.forEach { textField in
 			textField.textColor = inputBlackTextColor
 			textField.font = UIFont.preferredFont(forTextStyle: .body)
 			textField.adjustsFontForContentSizeCategory = true
-		  textField.delegate = self
 		}
 
 		for item in fieldViews {
 			item.placeholderView.delegate = self
+            item.delegate = self
 		}
 
 		// Set picker fields delegate.
@@ -162,23 +162,26 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 // MARK: - VGSTextFieldDelegate
 
-extension VGSAddressDataSectionViewModel: VGSTextFieldDelegate {
-
-	func vgsTextFieldDidChange(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEditingTextField(textField: textField)
-		updateFormState()
-	}
-
-	func vgsTextFieldDidEndEditing(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
-		updateFormState()
-	}
-
-	func vgsTextFieldDidEndEditingOnReturn(_ textField: VGSTextField) {
-		formValidationHelper.updateFormSectionViewOnEndEditingTextField(textField: textField)
-//		autoFocusManager.focusOnEndEditingOnReturn(for: textField)
-		updateFormState()
-	}
+extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
+    func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnBeginEditingTextField(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewDidEndEditingOnReturn(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEndEditing(fieldView)
+        updateFormState()
+    }
+    
+    func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
+        updateFormState()
+    }
 
 	func pickerAddressDidUpdate(in field: VGSTextField, fieldType: VGSAddCardFormFieldType) {
 		guard let pickerField = field as? VGSPickerTextField else {
