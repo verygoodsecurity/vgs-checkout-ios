@@ -13,7 +13,7 @@ import UIKit
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
   /// The textfield’s background color. Default is `.systemGray`.
-  public var textFieldBackgroundColor: UIColor = .systemGray
+  public var textFieldBackgroundColor: UIColor = .vgsSystemBackground
 
 	/// The textfield’s border background color. Default is `.systemGray`.
   public var textFieldBorderColor: UIColor = .systemGray
@@ -28,25 +28,25 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
     public var textFieldFocusColor: UIColor = .systemBlue
 
 	/// The font of the textfield. Default is `.body`.
-  public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+  public var textFieldTextFont: UIFont = UIFont.preferredFont(forTextStyle: .callout)
 
 	/// The text color of the textfield hint (above the text field). Default is `.vgsInputBlackTextColor` (black).
 	public var textFieldHintTextColor: UIColor = .vgsInputBlackTextColor
 
 	/// The font of the textfield hint (above the text field). Default is `.body`.
-	public var textFieldHintTextFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
+	public var textFieldHintTextFont: UIFont = UIFont.preferredFont(forTextStyle: .caption1)
 
 	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
 
 	/// The font of the section title. Default is `.headline`.
-	public var checkoutFormSectionTitleFont: UIFont = .preferredFont(forTextStyle: .headline)
+	public var checkoutFormSectionTitleFont: UIFont = .preferredFont(forTextStyle: .body)
 
 	/// The font of the error label. Default is `.footnote`.
-  public var checkoutErrorLabelFont: UIFont = .preferredFont(forTextStyle: .footnote)
+  public var textFieldErrorLabelFont: UIFont = .preferredFont(forTextStyle: .caption2)
 
 	/// The text color of the error label. Default is `.systemRed`.
-  public var checkoutErrorLabelTextColor: UIColor = .systemRed
+  public var textFieldErrorLabelTextColor: UIColor = .systemRed
   
   /// Submit button attributes
 
