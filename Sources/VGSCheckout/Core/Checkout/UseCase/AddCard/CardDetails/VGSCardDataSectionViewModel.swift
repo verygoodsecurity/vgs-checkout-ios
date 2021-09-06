@@ -178,7 +178,7 @@ extension VGSCardDataSectionViewModel {
      case .amex:
        field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_amex")
      default:
-      field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_security_code")
+      field.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
      }
    }
 }
