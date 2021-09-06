@@ -64,7 +64,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
         componentView.fieldType = .cvc
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
         componentView.subtitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_subtitle")
-        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code_hint")
+        componentView.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
 		return componentView
 	}()
     

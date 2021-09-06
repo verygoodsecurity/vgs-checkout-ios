@@ -67,7 +67,7 @@ internal class VGSCardDataFormConfigurationManager {
 		cvcCardNum.isSecureTextEntry = true
         cvcCardNum.cvcIconLocation = .left
         cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
-		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
+		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
 
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
 		if cardHolderOptions.fieldVisibility == .visible {
@@ -183,7 +183,7 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
-		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_expiration_date_hint")
+		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
 
 		guard let cardHolderName = fieldViews.first(where: {$0.fieldType == .cardholderName}) else {
 			assertionFailure("Invalid multiplexing setup!")
