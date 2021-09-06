@@ -61,7 +61,7 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-
+        stackView.spacing = 8
         return stackView
     }()
 
@@ -82,7 +82,6 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 	private func buildUI() {
         addSubview(stackView)
         stackView.checkout_constraintViewToSuperviewEdges()
-
         stackView.addArrangedSubview(placeholderView)
         buildPlaceholderUI()
 

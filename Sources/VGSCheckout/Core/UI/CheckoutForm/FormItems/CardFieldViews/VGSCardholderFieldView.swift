@@ -27,6 +27,8 @@ class VGSTextFieldViewUIConfigurationHandler {
         view?.placeholderView.hintLabel.textColor = theme.textFieldHintTextColor
         view?.placeholderView.hintLabel.font = theme.textFieldHintTextFont
         /// errorlabel
+        view?.errorLabel.textColor = theme.textFieldErrorLabelTextColor
+        view?.errorLabel.font = theme.textFieldErrorLabelFont
     }
     
     func initial() {

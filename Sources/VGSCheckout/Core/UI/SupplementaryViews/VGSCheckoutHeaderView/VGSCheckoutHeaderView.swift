@@ -26,7 +26,6 @@ internal class VGSCheckoutHeaderView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .horizontal
 		stackView.alignment = .fill
-
 		return stackView
 	}()
 

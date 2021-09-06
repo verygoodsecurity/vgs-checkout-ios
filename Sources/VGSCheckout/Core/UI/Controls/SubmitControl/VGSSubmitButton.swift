@@ -91,13 +91,11 @@ internal class VGSSubmitButton: UIControl {
 	/// Stack view.
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
-
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .horizontal
 		stackView.alignment = .center
 		stackView.distribution = .fill
 		stackView.spacing = 8
-
 		return stackView
 	}()
 

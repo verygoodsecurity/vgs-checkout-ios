@@ -47,7 +47,7 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-
+        stackView.spacing = 8
         return stackView
     }()
 

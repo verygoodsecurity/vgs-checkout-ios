@@ -35,22 +35,8 @@ internal class VGSAddCardFormViewBuilder {
 	static func buildPaymentButtonContainerView() -> VGSContainerItemView {
 		let view = VGSContainerItemView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
-
 		view.paddings = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
 		return view
-	}
-
-	/// Build error label.
-	/// - Returns: `UILabel` for error message.
-  static func buildErrorLabel(with uiTheme: VGSCheckoutErrorLabelThemeProtocol) -> UILabel {
-		let label = UILabel(frame: .zero)
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.adjustsFontForContentSizeCategory = true
-        label.font = uiTheme.checkoutErrorLabelFont
-		label.textColor = uiTheme.checkoutErrorLabelTextColor
-		label.numberOfLines = 0
-
-		return label
 	}
     
     /// Build error label.
