@@ -9,7 +9,7 @@ import UIKit
 #endif
 
 /// Defines basic UI Theme.
-public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutErrorLabelThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
+public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
   
 }
 
@@ -27,14 +27,28 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
                                                     textFieldHintTextColor: theme.textFieldHintTextColor,
                                                     textFieldTextColor: theme.textFieldTextColor,
                                                     textFieldTextFont: theme.textFieldTextFont,
-                                                    textFieldHintTextFont: theme.textFieldHintTextFont)
+                                                    textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+        case .focused:
+            return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                                    textFieldBorderColor: theme.textFieldBorderColor,
+                                                    textFieldHintTextColor: theme.textFieldFocusColor,
+                                                    textFieldTextColor: theme.textFieldTextColor,
+                                                    textFieldTextFont: theme.textFieldTextFont,
+                                                    textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+            
         default:
             return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
                                                    textFieldBorderColor: theme.textFieldBorderColor,
                                                    textFieldHintTextColor: theme.textFieldErrorColor,
                                                    textFieldTextColor: theme.textFieldTextColor,
                                                    textFieldTextFont: theme.textFieldTextFont,
-                                                   textFieldHintTextFont: theme.textFieldHintTextFont)
+                                                   textFieldHintTextFont: theme.textFieldHintTextFont,
+                                                   textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                   textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
         }
     }
 }
@@ -52,6 +66,9 @@ public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
 
     /// The text color of the textfield.
   var textFieldTextColor: UIColor { get set }
+    
+    /// The text color of the error label.
+  var textFieldErrorLabelTextColor: UIColor { get set }
 
   /// Fonts.
 
@@ -60,9 +77,13 @@ public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
 
     /// The font of the textfield hint (above the text field).
     var textFieldHintTextFont: UIFont { get set }
+    
+    /// The font of the error label.
+    var textFieldErrorLabelFont: UIFont { get set }
 }
 
 struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesProtocol {
+
     var textFieldBackgroundColor: UIColor
     
     var textFieldBorderColor: UIColor
@@ -74,6 +95,10 @@ struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesPro
     var textFieldTextFont: UIFont
     
     var textFieldHintTextFont: UIFont
+    
+    var textFieldErrorLabelTextColor: UIColor
+    
+    var textFieldErrorLabelFont: UIFont
 }
 
 /// Defines UI Theme for text field.
@@ -106,6 +131,9 @@ public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdap
 
 	/// The font of the textfield hint (above the text field).
 	var textFieldHintTextFont: UIFont { get set }
+    
+    /// The font of the error label.
+    var textFieldErrorLabelFont: UIFont { get set }
 }
 
 /// Defines Checkout main view UI Theme.
@@ -116,16 +144,6 @@ public protocol VGSCheckoutViewThemeProtocol {
 
 	/// The font of the section title.
 	var checkoutFormSectionTitleFont: UIFont {get set}
-}
-
-/// Defines Checkout error label UI Theme.
-public protocol VGSCheckoutErrorLabelThemeProtocol {
-
-	/// The font of the error label.
-  var checkoutErrorLabelFont: UIFont { get set }
-
-	/// The text color of the error label.
-  var checkoutErrorLabelTextColor: UIColor { get set }
 }
 
 /// Defines Checkout submit button UI Theme.

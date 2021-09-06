@@ -134,7 +134,8 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
     func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
-
+        formValidationHelper.updateFieldViewOnBeginEditingTextField(fieldView)
+        updateFormState()
     }
     
     func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {

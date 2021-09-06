@@ -164,7 +164,8 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
     func vgsFieldViewDidBeginEditing(_ fieldView: VGSTextFieldViewProtocol) {
-
+        formValidationHelper.updateFieldViewOnBeginEditingTextField(fieldView)
+        updateFormState()
     }
     
     func vgsFieldViewDidEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
