@@ -73,10 +73,10 @@ internal extension String {
     static let checkout_emptyErrorText = " "
 }
 
-/// JWT decoding
+/// JWT decoding.
 internal extension String {
     
-    /// Decode JSON Web  token
+    /// Decode JSON Web  token.
     static func decode(jwtToken jwt: String) -> [String: Any] {
         let segments = jwt.components(separatedBy: ".")
 
