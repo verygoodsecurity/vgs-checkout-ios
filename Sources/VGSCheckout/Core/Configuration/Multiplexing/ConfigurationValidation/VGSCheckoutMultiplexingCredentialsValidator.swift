@@ -5,16 +5,16 @@
 
 import Foundation
 
-/// Check and Validates Multiplexing Token Scope
+/// Check and Validates Multiplexing Token Scope.
 internal class VGSCheckoutMultiplexingCredentialsValidator {
     
-    /// Scope not allowed
+    /// Scope not allowed.
     static let restrictedRolesScope: Set<String> = ["transfers:write"]
-    /// Multiplexing App id  prefix
+    /// Multiplexing App id  prefix.
     static let multiplexingAppIdPrefix = "multiplexing-app-"
     
-    /// Returns JWT scope validation result
-    static func jwtScopeValid(_ jwtToken: String, vaultId: String) -> Bool {
+    /// Returns JWT scope validation result.
+    static func isJWTScopeValid(_ jwtToken: String, vaultId: String) -> Bool {
         guard !jwtToken.isEmpty else {
             return false
         }
