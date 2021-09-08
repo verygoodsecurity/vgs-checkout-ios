@@ -11,5 +11,5 @@ import UIKit
 #endif
 
 internal extension CGSize {
-    static let checkout_fieldIconSize = CGSize(width: 32, height: 20)
+    static let checkoutFieldIconSize = CGSize(width: 32, height: 20)
 }

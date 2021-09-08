@@ -31,13 +31,12 @@ internal class VGSSubmitButton: UIControl {
 	enum LeftIconAccessory {
 		case none
 		case loader
-		case lockImage
 	}
   
   weak var delegate: VGSSubmitButtonDelegateProtocol?
   
 	/// Current icon accessory style.
-	internal var iconAccessory: LeftIconAccessory = .lockImage {
+	internal var iconAccessory: LeftIconAccessory = .none {
 		didSet {
 			switch iconAccessory {
 			case .none:
@@ -46,39 +45,15 @@ internal class VGSSubmitButton: UIControl {
 				accessoryContainerView.isHidden = false
 				progressView.isHidden = false
 				progressView.beginProgress()
-				lockImageView.isHidden = true
-			case .lockImage:
-				accessoryContainerView.isHidden = false
-				progressView.isHidden = true
-				activityIndicatorView.stopAnimating()
-				lockImageView.isHidden = false
 			}
 		}
 	}
-
-	/// Lock icon image view.
-	internal lazy var lockImageView: UIImageView = {
-		let imageView = UIImageView(frame: .zero)
-		imageView.contentMode = .scaleAspectFit
-		imageView.translatesAutoresizingMaskIntoConstraints = false
-		if #available(iOS 11.0, *) {
-			imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-		} else {
-			// Fallback on earlier versions
-		}
-		imageView.image = UIImage(named: "submit_button_lock", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
-
-		return imageView
-	}()
 
 	internal lazy var accessoryContainerView: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 
-		//view.backgroundColor = .orange
 		view.widthAnchor.constraint(equalToConstant: 20).isActive = true
-		view.addSubview(lockImageView)
-		lockImageView.checkout_constraintViewToSuperviewEdges()
 		view.addSubview(progressView)
 		progressView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 		progressView.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -100,17 +75,16 @@ internal class VGSSubmitButton: UIControl {
 	}()
 
 	/// Control title.
-	lazy var titleLabel: UILabel = {
+	internal lazy var titleLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.text = "PAY"
+		label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_save_card_button_title")
 		return label
 	}()
 
 	/// Activity indicator.
 	private lazy var activityIndicatorView: UIActivityIndicatorView = {
 		let activityIndicatorView = UIActivityIndicatorView(style: .white)
-		//			activityIndicatorView.color = titleLabel.textColor
 		activityIndicatorView.backgroundColor = .clear
 		activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
 		activityIndicatorView.hidesWhenStopped = true
@@ -189,31 +163,29 @@ internal class VGSSubmitButton: UIControl {
 		case .disabled:
 			isUserInteractionEnabled = false
 			backgroundColor =
-        uiTheme.checkoutSubmitButtonBackgroundColor
+				uiTheme.checkoutSubmitButtonBackgroundColor.withAlphaComponent(0.6)
       titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
       titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
-			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_title")
-      lockImageView.alpha = 0.6
+			titleLabel.text = title
 			titleLabel.textAlignment = .center
 			activityIndicatorView.stopAnimating()
-			iconAccessory = .lockImage
+			iconAccessory = .none
 		case .enabled:
 			isUserInteractionEnabled = true
 			backgroundColor =
         uiTheme.checkoutSubmitButtonBackgroundColor
-			titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-			titleLabel.textColor = UIColor.white
-			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_title")
+			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+			titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
+			titleLabel.text = title
 			titleLabel.textAlignment = .center
-			lockImageView.alpha = 1
 			activityIndicatorView.stopAnimating()
-			iconAccessory = .lockImage
+			iconAccessory = .none
 		case .processing:
 			isUserInteractionEnabled = false
 			backgroundColor =
-        uiTheme.checkoutSubmitButtonBackgroundColor
+				uiTheme.checkoutSubmitButtonBackgroundColor
 			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
-      titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
+			titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_button_processing_title")
 			titleLabel.textAlignment = .center
 			activityIndicatorView.startAnimating()

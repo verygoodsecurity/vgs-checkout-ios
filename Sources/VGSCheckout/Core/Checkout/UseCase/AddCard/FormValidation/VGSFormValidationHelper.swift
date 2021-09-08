@@ -40,8 +40,8 @@ internal class VGSFormValidationHelper {
       case .onEdit:
         return
       case .onSubmit:
-          fieldView.errorLabel.text = String.checkout_emptyErrorText
-          fieldView.updateUI(for: .focused)
+				fieldView.validationErrorView.viewUIState = .valid
+				fieldView.updateUI(for: .focused)
         return
       }
     }
@@ -104,7 +104,7 @@ internal class VGSFormValidationHelper {
 //      updateFieldViewUIOnEndEditing(with: textField)
         return
     case .onSubmit:
-        fieldView.errorLabel.text = String.checkout_emptyErrorText
+				fieldView.validationErrorView.viewUIState = .valid
         fieldView.updateUI(for: .valid)
       return
     }
@@ -116,7 +116,9 @@ internal class VGSFormValidationHelper {
         for textView in invalidTextViews {
             let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: textView.fieldType)
             let errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
-            textView.errorLabel.text = errorMessage
+						if let message = errorMessage {
+							textView.validationErrorView.viewUIState = .error(message)
+						}
             textView.updateUI(for: .invalid)
         }
         

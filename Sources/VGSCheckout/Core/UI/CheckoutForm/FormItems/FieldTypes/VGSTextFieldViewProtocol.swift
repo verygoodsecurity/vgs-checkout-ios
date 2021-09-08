@@ -28,12 +28,13 @@ internal protocol VGSTextFieldViewDelegate {
 internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigurationProtocol {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
-    var errorLabel: UILabel {get}
+	//var errorLabel: UILabel {get}
 	var fieldType: VGSAddCardFormFieldType {get}
     
-    var delegate: VGSTextFieldViewDelegate? {get set}
-}
+	var delegate: VGSTextFieldViewDelegate? {get set}
 
+	var validationErrorView: VGSValidationErrorView {get}
+}
 
 internal protocol VGSTextFieldViewUIConfigurationProtocol {
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler? {get set}    
@@ -56,7 +57,7 @@ extension VGSTextFieldViewUIConfigurationProtocol {
 }
 
 public enum VGSCheckoutFieldUIState {
-    case initial
+	case initial
 	case focused
 	case valid
 	case invalid

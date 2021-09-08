@@ -36,7 +36,7 @@ internal extension UIView {
 			}
 		}
 	}
-    
+
     func checkout_constraintViewWithPaddingsToSuperview(_ leading: CGFloat, trailing: CGFloat, bottom: CGFloat, top: CGFloat) {
         guard let view = superview else {
             assertionFailure("No superview!")
@@ -54,6 +54,14 @@ internal extension UIView {
     }
     
     func checkout_defaultSectionViewConstraints() {
-        checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: -16, top: 16)
+        checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: 0, top: 16)
     }
+}
+
+internal extension UIResponder {
+
+	  /// First parent view controller of responder.
+		var vgsParentViewController: UIViewController? {
+				return next as? UIViewController ?? next?.vgsParentViewController
+		}
 }

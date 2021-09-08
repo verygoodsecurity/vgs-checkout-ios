@@ -21,8 +21,8 @@ internal class VGSCheckoutMultiplexingCredentialsValidator {
         let decodedToken = String.decode(jwtToken: jwtToken)
         let multiplexingAppId = multiplexingAppIdPrefix + vaultId
         
-        guard let resource_access = decodedToken["resource_access"] as? JsonData,
-              let multiplexingApp = resource_access[multiplexingAppId] as? JsonData,
+        guard let resourceAccess = decodedToken["resource_access"] as? JsonData,
+              let multiplexingApp = resourceAccess[multiplexingAppId] as? JsonData,
               let rolesScope = multiplexingApp["roles"] as? [String] else {
             return false
         }

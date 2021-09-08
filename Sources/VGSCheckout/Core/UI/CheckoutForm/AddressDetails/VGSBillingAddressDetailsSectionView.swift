@@ -45,8 +45,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FieldView: VGSErrorFieldView = {
-		let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSBaseFieldView = {
+		let componentView = VGSBaseFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine1
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -56,8 +56,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Address line 2 form item view.
-	internal lazy var addressLine2FieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var addressLine2FieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine2
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -67,8 +67,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// City form item view.
-	internal lazy var cityFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var cityFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .city
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -78,8 +78,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// region form item view.
-	internal lazy var regionFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var regionFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .state
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -89,8 +89,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
     }()
 
 	/// Postal Code/Zip form item view.
-	internal lazy var postalCodeFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var postalCodeFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .postalCode
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -125,29 +125,22 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Vertical stack view for all fields.
-	internal lazy var verticalStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var verticalStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = false
-//		stackView.borderViewCornerRadius = 4
-
-//		stackView.spacing = 1
-//		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
 
 	/// Horizontal stack view for state and cvc.
-	internal lazy var stateAndPostalCodeStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var stateAndPostalCodeStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-        stackView.hasBorderView = false
-		stackView.spacing = 1
 
 		return stackView
 	}()
@@ -179,27 +172,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-//		switch block {
-//		case .addressInfo:
-//			if isValid {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-//			} else {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-//			}
-//		default:
-//		 break
-//		}
 	}
 
 	// TODO: - refactor duplicated code for processing state styles.
 	/// Disable input views for processing state.
 	internal func updateUIForProcessingState() {
-		 /// Update grid view.
-		if #available(iOS 13, *) {
-			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-		} else {
-			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-		}
 
 		// Update form fields.
 		fieldViews.forEach { fieldView in
@@ -219,15 +196,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Setup UI and layout.
 	private func setupUI() {
-        /// TODO: Change to system colors
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 8
+
+		backgroundColor = .vgsSectionBackgroundColor
+		layer.cornerRadius = 8
+
+		addSubview(containerView)
+		containerView.checkout_defaultSectionViewConstraints()
         
-        addSubview(containerView)
-        containerView.checkout_defaultSectionViewConstraints()
-        
-        containerView.addSubview(rootStackView)
-        rootStackView.checkout_constraintViewToSuperviewEdges()
+		containerView.addSubview(rootStackView)
+		rootStackView.checkout_constraintViewToSuperviewEdges()
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 
@@ -253,8 +230,10 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
-            fieldView.updateUI(for: .initial)
-			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+			print("fieldView: \(fieldView)")
+			fieldView.updateUI(for: .initial)
+			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+			fieldView.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}

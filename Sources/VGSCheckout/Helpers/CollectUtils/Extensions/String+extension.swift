@@ -70,7 +70,7 @@ internal extension String {
 		return path
 	}
     
-    static let checkout_emptyErrorText = " "
+    static let checkoutEmptyErrorText = " "
 }
 
 /// JWT decoding.

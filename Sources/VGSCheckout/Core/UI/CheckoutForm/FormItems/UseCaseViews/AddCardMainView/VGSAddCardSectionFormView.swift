@@ -20,14 +20,6 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
-	/// Header bar view.
-	internal lazy var headerBarView: VGSHeaderBarView = {
-		let view = VGSHeaderBarView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		return view
-	}()
-
 	/// Pay with card header view.
 	internal lazy var payWithCardHeaderView: VGSPayWithCardHeaderView = {
 		let view = VGSPayWithCardHeaderView()
@@ -39,8 +31,8 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Background stack view.
 	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
 
-	/// Pay button.
-	internal let payButton: VGSSubmitButton
+	/// Save card button.
+	internal let saveCardButton: VGSSubmitButton
 
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
@@ -57,14 +49,14 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Initializer.
   internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
         self.uiTheme = uiTheme
-        self.payButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
+        self.saveCardButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsSectionView = cardDetailsView
 		self.billingAddressSectionView = billingAddressView
 		super.init()
 
-        self.payButton.delegate = self
+		self.saveCardButton.delegate = self
 		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
@@ -85,14 +77,8 @@ internal class VGSAddCardFormView: VGSFormView {
 	private func setupUI() {
 		switch viewLayoutStyle {
 		case .fullScreen:
-			addFormItemView(headerBarView)
-
-//			let payWithCardHeaderView = VGSPayWithCardHeaderView(frame: .zero)
-//			payWithCardHeaderView.translatesAutoresizingMaskIntoConstraints = false
-//			addFormItemView(payWithCardHeaderView)
-
 			addFormItemView(backgroundStackView)
-			payButtonContainerView.addContentView(payButton)
+			payButtonContainerView.addContentView(saveCardButton)
 
 			backgroundStackView.addArrangedSubview(cardDetailsSectionView)
 			backgroundStackView.addArrangedSubview(billingAddressSectionView)

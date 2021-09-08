@@ -10,7 +10,6 @@ import UIKit
 
 internal class VGSAddCardFormViewBuilder {
 
-	// TODO: - add styling 
 	static func buildBackgroundStackView() -> UIStackView {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +17,8 @@ internal class VGSAddCardFormViewBuilder {
 		stackView.distribution = .fill
 		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.spacing = 20
+		stackView.spacing = 20
+
 		return stackView
 	}
 
@@ -27,8 +27,11 @@ internal class VGSAddCardFormViewBuilder {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
     button.titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+
+		button.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_save_card_button_title" )
     button.delegate = delegate
     button.updateUI(with: uiTheme)
+
 		return button
 	}
 
@@ -50,4 +53,13 @@ internal class VGSAddCardFormViewBuilder {
         label.numberOfLines = 1
         return label
     }
+
+	/// Builds error view.
+	/// - Returns: `VGSValidationErrorView` object, view to display error message.
+	static func buildErrorView() -> VGSValidationErrorView {
+		let view = VGSValidationErrorView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}
 }

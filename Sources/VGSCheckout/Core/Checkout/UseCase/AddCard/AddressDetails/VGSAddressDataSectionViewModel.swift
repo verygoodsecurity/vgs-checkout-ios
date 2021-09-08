@@ -92,7 +92,11 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 		for item in fieldViews {
 			item.placeholderView.delegate = self
-            item.delegate = self
+			item.delegate = self
+		}
+
+		if let lastFieldView = fieldViews.last {
+			lastFieldView.validationErrorView.isLastRow = true
 		}
 
 		// Set picker fields delegate.

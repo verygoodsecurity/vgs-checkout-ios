@@ -26,14 +26,12 @@ internal class VGSCardHolderDetailsView: UIView {
 	fileprivate let paymentInstrument: VGSPaymentInstrument
 
 	/// Horizontal stack view for card holder name.
-	internal lazy var cardHolderNameStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var cardHolderNameStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-		stackView.hasBorderView = false
-		stackView.borderViewCornerRadius = 4
-		stackView.spacing = 1
+
 		return stackView
 	}()
 
