@@ -20,14 +20,6 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
 
-//	/// Header bar view.
-//	internal lazy var headerBarView: VGSHeaderBarView = {
-//		let view = VGSHeaderBarView()
-//		view.translatesAutoresizingMaskIntoConstraints = false
-//
-//		return view
-//	}()
-
 	/// Pay with card header view.
 	internal lazy var payWithCardHeaderView: VGSPayWithCardHeaderView = {
 		let view = VGSPayWithCardHeaderView()
