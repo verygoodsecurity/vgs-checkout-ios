@@ -58,7 +58,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
     private lazy var cvcTextField: VGSCVCTextField = {
         let field = VGSCVCTextField()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.cvcIconSize = CGSize.checkout_fieldIconSize
+        field.cvcIconSize = CGSize.checkoutFieldIconSize
         field.cornerRadius = 0
         field.borderWidth = 0
         return field
@@ -86,7 +86,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
         buildPlaceholderUI()
 
         stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = String.checkout_emptyErrorText
+        errorLabel.text = String.checkoutEmptyErrorText
         errorLabel.isHiddenInCheckoutStackView = false
     }
     

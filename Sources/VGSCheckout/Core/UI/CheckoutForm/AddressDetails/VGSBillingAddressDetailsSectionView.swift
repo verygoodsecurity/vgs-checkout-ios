@@ -125,28 +125,23 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Vertical stack view for all fields.
-	internal lazy var verticalStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var verticalStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = false
-//		stackView.borderViewCornerRadius = 4
-
-//		stackView.spacing = 1
-//		stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
 
 	/// Horizontal stack view for state and cvc.
-	internal lazy var stateAndPostalCodeStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var stateAndPostalCodeStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-        stackView.hasBorderView = false
+		//stackView.hasBorderView = false
 		stackView.spacing = 1
 
 		return stackView
@@ -179,27 +174,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-//		switch block {
-//		case .addressInfo:
-//			if isValid {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-//			} else {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-//			}
-//		default:
-//		 break
-//		}
 	}
 
 	// TODO: - refactor duplicated code for processing state styles.
 	/// Disable input views for processing state.
 	internal func updateUIForProcessingState() {
-		 /// Update grid view.
-		if #available(iOS 13, *) {
-			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-		} else {
-			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-		}
 
 		// Update form fields.
 		fieldViews.forEach { fieldView in
@@ -219,15 +198,15 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	/// Setup UI and layout.
 	private func setupUI() {
-        /// TODO: Change to system colors
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 8
+
+		backgroundColor = .vgsSectionBackgroundColor
+		layer.cornerRadius = 8
+
+		addSubview(containerView)
+		containerView.checkout_defaultSectionViewConstraints()
         
-        addSubview(containerView)
-        containerView.checkout_defaultSectionViewConstraints()
-        
-        containerView.addSubview(rootStackView)
-        rootStackView.checkout_constraintViewToSuperviewEdges()
+		containerView.addSubview(rootStackView)
+		rootStackView.checkout_constraintViewToSuperviewEdges()
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 

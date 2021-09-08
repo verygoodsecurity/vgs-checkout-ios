@@ -21,13 +21,23 @@ internal class VGSPlaceholderFieldView: UIView {
 
 	internal let tapGesture = UITapGestureRecognizer()
 
+	/// Horizonal stack view.
+	internal lazy var horizonalStackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .horizontal
+		stackView.alignment = .fill
+		stackView.spacing = 8
+		return stackView
+	}()
+
 	/// Stack view.
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.alignment = .fill
-        stackView.spacing = 8
+		stackView.spacing = 8
 		return stackView
 	}()
 
@@ -43,6 +53,23 @@ internal class VGSPlaceholderFieldView: UIView {
 	internal var hintLabel: UILabel {
 		return hintComponentView.label
 	}
+
+	/// Right icon container view (holds icon).
+	internal lazy var rightIconContainerView: UIView = {
+		let view = UIView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
+	/// Right icon image view.
+	internal lazy var rightIconImageView: UIImageView = {
+		let imageView = UIImageView(frame: .zero)
+		imageView.translatesAutoresizingMaskIntoConstraints = false
+		imageView.contentMode = .scaleAspectFit
+
+		return imageView
+	}()
 
 	// MARK: - Initialization
 

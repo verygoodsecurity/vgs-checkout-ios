@@ -40,7 +40,7 @@ internal class VGSFormValidationHelper {
       case .onEdit:
         return
       case .onSubmit:
-          fieldView.errorLabel.text = String.checkout_emptyErrorText
+          fieldView.errorLabel.text = String.checkoutEmptyErrorText
           fieldView.updateUI(for: .focused)
         return
       }
@@ -104,7 +104,7 @@ internal class VGSFormValidationHelper {
 //      updateFieldViewUIOnEndEditing(with: textField)
         return
     case .onSubmit:
-        fieldView.errorLabel.text = String.checkout_emptyErrorText
+        fieldView.errorLabel.text = String.checkoutEmptyErrorText
         fieldView.updateUI(for: .valid)
       return
     }

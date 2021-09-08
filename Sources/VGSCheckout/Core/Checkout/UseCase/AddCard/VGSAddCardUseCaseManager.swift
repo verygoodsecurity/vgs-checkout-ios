@@ -31,19 +31,20 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		didSet {
 			switch state {
 			case .invalid:
-				addCardSectionFormView.payButton.status = .enabled
-                return
+				updateCloseBarButtonItem(true)
+				addCardSectionFormView.saveCardButton.status = .enabled
+
 			case .valid:
 				addCardSectionFormView.isUserInteractionEnabled = true
-				addCardSectionFormView.headerBarView.closeButton?.isEnabled = true
-				addCardSectionFormView.payButton.status = .enabled
+				updateCloseBarButtonItem(true)
+				addCardSectionFormView.saveCardButton.status = .enabled
 
 				addCardSectionFormView.cardDetailsSectionView.updateSectionBlock(.cardDetails, isValid: true)
 				addCardSectionFormView.billingAddressSectionView.updateSectionBlock(.addressInfo, isValid: true)
 			case .processing:
 				addCardSectionFormView.isUserInteractionEnabled = false
-				addCardSectionFormView.headerBarView.closeButton?.isEnabled = false
-				addCardSectionFormView.payButton.status = .processing
+				updateCloseBarButtonItem(false)
+				addCardSectionFormView.saveCardButton.status = .processing
 				addCardSectionFormView.cardDetailsSectionView.updateUIForProcessingState()
 
 				apiWorker.sendData {[weak self] requestResult in
@@ -75,6 +76,9 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// UI Theme.
 	internal let uiTheme: VGSCheckoutThemeProtocol
+
+	/// Close bar button item.
+	internal var closeBarButtomItem: UIBarButtonItem?
   
 	// MARK: - Initialization
 
@@ -123,23 +127,41 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
 
 		super.init()
-		self.addCardSectionFormView.payButton.status = .enabled
+
+		// Initally pay button is always enabled.
+		self.addCardSectionFormView.saveCardButton.status = .enabled
 	}
 
 	internal func buildCheckoutViewController() -> UIViewController {
-
-		addCardSectionFormView.headerBarView.delegate = self
 		let viewController = VGSFormViewController(formView: addCardSectionFormView)
-		addCardSectionFormView.payButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		addCardSectionFormView.saveCardButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
 		cardDataSectionViewModel.delegate = self
 		addressDataSectionViewModel.delegate = self
 
 		viewController.view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 
-		return viewController
+		let navigationController = UINavigationController(rootViewController: viewController)
+		VGSAddCardNavigationBarBuilder.setupNavigationBarTitle(in: viewController)
+
+		let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
+		closeBarButtomItem = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
+
+		viewController.navigationItem.leftBarButtonItem = closeBarButtomItem
+
+		return navigationController
 	}
 
 	// MARK: - Helpers
+
+	/// Handles tap on close button.
+	@objc fileprivate func closeButtonDidTap() {
+		switch paymentInstrument {
+		case .vault:
+			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
+		case .multiplexing:
+			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
+		}
+	}
 
 	@objc fileprivate func payDidTap() {
         switch state {
@@ -156,6 +178,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
         cardDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
         addressDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
     }
+
+	/// Updates `.isEnabled` state for left bar button item if checkout is dislayed in viewController.
+	/// - Parameter isEnabled: `Bool` object, indicates `isEbabled` state for close left bar button item.
+	private func updateCloseBarButtonItem(_ isEnabled: Bool) {
+		if let viewController = self.addCardSectionFormView.vgsParentViewController, let leftItem = viewController.navigationItem.leftBarButtonItem {
+			leftItem.isEnabled = isEnabled
+		}
+	}
 }
 
 // MARK: - VGSHeaderBarViewDelegate

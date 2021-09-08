@@ -85,7 +85,7 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
         buildPlaceholderUI()
 
         stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = String.checkout_emptyErrorText
+        errorLabel.text = String.checkoutEmptyErrorText
         errorLabel.isHiddenInCheckoutStackView = false
     }
     

@@ -36,6 +36,9 @@
 /* Pay button text. */
 "vgs_checkout_pay_button_title" = "Pay";
 
+/* Save card button text. */
+"vgs_checkout_save_card_button_title" = "Save Card";
+
 /* Payment Processing label title. */
 "vgs_checkout_pay_button_processing_title" = "Payment Processing...";
 
@@ -61,7 +64,10 @@
 "vgs_checkout_card_verification_code_empty_error" = "Security code is empty";
 
 /* Cancel button title on checkout screen */
-"vgs_checkout_cancel_button_title" = "Cancel";
+"vgs_checkout_cancel_button_title" = "Close";
+
+/* Navigation bar title for `Add card` flow. */
+"vgs_checkout_add_card_navigation_bar_title" = "Add Card";
 
 /* Done button title on picker. */
 "vgs_checkout_picker_toolbar_done_button_title" = "Done";

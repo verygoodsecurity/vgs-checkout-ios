@@ -39,7 +39,8 @@ public extension UIColor {
 			if #available(iOS 13, *) {
                 return .systemGroupedBackground
 			}
-        return .groupTableViewBackground
+
+		return .groupTableViewBackground
 	}
 
 	/// Input text color (black).
@@ -50,6 +51,33 @@ public extension UIColor {
 			}
 		} else {
 			return .black
+		}
+	}
+
+	/// VGS section title color (with fallback to earlier versions).
+	static var vgsSectionTitleColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return label
+		} else {
+			return UIColor(hexString: "#1C1C1E")
+		}
+	}
+
+	/// VGS section background color (with fallback to earlier versions).
+	static var vgsSectionBackgroundColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor.secondarySystemGroupedBackground
+		} else {
+			return .white
+		}
+	}
+
+	/// VGS text field hint color (with fallback to earlier versions).
+	static var vgsTextFieldHintTextColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor.systemGray2
+		} else {
+			return UIColor(hexString: "#AEAEB2")
 		}
 	}
 }

@@ -39,6 +39,14 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
     let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
     let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+
+	lazy var containerView: VGSContainerItemView = {
+		let view = VGSContainerItemView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.paddings = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+
+		return view
+	}()
     
     /// Stack view.
     internal lazy var stackView: UIStackView = {
@@ -57,7 +65,7 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
     private lazy var cardTextField: VGSCardTextField = {
         let field = VGSCardTextField()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.cardIconSize = CGSize.checkout_fieldIconSize
+        field.cardIconSize = CGSize.checkoutFieldIconSize
         field.cornerRadius = 0
         field.borderWidth = 0
         return field
@@ -84,9 +92,10 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.addArrangedSubview(placeholderView)
         buildPlaceholderUI()
 
-        stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = String.checkout_emptyErrorText
-        errorLabel.isHiddenInCheckoutStackView = false
+				containerView.addContentView(errorLabel)
+        stackView.addArrangedSubview(containerView)
+        errorLabel.text = String.checkoutEmptyErrorText
+				containerView.isHiddenInCheckoutStackView = true
     }
     
     private func buildPlaceholderUI() {

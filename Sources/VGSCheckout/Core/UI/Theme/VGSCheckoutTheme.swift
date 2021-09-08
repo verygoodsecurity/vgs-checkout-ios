@@ -82,23 +82,23 @@ public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
     var textFieldErrorLabelFont: UIFont { get set }
 }
 
-struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesProtocol {
+internal struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttributesProtocol {
 
-    var textFieldBackgroundColor: UIColor
+		internal var textFieldBackgroundColor: UIColor
     
-    var textFieldBorderColor: UIColor
+		internal var textFieldBorderColor: UIColor
         
-    var textFieldHintTextColor: UIColor
+		internal var textFieldHintTextColor: UIColor
     
-    var textFieldTextColor: UIColor
+		internal var textFieldTextColor: UIColor
     
-    var textFieldTextFont: UIFont
+		internal var textFieldTextFont: UIFont
     
-    var textFieldHintTextFont: UIFont
+		internal var textFieldHintTextFont: UIFont
     
-    var textFieldErrorLabelTextColor: UIColor
+		internal var textFieldErrorLabelTextColor: UIColor
     
-    var textFieldErrorLabelFont: UIFont
+		internal var textFieldErrorLabelFont: UIFont
 }
 
 /// Defines UI Theme for text field.
@@ -144,13 +144,16 @@ public protocol VGSCheckoutViewThemeProtocol {
 
 	/// The font of the section title.
 	var checkoutFormSectionTitleFont: UIFont {get set}
+
+	/// The color of the section title.
+	var checkoutFormSectionTitleColor: UIColor {get set}
 }
 
 /// Defines Checkout submit button UI Theme.
 public protocol VGSCheckoutSubmitButtonThemeProtocol {
 
 	/// The background color of the submit button.
-  var checkoutSubmitButtonBackgroundColor: UIColor { get set }
+	var checkoutSubmitButtonBackgroundColor: UIColor { get set }
 
 	/// The background color of the submit button on success.
   var checkoutSubmitButtonSuccessBackgroundColor: UIColor { get set }

@@ -83,7 +83,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	internal lazy var headerContainerView: VGSContainerItemView = {
 		let view = VGSContainerItemView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.paddings = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+		view.paddings = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
 
 		return view
 	}()
@@ -122,26 +122,25 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
     }()
 
 	/// Vertical stack view for all fields.
-	internal lazy var verticalStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var verticalStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-		stackView.hasBorderView = false
-		stackView.borderViewCornerRadius = 4
+//		stackView.hasBorderView = false
+//		stackView.borderViewCornerRadius = 4
 		stackView.spacing = 1
-//        stackView.separatorColor = uiTheme.textFieldBorderColor
 
 		return stackView
 	}()
 
 	/// Horizontal stack view for exp date and cvc.
-	internal lazy var horizonalStackView: VGSSeparatedStackView = {
-		let stackView = VGSSeparatedStackView(frame: .zero)
+	internal lazy var horizonalStackView: UIStackView = {
+		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-        stackView.hasBorderView = false
+		//stackView.hasBorderView = false
 		stackView.spacing = 20
 
 		return stackView
@@ -231,14 +230,14 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 	/// Setup UI and layout.
 	private func setupUI() {
-        /// TODO: Change to system colors
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 8
+
+		backgroundColor = .vgsSectionBackgroundColor
+		layer.cornerRadius = 8
         
-        addSubview(containerView)
-        containerView.checkout_defaultSectionViewConstraints()
+		addSubview(containerView)
+		containerView.checkout_defaultSectionViewConstraints()
         
-        containerView.addSubview(rootStackView)
+		containerView.addSubview(rootStackView)
 		rootStackView.checkout_constraintViewToSuperviewEdges()
 
 		headerContainerView.addContentView(headerView)
