@@ -39,7 +39,8 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
 
 	let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+	/// Validation error view.
+	let validationErrorView: VGSValidationErrorView = VGSAddCardFormViewBuilder.buildErrorView()
     
 	var textField: VGSTextField {
 		return countryTextField
@@ -85,9 +86,7 @@ internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.addArrangedSubview(placeholderView)
         buildPlaceholderUI()
 
-        stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = " "
-        errorLabel.isHiddenInCheckoutStackView = false
+        stackView.addArrangedSubview(validationErrorView)
 	}
     
     private func buildPlaceholderUI() {

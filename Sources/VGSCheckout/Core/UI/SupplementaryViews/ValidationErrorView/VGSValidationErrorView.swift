@@ -19,8 +19,8 @@ internal class VGSValidationErrorView: UIView {
 		/// Display error.
 		case error(_ text: String)
 
-		/// Hide error keeping the error label to avoid jumping UI.
-		case isValid
+		/// Hide error text keeping the error label space to avoid jumping UI.
+		case valid
 	}
 
 	/// Holds view ui state.
@@ -31,6 +31,9 @@ internal class VGSValidationErrorView: UIView {
 	}
 
 	// MARK: - Vars
+
+	/// A boolean flag indicating that view already has an error. Use this flag to track that we have an error at least once so we need to keep error label space.
+	private var hasError: Bool = false
 
 	/// Stack view.
 	private lazy var stackView: UIStackView = {
@@ -45,13 +48,23 @@ internal class VGSValidationErrorView: UIView {
 	}()
 
 	/// Error label.
-	private lazy var errorLabel: UILabel = {
+	internal lazy var errorLabel: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 
 		label.adjustsFontForContentSizeCategory = true
 
 		return label
+	}()
+
+	/// Empty padding view with fixed height.
+	private lazy var emptyView: UIView = {
+		let view = UIView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		view.heightAnchor.constraint(equalToConstant: 16).isActive = true
+
+		return view
 	}()
 
 	// MARK: - Initialization
@@ -68,11 +81,7 @@ internal class VGSValidationErrorView: UIView {
 		fatalError("Not implemented")
 	}
 
-	/// no:doc
-	override var intrinsicContentSize: CGSize {
-		let height = max(super.intrinsicContentSize.height, 30)
-		return CGSize(width: UIView.noIntrinsicMetric, height: height)
-	}
+	// MARK: - Interface
 
 	// MARK: - Private
 
@@ -81,7 +90,7 @@ internal class VGSValidationErrorView: UIView {
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()
 
-		stackView.addArrangedSubview(errorLabel)
+		stackView.addArrangedSubview(emptyView)
 	}
 
 	/// Updates view UI.
@@ -89,9 +98,29 @@ internal class VGSValidationErrorView: UIView {
 		switch viewUIState {
 		case .initial:
 			break
-			// Hide error label.
-		default:
-			break
+		case .error(let errorText):
+			hasError = true
+			addErrorLabelIfNeeded()
+			errorLabel.text = errorText
+		case .valid:
+			// Dispay error label only if we have an error.
+			if hasError {
+				addErrorLabelIfNeeded()
+				errorLabel.text = String.checkoutEmptyErrorText
+			}
+		}
+	}
+
+	/// Add error label once.
+	private func addErrorLabelIfNeeded() {
+		if stackView.arrangedSubviews.first(where: {$0 === errorLabel}) == nil {
+			// Hide empty view.
+			emptyView.isHiddenInCheckoutStackView = true
+
+			// Add error label.
+			stackView.addArrangedSubview(errorLabel)
+			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 4)
+			stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}
 }

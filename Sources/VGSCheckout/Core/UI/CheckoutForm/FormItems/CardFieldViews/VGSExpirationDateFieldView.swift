@@ -39,7 +39,8 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
     // MARK: - Views
     let placeholderView = VGSPlaceholderFieldView(frame: .zero)
 
-    let errorLabel = VGSAddCardFormViewBuilder.buildErrorLabel()
+		/// Validation error view.
+		let validationErrorView: VGSValidationErrorView = VGSAddCardFormViewBuilder.buildErrorView()
     
     /// Stack view.
     internal lazy var stackView: UIStackView = {
@@ -84,9 +85,7 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.addArrangedSubview(placeholderView)
         buildPlaceholderUI()
 
-        stackView.addArrangedSubview(errorLabel)
-        errorLabel.text = String.checkoutEmptyErrorText
-        errorLabel.isHiddenInCheckoutStackView = false
+        stackView.addArrangedSubview(validationErrorView)
     }
     
     private func buildPlaceholderUI() {
