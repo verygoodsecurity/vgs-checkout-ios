@@ -230,7 +230,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
-            fieldView.updateUI(for: .initial)
+			fieldView.updateUI(for: .initial)
 			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
 			fieldView.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
 			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true

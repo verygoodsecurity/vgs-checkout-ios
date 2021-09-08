@@ -176,24 +176,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
   /// Update Form block items UI with validation state.
 	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-//		switch block {
-//		case .cardHolder:
-//			if isValid {
-//        cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderColor
-//			} else {
-//				cardHolderDetailsView.cardHolderNameStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-//			}
-//		case .cardDetails:
-//			if isValid {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderColor
-//				horizonalStackView.separatorColor = uiTheme.textFieldBorderColor
-//			} else {
-//				verticalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-//				horizonalStackView.separatorColor = uiTheme.textFieldBorderErrorColor
-//			}
-//		case .addressInfo:
-//			break
-//		}
 	}
   
   /// TODO: Add option to set UI for ProcessingState ???
@@ -256,11 +238,11 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-        cardHolderFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-        cardHolderFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardHolderFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+		cardHolderFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 
-        cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-        cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+		cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
 		verticalStackView.addArrangedSubview(cardNumberFieldView)
 
 		switch fieldsDistribution {
@@ -274,7 +256,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 		// Gather all form items.
 		fieldViews = [
-            cardHolderFieldView,
+			cardHolderFieldView,
 			cardNumberFieldView,
 			expDateFieldView,
 			cvcFieldView,
