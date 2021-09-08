@@ -129,7 +129,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		stackView.axis = .vertical
 //		stackView.hasBorderView = false
 //		stackView.borderViewCornerRadius = 4
-		stackView.spacing = 1
 
 		return stackView
 	}()
@@ -289,6 +288,9 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
         
     
 		fieldViews.first?.textField.becomeFirstResponder()
+
+		expDateFieldView.validationErrorView.isLastRow = true
+		cvcFieldView.validationErrorView.isLastRow = true
 	}
 
 	private func setupDateAndCVC(in singleLine: Bool) {

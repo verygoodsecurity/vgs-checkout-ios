@@ -35,6 +35,8 @@ internal class VGSValidationErrorView: UIView {
 	/// A boolean flag indicating that view already has an error. Use this flag to track that we have an error at least once so we need to keep error label space.
 	private var hasError: Bool = false
 
+	internal var isLastRow: Bool = false
+
 	/// Stack view.
 	private lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
@@ -119,7 +121,11 @@ internal class VGSValidationErrorView: UIView {
 
 			// Add error label.
 			stackView.addArrangedSubview(errorLabel)
-			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0)
+			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
+
+			if isLastRow {
+				stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 16, right: 0)
+			}
 			stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}
