@@ -23,6 +23,9 @@ internal class VGSValidationErrorView: UIView {
 		case valid
 	}
 
+	/// Constraint for error label height to display padding when no error.
+	private var errorLabelHeightConstraint: NSLayoutConstraint?
+
 	/// Holds view ui state.
 	internal var viewUIState: ValidationViewUIState = .initial {
 		didSet {
@@ -33,8 +36,9 @@ internal class VGSValidationErrorView: UIView {
 	// MARK: - Vars
 
 	/// A boolean flag indicating that view already has an error. Use this flag to track that we have an error at least once so we need to keep error label space.
-	private var hasError: Bool = false
+	private var isDirty: Bool = false
 
+	/// A boolean flag indicating field is in last row so extra bottom inset is required to adjust paddings for last field view.
 	internal var isLastRow: Bool = false
 
 	/// Stack view.
@@ -57,16 +61,6 @@ internal class VGSValidationErrorView: UIView {
 		label.adjustsFontForContentSizeCategory = true
 
 		return label
-	}()
-
-	/// Empty padding view with fixed height.
-	private lazy var emptyView: UIView = {
-		let view = UIView(frame: .zero)
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		view.heightAnchor.constraint(equalToConstant: 16).isActive = true
-
-		return view
 	}()
 
 	// MARK: - Initialization
@@ -92,7 +86,9 @@ internal class VGSValidationErrorView: UIView {
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()
 
-		stackView.addArrangedSubview(emptyView)
+		stackView.addArrangedSubview(errorLabel)
+		errorLabelHeightConstraint = errorLabel.heightAnchor.constraint(equalToConstant: 16)
+		errorLabelHeightConstraint?.isActive = true
 	}
 
 	/// Updates view UI.
@@ -101,32 +97,30 @@ internal class VGSValidationErrorView: UIView {
 		case .initial:
 			break
 		case .error(let errorText):
-			hasError = true
-			addErrorLabelIfNeeded()
+			isDirty = true
+			updateErrorLabelLayout()
 			errorLabel.text = errorText
 		case .valid:
 			// Dispay error label only if we have an error.
-			if hasError {
-				addErrorLabelIfNeeded()
+			if isDirty {
+				updateErrorLabelLayout()
 				errorLabel.text = String.checkoutEmptyErrorText
 			}
 		}
 	}
 
-	/// Add error label once.
-	private func addErrorLabelIfNeeded() {
-		if stackView.arrangedSubviews.first(where: {$0 === errorLabel}) == nil {
-			// Hide empty view.
-			emptyView.isHiddenInCheckoutStackView = true
+	/// Update error label layout.
+	private func updateErrorLabelLayout() {
+		// Turn off hardcoded label height constraint view.
+		errorLabelHeightConstraint?.isActive = true
 
-			// Add error label.
-			stackView.addArrangedSubview(errorLabel)
-			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
+		// Update stack view insets.
+		stackView.addArrangedSubview(errorLabel)
+		stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
 
-			if isLastRow {
-				stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 16, right: 0)
-			}
-			stackView.isLayoutMarginsRelativeArrangement = true
+		if isLastRow {
+			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 16, right: 0)
 		}
+		stackView.isLayoutMarginsRelativeArrangement = true
 	}
 }

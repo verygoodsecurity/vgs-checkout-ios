@@ -280,12 +280,11 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 			cvcFieldView,
 		]
 
-    /// Set UI Theme
-        fieldViews.forEach { item in
-            item.updateUI(for: .initial)
-					  item.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-        }
-        
+		/// Set UI Theme
+		fieldViews.forEach { item in
+			item.updateUI(for: .initial)
+			item.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+		}
 
 		fieldViews.first?.textField.becomeFirstResponder()
 
