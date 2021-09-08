@@ -28,26 +28,26 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
                                                     textFieldTextColor: theme.textFieldTextColor,
                                                     textFieldTextFont: theme.textFieldTextFont,
                                                     textFieldHintTextFont: theme.textFieldHintTextFont,
-                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
                                                     textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
         case .focused:
             return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
                                                     textFieldBorderColor: theme.textFieldBorderColor,
-                                                    textFieldHintTextColor: theme.textFieldFocusColor,
+                                                    textFieldHintTextColor: theme.textFieldFocusedColor,
                                                     textFieldTextColor: theme.textFieldTextColor,
                                                     textFieldTextFont: theme.textFieldTextFont,
                                                     textFieldHintTextFont: theme.textFieldHintTextFont,
-                                                    textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                    textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
                                                     textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
             
         default:
             return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
                                                    textFieldBorderColor: theme.textFieldBorderColor,
-                                                   textFieldHintTextColor: theme.textFieldErrorColor,
+                                                   textFieldHintTextColor: theme.textFieldErrorLabelColor,
                                                    textFieldTextColor: theme.textFieldTextColor,
                                                    textFieldTextFont: theme.textFieldTextFont,
                                                    textFieldHintTextFont: theme.textFieldHintTextFont,
-                                                   textFieldErrorLabelTextColor: theme.textFieldErrorColor,
+                                                   textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
                                                    textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
         }
     }
@@ -112,17 +112,17 @@ public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdap
 	/// The textfield’s border background color.
   var textFieldBorderColor: UIColor { get set }
 
-	/// The textfield’s elements error  color.
-  var textFieldErrorColor: UIColor { get set }
-    
-    /// The textfield’s elements focus  color.
-  var textFieldFocusColor: UIColor { get set }
+	/// The textfield’s focus state color.
+  var textFieldFocusedColor: UIColor { get set }
 
 	/// The text color of the textfield hint (above the text field).
 	var textFieldHintTextColor: UIColor { get set }
 
 	/// The text color of the textfield.
   var textFieldTextColor: UIColor { get set }
+
+	/// The textfield’s error label color.
+	var textFieldErrorLabelColor: UIColor { get set }
 
   /// Fonts.
 
@@ -131,9 +131,9 @@ public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdap
 
 	/// The font of the textfield hint (above the text field).
 	var textFieldHintTextFont: UIFont { get set }
-    
-    /// The font of the error label.
-    var textFieldErrorLabelFont: UIFont { get set }
+
+	/// The font of the error label.
+	var textFieldErrorLabelFont: UIFont { get set }
 }
 
 /// Defines Checkout main view UI Theme.

@@ -8,42 +8,45 @@ import Foundation
 import UIKit
 #endif
 
-class VGSTextFieldViewUIConfigurationHandler {
+internal class VGSTextFieldViewUIConfigurationHandler {
     
-    let theme: VGSCheckoutTextFieldThemeProtocol
-    weak var view: VGSTextFieldViewProtocol?
+		internal let theme: VGSCheckoutTextFieldThemeProtocol
+		internal weak var view: VGSTextFieldViewProtocol?
 
-    required init(view: VGSTextFieldViewProtocol, theme: VGSCheckoutTextFieldThemeProtocol) {
+		internal required init(view: VGSTextFieldViewProtocol, theme: VGSCheckoutTextFieldThemeProtocol) {
         self.view = view
         self.theme = theme
     }
     
-    func applyTheme(_ theme: VGSCheckoutTextFieldViewUIAttributesProtocol) {
-        /// textfield
+		internal func applyTheme(_ theme: VGSCheckoutTextFieldViewUIAttributesProtocol) {
+
+			  // TextField UI.
         view?.textField.textColor = theme.textFieldTextColor
         view?.textField.font = theme.textFieldTextFont
         view?.textField.adjustsFontForContentSizeCategory = true
-        /// placeholder
+
+			  // placeholder UI.
         view?.placeholderView.hintLabel.textColor = theme.textFieldHintTextColor
         view?.placeholderView.hintLabel.font = theme.textFieldHintTextFont
-        /// errorlabel
+
+			  // Error label UI.
 				view?.validationErrorView.errorLabel.textColor = theme.textFieldErrorLabelTextColor
 				view?.validationErrorView.errorLabel.font = theme.textFieldErrorLabelFont
     }
     
-    func initial() {
+		internal func initial() {
         applyTheme(theme.adapt(theme: theme, for: .initial))
     }
     
-    func valid() {
+		internal func valid() {
         applyTheme(theme.adapt(theme: theme, for: .valid))
     }
     
-    func invalid() {
+		internal func invalid() {
         applyTheme(theme.adapt(theme: theme, for: .invalid))
     }
     
-    func focused() {
+		internal func focused() {
         applyTheme(theme.adapt(theme: theme, for: .focused))
     }
 }

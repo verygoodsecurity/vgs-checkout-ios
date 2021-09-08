@@ -141,8 +141,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-		//stackView.hasBorderView = false
-		stackView.spacing = 1
 
 		return stackView
 	}()

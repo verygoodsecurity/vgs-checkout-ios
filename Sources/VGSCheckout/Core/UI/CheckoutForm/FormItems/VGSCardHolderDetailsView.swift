@@ -31,8 +31,7 @@ internal class VGSCardHolderDetailsView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-		stackView.spacing = 1
-		
+
 		return stackView
 	}()
 

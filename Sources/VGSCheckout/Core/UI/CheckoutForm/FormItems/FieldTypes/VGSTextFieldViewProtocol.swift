@@ -57,7 +57,7 @@ extension VGSTextFieldViewUIConfigurationProtocol {
 }
 
 public enum VGSCheckoutFieldUIState {
-    case initial
+	case initial
 	case focused
 	case valid
 	case invalid
