@@ -33,6 +33,7 @@ internal final class VGSCardTextField: VGSTextField {
 
 		// Container view width should be equal to cvcIconImageView.width. Container view doesn't infer its own intristicContentSize. So stackView cannot get widths from simpleView without this.
 		view.widthAnchor.constraint(equalTo: cardIconView.widthAnchor).isActive = true
+		view.heightAnchor.constraint(equalTo: cardIconView.heightAnchor).isActive = true
 
 		return view
 	}()
