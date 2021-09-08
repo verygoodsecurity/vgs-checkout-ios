@@ -188,19 +188,6 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	}
 }
 
-// MARK: - VGSHeaderBarViewDelegate
-
-extension VGSAddCardUseCaseManager: VGSHeaderBarViewDelegate {
-	func buttonDidTap(in header: VGSHeaderBarView) {
-		switch paymentInstrument {
-		case .vault:
-			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
-		case .multiplexing:
-			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
-		}
-	}
-}
-
 // MARK: - VGSFormSectionPresenterDelegate
 
 extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
