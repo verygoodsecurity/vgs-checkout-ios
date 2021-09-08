@@ -113,15 +113,15 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 	/// - Parameter token: `String` object, should be valid multiplexing token.
 	fileprivate func presentMultiplexingCheckout(with token: String) {
 		// Create multiplexing configuration with token.
-		let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment)
+        if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment) {
+            // Init Checkout with vaultID associated with your multiplexing configuration.
+            vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
 
-		// Init Checkout with vaultID associated with your multiplexing configuration.
-		vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
+            // Present checkout configuration.
+            vgsCheckout?.present(from: self)
 
-		// Present checkout configuration.
-		vgsCheckout?.present(from: self)
-
-		vgsCheckout?.delegate = self
+            vgsCheckout?.delegate = self
+        }
 	}
 }
 

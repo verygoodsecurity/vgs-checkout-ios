@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		034834B026D76F8E00AE59F7 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */; };
+		034834B626DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */; };
+		034834BB26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */; };
 		03B6749E26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */; };
 		03B674A026B308EC0001E5AD /* VGSPostalCodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */; };
 		3286E0C6265EC19C001FECEB /* VGSCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckout.framework */; };
@@ -257,6 +259,8 @@
 
 /* Begin PBXFileReference section */
 		034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSJWTTokenValidationTest.swift; sourceTree = "<group>"; };
+		034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMultiplexingCredentialsValidator.swift; sourceTree = "<group>"; };
 		03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldValidator.swift; sourceTree = "<group>"; };
 		03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldView.swift; sourceTree = "<group>"; };
 		3286E0BC265EC19C001FECEB /* VGSCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VGSCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -526,6 +530,22 @@
 				034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */,
 			);
 			path = "CGSize+Extensions";
+			sourceTree = "<group>";
+		};
+		034834B426DCB96D00AE59F7 /* ConfigurationTests */ = {
+			isa = PBXGroup;
+			children = (
+				034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */,
+			);
+			path = ConfigurationTests;
+			sourceTree = "<group>";
+		};
+		034834B926E0B7DC00AE59F7 /* ConfigurationValidation */ = {
+			isa = PBXGroup;
+			children = (
+				034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */,
+			);
+			path = ConfigurationValidation;
 			sourceTree = "<group>";
 		};
 		3286E0B2265EC19C001FECEB = {
@@ -880,6 +900,7 @@
 			children = (
 				32CC737926C10E35006E9DCD /* AddressTests */,
 				4405DD3026859FAC004A83AD /* CollectUtilsTests */,
+				034834B426DCB96D00AE59F7 /* ConfigurationTests */,
 				4405DD5E26859FAC004A83AD /* Resources */,
 				4405DD6E26859FAC004A83AD /* Info.plist */,
 				4405DD9F2685B55C004A83AD /* VGSCheckoutTests.xctestplan */,
@@ -1479,6 +1500,7 @@
 			isa = PBXGroup;
 			children = (
 				4438576B26AEAB7200EE5C7F /* BillingAddress */,
+				034834B926E0B7DC00AE59F7 /* ConfigurationValidation */,
 				44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingConfiguration.swift */,
 			);
 			path = Multiplexing;
@@ -2171,6 +2193,7 @@
 				44C4C8E12664B18B00195505 /* VGSFormView.swift in Sources */,
 				4405DC5F26844B30004A83AD /* State.swift in Sources */,
 				4405DC2926844AD8004A83AD /* VGSCheckoutFormAnanlyticsDetails.swift in Sources */,
+				034834BB26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift in Sources */,
 				4405DC1C26844AD8004A83AD /* VGSExpDateConfiguration.swift in Sources */,
 				44E10A8E26936512001F0D44 /* VGSCountryFieldView.swift in Sources */,
 				4405DC9626847247004A83AD /* Calendar+extension.swift in Sources */,
@@ -2275,6 +2298,7 @@
 				4405DD7C26859FAD004A83AD /* SSNTextFieldTests.swift in Sources */,
 				4405DD9226859FAD004A83AD /* APIHostnameValidatorTests.swift in Sources */,
 				4405DD7426859FAD004A83AD /* VGSTextFieldTests.swift in Sources */,
+				034834B626DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift in Sources */,
 				4405DD8626859FAD004A83AD /* UtilsTest.swift in Sources */,
 				4405DD8726859FAD004A83AD /* ExpDateConvertorTests.swift in Sources */,
 				4405DD9126859FAD004A83AD /* VGSCheckoutBaseTestCase.swift in Sources */,
