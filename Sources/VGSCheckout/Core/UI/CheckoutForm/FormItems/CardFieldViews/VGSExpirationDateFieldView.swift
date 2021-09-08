@@ -48,7 +48,6 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 8
         return stackView
     }()
 
@@ -68,7 +67,7 @@ internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
 
 	override init(frame: CGRect) {
 		super.init(frame: .zero)
-        textField.delegate = self
+		textField.delegate = self
 		buildUI()
 	}
 

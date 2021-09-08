@@ -54,7 +54,7 @@ internal extension UIView {
     }
     
     func checkout_defaultSectionViewConstraints() {
-        checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: -16, top: 16)
+        checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: 0, top: 16)
     }
 }
 

@@ -119,7 +119,7 @@ internal class VGSValidationErrorView: UIView {
 
 			// Add error label.
 			stackView.addArrangedSubview(errorLabel)
-			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 4)
+			stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0)
 			stackView.isLayoutMarginsRelativeArrangement = true
 		}
 	}

@@ -247,12 +247,12 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		case .vault(let configuration):
 			switch configuration.cardHolderFieldOptions.fieldVisibility {
 			case .visible:
-				rootStackView.addArrangedSubview(cardHolderFieldView)
+				verticalStackView.addArrangedSubview(cardHolderFieldView)
 			default:
 				break
 			}
 		case .multiplexing:
-			rootStackView.addArrangedSubview(cardHolderFieldView)
+			verticalStackView.addArrangedSubview(cardHolderFieldView)
 		}
 
 		rootStackView.addArrangedSubview(verticalStackView)
