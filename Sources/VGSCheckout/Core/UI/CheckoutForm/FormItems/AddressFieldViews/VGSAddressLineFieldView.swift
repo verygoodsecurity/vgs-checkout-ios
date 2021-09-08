@@ -1,5 +1,5 @@
 //
-//  VGSAddressLineFieldView.swift
+//  VGSBaseFieldView.swift
 //  VGSCheckout
 
 import Foundation
@@ -7,8 +7,8 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for address line form item.
-internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
+/// Holds UI for base field view (has simple `VGSTextField`).
+internal class VGSBaseFieldView: UIView, VGSTextFieldViewProtocol {
     var delegate: VGSTextFieldViewDelegate?
     
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
@@ -61,12 +61,14 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
 
     // MARK: - Initialization
 
+	  /// no:doc
     override init(frame: CGRect) {
         super.init(frame: .zero)
         textField.delegate = self
         buildUI()
     }
 
+		/// no:doc
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,7 +94,9 @@ internal class VGSErrorFieldView: UIView, VGSTextFieldViewProtocol {
     }
 }
 
-extension VGSErrorFieldView: VGSTextFieldDelegate {
+// MARK: - VGSTextFieldDelegate
+
+extension VGSBaseFieldView: VGSTextFieldDelegate {
     func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
         delegate?.vgsFieldViewDidBeginEditing(self)
     }

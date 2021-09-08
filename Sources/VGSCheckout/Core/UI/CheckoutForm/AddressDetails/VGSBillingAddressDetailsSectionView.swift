@@ -45,8 +45,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Address line 1 form item view.
-	internal lazy var addressLine1FieldView: VGSErrorFieldView = {
-		let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var addressLine1FieldView: VGSBaseFieldView = {
+		let componentView = VGSBaseFieldView(frame: .zero)
 		componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine1
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -56,8 +56,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// Address line 2 form item view.
-	internal lazy var addressLine2FieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var addressLine2FieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .addressLine2
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -67,8 +67,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// City form item view.
-	internal lazy var cityFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var cityFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .city
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -78,8 +78,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}()
 
 	/// region form item view.
-	internal lazy var regionFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var regionFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .state
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -89,8 +89,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
     }()
 
 	/// Postal Code/Zip form item view.
-	internal lazy var postalCodeFieldView: VGSErrorFieldView = {
-        let componentView = VGSErrorFieldView(frame: .zero)
+	internal lazy var postalCodeFieldView: VGSBaseFieldView = {
+        let componentView = VGSBaseFieldView(frame: .zero)
         componentView.translatesAutoresizingMaskIntoConstraints = false
         componentView.fieldType = .postalCode
         componentView.uiConfigurationHandler = VGSTextFieldViewUIConfigurationHandler(view: componentView, theme: uiTheme)
@@ -230,6 +230,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
+			print("fieldView: \(fieldView)")
 			fieldView.updateUI(for: .initial)
 			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
 			fieldView.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
