@@ -12,8 +12,8 @@ import UIKit
 /// Default Checkout UI Theme settings.
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
-  /// The textfield’s background color. Default is `.vgsSystemBackground`.
-  public var textFieldBackgroundColor: UIColor = .vgsSystemBackground
+  /// The textfield’s background color. Default is `.clear`.
+  public var textFieldBackgroundColor: UIColor = .clear
 
 	/// The textfield’s border background color. Default is `.systemGray`.
   public var textFieldBorderColor: UIColor = .systemGray

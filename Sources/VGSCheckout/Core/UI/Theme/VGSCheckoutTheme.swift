@@ -106,7 +106,7 @@ public protocol VGSCheckoutTextFieldThemeProtocol: VGSCheckoutTextFieldThemeAdap
 
 	/// Colors.
 
-	/// The textfield’s background color. NOT USED!!!
+	/// The textfield’s background color. 
   var textFieldBackgroundColor: UIColor { get set }
 
 	/// The textfield’s border background color.

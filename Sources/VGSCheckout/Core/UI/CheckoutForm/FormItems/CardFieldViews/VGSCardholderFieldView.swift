@@ -20,6 +20,9 @@ internal class VGSTextFieldViewUIConfigurationHandler {
     
 		internal func applyTheme(_ theme: VGSCheckoutTextFieldViewUIAttributesProtocol) {
 
+			  // Set text field view background color - text field and placeholder view.
+			  view?.placeholderView.backgroundColor = theme.textFieldBackgroundColor
+
 			  // TextField UI.
         view?.textField.textColor = theme.textFieldTextColor
         view?.textField.font = theme.textFieldTextFont
