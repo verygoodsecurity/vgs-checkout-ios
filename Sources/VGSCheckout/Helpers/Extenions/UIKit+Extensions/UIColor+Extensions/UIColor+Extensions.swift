@@ -72,8 +72,8 @@ public extension UIColor {
 		}
 	}
 
-	/// VGS text field hint color (with fallback to earlier versions).
-	static var vgsTextFieldHintTextColor: UIColor {
+	/// VGS systemGray2 color (with fallback to earlier versions).
+	static var vgsSystemGray2Color: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor.systemGray2
 		} else {

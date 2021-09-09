@@ -30,8 +30,8 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	/// The font of the textfield. Default is `.body` with `.medium` weight.
 	public var textFieldTextFont: UIFont = .vgsPreferredFont(forTextStyle: .body, weight: .medium)
 
-	/// The text color of the textfield hint (above the text field). Default is `.vgsTextFieldHintTextColor` (black).
-	public var textFieldHintTextColor: UIColor = .vgsTextFieldHintTextColor
+	/// The text color of the textfield hint (above the text field). Default is `.vgsSystemGray2Color` (black).
+	public var textFieldHintTextColor: UIColor = .vgsSystemGray2Color
 
 	/// The font of the textfield hint (above the text field). Default is `.caption1`.
 	public var textFieldHintTextFont: UIFont = .preferredFont(forTextStyle: .caption1)

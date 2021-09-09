@@ -121,8 +121,6 @@ internal class VGSCardDetailsSectionView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-//		stackView.hasBorderView = false
-//		stackView.borderViewCornerRadius = 4
 
 		return stackView
 	}()
@@ -133,7 +131,6 @@ internal class VGSCardDetailsSectionView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-		//stackView.hasBorderView = false
 		stackView.spacing = 20
 
 		return stackView
@@ -160,36 +157,6 @@ internal class VGSCardDetailsSectionView: UIView {
 	}
 
 	// MARK: - Interface
-
-
-  /// TODO: Add option to set UI for ProcessingState ???
-
-	/// Disable input view for processing state.
-	internal func updateUIForProcessingState() {
-//		// Update grid view.
-//		if #available(iOS 13, *) {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//		} else {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//		}
-
-		// Update form fields.
-		fieldViews.forEach { fieldView in
-			if #available(iOS 13.0, *) {
-				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
-				fieldView.textField.textColor = UIColor.placeholderText
-				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
-			} else {
-				fieldView.placeholderView.backgroundColor = .white
-				fieldView.textField.textColor = .gray
-				fieldView.placeholderView.hintComponentView.label.textColor = .gray
-			}
-		}
-	}
 
 	// MARK: - Helpers
 

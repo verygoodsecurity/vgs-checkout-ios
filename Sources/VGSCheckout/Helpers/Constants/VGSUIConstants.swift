@@ -21,5 +21,11 @@ internal struct VGSUIConstants {
 
 		/// Checkout field icon size.
 		static let fieldIconSize = CGSize(width: 32, height: 20)
+
+ 		/// Form in enabled state alpha.
+		static let formEnabledAlpha: CGFloat = 1
+
+		/// Form in processing state alpha.
+		static let formProcessingAlpha: CGFloat = 0.6
 	}
 }

@@ -55,6 +55,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.saveCardButton.status = .enabled
 
 			case .valid:
+				addCardSectionFormView.billingAddressSectionView.alpha = VGSUIConstants.FormUI.formEnabledAlpha
+				addCardSectionFormView.cardDetailsSectionView.alpha = VGSUIConstants.FormUI.formEnabledAlpha
 				addCardSectionFormView.isUserInteractionEnabled = true
 				updateCloseBarButtonItem(true)
 				addCardSectionFormView.saveCardButton.status = .enabled
@@ -62,7 +64,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.isUserInteractionEnabled = false
 				updateCloseBarButtonItem(false)
 				addCardSectionFormView.saveCardButton.status = .processing
-				addCardSectionFormView.cardDetailsSectionView.updateUIForProcessingState()
+				addCardSectionFormView.billingAddressSectionView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
+				addCardSectionFormView.cardDetailsSectionView.alpha =  VGSUIConstants.FormUI.formProcessingAlpha
 
 				apiWorker.sendData {[weak self] requestResult in
 					guard let strongSelf = self else {return}

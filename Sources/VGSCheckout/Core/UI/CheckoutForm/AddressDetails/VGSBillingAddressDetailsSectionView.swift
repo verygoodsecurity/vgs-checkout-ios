@@ -163,24 +163,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 
 	// MARK: - Interface
 
-	// TODO: - refactor duplicated code for processing state styles.
-	/// Disable input views for processing state.
-	internal func updateUIForProcessingState() {
-
-		// Update form fields.
-		fieldViews.forEach { fieldView in
-			if #available(iOS 13.0, *) {
-				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
-				fieldView.textField.textColor = UIColor.placeholderText
-				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
-			} else {
-				fieldView.placeholderView.backgroundColor = .white
-				fieldView.textField.textColor = .gray
-				fieldView.placeholderView.hintComponentView.label.textColor = .gray
-			}
-		}
-	}
-
 	// MARK: - Helpers
 
 	/// Setup UI and layout.
