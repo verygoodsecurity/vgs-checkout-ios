@@ -222,11 +222,9 @@ internal class VGSCardDetailsSectionView: UIView {
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-		cardHolderFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cardHolderFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardHolderFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardNumberFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 		verticalStackView.addArrangedSubview(cardNumberFieldView)
 
 		switch fieldsDistribution {
@@ -249,7 +247,7 @@ internal class VGSCardDetailsSectionView: UIView {
 		/// Set UI Theme
 		fieldViews.forEach { item in
 			item.updateUI(for: .initial)
-			item.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+			item.textField.padding = VGSUIConstants.FormUI.textFieldPaddings
 		}
 
 		fieldViews.first?.textField.becomeFirstResponder()
@@ -265,11 +263,9 @@ internal class VGSCardDetailsSectionView: UIView {
 			horizonalStackView.axis = .vertical
 		}
 
-		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
 		horizonalStackView.addArrangedSubview(expDateFieldView)
 		horizonalStackView.addArrangedSubview(cvcFieldView)
@@ -278,11 +274,9 @@ internal class VGSCardDetailsSectionView: UIView {
 	}
 
 	private func setupAllInSingleLine() {
-		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
 		verticalStackView.axis = .horizontal
 		verticalStackView.addArrangedSubview(expDateFieldView)

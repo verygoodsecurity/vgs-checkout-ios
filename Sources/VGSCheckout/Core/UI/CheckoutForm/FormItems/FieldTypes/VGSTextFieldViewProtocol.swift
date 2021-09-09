@@ -24,7 +24,6 @@ internal protocol VGSTextFieldViewDelegate {
     func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol)
 }
 
-
 internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigurationProtocol {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}

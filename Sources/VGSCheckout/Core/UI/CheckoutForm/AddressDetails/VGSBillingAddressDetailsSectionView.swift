@@ -221,9 +221,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 		fieldViews.forEach { fieldView in
 			print("fieldView: \(fieldView)")
 			fieldView.updateUI(for: .initial)
-			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-			fieldView.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+			fieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
+			fieldView.textField.padding = VGSUIConstants.FormUI.textFieldPaddings
 		}
 	}
 }
