@@ -7,26 +7,46 @@ import Foundation
 import UIKit
 #endif
 
+/// Defines Add Card use case states.
 internal enum VGSAddCardFlowState {
+
+	/**
+	 Request was sumitted with result.
+
+	 - Parameters:
+			- result: request result of checkout save card flow.
+	*/
 	case requestSubmitted(_ result: VGSCheckoutRequestResult)
+
+	/// User cancelled checkout flow.
 	case cancelled
 }
 
+/// A set of methods to notify about changes in `Save Card` form.
 internal protocol VGSAddCardUseCaseManagerDelegate: AnyObject {
 	func addCardFlowDidChange(with state: VGSAddCardFlowState, in useCaseManager: VGSAddCardUseCaseManager)
 }
 
-/// Handle add card form logic.
+/// Handles `Add card` use case logic.
 internal class VGSAddCardUseCaseManager: NSObject {
 
+	/// Delegate object.
 	internal weak var delegate: VGSAddCardUseCaseManagerDelegate?
-  
+
+	/// Defines form state.
 	enum FormState {
+
+		/// Form has invalid data.
 		case invalid
+
+		/// Form has valid data and ready for precessing.
 		case valid
+
+		/// Payment processing is in progress.
 		case processing
 	}
 
+	/// Holds the entire form state.
 	var state = FormState.invalid {
 		didSet {
 			switch state {
@@ -104,8 +124,6 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
-		// TODO: - move form validation setup to a separate func?
-
 		formValidationHelper.fieldViewsManager.appendFieldViews(self.cardDataSectionViewModel.cardDetailsSectionView.fieldViews)
 		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView])
 
@@ -132,9 +150,11 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.addCardSectionFormView.saveCardButton.status = .enabled
 	}
 
+	/// Builds view controller for save card flow.
+	/// - Returns: `UIViewController` object, view controller with save card form.
 	internal func buildCheckoutViewController() -> UIViewController {
 		let viewController = VGSFormViewController(formView: addCardSectionFormView)
-		addCardSectionFormView.saveCardButton.addTarget(self, action: #selector(payDidTap), for: .touchUpInside)
+		addCardSectionFormView.saveCardButton.addTarget(self, action: #selector(saveCardDidTap), for: .touchUpInside)
 		cardDataSectionViewModel.delegate = self
 		addressDataSectionViewModel.delegate = self
 
@@ -163,7 +183,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		}
 	}
 
-	@objc fileprivate func payDidTap() {
+	/// Handles tap on the save card button.
+	@objc fileprivate func saveCardDidTap() {
         switch state {
         case .valid:
             state = .processing
@@ -173,11 +194,12 @@ internal class VGSAddCardUseCaseManager: NSObject {
             return
         }
 	}
-    
-    private func showFormValidationErrors() {
-        cardDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
-        addressDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
-    }
+
+	/// Displays all form validation errors.
+	private func showFormValidationErrors() {
+		cardDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
+		addressDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
+	}
 
 	/// Updates `.isEnabled` state for left bar button item if checkout is dislayed in viewController.
 	/// - Parameter isEnabled: `Bool` object, indicates `isEbabled` state for close left bar button item.
