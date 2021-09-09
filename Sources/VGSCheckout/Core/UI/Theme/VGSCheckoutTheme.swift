@@ -39,7 +39,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 
-		default:
+		case .invalid:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
 																							textFieldBorderColor: theme.textFieldBorderColor,
 																							textFieldHintTextColor: theme.textFieldErrorLabelColor,

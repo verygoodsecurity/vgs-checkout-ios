@@ -27,7 +27,7 @@ internal protocol VGSTextFieldViewDelegate {
 internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigurationProtocol {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
-	//var errorLabel: UILabel {get}
+	
 	var fieldType: VGSAddCardFormFieldType {get}
     
 	var delegate: VGSTextFieldViewDelegate? {get set}
