@@ -72,7 +72,6 @@ internal class VGSFieldHintView: UIView {
 		view.addSubview(hintImageView)
 
 		let constraints = [
-			view.heightAnchor.constraint(equalTo: hintImageView.heightAnchor),
 			view.widthAnchor.constraint(equalTo: hintImageView.widthAnchor),
 			hintImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 			hintImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
