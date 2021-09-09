@@ -10,11 +10,6 @@ import UIKit
 /// Utility class that encapsulates fields validation logic.
 internal class VGSFormValidationHelper {
 
-	internal struct FormError {
-		let formViewSection: VGSFormSection
-		let errorMessage: String?
-	}
-  
 	/// Validation behavior block.
 	internal let validationBehaviour: VGSFormValidationBehaviour
 
@@ -106,23 +101,6 @@ internal class VGSFormValidationHelper {
         }
     return invalidFields
   }
-
-	/// Return boolean flag if field is empty and dirty.
-	/// - Parameter textField: `VGSTextField` object, text field.
-	/// - Returns: `Bool` object, `true` if field is empty and dirty.
-	internal func isEmptyAndDirtyTextField(_ textField: VGSTextField) -> Bool {
-		let state = textField.state
-		return state.isEmpty && state.isDirty
-	}
-
-	/// Check if input has required length.
-	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, form item.
-	/// - Returns: `Bool` object, `true` if item has valid length.
-	internal func isInputRequiredLengthInFieldView(_ fieldView: VGSTextFieldViewProtocol) -> Bool {
-
-		let fieldValidator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: fieldView.fieldType)
-		return fieldValidator.isTextFieldInputComplete(fieldView.textField)
-	}
 
 	/// Get state from form items array.
 	/// - Parameter fieldViews: `[VGSTextFieldViewProtocol]` object, `VGSTextFieldViewProtocol` items.

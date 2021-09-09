@@ -6,7 +6,7 @@
 import Foundation
 
 /// Check and Validates Multiplexing Token Scope.
-internal class VGSCheckoutMultiplexingCredentialsValidator {
+internal class VGSMultiplexingCredentialsValidator {
     
     /// Scope not allowed.
     static let restrictedRolesScope: Set<String> = ["transfers:write"]

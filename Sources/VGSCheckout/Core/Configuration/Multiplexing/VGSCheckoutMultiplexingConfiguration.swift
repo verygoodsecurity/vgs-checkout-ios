@@ -16,13 +16,13 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 	/// Multiplexing token.
 	private(set) public var token: String
 
-	/// Configuration initializer.
+	/// Configuration initializer (failable).
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - token: `String` object, should be valid token for multiplexing.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public init?(vaultID: String, token: String, environment: String = "sandbox") {
-        guard VGSCheckoutMultiplexingCredentialsValidator.isJWTScopeValid(token, vaultId: vaultID) else {
+        guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(token, vaultId: vaultID) else {
             return nil
         }
 		self.vaultID = vaultID
@@ -30,8 +30,8 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 		self.environment = environment
 	}
 
-      /// Checkout UI elements  configuration.
-      public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+	/// Checkout UI elements  configuration.
+	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
 
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .multiplexing

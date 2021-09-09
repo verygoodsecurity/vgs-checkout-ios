@@ -125,21 +125,18 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
 
 		formValidationHelper.fieldViewsManager.appendFieldViews(self.cardDataSectionViewModel.cardDetailsSectionView.fieldViews)
-		formValidationHelper.fieldViewsManager.appendFormSectionViews([cardDataSectionViewModel.cardDetailsSectionView])
 
 		switch paymentInstrument {
 		case .vault(let vaultConfiguration):
 			switch vaultConfiguration.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
-				formValidationHelper.fieldViewsManager.appendFormSectionViews([ addressDataSectionViewModel.billingAddressFormView])
 			case .hidden:
 				break
 			}
 		case .multiplexing:
 			// Always display address section for multiplexing.
 			formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
-			formValidationHelper.fieldViewsManager.appendFormSectionViews([ addressDataSectionViewModel.billingAddressFormView])
 		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
