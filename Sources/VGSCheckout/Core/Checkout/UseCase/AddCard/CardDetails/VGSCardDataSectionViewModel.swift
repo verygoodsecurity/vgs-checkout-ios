@@ -154,7 +154,6 @@ extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
     
     func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
         updateSecurityCodeFieldIfNeeded(for: fieldView)
-        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
         updateFormState()
     }
 }

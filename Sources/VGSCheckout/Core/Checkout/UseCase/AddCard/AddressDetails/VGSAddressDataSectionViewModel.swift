@@ -190,7 +190,6 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
     }
     
     func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
-        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
         updateFormState()
     }
 
