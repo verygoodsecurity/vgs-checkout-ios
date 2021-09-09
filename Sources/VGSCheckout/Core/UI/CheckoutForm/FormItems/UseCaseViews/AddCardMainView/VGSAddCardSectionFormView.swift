@@ -51,7 +51,7 @@ internal class VGSAddCardFormView: VGSFormView {
 		super.init()
 
 		self.saveCardButton.delegate = self
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
+		stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 

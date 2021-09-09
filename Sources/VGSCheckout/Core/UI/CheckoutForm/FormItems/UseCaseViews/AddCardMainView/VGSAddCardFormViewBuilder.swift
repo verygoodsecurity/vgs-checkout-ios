@@ -15,9 +15,9 @@ internal class VGSAddCardFormViewBuilder {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.distribution = .fill
-		stackView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+		stackView.layoutMargins = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
-		stackView.spacing = 20
+		stackView.spacing = 16
 
 		return stackView
 	}
@@ -38,21 +38,9 @@ internal class VGSAddCardFormViewBuilder {
 	static func buildPaymentButtonContainerView() -> VGSContainerItemView {
 		let view = VGSContainerItemView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.paddings = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+		view.paddings = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
 		return view
 	}
-    
-    /// Build error label.
-    /// - Returns: `UILabel` for error message.
-  static func buildErrorLabel() -> UILabel {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .red
-        label.numberOfLines = 1
-        return label
-    }
 
 	/// Builds error view.
 	/// - Returns: `VGSValidationErrorView` object, view to display error message.
