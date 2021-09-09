@@ -59,6 +59,7 @@ internal class VGSValidationErrorView: UIView {
 		label.translatesAutoresizingMaskIntoConstraints = false
 
 		label.adjustsFontForContentSizeCategory = true
+		label.numberOfLines = 0
 
 		return label
 	}()
@@ -112,7 +113,7 @@ internal class VGSValidationErrorView: UIView {
 	/// Update error label layout.
 	private func updateErrorLabelLayout() {
 		// Turn off hardcoded label height constraint view.
-		errorLabelHeightConstraint?.isActive = true
+		errorLabelHeightConstraint?.isActive = false
 
 		// Update stack view insets.
 		stackView.addArrangedSubview(errorLabel)

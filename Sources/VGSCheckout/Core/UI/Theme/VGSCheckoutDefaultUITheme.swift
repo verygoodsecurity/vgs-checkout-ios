@@ -33,8 +33,8 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	/// The text color of the textfield hint (above the text field). Default is `.vgsTextFieldHintTextColor` (black).
 	public var textFieldHintTextColor: UIColor = .vgsTextFieldHintTextColor
 
-	/// The font of the textfield hint (above the text field). Default is `.caption1` with `.semibold` weight.
-	public var textFieldHintTextFont: UIFont = .vgsPreferredFont(forTextStyle: .caption1, weight: .semibold)
+	/// The font of the textfield hint (above the text field). Default is `.footnote` with `.semibold` weight.
+	public var textFieldHintTextFont: UIFont = .vgsPreferredFont(forTextStyle: .footnote, weight: .semibold)
 
 	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
