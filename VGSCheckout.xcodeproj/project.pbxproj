@@ -144,7 +144,6 @@
 		4438577D26B0229200EE5C7F /* VGSCheckoutBillingAddressLine2Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438577C26B0229200EE5C7F /* VGSCheckoutBillingAddressLine2Options.swift */; };
 		4438578126B022D200EE5C7F /* VGSCheckoutBillingAddressCityOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438578026B022D200EE5C7F /* VGSCheckoutBillingAddressCityOptions.swift */; };
 		4438578326B022EE00EE5C7F /* VGSCheckoutBillingAddressPostalCodeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438578226B022EE00EE5C7F /* VGSCheckoutBillingAddressPostalCodeOptions.swift */; };
-		4450EEDA26E72E99007866C3 /* VGSAddCardNavigationBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450EED926E72E99007866C3 /* VGSAddCardNavigationBarBuilder.swift */; };
 		4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */; };
 		4455C84C266E4420000CD666 /* VGSPayWithCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */; };
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
@@ -400,7 +399,6 @@
 		4438577C26B0229200EE5C7F /* VGSCheckoutBillingAddressLine2Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressLine2Options.swift; sourceTree = "<group>"; };
 		4438578026B022D200EE5C7F /* VGSCheckoutBillingAddressCityOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressCityOptions.swift; sourceTree = "<group>"; };
 		4438578226B022EE00EE5C7F /* VGSCheckoutBillingAddressPostalCodeOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressPostalCodeOptions.swift; sourceTree = "<group>"; };
-		4450EED926E72E99007866C3 /* VGSAddCardNavigationBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardNavigationBarBuilder.swift; sourceTree = "<group>"; };
 		4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		4455C84B266E4420000CD666 /* VGSPayWithCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPayWithCardHeaderView.swift; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
@@ -1160,14 +1158,6 @@
 			path = ViewControlllers;
 			sourceTree = "<group>";
 		};
-		4450EED826E72E77007866C3 /* NavigationBarSetup */ = {
-			isa = PBXGroup;
-			children = (
-				4450EED926E72E99007866C3 /* VGSAddCardNavigationBarBuilder.swift */,
-			);
-			path = NavigationBarSetup;
-			sourceTree = "<group>";
-		};
 		4450EEDB26E737B0007866C3 /* UIFont+Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1652,7 +1642,6 @@
 			isa = PBXGroup;
 			children = (
 				44C4C92B2665F8ED00195505 /* VGSAddCardUseCaseManager.swift */,
-				4450EED826E72E77007866C3 /* NavigationBarSetup */,
 				44C4C92826651DB100195505 /* CardDetails */,
 				44E10A9B26957131001F0D44 /* AddressDetails */,
 				44D5CF1C268C37D500312108 /* FormValidation */,
@@ -2164,7 +2153,6 @@
 				4405DC5D26844B30004A83AD /* VGSExpDateTextField.swift in Sources */,
 				4405DC9526847247004A83AD /* UIDevice+extension.swift in Sources */,
 				4405DC8F26847247004A83AD /* VGSCollectLoggingConfiguration.swift in Sources */,
-				4450EEDA26E72E99007866C3 /* VGSAddCardNavigationBarBuilder.swift in Sources */,
 				44D520CC26771AD8005AB588 /* VGSCreditCardAPIWorker.swift in Sources */,
 				4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */,
 				4405DCA026847247004A83AD /* VGSFieldNameToSubscriptMapper.swift in Sources */,

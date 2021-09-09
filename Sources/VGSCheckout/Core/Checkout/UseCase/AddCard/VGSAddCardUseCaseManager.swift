@@ -161,7 +161,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		viewController.view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 
 		let navigationController = UINavigationController(rootViewController: viewController)
-		VGSAddCardNavigationBarBuilder.setupNavigationBarTitle(in: viewController)
+		viewController.navigationItem.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_add_card_navigation_bar_title")
 
 		let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
 		closeBarButtomItem = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))

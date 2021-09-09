@@ -57,7 +57,6 @@ internal class VGSCardDataFormConfigurationManager {
 		expDateConfiguration.inputDateFormat = .shortYear
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
-	//        expCardDate.monthPickerFormat = .longSymbols
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true

@@ -58,19 +58,20 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
-    setupCardForm(vaultConfiguration: configuration)
+    setupBillingAddressForm(with: configuration)
     buildForm()
 	}
   
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
 
-    setupCardForm(multiplexingConfiguration: configuration)
+		setupBillingAddressForm(with: configuration)
     buildForm()
   }
 
 	// MARK: - Interface
 
+	/// Builds form.
   internal func buildForm() {
 		billingAddressFormView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -106,14 +107,19 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Helpers
 
-	private func setupCardForm(vaultConfiguration: VGSCheckoutConfiguration) {
+	/// Setup billing address form with vault configuration.
+	/// - Parameter multiplexingConfiguration: `VGSCheckoutConfiguration` object, vault configuration.
+	private func setupBillingAddressForm(with vaultConfiguration: VGSCheckoutConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
-	private func setupCardForm(multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
+	/// Setup billing address form with multiplexing configuration.
+	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
+	private func setupBillingAddressForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
+	/// Handles tap in form views to make textField first responder when tap is outside the textField.
 	func didTap(in formView: VGSPlaceholderFieldView) {
 		for item in fieldViews {
 			if item.placeholderView === formView {
@@ -155,6 +161,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		return stateTextField
 	}
 
+	/// Current available regions.
   internal var currentRegions: [VGSAddressRegionModel] {
 		guard let config = countryPickerField?.configuration as? VGSPickerTextFieldConfiguration, let dataSource = config.dataProvider?.dataSource as? VGSRegionsDataSourceProvider else {
 			return []
