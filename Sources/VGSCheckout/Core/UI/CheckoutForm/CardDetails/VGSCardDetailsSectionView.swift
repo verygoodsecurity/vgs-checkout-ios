@@ -8,14 +8,8 @@ import Foundation
 import UIKit
 #endif
 
-/// Form View with group of fields.
-internal protocol VGSFormSectionViewProtocol: UIView {
-    var uiTheme: VGSCheckoutThemeProtocol {get}
-	func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool)
-}
-
 /// Holds UI for card details.
-internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
+internal class VGSCardDetailsSectionView: UIView {
 
 	/// Defines field distribution.
 	internal enum FieldsDistribution {
@@ -166,18 +160,8 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}
 
 	// MARK: - Interface
-  
-  /// Update Array of form blocks with validation state.
-  internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
-    sectionBlocks.forEach { sectionBlock in
-      updateSectionBlock(sectionBlock, isValid: isValid)
-    }
-  }
 
-  /// Update Form block items UI with validation state.
-	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-	}
-  
+
   /// TODO: Add option to set UI for ProcessingState ???
 
 	/// Disable input view for processing state.

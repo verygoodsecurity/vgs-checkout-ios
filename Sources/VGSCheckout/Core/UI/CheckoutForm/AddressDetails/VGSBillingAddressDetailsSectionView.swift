@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds UI for address details.
-internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewProtocol {
+internal class VGSBillingAddressDetailsSectionView: UIView {
 
 	/// UI Theme.
   internal var uiTheme: VGSCheckoutThemeProtocol
@@ -162,17 +162,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 	}
 
 	// MARK: - Interface
-
-	/// Update Array of form blocks with validation state.
-	internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
-		sectionBlocks.forEach { sectionBlock in
-      updateSectionBlock(sectionBlock, isValid: isValid)
-		}
-	}
-
-	/// Update Form block items UI with validation state.
-	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-	}
 
 	// TODO: - refactor duplicated code for processing state styles.
 	/// Disable input views for processing state.

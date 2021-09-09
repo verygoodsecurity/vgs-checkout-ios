@@ -58,9 +58,6 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				addCardSectionFormView.isUserInteractionEnabled = true
 				updateCloseBarButtonItem(true)
 				addCardSectionFormView.saveCardButton.status = .enabled
-
-				addCardSectionFormView.cardDetailsSectionView.updateSectionBlock(.cardDetails, isValid: true)
-				addCardSectionFormView.billingAddressSectionView.updateSectionBlock(.addressInfo, isValid: true)
 			case .processing:
 				addCardSectionFormView.isUserInteractionEnabled = false
 				updateCloseBarButtonItem(false)
