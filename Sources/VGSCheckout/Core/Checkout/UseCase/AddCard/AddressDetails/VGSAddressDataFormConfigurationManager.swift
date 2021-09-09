@@ -51,14 +51,12 @@ internal class VGSAddressDataFormConfigurationManager {
 		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 		])
-		addressLine1Configuration.returnKeyType = .next
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
-		addressLine2Configuration.returnKeyType = .next
 
 		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
 		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
@@ -72,7 +70,6 @@ internal class VGSAddressDataFormConfigurationManager {
 		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 		])
-		addressLine1Configuration.returnKeyType = .next
 
 		cityTextField.configuration = cityConfiguration
 
@@ -156,14 +153,12 @@ internal class VGSAddressDataFormConfigurationManager {
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.address1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
-		addressLine1Configuration.returnKeyType = .next
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.adddressLine2")
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
-		addressLine2Configuration.returnKeyType = .next
 		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.city")
@@ -172,12 +167,9 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		cityTextField.configuration = cityConfiguration
 
-		cityConfiguration.returnKeyType = .next
-
 		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
 		postalCodeConfiguration.type = .none
 		postalCodeConfiguration.isRequiredValidOnly = true
-		postalCodeConfiguration.returnKeyType = .done
 
 		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
 		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
