@@ -18,5 +18,8 @@ internal struct VGSUIConstants {
 
 		/// Text field paddings.
 		static let textFieldPaddings: UIEdgeInsets = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+
+		/// Checkout field icon size.
+		static let fieldIconSize = CGSize(width: 32, height: 20)
 	}
 }

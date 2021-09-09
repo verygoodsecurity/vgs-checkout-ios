@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		034834B026D76F8E00AE59F7 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */; };
 		034834B626DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */; };
 		034834BB26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */; };
 		03B6749E26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */; };
@@ -254,7 +253,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSJWTTokenValidationTest.swift; sourceTree = "<group>"; };
 		034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMultiplexingCredentialsValidator.swift; sourceTree = "<group>"; };
 		03B6749D26B3082E0001E5AD /* VGSPostalCodeFieldValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldValidator.swift; sourceTree = "<group>"; };
@@ -516,14 +514,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		034834AE26D76F6B00AE59F7 /* CGSize+Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				034834AF26D76F8E00AE59F7 /* CGSize+Extensions.swift */,
-			);
-			path = "CGSize+Extensions";
-			sourceTree = "<group>";
-		};
 		034834B426DCB96D00AE59F7 /* ConfigurationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1347,7 +1337,6 @@
 			isa = PBXGroup;
 			children = (
 				4450EEDB26E737B0007866C3 /* UIFont+Extensions */,
-				034834AE26D76F6B00AE59F7 /* CGSize+Extensions */,
 				44C4C8FC2664B3A500195505 /* UIColor+Extensions */,
 				44C4C8F92664B1E700195505 /* UIView+Extensions */,
 			);
@@ -2148,7 +2137,6 @@
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
 				4405DC2326844AD8004A83AD /* APIClient+Utils.swift in Sources */,
 				4405DC6626844B30004A83AD /* VGSTextFieldDelegate.swift in Sources */,
-				034834B026D76F8E00AE59F7 /* CGSize+Extensions.swift in Sources */,
 				4405DCB826848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift in Sources */,
 				44E10A8B2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift in Sources */,
 				4405DC9026847247004A83AD /* VGSCollectLogger.swift in Sources */,

@@ -78,7 +78,5 @@ internal enum VGSPaymentInstrument {
 				return nil
 			}
 		}
-
-		return nil
 	}
 }

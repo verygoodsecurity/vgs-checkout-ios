@@ -58,7 +58,7 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
     private lazy var cardTextField: VGSCardTextField = {
         let field = VGSCardTextField()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.cardIconSize = CGSize.checkoutFieldIconSize
+        field.cardIconSize = VGSUIConstants.FormUI.fieldIconSize
         field.cornerRadius = 0
         field.borderWidth = 0
         return field
