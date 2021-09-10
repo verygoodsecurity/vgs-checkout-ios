@@ -8,14 +8,8 @@ import Foundation
 import UIKit
 #endif
 
-/// Form View with group of fields.
-internal protocol VGSFormSectionViewProtocol: UIView {
-    var uiTheme: VGSCheckoutThemeProtocol {get}
-	func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool)
-}
-
 /// Holds UI for card details.
-internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
+internal class VGSCardDetailsSectionView: UIView {
 
 	/// Defines field distribution.
 	internal enum FieldsDistribution {
@@ -127,8 +121,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fill
 		stackView.axis = .vertical
-//		stackView.hasBorderView = false
-//		stackView.borderViewCornerRadius = 4
 
 		return stackView
 	}()
@@ -139,7 +131,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
-		//stackView.hasBorderView = false
 		stackView.spacing = 20
 
 		return stackView
@@ -166,46 +157,6 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}
 
 	// MARK: - Interface
-  
-  /// Update Array of form blocks with validation state.
-  internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
-    sectionBlocks.forEach { sectionBlock in
-      updateSectionBlock(sectionBlock, isValid: isValid)
-    }
-  }
-
-  /// Update Form block items UI with validation state.
-	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-	}
-  
-  /// TODO: Add option to set UI for ProcessingState ???
-
-	/// Disable input view for processing state.
-	internal func updateUIForProcessingState() {
-//		// Update grid view.
-//		if #available(iOS 13, *) {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.systemGray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.systemGray.cgColor
-//		} else {
-//			cardHolderDetailsView.cardHolderNameStackView.separatorColor = UIColor.gray
-//			cardHolderDetailsView.cardHolderNameStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//			verticalStackView.borderView.layer.borderColor = UIColor.gray.cgColor
-//		}
-
-		// Update form fields.
-		fieldViews.forEach { fieldView in
-			if #available(iOS 13.0, *) {
-				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
-				fieldView.textField.textColor = UIColor.placeholderText
-				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
-			} else {
-				fieldView.placeholderView.backgroundColor = .white
-				fieldView.textField.textColor = .gray
-				fieldView.placeholderView.hintComponentView.label.textColor = .gray
-			}
-		}
-	}
 
 	// MARK: - Helpers
 
@@ -238,11 +189,9 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 
 		rootStackView.addArrangedSubview(verticalStackView)
 
-		cardHolderFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cardHolderFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardHolderFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cardNumberFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cardNumberFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cardNumberFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 		verticalStackView.addArrangedSubview(cardNumberFieldView)
 
 		switch fieldsDistribution {
@@ -265,7 +214,7 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 		/// Set UI Theme
 		fieldViews.forEach { item in
 			item.updateUI(for: .initial)
-			item.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+			item.textField.padding = VGSUIConstants.FormUI.textFieldPaddings
 		}
 
 		fieldViews.first?.textField.becomeFirstResponder()
@@ -281,11 +230,9 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 			horizonalStackView.axis = .vertical
 		}
 
-		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
 		horizonalStackView.addArrangedSubview(expDateFieldView)
 		horizonalStackView.addArrangedSubview(cvcFieldView)
@@ -294,11 +241,9 @@ internal class VGSCardDetailsSectionView: UIView, VGSFormSectionViewProtocol {
 	}
 
 	private func setupAllInSingleLine() {
-		expDateFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		expDateFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		expDateFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
-		cvcFieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-		cvcFieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+		cvcFieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 
 		verticalStackView.axis = .horizontal
 		verticalStackView.addArrangedSubview(expDateFieldView)

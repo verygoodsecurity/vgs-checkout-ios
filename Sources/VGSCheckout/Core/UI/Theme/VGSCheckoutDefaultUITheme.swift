@@ -12,8 +12,8 @@ import UIKit
 /// Default Checkout UI Theme settings.
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
-  /// The textfield’s background color. Default is `.vgsSystemBackground`.
-  public var textFieldBackgroundColor: UIColor = .vgsSystemBackground
+  /// The textfield’s background color. Default is `.clear`.
+  public var textFieldBackgroundColor: UIColor = .clear
 
 	/// The textfield’s border background color. Default is `.systemGray`.
   public var textFieldBorderColor: UIColor = .systemGray
@@ -30,11 +30,11 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	/// The font of the textfield. Default is `.body` with `.medium` weight.
 	public var textFieldTextFont: UIFont = .vgsPreferredFont(forTextStyle: .body, weight: .medium)
 
-	/// The text color of the textfield hint (above the text field). Default is `.vgsTextFieldHintTextColor` (black).
-	public var textFieldHintTextColor: UIColor = .vgsTextFieldHintTextColor
+	/// The text color of the textfield hint (above the text field). Default is `.vgsSystemGray2Color` (black).
+	public var textFieldHintTextColor: UIColor = .vgsSystemGray2Color
 
-	/// The font of the textfield hint (above the text field). Default is `.caption1` with `.semibold` weight.
-	public var textFieldHintTextFont: UIFont = .vgsPreferredFont(forTextStyle: .caption1, weight: .semibold)
+	/// The font of the textfield hint (above the text field). Default is `.caption1`.
+	public var textFieldHintTextFont: UIFont = .preferredFont(forTextStyle: .caption1)
 
 	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground

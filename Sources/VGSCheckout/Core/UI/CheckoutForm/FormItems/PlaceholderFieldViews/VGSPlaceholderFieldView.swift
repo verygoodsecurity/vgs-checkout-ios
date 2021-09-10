@@ -28,6 +28,8 @@ internal class VGSPlaceholderFieldView: UIView {
 		stackView.axis = .vertical
 		stackView.alignment = .fill
 		stackView.spacing = 6
+		stackView.isLayoutMarginsRelativeArrangement = true
+
 		return stackView
 	}()
 

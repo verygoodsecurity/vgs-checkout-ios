@@ -13,9 +13,6 @@ internal class VGSFieldViewsManager {
 	/// Form items.
 	private (set) internal var fieldViews: [VGSTextFieldViewProtocol]
 
-	/// Form section views.
-	private (set) internal var formSectionViews: [VGSFormSectionViewProtocol] = []
-
 	/// Initializer.
 	/// - Parameters:
 	///   - fieldViews: `[VGSTextFieldViewProtocol]` object, an array of `VGSTextFieldViewProtocol` items.
@@ -35,21 +32,10 @@ internal class VGSFieldViewsManager {
 		return fieldViews.map({return $0.textField})
 	}
 
-	/// All form blocks.
-	internal var sectionBlocks: [VGSAddCardSectionBlock] {
-		return Array(Set(fieldViews.map({return $0.fieldType.sectionBlock})))
-	}
-
 	/// Append form items.
 	/// - Parameter items: `[VGSTextFieldViewProtocol]` object, array of form items.
 	internal func appendFieldViews(_ views: [VGSTextFieldViewProtocol]) {
 		fieldViews = fieldViews + views
-	}
-
-	/// Appends form section views.
-	/// - Parameter views: `[VGSTextFieldViewProtocol]` object, array of form section views.
-	internal func appendFormSectionViews(_ views: [VGSFormSectionViewProtocol]) {
-		formSectionViews = formSectionViews + views
 	}
 
 	/// Removes field view from validation manager.

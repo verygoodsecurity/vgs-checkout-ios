@@ -18,8 +18,8 @@ internal class VGSDialogHelper {
 	///   - completion: `(() -> Void)?` object, completion block triggered on alert action button tap.
 	internal static func presentErrorAlertDialog(with message: String, in viewController: UIViewController, completion: (() -> Void)?) {
 
-		let title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: 		"vgs_checkout_error_dialog_title_something_went_wrong_error")
-		let okButtonTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: 		"vgs_checkout_error_dialog_ok_button_title")
+		let title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_error_dialog_title_something_went_wrong_error")
+		let okButtonTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_error_dialog_ok_button_title")
 
 		presentAlertDialog(with: title, message: message, okActionTitle: okButtonTitle, in: viewController, completion: completion)
 	}

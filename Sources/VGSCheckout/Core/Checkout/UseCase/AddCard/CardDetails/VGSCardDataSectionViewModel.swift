@@ -78,14 +78,13 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
     self.cardDetailsSectionView = VGSCardDetailsSectionView(paymentInstrument: paymentInstrument, uiTheme: uiTheme)
 		self.formValidationHelper = formValidationHelper
 		self.autoFocusManager = autoFocusManager
-//		self.formValidationHelper = VGSFormValidationHelper(formItems: cardFormView.formItems, validationBehaviour: validationBehavior)
-//		self.autoFocusManager = VGSFormAutofocusManager(formItemsManager: VGSFormItemsManager(formItems: cardFormView.formItems))
 
 		buildForm()
 	}
 
 	// MARK: - Interface
 
+	/// Builds form.
 	internal func buildForm() {
 		cardDetailsSectionView.translatesAutoresizingMaskIntoConstraints = false
 		
@@ -96,22 +95,27 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 			setupCardForm(with: multiplexingConfig)
 		}
 
-        for item in fieldViews {
-          item.placeholderView.delegate = self
-          item.delegate = self
-        }
+		for item in fieldViews {
+			item.placeholderView.delegate = self
+			item.delegate = self
+		}
 	}
 
 	// MARK: - Helpers
 
+	/// Setup card form with vault config.
+	/// - Parameter vaultConfiguration: `VGSCheckoutConfiguration` object, vault configuration.
 	private func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: vaultConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
+	/// Setup card form with multiplexing config.
+	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
 	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
+	/// Handles tap in form views to make textField first responder when tap is outside the textField.
 	func didTap(in formView: VGSPlaceholderFieldView) {
 		for item in fieldViews {
 			if item.placeholderView === formView {
@@ -150,7 +154,6 @@ extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
     
     func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
         updateSecurityCodeFieldIfNeeded(for: fieldView)
-        formValidationHelper.updateFieldViewOnEditingTextField(fieldView)
         updateFormState()
     }
 }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-///  VGSCheckout configuration, public interface.
+/// VGSCheckout configuration, public interface.
 public protocol VGSCheckoutConfigurationProtocol {
   
   /// UI elements configuration theme.
@@ -39,10 +39,24 @@ internal enum VGSPaymentFlowIdentifier {
 /// Defines paymnet processing flow.
 internal enum VGSPaymentInstrument {
 
+	/**
+	 Payment instrument for general flow.
+
+	 - Parameters:
+			- configuration: `VGSCheckoutConfiguration` object, vault configuration.
+	*/
 	case vault(_ configuration: VGSCheckoutConfiguration)
 
+	/**
+	 Payment instrument for multiplexing flow.
+
+	 - Parameters:
+			- configuration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
+	*/
 	case multiplexing(_ configuration: VGSCheckoutMultiplexingConfiguration)
 
+	/// Initializer (failable).
+	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
 	init?(configuration: VGSCheckoutConfigurationProtocol) {
 		guard let checkoutConfiguration = configuration as? VGSCheckoutBasicConfigurationProtocol else {
 			return nil
@@ -64,7 +78,5 @@ internal enum VGSPaymentInstrument {
 				return nil
 			}
 		}
-
-		return nil
 	}
 }

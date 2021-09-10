@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds UI for address details.
-internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewProtocol {
+internal class VGSBillingAddressDetailsSectionView: UIView {
 
 	/// UI Theme.
   internal var uiTheme: VGSCheckoutThemeProtocol
@@ -163,35 +163,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 
 	// MARK: - Interface
 
-	/// Update Array of form blocks with validation state.
-	internal func updateSectionBlocks(_ sectionBlocks: [VGSAddCardSectionBlock], isValid: Bool) {
-		sectionBlocks.forEach { sectionBlock in
-      updateSectionBlock(sectionBlock, isValid: isValid)
-		}
-	}
-
-	/// Update Form block items UI with validation state.
-	internal func updateSectionBlock(_ block: VGSAddCardSectionBlock, isValid: Bool) {
-	}
-
-	// TODO: - refactor duplicated code for processing state styles.
-	/// Disable input views for processing state.
-	internal func updateUIForProcessingState() {
-
-		// Update form fields.
-		fieldViews.forEach { fieldView in
-			if #available(iOS 13.0, *) {
-				fieldView.placeholderView.backgroundColor = .systemGroupedBackground
-				fieldView.textField.textColor = UIColor.placeholderText
-				fieldView.placeholderView.hintComponentView.label.textColor = UIColor.placeholderText
-			} else {
-				fieldView.placeholderView.backgroundColor = .white
-				fieldView.textField.textColor = .gray
-				fieldView.placeholderView.hintComponentView.label.textColor = .gray
-			}
-		}
-	}
-
 	// MARK: - Helpers
 
 	/// Setup UI and layout.
@@ -232,9 +203,8 @@ internal class VGSBillingAddressDetailsSectionView: UIView, VGSFormSectionViewPr
 		fieldViews.forEach { fieldView in
 			print("fieldView: \(fieldView)")
 			fieldView.updateUI(for: .initial)
-			fieldView.placeholderView.stackView.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-			fieldView.textField.padding = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-			fieldView.placeholderView.stackView.isLayoutMarginsRelativeArrangement = true
+			fieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
+			fieldView.textField.padding = VGSUIConstants.FormUI.textFieldPaddings
 		}
 	}
 }

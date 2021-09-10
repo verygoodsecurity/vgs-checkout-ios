@@ -12,6 +12,8 @@ internal class VGSAddCardFormView: VGSFormView {
 
 	/// Defines layout style.
 	internal enum LayoutStyle {
+
+		/// Full screen layout (checkout is being presented as view controller).
 		case fullScreen
 	}
 
@@ -19,14 +21,6 @@ internal class VGSAddCardFormView: VGSFormView {
 
 	/// Main view layout style.
 	internal let viewLayoutStyle: LayoutStyle
-
-	/// Pay with card header view.
-	internal lazy var payWithCardHeaderView: VGSPayWithCardHeaderView = {
-		let view = VGSPayWithCardHeaderView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		return view
-	}()
 
 	/// Background stack view.
 	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
@@ -57,7 +51,7 @@ internal class VGSAddCardFormView: VGSFormView {
 		super.init()
 
 		self.saveCardButton.delegate = self
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
+		stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
 

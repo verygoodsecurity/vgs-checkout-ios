@@ -107,6 +107,7 @@ internal class VGSFormViewController: UIViewController {
 		formKeyboardGuideBottomConstraint?.constant = heightOffset
 	}
 
+	/// Dismisses keyboard.
 	@objc fileprivate func dismissKeyboard() {
 		view.endEditing(true)
 	}

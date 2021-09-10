@@ -38,9 +38,8 @@ public class VGSCheckout {
 
 	/// Present drop-in checkout.
 	/// - Parameter viewController: `UIViewController` object, view controller to present checkout.
-	/// - Parameter theme: `Any` object. Theme for UI configuration will be used here. Empty object for now.
 	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
-	public func present(from viewController: UIViewController, theme: Any? = nil, animated: Bool = true) {
+	public func present(from viewController: UIViewController, animated: Bool = true) {
 
 		let checkoutViewController = addCardUseCaseManager.buildCheckoutViewController()
 		checkoutCoordinator.setRootViewController(checkoutViewController)
@@ -57,22 +56,25 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 		switch state {
 		case .cancelled:
 			checkoutCoordinator.dismissRootViewController(with: {
+				// Close checkout.
 				self.delegate?.checkoutDidCancel()
 			})
 		case .requestSubmitted(let requestResult):
 				switch requestResult {
 				case .success:
 					checkoutCoordinator.dismissRootViewController {
+						// Close checkout with success request result.
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 				case .failure(_, _, _, let error):
+					// Do not close checkout for `noConnection` error.
 					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
 						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {
 							// Reset UI state to valid (previous state before submit).
 							self.addCardUseCaseManager.state = .valid
 						})
 					} else {
-						// Close
+						// Close checkout with error request result.
 						checkoutCoordinator.dismissRootViewController {
 							self.delegate?.checkoutDidFinish(with: requestResult)
 						}

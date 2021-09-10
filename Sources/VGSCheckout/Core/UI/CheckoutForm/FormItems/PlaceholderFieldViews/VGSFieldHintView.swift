@@ -11,6 +11,19 @@ import UIKit
 /// Form component for hint.
 internal class VGSFieldHintView: UIView {
 
+	/// Defines hint accessory type.
+	internal enum HintItemType {
+
+		/// No accessory view.
+		case none
+
+		/// View for invalid state.
+		case invalid
+
+		/// Custom view.
+		case custom(UIView)
+	}
+
 	// MARK: - Vars
 
 	/// Stack view.
@@ -19,7 +32,7 @@ internal class VGSFieldHintView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .horizontal
 		stackView.alignment = .fill
-		stackView.spacing = 4
+		stackView.spacing = 6
 
 		return stackView
 	}()
@@ -28,24 +41,22 @@ internal class VGSFieldHintView: UIView {
 	internal lazy var label: UILabel = {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
+
 		label.adjustsFontForContentSizeCategory = true
-		label.font = UIFont.preferredFont(forTextStyle: .title3)
+    label.numberOfLines = 0
 
 		return label
 	}()
 
 	/// Accessory type, default is `none`.
-	internal var accessory: VGSCheckoutHintItemType = .none {
+	internal var accessory: HintItemType = .none {
 		didSet {
 			switch accessory {
 			case .none:
 				hideAllExceptLabel()
 			case .invalid:
-				hintImageViewContainer.isHidden = false
+				hintImageViewContainer.isHiddenInCheckoutStackView = false
 				hintImageView.image = UIImage(named: "invalid_state_icon", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
-			case .valid:
-				hintImageViewContainer.isHidden = false
-				hintImageView.image = UIImage(named: "valid_state_icon", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
 			case .custom(let view):
 				hideAllExceptLabel()
 				stackView.addArrangedSubview(view)
@@ -61,9 +72,9 @@ internal class VGSFieldHintView: UIView {
 		view.addSubview(hintImageView)
 
 		let constraints = [
-			hintImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			hintImageView.topAnchor.constraint(equalTo: view.topAnchor),
-			hintImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			view.widthAnchor.constraint(equalTo: hintImageView.widthAnchor),
+			hintImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			hintImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 		]
 
 		NSLayoutConstraint.activate(constraints)
@@ -76,7 +87,10 @@ internal class VGSFieldHintView: UIView {
 		imageView.contentMode = .scaleAspectFit
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 
-		imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+		imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+		imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+
+		// imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
 		return imageView
 	}()
 
@@ -101,23 +115,15 @@ internal class VGSFieldHintView: UIView {
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()
 
-		stackView.addArrangedSubview(label)
-		hintImageViewContainer.widthAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
 		stackView.addArrangedSubview(hintImageViewContainer)
+		stackView.addArrangedSubview(label)
 	}
 
 	/// Hide allv views except hint label.
 	internal func hideAllExceptLabel() {
 		let allOtherSubviewsExceptLabel = stackView.arrangedSubviews.filter { $0 != label}
 		allOtherSubviewsExceptLabel.forEach { view in
-			view.isHidden = true
+			view.isHiddenInCheckoutStackView = true
 		}
 	}
-}
-
-internal enum VGSCheckoutHintItemType {
-	case none
-	case valid
-	case invalid
-	case custom(UIView)
 }

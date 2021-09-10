@@ -44,26 +44,26 @@ internal enum VGSAddCardFormFieldType {
 	case postalCode
 
 	/// Corresponding form block.
-	internal var sectionBlock: VGSAddCardSectionBlock {
-		switch self {
-		case .cardholderName, .firstName, .lastName:
-			return .cardHolder
-		case .cardNumber, .expirationDate, .cvc:
-			return .cardDetails
-		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
-			return .addressInfo
-		}
-	}
-
-	/// Corresponding form section.
-	internal var formSection: VGSFormSection {
-		switch self {
-		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
-			return .card
-		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
-			return .billingAddress
-		}
-	}
+//	internal var sectionBlock: VGSAddCardSectionBlock {
+//		switch self {
+//		case .cardholderName, .firstName, .lastName:
+//			return .cardHolder
+//		case .cardNumber, .expirationDate, .cvc:
+//			return .cardDetails
+//		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
+//			return .addressInfo
+//		}
+//	}
+//
+//	/// Corresponding form section.
+//	internal var formSection: VGSFormSection {
+//		switch self {
+//		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
+//			return .card
+//		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
+//			return .billingAddress
+//		}
+//	}
 
 	/// Empty field name error.
 	internal var emptyFieldNameError: String {

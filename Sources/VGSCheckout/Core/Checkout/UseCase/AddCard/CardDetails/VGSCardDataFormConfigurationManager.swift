@@ -57,7 +57,6 @@ internal class VGSCardDataFormConfigurationManager {
 		expDateConfiguration.inputDateFormat = .shortYear
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
-	//        expCardDate.monthPickerFormat = .longSymbols
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true
@@ -78,7 +77,6 @@ internal class VGSCardDataFormConfigurationManager {
 				holderConfiguration.validationRules = VGSValidationRuleSet(rules: [
 					VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 				])
-				holderConfiguration.returnKeyType = .next
 
 				if let cardHolderName = fieldViews.first(where: {$0.fieldType == .cardholderName}) {
 					cardHolderName.textField.textAlignment = .natural
@@ -198,7 +196,7 @@ internal class VGSCardDataFormConfigurationManager {
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 		])
 		holderConfiguration.keyboardType = .namePhonePad
-		holderConfiguration.returnKeyType = .next
+		//holderConfiguration.returnKeyType = .next
 
 		cardHolderName.textField.configuration = holderConfiguration
 	}

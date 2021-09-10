@@ -20,6 +20,9 @@ internal class VGSTextFieldViewUIConfigurationHandler {
     
 		internal func applyTheme(_ theme: VGSCheckoutTextFieldViewUIAttributesProtocol) {
 
+			  // Set text field view background color - text field and placeholder view.
+			  view?.placeholderView.backgroundColor = theme.textFieldBackgroundColor
+
 			  // TextField UI.
         view?.textField.textColor = theme.textFieldTextColor
         view?.textField.font = theme.textFieldTextFont
@@ -36,18 +39,22 @@ internal class VGSTextFieldViewUIConfigurationHandler {
     
 		internal func initial() {
         applyTheme(theme.adapt(theme: theme, for: .initial))
+				view?.placeholderView.hintComponentView.accessory = .none
     }
     
 		internal func valid() {
         applyTheme(theme.adapt(theme: theme, for: .valid))
+				view?.placeholderView.hintComponentView.accessory = .none
     }
     
 		internal func invalid() {
         applyTheme(theme.adapt(theme: theme, for: .invalid))
+				view?.placeholderView.hintComponentView.accessory = .invalid
     }
     
 		internal func focused() {
         applyTheme(theme.adapt(theme: theme, for: .focused))
+				view?.placeholderView.hintComponentView.accessory = .none
     }
 }
 
