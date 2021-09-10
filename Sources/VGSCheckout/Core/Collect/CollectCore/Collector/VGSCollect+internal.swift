@@ -49,14 +49,14 @@ internal extension VGSCollect {
           
             let eventText = "NOT VALID FIELDS CONTENT!!!. Next fields configuration set as **isRequired** but fields' content is **nil** or **empty**: \(isRequiredErrorFields)"
             let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-            VGSCollectLogger.shared.forwardLogEvent(event)
+            VGSCheckoutLogger.shared.forwardLogEvent(event)
           
             errorFields[VGSSDKErrorInputDataRequired] = isRequiredErrorFields
         }
         if isRequiredValidOnlyErrorFields.count > 0 {
             let eventText = "NOT VALID FIELDS CONTENT!!!. Next fields configuration set as **sRequiredValidOnly** but fields' content didn't pass validation: \(isRequiredValidOnlyErrorFields)"
             let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-            VGSCollectLogger.shared.forwardLogEvent(event)
+            VGSCheckoutLogger.shared.forwardLogEvent(event)
             errorFields[VGSSDKErrorInputDataRequiredValid] = isRequiredValidOnlyErrorFields
         }
         
@@ -147,7 +147,7 @@ internal extension VGSCollect {
           if !Self.regionValid(region) {
             let eventText = "VGSCheckout CONFIGURATION ERROR: REGION STRING IS NOT VALID!!! region: \(region)"
             let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-            VGSCollectLogger.shared.forwardLogEvent(event)
+            VGSCheckoutLogger.shared.forwardLogEvent(event)
             
             assert(Self.regionValid(region), "❗VGSCheckout CONFIGURATION ERROR:: REGION IS NOT VALID!!!")
           }

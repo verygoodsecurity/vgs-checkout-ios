@@ -1,19 +1,19 @@
 //
-//  VGSCollectLoggingConfiguration.swift
+//  VGSCheckoutLoggingConfiguration.swift
 //  VGSCheckout
 //
 
 import Foundation
 
 /// Holds configuration for VGSCheckout logging.
-internal struct VGSCollectLoggingConfiguration {
+public struct VGSCheckoutLoggingConfiguration {
 
 	/// Log level. Default is `.none`.
-	internal var level: VGSLogLevel = .none
+	public var level: VGSCheckoutLogLevel = .none
 
 	/// `Bool` flag. Specify `true` to record VGSCheckout network session with success/failed requests. Default is `false`.
-	internal var isNetworkDebugEnabled: Bool = false
+	public var isNetworkDebugEnabled: Bool = false
 
 	/// `Bool` flag. Specify `true` to enable extensive debugging. Default is `false`.
-	internal var isExtensiveDebugEnabled: Bool = false
+	public var isExtensiveDebugEnabled: Bool = false
 }

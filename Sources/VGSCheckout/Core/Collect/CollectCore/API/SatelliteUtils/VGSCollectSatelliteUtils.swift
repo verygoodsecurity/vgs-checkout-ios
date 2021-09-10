@@ -39,7 +39,7 @@ internal class VGSCollectSatelliteUtils {
 		guard let satelliteHostname = hostname else {
 			let errorText = "SATELLITE CONFIGURATION ERROR! HOSTNAME NOT SET! SHOULD BE *http://localhost* or in local IP format  http://192.168.X.X"
 			let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			forwardAssertion(with: errorText)
 
@@ -67,7 +67,7 @@ internal class VGSCollectSatelliteUtils {
 			// Cannot build hostname URL for satellite.
 			let errorText = "SATELLITE CONFIGURATION ERROR! HOSTNAME \(satelliteHostname) IS NOT VALID AND CANNOT BE NORMALIZED FOR SATELLITE! SHOULD BE *http://localhost* or *http://192.168.*"
 			let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			forwardAssertion(with: errorText)
 			return nil
@@ -87,7 +87,7 @@ internal class VGSCollectSatelliteUtils {
 		// Normalize hostname. Create components to check hostname.
 		guard let normalizedHostName = hostname.normalizedHostname(), let components = URLComponents(string: normalizedHostName) else {
 			let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			forwardAssertion(with: errorText)
 
@@ -112,7 +112,7 @@ internal class VGSCollectSatelliteUtils {
 		}
 
 		let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-		VGSCollectLogger.shared.forwardLogEvent(event)
+		VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 		forwardAssertion(with: errorText)
 
@@ -126,7 +126,7 @@ internal class VGSCollectSatelliteUtils {
 		guard environment == Environment.sandbox.rawValue else {
 			let errorText = "CONFIGURATION ERROR! ENVIRONMENT *\(environment)* IS NOT *sandbox*! SATELLITE IS AVAILABLE ONLY FOR *sandbox*!"
 			let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			forwardAssertion(with: errorText)
 
@@ -143,7 +143,7 @@ internal class VGSCollectSatelliteUtils {
 		guard Constants.validPortNumbers.contains(port) else {
 			let errorText = "SATELLITE CONFIGURATION ERROR! PORT \(port) is invalid! Should be in range *1...65535*."
 			let event = VGSLogEvent(level: .warning, text: errorText, severityLevel: .error)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			forwardAssertion(with: errorText)
 

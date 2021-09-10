@@ -1,12 +1,12 @@
 //
-//  VGSLogLevel.swift
+//  VGSCheckoutLogLevel.swift
 //  VGSCheckout
 //
 
 import Foundation
 
 /// Defines levels of logging.
-internal enum VGSLogLevel: String {
+public enum VGSCheckoutLogLevel: String {
 		/// Log *all* events including errors and warnings.
 		case info
 

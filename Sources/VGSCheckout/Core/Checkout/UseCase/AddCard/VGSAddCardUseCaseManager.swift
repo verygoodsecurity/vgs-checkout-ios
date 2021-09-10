@@ -103,8 +103,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	// MARK: - Initialization
 
   init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
-		VGSCollectLogger.shared.configuration.isNetworkDebugEnabled = true
-		VGSCollectLogger.shared.configuration.level = .info
+		VGSCheckoutLogger.shared.configuration.isNetworkDebugEnabled = true
+		VGSCheckoutLogger.shared.configuration.level = .info
 
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
