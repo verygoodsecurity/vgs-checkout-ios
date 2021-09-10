@@ -196,6 +196,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	private func showFormValidationErrors() {
 		cardDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
 		addressDataSectionViewModel.formValidationHelper.updateFormSectionViewOnSubmit()
+		if let firstInvalidField = cardDataSectionViewModel.formValidationHelper.fieldViewsWithValidationErrors.first {
+			let visibleRect = firstInvalidField.placeholderView.convert(firstInvalidField.placeholderView.frame, to: addCardSectionFormView.scrollView)
+			addCardSectionFormView.scrollView.scrollRectToVisible(visibleRect, animated: true)
+		}
 	}
 
 	/// Updates `.isEnabled` state for left bar button item if checkout is dislayed in viewController.
