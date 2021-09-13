@@ -89,6 +89,8 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		// Set picker fields delegate.
 		statePickerField?.pickerSelectionDelegate = self
 		countryPickerField?.pickerSelectionDelegate = self
+
+		lastSelectedCountryCode = countryPickerField?.selectedOutputValue
 	}
 
 	// MARK: - Helpers
@@ -155,6 +157,9 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 		return dataSource.regions
 	}
+
+	/// Current selected country.
+	internal var lastSelectedCountryCode: String? = nil
 }
 
 // MARK: - VGSTextFieldDelegate
@@ -237,6 +242,15 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 					print("currentCode found \(currentCountryCode)")
 				}
 			}
+
+			// Clear postal code on country change.
+			if let previousCountryCode = lastSelectedCountryCode {
+				if previousCountryCode != currentCountryCode {
+					postalCodeFieldView?.textField.setText(nil)
+				}
+			}
+
+			lastSelectedCountryCode = currentCountryCode
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
