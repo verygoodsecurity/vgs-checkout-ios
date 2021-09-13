@@ -96,6 +96,8 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 			item.delegate = self
 		}
 
+		billingAddressFormView.cityFieldView.validationErrorView.isLastRow = true
+
 		if let lastFieldView = fieldViews.last {
 			lastFieldView.validationErrorView.isLastRow = true
 		}

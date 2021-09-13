@@ -189,7 +189,7 @@ internal class VGSAddressDataFormConfigurationManager {
 			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
 
 			if isAddressVerificationAvailable {
-				addressFormView.stateAndPostalCodeStackView.isHiddenInCheckoutStackView = false
+				addressFormView.cityAndPostalCodeStackView.isHiddenInCheckoutStackView = false
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {
@@ -206,7 +206,7 @@ internal class VGSAddressDataFormConfigurationManager {
 				// Add address fields to validation manager again in the correct order.
 				formValidationHelper.fieldViewsManager.appendFieldViews([addressFormView.addressLine1FieldView, addressFormView.addressLine2FieldView, addressFormView.cityFieldView,  addressFormView.postalCodeFieldView])
 			} else {
-				addressFormView.stateAndPostalCodeStackView.isHiddenInCheckoutStackView = true
+				addressFormView.cityAndPostalCodeStackView.isHiddenInCheckoutStackView = true
 				addressFormView.fieldViews.forEach { fieldView in
 					let fieldType = fieldView.fieldType
 					switch fieldType {

@@ -134,13 +134,14 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 		return stackView
 	}()
 
-	/// Horizontal stack view for state and cvc.
-	internal lazy var stateAndPostalCodeStackView: UIStackView = {
+	/// Horizontal stack view for city and postal code.
+	internal lazy var cityAndPostalCodeStackView: UIStackView = {
 		let stackView = UIStackView(frame: .zero)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 
 		stackView.distribution = .fillEqually
 		stackView.axis = .horizontal
+		stackView.spacing = 20
 
 		return stackView
 	}()
@@ -184,11 +185,11 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 		verticalStackView.addArrangedSubview(countryFieldView)
 		verticalStackView.addArrangedSubview(addressLine1FieldView)
 		verticalStackView.addArrangedSubview(addressLine2FieldView)
-		verticalStackView.addArrangedSubview(cityFieldView)
 
-		stateAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
+		cityAndPostalCodeStackView.addArrangedSubview(cityFieldView)
+		cityAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
-		verticalStackView.addArrangedSubview(stateAndPostalCodeStackView)
+		verticalStackView.addArrangedSubview(cityAndPostalCodeStackView)
 
 		// Gather all form items.
 		fieldViews = [
