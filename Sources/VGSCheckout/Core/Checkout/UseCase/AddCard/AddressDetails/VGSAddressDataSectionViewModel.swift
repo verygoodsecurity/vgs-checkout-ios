@@ -75,22 +75,6 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
   internal func buildForm() {
 		billingAddressFormView.translatesAutoresizingMaskIntoConstraints = false
 
-		let inputBlackTextColor: UIColor = {
-			if #available(iOS 13.0, *) {
-				return UIColor {(traits) -> UIColor in
-					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-				}
-			} else {
-				return .black
-			}
-		}()
-
-        vgsTextFields.forEach { textField in
-			textField.textColor = inputBlackTextColor
-			textField.font = UIFont.preferredFont(forTextStyle: .body)
-			textField.adjustsFontForContentSizeCategory = true
-		}
-
 		for item in fieldViews {
 			item.placeholderView.delegate = self
 			item.delegate = self
