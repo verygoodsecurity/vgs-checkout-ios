@@ -45,7 +45,7 @@ internal extension APIClient {
 	static func logInvalidEnironmentEvent(_ regionalEnvironment: String) {
 		let eventText = "CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!! region \(regionalEnvironment)"
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-		VGSCollectLogger.shared.forwardLogEvent(event)
+		VGSCheckoutLogger.shared.forwardLogEvent(event)
 		assert(VGSCollect.regionalEnironmentStringValid(regionalEnvironment), "❗VGSCheckout CONFIGURATION ERROR: ENVIRONMENT STRING IS NOT VALID!!!")
 	}
 
@@ -54,7 +54,7 @@ internal extension APIClient {
 	static func logInvalidVaultIDEvent(_ vaultID: String) {
 		let eventText = "CONFIGURATION ERROR: VAULT ID IS NOT VALID OR NOT SET!!! vaultID: \(vaultID)"
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-		VGSCollectLogger.shared.forwardLogEvent(event)
+		VGSCheckoutLogger.shared.forwardLogEvent(event)
 		assert(VGSCollect.tenantIDValid(vaultID), "❗VGSCheckout CONFIGURATION ERROR: : VAULT ID IS NOT VALID!!!")
 	}
 
@@ -67,6 +67,6 @@ internal extension APIClient {
 
 		let eventText = "CONFIGURATION ERROR: NOT VALID ORGANIZATION PARAMETERS!!! vaultID: \(vaultID), environment: \(regionalEnvironment)"
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
-		VGSCollectLogger.shared.forwardLogEvent(event)
+		VGSCheckoutLogger.shared.forwardLogEvent(event)
 	}
 }

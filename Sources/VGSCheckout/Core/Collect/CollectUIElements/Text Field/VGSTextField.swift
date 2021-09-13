@@ -88,7 +88,7 @@ internal class VGSTextField: UIView {
             guard let configuration = configuration else {
               let message = "VGSTextField CONFIGURATION ERROR! VGSConfiguration is REQUIRED!!!"
               let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
-              VGSCollectLogger.shared.forwardLogEvent(event)
+              VGSCheckoutLogger.shared.forwardLogEvent(event)
               return
             }
           setupField(with: configuration)
@@ -181,7 +181,6 @@ internal class VGSTextField: UIView {
     if let collector = configuration.vgsCollector {
       vgsCollector = collector
       collector.registerTextFields(textField: [self])
-      VGSCheckoutAnalyticsClient.shared.trackFormEvent(collector.formAnalyticsDetails, type: .fieldInit, extraData: ["field": fieldType.stringIdentifier])
     }
   }
 

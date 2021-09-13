@@ -87,7 +87,7 @@ internal class APIClient {
 
 			let message = "Satellite has been configured successfully! Satellite URL is: \(satelliteURL.absoluteString)"
 			let event = VGSLogEvent(level: .info, text: message)
-			VGSCollectLogger.shared.forwardLogEvent(event)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 			return
 		}
@@ -97,7 +97,7 @@ internal class APIClient {
 			if let name = hostname, name.isEmpty {
 				let message = "Hostname is invalid (empty) and will be ignored. Default Vault URL will be used."
 				let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
-				VGSCollectLogger.shared.forwardLogEvent(event)
+				VGSCheckoutLogger.shared.forwardLogEvent(event)
 			}
 
 			// Use vault URL.
@@ -117,7 +117,7 @@ internal class APIClient {
 			guard let requestURL = url else {
 				let message = "CONFIGURATION ERROR: NOT VALID ORGANIZATION PARAMETERS!!! CANNOT BUILD URL!!!"
 				let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
-				VGSCollectLogger.shared.forwardLogEvent(event)
+				VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 				let invalidURLError = VGSError(type: .invalidConfigurationURL)
 				block?(.failure(invalidURLError.code, nil, nil, invalidURLError))
@@ -168,13 +168,13 @@ internal class APIClient {
 		request.allHTTPHeaderFields = headers
 
 		// Log request.
-		VGSCollectRequestLogger.logRequest(request, payload: value)
+		VGSNetworkRequestLogger.logRequest(request, payload: value)
 
 		// Send data.
 		urlSession.dataTask(with: request) { (data, response, error) in
 			DispatchQueue.main.async {
 				if let error = error as NSError? {
-					VGSCollectRequestLogger.logErrorResponse(response, data: data, error: error, code: error.code)
+					VGSNetworkRequestLogger.logErrorResponse(response, data: data, error: error, code: error.code)
 					block?(.failure(error.code, data, response, error))
 					return
 				}
@@ -182,11 +182,11 @@ internal class APIClient {
 
 				switch statusCode {
 				case 200..<300:
-					VGSCollectRequestLogger.logSuccessResponse(response, data: data, code: statusCode)
+					VGSNetworkRequestLogger.logSuccessResponse(response, data: data, code: statusCode)
 					block?(.success(statusCode, data, response))
 					return
 				default:
-					VGSCollectRequestLogger.logErrorResponse(response, data: data, error: error, code: statusCode)
+					VGSNetworkRequestLogger.logErrorResponse(response, data: data, error: error, code: statusCode)
 					block?(.failure(statusCode, data, response, error))
 					return
 				}
@@ -232,7 +232,7 @@ extension APIClient {
 
 						let text = "✅ Success! VGSSCollectSDK hostname \(hostname) has been successfully resolved and will be used for requests!"
 						let event = VGSLogEvent(level: .info, text: text)
-						VGSCollectLogger.shared.forwardLogEvent(event)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 						VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .success, extraData: ["hostname": hostname])
 					}
@@ -241,7 +241,7 @@ extension APIClient {
 					guard let strongSelf = self, let validVaultURL = self?.vaultUrl else {
 						let text = "No VGSCollect instance and any valid url"
 						let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
-						VGSCollectLogger.shared.forwardLogEvent(event)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
 						return
 					}
 
@@ -253,7 +253,7 @@ extension APIClient {
 
 					let text = "VAULT URL WILL BE USED!"
 					let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
-					VGSCollectLogger.shared.forwardLogEvent(event)
+					VGSCheckoutLogger.shared.forwardLogEvent(event)
 
 					VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticDetails, type: .hostnameValidation, status: .failed, extraData: ["hostname": hostname])
 					return

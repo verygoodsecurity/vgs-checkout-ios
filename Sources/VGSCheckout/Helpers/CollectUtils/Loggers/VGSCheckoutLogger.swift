@@ -1,21 +1,21 @@
 //
-//  VGSCollectLogger.swift
+//  VGSCheckoutLogger.swift
 //  VGSCheckout
 //
 
 import Foundation
 
-/// `VGSCollectLogger` encapsulates logging logic and debugging options for VGSCheckout. Use `.configuration` property to setup these options. `VGSCollectLogger` logging implies only printing logs to Xcode console. It doesn't save logs to persistent store/local file, also it doesn't send debugging logs to backend services.
+/// `VGSCheckoutLogger` encapsulates logging logic and debugging options for VGSCheckout. Use `.configuration` property to setup these options. `VGSCheckoutLogger` logging implies only printing logs to Xcode console. It doesn't save logs to persistent store/local file, also it doesn't send debugging logs to backend services.
 /// **IMPORTANT** You should NOT use logging in your production configuration for live apps.
-internal final class VGSCollectLogger {
+public final class VGSCheckoutLogger {
 
   // MARK: - vars
 
 	/// Shared instance.
-	internal static var shared = VGSCollectLogger()
+	public static var shared = VGSCheckoutLogger()
 
 	/// Logging configuration. Check `VGSCollectLoggingConfiguration` for logging options.
-	internal var configuration: VGSCollectLoggingConfiguration = VGSCollectLoggingConfiguration()
+	public var configuration: VGSCheckoutLoggingConfiguration = VGSCheckoutLoggingConfiguration()
 
 	// MARK: - Private vars
 
@@ -27,7 +27,7 @@ internal final class VGSCollectLogger {
 
 	// MARK: - Initialization
 
-	/// Private init for `VGSCollectLogger`.
+	/// Private init for `VGSCheckoutLogger`.
 	private init() {
 		addLogger(VGSPrintingLogger())
 	}
@@ -76,7 +76,7 @@ internal final class VGSCollectLogger {
 	///   - level: `VGSLogLevel` object, should be event `level`.
 	///   - currentLevel: `VGSLogLevel` object, current logging level.
 	/// - Returns: `true` if event should be logged.
-	internal func shouldForwardEvent(with level: VGSLogLevel, currentLevel: VGSLogLevel) -> Bool {
+	internal func shouldForwardEvent(with level: VGSCheckoutLogLevel, currentLevel: VGSCheckoutLogLevel) -> Bool {
 		switch currentLevel {
 		case .none:
 			return false

@@ -29,7 +29,7 @@ internal struct VGSLogEvent {
 	}
 
 	/// Log level.
-	internal let level: VGSLogLevel
+	internal let level: VGSCheckoutLogLevel
 
 	/// Text to log.
 	internal let text: String
@@ -54,7 +54,7 @@ internal struct VGSLogEvent {
 	///   - file: `String` object, refers to filename of calling function.
 	///   - functionName: `String` object, refers to filename of calling function.
 	///   - lineNumber: `Int` object, refers to line number of calling function.
-	internal init(level: VGSLogLevel, text: String, severityLevel: SeverityLevel? = nil, file: String = #file, functionName: String = #function, lineNumber: Int = #line) {
+	internal init(level: VGSCheckoutLogLevel, text: String, severityLevel: SeverityLevel? = nil, file: String = #file, functionName: String = #function, lineNumber: Int = #line) {
 		self.text = text
 		self.severityLevel = severityLevel
 		self.level = level

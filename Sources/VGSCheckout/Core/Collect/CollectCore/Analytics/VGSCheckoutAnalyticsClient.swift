@@ -13,11 +13,9 @@ import UIKit
 
 /// :nodoc: VGS Analytics event type
 internal enum VGSAnalyticsEventType: String {
-  case fieldInit = "Init"
   case hostnameValidation = "HostNameValidation"
   case beforeSubmit = "BeforeSubmit"
   case submit = "Submit"
-  case scan = "Scan"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.
@@ -39,11 +37,14 @@ public class VGSCheckoutAnalyticsClient {
   
   /// Uniq id that should stay the same during application rintime
   public let vgsCheckoutSessionId = UUID().uuidString
-  
+
+	/// no:doc
   private init() {}
-  
+
+	/// Base URL.
   internal let baseURL = "https://vgs-collect-keeper.apps.verygood.systems/"
-  
+
+	/// Default headers.
   internal let defaultHttpHeaders: HTTPHeaders = {
     return ["Content-Type": "application/x-www-form-urlencoded" ]
   }()

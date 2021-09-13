@@ -75,26 +75,12 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
   internal func buildForm() {
 		billingAddressFormView.translatesAutoresizingMaskIntoConstraints = false
 
-		let inputBlackTextColor: UIColor = {
-			if #available(iOS 13.0, *) {
-				return UIColor {(traits) -> UIColor in
-					return traits.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
-				}
-			} else {
-				return .black
-			}
-		}()
-
-        vgsTextFields.forEach { textField in
-			textField.textColor = inputBlackTextColor
-			textField.font = UIFont.preferredFont(forTextStyle: .body)
-			textField.adjustsFontForContentSizeCategory = true
-		}
-
 		for item in fieldViews {
 			item.placeholderView.delegate = self
 			item.delegate = self
 		}
+
+		billingAddressFormView.cityFieldView.validationErrorView.isLastRow = true
 
 		if let lastFieldView = fieldViews.last {
 			lastFieldView.validationErrorView.isLastRow = true
@@ -103,6 +89,8 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		// Set picker fields delegate.
 		statePickerField?.pickerSelectionDelegate = self
 		countryPickerField?.pickerSelectionDelegate = self
+
+		lastSelectedCountryCode = countryPickerField?.selectedOutputValue
 	}
 
 	// MARK: - Helpers
@@ -169,6 +157,9 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 		return dataSource.regions
 	}
+
+	/// Current selected country.
+	internal var lastSelectedCountryCode: String? = nil
 }
 
 // MARK: - VGSTextFieldDelegate
@@ -251,6 +242,15 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 					print("currentCode found \(currentCountryCode)")
 				}
 			}
+
+			// Clear postal code on country change.
+			if let previousCountryCode = lastSelectedCountryCode {
+				if previousCountryCode != currentCountryCode {
+					postalCodeFieldView?.textField.setText(nil)
+				}
+			}
+
+			lastSelectedCountryCode = currentCountryCode
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")

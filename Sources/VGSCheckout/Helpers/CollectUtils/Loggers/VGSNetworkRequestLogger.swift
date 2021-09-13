@@ -1,12 +1,12 @@
 //
-//  VGSCollectRequestLogger.swift
+//  VGSNetworkRequestLogger.swift
 //  VGSCheckout
 //
 
 import Foundation
 
 /// Utilities to log network requests.
-internal class VGSCollectRequestLogger {
+internal class VGSNetworkRequestLogger {
 
 	/// Log sending request.
 	/// - Parameters:
@@ -14,7 +14,7 @@ internal class VGSCollectRequestLogger {
 	///   - payload: `VGSRequestPayloadBody` object, request payload.
 	internal static func logRequest(_ request: URLRequest, payload: JsonData?) {
 
-		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
+		if !VGSCheckoutLogger.shared.configuration.isNetworkDebugEnabled {return}
 
 		print("⬆️ Send VGSCheckout request url: \(stringFromURL(request.url))")
 		if let headers = request.allHTTPHeaderFields {
@@ -36,7 +36,7 @@ internal class VGSCollectRequestLogger {
 	///   - code: `Int` object, status code.
 	internal static func logErrorResponse(_ response: URLResponse?, data: Data?, error: Error?, code: Int) {
 
-		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
+		if !VGSCheckoutLogger.shared.configuration.isNetworkDebugEnabled {return}
 
 		if let url = response?.url {
 			print("❗Failed ⬇️ VGSCheckout request url: \(stringFromURL(url))")
@@ -71,7 +71,7 @@ internal class VGSCollectRequestLogger {
 	///   - code: `Int` object, status code.
 	internal static func logSuccessResponse(_ response: URLResponse?, data: Data?, code: Int) {
 
-		if !VGSCollectLogger.shared.configuration.isNetworkDebugEnabled {return}
+		if !VGSCheckoutLogger.shared.configuration.isNetworkDebugEnabled {return}
 
 		print("✅ Success ⬇️ VGSCheckout request url: \(stringFromURL(response?.url))")
 		print("✅ Success ⬇️ VGSCheckout response code: \(code)")
