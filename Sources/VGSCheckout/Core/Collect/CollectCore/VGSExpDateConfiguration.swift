@@ -13,7 +13,26 @@ import UIKit
 
 /// A class responsible for configuration `VGSTextField` with `fieldType = .expDate`. Extends `VGSConfiguration` class.
 internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutFormatSerializableProtocol {
-   
+
+	/// Initializer.
+	/// - Parameters:
+	///   - checkoutExpDateOptions: `VGSCheckoutExpirationDateOptions` object, exp date options.
+	///   - collect: `VGSCollect` object, collect instance.
+	convenience init(checkoutExpDateOptions: VGSCheckoutExpirationDateOptions, collect: VGSCollect) {
+		self.init(collector: collect, fieldName: checkoutExpDateOptions.fieldName)
+		serializers = checkoutExpDateOptions.serializers
+		inputDateFormat = checkoutExpDateOptions.inputDateFormat
+		outputDateFormat = checkoutExpDateOptions.outputDateFormat
+	}
+
+	/// Initializer.
+	/// - Parameters:
+	///   - vgs: `VGSCollect` object, collect instance.
+	///   - fieldName: `String` object, fieldname.
+	override internal init(collector vgs: VGSCollect, fieldName: String) {
+		super.init(collector: vgs, fieldName: fieldName)
+	}
+
   /// Input Source type. Default is `VGSTextFieldInputSource.datePicker`.
 	internal var inputSource: VGSTextFieldInputSource = .datePicker
   
