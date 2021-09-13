@@ -57,12 +57,12 @@
 		4405DC6D26844B30004A83AD /* VGSValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC5126844B30004A83AD /* VGSValidationRule.swift */; };
 		4405DC6E26844B30004A83AD /* VGSValidatior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC5226844B30004A83AD /* VGSValidatior.swift */; };
 		4405DC6F26844B30004A83AD /* VGSValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC5326844B30004A83AD /* VGSValidationError.swift */; };
-		4405DC8E26847247004A83AD /* VGSCollectLogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7226847247004A83AD /* VGSCollectLogLevel.swift */; };
-		4405DC8F26847247004A83AD /* VGSCollectLoggingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7326847247004A83AD /* VGSCollectLoggingConfiguration.swift */; };
-		4405DC9026847247004A83AD /* VGSCollectLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7426847247004A83AD /* VGSCollectLogger.swift */; };
-		4405DC9126847247004A83AD /* VGSCollectPrintingLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7526847247004A83AD /* VGSCollectPrintingLogger.swift */; };
-		4405DC9226847247004A83AD /* VGSCollectLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7626847247004A83AD /* VGSCollectLogEvent.swift */; };
-		4405DC9326847247004A83AD /* VGSCollectRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7726847247004A83AD /* VGSCollectRequestLogger.swift */; };
+		4405DC8E26847247004A83AD /* VGSCheckoutLogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7226847247004A83AD /* VGSCheckoutLogLevel.swift */; };
+		4405DC8F26847247004A83AD /* VGSCheckoutLoggingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7326847247004A83AD /* VGSCheckoutLoggingConfiguration.swift */; };
+		4405DC9026847247004A83AD /* VGSCheckoutLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7426847247004A83AD /* VGSCheckoutLogger.swift */; };
+		4405DC9126847247004A83AD /* VGSPrintingLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7526847247004A83AD /* VGSPrintingLogger.swift */; };
+		4405DC9226847247004A83AD /* VGSLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7626847247004A83AD /* VGSLogEvent.swift */; };
+		4405DC9326847247004A83AD /* VGSNetworkRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7726847247004A83AD /* VGSNetworkRequestLogger.swift */; };
 		4405DC9426847247004A83AD /* ExpDateFormatConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7926847247004A83AD /* ExpDateFormatConvertor.swift */; };
 		4405DC9526847247004A83AD /* UIDevice+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7B26847247004A83AD /* UIDevice+extension.swift */; };
 		4405DC9626847247004A83AD /* Calendar+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405DC7C26847247004A83AD /* Calendar+extension.swift */; };
@@ -305,12 +305,12 @@
 		4405DC5126844B30004A83AD /* VGSValidationRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSValidationRule.swift; sourceTree = "<group>"; };
 		4405DC5226844B30004A83AD /* VGSValidatior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSValidatior.swift; sourceTree = "<group>"; };
 		4405DC5326844B30004A83AD /* VGSValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSValidationError.swift; sourceTree = "<group>"; };
-		4405DC7226847247004A83AD /* VGSCollectLogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectLogLevel.swift; sourceTree = "<group>"; };
-		4405DC7326847247004A83AD /* VGSCollectLoggingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectLoggingConfiguration.swift; sourceTree = "<group>"; };
-		4405DC7426847247004A83AD /* VGSCollectLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectLogger.swift; sourceTree = "<group>"; };
-		4405DC7526847247004A83AD /* VGSCollectPrintingLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectPrintingLogger.swift; sourceTree = "<group>"; };
-		4405DC7626847247004A83AD /* VGSCollectLogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectLogEvent.swift; sourceTree = "<group>"; };
-		4405DC7726847247004A83AD /* VGSCollectRequestLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCollectRequestLogger.swift; sourceTree = "<group>"; };
+		4405DC7226847247004A83AD /* VGSCheckoutLogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutLogLevel.swift; sourceTree = "<group>"; };
+		4405DC7326847247004A83AD /* VGSCheckoutLoggingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutLoggingConfiguration.swift; sourceTree = "<group>"; };
+		4405DC7426847247004A83AD /* VGSCheckoutLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutLogger.swift; sourceTree = "<group>"; };
+		4405DC7526847247004A83AD /* VGSPrintingLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPrintingLogger.swift; sourceTree = "<group>"; };
+		4405DC7626847247004A83AD /* VGSLogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSLogEvent.swift; sourceTree = "<group>"; };
+		4405DC7726847247004A83AD /* VGSNetworkRequestLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSNetworkRequestLogger.swift; sourceTree = "<group>"; };
 		4405DC7926847247004A83AD /* ExpDateFormatConvertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpDateFormatConvertor.swift; sourceTree = "<group>"; };
 		4405DC7B26847247004A83AD /* UIDevice+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+extension.swift"; sourceTree = "<group>"; };
 		4405DC7C26847247004A83AD /* Calendar+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+extension.swift"; sourceTree = "<group>"; };
@@ -781,12 +781,12 @@
 		4405DC7126847247004A83AD /* Loggers */ = {
 			isa = PBXGroup;
 			children = (
-				4405DC7226847247004A83AD /* VGSCollectLogLevel.swift */,
-				4405DC7326847247004A83AD /* VGSCollectLoggingConfiguration.swift */,
-				4405DC7426847247004A83AD /* VGSCollectLogger.swift */,
-				4405DC7526847247004A83AD /* VGSCollectPrintingLogger.swift */,
-				4405DC7626847247004A83AD /* VGSCollectLogEvent.swift */,
-				4405DC7726847247004A83AD /* VGSCollectRequestLogger.swift */,
+				4405DC7226847247004A83AD /* VGSCheckoutLogLevel.swift */,
+				4405DC7326847247004A83AD /* VGSCheckoutLoggingConfiguration.swift */,
+				4405DC7426847247004A83AD /* VGSCheckoutLogger.swift */,
+				4405DC7526847247004A83AD /* VGSPrintingLogger.swift */,
+				4405DC7626847247004A83AD /* VGSLogEvent.swift */,
+				4405DC7726847247004A83AD /* VGSNetworkRequestLogger.swift */,
 			);
 			path = Loggers;
 			sourceTree = "<group>";
@@ -2106,13 +2106,13 @@
 				4405DC5C26844B30004A83AD /* VGSTextField.swift in Sources */,
 				44C4C8EB2664B18B00195505 /* VGSCVCFieldView.swift in Sources */,
 				44C4C8EF2664B18B00195505 /* VGSFormComponent.swift in Sources */,
-				4405DC9126847247004A83AD /* VGSCollectPrintingLogger.swift in Sources */,
+				4405DC9126847247004A83AD /* VGSPrintingLogger.swift in Sources */,
 				4405DC2626844AD8004A83AD /* APICustomHostStatus.swift in Sources */,
 				44E10A89269363A0001F0D44 /* VGSAddressDataProvider.swift in Sources */,
 				4405DC9B26847247004A83AD /* Collection+Extensions.swift in Sources */,
 				4405DC5D26844B30004A83AD /* VGSExpDateTextField.swift in Sources */,
 				4405DC9526847247004A83AD /* UIDevice+extension.swift in Sources */,
-				4405DC8F26847247004A83AD /* VGSCollectLoggingConfiguration.swift in Sources */,
+				4405DC8F26847247004A83AD /* VGSCheckoutLoggingConfiguration.swift in Sources */,
 				44D520CC26771AD8005AB588 /* VGSCreditCardAPIWorker.swift in Sources */,
 				4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */,
 				4405DCA026847247004A83AD /* VGSFieldNameToSubscriptMapper.swift in Sources */,
@@ -2121,7 +2121,7 @@
 				44E10ADB26A01FA0001F0D44 /* VGSAddCardFormFieldType.swift in Sources */,
 				4405DC2226844AD8004A83AD /* HTTPMethod.swift in Sources */,
 				4405DC6826844B30004A83AD /* VGSValidationRuleLuhnCheck.swift in Sources */,
-				4405DC8E26847247004A83AD /* VGSCollectLogLevel.swift in Sources */,
+				4405DC8E26847247004A83AD /* VGSCheckoutLogLevel.swift in Sources */,
 				4405DC6E26844B30004A83AD /* VGSValidatior.swift in Sources */,
 				44985D4D2692F03C00A4BB42 /* VGSFieldViewValidationManager.swift in Sources */,
 				4405DC6226844B30004A83AD /* VGSCVCTextField.swift in Sources */,
@@ -2131,7 +2131,7 @@
 				4405DC2726844AD8004A83AD /* VGSConfiguration.swift in Sources */,
 				44C4C8FE2664B3B900195505 /* UIColor+Extensions.swift in Sources */,
 				44FF1A6226C1362800BA85AF /* VGSDialogHelper.swift in Sources */,
-				4405DC9326847247004A83AD /* VGSCollectRequestLogger.swift in Sources */,
+				4405DC9326847247004A83AD /* VGSNetworkRequestLogger.swift in Sources */,
 				4405DC6126844B30004A83AD /* MaskedTextField+security.swift in Sources */,
 				4405DC1726844AD8004A83AD /* VGSCollect.swift in Sources */,
 				44EC94FC26690D7900CE04F4 /* VGSCheckoutCardHolderOptions.swift in Sources */,
@@ -2139,7 +2139,7 @@
 				4405DC6626844B30004A83AD /* VGSTextFieldDelegate.swift in Sources */,
 				4405DCB826848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift in Sources */,
 				44E10A8B2693641D001F0D44 /* VGSCardDataFormConfigurationManager.swift in Sources */,
-				4405DC9026847247004A83AD /* VGSCollectLogger.swift in Sources */,
+				4405DC9026847247004A83AD /* VGSCheckoutLogger.swift in Sources */,
 				44D520F226788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift in Sources */,
 				44C4C8E02664B18B00195505 /* VGSCardDetailsSectionView.swift in Sources */,
 				44C4C8DF2664B18B00195505 /* VGSCheckoutHeaderView.swift in Sources */,
@@ -2221,7 +2221,7 @@
 				44EC95102669EE8700CE04F4 /* VGSCheckoutHTTPMethod.swift in Sources */,
 				4405DC9426847247004A83AD /* ExpDateFormatConvertor.swift in Sources */,
 				4438578326B022EE00EE5C7F /* VGSCheckoutBillingAddressPostalCodeOptions.swift in Sources */,
-				4405DC9226847247004A83AD /* VGSCollectLogEvent.swift in Sources */,
+				4405DC9226847247004A83AD /* VGSLogEvent.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFieldView.swift in Sources */,
 				44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */,
 				4405DC5E26844B30004A83AD /* VGSTextField+UIBuilder.swift in Sources */,

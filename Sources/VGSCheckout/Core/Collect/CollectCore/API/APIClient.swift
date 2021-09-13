@@ -168,13 +168,13 @@ internal class APIClient {
 		request.allHTTPHeaderFields = headers
 
 		// Log request.
-		VGSCollectRequestLogger.logRequest(request, payload: value)
+		VGSNetworkRequestLogger.logRequest(request, payload: value)
 
 		// Send data.
 		urlSession.dataTask(with: request) { (data, response, error) in
 			DispatchQueue.main.async {
 				if let error = error as NSError? {
-					VGSCollectRequestLogger.logErrorResponse(response, data: data, error: error, code: error.code)
+					VGSNetworkRequestLogger.logErrorResponse(response, data: data, error: error, code: error.code)
 					block?(.failure(error.code, data, response, error))
 					return
 				}
@@ -182,11 +182,11 @@ internal class APIClient {
 
 				switch statusCode {
 				case 200..<300:
-					VGSCollectRequestLogger.logSuccessResponse(response, data: data, code: statusCode)
+					VGSNetworkRequestLogger.logSuccessResponse(response, data: data, code: statusCode)
 					block?(.success(statusCode, data, response))
 					return
 				default:
-					VGSCollectRequestLogger.logErrorResponse(response, data: data, error: error, code: statusCode)
+					VGSNetworkRequestLogger.logErrorResponse(response, data: data, error: error, code: statusCode)
 					block?(.failure(statusCode, data, response, error))
 					return
 				}
