@@ -18,10 +18,10 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutForma
 	internal var inputSource: VGSTextFieldInputSource = .datePicker
   
   /// Input date format to convert.
-	internal var inputDateFormat: VGSCardExpDateFormat?
+	internal var inputDateFormat: VGSCheckoutCardExpDateFormat?
   
   /// Output date format.
-	internal var outputDateFormat: VGSCardExpDateFormat?
+	internal var outputDateFormat: VGSCheckoutCardExpDateFormat?
   
   /// Output date format.
 	internal var serializers: [VGSCheckoutFormatSerializerProtocol] = []
@@ -83,11 +83,11 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutForma
 /// Implement `FormatConvertable` protocol.
 extension VGSExpDateConfiguration: FormatConvertable {
 
-  internal var outputFormat: VGSCardExpDateFormat? {
+  internal var outputFormat: VGSCheckoutCardExpDateFormat? {
     return outputDateFormat
   }
 
-  internal var inputFormat: VGSCardExpDateFormat? {
+  internal var inputFormat: VGSCheckoutCardExpDateFormat? {
     return inputDateFormat
   }
   

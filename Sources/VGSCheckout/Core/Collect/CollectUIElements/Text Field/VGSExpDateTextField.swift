@@ -179,7 +179,7 @@ private extension VGSExpDateTextField {
     func updateTextFieldWithDatePickerSelection() {
       let month = months[picker.selectedRow(inComponent: monthPickerComponent)]
       let year = years[picker.selectedRow(inComponent: yearPickerComponent)]
-      let inputDateFormat: VGSCardExpDateFormat
+      let inputDateFormat: VGSCheckoutCardExpDateFormat
       
       /// Check if specific `.inputFormat` is set in field configuration
       if let config = configuration as? VGSExpDateConfiguration, let fieldDateFormat = config.inputFormat {

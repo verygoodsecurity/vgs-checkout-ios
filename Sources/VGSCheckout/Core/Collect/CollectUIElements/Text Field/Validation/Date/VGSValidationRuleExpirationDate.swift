@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Payment Card Expiration Date Format
-internal enum VGSCardExpDateFormat {
+/// Payment Card Expiration Date Format.
+public enum VGSCheckoutCardExpDateFormat {
   
   /// Exp.Date in format mm/yy: 01/22
   case shortYear
@@ -61,7 +61,7 @@ Validate input in scope of matching card expiration date format and time range.
 internal struct VGSValidationRuleCardExpirationDate: VGSValidationRuleProtocol {
 
   /// Payment Card Expiration Date Format
-  public let dateFormat: VGSCardExpDateFormat
+  public let dateFormat: VGSCheckoutCardExpDateFormat
   
   /// Validation Error
   public let error: VGSValidationError
@@ -71,7 +71,7 @@ internal struct VGSValidationRuleCardExpirationDate: VGSValidationRuleProtocol {
   /// - Parameters:
   ///   - error:`VGSValidationError` - error on failed validation relust.
   ///   - dateFormat: `CardExpDateFormat` date format
-  public init(dateFormat: VGSCardExpDateFormat = .shortYear, error: VGSValidationError) {
+  public init(dateFormat: VGSCheckoutCardExpDateFormat = .shortYear, error: VGSValidationError) {
         self.dateFormat = dateFormat
         self.error = error
     }
