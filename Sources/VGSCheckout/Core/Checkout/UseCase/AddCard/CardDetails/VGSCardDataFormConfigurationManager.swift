@@ -45,11 +45,11 @@ internal class VGSCardDataFormConfigurationManager {
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
 
-		/// Default .expDate format is "##/##"
-		expDateConfiguration.formatPattern = "##/##"
-
 		if let expDateFormatPattern = expDateOptions.inputDateFormat?.inputFormatPattern {
 			expDateConfiguration.formatPattern = expDateFormatPattern
+		} else {
+			/// Default .expDate format is "##/##"
+			expDateConfiguration.formatPattern = "##/##"
 		}
 
 		/// Update validation rules
