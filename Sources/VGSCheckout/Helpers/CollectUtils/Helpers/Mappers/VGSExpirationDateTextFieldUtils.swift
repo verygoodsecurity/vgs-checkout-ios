@@ -11,7 +11,7 @@ import Foundation
 internal final class VGSExpirationDateTextFieldUtils {
   
   /// Map the date components to expected VGSCardExpDateFormat
-  internal static func mapDatePickerExpirationDataForFieldFormat(_ format: VGSCardExpDateFormat, month: Int, year: Int) -> String {
+  internal static func mapDatePickerExpirationDataForFieldFormat(_ format: VGSCheckoutCardExpDateFormat, month: Int, year: Int) -> String {
     
     let monthString = String(format: "%02d", month)
 

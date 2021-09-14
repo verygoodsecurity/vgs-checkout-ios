@@ -15,9 +15,8 @@ internal class VGSCardDataFormConfigurationManager {
 
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
 		let cvcFieldName = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.fieldName
-		let expDateFieldName = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions.fieldName
 
-        guard let cardNumber = cardSectionView.cardNumberFieldView.textField as? VGSCardTextField,
+		guard let cardNumber = cardSectionView.cardNumberFieldView.textField as? VGSCardTextField,
               let expCardDate = cardSectionView.expDateFieldView.textField as? VGSExpDateTextField,
               let cvcCardNum = cardSectionView.cvcFieldView.textField as? VGSCVCTextField
               else {
@@ -40,12 +39,18 @@ internal class VGSCardDataFormConfigurationManager {
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .left
 
-		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
+		let expDateOptions = vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions
+
+		let expDateConfiguration = VGSExpDateConfiguration(checkoutExpDateOptions: expDateOptions, collect: vgsCollect)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
 
-		/// Default .expDate format is "##/##"
-		expDateConfiguration.formatPattern = "##/##"
+		if let expDateFormatPattern = expDateOptions.inputDateFormat?.inputFormatPattern {
+			expDateConfiguration.formatPattern = expDateFormatPattern
+		} else {
+			/// Default .expDate format is "##/##"
+			expDateConfiguration.formatPattern = "##/##"
+		}
 
 		/// Update validation rules
 		/// FIXME - hardcoded for now!

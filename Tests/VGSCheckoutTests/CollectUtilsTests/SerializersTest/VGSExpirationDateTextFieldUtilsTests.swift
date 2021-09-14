@@ -11,7 +11,7 @@ class VGSExpirationDateTextFieldUtilsTests: VGSCheckoutBaseTestCase {
 	struct TestDateFormatItem {
 		let month: Int
 		let year: Int
-		let format: VGSCardExpDateFormat
+		let format: VGSCheckoutCardExpDateFormat
 		let expectedOutput: String
 	}
 
