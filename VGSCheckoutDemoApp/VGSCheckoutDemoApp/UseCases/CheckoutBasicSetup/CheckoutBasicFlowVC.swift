@@ -77,6 +77,17 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 		checkoutConfiguration.routeConfiguration.path = "post"
 
+		/*
+		Set custom date user input/output JSON format.
+
+		checkoutConfiguration.expirationDateFieldOptions.inputDateFormat = .shortYear
+		checkoutConfiguration.expirationDateFieldOptions.outputDateFormat = .longYearThenMonth
+
+		let expDateSerializer = VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card_date.month", yearFieldName: "card_date.year")
+		checkoutConfiguration.expirationDateFieldOptions.serializers = [expDateSerializer]
+
+    */
+
 		// Init Checkout with vault and ID.
 		vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)
 
