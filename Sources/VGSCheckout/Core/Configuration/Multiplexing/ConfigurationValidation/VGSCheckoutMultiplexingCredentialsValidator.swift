@@ -27,7 +27,7 @@ internal class VGSMultiplexingCredentialsValidator {
         guard let resourceAccess = decodedToken["resource_access"] as? JsonData,
               let multiplexingApp = resourceAccess[multiplexingAppId] as? JsonData,
               let rolesScope = multiplexingApp["roles"] as? [String] else {
-					let eventText = "Cannot parse token resouse!"
+					let eventText = "Cannot parse token resource!"
 					let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 					VGSCheckoutLogger.shared.forwardLogEvent(event)
             return false
