@@ -28,7 +28,7 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutForma
 	/// Initializer.
 	/// - Parameters:
 	///   - vgs: `VGSCollect` object, collect instance.
-	///   - fieldName: `String` object, fieldname.
+	///   - fieldName: `String` object, fieldname
 	override internal init(collector vgs: VGSCollect, fieldName: String) {
 		super.init(collector: vgs, fieldName: fieldName)
 	}

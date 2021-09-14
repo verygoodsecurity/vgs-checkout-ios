@@ -40,7 +40,7 @@ internal class VGSCardDataFormConfigurationManager {
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .left
 
-		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: expDateFieldName)
+		let expDateConfiguration = VGSExpDateConfiguration(checkoutExpDateOptions: vaultConfiguration.formConfiguration.cardOptions.expirationDateOptions, collect: vgsCollect)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
 
