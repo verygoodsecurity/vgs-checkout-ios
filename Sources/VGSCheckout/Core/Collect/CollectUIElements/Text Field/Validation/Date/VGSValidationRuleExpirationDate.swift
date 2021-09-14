@@ -53,6 +53,18 @@ public enum VGSCheckoutCardExpDateFormat {
       return true
     }
   }
+
+	/// Corresponding format pattern for input format.
+	internal var inputFormatPattern: String {
+		switch self {
+		case .shortYear, .shortYearThenMonth:
+			return "##/##"
+		case .longYearThenMonth:
+			return "####/##"
+		case .longYear:
+			return "##/####"
+		}
+	}
 }
 
 /**
