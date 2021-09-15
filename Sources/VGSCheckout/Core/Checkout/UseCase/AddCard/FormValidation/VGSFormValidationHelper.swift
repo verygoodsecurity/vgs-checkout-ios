@@ -47,8 +47,9 @@ internal class VGSFormValidationHelper {
     case .onEdit:
         return
     case .onSubmit:
-				fieldView.validationErrorView.viewUIState = .valid
-        fieldView.updateUI(for: .valid)
+        let fieldUIState: VGSCheckoutFieldUIState = fieldView.textField.state.isEmpty ? .initial : .filled
+        fieldView.updateUI(for: fieldUIState)
+        fieldView.validationErrorView.viewUIState = .valid
       return
     }
   }

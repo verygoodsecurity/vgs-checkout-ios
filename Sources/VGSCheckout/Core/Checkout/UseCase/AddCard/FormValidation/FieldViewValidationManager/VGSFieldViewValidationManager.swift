@@ -21,7 +21,7 @@ internal final class VGSFieldViewValidationManager {
 		case (false, _):
             fieldView.updateUI(for: .focused)
 		case (true, true):
-            fieldView.updateUI(for: .valid)
+            fieldView.updateUI(for: .filled)
 		case (true, false):
             fieldView.updateUI(for: .invalid)
 		}
@@ -36,7 +36,7 @@ internal final class VGSFieldViewValidationManager {
 		case (false, _):
             fieldView.updateUI(for: .focused)
 		case (true, true):
-            fieldView.updateUI(for: .valid)
+            fieldView.updateUI(for: .filled)
 		case (true, false):
             fieldView.updateUI(for: .invalid)
 		}
