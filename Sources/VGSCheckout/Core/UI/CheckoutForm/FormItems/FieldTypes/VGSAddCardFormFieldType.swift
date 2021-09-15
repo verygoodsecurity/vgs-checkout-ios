@@ -4,6 +4,16 @@
 
 import Foundation
 
+/// Defines UI sections on add card screen.
+internal enum VGSAddCardSection {
+
+	/// Card details section.
+	case card
+
+	/// Billing address section.
+	case billingAddress
+}
+
 /// Defines checkout field types.
 internal enum VGSAddCardFormFieldType {
 

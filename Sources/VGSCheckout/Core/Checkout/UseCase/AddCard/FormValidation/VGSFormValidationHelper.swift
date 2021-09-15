@@ -7,11 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-internal enum VGSAddCardSection {
-	case card
-	case billingAddress
-}
-
 /// Utility class that encapsulates fields validation logic.
 internal class VGSFormValidationHelper {
 
