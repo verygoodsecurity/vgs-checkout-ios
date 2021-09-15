@@ -190,14 +190,13 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 		cityAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
 		verticalStackView.addArrangedSubview(cityAndPostalCodeStackView)
-
 		// Gather all form items.
 		fieldViews = [
 			countryFieldView,
 			addressLine1FieldView,
 			addressLine2FieldView,
 			cityFieldView,
-			postalCodeFieldView
+			postalCodeFieldView,
 		]
 
 		// Setup insets and UI Theme.

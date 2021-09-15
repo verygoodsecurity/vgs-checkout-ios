@@ -55,15 +55,15 @@ internal enum VGSAddCardFormFieldType {
 //		}
 //	}
 //
-//	/// Corresponding form section.
-//	internal var formSection: VGSFormSection {
-//		switch self {
-//		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
-//			return .card
-//		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
-//			return .billingAddress
-//		}
-//	}
+	/// Corresponding form section.
+	internal var formSection: VGSAddCardSection {
+		switch self {
+		case .cardNumber, .expirationDate, .cvc, .cardholderName, .firstName, .lastName:
+			return .card
+		case .country, .addressLine1, .addressLine2, .city, .state, .postalCode:
+			return .billingAddress
+		}
+	}
 
 	/// Empty field name error.
 	internal var emptyFieldNameError: String {

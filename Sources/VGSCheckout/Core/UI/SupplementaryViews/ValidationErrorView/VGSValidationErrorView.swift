@@ -11,7 +11,7 @@ import UIKit
 internal class VGSValidationErrorView: UIView {
 
 	/// Defines validation view UI state.
-	internal enum ValidationViewUIState {
+	internal enum ValidationViewUIState: Equatable {
 
 		/// Error hasn't been displayed yet.
 		case initial
@@ -21,6 +21,20 @@ internal class VGSValidationErrorView: UIView {
 
 		/// Hide error text keeping the error label space to avoid jumping UI.
 		case valid
+
+		/// Equatable.
+		static internal func ==(lhs: ValidationViewUIState, rhs: ValidationViewUIState) -> Bool {
+				switch (lhs, rhs) {
+				case (.initial,   .initial):
+					return true
+				case (.valid, .valid):
+					return true
+				case let (.error(message1), .error(message2)):
+					return message1 == message2
+				default:
+					return false
+				}
+		}
 	}
 
 	/// Constraint for error label height to display padding when no error.
@@ -36,7 +50,7 @@ internal class VGSValidationErrorView: UIView {
 	// MARK: - Vars
 
 	/// A boolean flag indicating that view already has an error. Use this flag to track that we have an error at least once so we need to keep error label space.
-	private var isDirty: Bool = false
+	internal var isDirty: Bool = false
 
 	/// A boolean flag indicating field is in last row so extra bottom inset is required to adjust paddings for last field view.
 	internal var isLastRow: Bool = false
@@ -116,7 +130,6 @@ internal class VGSValidationErrorView: UIView {
 		errorLabelHeightConstraint?.isActive = false
 
 		// Update stack view insets.
-		stackView.addArrangedSubview(errorLabel)
 		stackView.layoutMargins = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
 
 		if isLastRow {
