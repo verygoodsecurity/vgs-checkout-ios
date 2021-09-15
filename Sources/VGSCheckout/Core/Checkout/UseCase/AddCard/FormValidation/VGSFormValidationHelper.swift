@@ -57,6 +57,8 @@ internal class VGSFormValidationHelper {
 	internal func updateFormSectionViewOnSubmit() {
 		let invalidTextViews = fieldViewsWithValidationErrors
 
+		updateAllSectionOnErrorIfNeeded()
+
 		for textView in invalidTextViews {
 			let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: textView.fieldType)
 			let errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
@@ -65,6 +67,30 @@ internal class VGSFormValidationHelper {
 			}
 			textView.updateUI(for: .invalid)
 		}
+	}
+
+	/// Update all section fields UI to scale all views in section if at least one is invalid.
+	internal func updateAllSectionOnErrorIfNeeded() {
+		for section in invalidSections {
+			let fieldsInInitialState = fieldsWithoutErrorState(for: section)
+			fieldsInInitialState.forEach { field in
+				field.validationErrorView.isDirty = true
+				field.validationErrorView.viewUIState = .valid
+			}
+		}
+	}
+
+	internal func fieldsWithoutErrorState(for section: VGSAddCardSection) -> [VGSTextFieldViewProtocol] {
+		let allSectionFieldsInItialState = fieldViewsManager.fieldViews.filter({$0.fieldType.formSection == section}).filter({!$0.validationErrorView.isDirty})
+
+		return allSectionFieldsInItialState
+	}
+
+	internal var invalidSections: [VGSAddCardSection] {
+		let allInvalidSections = fieldViewsWithValidationErrors.map({$0.fieldType.formSection})
+
+		let invalidSections = Array(Set(allInvalidSections))
+		return invalidSections
 	}
   
   // MARK: - Handle TextField State

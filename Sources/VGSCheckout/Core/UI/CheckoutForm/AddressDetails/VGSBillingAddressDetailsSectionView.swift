@@ -190,7 +190,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 		cityAndPostalCodeStackView.addArrangedSubview(postalCodeFieldView)
 
 		verticalStackView.addArrangedSubview(cityAndPostalCodeStackView)
-
 		// Gather all form items.
 		fieldViews = [
 			countryFieldView,

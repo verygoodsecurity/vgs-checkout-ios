@@ -208,7 +208,7 @@ internal class VGSCardDetailsSectionView: UIView {
 			cardHolderFieldView,
 			cardNumberFieldView,
 			expDateFieldView,
-			cvcFieldView,
+			cvcFieldView
 		]
 
 		/// Set UI Theme
