@@ -20,15 +20,24 @@ public protocol VGSCheckoutTextFieldThemeAdapterProtocol {
 extension VGSCheckoutTextFieldThemeAdapterProtocol {
 	public func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol {
 		switch state {
-		case .initial, .valid:
+		case .initial:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
 																							textFieldBorderColor: theme.textFieldBorderColor,
-																							textFieldHintTextColor: theme.textFieldHintTextColor,
+                                              textFieldHintTextColor: theme.textFieldTextColor,
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
 																							textFieldHintTextFont: theme.textFieldHintTextFont,
 																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
+    case .filled:
+      return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
+                                              textFieldBorderColor: theme.textFieldBorderColor,
+                                              textFieldHintTextColor: theme.textFieldHintTextColor,
+                                              textFieldTextColor: theme.textFieldTextColor,
+                                              textFieldTextFont: theme.textFieldTextFont,
+                                              textFieldHintTextFont: theme.textFieldHintTextFont,
+                                              textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
+                                              textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 		case .focused:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
 																							textFieldBorderColor: theme.textFieldBorderColor,

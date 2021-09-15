@@ -42,8 +42,8 @@ internal class VGSTextFieldViewUIConfigurationHandler {
 				view?.placeholderView.hintComponentView.accessory = .none
     }
     
-		internal func valid() {
-        applyTheme(theme.adapt(theme: theme, for: .valid))
+		internal func filled() {
+        applyTheme(theme.adapt(theme: theme, for: .filled))
 				view?.placeholderView.hintComponentView.accessory = .none
     }
     
@@ -130,8 +130,8 @@ internal class VGSCardholderFieldView: UIView, VGSTextFieldViewProtocol, VGSText
         switch uiState {
         case .initial:
             uiConfigurationHandler?.initial()
-        case .valid:
-            uiConfigurationHandler?.valid()
+        case .filled:
+            uiConfigurationHandler?.filled()
         case .invalid:
             uiConfigurationHandler?.invalid()
         case .focused:

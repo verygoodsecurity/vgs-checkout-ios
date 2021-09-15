@@ -45,8 +45,8 @@ extension VGSTextFieldViewUIConfigurationProtocol {
         switch uiState {
         case .initial:
             uiConfigurationHandler?.initial()
-        case .valid:
-            uiConfigurationHandler?.valid()
+        case .filled:
+            uiConfigurationHandler?.filled()
         case .invalid:
             uiConfigurationHandler?.invalid()
         case .focused:
@@ -58,6 +58,6 @@ extension VGSTextFieldViewUIConfigurationProtocol {
 public enum VGSCheckoutFieldUIState {
 	case initial
 	case focused
-	case valid
+	case filled
 	case invalid
 }
