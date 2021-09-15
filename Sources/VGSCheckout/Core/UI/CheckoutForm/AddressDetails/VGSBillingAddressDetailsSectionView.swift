@@ -196,7 +196,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 			addressLine1FieldView,
 			addressLine2FieldView,
 			cityFieldView,
-			postalCodeFieldView,
+			postalCodeFieldView
 		]
 
 		// Setup insets and UI Theme.

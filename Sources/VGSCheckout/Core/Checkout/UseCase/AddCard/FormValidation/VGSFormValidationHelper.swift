@@ -83,8 +83,6 @@ internal class VGSFormValidationHelper {
 	internal func fieldsWithoutErrorState(for section: VGSAddCardSection) -> [VGSTextFieldViewProtocol] {
 		let allSectionFieldsInItialState = fieldViewsManager.fieldViews.filter({$0.fieldType.formSection == section}).filter({!$0.validationErrorView.isDirty})
 
-		print("fieldsWithoutErrorState: \(allSectionFieldsInItialState)")
-
 		return allSectionFieldsInItialState
 	}
 
@@ -92,7 +90,6 @@ internal class VGSFormValidationHelper {
 		let allInvalidSections = fieldViewsWithValidationErrors.map({$0.fieldType.formSection})
 
 		let invalidSections = Array(Set(allInvalidSections))
-		print("invalidSections: \(invalidSections)")
 		return invalidSections
 	}
   
