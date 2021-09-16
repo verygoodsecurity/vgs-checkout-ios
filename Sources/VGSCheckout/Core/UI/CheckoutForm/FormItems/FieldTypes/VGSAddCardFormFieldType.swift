@@ -53,6 +53,32 @@ internal enum VGSAddCardFormFieldType {
 	/// Zip/postal code.
 	case postalCode
 
+	/// Analytics field name.
+	internal var analyticsFieldName: String {
+		switch self {
+		case .cardNumber:
+			return "cardNumber"
+		case .expirationDate:
+			return "expDate"
+		case .addressLine1:
+			return "addressLine1"
+		case .addressLine2:
+			return "addressLine2"
+		case .cardholderName:
+			return "cardholderName"
+		case .cvc:
+			return "cvc"
+		case .city:
+			return "city"
+		case .postalCode:
+			return "postalCode"
+		case .country:
+			return "country"
+		default:
+			return ""
+		}
+	}
+
 	/// Corresponding form block.
 //	internal var sectionBlock: VGSAddCardSectionBlock {
 //		switch self {

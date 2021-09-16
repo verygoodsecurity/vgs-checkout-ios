@@ -38,17 +38,13 @@ extension VGSCollect {
 
 				content.append(fieldMappingPolicy.analyticsName)
         if let error = validateStoredInputData() {
-          
-          VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: [ "statusCode": error.code, "content": content])
-          
+
           block(.failure(error.code, nil, nil, error))
-            return
+					return
         }
 
         let body = mapFieldsToBodyJSON(with: fieldMappingPolicy, extraData: extraData)
 
-        VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: [ "statusCode": 200, "content": content])
-      
         // Send request.
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
           
@@ -65,4 +61,25 @@ extension VGSCollect {
         block(response)
       }
     }
+
+	/// Track befre submit with invalid fields.
+	/// - Parameter invalidFields: `String` object, coma separated list of invalid fieldTypes.
+	internal func trackBeforeSubmit(with invalidFields: String) {
+		// Content analytics.
+		var content: [String] = [""]
+		if !(customHeaders?.isEmpty ?? true) {
+			content.append("custom_header")
+		}
+
+		if let error = validateStoredInputData() {
+			var extraData: [String: Any] =  ["statusCode": error.code, "content": content]
+
+			if !invalidFields.isEmpty {
+				extraData["invalidFields"] = invalidFields
+			}
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: [ "statusCode": error.code, "content": content])
+		} else {
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: [ "statusCode": 200, "content": content])
+		}
+	}
 }
