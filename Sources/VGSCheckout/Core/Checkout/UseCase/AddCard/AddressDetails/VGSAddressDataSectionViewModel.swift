@@ -246,7 +246,8 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			// Clear postal code on country change.
 			if let previousCountryCode = lastSelectedCountryCode {
 				if previousCountryCode != currentCountryCode {
-					postalCodeFieldView?.textField.setText(nil)
+					postalCodeFieldView?.updateUI(for: .filled)
+					postalCodeFieldView?.validationErrorView.viewUIState = .valid
 				}
 			}
 
