@@ -28,6 +28,17 @@ public class VGSCheckoutAnalyticsClient {
     case failed = "Failed"
     case cancel = "Cancel"
   }
+
+	/// ISO8601 date formatter.
+	internal lazy var dateFormatter: DateFormatter = {
+		let dateFormatter = DateFormatter()
+		let enUSPosixLocale = Locale(identifier: "en_US_POSIX")
+		dateFormatter.locale = enUSPosixLocale
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+		dateFormatter.calendar = Calendar(identifier: .gregorian)
+
+		return dateFormatter
+	}()
   
   /// Shared `VGSCheckoutAnalyticsClient` instance
   public static let shared = VGSCheckoutAnalyticsClient()
@@ -100,9 +111,10 @@ public class VGSCheckoutAnalyticsClient {
       data["status"] = status.rawValue
       data["ua"] = VGSCheckoutAnalyticsClient.userAgentData
       data["version"] = Utils.vgsCollectVersion
-      data["source"] = "iosSDK"
+      data["source"] = "checkout-ios"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
       data["vgsCollectSessionId"] = vgsCheckoutSessionId
+			data["clientTimestamp"] = dateFormatter.string(from: Date())
       sendAnalyticsRequest(data: data)
   }
 
