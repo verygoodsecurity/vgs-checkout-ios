@@ -43,7 +43,7 @@ internal class VGSFieldHintView: UIView {
 		label.translatesAutoresizingMaskIntoConstraints = false
 
 		label.adjustsFontForContentSizeCategory = true
-    label.numberOfLines = 0
+    label.numberOfLines = 1
 
 		return label
 	}()
