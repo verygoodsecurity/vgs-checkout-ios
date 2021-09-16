@@ -115,8 +115,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
     switch paymentInstrument {
     case .vault(let configuration):
       self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+			VGSCheckoutAnalyticsClient.shared.trackEvent(.formInit, extraData:["config" : "custom"])
     case .multiplexing(let configuration):
       self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+			VGSCheckoutAnalyticsClient.shared.trackEvent(.formInit, extraData: ["config" :  "multiplexing"])
     }
 
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
