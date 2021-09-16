@@ -16,10 +16,9 @@ internal enum VGSAnalyticsEventType: String {
   case hostnameValidation = "HostNameValidation"
   case beforeSubmit = "BeforeSubmit"
   case submit = "Submit"
-
-	// TODO: - add
 	case formInit = "Init"
 	case cancel = "Cancel"
+	case jwtValidation = "JVTValidation"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.

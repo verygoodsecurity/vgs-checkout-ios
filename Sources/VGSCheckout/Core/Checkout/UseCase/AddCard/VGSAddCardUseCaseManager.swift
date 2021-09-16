@@ -115,10 +115,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
     switch paymentInstrument {
     case .vault(let configuration):
       self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackEvent(.formInit, extraData:["config" : "custom"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData:["config": "custom"])
     case .multiplexing(let configuration):
       self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackEvent(.formInit, extraData: ["config" :  "multiplexing"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config":  "multiplexing"])
     }
 
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
@@ -171,6 +171,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// Handles tap on close button.
 	@objc fileprivate func closeButtonDidTap() {
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .cancel)
+
 		switch paymentInstrument {
 		case .vault:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
