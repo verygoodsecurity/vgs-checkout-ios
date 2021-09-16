@@ -114,7 +114,7 @@ public class VGSCheckoutAnalyticsClient {
       data["type"] = type.rawValue
       data["status"] = status.rawValue
       data["ua"] = VGSCheckoutAnalyticsClient.userAgentData
-      data["version"] = Utils.vgsCollectVersion
+      data["version"] = Utils.vgsCheckoutVersion
       data["source"] = "checkout-ios"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
       data["vgsCheckoutSessionId"] = vgsCheckoutSessionId
