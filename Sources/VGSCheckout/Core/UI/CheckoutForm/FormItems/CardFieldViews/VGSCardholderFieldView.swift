@@ -22,6 +22,7 @@ internal class VGSTextFieldViewUIConfigurationHandler {
 
 			  // Set text field view background color - text field and placeholder view.
 			  view?.placeholderView.backgroundColor = theme.textFieldBackgroundColor
+				view?.placeholderView.layer.borderColor = theme.textFieldBorderColor.cgColor
 
 			  // TextField UI.
         view?.textField.textColor = theme.textFieldTextColor

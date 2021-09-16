@@ -40,7 +40,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
                                               textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 		case .focused:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
-																							textFieldBorderColor: theme.textFieldBorderColor,
+																							textFieldBorderColor: theme.textFieldFocusedColor,
 																							textFieldHintTextColor: theme.textFieldFocusedColor,
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
@@ -50,7 +50,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 
 		case .invalid:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
-																							textFieldBorderColor: theme.textFieldBorderColor,
+																							textFieldBorderColor: theme.textFieldErrorLabelColor,
 																							textFieldHintTextColor: theme.textFieldErrorLabelColor,
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
@@ -67,7 +67,6 @@ public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
 
 	/// The textfield’s border background color.
 	var textFieldBorderColor: UIColor { get set }
-
 
 	/// The text color of the textfield hint (above the text field).
 	var textFieldHintTextColor: UIColor { get set }
