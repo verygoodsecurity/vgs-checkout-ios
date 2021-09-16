@@ -13,10 +13,10 @@
 "vgs_checkout_card_number_subtitle" = "CARD NUMBER";
 
 /* Expiration date field subtitle. */
-"vgs_checkout_expiration_date_subtitle" = "EXPIRATION DATE";
+"vgs_checkout_expiration_date_subtitle" = "EXPIRY DATE";
 
 /* Security code field subtitle. */
-"vgs_checkout_security_code_subtitle" = "SECURITY CODE";
+"vgs_checkout_security_code_subtitle" = "CVC/CVV";
 
 /* Card holder field placeholder text. */
 "vgs_checkout_card_holder_hint" = "Joe Business";
@@ -28,10 +28,10 @@
 "vgs_checkout_card_expiration_date_hint" = "MM/YY";
 
 /* Card CVC field placeholder text. */
-"vgs_checkout_security_code" = "CVC";
+"vgs_checkout_security_code" = "3 digits";
 
 /* Card CVV field placeholder text. */
-"vgs_checkout_security_code_amex" = "CVV";
+"vgs_checkout_security_code_amex" = "4 digits";
 
 /* Pay button text. */
 "vgs_checkout_pay_button_title" = "Pay";
