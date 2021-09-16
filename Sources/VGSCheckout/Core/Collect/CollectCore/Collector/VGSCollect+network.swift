@@ -26,13 +26,7 @@ extension VGSCollect {
 	internal func sendData(path: String, method: HTTPMethod = .post, extraData: [String: Any]? = nil, requestOptions: VGSCollectRequestOptions = VGSCollectRequestOptions(), completion block: @escaping (VGSResponse) -> Void) {
       
         // Content analytics.
-        var content: [String] = ["textField"]
-        if !(extraData?.isEmpty ?? true) {
-          content.append("custom_data")
-        }
-        if !(customHeaders?.isEmpty ?? true) {
-          content.append("custom_header")
-        }
+				var content: [String] = contentForAnalytics(from: extraData)
 
 				let fieldMappingPolicy = requestOptions.fieldNameMappingPolicy
 
@@ -66,20 +60,48 @@ extension VGSCollect {
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
 	internal func trackBeforeSubmit(with invalidFields: [String]) {
 		// Content analytics.
-		var content: [String] = [""]
+		var extraAnalyticsInfo: [String : Any] = [:]
+		let contentData = contentForAnalytics(from: [:])
+
+		if let error = validateStoredInputData() {
+			if !invalidFields.isEmpty  {
+				extraAnalyticsInfo["invalidFields"] = invalidFields
+			}
+
+			extraAnalyticsInfo["content"] = contentData
+			extraAnalyticsInfo["statusCode"] = error.code
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: extraAnalyticsInfo)
+		} else {
+			extraAnalyticsInfo["statusCode"] = 200
+			extraAnalyticsInfo["content"] = contentData
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: extraAnalyticsInfo)
+		}
+	}
+
+	/// Custom content for analytics from headers and payload.
+	/// - Parameter payload: `[String: Any]` payload object.
+	/// - Returns: `[String]` object.
+	private func contentForAnalytics(from payload: [String: Any]?) -> [String] {
+		var content: [String] = []
+		if !(payload?.isEmpty ?? true) {
+			content.append("custom_data")
+		}
 		if !(customHeaders?.isEmpty ?? true) {
 			content.append("custom_header")
 		}
 
-		if let error = validateStoredInputData() {
-			var extraData: [String: Any] =  ["statusCode": error.code, "content": content]
-
-			if !invalidFields.isEmpty  {
-				extraData["invalidFields"] = invalidFields
+		switch apiClient.hostURLPolicy {
+		case .customHostURL(let status):
+			switch status {
+			case .resolved, .isResolving:
+				content.append("custom_hostname")
+			default:
+				break
 			}
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: extraData)
-		} else {
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: [ "statusCode": 200, "content": content])
+		default:
+			break
 		}
+
+		return content
 	}
 }
