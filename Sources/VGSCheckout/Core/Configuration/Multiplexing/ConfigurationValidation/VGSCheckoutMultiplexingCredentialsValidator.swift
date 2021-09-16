@@ -19,6 +19,8 @@ internal class VGSMultiplexingCredentialsValidator {
 					let eventText = "Token is empty!"
 					let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 					VGSCheckoutLogger.shared.forwardLogEvent(event)
+
+				VGSCheckoutAnalyticsClient.shared.trackEvent(.jwtValidation, status: .failed)
 					return false
         }
         let decodedToken = String.decode(jwtToken: jwtToken)
@@ -30,6 +32,7 @@ internal class VGSMultiplexingCredentialsValidator {
 					let eventText = "Cannot parse token resource!"
 					let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 					VGSCheckoutLogger.shared.forwardLogEvent(event)
+					VGSCheckoutAnalyticsClient.shared.trackEvent(.jwtValidation, status: .failed)
             return false
         }
         let intersectionScope = Set(rolesScope).intersection(restrictedRolesScope)
@@ -37,6 +40,7 @@ internal class VGSMultiplexingCredentialsValidator {
 					let eventText = "Invalid token scope!"
 					let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 					VGSCheckoutLogger.shared.forwardLogEvent(event)
+					VGSCheckoutAnalyticsClient.shared.trackEvent(.jwtValidation, status: .failed)
 				}
 
         return intersectionScope.isEmpty
