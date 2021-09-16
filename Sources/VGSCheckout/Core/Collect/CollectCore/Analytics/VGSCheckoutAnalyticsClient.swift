@@ -16,6 +16,10 @@ internal enum VGSAnalyticsEventType: String {
   case hostnameValidation = "HostNameValidation"
   case beforeSubmit = "BeforeSubmit"
   case submit = "Submit"
+
+	// TODO: - add
+	case formInit = "Init"
+	case cancel = "Cancel"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.
@@ -44,7 +48,7 @@ public class VGSCheckoutAnalyticsClient {
   public static let shared = VGSCheckoutAnalyticsClient()
   
   /// Enable or disable VGS analytics tracking
-  public var shouldCollectAnalytics = false
+  public var shouldCollectAnalytics = true
   
   /// Uniq id that should stay the same during application rintime
   public let vgsCheckoutSessionId = UUID().uuidString
@@ -113,7 +117,7 @@ public class VGSCheckoutAnalyticsClient {
       data["version"] = Utils.vgsCollectVersion
       data["source"] = "checkout-ios"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
-      data["vgsCollectSessionId"] = vgsCheckoutSessionId
+      data["vgsCheckoutSessionId"] = vgsCheckoutSessionId
 			data["clientTimestamp"] = dateFormatter.string(from: Date())
       sendAnalyticsRequest(data: data)
   }
@@ -151,8 +155,10 @@ internal extension VGSCheckoutAnalyticsClient {
       request.allHTTPHeaderFields = defaultHttpHeaders
 
       let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+			VGSNetworkRequestLogger.logAnalyticsRequest(request, payload: data)
       let encodedJSON = jsonData?.base64EncodedData()
       request.httpBody = encodedJSON
+
       // Send data
 			urlSession.dataTask(with: request).resume()
   }
