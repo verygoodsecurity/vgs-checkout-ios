@@ -8,6 +8,28 @@ import Foundation
 /// Utilities to log network requests.
 internal class VGSNetworkRequestLogger {
 
+	internal static var shouldLogAnalyticsRequests = true
+
+	/// Log sending analytics request.
+	/// - Parameters:
+	///   - request: `URLRequest` object, request to send.
+	///   - payload: `VGSRequestPayloadBody` object, request payload.
+	internal static func logAnalyticsRequest(_ request: URLRequest, payload: JsonData?) {
+
+		if !shouldLogAnalyticsRequests {return}
+
+		print("⬆️ Send VGSCheckout request url: \(stringFromURL(request.url))")
+		if let headers = request.allHTTPHeaderFields {
+			print("⬆️ Send VGSCheckout request headers:")
+			print(normalizeRequestHeadersForLogs(headers))
+		}
+		if let payloadValue = payload {
+			print("⬆️ Send VGSCheckout request payload:")
+			print(stringifyRawRequestPayloadForLogs(payloadValue))
+		}
+		print("------------------------------------")
+	}
+
 	/// Log sending request.
 	/// - Parameters:
 	///   - request: `URLRequest` object, request to send.

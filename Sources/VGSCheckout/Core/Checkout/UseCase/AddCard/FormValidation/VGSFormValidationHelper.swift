@@ -122,12 +122,8 @@ internal class VGSFormValidationHelper {
 	}
 
 	/// Coma separated string with invalid field names.
-	internal var analyticsInvalidFieldNames: String? {
-		if fieldViewsWithValidationErrors.isEmpty {
-			return nil
-		} else {
-			return fieldViewsWithValidationErrors.map({$0.fieldType.analyticsFieldName}).joined(separator: ",")
-		}
+	internal var analyticsInvalidFieldNames: [String] {
+		return fieldViewsWithValidationErrors.map({$0.fieldType.analyticsFieldName})
 	}
   
   /// Array of `VGSTextFieldViewProtocol` items with validation error.

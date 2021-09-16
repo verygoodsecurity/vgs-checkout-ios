@@ -63,8 +63,8 @@ extension VGSCollect {
     }
 
 	/// Track befre submit with invalid fields.
-	/// - Parameter invalidFields: `String` object, coma separated list of invalid fieldTypes.
-	internal func trackBeforeSubmit(with invalidFields: String?) {
+	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
+	internal func trackBeforeSubmit(with invalidFields: [String]) {
 		// Content analytics.
 		var content: [String] = [""]
 		if !(customHeaders?.isEmpty ?? true) {
@@ -74,10 +74,10 @@ extension VGSCollect {
 		if let error = validateStoredInputData() {
 			var extraData: [String: Any] =  ["statusCode": error.code, "content": content]
 
-			if let fieldsWithError = invalidFields  {
+			if !invalidFields.isEmpty  {
 				extraData["invalidFields"] = invalidFields
 			}
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: [ "statusCode": error.code, "content": content])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: extraData)
 		} else {
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: [ "statusCode": 200, "content": content])
 		}
