@@ -201,7 +201,7 @@ extension APIClient {
 
 	private func updateHost(with hostname: String, completion: ((URL) -> Void)? = nil) {
 
-		dataSyncQueue.async {
+		dataSyncQueue.async { [self] in
 
 			// Enter sync zone.
 			self.syncSemaphore.wait()
@@ -215,7 +215,7 @@ extension APIClient {
 			}
 
 			// Resolve hostname.
-			APIHostnameValidator.validateCustomHostname(hostname, tenantId: self.vaultId) {[weak self](url) in
+			APIHostnameValidator.validateCustomHostname(hostname, tenantId: self.vaultId, formAnalyticDetails: self.formAnalyticDetails) {[weak self](url) in
 				if var validUrl = url {
 
 					// Update url scheme if needed.

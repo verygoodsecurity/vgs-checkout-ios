@@ -25,10 +25,13 @@ internal class APIHostnameValidator {
 	///   - hostname: `String` object, hostname to validate.
 	///   - tenantId: `String` object, tenant id.
 	///   - completion: `((URL?) -> Void)` completion block.
-	internal static func validateCustomHostname(_ hostname: String, tenantId: String, completion: @escaping ((URL?) -> Void)) {
+	internal static func validateCustomHostname(_ hostname: String, tenantId: String, formAnalyticDetails: VGSCheckoutFormAnanlyticsDetails? = nil, completion: @escaping ((URL?) -> Void)) {
 
 		guard !hostname.isEmpty else {
 			completion(nil)
+			if let details = formAnalyticDetails {
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(details, type: .hostnameValidation, status: .failed, extraData: ["hostname": hostname])
+			}
 			return
 		}
 
@@ -37,6 +40,9 @@ internal class APIHostnameValidator {
 			let text = "Error❗Cannot build validation URL with tenantId: \"\(tenantId)\", hostname: \"\(hostname)\""
 			let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
 			VGSCheckoutLogger.shared.forwardLogEvent(event)
+			if let details = formAnalyticDetails {
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(details, type: .hostnameValidation, status: .failed, extraData: ["hostname": hostname])
+			}
 			completion(nil)
 			return
 		}
