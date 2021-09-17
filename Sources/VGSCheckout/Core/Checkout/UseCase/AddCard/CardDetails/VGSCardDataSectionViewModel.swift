@@ -153,6 +153,7 @@ extension VGSCardDataSectionViewModel: VGSTextFieldViewDelegate {
     }
     
     func vgsFieldViewdDidChange(_ fieldView: VGSTextFieldViewProtocol) {
+        formValidationHelper.updateFieldViewOnTextChangeInTextField(fieldView)
         updateSecurityCodeFieldIfNeeded(for: fieldView)
         updateFormState()
     }
@@ -166,14 +167,11 @@ extension VGSCardDataSectionViewModel {
   internal func updateSecurityCodeFieldIfNeeded(for textView: VGSTextFieldViewProtocol) {
     guard textView.fieldType == .cardNumber,
           let cardState = textView.textField.state as? CardState,
-          let cvcField = vgsTextFields.first(where: { $0.configuration?.type == .cvc}),
-          let cvcFieldView = fieldViews.first(where: {$0.textField == cvcField}) else {
+          let cvcFieldView = fieldViews.first(where: {$0.fieldType == .cvc}) else {
         return
     }
     // Update Field Placeholder
-    updateCVCFieldPlaceholder(cvcField, cardBrand: cardState.cardBrand)
-    // Update UI for new CVC Field State
-    formValidationHelper.updateFieldViewOnEndEditing(cvcFieldView)
+    updateCVCFieldPlaceholder(cvcFieldView.textField, cardBrand: cardState.cardBrand)
   }
 
   private func updateCVCFieldPlaceholder(_ field: VGSTextField, cardBrand: VGSCheckoutPaymentCards.CardBrand) {
