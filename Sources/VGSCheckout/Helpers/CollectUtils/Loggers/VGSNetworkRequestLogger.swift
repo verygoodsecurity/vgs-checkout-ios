@@ -8,7 +8,8 @@ import Foundation
 /// Utilities to log network requests.
 internal class VGSNetworkRequestLogger {
 
-	internal static var shouldLogAnalyticsRequests = true
+	/// A boolean flag, when `true` log analytics request. Default is `false`. 
+	internal static var shouldLogAnalyticsRequests = false
 
 	/// Log sending analytics request.
 	/// - Parameters:
