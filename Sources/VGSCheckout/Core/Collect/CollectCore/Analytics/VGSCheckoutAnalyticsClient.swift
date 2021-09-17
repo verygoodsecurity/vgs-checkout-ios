@@ -26,7 +26,7 @@ internal enum VGSAnalyticsEventType: String {
 /// :nodoc:
 public class VGSCheckoutAnalyticsClient {
   
-  public enum AnalyticEventStatus: String {
+  internal enum AnalyticEventStatus: String {
     case success = "Ok"
     case failed = "Failed"
     case cancel = "Cancel"
