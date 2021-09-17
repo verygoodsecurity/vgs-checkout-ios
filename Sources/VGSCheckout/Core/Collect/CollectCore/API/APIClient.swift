@@ -239,7 +239,7 @@ extension APIClient {
 					return
 				} else {
 					guard let strongSelf = self, let validVaultURL = self?.vaultUrl else {
-						let text = "No VGSCheckout instance and any valid url"
+						let text = "No VGSCheckout instance or any valid url"
 						let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
 						return
