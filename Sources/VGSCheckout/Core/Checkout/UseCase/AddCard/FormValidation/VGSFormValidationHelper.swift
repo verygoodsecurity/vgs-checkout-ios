@@ -64,6 +64,7 @@ internal class VGSFormValidationHelper {
     case .onEdit:
       return
     case .onSubmit:
+      /// Set `inital`(empty) UI state for fields without content. Set `filled` UI state for fileds with content.
       let fieldUIState: VGSCheckoutFieldUIState = fieldView.textField.state.isEmpty ? .initial : .filled
       fieldView.updateUI(for: fieldUIState)
       fieldView.validationErrorView.viewUIState = .valid
