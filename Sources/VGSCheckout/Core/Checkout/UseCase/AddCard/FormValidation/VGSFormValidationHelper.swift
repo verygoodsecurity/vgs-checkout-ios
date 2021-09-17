@@ -35,21 +35,39 @@ internal class VGSFormValidationHelper {
       case .onEdit:
         return
       case .onSubmit:
-				fieldView.validationErrorView.viewUIState = .valid
-				fieldView.updateUI(for: .focused)
+        switch fieldView.validationErrorView.viewUIState {
+        case .error(_):
+          return
+        default:
+          fieldView.validationErrorView.viewUIState = .valid
+          fieldView.updateUI(for: .focused)
+        }
         return
       }
     }
 
+  /// Update Form View UI elements on editing.
+  internal func updateFieldViewOnTextChangeInTextField(_ fieldView: VGSTextFieldViewProtocol) {
+    switch validationBehaviour {
+    case .onEdit:
+      return
+    case .onSubmit:
+        fieldView.validationErrorView.viewUIState = .valid
+        fieldView.updateUI(for: .focused)
+      return
+    }
+  }
+  
   /// Update Form View UI elements on end editing.
   internal func updateFieldViewOnEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
     switch validationBehaviour {
     case .onEdit:
-        return
+      return
     case .onSubmit:
-        let fieldUIState: VGSCheckoutFieldUIState = fieldView.textField.state.isEmpty ? .initial : .filled
-        fieldView.updateUI(for: fieldUIState)
-        fieldView.validationErrorView.viewUIState = .valid
+      /// Set `inital`(empty) UI state for fields without content. Set `filled` UI state for fileds with content.
+      let fieldUIState: VGSCheckoutFieldUIState = fieldView.textField.state.isEmpty ? .initial : .filled
+      fieldView.updateUI(for: fieldUIState)
+      fieldView.validationErrorView.viewUIState = .valid
       return
     }
   }
