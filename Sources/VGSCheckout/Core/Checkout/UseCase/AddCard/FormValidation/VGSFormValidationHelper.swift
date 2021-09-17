@@ -121,7 +121,7 @@ internal class VGSFormValidationHelper {
 		return isValid
 	}
 
-	/// Coma separated string with invalid field names.
+	/// An array with invalid fieldType names.
 	internal var analyticsInvalidFieldNames: [String] {
 		return fieldViewsWithValidationErrors.map({$0.fieldType.analyticsFieldName})
 	}
