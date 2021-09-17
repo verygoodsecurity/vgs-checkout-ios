@@ -39,17 +39,25 @@ extension VGSCollect {
 
         let body = mapFieldsToBodyJSON(with: fieldMappingPolicy, extraData: extraData)
 
+				let dateBeforeRequest = Date()
+
         // Send request.
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
-          
+
+					var extraData: [String : Any] = ["content": content]
+					extraData["latency"] = Date().timeIntervalSince(dateBeforeRequest)
+
           // Analytics
           if let strongSelf = self {
             switch response {
             case .success(let code, _, _):
-              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, extraData: ["statusCode": code, "content": content])
+							extraData["statusCode"] = code
+              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, extraData: extraData)
             case .failure(let code, _, _, let error):
               let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
-              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, status: .failed, extraData: ["statusCode": code, "error": errorMessage])
+							extraData["statusCode"] = code
+							extraData["error"] = errorMessage
+							VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, status: .failed, extraData: extraData)
             }
         }
         block(response)
