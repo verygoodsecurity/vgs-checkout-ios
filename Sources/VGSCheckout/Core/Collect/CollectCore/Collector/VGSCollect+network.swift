@@ -26,43 +26,90 @@ extension VGSCollect {
 	internal func sendData(path: String, method: HTTPMethod = .post, extraData: [String: Any]? = nil, requestOptions: VGSCollectRequestOptions = VGSCollectRequestOptions(), completion block: @escaping (VGSResponse) -> Void) {
       
         // Content analytics.
-        var content: [String] = ["textField"]
-        if !(extraData?.isEmpty ?? true) {
-          content.append("custom_data")
-        }
-        if !(customHeaders?.isEmpty ?? true) {
-          content.append("custom_header")
-        }
+				var content: [String] = contentForAnalytics(from: extraData)
 
 				let fieldMappingPolicy = requestOptions.fieldNameMappingPolicy
 
 				content.append(fieldMappingPolicy.analyticsName)
         if let error = validateStoredInputData() {
-          
-          VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: [ "statusCode": error.code, "content": content])
-          
+
           block(.failure(error.code, nil, nil, error))
-            return
+					return
         }
 
         let body = mapFieldsToBodyJSON(with: fieldMappingPolicy, extraData: extraData)
 
-        VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: [ "statusCode": 200, "content": content])
-      
+				let dateBeforeRequest = Date()
+
         // Send request.
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
-          
+
+					var extraData: [String : Any] = ["content": content]
+					extraData["latency"] = Int(Date().timeIntervalSince(dateBeforeRequest) * 1000)
+
           // Analytics
           if let strongSelf = self {
             switch response {
             case .success(let code, _, _):
-              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, extraData: ["statusCode": code, "content": content])
+							extraData["statusCode"] = code
+              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, extraData: extraData)
             case .failure(let code, _, _, let error):
               let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
-              VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, status: .failed, extraData: ["statusCode": code, "error": errorMessage])
+							extraData["statusCode"] = code
+							extraData["error"] = errorMessage
+							VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.formAnalyticsDetails, type: .submit, status: .failed, extraData: extraData)
             }
         }
         block(response)
       }
     }
+
+	/// Track befre submit with invalid fields.
+	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
+	internal func trackBeforeSubmit(with invalidFields: [String]) {
+		// Content analytics.
+		var extraAnalyticsInfo: [String : Any] = [:]
+		let contentData = contentForAnalytics(from: [:])
+
+		if let error = validateStoredInputData() {
+			if !invalidFields.isEmpty  {
+				extraAnalyticsInfo["invalidFields"] = invalidFields
+			}
+
+			extraAnalyticsInfo["content"] = contentData
+			extraAnalyticsInfo["statusCode"] = error.code
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: extraAnalyticsInfo)
+		} else {
+			extraAnalyticsInfo["statusCode"] = 200
+			extraAnalyticsInfo["content"] = contentData
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: extraAnalyticsInfo)
+		}
+	}
+
+	/// Custom content for analytics from headers and payload.
+	/// - Parameter payload: `[String: Any]` payload object.
+	/// - Returns: `[String]` object.
+	private func contentForAnalytics(from payload: [String: Any]?) -> [String] {
+		var content: [String] = []
+		if !(payload?.isEmpty ?? true) {
+			content.append("custom_data")
+		}
+		if !(customHeaders?.isEmpty ?? true) {
+			content.append("custom_header")
+		}
+
+		switch apiClient.hostURLPolicy {
+		case .customHostURL(let status):
+			switch status {
+			case .resolved, .isResolving:
+				content.append("custom_hostname")
+			default:
+				break
+			}
+		default:
+			break
+		}
+
+		return content
+	}
 }

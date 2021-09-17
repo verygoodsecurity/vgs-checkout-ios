@@ -48,7 +48,7 @@ internal class APIClient {
 		let trStatus = VGSCheckoutAnalyticsClient.shared.shouldCollectAnalytics ? "default" : "none"
 
 		return [
-			"vgs-client": "source=iosSDK&medium=vgs-collect&content=\(Utils.vgsCollectVersion)&osVersion=\(versionString)&vgsCollectSessionId=\(VGSCheckoutAnalyticsClient.shared.vgsCheckoutSessionId)&tr=\(trStatus)"
+			"vgs-client": "source=checkout-ios&medium=vgs-checkout&content=\(Utils.vgsCheckoutVersion)&osVersion=\(versionString)&vgsCheckoutSessionId=\(VGSCheckoutAnalyticsClient.shared.vgsCheckoutSessionId)&tr=\(trStatus)"
 		]
 	}()
 
@@ -201,7 +201,7 @@ extension APIClient {
 
 	private func updateHost(with hostname: String, completion: ((URL) -> Void)? = nil) {
 
-		dataSyncQueue.async {
+		dataSyncQueue.async { [self] in
 
 			// Enter sync zone.
 			self.syncSemaphore.wait()
@@ -215,7 +215,7 @@ extension APIClient {
 			}
 
 			// Resolve hostname.
-			APIHostnameValidator.validateCustomHostname(hostname, tenantId: self.vaultId) {[weak self](url) in
+			APIHostnameValidator.validateCustomHostname(hostname, tenantId: self.vaultId, formAnalyticDetails: self.formAnalyticDetails) {[weak self](url) in
 				if var validUrl = url {
 
 					// Update url scheme if needed.
@@ -230,7 +230,7 @@ extension APIClient {
 					self?.syncSemaphore.signal()
 					if let strongSelf = self {
 
-						let text = "✅ Success! VGSSCollectSDK hostname \(hostname) has been successfully resolved and will be used for requests!"
+						let text = "✅ Success! VGSCheckout hostname \(hostname) has been successfully resolved and will be used for requests!"
 						let event = VGSLogEvent(level: .info, text: text)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
 
@@ -239,7 +239,7 @@ extension APIClient {
 					return
 				} else {
 					guard let strongSelf = self, let validVaultURL = self?.vaultUrl else {
-						let text = "No VGSCollect instance and any valid url"
+						let text = "No VGSCheckout instance or any valid url"
 						let event = VGSLogEvent(level: .warning, text: text, severityLevel: .error)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
 						return

@@ -16,6 +16,9 @@ internal enum VGSAnalyticsEventType: String {
   case hostnameValidation = "HostNameValidation"
   case beforeSubmit = "BeforeSubmit"
   case submit = "Submit"
+	case formInit = "Init"
+	case cancel = "Cancel"
+	case jwtValidation = "JVTValidation"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.
@@ -23,17 +26,28 @@ internal enum VGSAnalyticsEventType: String {
 /// :nodoc:
 public class VGSCheckoutAnalyticsClient {
   
-  public enum AnalyticEventStatus: String {
+  internal enum AnalyticEventStatus: String {
     case success = "Ok"
     case failed = "Failed"
     case cancel = "Cancel"
   }
+
+	/// ISO8601 date formatter.
+	internal lazy var dateFormatter: DateFormatter = {
+		let dateFormatter = DateFormatter()
+		let enUSPosixLocale = Locale(identifier: "en_US_POSIX")
+		dateFormatter.locale = enUSPosixLocale
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+		dateFormatter.calendar = Calendar(identifier: .gregorian)
+
+		return dateFormatter
+	}()
   
   /// Shared `VGSCheckoutAnalyticsClient` instance
   public static let shared = VGSCheckoutAnalyticsClient()
   
   /// Enable or disable VGS analytics tracking
-  public var shouldCollectAnalytics = false
+  public var shouldCollectAnalytics = true
   
   /// Uniq id that should stay the same during application rintime
   public let vgsCheckoutSessionId = UUID().uuidString
@@ -99,10 +113,11 @@ public class VGSCheckoutAnalyticsClient {
       data["type"] = type.rawValue
       data["status"] = status.rawValue
       data["ua"] = VGSCheckoutAnalyticsClient.userAgentData
-      data["version"] = Utils.vgsCollectVersion
-      data["source"] = "iosSDK"
+      data["version"] = Utils.vgsCheckoutVersion
+      data["source"] = "checkout-ios"
       data["localTimestamp"] = Int(Date().timeIntervalSince1970 * 1000)
-      data["vgsCollectSessionId"] = vgsCheckoutSessionId
+      data["vgsCheckoutSessionId"] = vgsCheckoutSessionId
+			data["clientTimestamp"] = dateFormatter.string(from: Date())
       sendAnalyticsRequest(data: data)
   }
 
@@ -139,8 +154,10 @@ internal extension VGSCheckoutAnalyticsClient {
       request.allHTTPHeaderFields = defaultHttpHeaders
 
       let jsonData = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+			VGSNetworkRequestLogger.logAnalyticsRequest(request, payload: data)
       let encodedJSON = jsonData?.base64EncodedData()
       request.httpBody = encodedJSON
+
       // Send data
 			urlSession.dataTask(with: request).resume()
   }

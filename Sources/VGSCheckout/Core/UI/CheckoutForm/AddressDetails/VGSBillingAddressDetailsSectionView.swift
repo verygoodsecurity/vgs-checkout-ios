@@ -201,7 +201,6 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 
 		// Setup insets and UI Theme.
 		fieldViews.forEach { fieldView in
-			print("fieldView: \(fieldView)")
 			fieldView.updateUI(for: .initial)
 			fieldView.placeholderView.stackView.layoutMargins = VGSUIConstants.FormUI.fieldViewLayoutMargings
 			fieldView.textField.padding = VGSUIConstants.FormUI.textFieldPaddings

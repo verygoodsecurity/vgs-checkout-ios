@@ -120,6 +120,11 @@ internal class VGSFormValidationHelper {
 
 		return isValid
 	}
+
+	/// An array with invalid fieldType names.
+	internal var analyticsInvalidFieldNames: [String] {
+		return fieldViewsWithValidationErrors.map({$0.fieldType.analyticsFieldName})
+	}
   
   /// Array of `VGSTextFieldViewProtocol` items with validation error.
 	internal var fieldViewsWithValidationErrors: [VGSTextFieldViewProtocol] {
