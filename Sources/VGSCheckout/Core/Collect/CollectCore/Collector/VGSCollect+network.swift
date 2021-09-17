@@ -45,7 +45,7 @@ extension VGSCollect {
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
 
 					var extraData: [String : Any] = ["content": content]
-					extraData["latency"] = Date().timeIntervalSince(dateBeforeRequest)
+					extraData["latency"] = Int(Date().timeIntervalSince(dateBeforeRequest) * 1000)
 
           // Analytics
           if let strongSelf = self {
