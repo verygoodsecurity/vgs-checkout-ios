@@ -40,28 +40,28 @@
 "vgs_checkout_save_card_button_title" = "Save Card";
 
 /* Payment Processing label title. */
-"vgs_checkout_pay_button_processing_title" = "Payment Processing...";
+"vgs_checkout_pay_button_processing_title" = "Processing";
 
 /* Empty card holder name error. */
 "vgs_checkout_card_holder_empty_error" = "Name is empty";
 
 /* Invalid card number error. */
-"vgs_checkout_card_number_invalid_error" = "Enter a valid card number";
+"vgs_checkout_card_number_invalid_error" = "Invalid card number";
 
 /* Invalid card number error. */
 "vgs_checkout_card_number_empty_error" = "Card number is empty";
 
 /* Invalid card expiration date error. */
-"vgs_checkout_card_expiration_date_invalid_error" = "Expiration date is not valid";
+"vgs_checkout_card_expiration_date_invalid_error" = "Invalid expiry date";
 
 /* Empty card expiration date error. */
-"vgs_checkout_card_expiration_date_empty_error" = "Expiration date is empty";
+"vgs_checkout_card_expiration_date_empty_error" = "Expiry date is empty";
 
 /* Invalid card verification code error. */
-"vgs_checkout_card_verification_code_invalid_error" = "Security code is not valid";
+"vgs_checkout_card_verification_code_invalid_error" = "Invalid CVC/CVV format";
 
 /* Empty card verification code error. */
-"vgs_checkout_card_verification_code_empty_error" = "Security code is empty";
+"vgs_checkout_card_verification_code_empty_error" = "CVC/CVV is empty";
 
 /* Cancel button title on checkout screen */
 "vgs_checkout_cancel_button_title" = "Close";
