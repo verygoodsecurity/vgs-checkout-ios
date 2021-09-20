@@ -40,7 +40,7 @@
 "vgs_checkout_save_card_button_title" = "Save Card";
 
 /* Payment Processing label title. */
-"vgs_checkout_pay_button_processing_title" = "Payment Processing...";
+"vgs_checkout_pay_button_processing_title" = "Processing";
 
 /* Empty card holder name error. */
 "vgs_checkout_card_holder_empty_error" = "Name is empty";
