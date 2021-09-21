@@ -65,7 +65,7 @@ internal class VGSFormValidationHelper {
       return
     case .onSubmit:
       /// Set `inital`(empty) UI state for fields without content. Set `filled` UI state for fileds with content.
-      let fieldUIState: VGSCheckoutFieldUIState = fieldView.textField.state.isEmpty ? .initial : .filled
+      let fieldUIState: VGSCheckoutFieldUIState = fieldView.textFieldState.isEmpty ? .initial : .filled
       fieldView.updateUI(for: fieldUIState)
       fieldView.validationErrorView.viewUIState = .valid
       return
@@ -83,7 +83,7 @@ internal class VGSFormValidationHelper {
       
   
       let errorMessage: String?
-      if textView.textField.state.isEmpty {
+      if textView.textFieldState.isEmpty {
         /// get specific error message for empty fields
         errorMessage = validator.emptyErrorMessage(for: textView.textField, fieldType: textView.fieldType)
       } else {
@@ -142,7 +142,7 @@ internal class VGSFormValidationHelper {
 	/// - Returns: `Bool` object, true if form is valid.
 	internal func isFormValid() -> Bool {
     let invalidFields = fieldViewsManager.fieldViews.filter { fieldView in
-			return !fieldView.textField.state.isValid
+			return !fieldView.textFieldState.isValid
 		}
 		let isValid = invalidFields.isEmpty
 
@@ -157,7 +157,7 @@ internal class VGSFormValidationHelper {
   /// Array of `VGSTextFieldViewProtocol` items with validation error.
 	internal var fieldViewsWithValidationErrors: [VGSTextFieldViewProtocol] {
         let invalidFields = fieldViewsManager.fieldViews.filter { fieldView in
-          return !fieldView.textField.state.isValid
+          return !fieldView.textFieldState.isValid
         }
     return invalidFields
   }
@@ -168,7 +168,7 @@ internal class VGSFormValidationHelper {
 	internal func isStateValid(for fieldViews: [VGSTextFieldViewProtocol]) -> Bool {
 		var isValid = true
 		fieldViews.forEach { fieldView in
-			let state = fieldView.textField.state
+			let state = fieldView.textFieldState
 
 			// Don't mark fields as invalid without input.
 			if state.isDirty && state.isValid == false {

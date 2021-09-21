@@ -27,12 +27,19 @@ internal protocol VGSTextFieldViewDelegate {
 internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigurationProtocol {
 	var placeholderView: VGSPlaceholderFieldView {get}
 	var textField: VGSTextField {get}
-	
+  var textFieldState: State {get}
 	var fieldType: VGSAddCardFormFieldType {get}
     
 	var delegate: VGSTextFieldViewDelegate? {get set}
 
 	var validationErrorView: VGSValidationErrorView {get}
+}
+
+internal extension VGSTextFieldViewProtocol {
+  /// Return default textField state object
+  var textFieldState: State {
+    return textField.state
+  }
 }
 
 internal protocol VGSTextFieldViewUIConfigurationProtocol {
