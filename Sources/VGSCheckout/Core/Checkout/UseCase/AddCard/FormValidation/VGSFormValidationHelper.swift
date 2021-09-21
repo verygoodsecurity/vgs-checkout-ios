@@ -80,7 +80,17 @@ internal class VGSFormValidationHelper {
 
 		for textView in invalidTextViews {
 			let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: textView.fieldType)
-			let errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
+      
+  
+      let errorMessage: String?
+      if textView.textField.state.isEmpty {
+        /// get specific error message for empty fields
+        errorMessage = validator.emptyErrorMessage(for: textView.textField, fieldType: textView.fieldType)
+      } else {
+        /// get specific error message for non-empty fields
+        errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
+      }
+       
 			if let message = errorMessage {
 				textView.validationErrorView.viewUIState = .error(message)
 			}
