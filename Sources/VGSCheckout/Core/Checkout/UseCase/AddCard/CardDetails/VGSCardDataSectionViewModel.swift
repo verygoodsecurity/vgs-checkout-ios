@@ -166,7 +166,7 @@ extension VGSCardDataSectionViewModel {
   /// Check if CardBrand is changed and update cvc validation state if needed.
   internal func updateSecurityCodeFieldIfNeeded(for textView: VGSTextFieldViewProtocol) {
     guard textView.fieldType == .cardNumber,
-          let cardState = textView.textField.state as? CardState,
+          let cardState = textView.textFieldState as? CardState,
           let cvcFieldView = fieldViews.first(where: {$0.fieldType == .cvc}) else {
         return
     }
