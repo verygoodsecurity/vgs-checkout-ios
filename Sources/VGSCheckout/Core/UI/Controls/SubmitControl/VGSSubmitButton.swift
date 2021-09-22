@@ -193,6 +193,8 @@ internal class VGSSubmitButton: UIControl {
 		case .success:
 			progressView.endProgress()
 			iconAccessory = .none
+			backgroundColor = uiTheme.checkoutSubmitButtonSuccessBackgroundColor
+			titleLabel.textColor = UIColor.white
 		}
 	}
 }
