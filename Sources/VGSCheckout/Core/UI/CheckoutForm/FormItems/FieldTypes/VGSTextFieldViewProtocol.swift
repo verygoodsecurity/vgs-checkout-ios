@@ -36,7 +36,7 @@ internal protocol VGSTextFieldViewProtocol: AnyObject, VGSTextFieldViewUIConfigu
 }
 
 internal extension VGSTextFieldViewProtocol {
-  /// Return default textField state object
+  /// Return default textField state object.
   var textFieldState: State {
     return textField.state
   }
