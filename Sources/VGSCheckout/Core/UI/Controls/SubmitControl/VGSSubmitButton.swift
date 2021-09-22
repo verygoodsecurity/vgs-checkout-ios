@@ -191,11 +191,11 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.startAnimating()
 			iconAccessory = .loader
 		case .success:
+			progressView.endProgress()
+			iconAccessory = .none
 
-			self.progressView.endProgress()
-			self.iconAccessory = .none
+			// Change background color with animation.
 			UIView.animate(withDuration: 0.3) {
-				self.titleLabel.text = ""
 				self.backgroundColor = uiTheme.checkoutSubmitButtonSuccessBackgroundColor
 				self.titleLabel.textColor = UIColor.white
 				self.titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
