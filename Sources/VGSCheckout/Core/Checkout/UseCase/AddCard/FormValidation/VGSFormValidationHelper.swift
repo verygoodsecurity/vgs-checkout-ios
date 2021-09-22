@@ -84,10 +84,10 @@ internal class VGSFormValidationHelper {
   
       let errorMessage: String?
       if textView.textFieldState.isEmpty {
-        /// get specific error message for empty fields
+        // Get specific error message for empty fields.
         errorMessage = validator.emptyErrorMessage(for: textView.textField, fieldType: textView.fieldType)
       } else {
-        /// get specific error message for non-empty fields
+        // Get specific error message for non-empty fields.
         errorMessage = validator.errorMessage(for: textView.textField, fieldType: textView.fieldType)
       }
        
