@@ -32,9 +32,9 @@ internal class VGSSubmitButton: UIControl {
 		case none
 		case loader
 	}
-  
-  weak var delegate: VGSSubmitButtonDelegateProtocol?
-  
+
+	weak var delegate: VGSSubmitButtonDelegateProtocol?
+
 	/// Current icon accessory style.
 	internal var iconAccessory: LeftIconAccessory = .none {
 		didSet {
@@ -154,9 +154,9 @@ internal class VGSSubmitButton: UIControl {
 	}
 
 	/// Update UI.
-  internal func updateUI(with uiTheme: VGSCheckoutSubmitButtonThemeProtocol) {
+	internal func updateUI(with uiTheme: VGSCheckoutSubmitButtonThemeProtocol) {
 
-    layer.cornerRadius = 6.0
+		layer.cornerRadius = 6.0
 		layer.masksToBounds = true
 
 		switch status {
@@ -164,8 +164,8 @@ internal class VGSSubmitButton: UIControl {
 			isUserInteractionEnabled = false
 			backgroundColor =
 				uiTheme.checkoutSubmitButtonBackgroundColor.withAlphaComponent(0.6)
-      titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
-      titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
+			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
+			titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = title
 			titleLabel.textAlignment = .center
 			activityIndicatorView.stopAnimating()
@@ -173,7 +173,7 @@ internal class VGSSubmitButton: UIControl {
 		case .enabled:
 			isUserInteractionEnabled = true
 			backgroundColor =
-        uiTheme.checkoutSubmitButtonBackgroundColor
+				uiTheme.checkoutSubmitButtonBackgroundColor
 			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
 			titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = title
@@ -194,13 +194,11 @@ internal class VGSSubmitButton: UIControl {
 
 			self.progressView.endProgress()
 			self.iconAccessory = .none
-			UIView.animate(withDuration: 0.3, delay: 0, options: []) {
-				self.titleLabel.text = "Success"
-        self.backgroundColor = uiTheme.checkoutSubmitButtonSuccessBackgroundColor
+			UIView.animate(withDuration: 0.3) {
+				self.titleLabel.text = ""
+				self.backgroundColor = uiTheme.checkoutSubmitButtonSuccessBackgroundColor
 				self.titleLabel.textColor = UIColor.white
 				self.titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-			} completion: { isFinished in
-				//self.checkmarkIndicatorView.completeProgress()
 			}
 		}
 	}

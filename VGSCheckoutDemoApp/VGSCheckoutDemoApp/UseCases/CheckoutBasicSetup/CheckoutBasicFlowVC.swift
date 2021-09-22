@@ -29,6 +29,7 @@ class CheckoutBasicFlowVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		setupIdentifiers()
 		view.addSubview(mainView)
 		mainView.checkoutDemo_constraintViewToSuperviewEdges()
 		mainView.delegate = self
@@ -43,6 +44,12 @@ class CheckoutBasicFlowVC: UIViewController {
 	private func displayShoppingCartData() {
 		let items = OrderDataProvider.provideOrders()
 		mainView.shoppingCartView.configure(with: items)
+	}
+
+	/// Setup identifiers.
+	private func setupIdentifiers() {
+		view.accessibilityIdentifier = "VGSDemoApp.Screens.CustomConfigFlow"
+		mainView.button.accessibilityIdentifier = "VGSDemoApp.Screens.CustomConfigFlow.SaveCardButton"
 	}
 
 	/// Setup VGS Checkout configuration.
