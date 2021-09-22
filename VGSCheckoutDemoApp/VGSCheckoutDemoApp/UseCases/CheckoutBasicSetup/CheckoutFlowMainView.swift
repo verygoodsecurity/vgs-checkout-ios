@@ -44,7 +44,7 @@ class CheckoutFlowMainView: UIView {
 	}()
 
 	/// Button.
-	private lazy var button: UIButton = {
+	internal lazy var button: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
@@ -54,7 +54,7 @@ class CheckoutFlowMainView: UIView {
 		button.backgroundColor = .systemBlue
 		button.layer.cornerRadius = 6
 		button.layer.masksToBounds = true
-		button.setTitle("CHECKOUT", for: .normal)
+		button.setTitle("SAVE CARD", for: .normal)
 		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
 		button.titleLabel?.adjustsFontForContentSizeCategory = true
 

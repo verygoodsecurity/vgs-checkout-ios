@@ -23,6 +23,14 @@
 		441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E5265F6CC50080B01E /* OrderDataProvider.swift */; };
 		441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */; };
 		441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927EA265FA3E60080B01E /* UIFont+Extensions.swift */; };
+		445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */; };
+		445C126326F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */; };
+		445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */; };
+		445C126A26F99A0700D6F3DD /* VGSUITestElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126926F99A0700D6F3DD /* VGSUITestElement.swift */; };
+		445C126C26F99A2900D6F3DD /* VGSUITestElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126B26F99A2900D6F3DD /* VGSUITestElementType.swift */; };
+		445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */; };
+		445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */; };
+		445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
 		44D520F026787B18005AB588 /* CheckoutMultiplexingFlowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520EF26787B18005AB588 /* CheckoutMultiplexingFlowVC.swift */; };
@@ -74,6 +82,14 @@
 		441927E5265F6CC50080B01E /* OrderDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataProvider.swift; sourceTree = "<group>"; };
 		441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFlowMainView.swift; sourceTree = "<group>"; };
 		441927EA265FA3E60080B01E /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppBaseTestCase.swift; sourceTree = "<group>"; };
+		445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomConfigFlow.swift; sourceTree = "<group>"; };
+		445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSaveCardBaseTestCase.swift; sourceTree = "<group>"; };
+		445C126926F99A0700D6F3DD /* VGSUITestElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUITestElement.swift; sourceTree = "<group>"; };
+		445C126B26F99A2900D6F3DD /* VGSUITestElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUITestElementType.swift; sourceTree = "<group>"; };
+		445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
+		445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
+		445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
 		44D520EF26787B18005AB588 /* CheckoutMultiplexingFlowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutMultiplexingFlowVC.swift; sourceTree = "<group>"; };
@@ -160,6 +176,10 @@
 		3286E10B265EC30A001FECEB /* VGSCheckoutDemoAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				445C125C26F996BB00D6F3DD /* BaseTestCase */,
+				445C125F26F9986B00D6F3DD /* UseCasesTests */,
+				445C126826F999E300D6F3DD /* UITestUtils */,
+				445C126D26F99A4500D6F3DD /* Extensions */,
 				3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */,
 				3286E10E265EC30A001FECEB /* Info.plist */,
 			);
@@ -196,6 +216,7 @@
 		441927BF265F62D10080B01E /* UIKit+Extenions */ = {
 			isa = PBXGroup;
 			children = (
+				445C127426FAEE4D00D6F3DD /* UIApplication+Extensions */,
 				441927E9265FA3D60080B01E /* UIFont+Extensions */,
 				441927DB265F672C0080B01E /* UIView+Extensions */,
 			);
@@ -322,6 +343,65 @@
 				441927EA265FA3E60080B01E /* UIFont+Extensions.swift */,
 			);
 			path = "UIFont+Extensions";
+			sourceTree = "<group>";
+		};
+		445C125C26F996BB00D6F3DD /* BaseTestCase */ = {
+			isa = PBXGroup;
+			children = (
+				445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */,
+				445C126526F9995100D6F3DD /* SaveCard */,
+			);
+			path = BaseTestCase;
+			sourceTree = "<group>";
+		};
+		445C125F26F9986B00D6F3DD /* UseCasesTests */ = {
+			isa = PBXGroup;
+			children = (
+				445C126026F9987800D6F3DD /* CustomConfig */,
+			);
+			path = UseCasesTests;
+			sourceTree = "<group>";
+		};
+		445C126026F9987800D6F3DD /* CustomConfig */ = {
+			isa = PBXGroup;
+			children = (
+				445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */,
+			);
+			path = CustomConfig;
+			sourceTree = "<group>";
+		};
+		445C126526F9995100D6F3DD /* SaveCard */ = {
+			isa = PBXGroup;
+			children = (
+				445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */,
+			);
+			path = SaveCard;
+			sourceTree = "<group>";
+		};
+		445C126826F999E300D6F3DD /* UITestUtils */ = {
+			isa = PBXGroup;
+			children = (
+				445C126926F99A0700D6F3DD /* VGSUITestElement.swift */,
+				445C126B26F99A2900D6F3DD /* VGSUITestElementType.swift */,
+			);
+			path = UITestUtils;
+			sourceTree = "<group>";
+		};
+		445C126D26F99A4500D6F3DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */,
+				445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		445C127426FAEE4D00D6F3DD /* UIApplication+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */,
+			);
+			path = "UIApplication+Extensions";
 			sourceTree = "<group>";
 		};
 		44C4C9332666011A00195505 /* Configuration */ = {
@@ -612,6 +692,7 @@
 				441927E0265F67DE0080B01E /* ShoppingCartView.swift in Sources */,
 				44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */,
 				441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */,
+				445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */,
 				441927DD265F673C0080B01E /* UIView+Extensions.swift in Sources */,
 				44D520F026787B18005AB588 /* CheckoutMultiplexingFlowVC.swift in Sources */,
 				441927D7265F64A60080B01E /* CheckoutBasicFlowVC.swift in Sources */,
@@ -636,6 +717,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445C126326F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift in Sources */,
+				445C126C26F99A2900D6F3DD /* VGSUITestElementType.swift in Sources */,
+				445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */,
+				445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */,
+				445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */,
+				445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */,
+				445C126A26F99A0700D6F3DD /* VGSUITestElement.swift in Sources */,
 				3286E10D265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,7 +775,6 @@
 /* Begin XCBuildConfiguration section */
 		3286E10F265EC30A001FECEB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4405DDA5268AE539004A83AD /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

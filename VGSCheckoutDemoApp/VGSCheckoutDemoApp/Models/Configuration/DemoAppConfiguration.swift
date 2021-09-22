@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Setup your Vault configuration details here.
 class DemoAppConfiguration {
@@ -13,6 +14,12 @@ class DemoAppConfiguration {
 
 	/// no:doc
 	private init() {
+		guard !UIApplication.isRunningUITest else {
+			setupMockedTestDataIfNeeded()
+			return
+		}
+
+
 		// Fill data from *.xconfig for test and etc if *.xconfig is available. 
 		if let customVault = Bundle.main.object(forInfoDictionaryKey: "CUSTOM_VAULT") as? String {
 			self.vaultId = customVault
@@ -38,4 +45,21 @@ class DemoAppConfiguration {
 
 	/// Path to backend URL to fetch token for multipexing.
 	var multiplexingServicePath = ""
+
+	/// Setup mocked data.
+	private func setupMockedTestDataIfNeeded() {
+		if UIApplication.isRunningUITest {
+			guard let path = Bundle.main.path(forResource: "UITestsMockedData", ofType: "plist") else {
+					print("Path not found")
+					return
+			}
+
+			guard let dictionary = NSDictionary(contentsOfFile: path) else {
+					print("Unable to get dictionary from path")
+					return
+			}
+
+			self.vaultId = dictionary["vaultID"] as? String ?? ""
+		}
+	}
 }
