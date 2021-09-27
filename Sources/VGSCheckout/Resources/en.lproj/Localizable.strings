@@ -25,7 +25,7 @@
 "vgs_checkout_card_number_hint" = "1234 1234 1234 1234";
 
 /* Card exp date field placeholder text. */
-"vgs_checkout_card_expiration_date_hint" = "MM/YY";
+"vgs_checkout_expiration_date_hint" = "MM/YY";
 
 /* Card CVC field placeholder text. */
 "vgs_checkout_security_code" = "3 digits";
@@ -52,16 +52,16 @@
 "vgs_checkout_card_number_empty_error" = "Card number is empty";
 
 /* Invalid card expiration date error. */
-"vgs_checkout_card_expiration_date_invalid_error" = "Invalid expiry date";
+"vgs_checkout_expiration_date_invalid_error" = "Invalid expiry date";
 
 /* Empty card expiration date error. */
-"vgs_checkout_card_expiration_date_empty_error" = "Expiry date is empty";
+"vgs_checkout_expiration_date_empty_error" = "Expiry date is empty";
 
 /* Invalid card verification code error. */
-"vgs_checkout_card_verification_code_invalid_error" = "Invalid CVC/CVV format";
+"vgs_checkout_verification_code_invalid_error" = "Invalid CVC/CVV format";
 
 /* Empty card verification code error. */
-"vgs_checkout_card_verification_code_empty_error" = "CVC/CVV is empty";
+"vgs_checkout_verification_code_empty_error" = "CVC/CVV is empty";
 
 /* Cancel button title on checkout screen */
 "vgs_checkout_cancel_button_title" = "Close";
