@@ -118,9 +118,9 @@ internal enum VGSAddCardFormFieldType {
 		case .cardNumber:
 			return "vgs_checkout_card_number_empty_error"
 		case .expirationDate:
-			return "vgs_checkout_card_expiration_date_empty_error"
+			return "vgs_checkout_expiration_date_empty_error"
 		case .cvc:
-			return "vgs_checkout_card_verification_code_invalid_error"
+			return "vgs_checkout_verification_code_invalid_error"
 		case .addressLine1:
 			return "vgs_checkout_address_info_line1_empty_error"
 		case .city:
