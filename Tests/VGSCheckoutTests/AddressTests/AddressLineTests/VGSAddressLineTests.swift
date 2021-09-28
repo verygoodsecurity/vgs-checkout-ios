@@ -18,6 +18,9 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
     
     configuration = VGSCheckoutConfiguration(vaultID: "test", environment: "sandbox")
     checkout = VGSCheckout(configuration: configuration)
+
+		let viewController = UIViewController()
+		checkout.present(from: viewController)
   }
   
   func testValidAddress() {
@@ -26,9 +29,13 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
                               "a, b, c",
                               "3333"]
     
-     let addressLine1TextField = checkout.addCardUseCaseManager.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField
+		guard let addressLine1TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField else {
+			return
+		}
     
-    let addressLine2TextField = checkout.addCardUseCaseManager.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField
+		guard let addressLine2TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField else {
+			return
+		}
     
     for address in validAddressSource {
       addressLine1TextField.setText(address)
@@ -38,8 +45,13 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
     }
     
     func testEmptyAddress() {
-       let addressLine1TextField = checkout.addCardUseCaseManager.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField
-      let addressLine2TextField = checkout.addCardUseCaseManager.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField
+			guard let addressLine1TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField else {
+				return
+			}
+
+			guard let addressLine2TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField else {
+				return
+			}
       
         addressLine1TextField.setText("")
         addressLine2TextField.setText("")

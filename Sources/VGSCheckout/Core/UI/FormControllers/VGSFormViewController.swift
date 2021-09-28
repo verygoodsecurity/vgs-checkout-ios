@@ -63,7 +63,7 @@ internal class VGSFormViewController: UIViewController {
 
 		var formConstraints = [NSLayoutConstraint?]()
 		if #available(iOS 11.0, *) {
-			formKeyboardGuideBottomConstraint = formView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+			formKeyboardGuideBottomConstraint = formView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 			formConstraints = [
 				formView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 				formKeyboardGuideBottomConstraint,
