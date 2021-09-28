@@ -21,9 +21,9 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:VGSCheckout.xcodeproj",
+        "containerPath" : "container:VGSCheckoutSDK.xcodeproj",
         "identifier" : "3286E0C4265EC19C001FECEB",
-        "name" : "VGSCheckoutTests"
+        "name" : "VGSCheckoutSDKTests"
       }
     }
   ],
