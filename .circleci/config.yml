@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Run Tests iOS 13-14
           command: >
-            cd Tests/VGSCheckoutTests/Resources/MockedData &&
+            cd Tests/VGSCheckoutSDKTests/Resources/MockedData &&
             plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} VGSCheckoutTestConfig.plist && cd .. && cd .. && cd .. && cd .. && ls && xcodebuild test -project VGSCheckoutSDK.xcodeproj -scheme VGSCheckoutSDKTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.2' -testPlan VGSCheckoutSDKTests
   build-and-ui-test-demo-app-ios-13-14:
     macos:
