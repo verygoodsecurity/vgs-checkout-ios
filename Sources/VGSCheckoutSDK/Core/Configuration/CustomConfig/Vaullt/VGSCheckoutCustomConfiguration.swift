@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// Holds configuration for vault payment processing with custom configuration, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+/// Holds configuration for vault payment processing with custom configuration, conforms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
 	/// `String` object, organization vault id.
@@ -13,6 +13,8 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
+  // MARK: - Initialization
+  
 	/// Configuration initializer.
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
@@ -22,10 +24,14 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 		self.environment = environment
 	}
 
+  // MARK: - API Configuration
+  
 	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
 	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
 
-  ///
+  // MARK: - UI Configuration
+
+  /// Form UI configuration attributes, default is `VGSCheckoutDefaultTheme` object.
   public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
 	/// Form configuration options. Check `VGSCheckoutFormConfiguration` for default settings.
@@ -34,6 +40,8 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
 
+  // MARK: - Card Data Fields Configuration
+  
 	/// Card number field options.
 	public var cardNumberFieldOptions: VGSCheckoutCardNumberOptions {
 		get {
@@ -78,6 +86,19 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 		}
 	}
 
+  // MARK: - Billing Address Fields Configuration
+  
+  /// Billing address section visibility.
+  public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
+    get {
+      return formConfiguration.billingAddressVisibility
+    }
+
+    set {
+      formConfiguration.billingAddressVisibility = newValue
+    }
+  }
+  
 	/// Billing address country field options.
 	public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
 		get {
@@ -130,17 +151,6 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 
 		set {
 			formConfiguration.addressOptions.postalCodeOptions = newValue
-		}
-	}
-
-	/// Billing address visibility.
-	public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
-		get {
-			return formConfiguration.billingAddressVisibility
-		}
-
-		set {
-			formConfiguration.billingAddressVisibility = newValue
 		}
 	}
 }

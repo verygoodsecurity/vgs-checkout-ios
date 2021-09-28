@@ -87,8 +87,8 @@ public final class VGSCheckoutLogger {
 
 	/// Verify if event level should be forwarded to registered loggers.
 	/// - Parameters:
-	///   - level: `VGSLogLevel` object, should be event `level`.
-	///   - currentLevel: `VGSLogLevel` object, current logging level.
+	///   - level: `VGSCheckoutLogLevel` object, should be event `level`.
+	///   - currentLevel: `VGSCheckoutLogLevel` object, current logging level.
 	/// - Returns: `true` if event should be logged.
 	internal func shouldForwardEvent(with level: VGSCheckoutLogLevel, currentLevel: VGSCheckoutLogLevel) -> Bool {
 		switch currentLevel {
