@@ -6,6 +6,8 @@
 
 ## User settings
 xcuserdata/
+**/xcuserdata
+**.xcworkspace
 
 
 ## Obj-C/Swift specific
@@ -78,4 +80,8 @@ VGSCheckoutDemoApp/Pods
 VGSCheckoutDemoApp/Podfile.lock
 *.xcworkspacedata
 *.xcconfig
+
+Docs
+.build/**
+build
 
