@@ -132,13 +132,6 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// Fill in correct billing address.
 	func fillInCorrectBillingAddress() {
-		// Tap on billing address section label to close keyboard.
-		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
-
-		// Swipe up to make other address fields visible.
-		app.swipeUp()
-		wait(forTimeInterval: 0.5)
-
 		VGSTextField.BillingAddress.addressLine1.find(in: app).type("1555 Lake Woodlands Dr")
 
 		// Tap on billing address section label to close keyboard.
@@ -146,7 +139,6 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Swipe up to make other address fields visible.
 		app.swipeUp()
-		wait(forTimeInterval: 0.5)
 
 		VGSTextField.BillingAddress.city.find(in: app).type("Spring")
 		VGSTextField.BillingAddress.zip.find(in: app).type("77380")
