@@ -17,7 +17,16 @@ public class VGSCheckout {
 	fileprivate var checkoutCoordinator = VGSCheckoutFlowCoordinator()
 
 	/// Handles add card flow.
-	internal let addCardUseCaseManager: VGSAddCardUseCaseManager
+	internal var addCardUseCaseManager: VGSAddCardUseCaseManager?
+
+	/// Payment instrument.
+	internal let paymentInstrument: VGSPaymentInstrument
+
+	/// VGS collect.
+	internal let vgsCollect: VGSCollect
+
+	/// UI Theme.
+	internal let uiTheme: VGSCheckoutThemeProtocol
 
 	// MARK: - Initialization
 
@@ -29,9 +38,9 @@ public class VGSCheckout {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-		let vgsCollect = VGSCollect(vaultID: configuration.vaultID, environment: configuration.environment, paymentFlow: paymentInstrument)
-    self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, uiTheme: configuration.uiTheme)
-		addCardUseCaseManager.delegate = self
+		self.paymentInstrument = paymentInstrument
+		vgsCollect = VGSCollect(vaultID: configuration.vaultID, environment: configuration.environment, paymentFlow: paymentInstrument)
+		self.uiTheme = configuration.uiTheme
 	}
 
 	// MARK: - Interface
@@ -41,11 +50,16 @@ public class VGSCheckout {
 	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
 	public func present(from viewController: UIViewController, animated: Bool = true) {
 
-		let checkoutViewController = addCardUseCaseManager.buildCheckoutViewController()
-		checkoutCoordinator.setRootViewController(checkoutViewController)
-		checkoutViewController.modalPresentationStyle = .overFullScreen
+		self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, uiTheme: uiTheme)
+		addCardUseCaseManager?.delegate = self
 
-		viewController.present(checkoutViewController, animated: animated, completion: nil)
+		let checkoutViewController = addCardUseCaseManager?.buildCheckoutViewController()
+
+		if let vc = checkoutViewController {
+			checkoutCoordinator.setRootViewController(vc)
+			vc.modalPresentationStyle = .overFullScreen
+			viewController.present(vc, animated: animated, completion: nil)
+		}
 	}
 }
 
@@ -71,7 +85,7 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
 						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {
 							// Reset UI state to valid (previous state before submit).
-							self.addCardUseCaseManager.state = .valid
+							self.addCardUseCaseManager?.state = .valid
 						})
 					} else {
 						// Close checkout with error request result.
