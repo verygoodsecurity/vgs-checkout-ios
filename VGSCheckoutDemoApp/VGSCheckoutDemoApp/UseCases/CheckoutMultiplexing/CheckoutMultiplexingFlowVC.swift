@@ -6,7 +6,7 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 #endif
-import VGSCheckout
+import VGSCheckoutSDK
 import SVProgressHUD
 
 class CheckoutMultiplexingFlowVC: UIViewController {
