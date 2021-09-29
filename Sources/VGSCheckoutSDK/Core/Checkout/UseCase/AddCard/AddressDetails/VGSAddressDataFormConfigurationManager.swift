@@ -19,14 +19,14 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityTextField = addressFormView.cityFieldView.textField
 		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
-		let addressVisibility = vaultConfiguration.formConfiguration.billingAddressVisibility
-
 		let countryOptions = vaultConfiguration.billingAddressCountryFieldOptions
 		let addressLine1Options = vaultConfiguration.billingAddressLine1FieldOptions
 		let addressLine2Options = vaultConfiguration.billingAddressLine2FieldOptions
 		let cityOptions = vaultConfiguration.billingAddressCityFieldOptions
 		let postalCodeOptions = vaultConfiguration.billingAddressPostalCodeFieldOptions
 
+    let addressVisibility = vaultConfiguration.formConfiguration.billingAddressVisibility
+    
 		switch addressVisibility {
 		case .hidden:
 			addressFormView.isHidden = true
@@ -140,6 +140,16 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityTextField = addressFormView.cityFieldView.textField
 		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
+    let addressVisibility = multiplexingConfiguration.formConfiguration.billingAddressVisibility
+    
+    switch addressVisibility {
+    case .hidden:
+      addressFormView.isHidden = true
+      return
+    case .visible:
+      break
+    }
+    
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
