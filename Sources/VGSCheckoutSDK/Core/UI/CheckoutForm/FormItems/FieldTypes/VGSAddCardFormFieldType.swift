@@ -65,7 +65,7 @@ internal enum VGSAddCardFormFieldType {
 		case .addressLine2:
 			return "addressLine2"
 		case .cardholderName:
-			return "cardholderName"
+			return "cardHolder"
 		case .cvc:
 			return "cvc"
 		case .city:

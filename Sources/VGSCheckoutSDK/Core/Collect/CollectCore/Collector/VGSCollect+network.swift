@@ -73,7 +73,7 @@ extension VGSCollect {
 
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty  {
-				extraAnalyticsInfo["invalidFields"] = invalidFields
+				extraAnalyticsInfo["fieldTypes"] = invalidFields
 			}
 
 			extraAnalyticsInfo["content"] = contentData
