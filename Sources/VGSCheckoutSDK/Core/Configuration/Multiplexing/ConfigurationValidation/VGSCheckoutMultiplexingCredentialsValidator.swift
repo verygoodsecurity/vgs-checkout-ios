@@ -9,7 +9,7 @@ import Foundation
 internal class VGSMultiplexingCredentialsValidator {
 
 	/// Scope not allowed.
-	static let restrictedRolesScope: Set<String> = ["transfers"]
+	static let restrictedRolesScope: Set<String> = ["transfers:write"]
 	
 	/// Multiplexing App id  prefix.
 	static let multiplexingAppIdPrefix = "multiplexing-app-"
