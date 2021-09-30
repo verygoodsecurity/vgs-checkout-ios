@@ -184,6 +184,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	/// Handles tap on the save card button.
 	@objc fileprivate func saveCardDidTap() {
 				let invalidFieldNames = cardDataSectionViewModel.formValidationHelper.analyticsInvalidFieldNames
+		// Explicitly set payload and custom headers to analytics event content since we track beforeSubmit regardless sending API request.
 		vgsCollect.trackBeforeSubmit(with: invalidFieldNames, payload: paymentInstrument.extraData, customHeaders: paymentInstrument.customHeaders)
         switch state {
         case .valid:
