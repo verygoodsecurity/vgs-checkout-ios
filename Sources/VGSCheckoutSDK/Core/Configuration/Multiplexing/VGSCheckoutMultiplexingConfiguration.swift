@@ -32,7 +32,21 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 
 	/// Checkout UI elements  configuration.
 	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+  
+  /// Billing address visibility.
+  public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
+    get {
+      return formConfiguration.billingAddressVisibility
+    }
+
+    set {
+      formConfiguration.billingAddressVisibility = newValue
+    }
+  }
 
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .multiplexing
+  
+  /// Form configuration options. Check `VGSCheckoutMultiplexingFormConfiguration` for default settings.
+  internal var formConfiguration = VGSMultiplexingFormConfiguration()
 }

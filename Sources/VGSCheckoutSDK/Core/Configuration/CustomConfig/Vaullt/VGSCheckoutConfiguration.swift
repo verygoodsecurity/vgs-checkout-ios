@@ -29,7 +29,7 @@ public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
   public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
 	/// Form configuration options. Check `VGSCheckoutFormConfiguration` for default settings.
-	internal var formConfiguration: VGSCheckoutFormConfiguration = VGSCheckoutFormConfiguration()
+	internal var formConfiguration: VGSCustomFormConfiguration = VGSCustomFormConfiguration()
 
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
