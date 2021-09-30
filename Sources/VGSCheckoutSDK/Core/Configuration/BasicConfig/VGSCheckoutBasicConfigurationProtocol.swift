@@ -79,4 +79,24 @@ internal enum VGSPaymentInstrument {
 			}
 		}
 	}
+
+	/// Custom headers from custom user configuration. Not available in multiplexing.
+	internal var customHeaders: [String: String] {
+		switch self {
+		case .multiplexing:
+			return [:]
+		case .vault(let configuration):
+			return configuration.routeConfiguration.requestOptions.customHeaders
+		}
+	}
+
+	/// Extra data from custom user configuration. Not available in multiplexing.
+	internal var extraData: [String: Any]? {
+		switch self {
+		case .multiplexing:
+			return nil
+		case .vault(let configuration):
+			return configuration.routeConfiguration.requestOptions.extraData
+		}
+	}
 }

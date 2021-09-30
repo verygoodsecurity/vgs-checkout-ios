@@ -183,7 +183,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// Handles tap on the save card button.
 	@objc fileprivate func saveCardDidTap() {
-				vgsCollect.trackBeforeSubmit(with: cardDataSectionViewModel.formValidationHelper.analyticsInvalidFieldNames)
+				let invalidFieldNames = cardDataSectionViewModel.formValidationHelper.analyticsInvalidFieldNames
+		vgsCollect.trackBeforeSubmit(with: invalidFieldNames, payload: paymentInstrument.extraData, customHeaders: paymentInstrument.customHeaders)
         switch state {
         case .valid:
             state = .processing

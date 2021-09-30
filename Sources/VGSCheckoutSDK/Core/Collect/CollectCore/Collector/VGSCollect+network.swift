@@ -24,19 +24,14 @@ extension VGSCollect {
         Errors can be returned in the `NSURLErrorDomain` and `VGSCheckoutErrorDomain`.
     */
 	internal func sendData(path: String, method: HTTPMethod = .post, extraData: [String: Any]? = nil, requestOptions: VGSCollectRequestOptions = VGSCollectRequestOptions(), completion block: @escaping (VGSResponse) -> Void) {
-      
-        // Content analytics.
-				var content: [String] = contentForAnalytics(from: extraData)
 
-				let fieldMappingPolicy = requestOptions.fieldNameMappingPolicy
-
-				content.append(fieldMappingPolicy.analyticsName)
         if let error = validateStoredInputData() {
 
           block(.failure(error.code, nil, nil, error))
 					return
         }
 
+				let fieldMappingPolicy = requestOptions.fieldNameMappingPolicy
         let body = mapFieldsToBodyJSON(with: fieldMappingPolicy, extraData: extraData)
 
 				let dateBeforeRequest = Date()
@@ -66,10 +61,10 @@ extension VGSCollect {
 
 	/// Track befre submit with invalid fields.
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
-	internal func trackBeforeSubmit(with invalidFields: [String]) {
+	internal func trackBeforeSubmit(with invalidFields: [String], payload: [String: Any]?, customHeaders: [String: String]) {
 		// Content analytics.
 		var extraAnalyticsInfo: [String : Any] = [:]
-		let contentData = contentForAnalytics(from: [:])
+		let contentData = contentForAnalytics(from: payload, customHeaders: customHeaders)
 
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty  {
@@ -89,12 +84,12 @@ extension VGSCollect {
 	/// Custom content for analytics from headers and payload.
 	/// - Parameter payload: `[String: Any]` payload object.
 	/// - Returns: `[String]` object.
-	private func contentForAnalytics(from payload: [String: Any]?) -> [String] {
+	private func contentForAnalytics(from payload: [String: Any]?, customHeaders: [String : String]) -> [String] {
 		var content: [String] = []
 		if !(payload?.isEmpty ?? true) {
 			content.append("custom_data")
 		}
-		if !(customHeaders?.isEmpty ?? true) {
+		if !(customHeaders.isEmpty) {
 			content.append("custom_header")
 		}
 
