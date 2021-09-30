@@ -18,7 +18,7 @@ internal enum VGSAnalyticsEventType: String {
   case submit = "Submit"
 	case formInit = "Init"
 	case cancel = "Cancel"
-	case jwtValidation = "JVTValidation"
+	case jwtValidation = "JWTValidation"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.
@@ -37,7 +37,7 @@ public class VGSCheckoutAnalyticsClient {
 		let dateFormatter = DateFormatter()
 		let enUSPosixLocale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.locale = enUSPosixLocale
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 		dateFormatter.calendar = Calendar(identifier: .gregorian)
 
 		return dateFormatter
