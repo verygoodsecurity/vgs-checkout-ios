@@ -44,7 +44,7 @@ extension VGSCollect {
         // Send request.
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
 
-					var extraData: [String : Any] = ["content": content]
+					var extraData: [String : Any] = [:]
 					extraData["latency"] = Int(Date().timeIntervalSince(dateBeforeRequest) * 1000)
 
           // Analytics
@@ -98,14 +98,10 @@ extension VGSCollect {
 			content.append("custom_header")
 		}
 
+		// Always track custom hostname feature regardless its resolving status.
 		switch apiClient.hostURLPolicy {
-		case .customHostURL(let status):
-			switch status {
-			case .resolved, .isResolving:
-				content.append("custom_hostname")
-			default:
-				break
-			}
+		case .customHostURL:
+			content.append("custom_hostname")
 		default:
 			break
 		}
