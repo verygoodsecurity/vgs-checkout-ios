@@ -13,7 +13,7 @@ internal struct VGSCustomFormConfiguration {
 	/// Address options.
   var addressOptions = VGSCheckoutBillingAddressOptions()
 
-	/// Billing address visibility. Default is `.hidden` - address section is hidden and `addressOptions` fields will be ignored.
+	/// Billing address visibility. Default is `.hidden` - address section is hidden.
   var billingAddressVisibility: VGSCheckoutBillingAddressVisibility = .hidden
 
 	/// no:doc

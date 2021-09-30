@@ -7,7 +7,7 @@ import Foundation
 /// Multiplexing Flow Form configuration.
 internal struct VGSMultiplexingFormConfiguration {
 
-  /// Billing address visibility. Default is `.hidden` - address section is hidden and `addressOptions` fields will be ignored.
+  /// Billing address visibility. Default is `.hidden`.
   var billingAddressVisibility: VGSCheckoutBillingAddressVisibility = .hidden
 
   /// no:doc
