@@ -71,6 +71,20 @@ public final class VGSCheckoutLogger {
 		}
 	}
 
+	/// Forward to loggers critical log event ignoring current log level configuration.
+	/// - Parameter event: `VGSLogEvent` object, event to log.
+	internal func forwardCriticalLogEvent(_ event: VGSLogEvent) {
+		let isExtensiveDebugEnabled = configuration.isExtensiveDebugEnabled
+
+		var loggers = [VGSLogging]()
+		readWriteContainer.read {
+			loggers = self.registeredLoggers
+		}
+		readWriteContainer.write {
+			loggers.forEach {$0.logEvent(event, isExtensiveDebugEnabled: isExtensiveDebugEnabled)}
+		}
+	}
+
 	/// Verify if event level should be forwarded to registered loggers.
 	/// - Parameters:
 	///   - level: `VGSLogLevel` object, should be event `level`.
