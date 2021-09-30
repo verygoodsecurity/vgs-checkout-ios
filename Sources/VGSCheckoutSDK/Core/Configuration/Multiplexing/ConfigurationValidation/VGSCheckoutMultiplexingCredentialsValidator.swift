@@ -50,7 +50,7 @@ internal class VGSMultiplexingCredentialsValidator {
 
 		// Print JWT error to console if logger is disabled since it is critical but we do not want to trigger asserts.
 		if VGSCheckoutLogger.shared.configuration.level == .none {
-			print("[VGSCheckout - ❌ ERROR! JWT TOKEN IS INVALID: \(debugErrorText)]. Multiplexing configuration cannot start without valid JWT token!")
+			print("[VGSCheckout - ❌ ERROR! JWT TOKEN IS INVALID: \(debugErrorText). Multiplexing configuration cannot start without valid JWT token!]")
 		}
 		let event = VGSLogEvent(level: .warning, text: debugErrorText, severityLevel: .error)
 		VGSCheckoutLogger.shared.forwardLogEvent(event)
