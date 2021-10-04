@@ -67,7 +67,7 @@ extension VGSCollect {
 		let contentData = contentForAnalytics(from: payload, customHeaders: customHeaders)
 
 		if let error = validateStoredInputData() {
-			if !invalidFields.isEmpty  {
+			if !invalidFields.isEmpty {
 				extraAnalyticsInfo["fieldTypes"] = invalidFields
 			}
 

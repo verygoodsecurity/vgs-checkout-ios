@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 #endif
 
-internal protocol VGSTextFieldViewDelegate {
+internal protocol VGSTextFieldViewDelegate: AnyObject {
     
     // MARK: - Handle user ineraction with `VGSTextFieldViewProtocol`
     
