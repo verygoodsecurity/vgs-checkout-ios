@@ -16,6 +16,9 @@ internal class VGSMultiplexingCredentialsValidator {
 
 	/// Returns JWT scope validation result.
 	static func isJWTScopeValid(_ jwtToken: String, vaultId: String, environment: String) -> Bool {
+		return true
+
+		/*
 		guard !jwtToken.isEmpty else {
 			trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "JWT token is empty!")
 			return false
@@ -35,6 +38,7 @@ internal class VGSMultiplexingCredentialsValidator {
 		}
 
 		return intersectionScope.isEmpty
+		*/
 	}
 
 	/// Track JWTValidation error.

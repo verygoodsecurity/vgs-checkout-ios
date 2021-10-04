@@ -23,9 +23,9 @@ internal class VGSValidationErrorView: UIView {
 		case valid
 
 		/// Equatable.
-		static internal func ==(lhs: ValidationViewUIState, rhs: ValidationViewUIState) -> Bool {
+		static internal func == (lhs: ValidationViewUIState, rhs: ValidationViewUIState) -> Bool {
 				switch (lhs, rhs) {
-				case (.initial,   .initial):
+				case (.initial, .initial):
 					return true
 				case (.valid, .valid):
 					return true

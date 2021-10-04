@@ -45,7 +45,7 @@ internal enum VGSPaymentInstrument {
 	 - Parameters:
 			- configuration: `VGSCheckoutConfiguration` object, vault configuration.
 	*/
-	case vault(_ configuration: VGSCheckoutConfiguration)
+	case vault(_ configuration: VGSCheckoutCustomConfiguration)
 
 	/**
 	 Payment instrument for multiplexing flow.
@@ -64,7 +64,7 @@ internal enum VGSPaymentInstrument {
 
 		switch checkoutConfiguration.paymentFlowType {
 		case .vault:
-			if let vaultConfig = checkoutConfiguration as? VGSCheckoutConfiguration {
+			if let vaultConfig = checkoutConfiguration as? VGSCheckoutCustomConfiguration {
 				self = .vault(vaultConfig)
 				return
 			} else {

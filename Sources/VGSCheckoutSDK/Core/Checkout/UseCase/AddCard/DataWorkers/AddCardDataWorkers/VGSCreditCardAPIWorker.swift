@@ -21,11 +21,11 @@ internal class VGSAddCreditCardVaultAPIWorker: VGSAddCreditCardAPIWorkerProtocol
 	internal let vgsCollect: VGSCollect
 
 	/// Custom vault configuration.
-	internal let vaultConfiguration: VGSCheckoutConfiguration
+	internal let vaultConfiguration: VGSCheckoutCustomConfiguration
 
 	// MARK: - Initialization
 
-	init(vgsCollect: VGSCollect, vaultConfiguration: VGSCheckoutConfiguration) {
+	init(vgsCollect: VGSCollect, vaultConfiguration: VGSCheckoutCustomConfiguration) {
 		self.vgsCollect = vgsCollect
 		self.vaultConfiguration = vaultConfiguration
 	}

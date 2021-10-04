@@ -10,7 +10,7 @@ import UIKit
 /// Encapsulates form setup with collect.
 internal class VGSCardDataFormConfigurationManager {
 
-	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
+	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutCustomConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
 		let fieldViews = cardSectionView.fieldViews
 
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName
@@ -22,7 +22,6 @@ internal class VGSCardDataFormConfigurationManager {
               else {
             return
         }
-				
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
 		cardConfiguration.type = .cardNumber
@@ -116,27 +115,23 @@ internal class VGSCardDataFormConfigurationManager {
 		}
 	}
 
-	/*
-	{
-		name,
-		number,
-		exp_month,
-		exp_year,
-		cvc,
-		billing_address: {
-			name, //require
-			company,
-			address1, //require
-			address2,
-			city, //require
-			region, //require (Principal subdivision in ISO 3166-2)
-			country, //require (Country code in ISO 3166-1 alpha-2)
-			state,
-			country,
-			postal_code, //require
-			phone,
-		},
-	},
+	/* Sample of multiplexing payload:
+	 {
+		 "card" : {
+			 "billing_address" : {
+				 "city" : "Texas City",
+				 "address1" : "1",
+				 "country" : "US",
+				 "adddressLine2" : "1",
+				 "postal_code" : "12345"
+			 },
+			 "cvc" : "333",
+			 "exp_month" : "10",
+			 "name" : "Joe Doe",
+			 "number" : "4111111111111111",
+			 "exp_year" : "2022"
+		 }
+	 }
 	*/
 
 	internal static func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {

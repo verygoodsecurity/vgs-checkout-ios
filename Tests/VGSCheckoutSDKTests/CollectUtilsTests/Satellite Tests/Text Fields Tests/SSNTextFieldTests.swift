@@ -82,7 +82,7 @@ class SSNTextFieldTests: VGSCheckoutBaseTestCase {
         "100123456", "143104563", "235231000",
         "823423423", "665123455", "123456780",
         "219099998", "078051125", "457555465",
-        /// mask should cut extra symbols
+        // mask should cut extra symbols
         "234567890123456789"
       ]
       

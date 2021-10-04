@@ -60,7 +60,7 @@ internal class VGSTextFieldViewUIConfigurationHandler {
 }
 
 internal class VGSCardholderFieldView: UIView, VGSTextFieldViewProtocol, VGSTextFieldViewUIConfigurationProtocol {
-    var delegate: VGSTextFieldViewDelegate?
+    weak var delegate: VGSTextFieldViewDelegate?
     
     // MARK: - Attributes
     internal var fieldType: VGSAddCardFormFieldType = .cardholderName

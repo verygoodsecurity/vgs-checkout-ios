@@ -10,13 +10,13 @@ import XCTest
 /// Test postal codes validation
 class VGSAddressLineTests: VGSCheckoutBaseTestCase {
   
-  var configuration: VGSCheckoutConfiguration!
+  var configuration: VGSCheckoutCustomConfiguration!
   var checkout: VGSCheckout!
   
   override func setUp() {
     super.setUp()
     
-    configuration = VGSCheckoutConfiguration(vaultID: "test", environment: "sandbox")
+    configuration = VGSCheckoutCustomConfiguration(vaultID: "test", environment: "sandbox")
     checkout = VGSCheckout(configuration: configuration)
 
 		let viewController = UIViewController()

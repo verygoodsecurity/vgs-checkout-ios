@@ -64,7 +64,7 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 		// Create custom configuration.
-		var checkoutConfiguration = VGSCheckoutConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
+		var checkoutConfiguration = VGSCheckoutCustomConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
 
 		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
 		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"

@@ -9,8 +9,8 @@ import UIKit
 #endif
 
 internal class VGSExpirationDateFieldView: UIView, VGSTextFieldViewProtocol {
-    var delegate: VGSTextFieldViewDelegate?
-    
+
+		weak var delegate: VGSTextFieldViewDelegate?
 
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
     

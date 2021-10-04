@@ -40,7 +40,7 @@ class VGSFieldNameToJSONTests: XCTestCase {
 			let comment = item.comment
 
 			var actualResultJSON: JsonData = [:]
-			_ = VGSFieldNameToJSONDataMapper.mapFieldNameToJSON(fieldName, value: fieldValue, json: &actualResultJSON)
+			VGSFieldNameToJSONDataMapper.mapFieldNameToJSON(fieldName, value: fieldValue, json: &actualResultJSON)
 
 			let debugOutput = "index: \(index). \nFieldName *\(fieldName) should produce \(expectedResult), \n\ncomment: \(comment)* \n\nActual result: \(actualResultJSON)"
 
@@ -50,11 +50,11 @@ class VGSFieldNameToJSONTests: XCTestCase {
 }
 
 class VGSFieldNameMapperTestDataProvider {
-	static func provideTestDataForVGSFieldNameToJSON() -> [VGSFieldNameToJSONTests.VGSFieldNameTestData]  {
+	static func provideTestDataForVGSFieldNameToJSON() -> [VGSFieldNameToJSONTests.VGSFieldNameTestData] {
 		return provideFieldNameTestData(for: "VGSFieldNameToJSONTestData")
 	}
 
-	static func provideFieldNameTestData(for fileName: String) -> [VGSFieldNameToJSONTests.VGSFieldNameTestData]  {
+	static func provideFieldNameTestData(for fileName: String) -> [VGSFieldNameToJSONTests.VGSFieldNameTestData] {
 		guard let rootTestJSON = JsonData(jsonFileName: fileName), let testDataJSONArray = rootTestJSON["test_data"] as? [JsonData] else {
 			XCTFail("cannot build data for file VGSFieldNameToJSONTestData")
 			return []

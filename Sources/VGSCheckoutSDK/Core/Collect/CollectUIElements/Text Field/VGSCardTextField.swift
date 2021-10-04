@@ -133,7 +133,7 @@ internal extension VGSCardTextField {
         updateCardImage()
     }
   
-    func updateCardImageView(hidden: Bool)  {
+    func updateCardImageView(hidden: Bool) {
       if hidden {
         cardIconView.removeFromSuperview()
       } else {

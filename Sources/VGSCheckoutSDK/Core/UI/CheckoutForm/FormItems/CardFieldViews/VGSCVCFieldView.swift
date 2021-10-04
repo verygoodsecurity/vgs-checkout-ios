@@ -9,7 +9,7 @@ import UIKit
 #endif
 
 internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
-    var delegate: VGSTextFieldViewDelegate?
+    weak var delegate: VGSTextFieldViewDelegate?
     
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
 
