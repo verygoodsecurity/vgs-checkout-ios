@@ -9,7 +9,8 @@ import UIKit
 
 /// Holds UI for country form.
 internal class VGSCountryFieldView: UIView, VGSTextFieldViewProtocol {
-    var delegate: VGSTextFieldViewDelegate?
+
+	  weak var delegate: VGSTextFieldViewDelegate?
     
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
 

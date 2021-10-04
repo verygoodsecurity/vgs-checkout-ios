@@ -90,13 +90,16 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		statePickerField?.pickerSelectionDelegate = self
 		countryPickerField?.pickerSelectionDelegate = self
 
+		// Country field cannot be empty so make it filled from start.
+		billingAddressFormView.countryFieldView.uiConfigurationHandler?.filled()
+
 		lastSelectedCountryCode = countryPickerField?.selectedOutputValue
 	}
 
 	// MARK: - Helpers
 
 	/// Setup billing address form with vault configuration.
-	/// - Parameter multiplexingConfiguration: `VGSCheckoutConfiguration` object, vault configuration.
+	/// - Parameter multiplexingConfiguration: `VGSCheckoutCustomConfiguration` object, vault configuration.
 	private func setupBillingAddressForm(with vaultConfiguration: VGSCheckoutCustomConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
