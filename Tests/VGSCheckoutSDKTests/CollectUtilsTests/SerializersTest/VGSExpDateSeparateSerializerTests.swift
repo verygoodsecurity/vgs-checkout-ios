@@ -27,7 +27,7 @@ class VGSExpDateSeparateSerializerTests: VGSCheckoutBaseTestCase {
 				return "DefaultConfig"
 			case .customConfiguration:
 				return "CustomConfig"
-      case .customExpDateOutputConfiguration:
+			case .customExpDateOutputConfiguration:
         return "CustomExpDateOutputConfig"
 			case .mapWithArrayOverwrite:
 				return "MapWithArrayOverwrite"

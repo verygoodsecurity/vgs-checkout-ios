@@ -95,11 +95,11 @@ class VGSTextFieldTests: VGSCheckoutBaseTestCase {
     
     let testFields = [testField1, testField2, testField3, testField4]
     
-    for i in 0 ..< testFields.count - 1 {
-      let field1 = testFields[i]
+    for index in 0 ..< testFields.count - 1 {
+      let field1 = testFields[index]
       
-      for j in (i+1) ..< testFields.count {
-        let field2 = testFields[j]
+      for subIndex in (index+1) ..< testFields.count {
+        let field2 = testFields[subIndex]
 
         /// Test positive case with equal input
         field1.textField.secureText = input1

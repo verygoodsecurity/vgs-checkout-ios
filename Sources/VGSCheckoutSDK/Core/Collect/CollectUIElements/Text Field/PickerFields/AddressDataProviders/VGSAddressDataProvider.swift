@@ -44,7 +44,7 @@ internal class VGSAddressCountriesDataProvider {
 
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
-			let unsortedFiltered = filtered.filter{($0.code != defaultFirstCountryCode.rawValue)}
+			let unsortedFiltered = filtered.filter({ $0.code != defaultFirstCountryCode.rawValue})
 			return [model] + unsortedFiltered
 		} else {
 			return filtered
