@@ -149,7 +149,7 @@ internal class VGSAddressDataFormConfigurationManager {
       break
     }
     
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "billing_address.country")
+		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
@@ -159,24 +159,24 @@ internal class VGSAddressDataFormConfigurationManager {
 		// Force select first row in picker.
 		countryTextField.selectFirstRow()
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.address1")
+		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.address1")
 		addressLine1Configuration.type = .none
 		addressLine1Configuration.isRequiredValidOnly = true
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.adddressLine2")
+		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.adddressLine2")
 		addressLine2Configuration.type = .none
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2TextField.configuration = addressLine2Configuration
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.city")
+		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.city")
 		cityConfiguration.type = .none
 		cityConfiguration.isRequiredValidOnly = true
 
 		cityTextField.configuration = cityConfiguration
 
-		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "billing_address.postal_code")
+		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.postal_code")
 		postalCodeConfiguration.type = .none
 		postalCodeConfiguration.isRequiredValidOnly = true
 
