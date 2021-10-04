@@ -11,7 +11,7 @@ import SVProgressHUD
 
 // swiftlint:disable all
 
-/// Custom API client for multiplexing.
+/// Your Custom API client for multiplexing.
 final class MultiplexingCustomBackendAPIClient {
 
 	/// Succcess completion for token fetch.
@@ -49,6 +49,7 @@ final class MultiplexingCustomBackendAPIClient {
 								let token = json["access_token"] as? String else {
 								// Handle error
 							DispatchQueue.main.async {
+								DemoAppResponseParser.logErrorResponse(response, data: data, error: error)
 								failure("Cannot fetch token")
 							}
 							return
@@ -73,13 +74,16 @@ final class MultiplexingCustomBackendAPIClient {
 	func initiateTransfer(with financialInstrumentID: String, amount: String, currency: String, success: @escaping SendTransferCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
 
 		var request = URLRequest(url: yourCustomBackendSendPaymentURL)
-		request.httpBody = try? JSONSerialization.data(withJSONObject: [
+		request.httpMethod = "POST"
+
+		let transderPayload: [String: Any] = [
 			"amount": amount,
 			"currency": currency,
 			"source": financialInstrumentID
-		])
+		]
+		request.httpBody = try? JSONSerialization.data(withJSONObject: transderPayload)
+		DemoAppResponseParser.logRequest(request, payload: transderPayload)
 
-		request.httpMethod = "POST"
 		let task = URLSession.shared.dataTask(
 				with: request,
 				completionHandler: {(data, response, error) in
@@ -88,6 +92,7 @@ final class MultiplexingCustomBackendAPIClient {
 										as? [String: Any] else {
 								// Handle error
 							DispatchQueue.main.async {
+								DemoAppResponseParser.logErrorResponse(response, data: data, error: error)
 								failure("Cannot send payment")
 							}
 							return
@@ -105,13 +110,11 @@ final class MultiplexingCustomBackendAPIClient {
 	/// - Returns: `String?` object, multiplexing financial instrument id or `nil`.
 	func multiplexingFinancialInstrumentID(from data: Data?) -> String? {
 		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-			if let json = jsonData["json"] as? [String: Any] {
-				if let dataJSON = json["data"] as? [String: Any] {
+				if let dataJSON = jsonData["data"] as? [String: Any] {
 					if let financialInstumentID = dataJSON["id"] as? String {
 						return financialInstumentID
 					}
 				}
-			}
 		}
 
 		return nil
@@ -201,7 +204,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Start progress hud animation until payment transfer is finished.
 		SVProgressHUD.show()
-		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "", currency: "USD") {
+		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") {
 			SVProgressHUD.showSuccess(withStatus: "Successfully finished multiplexing transfer!")
 		} failure: { errorMessage in
 			SVProgressHUD.showError(withStatus: "Cannot complete transfer!")
@@ -249,7 +252,7 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 				message = "status code is: \(statusCode). Press BUY to send payment!"
 				mainView.button.setTitle("BUY", for: .normal)
 			} else {
-				message = "status code is: \(statusCode). Card was saved successfully but cannot obtain financial id"
+				message = "status code is: \(statusCode). Card was saved successfully but cannot obtain financial instrument id"
 			}
 		case .failure(let statusCode, _, _, let error):
 			title = "Checkout Multiplexing status: Failed!"
