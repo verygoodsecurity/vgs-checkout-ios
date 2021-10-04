@@ -9,7 +9,7 @@ import UIKit
 
 /// Holds UI for base field view (has simple `VGSTextField`).
 internal class VGSBaseFieldView: UIView, VGSTextFieldViewProtocol {
-    var delegate: VGSTextFieldViewDelegate?
+    weak var delegate: VGSTextFieldViewDelegate?
     
     var uiConfigurationHandler: VGSTextFieldViewUIConfigurationHandler?
     
