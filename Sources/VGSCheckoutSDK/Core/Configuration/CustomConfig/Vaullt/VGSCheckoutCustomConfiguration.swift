@@ -1,5 +1,5 @@
 //
-//  VGSCheckoutSDKConfiguration.swift
+//  VGSCheckoutCustomConfiguration.swift
 //  VGSCheckoutSDK
 
 import Foundation
