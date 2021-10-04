@@ -55,7 +55,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     self.autoFocusManager = autoFocusManager
   }
 
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutCustomConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupBillingAddressForm(with: configuration)
@@ -97,7 +97,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	/// Setup billing address form with vault configuration.
 	/// - Parameter multiplexingConfiguration: `VGSCheckoutConfiguration` object, vault configuration.
-	private func setupBillingAddressForm(with vaultConfiguration: VGSCheckoutConfiguration) {
+	private func setupBillingAddressForm(with vaultConfiguration: VGSCheckoutCustomConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 

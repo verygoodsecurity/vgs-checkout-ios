@@ -16,7 +16,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
     let emptyErrorText: String
   }
   
-  var configuration: VGSCheckoutConfiguration!
+  var configuration: VGSCheckoutCustomConfiguration!
   var checkout: VGSCheckout!
   
   lazy var testCountryData: [VGSCountriesISO: CountryStrings] = {
@@ -26,7 +26,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   override func setUp() {
     super.setUp()
     
-    configuration = VGSCheckoutConfiguration(vaultID: "test", environment: "sandbox")
+    configuration = VGSCheckoutCustomConfiguration(vaultID: "test", environment: "sandbox")
     checkout = VGSCheckout(configuration: configuration)
 
 		let viewController = UIViewController()

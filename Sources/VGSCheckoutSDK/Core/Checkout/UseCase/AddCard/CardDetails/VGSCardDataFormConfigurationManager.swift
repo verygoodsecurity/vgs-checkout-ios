@@ -10,7 +10,7 @@ import UIKit
 /// Encapsulates form setup with collect.
 internal class VGSCardDataFormConfigurationManager {
 
-	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
+	internal static func setupCardForm(with vaultConfiguration: VGSCheckoutCustomConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
 		let fieldViews = cardSectionView.fieldViews
 
 		let cardNumberFieldName = vaultConfiguration.formConfiguration.cardOptions.cardNumberOptions.fieldName

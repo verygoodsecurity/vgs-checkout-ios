@@ -4,8 +4,8 @@
 
 import Foundation
 
-/// Holds configuration for vault payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutConfiguration: VGSCheckoutBasicConfigurationProtocol {
+/// Holds configuration for vault payment processing with custom configuration, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
 	/// `String` object, organization vault id.
 	public let vaultID: String
