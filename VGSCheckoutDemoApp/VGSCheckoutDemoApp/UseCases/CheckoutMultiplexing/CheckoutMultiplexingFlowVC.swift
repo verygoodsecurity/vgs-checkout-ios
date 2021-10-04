@@ -9,7 +9,8 @@ import UIKit
 import VGSCheckoutSDK
 import SVProgressHUD
 
-class CheckoutMultiplexingFlowVC: UIViewController {
+/// Custom API client for multiplexing.
+final class MultiplexingCustomBackendAPIClient {
 
 	/// Succcess completion for token fetch.
 	typealias FetchTokenCompletionSuccess = (_ token: String) -> Void
@@ -17,10 +18,107 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 	/// Fail completion for token fetch.
 	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> Void
 
+	/// Success completion for transfer request.
+	typealias SendTransferCompletionSuccess = () -> Void
+
+	/// Fail completion for transfer request.
+	typealias SendTransferCompletionFail = (_ errorMessage: String) -> Void
+
+	// Use your own backend to fetch access_token token.
+	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/get-auth-token")!
+
+	// Use your own backend to send payment to multiplexing.
+	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/transfers")!
+
+	/// Fetch multiplexing token from your own backend.
+	/// - Parameters:
+	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
+	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
+	fileprivate func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+
+		var request = URLRequest(url: yourCustomBackendTokenURL)
+		request.httpMethod = "POST"
+		let task = URLSession.shared.dataTask(
+				with: request,
+				completionHandler: { (data, response, error) in
+						guard let data = data,
+								let json = try? JSONSerialization.jsonObject(with: data, options: [])
+										as? [String: Any],
+								let token = json["access_token"] as? String else {
+								// Handle error
+							DispatchQueue.main.async {
+								failure("Cannot fetch token")
+							}
+							return
+						}
+
+					let multipexingToken = token
+					print("access_token: \(token)")
+					DispatchQueue.main.async {
+						success(multipexingToken)
+					}
+				})
+		task.resume()
+	}
+
+	/// Initiate transfer request on multiplexing from your custom backend.
+	/// - Parameters:
+	///   - financialInstrumentID: `String` object, id of financial instrument.
+	///   - amount: `String` object, amount of transaction.
+	///   - currency: `String` object, currency of transaction.
+	///   - success: `SendTransferCompletionSuccess` object, completion on success transfers.
+	///   - failure: `SendTransferCompletionFail` object, completion on failed request with error message.
+	fileprivate func initiateTransfer(with financialInstrumentID: String, amount: String, currency: String, success: @escaping SendTransferCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+
+		var request = URLRequest(url: yourCustomBackendSendPaymentURL)
+		request.httpBody = try? JSONSerialization.data(withJSONObject: [
+			"amount": amount,
+			"currency": currency,
+			"source": financialInstrumentID
+		])
+
+		request.httpMethod = "POST"
+		let task = URLSession.shared.dataTask(
+				with: request,
+				completionHandler: { [weak self] (data, response, error) in
+						guard let data = data,
+								let json = try? JSONSerialization.jsonObject(with: data, options: [])
+										as? [String: Any] else {
+								// Handle error
+							DispatchQueue.main.async {
+								failure("Cannot send payment")
+							}
+							return
+						}
+					print("response json: \(json)")
+					DispatchQueue.main.async {
+						success()
+					}
+				})
+		task.resume()
+	}
+}
+
+/*
+ Multiplexing flow use case demo.
+
+ Step 1: Setup your custom backend for multiplexing.
+ Step 2: Send request to your backend and fetch access token required for multiplexing flow.
+ Step 3: Create `VGSCheckoutMultiplexingConfiguration` with fetched token and present Checkout.
+         Implement `VGSCheckoutDelegate` protocol to get notified when checkout flow will be finished.
+ Step 4: Implement `checkoutDidFinish` method and parse response to get financial instrument `id` in response json.
+
+ Step 5: Initiate `/transfer` request with financial instrument using your backend by sending request from mobile app.
+*/
+class CheckoutMultiplexingFlowVC: UIViewController {
+
 	// MARK: - Vars
 
 	/// Checkout instance.
 	fileprivate var vgsCheckout: VGSCheckout?
+
+	/// Sends request to your custom backend required for multiplexing setup.
+	fileprivate let multiplexingCustomAPIClient = MultiplexingCustomBackendAPIClient()
 
 	/// Main view.
 	fileprivate lazy var mainView: CheckoutFlowMainView = {
@@ -65,7 +163,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Start progress hud animation until token is fetched.
 		SVProgressHUD.show()
-		fetchMultiplexingToken { token in
+		multiplexingCustomAPIClient.fetchMultiplexingToken { token in
 			SVProgressHUD.dismiss()
 
 			// Uncomment the line below to simulate 401 error and set invalid token to multiplexing.
@@ -75,38 +173,6 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		} failure: { errorText in
 			SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
 		}
-	}
-
-	/// Fetch multiplexing token from your own backend.
-	/// - Parameters:
-	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
-	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
-	fileprivate func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
-
-		// Use your own backend to fetch access_token token.
-		var request = URLRequest(url: URL(string:  DemoAppConfiguration.shared.multiplexingServicePath)!)
-		request.httpMethod = "POST"
-		let task = URLSession.shared.dataTask(
-				with: request,
-				completionHandler: { [weak self] (data, response, error) in
-						guard let data = data,
-								let json = try? JSONSerialization.jsonObject(with: data, options: [])
-										as? [String: Any],
-								let token = json["access_token"] as? String else {
-								// Handle error
-							DispatchQueue.main.async {[weak self] in
-								failure("Cannot fetch token")
-							}
-							return
-						}
-
-					let multipexingToken = token
-				  print("access_token: \(token)")
-					DispatchQueue.main.async {[weak self] in
-						success(multipexingToken)
-				  }
-				})
-		task.resume()
 	}
 
 	/// Presents multiplexing checkout flow.
@@ -152,10 +218,11 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 		switch requestResult {
 		case .success(let statusCode, let data, let response):
 			title = "Checkout Multiplexing status: Success!"
-			message = "status code is: \(statusCode)"
+			message = "status code is: \(statusCode). Press BUY to send payment!"
 			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
+			mainView.button.setTitle("BUY", for: .normal)
 		case .failure(let statusCode, let data, let response, let error):
 			title = "Checkout Multiplexing status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
@@ -164,10 +231,10 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 			if statusCode == 401 {
 				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
 					SVProgressHUD.show()
-					self.fetchMultiplexingToken { token in
+					self.multiplexingCustomAPIClient.fetchMultiplexingToken { token in
 						SVProgressHUD.dismiss()
 						self.presentMultiplexingCheckout(with: token)
-					} failure: { errorMessage in
+					} failure: { _ in
 						SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
 					}
 				}
