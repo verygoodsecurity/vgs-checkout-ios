@@ -9,6 +9,8 @@ import UIKit
 import VGSCheckoutSDK
 import SVProgressHUD
 
+// swiftlint:disable all
+
 /// Custom API client for multiplexing.
 final class MultiplexingCustomBackendAPIClient {
 
@@ -34,7 +36,7 @@ final class MultiplexingCustomBackendAPIClient {
 	/// - Parameters:
 	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
 	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
-	fileprivate func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+	func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
 
 		var request = URLRequest(url: yourCustomBackendTokenURL)
 		request.httpMethod = "POST"
@@ -68,7 +70,7 @@ final class MultiplexingCustomBackendAPIClient {
 	///   - currency: `String` object, currency of transaction.
 	///   - success: `SendTransferCompletionSuccess` object, completion on success transfers.
 	///   - failure: `SendTransferCompletionFail` object, completion on failed request with error message.
-	fileprivate func initiateTransfer(with financialInstrumentID: String, amount: String, currency: String, success: @escaping SendTransferCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+	func initiateTransfer(with financialInstrumentID: String, amount: String, currency: String, success: @escaping SendTransferCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
 
 		var request = URLRequest(url: yourCustomBackendSendPaymentURL)
 		request.httpBody = try? JSONSerialization.data(withJSONObject: [
@@ -80,7 +82,7 @@ final class MultiplexingCustomBackendAPIClient {
 		request.httpMethod = "POST"
 		let task = URLSession.shared.dataTask(
 				with: request,
-				completionHandler: { [weak self] (data, response, error) in
+				completionHandler: {(data, response, error) in
 						guard let data = data,
 								let json = try? JSONSerialization.jsonObject(with: data, options: [])
 										as? [String: Any] else {
@@ -96,6 +98,23 @@ final class MultiplexingCustomBackendAPIClient {
 					}
 				})
 		task.resume()
+	}
+
+	/// Financial instrument id from success multiplexing save card response.
+	/// - Parameter data: `Data?` object, response data.
+	/// - Returns: `String?` object, multiplexing financial instrument id or `nil`.
+	func multiplexingFinancialInstrumentID(from data: Data?) -> String? {
+		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+			if let json = jsonData["json"] as? [String: Any] {
+				if let dataJSON = json["data"] as? [String: Any] {
+					if let financialInstumentID = dataJSON["id"] as? String {
+						return financialInstumentID
+					}
+				}
+			}
+		}
+
+		return nil
 	}
 }
 
@@ -119,6 +138,9 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 
 	/// Sends request to your custom backend required for multiplexing setup.
 	fileprivate let multiplexingCustomAPIClient = MultiplexingCustomBackendAPIClient()
+
+	/// ID to start payment transfer.
+	fileprivate var financialInstrumentID: String?
 
 	/// Main view.
 	fileprivate lazy var mainView: CheckoutFlowMainView = {
@@ -161,17 +183,28 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 
-		// Start progress hud animation until token is fetched.
+		guard let id = financialInstrumentID else {
+			// Start progress hud animation until token is fetched.
+			SVProgressHUD.show()
+			multiplexingCustomAPIClient.fetchMultiplexingToken { token in
+				SVProgressHUD.dismiss()
+
+				// Uncomment the line below to simulate 401 error and set invalid token to multiplexing.
+				// let invalidToken = "Some invalid token"
+
+				self.presentMultiplexingCheckout(with: token)
+			} failure: { errorText in
+				SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+			}
+			return
+		}
+
+		// Start progress hud animation until payment transfer is finished.
 		SVProgressHUD.show()
-		multiplexingCustomAPIClient.fetchMultiplexingToken { token in
-			SVProgressHUD.dismiss()
-
-			// Uncomment the line below to simulate 401 error and set invalid token to multiplexing.
-			// let invalidToken = "Some invalid token"
-
-			self.presentMultiplexingCheckout(with: token)
-		} failure: { errorText in
-			SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "", currency: "USD") {
+			SVProgressHUD.showSuccess(withStatus: "Successfully finished multiplexing transfer!")
+		} failure: { errorMessage in
+			SVProgressHUD.showError(withStatus: "Cannot complete transfer!")
 		}
 	}
 
@@ -196,18 +229,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 
 	func checkoutDidCancel() {
-
-		let alert = UIAlertController(title: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", preferredStyle: UIAlertController.Style.alert)
-
-		if let popoverController = alert.popoverPresentationController {
-			popoverController.sourceView = self.view //to set the source of your alert
-			popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
-			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
-		}
-
-		alert.addAction(UIAlertAction(title: "OK", style: .default))
-
-		self.present(alert, animated: true, completion: nil)
+		CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
 	}
 
 	func checkoutDidFinish(with requestResult: VGSCheckoutRequestResult) {
@@ -216,14 +238,20 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 		var message = ""
 
 		switch requestResult {
-		case .success(let statusCode, let data, let response):
+		case .success(let statusCode, let data, _):
 			title = "Checkout Multiplexing status: Success!"
-			message = "status code is: \(statusCode). Press BUY to send payment!"
 			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
-			mainView.button.setTitle("BUY", for: .normal)
-		case .failure(let statusCode, let data, let response, let error):
+
+			if let id = multiplexingCustomAPIClient.multiplexingFinancialInstrumentID(from: data) {
+				financialInstrumentID = id
+				message = "status code is: \(statusCode). Press BUY to send payment!"
+				mainView.button.setTitle("BUY", for: .normal)
+			} else {
+				message = "status code is: \(statusCode). Card was saved successfully but cannot obtain financial id"
+			}
+		case .failure(let statusCode, _, _, let error):
 			title = "Checkout Multiplexing status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 
@@ -256,3 +284,5 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 		self.present(alert, animated: true, completion: nil)
 	}
 }
+
+// swiftlint:enable all
