@@ -126,7 +126,6 @@ internal extension VGSCVCTextField {
         return stack
     }
 
-  
     func updateCVCImage(for cardBrand: VGSCheckoutPaymentCards.CardBrand) {
         guard !isIconHidden else {
           return

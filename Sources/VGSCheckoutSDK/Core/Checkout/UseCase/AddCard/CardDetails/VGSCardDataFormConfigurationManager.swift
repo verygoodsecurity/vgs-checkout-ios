@@ -22,7 +22,6 @@ internal class VGSCardDataFormConfigurationManager {
               else {
             return
         }
-				
 
 		let cardConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cardNumberFieldName)
 		cardConfiguration.type = .cardNumber
