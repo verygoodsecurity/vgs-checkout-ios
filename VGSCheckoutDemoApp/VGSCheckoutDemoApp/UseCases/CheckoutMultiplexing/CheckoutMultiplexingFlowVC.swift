@@ -77,10 +77,13 @@ final class MultiplexingCustomBackendAPIClient {
 		request.httpMethod = "POST"
 
 		let transderPayload: [String: Any] = [
+			"tnt": DemoAppConfiguration.shared.multiplexingVaultId,
 			"amount": amount,
 			"currency": currency,
-			"source": financialInstrumentID
+			"fi_id": financialInstrumentID
 		]
+
+		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.httpBody = try? JSONSerialization.data(withJSONObject: transderPayload)
 		DemoAppResponseParser.logRequest(request, payload: transderPayload)
 
@@ -215,7 +218,10 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 	/// - Parameter token: `String` object, should be valid multiplexing token.
 	fileprivate func presentMultiplexingCheckout(with token: String) {
 		// Create multiplexing configuration with token.
-        if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment) {
+        if var multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment) {
+
+
+					multiplexingConfiguration.billingAddressVisibility = .visible
             // Init Checkout with vaultID associated with your multiplexing configuration.
             vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
 
