@@ -137,7 +137,7 @@ class ValidationRulesTest: VGSCheckoutBaseTestCase {
       XCTAssertTrue(textfield.state.validationErrors.count == 1)
       XCTAssertTrue(textfield.state.validationErrors.first == error)
       
-      /// Test  month in valid range
+      // Test  month in valid range
       textfield.textField.secureText = "1322"
       XCTAssertTrue(textfield.state.isValid == false)
       XCTAssertTrue(textfield.state.validationErrors.count == 1)

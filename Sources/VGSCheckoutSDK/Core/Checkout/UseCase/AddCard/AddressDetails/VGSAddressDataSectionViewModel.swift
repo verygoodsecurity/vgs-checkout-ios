@@ -56,14 +56,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
   }
 
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
     setupBillingAddressForm(with: configuration)
     buildForm()
 	}
   
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper:  formValidationHelper, autoFocusManager: autoFocusManager)
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
 		setupBillingAddressForm(with: configuration)
     buildForm()
@@ -159,7 +159,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	}
 
 	/// Current selected country.
-	internal var lastSelectedCountryCode: String? = nil
+	internal var lastSelectedCountryCode: String?
 }
 
 // MARK: - VGSTextFieldDelegate

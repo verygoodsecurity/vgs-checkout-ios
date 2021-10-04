@@ -39,7 +39,7 @@ extension VGSCollect {
         // Send request.
         apiClient.sendRequest(path: path, method: method, value: body) { [weak self](response ) in
 
-					var extraData: [String : Any] = [:]
+					var extraData: [String: Any] = [:]
 					extraData["latency"] = Int(Date().timeIntervalSince(dateBeforeRequest) * 1000)
 
           // Analytics
@@ -63,7 +63,7 @@ extension VGSCollect {
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
 	internal func trackBeforeSubmit(with invalidFields: [String], payload: [String: Any]?, customHeaders: [String: String]) {
 		// Content analytics.
-		var extraAnalyticsInfo: [String : Any] = [:]
+		var extraAnalyticsInfo: [String: Any] = [:]
 		let contentData = contentForAnalytics(from: payload, customHeaders: customHeaders)
 
 		if let error = validateStoredInputData() {
@@ -84,7 +84,7 @@ extension VGSCollect {
 	/// Custom content for analytics from headers and payload.
 	/// - Parameter payload: `[String: Any]` payload object.
 	/// - Returns: `[String]` object.
-	private func contentForAnalytics(from payload: [String: Any]?, customHeaders: [String : String]) -> [String] {
+	private func contentForAnalytics(from payload: [String: Any]?, customHeaders: [String: String]) -> [String] {
 		var content: [String] = []
 		if !(payload?.isEmpty ?? true) {
 			content.append("custom_data")

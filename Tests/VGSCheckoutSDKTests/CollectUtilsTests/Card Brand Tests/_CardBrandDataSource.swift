@@ -158,7 +158,7 @@ extension VGSCheckoutPaymentCards.CardBrand {
                 "6062828888666688"]
         case .unknown:
             return []
-        case .custom(brandName:_):
+        case .custom(brandName: _):
           return []
       }
     }
