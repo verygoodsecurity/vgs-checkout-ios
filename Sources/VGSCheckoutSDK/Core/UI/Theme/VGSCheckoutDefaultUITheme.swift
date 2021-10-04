@@ -63,5 +63,5 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutSubmitButtonTitleColor: UIColor = .white
 
 	/// The font of the submit button title. Default is `.title3` with `.bold` weight.
-	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .bold)
+	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .regular)
 }
