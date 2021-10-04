@@ -186,7 +186,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
     }
 
 	func pickerAddressDidUpdate(in field: VGSTextField, fieldType: VGSAddCardFormFieldType) {
-		guard let pickerField = field as? VGSPickerTextField else {
+		guard field is VGSPickerTextField else {
 			return
 		}
 

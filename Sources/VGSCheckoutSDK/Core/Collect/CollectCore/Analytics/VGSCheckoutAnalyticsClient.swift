@@ -123,15 +123,13 @@ public class VGSCheckoutAnalyticsClient {
 
 	/// SDK integration tool.
 	private static var sdkIntegration: String {
-		#if COCOAPODS
-			return "COCOAPODS"
-		#endif
-
-		#if SWIFT_PACKAGE
-			return "SPM"
-		#endif
-
-		return "OTHER"
+			#if COCOAPODS
+				return "COCOAPODS"
+			#elseif SWIFT_PACKAGE
+				return "SPM"
+			#else
+				return "OTHER"
+			#endif
 	}
 }
 
