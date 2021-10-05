@@ -14,10 +14,10 @@ Validate input in scope of matching the pattern(regex).
 internal struct VGSValidationRulePattern: VGSValidationRuleProtocol {
   
     /// Regex pattern
-    public let pattern: String
+    let pattern: String
   
     /// Validation Error
-    public let error: VGSValidationError
+    let error: VGSValidationError
     
     /// Initialzation
     ///

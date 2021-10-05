@@ -14,13 +14,13 @@ Validate input in scope of length.
 internal struct VGSValidationRuleLength: VGSValidationRuleProtocol {
     
     /// Min input  length required
-    public let min: Int
+    let min: Int
   
     /// Max input  length required
-    public let max: Int
+    let max: Int
   
     /// Validation Error
-    public let error: VGSValidationError
+    let error: VGSValidationError
 
     /// Initialzation
     ///
@@ -28,7 +28,7 @@ internal struct VGSValidationRuleLength: VGSValidationRuleProtocol {
     ///   - error:`VGSValidationError` - error on failed validation relust.
     ///   - min: min input  length required
     ///   - max: max input  length required
-    public init(min: Int = 0, max: Int = Int.max, error: VGSValidationError) {
+    init(min: Int = 0, max: Int = Int.max, error: VGSValidationError) {
         self.min = min
         self.max = max
         self.error = error

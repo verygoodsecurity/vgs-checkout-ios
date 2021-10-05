@@ -21,19 +21,19 @@ internal struct VGSValidationRuleSet {
     internal var rules = [AnyValidationRule]()
     
     /// Initialzation
-    public init() { }
+    init() { }
     
     /// Initialzation
     ///
     /// - Parameters:
     ///   - rules: array of validation rules
-    public init(rules: [VGSValidationRuleProtocol]) {
+    init(rules: [VGSValidationRuleProtocol]) {
         
         self.rules = rules.map(AnyValidationRule.init)
     }
     
     /// Add validation rule
-    public mutating func add(rule: VGSValidationRuleProtocol) {
+    mutating func add(rule: VGSValidationRuleProtocol) {
      
         let anyRule = AnyValidationRule(base: rule)
         rules.append(anyRule)
