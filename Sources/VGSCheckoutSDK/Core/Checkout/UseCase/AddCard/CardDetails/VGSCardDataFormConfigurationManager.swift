@@ -43,24 +43,17 @@ internal class VGSCardDataFormConfigurationManager {
 		let expDateConfiguration = VGSExpDateConfiguration(checkoutExpDateOptions: expDateOptions, collect: vgsCollect)
 		expDateConfiguration.isRequiredValidOnly = true
 		expDateConfiguration.type = .expDate
-
-		if let expDateFormatPattern = expDateOptions.inputDateFormat?.inputFormatPattern {
-			expDateConfiguration.formatPattern = expDateFormatPattern
-		} else {
-			/// Default .expDate format is "##/##"
-			expDateConfiguration.formatPattern = "##/##"
-		}
-
+    expDateConfiguration.inputSource = .keyboard
+    expDateConfiguration.inputDateFormat = expDateOptions.inputDateFormat
+    expDateConfiguration.formatPattern = expDateOptions.inputDateFormat.inputFormatPattern
+    expCardDate.configuration = expDateConfiguration
+    expCardDate.placeholder = "MM/YY"
+		
 		/// Update validation rules
-		/// FIXME - hardcoded for now!
-		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
-		])
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: expDateOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
 
-		expDateConfiguration.inputSource = .keyboard
-		expDateConfiguration.inputDateFormat = .shortYear
-		expCardDate.configuration = expDateConfiguration
-		expCardDate.placeholder = "MM/YY"
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true
@@ -149,7 +142,7 @@ internal class VGSCardDataFormConfigurationManager {
 		cardConfiguration.type = .cardNumber
 		cardConfiguration.isRequiredValidOnly = true
 
-		/// Enable validation of unknown card brand if needed
+		// Enable validation of unknown card brand if needed
 		cardConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRulePaymentCard(error: VGSValidationErrorType.cardNumber.rawValue, validateUnknownCardBrand: true)
 		])
@@ -161,18 +154,20 @@ internal class VGSCardDataFormConfigurationManager {
 
 		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "")
 		expDateConfiguration.type = .expDate
-		expDateConfiguration.inputDateFormat = .shortYear
-		expDateConfiguration.outputDateFormat = .longYear
-		expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card.exp_month", yearFieldName: "card.exp_year")]
-		expDateConfiguration.formatPattern = "##/##"
-		expDateConfiguration.inputSource = .keyboard
+    
+    // Setup Date Format
+    let inputDateFormat =  VGSCheckoutCardExpDateFormat.shortYear
+    expDateConfiguration.inputDateFormat = inputDateFormat
+    expDateConfiguration.outputDateFormat = .longYear
+    expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card.exp_month", yearFieldName: "card.exp_year")]
+    expDateConfiguration.formatPattern = inputDateFormat.inputFormatPattern
 
-		/// Update validation rules
+		// Update validation rules
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleCardExpirationDate(dateFormat: .shortYear, error: VGSValidationErrorType.expDate.rawValue)
+			VGSValidationRuleCardExpirationDate(dateFormat: inputDateFormat, error: VGSValidationErrorType.expDate.rawValue)
 		])
-
-		expDateConfiguration.inputDateFormat = .shortYear
+    
+    expDateConfiguration.inputSource = .keyboard
 		expCardDate.configuration = expDateConfiguration
 		expCardDate.placeholder = "MM/YY"
 
