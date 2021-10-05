@@ -24,6 +24,22 @@ jobs:
           command: >
             cd Tests/VGSCheckoutSDKTests/Resources/MockedData &&
             plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} VGSCheckoutTestConfig.plist && cd .. && cd .. && cd .. && cd .. && ls && xcodebuild test -project VGSCheckoutSDK.xcodeproj -scheme VGSCheckoutSDKTests -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' -testPlan VGSCheckoutSDKTests
+  build-and-ui-test-demo-app-ios-15:
+    macos:
+      xcode: "13.0.0"
+    steps:
+      - checkout
+      - run:
+          name: Run UI Tests
+          command: >
+            cd VGSCheckoutDemoApp/VGSCheckoutDemoApp/Models/MockedData &&
+            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
+            pod install &&
+            xcrun instruments -w "iPhone 13 Pro Max (15.0) [" || true &&
+            xcodebuild test -workspace VGSCheckoutDemoApp.xcworkspace
+            -scheme VGSCheckoutDemoAppUITests
+            -sdk iphonesimulator
+            -destination 'platform=iOS Simulator,name=iPhone 13 Pro Max,OS=15.0'
   build-and-ui-test-demo-app-ios-13-14:
     macos:
       xcode: "12.5.1"
@@ -51,3 +67,4 @@ workflows:
       - build-and-test-sdk-xcode13
       - build-and-test-sdk
       - build-and-ui-test-demo-app-ios-13-14
+      - build-and-ui-test-demo-app-ios-15

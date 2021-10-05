@@ -147,6 +147,31 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
 	}
 
+	/// Fill in correct billing address with no postal code.
+	func fillInCorrectBillingAddressWithNoPostalCode() {
+		// Select Bolivia (country without postal code).
+		selectCountry("Bolivia", currentCounryName: "United States")
+
+		// Type in address line 1.
+		VGSTextField.BillingAddress.addressLine1.find(in: app).type("c. Andres Muñoz # 1078")
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+
+		// Swipe up to make other address fields visible.
+		app.swipeUp()
+
+		// Type in City.
+		VGSTextField.BillingAddress.city.find(in: app).type("La Paz")
+
+		// Verify postal code/zip is not displayed.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
 	/// Fill in wrong card data.
 	func fillInWrongCardData() {
 		VGSTextField.CardDetails.cardHolderName.find(in: app).type("Joe Business")
