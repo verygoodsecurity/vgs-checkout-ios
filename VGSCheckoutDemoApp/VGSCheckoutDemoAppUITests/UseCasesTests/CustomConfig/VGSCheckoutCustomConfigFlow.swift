@@ -32,6 +32,30 @@ class VGSCheckoutCustomConfigFlow: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test success flow for correct inputs and country without postal code.
+	func testSuccessFlowWithNoPostalCode() {
+		// Navigate to Custom config use case.
+		navigateToCustomConfigUseCase()
+
+		// Open checkout screen.
+		startCheckout()
+
+		// Fill in card data.
+		fillInCorrectCardData()
+
+		// Fill in billing addreess with no postal code.
+		fillInCorrectBillingAddressWithNoPostalCode()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
+	}
+
 	/// Test flow with incorrect input data.
 	func testErrorFlow() {
 		// Navigate to Custom config use case.

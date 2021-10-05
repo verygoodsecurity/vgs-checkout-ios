@@ -17,7 +17,7 @@ internal class VGSBillingAddressUtils {
 		case .ca, .gb, .au, .nz:
 			return .postalCode
 		default:
-			return .noPostalCode
+			return .postalCode
 		}
 	}
 

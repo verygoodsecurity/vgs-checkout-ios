@@ -5,6 +5,8 @@
 import Foundation
 import XCTest
 
+// swiftlint:disable nesting
+
 class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// VGSTextFields.
@@ -147,6 +149,31 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
 	}
 
+	/// Fill in correct billing address with no postal code.
+	func fillInCorrectBillingAddressWithNoPostalCode() {
+		// Select Bolivia (country without postal code).
+		selectCountry("Bolivia", currentCounryName: "United States")
+
+		// Type in address line 1.
+		VGSTextField.BillingAddress.addressLine1.find(in: app).type("c. Andres Muñoz # 1078")
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+
+		// Swipe up to make other address fields visible.
+		app.swipeUp()
+
+		// Type in City.
+		VGSTextField.BillingAddress.city.find(in: app).type("La Paz")
+
+		// Verify postal code/zip is not displayed.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
 	/// Fill in wrong card data.
 	func fillInWrongCardData() {
 		VGSTextField.CardDetails.cardHolderName.find(in: app).type("Joe Business")
@@ -182,10 +209,12 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// Selects country name in country picker.
 	/// - Parameter countryName: `String` object, country name.
-	func selectCountry(_ countryName: String) {
+	/// - Parameter currentCounryName: `String` object, country name displayed now.
+	func selectCountry(_ countryName: String, currentCounryName: String) {
 
-		// Tap to activate picker view.
-		VGSTextField.BillingAddress.country.find(in: app).tap()
+		// Tap to activate picker view in country field.
+		let countryField: VGSUITestElement = .init(type: .textField, identifier: currentCounryName)
+		countryField.find(in: app).tap()
 
 		// Wait for keyboard.
 		wait(forTimeInterval: 0.5)
@@ -212,10 +241,11 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// Veify UI on country change.
 	func verifyChangeCountryFlowUI() {
+		// Verify zip code is visible.
 		verifyZIPUI()
 
 		// Select Australia.
-		selectCountry("Australia")
+		selectCountry("Australia", currentCounryName: "United States")
 
 		// Swipe up.
 		app.swipeUp()
@@ -225,6 +255,25 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Verify zip code error was disappeared.
 		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+
+		// Select country without postal code.
+		selectCountry("Bolivia", currentCounryName: "Australia")
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify postal code/zip field view is disappeared.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Select USA.
+		selectCountry("United States", currentCounryName: "Bolivia")
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify zip code is visible.
+		verifyZIPUI()
 	}
 
 	/// Check whether card details errors are presented.
@@ -258,3 +307,5 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		wait(forTimeInterval: 2.5)
 	}
 }
+
+// swiftlint:enable nesting

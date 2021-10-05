@@ -188,6 +188,34 @@ internal class VGSAddressDataFormConfigurationManager {
 
 	}
 
+	/// Updates postal code field view if needed.
+	/// - Parameters:
+	///   - countryISO: `VGSCountriesISO` object, new country ISO.
+	///   - paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
+	///   - addressFormView: `VGSBillingAddressDetailsSectionView` object, address form view.
+	///   - vgsCollect: `VGSCollect` object, an instance of VGSColelct.
+	///   - formValidationHelper: `VGSFormValidationHelper` object, validation helper.
+	internal static func updatePostalCodeViewIfNeeded(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
+		let postalCodeFieldView = addressFormView.postalCodeFieldView
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
+
+		// 1. Unhide/hide postal code field view.
+		// 2. Register/unregister postal code text field in collect.
+		// 3. Add/remove postal code field view from validation helper.
+		if countryISO.hasPostalCode {
+			postalCodeFieldView.isHiddenInCheckoutStackView = false
+			vgsCollect.registerTextFields(textField: [postalCodeTextField])
+			formValidationHelper.fieldViewsManager.appendFieldViews([postalCodeFieldView])
+		} else {
+			postalCodeFieldView.isHiddenInCheckoutStackView = true
+			vgsCollect.unsubscribeTextField(postalCodeTextField)
+			formValidationHelper.fieldViewsManager.removeFieldView(postalCodeFieldView)
+		}
+	}
+
+	/*
+	Update form for counries without address verification support.
+
 	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
 		switch paymentInstrument {
 		case .vault:
@@ -232,4 +260,5 @@ internal class VGSAddressDataFormConfigurationManager {
 			}
 		}
 	}
+	*/
 }

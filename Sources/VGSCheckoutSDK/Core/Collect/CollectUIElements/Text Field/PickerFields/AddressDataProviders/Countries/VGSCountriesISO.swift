@@ -541,6 +541,85 @@ internal extension VGSCountriesISO {
 					  return ""
         }
     }
+
+	/// `true` if country has postal code.
+	var hasPostalCode: Bool {
+		return !VGSCountriesISO.countriesWithNoPostalCode().contains(self)
+	}
+
+	/// Returns an array of counries without postal code.
+	/// - Returns: `[VGSCountriesISO]` object, array of counries without postal code.
+		static func countriesWithNoPostalCode() -> [VGSCountriesISO] {
+				return [
+						"AE",
+						"AG",
+						"AN",
+						"AO",
+						"AW",
+						"BF",
+						"BI",
+						"BJ",
+						"BO",
+						"BS",
+						"BW",
+						"BZ",
+						"CD",
+						"CF",
+						"CG",
+						"CI",
+						"CK",
+						"CM",
+						"DJ",
+						"DM",
+						"ER",
+						"FJ",
+						"GD",
+						"GH",
+						"GM",
+						"GN",
+						"GQ",
+						"GY",
+						"HK",
+						"IE",
+						"JM",
+						"KE",
+						"KI",
+						"KM",
+						"KN",
+						"KP",
+						"LC",
+						"ML",
+						"MO",
+						"MR",
+						"MS",
+						"MU",
+						"MW",
+						"NR",
+						"NU",
+						"PA",
+						"QA",
+						"RW",
+						"SB",
+						"SC",
+						"SL",
+						"SO",
+						"SR",
+						"ST",
+						"SY",
+						"TF",
+						"TK",
+						"TL",
+						"TO",
+						"TT",
+						"TV",
+						"TZ",
+						"UG",
+						"VU",
+						"YE",
+						"ZA",
+						"ZW",
+				].compactMap({return VGSCountriesISO(rawValue: $0)})
+		}
 }
 
 // swiftlint:disable all

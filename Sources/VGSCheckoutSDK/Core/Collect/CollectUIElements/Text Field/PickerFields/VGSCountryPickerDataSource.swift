@@ -30,7 +30,7 @@ internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourc
 	}
 
 	lazy var countries: [VGSAddressCountriesDataProvider.CountryModel] = {
-		return VGSAddressCountriesDataProvider.provideSupportedCountries()
+		return VGSAddressCountriesDataProvider.provideAllCountries()
 	}()
 
 	func numberOfRows() -> Int {

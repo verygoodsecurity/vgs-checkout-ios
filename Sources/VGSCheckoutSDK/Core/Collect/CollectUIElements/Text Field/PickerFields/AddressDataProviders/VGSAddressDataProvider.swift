@@ -17,14 +17,14 @@ internal class VGSAddressCountriesDataProvider {
 	}
 
 	/// Countries with address verification support.
-	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
+	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
 
 	/// First country in picker.
 	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us
 
 	/// First country model in picker.
 	private static var firstCountryModel: CountryModel? {
-		let locale = NSLocale.autoupdatingCurrent
+		let locale = NSLocale(localeIdentifier: "en_US")
 		let identifier = Locale.identifier(fromComponents: [
 			NSLocale.Key.countryCode.rawValue: defaultFirstCountryCode.rawValue
 		])
@@ -38,9 +38,9 @@ internal class VGSAddressCountriesDataProvider {
 	}
 
 	/// List of available countries in alphabetical order. US will be on the top of the list.
-	static func provideSupportedCountries() -> [CountryModel] {
+	static func provideAllCountries() -> [CountryModel] {
 		// Filter valid coutries.
-	  let filtered = provideCountries().filter({ supportedCodes.contains($0.code) })
+	  let filtered = provideCountries()
 
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
@@ -54,7 +54,7 @@ internal class VGSAddressCountriesDataProvider {
 	/// Provide all countries.
 	/// - Returns: `[CountryModel]`, array of `CountryModel`.
 	private static func provideCountries() -> [CountryModel] {
-		let locale = NSLocale.autoupdatingCurrent
+		let locale = NSLocale(localeIdentifier: "en_US")
 
 		let unsorted = Locale.isoRegionCodes.compactMap { (code) -> (String, String)? in
 			let identifier = Locale.identifier(fromComponents: [

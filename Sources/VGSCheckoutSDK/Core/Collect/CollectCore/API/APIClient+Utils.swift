@@ -52,7 +52,11 @@ internal extension APIClient {
 	/// Logs invalid vaultID event.
 	/// - Parameter vaultID: `String` object, invalid vaultID.
 	static func logInvalidVaultIDEvent(_ vaultID: String) {
-		let eventText = "CONFIGURATION ERROR: VAULT ID IS NOT VALID OR NOT SET!!! vaultID: \(vaultID)"
+		var degugText = vaultID
+		if degugText.isEmpty {
+			degugText = "*EMPTY VAULT ID*"
+		}
+		let eventText = "CONFIGURATION ERROR: VAULT ID IS NOT VALID OR NOT SET!!! vaultID: \(degugText)"
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 		VGSCheckoutLogger.shared.forwardLogEvent(event)
 		assert(VGSCollect.tenantIDValid(vaultID), "❗VGSCheckout CONFIGURATION ERROR: : VAULT ID IS NOT VALID!!!")
