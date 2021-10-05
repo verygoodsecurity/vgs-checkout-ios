@@ -38,8 +38,8 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
 		textField.configuration = config
 
 		let testDates1: [TestDataType] = [TestDataType(input: "12/2025", output: "12/25"),
-																			TestDataType(input: "01/2050", output: "01/50"),
-																			TestDataType(input: "05/2100", output: "05/00")]
+																			TestDataType(input: "01/2030", output: "01/30"),
+																			TestDataType(input: "05/2040", output: "05/40")]
 
 		for date in testDates1 {
 			textField.setText(date.input)
@@ -91,7 +91,7 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
     textField.configuration = config
 
 		let testDates3: [TestDataType] = [TestDataType(input: "122025", output: "1225"),
-																			TestDataType(input: "012050", output: "0150"),
+																			TestDataType(input: "012040", output: "0140"),
 																			TestDataType(input: "052030", output: "0530")]
 
 		for date in testDates3 {
