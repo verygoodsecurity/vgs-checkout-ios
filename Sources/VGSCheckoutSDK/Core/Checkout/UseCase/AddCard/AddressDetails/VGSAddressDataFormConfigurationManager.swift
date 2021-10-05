@@ -188,6 +188,23 @@ internal class VGSAddressDataFormConfigurationManager {
 
 	}
 
+	internal static func updatePostalCodeViewIfNeeded(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
+		let postalCodeFieldView = addressFormView.postalCodeFieldView
+		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
+		if VGSCountriesISO.countriesWithNoPostalCode().contains(countryISO) {
+			postalCodeFieldView.isHiddenInCheckoutStackView = true
+			vgsCollect.unsubscribeTextField(postalCodeTextField)
+			formValidationHelper.fieldViewsManager.removeFieldView(postalCodeFieldView)
+		} else {
+			postalCodeFieldView.isHiddenInCheckoutStackView = false
+			vgsCollect.registerTextFields(textField: [postalCodeTextField])
+			formValidationHelper.fieldViewsManager.appendFieldViews([postalCodeFieldView])
+		}
+	}
+
+	/*
+	Update form for counries without address verification support.
+
 	internal static func updateAddressForm(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
 		switch paymentInstrument {
 		case .vault:
@@ -232,4 +249,5 @@ internal class VGSAddressDataFormConfigurationManager {
 			}
 		}
 	}
+	*/
 }

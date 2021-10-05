@@ -37,7 +37,7 @@ internal enum VGSAddressPostalCode {
 	}
 
 	/// Localization key for text field placeholder.
-	internal var localizedPlaceholderKey: String {
+	private var localizedPlaceholderKey: String {
 		switch self {
 		case .zip:
 			return "vgs_checkout_address_info_address_zip_hint"

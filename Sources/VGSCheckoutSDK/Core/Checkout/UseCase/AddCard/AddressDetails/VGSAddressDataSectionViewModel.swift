@@ -45,10 +45,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	/// Autofocus manager.
 	internal let autoFocusManager: VGSFieldAutofocusManager
 
+	/// Payment instrument.
+	internal let paymentInstrument: VGSPaymentInstrument
+
 	// MARK: - Initialization
   
-  internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+	internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager, paymentInstrument: VGSPaymentInstrument) {
     self.vgsCollect = vgsCollect
+		self.paymentInstrument = paymentInstrument
     self.validationBehavior = validationBehavior
     self.billingAddressFormView = VGSBillingAddressDetailsSectionView(uiTheme: uiTheme)
     self.formValidationHelper = formValidationHelper
@@ -56,14 +60,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
   }
 
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutCustomConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+		self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .vault(configuration))
 
     setupBillingAddressForm(with: configuration)
     buildForm()
 	}
   
   internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .multiplexing(configuration))
 
 		setupBillingAddressForm(with: configuration)
     buildForm()
@@ -260,11 +264,13 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
 
-				// Uncomment this code to enable other countries without AWS support
+				// Reload collect and validation helpers country without postal code.
+				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 
+				// Uncomment this code to enable other countries without AWS support
 //				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
-//
-				updateStateField(with: newCountry)
+
+				//updateStateField(with: newCountry)
 				updatePostalCodeField(with: newCountry)
 
 				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new files configuration.
