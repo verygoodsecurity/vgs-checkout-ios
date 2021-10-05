@@ -542,6 +542,8 @@ internal extension VGSCountriesISO {
         }
     }
 
+	/// Returns an array of counries without postal code.
+	/// - Returns: `[VGSCountriesISO]` object, array of counries without postal code.
 		static func countriesWithNoPostalCode() -> [VGSCountriesISO] {
 				return [
 						"AE",

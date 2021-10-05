@@ -264,7 +264,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 				print("update states with new country: \(newCountry)")
 
-				// Reload collect and validation helpers country without postal code.
+				// Update collect and validation helpers country without postal code.
 				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 
 				// Uncomment this code to enable other countries without AWS support
