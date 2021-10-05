@@ -202,14 +202,14 @@ internal class VGSAddressDataFormConfigurationManager {
 		// 1. Unhide/hide postal code field view.
 		// 2. Register/unregister postal code text field in collect.
 		// 3. Add/remove postal code field view from validation helper.
-		if VGSCountriesISO.countriesWithNoPostalCode().contains(countryISO) {
-			postalCodeFieldView.isHiddenInCheckoutStackView = true
-			vgsCollect.unsubscribeTextField(postalCodeTextField)
-			formValidationHelper.fieldViewsManager.removeFieldView(postalCodeFieldView)
-		} else {
+		if countryISO.hasPostalCode {
 			postalCodeFieldView.isHiddenInCheckoutStackView = false
 			vgsCollect.registerTextFields(textField: [postalCodeTextField])
 			formValidationHelper.fieldViewsManager.appendFieldViews([postalCodeFieldView])
+		} else {
+			postalCodeFieldView.isHiddenInCheckoutStackView = true
+			vgsCollect.unsubscribeTextField(postalCodeTextField)
+			formValidationHelper.fieldViewsManager.removeFieldView(postalCodeFieldView)
 		}
 	}
 

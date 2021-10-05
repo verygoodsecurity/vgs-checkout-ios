@@ -230,7 +230,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 	}
 
 	func updatePostalCodeField(with countryISO: VGSCountriesISO) {
-		guard let postalCodeTextFieldView = postalCodeFieldView else {return}
+		guard let postalCodeTextFieldView = postalCodeFieldView, countryISO.hasPostalCode else {return}
         /// update validation rules for country
         postalCodeTextFieldView.textField.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: countryISO))
         /// update UI state

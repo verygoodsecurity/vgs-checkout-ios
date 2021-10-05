@@ -542,6 +542,11 @@ internal extension VGSCountriesISO {
         }
     }
 
+	/// `true` if country has postal code.
+	var hasPostalCode: Bool {
+		return !VGSCountriesISO.countriesWithNoPostalCode().contains(self)
+	}
+
 	/// Returns an array of counries without postal code.
 	/// - Returns: `[VGSCountriesISO]` object, array of counries without postal code.
 		static func countriesWithNoPostalCode() -> [VGSCountriesISO] {
