@@ -5,6 +5,8 @@
 import Foundation
 import XCTest
 
+// swiftlint:disable nesting
+
 class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// VGSTextFields.
@@ -305,3 +307,5 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		wait(forTimeInterval: 2.5)
 	}
 }
+
+// swiftlint:enable nesting
