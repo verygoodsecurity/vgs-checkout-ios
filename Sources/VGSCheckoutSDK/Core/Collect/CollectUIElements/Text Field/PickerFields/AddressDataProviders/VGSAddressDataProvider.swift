@@ -24,7 +24,7 @@ internal class VGSAddressCountriesDataProvider {
 
 	/// First country model in picker.
 	private static var firstCountryModel: CountryModel? {
-		let locale = NSLocale.autoupdatingCurrent
+		let locale = NSLocale(localeIdentifier: "en_US")
 		let identifier = Locale.identifier(fromComponents: [
 			NSLocale.Key.countryCode.rawValue: defaultFirstCountryCode.rawValue
 		])
@@ -54,7 +54,7 @@ internal class VGSAddressCountriesDataProvider {
 	/// Provide all countries.
 	/// - Returns: `[CountryModel]`, array of `CountryModel`.
 	private static func provideCountries() -> [CountryModel] {
-		let locale = NSLocale.autoupdatingCurrent
+		let locale = NSLocale(localeIdentifier: "en_US")
 
 		let unsorted = Locale.isoRegionCodes.compactMap { (code) -> (String, String)? in
 			let identifier = Locale.identifier(fromComponents: [
