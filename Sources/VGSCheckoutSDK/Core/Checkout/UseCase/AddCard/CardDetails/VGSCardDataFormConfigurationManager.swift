@@ -42,19 +42,14 @@ internal class VGSCardDataFormConfigurationManager {
 
 		let expDateConfiguration = VGSExpDateConfiguration(checkoutExpDateOptions: expDateOptions, collect: vgsCollect)
 		expDateConfiguration.isRequiredValidOnly = true
-		expDateConfiguration.type = .expDate
     expDateConfiguration.inputSource = .keyboard
-    expDateConfiguration.inputDateFormat = expDateOptions.inputDateFormat
-    expDateConfiguration.formatPattern = expDateOptions.inputDateFormat.inputFormatPattern
-    expCardDate.configuration = expDateConfiguration
-    expCardDate.placeholder = "MM/YY"
-		
 		/// Update validation rules
     let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: expDateOptions.inputDateFormat,
                                                                     error: VGSValidationErrorType.expDate.rawValue)
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
-
-
+    expCardDate.configuration = expDateConfiguration
+    expCardDate.placeholder = "MM/YY"
+    
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true
 		cvcConfiguration.type = .cvc
@@ -153,19 +148,18 @@ internal class VGSCardDataFormConfigurationManager {
 		cardNumber.cardIconLocation = .left
 
 		let expDateConfiguration = VGSExpDateConfiguration(collector: vgsCollect, fieldName: "")
-		expDateConfiguration.type = .expDate
     
     // Setup Date Format
-    let inputDateFormat =  VGSCheckoutCardExpDateFormat.shortYear
+    let inputDateFormat = VGSCheckoutCardExpDateFormat.shortYear
     expDateConfiguration.inputDateFormat = inputDateFormat
     expDateConfiguration.outputDateFormat = .longYear
-    expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card.exp_month", yearFieldName: "card.exp_year")]
     expDateConfiguration.formatPattern = inputDateFormat.inputFormatPattern
+    expDateConfiguration.serializers = [VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card.exp_month", yearFieldName: "card.exp_year")]
 
 		// Update validation rules
-		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleCardExpirationDate(dateFormat: inputDateFormat, error: VGSValidationErrorType.expDate.rawValue)
-		])
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     
     expDateConfiguration.inputSource = .keyboard
 		expCardDate.configuration = expDateConfiguration
