@@ -38,9 +38,9 @@ internal class VGSAddressCountriesDataProvider {
 	}
 
 	/// List of available countries in alphabetical order. US will be on the top of the list.
-	static func provideSupportedCountries() -> [CountryModel] {
+	static func provideAllCountries() -> [CountryModel] {
 		// Filter valid coutries.
-	  let filtered = provideCountries().filter({ supportedCodes.contains($0.code) })
+	  let filtered = provideCountries()
 
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
