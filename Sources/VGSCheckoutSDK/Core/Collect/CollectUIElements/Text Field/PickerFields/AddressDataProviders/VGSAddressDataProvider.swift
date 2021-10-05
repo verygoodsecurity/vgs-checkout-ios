@@ -17,7 +17,7 @@ internal class VGSAddressCountriesDataProvider {
 	}
 
 	/// Countries with address verification support.
-	private static let supportedCodes = ["US", "CA", "NZ", "GB", "AU"]
+	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
 
 	/// First country in picker.
 	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us

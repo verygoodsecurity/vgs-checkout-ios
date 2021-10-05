@@ -21,7 +21,7 @@ final class MultiplexingCustomBackendAPIClient {
 	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> Void
 
 	/// Success completion for transfer request.
-	typealias SendTransferCompletionSuccess = () -> Void
+	typealias SendTransferCompletionSuccess = (_ responseText: String?) -> Void
 
 	/// Fail completion for transfer request.
 	typealias SendTransferCompletionFail = (_ errorMessage: String) -> Void
@@ -101,8 +101,9 @@ final class MultiplexingCustomBackendAPIClient {
 							return
 						}
 					print("response json: \(json)")
+
 					DispatchQueue.main.async {
-						success()
+						success(DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data"))
 					}
 				})
 		task.resume()
@@ -166,7 +167,6 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 		mainView.delegate = self
 
 		displayShoppingCartData()
-		setupCheckout()
 	}
 
 	// MARK: - Helpers
@@ -175,11 +175,6 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 	private func displayShoppingCartData() {
 		let items = OrderDataProvider.provideOrders()
 		mainView.shoppingCartView.configure(with: items)
-	}
-
-	/// Setup VGS Checkout configuration.
-	private func setupCheckout() {
-
 	}
 }
 
@@ -207,8 +202,9 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 		// Start progress hud animation until payment transfer is finished.
 		SVProgressHUD.show()
-		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") {
+		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") { responseText in
 			SVProgressHUD.showSuccess(withStatus: "Successfully finished multiplexing transfer!")
+			self.mainView.responseTextView.text = responseText
 		} failure: { errorMessage in
 			SVProgressHUD.showError(withStatus: "Cannot complete transfer!")
 		}
