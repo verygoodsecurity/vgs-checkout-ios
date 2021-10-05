@@ -182,10 +182,12 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// Selects country name in country picker.
 	/// - Parameter countryName: `String` object, country name.
-	func selectCountry(_ countryName: String) {
+	/// - Parameter currentCounryName: `String` object, country name displayed now.
+	func selectCountry(_ countryName: String, currentCounryName: String) {
 
-		// Tap to activate picker view.
-		VGSTextField.BillingAddress.country.find(in: app).tap()
+		// Tap to activate picker view in country field.
+		let countryField: VGSUITestElement = .init(type: .textField, identifier: currentCounryName)
+		countryField.find(in: app).tap()
 
 		// Wait for keyboard.
 		wait(forTimeInterval: 0.5)
@@ -212,10 +214,11 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 	/// Veify UI on country change.
 	func verifyChangeCountryFlowUI() {
+		// Verify zip code is visible.
 		verifyZIPUI()
 
 		// Select Australia.
-		selectCountry("Australia")
+		selectCountry("Australia", currentCounryName: "United States")
 
 		// Swipe up.
 		app.swipeUp()
@@ -225,6 +228,25 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Verify zip code error was disappeared.
 		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+
+		// Select country without postal code.
+		selectCountry("Bolivia", currentCounryName: "Australia")
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify postal code/zip field view is disappeared.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Select USA.
+		selectCountry("United States", currentCounryName: "Bolivia")
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify zip code is visible.
+		verifyZIPUI()
 	}
 
 	/// Check whether card details errors are presented.
