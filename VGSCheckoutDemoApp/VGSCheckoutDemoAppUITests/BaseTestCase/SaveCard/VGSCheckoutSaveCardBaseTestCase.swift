@@ -18,7 +18,7 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 			static let cardHolderName: VGSUITestElement = .init(type: .textField, identifier: "Joe Business")
 
 			/// Card number.
-			static let cardNumber: VGSUITestElement = .init(type: .textField, identifier: "4111 1111 1111 1111")
+			static let cardNumber: VGSUITestElement = .init(type: .textField, identifier: "1234 1234 1234 1234")
 
 			/// Expiration date.
 			static let expirationDate: VGSUITestElement = .init(type: .textField, identifier: "MM/YY")
