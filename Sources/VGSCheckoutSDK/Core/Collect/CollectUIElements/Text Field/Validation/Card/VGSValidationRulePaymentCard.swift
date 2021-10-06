@@ -16,16 +16,16 @@ import Foundation
 internal struct VGSValidationRulePaymentCard: VGSValidationRuleProtocol {
 
   /// Validation Error
-  public var error: VGSValidationError
+  var error: VGSValidationError
   
   /// Turn on/off validation of cards that are not defined in SDK - `CardBrand.unknown`
-  public var validateUnknownCardBrand = false
+  var validateUnknownCardBrand = false
 
   /// Initialzation
   ///
   /// - Parameters:
   ///   - error:`VGSValidationError` - error on failed validation relust.
-  public init(error: VGSValidationError) {
+  init(error: VGSValidationError) {
     self.error = error
   }
 

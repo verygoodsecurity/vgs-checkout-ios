@@ -14,13 +14,13 @@ Validate input in scope of matching Luhn algorithm.
 internal struct VGSValidationRuleLuhnCheck: VGSValidationRuleProtocol {
   
   /// Validation Error
-  public var error: VGSValidationError
+  var error: VGSValidationError
 
   /// Initialzation
   ///
   /// - Parameters:
   ///   - error:`VGSValidationError` - error on failed validation relust.
-  public init(error: VGSValidationError) {
+  init(error: VGSValidationError) {
     self.error = error
   }
 }

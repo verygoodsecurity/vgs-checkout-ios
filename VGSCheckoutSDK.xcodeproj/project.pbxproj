@@ -493,12 +493,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		034834B426DCB96D00AE59F7 /* ConfigurationTests */ = {
+		034834B426DCB96D00AE59F7 /* CheckoutConfigurationTests */ = {
 			isa = PBXGroup;
 			children = (
 				034834B526DCB99900AE59F7 /* VGSJWTTokenValidationTest.swift */,
 			);
-			path = ConfigurationTests;
+			path = CheckoutConfigurationTests;
 			sourceTree = "<group>";
 		};
 		034834B926E0B7DC00AE59F7 /* ConfigurationValidation */ = {
@@ -876,7 +876,7 @@
 			children = (
 				32CC737926C10E35006E9DCD /* AddressTests */,
 				4405DD3026859FAC004A83AD /* CollectUtilsTests */,
-				034834B426DCB96D00AE59F7 /* ConfigurationTests */,
+				034834B426DCB96D00AE59F7 /* CheckoutConfigurationTests */,
 				4405DD5E26859FAC004A83AD /* Resources */,
 				4405DD6E26859FAC004A83AD /* Info.plist */,
 				4405DD9F2685B55C004A83AD /* VGSCheckoutSDKTests.xctestplan */,

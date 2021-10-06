@@ -73,17 +73,17 @@ Validate input in scope of matching card expiration date format and time range.
 internal struct VGSValidationRuleCardExpirationDate: VGSValidationRuleProtocol {
 
   /// Payment Card Expiration Date Format
-  public let dateFormat: VGSCheckoutCardExpDateFormat
+  let dateFormat: VGSCheckoutCardExpDateFormat
   
   /// Validation Error
-  public let error: VGSValidationError
+  let error: VGSValidationError
 
   /// Initialzation
   ///
   /// - Parameters:
   ///   - error:`VGSValidationError` - error on failed validation relust.
   ///   - dateFormat: `CardExpDateFormat` date format
-  public init(dateFormat: VGSCheckoutCardExpDateFormat = .shortYear, error: VGSValidationError) {
+  init(dateFormat: VGSCheckoutCardExpDateFormat = .shortYear, error: VGSValidationError) {
         self.dateFormat = dateFormat
         self.error = error
     }

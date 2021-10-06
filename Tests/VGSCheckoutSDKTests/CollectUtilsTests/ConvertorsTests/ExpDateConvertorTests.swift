@@ -27,16 +27,19 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
   }
 
 	func testConvertExpDate1() {
-		let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
-		config.formatPattern = "##/####"
-		config.divider = "/"
-		config.inputDateFormat = .longYear
-		config.outputDateFormat = .shortYear
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYear
+    
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
 		textField.configuration = config
 
-		let testDates1: [TestDataType] = [TestDataType(input: "12/2021", output: "12/21"),
-																			TestDataType(input: "01/2050", output: "01/50"),
-																			TestDataType(input: "05/2100", output: "05/00")]
+		let testDates1: [TestDataType] = [TestDataType(input: "12/2025", output: "12/25"),
+																			TestDataType(input: "01/2030", output: "01/30"),
+																			TestDataType(input: "05/2040", output: "05/40")]
 
 		for date in testDates1 {
 			textField.setText(date.input)
@@ -45,21 +48,24 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
 			} else {
 				print("failed: \(date.input) \(date.output)")
 			}
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
 		}
 	}
 
 	func testConvertExpDate2() {
-		let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.outputDateFormat = .longYear
+    
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
+    textField.configuration = config
 
-		config.formatPattern = "##/##"
-		config.divider = "/"
-		config.inputDateFormat = .shortYear
-		config.outputDateFormat = .longYear
-		textField.configuration = config
-
-		let testDates2: [TestDataType] = [TestDataType(input: "12/21", output: "12/2021"),
+		let testDates2: [TestDataType] = [TestDataType(input: "12/25", output: "12/2025"),
 																			TestDataType(input: "01/30", output: "01/2030"),
-																			TestDataType(input: "05/01", output: "05/2001")]
+																			TestDataType(input: "05/41", output: "05/2041")]
 
 		for date in testDates2 {
 			textField.setText(date.input)
@@ -68,21 +74,25 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
 			} else {
 				print("failed: \(date.input) \(date.output)")
 			}
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
 		}
 	}
 
 	func testConvertExpDate3() {
-		let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYear
+    
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    config.divider = ""
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
+    textField.configuration = config
 
-		config.formatPattern = "##/####"
-		config.divider = ""
-		config.inputDateFormat = .longYear
-		config.outputDateFormat = .shortYear
-		textField.configuration = config
-
-		let testDates3: [TestDataType] = [TestDataType(input: "122021", output: "1221"),
-																			TestDataType(input: "012050", output: "0150"),
-																			TestDataType(input: "052100", output: "0500")]
+		let testDates3: [TestDataType] = [TestDataType(input: "122025", output: "1225"),
+																			TestDataType(input: "012040", output: "0140"),
+																			TestDataType(input: "052030", output: "0530")]
 
 		for date in testDates3 {
 			textField.setText(date.input)
@@ -91,20 +101,25 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
 			} else {
 				print("failed: \(date.input) \(date.output)")
 			}
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
 		}
 	}
   
   func testConvertExpDate4() {
-		let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.outputDateFormat = .longYear
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.divider = "-/-"
-    config.inputDateFormat = .shortYear
-    config.outputDateFormat = .longYear
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
 
-		let testDates4: [TestDataType] = [TestDataType(input: "12-/-21", output: "12-/-2021"),
+		let testDates4: [TestDataType] = [TestDataType(input: "12-/-25", output: "12-/-2025"),
 																			TestDataType(input: "01-/-30", output: "01-/-2030"),
-																			TestDataType(input: "05-/-01", output: "05-/-2001")]
+																			TestDataType(input: "05-/-41", output: "05-/-2041")]
     
     for date in testDates4 {
 			textField.setText(date.input)
@@ -113,20 +128,26 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
 			} else {
 				print("failed: \(date.input) \(date.output)")
 			}
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate5() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .shortYear
+    fieldOptions.outputDateFormat = .shortYearThenMonth
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.divider = "-/-"
-    config.inputDateFormat = .shortYear
-    config.outputDateFormat = .shortYearThenMonth
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
 
-    let testDates5: [TestDataType] = [TestDataType(input: "12-/-21", output: "21-/-12"),
+    let testDates5: [TestDataType] = [TestDataType(input: "12-/-41", output: "41-/-12"),
                                       TestDataType(input: "01-/-30", output: "30-/-01"),
-                                      TestDataType(input: "05-/-01", output: "01-/-05")]
+                                      TestDataType(input: "05-/-41", output: "41-/-05")]
     
     for date in testDates5 {
       textField.setText(date.input)
@@ -135,20 +156,26 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate6() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .shortYear
+    fieldOptions.outputDateFormat = .longYearThenMonth
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.divider = "../"
-    config.inputDateFormat = .shortYear
-    config.outputDateFormat = .longYearThenMonth
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
 
-    let testDates6: [TestDataType] = [TestDataType(input: "12../21", output: "2021../12"),
+    let testDates6: [TestDataType] = [TestDataType(input: "12../25", output: "2025../12"),
                                       TestDataType(input: "01../30", output: "2030../01"),
-                                      TestDataType(input: "05../21", output: "2021../05")]
+                                      TestDataType(input: "05../25", output: "2025../05")]
     
     for date in testDates6 {
       textField.setText(date.input)
@@ -157,20 +184,25 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate7() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYear
+    fieldOptions.outputDateFormat = .shortYearThenMonth
     
-    config.formatPattern = "##/####"
-    config.inputDateFormat = .longYear
-    config.outputDateFormat = .shortYearThenMonth
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
 
-    let testDates7: [TestDataType] = [TestDataType(input: "122021", output: "21/12"),
+    let testDates7: [TestDataType] = [TestDataType(input: "122025", output: "25/12"),
                                       TestDataType(input: "012030", output: "30/01"),
-                                      TestDataType(input: "052021", output: "21/05")]
+                                      TestDataType(input: "052025", output: "25/05")]
     
     for date in testDates7 {
       textField.setText(date.input)
@@ -179,20 +211,27 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate8() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYear
+    fieldOptions.outputDateFormat = .longYearThenMonth
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.formatPattern = "##-####"
-    config.inputDateFormat = .longYear
-    config.outputDateFormat = .longYearThenMonth
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
+    
 
-    let testDates8: [TestDataType] = [TestDataType(input: "12 2021", output: "2021/12"),
+    let testDates8: [TestDataType] = [TestDataType(input: "12 2025", output: "2025/12"),
                                       TestDataType(input: "01 2030", output: "2030/01"),
-                                      TestDataType(input: "05 2021", output: "2021/05")]
+                                      TestDataType(input: "05 2025", output: "2025/05")]
     
     for date in testDates8 {
       textField.setText(date.input)
@@ -201,19 +240,25 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate9() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .shortYearThenMonth
+    fieldOptions.outputDateFormat = .longYearThenMonth
     
-    config.inputDateFormat = .shortYearThenMonth
-    config.outputDateFormat = .longYearThenMonth
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
-
-    let testDates9: [TestDataType] = [TestDataType(input: "2112", output: "2021/12"),
+    
+    let testDates9: [TestDataType] = [TestDataType(input: "2512", output: "2025/12"),
                                       TestDataType(input: "3001", output: "2030/01"),
-                                      TestDataType(input: "2105", output: "2021/05")]
+                                      TestDataType(input: "2505", output: "2025/05")]
     
     for date in testDates9 {
       textField.setText(date.input)
@@ -222,20 +267,26 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate10() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYearThenMonth
+    fieldOptions.outputDateFormat = .shortYearThenMonth
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.formatPattern = "####---##"
-    config.inputDateFormat = .longYearThenMonth
-    config.outputDateFormat = .shortYearThenMonth
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
-
-    let testDates10: [TestDataType] = [TestDataType(input: "202112", output: "21///12"),
+    
+    let testDates10: [TestDataType] = [TestDataType(input: "202512", output: "25///12"),
                                       TestDataType(input: "203001", output: "30///01"),
-                                      TestDataType(input: "202105", output: "21///05")]
+                                      TestDataType(input: "202505", output: "25///05")]
     
     for date in testDates10 {
       textField.setText(date.input)
@@ -244,19 +295,25 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate11() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .shortYearThenMonth
+    fieldOptions.outputDateFormat = .shortYear
     
-    config.inputDateFormat = .shortYearThenMonth
-    config.outputDateFormat = .shortYear
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
 
-    let testDates11: [TestDataType] = [TestDataType(input: "21/12", output: "12/21"),
+    let testDates11: [TestDataType] = [TestDataType(input: "25/12", output: "12/25"),
                                       TestDataType(input: "30/01", output: "01/30"),
-                                      TestDataType(input: "21/05", output: "05/21")]
+                                      TestDataType(input: "41/05", output: "05/41")]
     
     for date in testDates11 {
       textField.setText(date.input)
@@ -265,21 +322,28 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
   
   func testConvertExpDate12() {
-    let config = VGSExpDateConfiguration(collector: collector, fieldName: "textField")
+    var fieldOptions = VGSCheckoutExpirationDateOptions()
+    fieldOptions.inputDateFormat = .longYearThenMonth
+    fieldOptions.outputDateFormat = .longYear
     
+    let config = VGSExpDateConfiguration(checkoutExpDateOptions: fieldOptions, collect: collector)
     config.formatPattern = "#### ##"
     config.divider = "."
-    config.inputDateFormat = .longYearThenMonth
-    config.outputDateFormat = .longYear
+    
+    // Update validation rules
+    let expDateValidationRule = VGSValidationRuleCardExpirationDate(dateFormat: fieldOptions.inputDateFormat,
+                                                                    error: VGSValidationErrorType.expDate.rawValue)
+    config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
-
-    let testDates11: [TestDataType] = [TestDataType(input: "202112", output: "12.2021"),
+    
+    let testDates11: [TestDataType] = [TestDataType(input: "202512", output: "12.2025"),
                                        TestDataType(input: "203001", output: "01.2030"),
-                                       TestDataType(input: "202105", output: "05.2021")]
+                                       TestDataType(input: "202505", output: "05.2025")]
     
     for date in testDates11 {
       textField.setText(date.input)
@@ -288,6 +352,7 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
       } else {
         print("failed: \(date.input) \(date.output)")
       }
+      XCTAssertTrue(textField.state.isValid, "Expiration date state error:\n - Input: \(date.input) should be valid!")
     }
   }
 }

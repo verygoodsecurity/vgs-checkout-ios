@@ -14,17 +14,17 @@ Validate input in scope of multiple lengths, e.x.: [16, 19].
 internal struct VGSValidationRuleLengthMatch: VGSValidationRuleProtocol {
     
     /// Array of valid length ranges
-    public let lengths: [Int]
+    let lengths: [Int]
   
     /// Validation Error
-    public let error: VGSValidationError
+    let error: VGSValidationError
 
     /// Initialzation
     ///
     /// - Parameters:
     ///   - error:`VGSValidationError` - error on failed validation relust.
     ///   - lengths: array of valid lengths
-    public init(lengths: [Int], error: VGSValidationError) {
+    init(lengths: [Int], error: VGSValidationError) {
         self.lengths = lengths
         self.error = error
     }

@@ -23,6 +23,7 @@ internal final class VGSExpDateConfiguration: VGSConfiguration, VGSCheckoutForma
 		serializers = checkoutExpDateOptions.serializers
 		inputDateFormat = checkoutExpDateOptions.inputDateFormat
 		outputDateFormat = checkoutExpDateOptions.outputDateFormat
+    formatPattern = checkoutExpDateOptions.inputDateFormat.inputFormatPattern
 	}
 
 	/// Initializer.
