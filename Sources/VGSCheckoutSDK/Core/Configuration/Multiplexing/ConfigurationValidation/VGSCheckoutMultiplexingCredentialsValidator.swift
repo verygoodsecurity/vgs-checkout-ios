@@ -4,41 +4,51 @@
 //
 
 import Foundation
+/** JWT token resources example
+"resource_access": {
+    "multiplexing-app-tntxxxxxxx": {
+      "roles": [
+        "financial-instruments:write"
+      ]
+    },
+    "multiplexing-app-tntyyyyyyy": {
+      "roles": [
+        "financial-instruments:write",
+        "test:test"
+      ]
+    }
+  }
+*/
 
 /// Check and Validates Multiplexing Token Scope.
 internal class VGSMultiplexingCredentialsValidator {
 
-	/// Scope not allowed.
-	static let restrictedRolesScope: Set<String> = ["transfers:write"]
-	
-	/// Multiplexing App id  prefix.
-	static let multiplexingAppIdPrefix = "multiplexing-app-"
+	/// Multiplexing Role Scope not allowed for Save Card flow.
+	static let restrictedRolesScope: String = "transfers:"
 
 	/// Returns JWT scope validation result.
 	static func isJWTScopeValid(_ jwtToken: String, vaultId: String, environment: String) -> Bool {
-		return true
-
-		/*
 		guard !jwtToken.isEmpty else {
 			trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "JWT token is empty!")
 			return false
 		}
 		let decodedToken = String.decode(jwtToken: jwtToken)
-		let multiplexingAppId = multiplexingAppIdPrefix + vaultId
-
-		guard let resourceAccess = decodedToken["resource_access"] as? JsonData,
-					let multiplexingApp = resourceAccess[multiplexingAppId] as? JsonData,
-					let rolesScope = multiplexingApp["roles"] as? [String] else {
-						trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "Cannot parse token resource!")
-						return false
-					}
-		let intersectionScope = Set(rolesScope).intersection(restrictedRolesScope)
-		if !intersectionScope.isEmpty {
-			trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "Invalid token scope!")
-		}
-
-		return intersectionScope.isEmpty
-		*/
+    guard let resourceAccess = decodedToken["resource_access"] as? JsonData else {
+      return false
+    }
+    
+    for key in resourceAccess.keys {
+      if let resource = resourceAccess[key] as? JsonData,
+        let roles = resource["roles"] as? [String] {
+        // Check invalid token scope
+        let rolesWithInvalidScope = roles.filter({$0.contains(restrictedRolesScope)})
+        if !rolesWithInvalidScope.isEmpty {
+          trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "JWT token has invalid role scope!")
+          return false
+        }
+      }
+    }
+		return true
 	}
 
 	/// Track JWTValidation error.
