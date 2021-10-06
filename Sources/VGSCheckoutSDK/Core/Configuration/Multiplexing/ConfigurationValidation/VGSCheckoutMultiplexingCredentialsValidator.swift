@@ -34,6 +34,7 @@ internal class VGSMultiplexingCredentialsValidator {
 		}
 		let decodedToken = String.decode(jwtToken: jwtToken)
     guard let resourceAccess = decodedToken["resource_access"] as? JsonData else {
+      trackInvalidJWTError(with: vaultId, environment: environment, debugErrorText: "JWT token has invalid resource_access!")
       return false
     }
     
