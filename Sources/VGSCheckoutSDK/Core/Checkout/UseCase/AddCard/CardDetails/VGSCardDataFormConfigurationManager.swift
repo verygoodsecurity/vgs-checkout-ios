@@ -32,8 +32,7 @@ internal class VGSCardDataFormConfigurationManager {
 			VGSValidationRulePaymentCard(error: VGSValidationErrorType.cardNumber.rawValue, validateUnknownCardBrand: true)
 		])
 		cardNumber.configuration = cardConfiguration
-		cardNumber.placeholder = "4111 1111 1111 1111"
-        cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
+    cardNumber.isIconHidden = vaultConfiguration.cardNumberFieldOptions.isIconHidden
 
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .left
@@ -48,7 +47,6 @@ internal class VGSCardDataFormConfigurationManager {
                                                                     error: VGSValidationErrorType.expDate.rawValue)
 		expDateConfiguration.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     expCardDate.configuration = expDateConfiguration
-    expCardDate.placeholder = "MM/YY"
     
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cvcFieldName)
 		cvcConfiguration.isRequired = true
@@ -56,9 +54,8 @@ internal class VGSCardDataFormConfigurationManager {
 
 		cvcCardNum.configuration = cvcConfiguration
 		cvcCardNum.isSecureTextEntry = true
-        cvcCardNum.cvcIconLocation = .left
-        cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
-		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
+    cvcCardNum.cvcIconLocation = .left
+    cvcCardNum.isIconHidden = vaultConfiguration.formConfiguration.cardOptions.cvcOptions.isIconHidden
 
 		let cardHolderOptions = vaultConfiguration.cardHolderFieldOptions
 		if cardHolderOptions.fieldVisibility == .visible {
@@ -142,8 +139,6 @@ internal class VGSCardDataFormConfigurationManager {
 			VGSValidationRulePaymentCard(error: VGSValidationErrorType.cardNumber.rawValue, validateUnknownCardBrand: true)
 		])
 		cardNumber.configuration = cardConfiguration
-		cardNumber.placeholder = "4111 1111 1111 1111"
-
 		cardNumber.textAlignment = .natural
 		cardNumber.cardIconLocation = .left
 
@@ -163,7 +158,6 @@ internal class VGSCardDataFormConfigurationManager {
     
     expDateConfiguration.inputSource = .keyboard
 		expCardDate.configuration = expDateConfiguration
-		expCardDate.placeholder = "MM/YY"
 
 		let cvcConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.cvc")
 		cvcConfiguration.type = .cvc
