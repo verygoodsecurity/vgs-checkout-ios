@@ -104,7 +104,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	// MARK: - Helpers
 
 	/// Setup card form with vault config.
-	/// - Parameter vaultConfiguration: `VGSCheckoutConfiguration` object, vault configuration.
+	/// - Parameter vaultConfiguration: `VGSCheckoutCustomConfiguration` object, vault configuration.
 	private func setupCardForm(with vaultConfiguration: VGSCheckoutCustomConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: vaultConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
