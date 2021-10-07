@@ -43,7 +43,7 @@ internal enum VGSPaymentInstrument {
 	 Payment instrument for general flow.
 
 	 - Parameters:
-			- configuration: `VGSCheckoutConfiguration` object, vault configuration.
+			- configuration: `VGSCheckoutCustomConfiguration` object, vault configuration.
 	*/
 	case vault(_ configuration: VGSCheckoutCustomConfiguration)
 

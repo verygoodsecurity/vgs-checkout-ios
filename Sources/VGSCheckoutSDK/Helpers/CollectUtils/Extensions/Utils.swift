@@ -50,7 +50,7 @@ internal class Utils {
 }
 
 extension Dictionary {
-    /// Resturn JSON string  representation of dictionary with sorted keys
+    ///:nodoc: Resturn JSON string  representation of dictionary with sorted keys
     @available(iOS 11.0, *)
     var jsonStringRepresentation: String? {
         guard let theJSONData = try? JSONSerialization.data(withJSONObject: self,

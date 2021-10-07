@@ -4,7 +4,7 @@
 # 2. jazzy command should be running form framework root dir
 ####################
 #names
-module: VGSCheckout
+module: VGSCheckoutSDK
 title: VGSCheckoutSDK
 author: Very Good Security
 author_url: https://verygoodsecurity.com
@@ -31,10 +31,35 @@ custom_categories:
   - VGSCheckoutDelegate
 - name: Configuration
   children:
-  - VGSCheckoutConfiguration
+  - VGSCheckoutConfigurationProtocol
+  - VGSCheckoutCustomConfiguration
   - VGSCheckoutMultiplexingConfiguration
-  - VGSCheckoutBasicConfigurationProtocol
+  - VGSCheckoutFieldVisibility
+  - VGSCheckoutBillingAddressVisibility
+- name: Card Details Configuration
+  children:
+  - VGSCheckoutCardOptions
+  - VGSCheckoutCardHolderOptions
+  - VGSCheckoutCardNumberOptions
+  - VGSCheckoutExpirationDateOptions
+  - VGSCheckoutCardExpDateFormat
+  - VGSCheckoutExpDateSeparateSerializer
+  - VGSCheckoutCVCOptions
+- name: Billing Address Details Configuration
+  children:
+  - VGSCheckoutBillingAddressOptions
+  - VGSCheckoutBillingAddressCountryOptions
+  - VGSCheckoutBillingAddressLine1Options
+  - VGSCheckoutBillingAddressLine2Options
+  - VGSCheckoutBillingAddressCityOptions
+  - VGSCheckoutBillingAddressPostalCodeOptions
+- name: UITheme
+  children:
   - VGSCheckoutDefaultTheme
+  - VGSCheckoutThemeProtocol
+  - VGSCheckoutTextFieldThemeProtocol
+  - VGSCheckoutSubmitButtonThemeProtocol
+  - VGSCheckoutViewThemeProtocol
 - name: APIConfiguration
   children:
   - VGSCheckoutRequestOptions
@@ -49,7 +74,9 @@ custom_categories:
   - VGSCheckoutPaymentCardModel
   - VGSCheckoutUnknownPaymentCardModel
   - VGSCheckoutCustomPaymentCardModel
+  - VGSCheckoutCheckSumAlgorithmType
 - name: Debugging
   children:
   - VGSCheckoutLogger
   - VGSCheckoutLoggingConfiguration
+  - VGSCheckoutLogLevel
