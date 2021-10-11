@@ -28,7 +28,7 @@ internal class VGSAddCardFormViewBuilder {
 		button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
     button.titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
 
-		button.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_save_card_button_title" )
+    button.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_save_card_button_title" )
     button.delegate = delegate
     button.updateUI(with: uiTheme)
 

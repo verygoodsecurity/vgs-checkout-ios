@@ -12,6 +12,9 @@ import UIKit
 /// Default Checkout UI Theme settings.
 public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
+  /// Initializer.
+  public init() {}
+  
   /// The textfield’s background color. Default is `.clear`.
   public var textFieldBackgroundColor: UIColor = .clear
 
@@ -24,8 +27,8 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	/// The textfield’s error color. Default is `.systemRed`.
   public var textFieldErrorLabelColor: UIColor = .systemRed
 
-    /// The textfield’s focus color. Default is `.systemBlue`.
-    public var textFieldFocusedColor: UIColor = .systemBlue
+  /// The textfield’s focus color. Default is `.systemBlue`.
+  public var textFieldFocusedColor: UIColor = .systemBlue
 
 	/// The font of the textfield. Default is `.body` with `.medium` weight.
 	public var textFieldTextFont: UIFont = .vgsPreferredFont(forTextStyle: .body, weight: .medium)
@@ -38,6 +41,9 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
 	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
+  
+  /// The section view's background color. Default is `.vgsSystemBackground` (white).
+  public var checkoutSectionViewBackgroundColor: UIColor = .vgsSectionBackgroundColor
 
 	/// The font of the section title. Default is `.title3` with `.bold` weight.
 	public var checkoutFormSectionTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .bold)
@@ -47,9 +53,6 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
 	/// The font of the error label. Default is `.caption2`.
   public var textFieldErrorLabelFont: UIFont = .preferredFont(forTextStyle: .caption2)
-
-	/// The text color of the error label. Default is `.systemRed`.
-  public var textFieldErrorLabelTextColor: UIColor = .systemRed
   
   /// Submit button attributes
 

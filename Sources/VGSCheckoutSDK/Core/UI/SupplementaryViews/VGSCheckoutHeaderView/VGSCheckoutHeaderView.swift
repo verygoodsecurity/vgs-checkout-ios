@@ -61,6 +61,7 @@ internal class VGSCheckoutHeaderView: UIView {
 	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	internal func configure(with model: VGSCheckoutHeaderViewModel, uiTheme: VGSCheckoutThemeProtocol) {
 		titleLabel.text = model.text
+    titleLabel.textColor = uiTheme.checkoutFormSectionTitleColor
 		titleLabel.font = uiTheme.checkoutFormSectionTitleFont
 	}
 

@@ -34,7 +34,7 @@ internal class VGSTextFieldViewUIConfigurationHandler {
         view?.placeholderView.hintLabel.font = theme.textFieldHintTextFont
 
 			  // Error label UI.
-				view?.validationErrorView.errorLabel.textColor = theme.textFieldErrorLabelTextColor
+				view?.validationErrorView.errorLabel.textColor = theme.textFieldErrorLabelColor
 				view?.validationErrorView.errorLabel.font = theme.textFieldErrorLabelFont
     }
     

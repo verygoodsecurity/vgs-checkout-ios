@@ -27,7 +27,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
 																							textFieldHintTextFont: theme.textFieldHintTextFont,
-																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
+																							textFieldErrorLabelColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
     case .filled:
       return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
@@ -36,7 +36,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
                                               textFieldTextColor: theme.textFieldTextColor,
                                               textFieldTextFont: theme.textFieldTextFont,
                                               textFieldHintTextFont: theme.textFieldHintTextFont,
-                                              textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
+                                              textFieldErrorLabelColor: theme.textFieldErrorLabelColor,
                                               textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 		case .focused:
 			return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
@@ -45,7 +45,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
 																							textFieldHintTextFont: theme.textFieldHintTextFont,
-																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
+																							textFieldErrorLabelColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 
 		case .invalid:
@@ -55,7 +55,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 																							textFieldTextColor: theme.textFieldTextColor,
 																							textFieldTextFont: theme.textFieldTextFont,
 																							textFieldHintTextFont: theme.textFieldHintTextFont,
-																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
+																							textFieldErrorLabelColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
 		}
 	}
@@ -75,7 +75,7 @@ public protocol VGSCheckoutTextFieldViewUIAttributesProtocol {
 	var textFieldTextColor: UIColor { get set }
 
 	/// The text color of the error label.
-	var textFieldErrorLabelTextColor: UIColor { get set }
+	var textFieldErrorLabelColor: UIColor { get set }
 
 	/// Fonts.
 
@@ -103,7 +103,7 @@ internal struct VGSCheckoutTextFieldUIAttributes: VGSCheckoutTextFieldViewUIAttr
 
 	internal var textFieldHintTextFont: UIFont
 
-	internal var textFieldErrorLabelTextColor: UIColor
+	internal var textFieldErrorLabelColor: UIColor
 
 	internal var textFieldErrorLabelFont: UIFont
 }
@@ -149,6 +149,9 @@ public protocol VGSCheckoutViewThemeProtocol {
 	/// The view's background color.
 	var checkoutViewBackgroundColor: UIColor { get set }
 
+  /// The section view's background color.
+  var checkoutSectionViewBackgroundColor: UIColor { get set }
+  
 	/// The font of the section title.
 	var checkoutFormSectionTitleFont: UIFont {get set}
 

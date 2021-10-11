@@ -145,7 +145,7 @@ internal class VGSCardDetailsSectionView: UIView {
 	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
   init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
-        self.uiTheme = uiTheme
+    self.uiTheme = uiTheme
 		super.init(frame: .zero)
 
 		setupUI()
@@ -163,7 +163,7 @@ internal class VGSCardDetailsSectionView: UIView {
 	/// Setup UI and layout.
 	private func setupUI() {
 
-		backgroundColor = .vgsSectionBackgroundColor
+    backgroundColor = uiTheme.checkoutSectionViewBackgroundColor
 		layer.cornerRadius = 8
         
 		addSubview(containerView)
