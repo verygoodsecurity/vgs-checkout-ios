@@ -163,7 +163,7 @@ internal class VGSSubmitButton: UIControl {
 		case .disabled:
 			isUserInteractionEnabled = false
 			backgroundColor =
-				uiTheme.checkoutSubmitButtonBackgroundColor.withAlphaComponent(0.6)
+      uiTheme.checkoutSubmitButtonBackgroundColor.withAlphaComponent(0.6)
 			titleLabel.font = uiTheme.checkoutSubmitButtonTitleFont
 			titleLabel.textColor = uiTheme.checkoutSubmitButtonTitleColor
 			titleLabel.text = title

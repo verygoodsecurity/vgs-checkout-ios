@@ -169,7 +169,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 	/// Setup UI and layout.
 	private func setupUI() {
 
-		backgroundColor = .vgsSectionBackgroundColor
+    backgroundColor = uiTheme.checkoutSectionViewBackgroundColor
 		layer.cornerRadius = 8
 
 		addSubview(containerView)
