@@ -25,7 +25,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   public var textFieldTextColor: UIColor = .vgsInputBlackTextColor
 
 	/// The textfield’s error color. Default is `.systemRed`.
-  public var textFieldErrorLabelColor: UIColor = .systemRed
+  public var textFieldErrorColor: UIColor = .systemRed
 
   /// The textfield’s focus color. Default is `.systemBlue`.
   public var textFieldFocusedColor: UIColor = .systemBlue
