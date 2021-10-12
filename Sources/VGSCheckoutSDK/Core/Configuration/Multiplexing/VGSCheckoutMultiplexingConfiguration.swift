@@ -4,22 +4,26 @@
 
 import Foundation
 
-/// Holds configuration for multiplexing payment processing, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+/// Holds configuration with predefined setup for wotk with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
+  // MARK: - Attributes
+  
 	/// `String` object, organization vault id.
 	public let vaultID: String
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
-	/// Multiplexing token.
+	/// Multiplexing app access token.
 	private(set) public var token: String
 
+  // MARK: - Initialization
+  
 	/// Configuration initializer (failable).
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
-	///   - token: `String` object, should be valid token for multiplexing.
+	///   - token: `String` object, should be valid access token for multiplexing app.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public init?(vaultID: String, token: String, environment: String = "sandbox") {
 		guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(token, vaultId: vaultID, environment: environment) else {
@@ -30,6 +34,8 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 		self.environment = environment
 	}
 
+  // MARK: - UI Configuration
+  
 	/// Checkout UI elements  configuration.
 	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
@@ -44,6 +50,8 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
     }
   }
 
+  // MARK: - Internal
+  
 	/// Payment flow type (internal use only).
 	internal let paymentFlowType: VGSPaymentFlowIdentifier = .multiplexing
   

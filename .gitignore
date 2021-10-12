@@ -81,7 +81,7 @@ VGSCheckoutDemoApp/Podfile.lock
 *.xcworkspacedata
 *.xcconfig
 
-Docs
-.build/**
+
+# Jazzy docs
 build
 

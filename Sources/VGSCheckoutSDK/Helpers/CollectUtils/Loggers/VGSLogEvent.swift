@@ -48,7 +48,7 @@ internal struct VGSLogEvent {
 
 	/// Initializer.
 	/// - Parameters:
-	///   - level: `VGSLogLevel` object, log level.
+	///   - level: `VGSCheckoutLogLevel` object, log level.
 	///   - text: `String` object, raw text to log.
 	///   - severityLevel: `SeverityLevel?` object, should be used to indicate errors or warnings. Default is `nil`.
 	///   - file: `String` object, refers to filename of calling function.

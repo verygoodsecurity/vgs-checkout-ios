@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Base protocol describing Content Serialization attributes
+///:nodoc: Base protocol describing Content Serialization attributes
 public protocol VGSCheckoutFormatSerializerProtocol {
 
 }

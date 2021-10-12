@@ -46,8 +46,9 @@ public class VGSCheckout {
 	// MARK: - Interface
 
 	/// Present drop-in checkout.
-	/// - Parameter viewController: `UIViewController` object, view controller to present checkout.
-	/// - Parameter animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
+  /// - Parameters:
+	///   -  viewController: `UIViewController` object, view controller to present checkout.
+	///   -  animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
 	public func present(from viewController: UIViewController, animated: Bool = true) {
 
 		self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, uiTheme: uiTheme)

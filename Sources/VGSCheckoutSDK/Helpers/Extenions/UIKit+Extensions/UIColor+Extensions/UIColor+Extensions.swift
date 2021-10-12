@@ -31,10 +31,9 @@ internal extension UIColor {
 // This code is taken from https://github.com/noahsark769/ColorCompatibility
 // Thanks to Noah Gilmore.
 // Copyright (c) 2019 Noah Gilmore <noah.w.gilmore@gmail.com>
-
 public extension UIColor {
 
-	/// System background color (white).
+	///:nodoc: System background color (white).
 	static var vgsSystemBackground: UIColor {
 			if #available(iOS 13, *) {
                 return .systemGroupedBackground
@@ -43,7 +42,7 @@ public extension UIColor {
 		return .groupTableViewBackground
 	}
 
-	/// Input text color (black).
+	///:nodoc: Input text color (black).
 	static var vgsInputBlackTextColor: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor {(traits) -> UIColor in
@@ -54,7 +53,7 @@ public extension UIColor {
 		}
 	}
 
-	/// VGS section title color (with fallback to earlier versions).
+	///:nodoc: VGS section title color (with fallback to earlier versions).
 	static var vgsSectionTitleColor: UIColor {
 		if #available(iOS 13.0, *) {
 			return label
@@ -63,7 +62,7 @@ public extension UIColor {
 		}
 	}
 
-	/// VGS section background color (with fallback to earlier versions).
+	///:nodoc: VGS section background color (with fallback to earlier versions).
 	static var vgsSectionBackgroundColor: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor.secondarySystemGroupedBackground
@@ -72,7 +71,7 @@ public extension UIColor {
 		}
 	}
 
-	/// VGS systemGray2 color (with fallback to earlier versions).
+	///:nodoc: VGS systemGray2 color (with fallback to earlier versions).
 	static var vgsSystemGray2Color: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor.systemGray2
