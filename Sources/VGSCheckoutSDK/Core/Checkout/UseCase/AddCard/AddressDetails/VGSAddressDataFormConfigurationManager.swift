@@ -47,6 +47,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
 		addressLine1Configuration.type = .none
+    addressLine1Configuration.keyboardType = .default
 		addressLine1Configuration.isRequiredValidOnly = true
 		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
@@ -56,6 +57,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
 		addressLine2Configuration.type = .none
+    addressLine2Configuration.keyboardType = .default
 		addressLine2Configuration.isRequiredValidOnly = false
 
 		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
@@ -65,6 +67,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
 		cityConfiguration.type = .none
+    cityConfiguration.keyboardType = .default
 		cityConfiguration.isRequiredValidOnly = true
 		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
 			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
@@ -161,17 +164,20 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.address1")
 		addressLine1Configuration.type = .none
+    addressLine1Configuration.keyboardType = .default
 		addressLine1Configuration.isRequiredValidOnly = true
 
 		addressLine1TextField.configuration = addressLine1Configuration
 
 		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.adddressLine2")
 		addressLine2Configuration.type = .none
+    addressLine2Configuration.keyboardType = .default
 		addressLine2Configuration.isRequiredValidOnly = false
 		addressLine2TextField.configuration = addressLine2Configuration
 
 		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.city")
 		cityConfiguration.type = .none
+    cityConfiguration.keyboardType = .default
 		cityConfiguration.isRequiredValidOnly = true
 
 		cityTextField.configuration = cityConfiguration
