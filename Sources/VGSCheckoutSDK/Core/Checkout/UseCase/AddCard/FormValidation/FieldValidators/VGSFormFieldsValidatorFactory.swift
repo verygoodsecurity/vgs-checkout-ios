@@ -31,8 +31,7 @@ internal class VGSFormFieldsValidatorFactory {
 		case .postalCode:
 			return VGSPostalCodeFieldValidator()
 		case .country:
-			// TODO: - add country validator?
-			return VGSCardNumberFieldValidator()
+			return VGSCountryFieldValidator()
 		}
 	}
 }

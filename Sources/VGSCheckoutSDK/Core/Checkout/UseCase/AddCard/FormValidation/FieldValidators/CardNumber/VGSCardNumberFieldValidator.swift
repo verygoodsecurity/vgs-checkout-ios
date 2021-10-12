@@ -33,3 +33,19 @@ internal class VGSCardNumberFieldValidator: VGSFormTextFieldValidationProtocol {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_card_number_empty_error")
 	}
 }
+
+/// Country field validator - field is always valid.
+internal class VGSCountryFieldValidator: VGSFormTextFieldValidationProtocol {
+
+	internal func isTextFieldInputComplete(_ textField: VGSTextField) -> Bool {
+		return true
+	}
+
+	internal func errorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return nil
+	}
+
+	internal func emptyErrorMessage(for textField: VGSTextField, fieldType: VGSAddCardFormFieldType) -> String? {
+		return nil
+	}
+}

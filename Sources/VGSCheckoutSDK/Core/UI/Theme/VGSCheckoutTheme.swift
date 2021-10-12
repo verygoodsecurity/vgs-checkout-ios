@@ -29,7 +29,7 @@ extension VGSCheckoutTextFieldThemeAdapterProtocol {
 																							textFieldHintTextFont: theme.textFieldHintTextFont,
 																							textFieldErrorLabelTextColor: theme.textFieldErrorLabelColor,
 																							textFieldErrorLabelFont: theme.textFieldErrorLabelFont)
-    case .filled:
+		case .filled:
       return VGSCheckoutTextFieldUIAttributes(textFieldBackgroundColor: theme.textFieldBackgroundColor,
                                               textFieldBorderColor: theme.textFieldBorderColor,
                                               textFieldHintTextColor: theme.textFieldHintTextColor,
