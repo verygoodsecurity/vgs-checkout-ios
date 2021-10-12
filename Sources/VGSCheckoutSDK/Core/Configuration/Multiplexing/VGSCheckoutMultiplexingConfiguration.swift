@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// Holds configuration with predefined setup for wotk with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+/// Holds configuration with predefined setup for work with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
   // MARK: - Attributes
