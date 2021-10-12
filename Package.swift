@@ -24,7 +24,7 @@ let package = Package(
 			exclude: [
 				"VGSCheckoutSDK.h",
 				"Info.plist"
-			], resources: [.process("Resources/VGSCanadaRegions.json"), .process("Resources/VGSVGSUnitedStatesRegions.json")]),
+			], resources: [.process("Resources")]),
 		.testTarget(
 				name: "VGSCheckoutSDKTests",
 				dependencies: ["VGSCheckoutSDK"],
