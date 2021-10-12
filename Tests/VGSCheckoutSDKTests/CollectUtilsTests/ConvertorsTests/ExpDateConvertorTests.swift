@@ -228,7 +228,6 @@ class ExpDateConvertorTests: VGSCheckoutBaseTestCase {
     config.validationRules = VGSValidationRuleSet(rules: [expDateValidationRule])
     textField.configuration = config
     
-
     let testDates8: [TestDataType] = [TestDataType(input: "12 2025", output: "2025/12"),
                                       TestDataType(input: "01 2030", output: "2030/01"),
                                       TestDataType(input: "05 2025", output: "2025/05")]

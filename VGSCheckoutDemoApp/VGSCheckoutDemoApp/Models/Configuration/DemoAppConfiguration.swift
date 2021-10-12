@@ -19,7 +19,6 @@ class DemoAppConfiguration {
 			return
 		}
 
-
 		// Fill data from *.xconfig for test and etc if *.xconfig is available. 
 		if let customVault = Bundle.main.object(forInfoDictionaryKey: "CUSTOM_VAULT") as? String {
 			self.vaultId = customVault
