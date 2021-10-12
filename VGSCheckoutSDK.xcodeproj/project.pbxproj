@@ -913,16 +913,8 @@
 				4405DD3326859FAC004A83AD /* VGSFieldNameToJSONTests.swift */,
 				4405DD3426859FAC004A83AD /* VGSFlatJSONStructMappingTests.swift */,
 				4405DD3526859FAC004A83AD /* VGSFieldNameMapUtilsTests.swift */,
-				4405DD3626859FAC004A83AD /* TestJSONs */,
 			);
 			path = "DeepMergeUtils Tests";
-			sourceTree = "<group>";
-		};
-		4405DD3626859FAC004A83AD /* TestJSONs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TestJSONs;
 			sourceTree = "<group>";
 		};
 		4405DD3726859FAC004A83AD /* Satellite Tests */ = {

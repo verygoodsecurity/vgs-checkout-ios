@@ -15,7 +15,6 @@ internal class VGSBaseFieldView: UIView, VGSTextFieldViewProtocol {
     
     // MARK: - Attributes
 
-    /// TODO: remove hardcoded value
     internal var fieldType: VGSAddCardFormFieldType = .addressLine1
     
     internal var placeholder: String? {

@@ -242,12 +242,9 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 		if pickerTextField === countryPickerField {
 			var currentCountryCode: String = ""
 
-			print("currentRegions: \(currentRegions)")
-
 			for country in VGSAddressCountriesDataProvider.provideAllCountries() {
 				if country.name == text {
 					currentCountryCode = country.code
-					print("currentCode found \(currentCountryCode)")
 				}
 			}
 
@@ -262,7 +259,6 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			lastSelectedCountryCode = currentCountryCode
 
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
-				print("update states with new country: \(newCountry)")
 
 				// Update collect and validation helpers country without postal code.
 				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)

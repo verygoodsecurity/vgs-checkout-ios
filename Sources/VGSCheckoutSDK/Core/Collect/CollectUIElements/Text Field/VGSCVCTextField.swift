@@ -149,11 +149,9 @@ internal extension VGSCVCTextField {
     func updatecvcIconViewSize() {
       if let widthConstraint = cvcIconImageView.constraints.filter({ $0.identifier == "widthConstraint" }).first {
           widthConstraint.constant = cvcIconSize.width
-        print("widthConstraint.constant: \(widthConstraint.constant)")
       }
       if let heightConstraint = cvcIconImageView.constraints.filter({ $0.identifier == "heightConstraint" }).first {
           heightConstraint.constant = cvcIconSize.height
-        print("heightConstraint.constant: \(heightConstraint.constant)")
       }
     }
     
@@ -184,7 +182,7 @@ internal extension VGSCVCTextField {
       cvcIconImageView.addConstraints([widthConstraint, heightConstraint])
     }
   
-    func updateCardImageView(hidden: Bool)  {
+    func updateCardImageView(hidden: Bool) {
       if hidden {
         cvcIconImageView.removeFromSuperview()
       } else {

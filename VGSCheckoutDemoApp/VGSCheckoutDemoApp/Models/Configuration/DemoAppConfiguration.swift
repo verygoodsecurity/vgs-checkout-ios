@@ -19,7 +19,7 @@ class DemoAppConfiguration {
 			return
 		}
 
-
+		/* Uncomment to use *xconfig file.
 		// Fill data from *.xconfig for test and etc if *.xconfig is available. 
 		if let customVault = Bundle.main.object(forInfoDictionaryKey: "CUSTOM_VAULT") as? String {
 			self.vaultId = customVault
@@ -32,6 +32,7 @@ class DemoAppConfiguration {
 		if let multiplexingServicePath = Bundle.main.object(forInfoDictionaryKey: "MULTIPLEXING_SERVICE_URL") as? String {
 			self.multiplexingServicePath = "https://" + multiplexingServicePath
 		}
+		*/
 	}
 
 	/// Set your vault id here https://www.verygoodsecurity.com/terminology/nomenclature#vault
