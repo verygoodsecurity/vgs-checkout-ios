@@ -202,8 +202,6 @@
 		44E10AA52695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AA42695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift */; };
 		44E10AAB2696C346001F0D44 /* VGSStateDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AAA2696C346001F0D44 /* VGSStateDataSourceProvider.swift */; };
 		44E10AAE2696DCCB001F0D44 /* VGSCountriesISO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AAD2696DCCB001F0D44 /* VGSCountriesISO.swift */; };
-		44E10ABB26970A37001F0D44 /* VGSUnitedStatesRegions.json in Resources */ = {isa = PBXBuildFile; fileRef = 44E10ABA26970A37001F0D44 /* VGSUnitedStatesRegions.json */; };
-		44E10ABE26970DF6001F0D44 /* VGSCanadaRegions.json in Resources */ = {isa = PBXBuildFile; fileRef = 44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */; };
 		44E10AC0269C067E001F0D44 /* CollectJSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10ABF269C067E001F0D44 /* CollectJSON+Extensions.swift */; };
 		44E10AC2269C07EF001F0D44 /* CollectJSONArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E10AC1269C07EF001F0D44 /* CollectJSONArray+Extensions.swift */; };
 		44E10AC5269C3E02001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AC7269C3E02001F0D44 /* Localizable.strings */; };
@@ -443,8 +441,6 @@
 		44E10AA42695C10B001F0D44 /* VGSCheckoutMockedDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMockedDataProvider.swift; sourceTree = "<group>"; };
 		44E10AAA2696C346001F0D44 /* VGSStateDataSourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSStateDataSourceProvider.swift; sourceTree = "<group>"; };
 		44E10AAD2696DCCB001F0D44 /* VGSCountriesISO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCountriesISO.swift; sourceTree = "<group>"; };
-		44E10ABA26970A37001F0D44 /* VGSUnitedStatesRegions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VGSUnitedStatesRegions.json; sourceTree = "<group>"; };
-		44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VGSCanadaRegions.json; sourceTree = "<group>"; };
 		44E10ABF269C067E001F0D44 /* CollectJSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectJSON+Extensions.swift"; sourceTree = "<group>"; };
 		44E10AC1269C07EF001F0D44 /* CollectJSONArray+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectJSONArray+Extensions.swift"; sourceTree = "<group>"; };
 		44E10AC6269C3E02001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1740,8 +1736,6 @@
 		44EC95162669F01900CE04F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				44E10ABD26970DF6001F0D44 /* VGSCanadaRegions.json */,
-				44E10ABA26970A37001F0D44 /* VGSUnitedStatesRegions.json */,
 				44EC95172669F06000CE04F4 /* Media.xcassets */,
 				4405DDA02685E699004A83AD /* CardIcon.xcassets */,
 				44E10AC7269C3E02001F0D44 /* Localizable.strings */,
@@ -1889,8 +1883,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E10AC5269C3E02001F0D44 /* Localizable.strings in Resources */,
-				44E10ABE26970DF6001F0D44 /* VGSCanadaRegions.json in Resources */,
-				44E10ABB26970A37001F0D44 /* VGSUnitedStatesRegions.json in Resources */,
 				44EC95182669F06000CE04F4 /* Media.xcassets in Resources */,
 				4405DDA12685E699004A83AD /* CardIcon.xcassets in Resources */,
 			);
