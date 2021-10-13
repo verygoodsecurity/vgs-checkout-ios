@@ -92,7 +92,8 @@ extension VGSCheckoutPaymentCards.CardBrand {
           return [3]
         }
     }
-  
+
+	  /// Specifies CVC format pattern.
     public var cvcFormatPattern: String {
       var maxLength = 0
       if let cardBrand = VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self }) {

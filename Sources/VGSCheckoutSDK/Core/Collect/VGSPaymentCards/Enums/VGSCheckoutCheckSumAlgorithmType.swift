@@ -16,7 +16,8 @@ public enum VGSCheckoutCheckSumAlgorithmType {
 }
 
 public extension VGSCheckoutCheckSumAlgorithmType {
-  
+
+	///no:doc
 	func validate(_ input: String) -> Bool {
     switch self {
     case .luhn:

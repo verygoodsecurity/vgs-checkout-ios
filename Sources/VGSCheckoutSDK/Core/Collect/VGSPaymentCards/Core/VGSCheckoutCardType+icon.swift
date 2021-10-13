@@ -17,11 +17,13 @@ extension VGSCheckoutPaymentCards.CardBrand {
     static var defaultCVCIcon3Digits = UIImage(named: "cvc3", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
   
     static var defaultCVCIcon4Digits = UIImage(named: "cvc4", in: AssetsBundle.main.iconBundle, compatibleWith: nil)
-  
+
+	  /// Card brand icon.
     public var brandIcon: UIImage? {
       return VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.brandIcon ?? VGSCheckoutPaymentCards.unknown.brandIcon
     }
-  
+
+		/// Card brand cvc icon.
     public var cvcIcon: UIImage? {
       return VGSCheckoutPaymentCards.availableCardBrands.first(where: { $0.brand == self })?.cvcIcon ?? VGSCheckoutPaymentCards.unknown.cvcIcon
     }

@@ -166,11 +166,13 @@ public extension VGSCheckoutPaymentCards.CardBrand {
 }
 
 public extension VGSCheckoutPaymentCards {
-    
+
+		///no:doc
     static func getCardModelFromAvailableModels(brand: VGSCheckoutPaymentCards.CardBrand) -> VGSCheckoutPaymentCardModelProtocol? {
       return Self.availableCardBrands.first(where: { $0.brand == brand})
     }
 
+		///no:doc
     static func detectCardBrandFromAvailableCards(input: String) -> VGSCheckoutPaymentCards.CardBrand {
       for cardModel in Self.availableCardBrands {
           let predicate = NSPredicate(format: "SELF MATCHES %@", cardModel.regex)
