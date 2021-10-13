@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VGSCheckoutSubmitButtonThemeProtocol Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/VGSCheckoutSubmitButtonThemeProtocol" class="dashAnchor"></a>
+
+    <a title="VGSCheckoutSubmitButtonThemeProtocol Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          VGSCheckoutSDK
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/verygoodsecurity/vgs-checkout-ios">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">VGSCheckoutSDK Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      VGSCheckoutSubmitButtonThemeProtocol Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../VGSCheckout.html">VGSCheckout</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckout.html">VGSCheckout</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutDelegate.html">VGSCheckoutDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Configuration.html">Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutConfigurationProtocol.html">VGSCheckoutConfigurationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomConfiguration.html">VGSCheckoutCustomConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutMultiplexingConfiguration.html">VGSCheckoutMultiplexingConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutFieldVisibility.html">VGSCheckoutFieldVisibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutBillingAddressVisibility.html">VGSCheckoutBillingAddressVisibility</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Card%20Details%20Configuration.html">Card Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardOptions.html">VGSCheckoutCardOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions.html">VGSCheckoutCardHolderOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions/FieldNameType.html">– FieldNameType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardNumberOptions.html">VGSCheckoutCardNumberOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpirationDateOptions.html">VGSCheckoutExpirationDateOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutCardExpDateFormat.html">VGSCheckoutCardExpDateFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpDateSeparateSerializer.html">VGSCheckoutExpDateSeparateSerializer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCVCOptions.html">VGSCheckoutCVCOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Billing%20Address%20Details%20Configuration.html">Billing Address Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressOptions.html">VGSCheckoutBillingAddressOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCountryOptions.html">VGSCheckoutBillingAddressCountryOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine1Options.html">VGSCheckoutBillingAddressLine1Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine2Options.html">VGSCheckoutBillingAddressLine2Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCityOptions.html">VGSCheckoutBillingAddressCityOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressPostalCodeOptions.html">VGSCheckoutBillingAddressPostalCodeOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../UITheme.html">UITheme</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutDefaultTheme.html">VGSCheckoutDefaultTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../UITheme.html#/s:14VGSCheckoutSDK0A13ThemeProtocolP">VGSCheckoutThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutTextFieldThemeProtocol.html">VGSCheckoutTextFieldThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutSubmitButtonThemeProtocol.html">VGSCheckoutSubmitButtonThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutViewThemeProtocol.html">VGSCheckoutViewThemeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../APIConfiguration.html">APIConfiguration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutRequestOptions.html">VGSCheckoutRequestOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutRouteConfiguration.html">VGSCheckoutRouteConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHTTPMethod.html">VGSCheckoutHTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHostnamePolicy.html">VGSCheckoutHostnamePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutDataMergePolicy.html">VGSCheckoutDataMergePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutRequestResult.html">VGSCheckoutRequestResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../PaymentCards.html">PaymentCards</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutPaymentCards.html">VGSCheckoutPaymentCards</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutPaymentCards/CardBrand.html">– CardBrand</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutPaymentCardModel.html">VGSCheckoutPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutUnknownPaymentCardModel.html">VGSCheckoutUnknownPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomPaymentCardModel.html">VGSCheckoutCustomPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutCheckSumAlgorithmType.html">VGSCheckoutCheckSumAlgorithmType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Debugging.html">Debugging</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutLogger.html">VGSCheckoutLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutLoggingConfiguration.html">VGSCheckoutLoggingConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutLogLevel.html">VGSCheckoutLogLevel</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>VGSCheckoutSubmitButtonThemeProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VGSCheckoutSubmitButtonThemeProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>Defines Checkout submit button UI Theme.</p>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/UI/Theme/VGSCheckoutTheme.swift#L163-L176">Show on GitHub</a>
+              </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD15BackgroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/checkoutSubmitButtonBackgroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD15BackgroundColorSo7UIColorCvp">checkoutSubmitButtonBackgroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The background color of the submit button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">checkoutSubmitButtonBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/UI/Theme/VGSCheckoutTheme.swift#L166">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD22SuccessBackgroundColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/checkoutSubmitButtonSuccessBackgroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD22SuccessBackgroundColorSo7UIColorCvp">checkoutSubmitButtonSuccessBackgroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The background color of the submit button on success.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">checkoutSubmitButtonSuccessBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/UI/Theme/VGSCheckoutTheme.swift#L169">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD10TitleColorSo7UIColorCvp"></a>
+                    <a name="//apple_ref/swift/Property/checkoutSubmitButtonTitleColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD10TitleColorSo7UIColorCvp">checkoutSubmitButtonTitleColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The text color of the submit button title.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">checkoutSubmitButtonTitleColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/UI/Theme/VGSCheckoutTheme.swift#L172">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD9TitleFontSo6UIFontCvp"></a>
+                    <a name="//apple_ref/swift/Property/checkoutSubmitButtonTitleFont" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A25SubmitButtonThemeProtocolP08checkoutcD9TitleFontSo6UIFontCvp">checkoutSubmitButtonTitleFont</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The font of the submit button title.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">checkoutSubmitButtonTitleFont</span><span class="p">:</span> <span class="kt">UIFont</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/UI/Theme/VGSCheckoutTheme.swift#L175">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2021 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2021-10-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
