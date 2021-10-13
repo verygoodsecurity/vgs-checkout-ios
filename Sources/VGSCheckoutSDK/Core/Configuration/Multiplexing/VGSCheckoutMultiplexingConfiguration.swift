@@ -22,15 +22,15 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
   
 	/// Configuration initializer (failable).
 	/// - Parameters:
+  ///   - token: `String` object, should be valid access token for multiplexing app.
 	///   - vaultID: `String` object, organization vault id.
-	///   - token: `String` object, should be valid access token for multiplexing app.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init?(vaultID: String, token: String, environment: String = "sandbox") {
+	public init?(token: String, vaultID: String, environment: String = "sandbox") {
 		guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(token, vaultId: vaultID, environment: environment) else {
             return nil
         }
+    self.token = token
 		self.vaultID = vaultID
-		self.token = token
 		self.environment = environment
 	}
 
