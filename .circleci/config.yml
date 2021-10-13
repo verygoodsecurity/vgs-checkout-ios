@@ -52,12 +52,10 @@ jobs:
             plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
             pod install &&
             xcrun instruments -w "iPhone 12 (14.2) [" || true &&
-            xcrun instruments -w "iPad Air (3rd generation) (13.7) [" || true &&
             xcodebuild test -workspace VGSCheckoutDemoApp.xcworkspace
             -scheme VGSCheckoutDemoAppUITests
             -sdk iphonesimulator
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5'
-            -destination 'platform=iOS Simulator,name=iPad Air (3rd generation),OS=13.7'
 
 
 workflows:
