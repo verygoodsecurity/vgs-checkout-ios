@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "VGSCheckoutSDK"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.0"
   spec.summary      = "VGS iOS Checkout SDK!"
   spec.description  = <<-DESC
                      VGS Checkout - is a universal checkout and user experience. Single, customized, consistent experience to your customers across devices and browsers that you control
