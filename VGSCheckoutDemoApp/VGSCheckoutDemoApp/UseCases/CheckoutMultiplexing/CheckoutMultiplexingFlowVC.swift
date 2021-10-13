@@ -214,7 +214,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 	/// - Parameter token: `String` object, should be valid multiplexing token.
 	fileprivate func presentMultiplexingCheckout(with token: String) {
 		// Create multiplexing configuration with token.
-        if var multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: DemoAppConfiguration.shared.multiplexingVaultId, token: token, environment: DemoAppConfiguration.shared.environment) {
+        if var multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(token: token, vaultID: DemoAppConfiguration.shared.multiplexingVaultId, environment: DemoAppConfiguration.shared.environment) {
 
 
 					multiplexingConfiguration.billingAddressVisibility = .visible

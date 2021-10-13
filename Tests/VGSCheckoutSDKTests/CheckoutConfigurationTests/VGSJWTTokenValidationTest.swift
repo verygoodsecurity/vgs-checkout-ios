@@ -13,18 +13,20 @@ class VGSJWTTokenValidationTest: VGSCheckoutBaseTestCase {
     let vaultId = "tntxxxxxxx"
     
     func testValidJWTTokenReturnsTrue() {
-        let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(vaultID: vaultId, token: validJWTToken, environment: "sandbox")
+        let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(token: validJWTToken, vaultID: vaultId, environment: "sandbox")
         XCTAssertTrue(multiplexingConfig != nil, "ERROR: MultiplexingConfig init failed with valid JWT token")
     }
     
     func testInvalidJWTTokenScopeReturnsFalse() {
-        let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(vaultID: vaultId, token: invalidScopeJWTToken, environment: "sandbox")
+      for token in invalidJWTTokens {
+        let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(token: token, vaultID: vaultId, environment: "sandbox")
         XCTAssertTrue(multiplexingConfig == nil, "ERROR: MultiplexingConfig init with invalid JWT token")
+      }
     }
     
     func testInvalidJWTTokenReturnsFalse() {
         for token in invalidJWTTokens {
-            let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(vaultID: vaultId, token: token, environment: "sandbox")
+            let multiplexingConfig = VGSCheckoutMultiplexingConfiguration(token: token, vaultID: vaultId, environment: "sandbox")
             XCTAssertTrue(multiplexingConfig == nil, "ERROR: MultiplexingConfig init with empty JWT token")
         }
     }
