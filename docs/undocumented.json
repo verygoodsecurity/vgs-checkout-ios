@@ -1,48 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
-      "line": 96,
-      "symbol": "VGSCheckoutPaymentCards.CardBrand.cvcFormatPattern",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
-      "line": 21,
-      "symbol": "VGSCheckoutPaymentCards.CardBrand.brandIcon",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
-      "line": 25,
-      "symbol": "VGSCheckoutPaymentCards.CardBrand.cvcIcon",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutPaymentCards.swift",
-      "line": 170,
-      "symbol": "VGSCheckoutPaymentCards.getCardModelFromAvailableModels(brand:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutPaymentCards.swift",
-      "line": 174,
-      "symbol": "VGSCheckoutPaymentCards.detectCardBrandFromAvailableCards(input:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Enums/VGSCheckoutCheckSumAlgorithmType.swift",
-      "line": 20,
-      "symbol": "VGSCheckoutCheckSumAlgorithmType.validate(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCVCFieldView.swift",
       "line": 99,
       "symbol": "VGSCVCFieldView",
