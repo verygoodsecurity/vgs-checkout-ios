@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  VGSCheckoutDemoApp
+
+*/
+
+/*
+Set your own texts using VGSCheckout keys!
+*/
+
+/* Card details section title. */
+"vgs_checkout_form_card_details_title" = "Card Details";

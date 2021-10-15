@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VGSCheckoutUnknownPaymentCardModel Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/VGSCheckoutUnknownPaymentCardModel" class="dashAnchor"></a>
+
+    <a title="VGSCheckoutUnknownPaymentCardModel Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          VGSCheckoutSDK
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/verygoodsecurity/vgs-checkout-ios">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">VGSCheckoutSDK Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      VGSCheckoutUnknownPaymentCardModel Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../VGSCheckout.html">VGSCheckout</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckout.html">VGSCheckout</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutDelegate.html">VGSCheckoutDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Configuration.html">Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutConfigurationProtocol.html">VGSCheckoutConfigurationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomConfiguration.html">VGSCheckoutCustomConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutMultiplexingConfiguration.html">VGSCheckoutMultiplexingConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutFieldVisibility.html">VGSCheckoutFieldVisibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutBillingAddressVisibility.html">VGSCheckoutBillingAddressVisibility</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Card%20Details%20Configuration.html">Card Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardOptions.html">VGSCheckoutCardOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions.html">VGSCheckoutCardHolderOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions/FieldNameType.html">– FieldNameType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardNumberOptions.html">VGSCheckoutCardNumberOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpirationDateOptions.html">VGSCheckoutExpirationDateOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutCardExpDateFormat.html">VGSCheckoutCardExpDateFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpDateSeparateSerializer.html">VGSCheckoutExpDateSeparateSerializer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCVCOptions.html">VGSCheckoutCVCOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Billing%20Address%20Details%20Configuration.html">Billing Address Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressOptions.html">VGSCheckoutBillingAddressOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCountryOptions.html">VGSCheckoutBillingAddressCountryOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine1Options.html">VGSCheckoutBillingAddressLine1Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine2Options.html">VGSCheckoutBillingAddressLine2Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCityOptions.html">VGSCheckoutBillingAddressCityOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressPostalCodeOptions.html">VGSCheckoutBillingAddressPostalCodeOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../UITheme.html">UITheme</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutDefaultTheme.html">VGSCheckoutDefaultTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../UITheme.html#/s:14VGSCheckoutSDK0A13ThemeProtocolP">VGSCheckoutThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutTextFieldThemeProtocol.html">VGSCheckoutTextFieldThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutSubmitButtonThemeProtocol.html">VGSCheckoutSubmitButtonThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutViewThemeProtocol.html">VGSCheckoutViewThemeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../APIConfiguration.html">APIConfiguration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutRequestOptions.html">VGSCheckoutRequestOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutRouteConfiguration.html">VGSCheckoutRouteConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHTTPMethod.html">VGSCheckoutHTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHostnamePolicy.html">VGSCheckoutHostnamePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutDataMergePolicy.html">VGSCheckoutDataMergePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutRequestResult.html">VGSCheckoutRequestResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../PaymentCards.html">PaymentCards</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutPaymentCards.html">VGSCheckoutPaymentCards</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutPaymentCards/CardBrand.html">– CardBrand</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutPaymentCardModel.html">VGSCheckoutPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutUnknownPaymentCardModel.html">VGSCheckoutUnknownPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomPaymentCardModel.html">VGSCheckoutCustomPaymentCardModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutCheckSumAlgorithmType.html">VGSCheckoutCheckSumAlgorithmType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Debugging.html">Debugging</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutLogger.html">VGSCheckoutLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutLoggingConfiguration.html">VGSCheckoutLoggingConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutLogLevel.html">VGSCheckoutLogLevel</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>VGSCheckoutUnknownPaymentCardModel</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">VGSCheckoutUnknownPaymentCardModel</span></code></pre>
+
+                </div>
+              </div>
+            <p>An object representing Unknown Payment Cards - cards not defined in the SDK. Object is used when validation for<code>CardBrand.unknown</code> is set as <code>true</code>. Check <code>VGSValidationRulePaymentCard</code> for more details. Validation attributes can be edited through `<code><a href="../Classes/VGSCheckoutPaymentCards.html#/s:14VGSCheckoutSDK0A12PaymentCardsC7unknownAA0a7UnknownC9CardModelVvpZ">VGSCheckoutPaymentCards.unknown</a></code> model.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV5regexSSvp"></a>
+                    <a name="//apple_ref/swift/Property/regex" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV5regexSSvp">regex</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Regex validating that input contains digits only.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">regex</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L20">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV17cardNumberLengthsSaySiGvp"></a>
+                    <a name="//apple_ref/swift/Property/cardNumberLengths" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV17cardNumberLengthsSaySiGvp">cardNumberLengths</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Valid Unknown Card Numbers Lengths</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">cardNumberLengths</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L23">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV10cvcLengthsSaySiGvp"></a>
+                    <a name="//apple_ref/swift/Property/cvcLengths" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV10cvcLengthsSaySiGvp">cvcLengths</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Valid Unknown Card CVC/CVV Lengths. For most brands valid cvc lengths is [3], while for Amex is [4].  For unknown brands can be set as [3, 4]</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">cvcLengths</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L26">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV17checkSumAlgorithmAA0a5CheckhI4TypeOSgvp"></a>
+                    <a name="//apple_ref/swift/Property/checkSumAlgorithm" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV17checkSumAlgorithmAA0a5CheckhI4TypeOSgvp">checkSumAlgorithm</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check sum validation algorithm. For most brands  card number can be validated by <code><a href="../Enums/VGSCheckoutCheckSumAlgorithmType.html#/s:14VGSCheckoutSDK0A21CheckSumAlgorithmTypeO4luhnyA2CmF">VGSCheckoutCheckSumAlgorithmType.luhn</a></code> algorithm. If <code>none</code> - result of Checksum Algorithm validation will be <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">checkSumAlgorithm</span><span class="p">:</span> <span class="kt"><a href="../Enums/VGSCheckoutCheckSumAlgorithmType.html">VGSCheckoutCheckSumAlgorithmType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L29">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV13formatPatternSSvp"></a>
+                    <a name="//apple_ref/swift/Property/formatPattern" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV13formatPatternSSvp">formatPattern</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unknown Payment Card Numbers visual format pattern. NOTE: format pattern length limits input length.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">formatPattern</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L32">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV9brandIconSo7UIImageCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/brandIcon" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV9brandIconSo7UIImageCSgvp">brandIcon</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Image, associated with Unknown Payment Card Brands.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">brandIcon</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L35">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV7cvcIconSo7UIImageCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/cvcIcon" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A23UnknownPaymentCardModelV7cvcIconSo7UIImageCSgvp">cvcIcon</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Image, associated with CVC for Unknown Payment Card Brands.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">cvcIcon</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutUnknownPaymentCardModel.swift#L38">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2021 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2021-10-15)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

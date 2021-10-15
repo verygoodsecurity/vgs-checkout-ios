@@ -1,0 +1,222 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/UseCase/AddCard/AddressDetails/VGSAddressDataSectionViewModel.swift",
+      "line": 195,
+      "symbol": "VGSAddressDataSectionViewModel.pickerAddressDidUpdate(in:fieldType:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/UseCase/AddCard/AddressDetails/VGSAddressDataSectionViewModel.swift",
+      "line": 210,
+      "symbol": "VGSAddressDataSectionViewModel.updateStateField(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/UseCase/AddCard/AddressDetails/VGSAddressDataSectionViewModel.swift",
+      "line": 232,
+      "symbol": "VGSAddressDataSectionViewModel.updatePostalCodeField(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/UseCase/AddCard/AddressDetails/VGSAddressDataSectionViewModel.swift",
+      "line": 240,
+      "symbol": "VGSAddressDataSectionViewModel.userDidSelectValue(_:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/UseCase/AddCard/VGSAddCardUseCaseManager.swift",
+      "line": 221,
+      "symbol": "VGSAddCardUseCaseManager.stateDidChange(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/VGSCheckout.swift",
+      "line": 70,
+      "symbol": "VGSCheckout.addCardFlowDidChange(with:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/Mask/MaskedTextField+security.swift",
+      "line": 22,
+      "symbol": "MaskedTextField.addSomeTarget(_:action:for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/Mask/MaskedTextField.swift",
+      "line": 277,
+      "symbol": "MaskedTextField.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/PickerFields/AddressDataProviders/Countries/VGSCountriesISO.swift",
+      "line": 262,
+      "symbol": "VGSCountriesISO",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/PickerFields/VGSPickerTextField.swift",
+      "line": 145,
+      "symbol": "VGSPickerTextField.pickerView(_:attributedTitleForRow:forComponent:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/PickerFields/VGSPickerTextField.swift",
+      "line": 157,
+      "symbol": "VGSPickerTextField.pickerView(_:didSelectRow:inComponent:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/VGSTextField.swift",
+      "line": 216,
+      "symbol": "VGSTextField.textFieldDidChange(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/CollectUIElements/Text Field/VGSTextField.swift",
+      "line": 228,
+      "symbol": "VGSTextField.textFieldDidEndEditingOnExit(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
+      "line": 50,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCardLengths",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
+      "line": 85,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCVCLengths",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
+      "line": 107,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultFormatPattern",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
+      "line": 118,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/CheckoutCardBrand+default.swift",
+      "line": 153,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCheckSumAlgorithm",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
+      "line": 13,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultUnknownBrandIcon",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
+      "line": 15,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCVCIcon3Digits",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
+      "line": 17,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCVCIcon4Digits",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
+      "line": 29,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultBrandIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Collect/VGSPaymentCards/Core/VGSCheckoutCardType+icon.swift",
+      "line": 68,
+      "symbol": "VGSCheckoutPaymentCards.CardBrand.defaultCVCIcon",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCVCFieldView.swift",
+      "line": 99,
+      "symbol": "VGSCVCFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardNumberFieldView.swift",
+      "line": 100,
+      "symbol": "VGSCardNumberFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardholderFieldView.swift",
+      "line": 168,
+      "symbol": "VGSCardholderFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSExpirationDateFieldView.swift",
+      "line": 99,
+      "symbol": "VGSExpirationDateFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/FieldTypes/VGSTextFieldViewProtocol.swift",
+      "line": 50,
+      "symbol": "VGSTextFieldViewUIConfigurationProtocol",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/FieldTypes/VGSTextFieldViewProtocol.swift",
+      "line": 65,
+      "symbol": "VGSCheckoutFieldUIState",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/Theme/FiledViewThemeAdapter/VGSCheckoutTextFieldThemeAdapterProtocol.swift",
+      "line": 17,
+      "symbol": "VGSCheckoutTextFieldThemeAdapterProtocol",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/dima/vgs-checkout-ios/Sources/VGSCheckoutSDK/Helpers/Extenions/UIKit+Extensions/UIFont+Extensions/UIFont+Extensions.swift",
+      "line": 11,
+      "symbol": "UIFont.vgsPreferredFont(forTextStyle:weight:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/dima/vgs-checkout-ios"
+}
