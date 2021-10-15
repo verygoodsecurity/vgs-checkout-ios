@@ -1,10 +1,7 @@
-[![CircleCI](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/checkout_0%2E0%2E1.svg?style=svg&circle-token=702dbbf24489d26efb05ca3eff1dd6f370c31ea6)](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/checkout_0%2E0%2E1)
+[![CircleCI](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main.svg?style=svg&circle-token=8f652123b81dcce5b55b0701af3de08d04cffac7)](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main)
 [![UT](https://img.shields.io/badge/Unit_Test-pass-green)]()
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/VGSCheckoutSDK.svg?style=flat)](https://github.com/verygoodsecurity/vgs-checkout-ios)
 [![swift](https://img.shields.io/badge/swift-5-orange)]()
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/VGSCheckoutSDK.svg?style=flat)](https://cocoapods.org/pods/VGSCheckoutSDK)
-<img src="./VGSZeroData.png" height="20">
 
 # VGS Checkout iOS SDK
 
@@ -94,9 +91,9 @@ VGS Checkout SDK works with different configuration types. You can get more info
 
 ```swift
 /// Create multiplexing configuration with access token.
-if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(vaultID: "<VAULT_ID>",
-                                                                          token: "<MULTIPLEXING_ACCESS_TOKEN>",
-                                                                    environment: "<ENVIRONMENT>") {
+if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(token: "<MULTIPLEXING_ACCESS_TOKEN>",
+                                                                      vaultID: "<VAULT_ID>",
+                                                                  environment: "<ENVIRONMENT>") {
                                                                     
   /// Init Checkout with vaultID associated with your multiplexing configuration.
   vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
