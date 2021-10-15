@@ -2,9 +2,6 @@
 //  VGSTextField+patternFormat.swift
 //  VGSCheckoutSDK
 //
-//  Created by Vitalii Obertynskyi on 22.12.2019.
-//  Copyright © 2019 VGS. All rights reserved.
-//
 
 import Foundation
 

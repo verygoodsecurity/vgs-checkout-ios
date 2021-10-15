@@ -2,9 +2,7 @@
 //  VGSCollect+network.swift
 //  VGSCheckoutSDK
 //
-//  Created by Vitalii Obertynskyi on 09.05.2020.
-//  Copyright © 2020 VGS. All rights reserved.
-//
+
 
 import Foundation
 

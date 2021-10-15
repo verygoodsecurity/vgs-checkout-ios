@@ -2,9 +2,7 @@
 //  CardBrand+icon.swift
 //  VGSCheckoutSDK
 //
-//  Created by Vitalii Obertynskyi on 27.11.2019.
-//  Copyright © 2019 VGS. All rights reserved.
-//
+
 
 import Foundation
 #if os(iOS)

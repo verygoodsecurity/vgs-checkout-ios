@@ -15,6 +15,10 @@
 		326B6B112704C7A10028BACD /* VGSMultiplexingFormConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B6B0F2704C7A10028BACD /* VGSMultiplexingFormConfiguration.swift */; };
 		3286E0C6265EC19C001FECEB /* VGSCheckoutSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3286E0BC265EC19C001FECEB /* VGSCheckoutSDK.framework */; };
 		3286E131265EC588001FECEB /* VGSCheckoutSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 3286E12F265EC588001FECEB /* VGSCheckoutSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3287E2212719850C0037B623 /* VGSCheckoutTextFieldThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3287E2202719850C0037B623 /* VGSCheckoutTextFieldThemeProtocol.swift */; };
+		3287E2232719854E0037B623 /* VGSCheckoutViewThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3287E2222719854E0037B623 /* VGSCheckoutViewThemeProtocol.swift */; };
+		3287E225271985850037B623 /* VGSCheckoutSubmitButtonThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3287E224271985850037B623 /* VGSCheckoutSubmitButtonThemeProtocol.swift */; };
+		3287E228271986020037B623 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3287E227271986020037B623 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift */; };
 		32CC737E26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */; };
 		32CC738026C11222006E9DCD /* _VGSCountryISOPostalCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */; };
 		32CF756D26C3B067008DB455 /* VGSAddressLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */; };
@@ -252,6 +256,10 @@
 		3286E0C5265EC19C001FECEB /* VGSCheckoutSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VGSCheckoutSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3286E12F265EC588001FECEB /* VGSCheckoutSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSCheckoutSDK.h; sourceTree = "<group>"; };
 		3286E130265EC588001FECEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3287E2202719850C0037B623 /* VGSCheckoutTextFieldThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTextFieldThemeProtocol.swift; sourceTree = "<group>"; };
+		3287E2222719854E0037B623 /* VGSCheckoutViewThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutViewThemeProtocol.swift; sourceTree = "<group>"; };
+		3287E224271985850037B623 /* VGSCheckoutSubmitButtonThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSubmitButtonThemeProtocol.swift; sourceTree = "<group>"; };
+		3287E227271986020037B623 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTextFieldThemeAdapterProtocol.swift; sourceTree = "<group>"; };
 		32CC737D26C10F8D006E9DCD /* VGSPostalCodeValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeValidationTest.swift; sourceTree = "<group>"; };
 		32CC737F26C11222006E9DCD /* _VGSCountryISOPostalCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VGSCountryISOPostalCodes.swift; sourceTree = "<group>"; };
 		32CF756C26C3B067008DB455 /* VGSAddressLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressLineTests.swift; sourceTree = "<group>"; };
@@ -567,6 +575,38 @@
 				4405DD2F26859FAC004A83AD /* VGSCheckoutSDKTests */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		3287E21D271984F30037B623 /* CheckoutViewTheme */ = {
+			isa = PBXGroup;
+			children = (
+				3287E2222719854E0037B623 /* VGSCheckoutViewThemeProtocol.swift */,
+			);
+			path = CheckoutViewTheme;
+			sourceTree = "<group>";
+		};
+		3287E21E271984F30037B623 /* FieldViewTheme */ = {
+			isa = PBXGroup;
+			children = (
+				3287E2202719850C0037B623 /* VGSCheckoutTextFieldThemeProtocol.swift */,
+			);
+			path = FieldViewTheme;
+			sourceTree = "<group>";
+		};
+		3287E21F271984F30037B623 /* SubmitButtonTheme */ = {
+			isa = PBXGroup;
+			children = (
+				3287E224271985850037B623 /* VGSCheckoutSubmitButtonThemeProtocol.swift */,
+			);
+			path = SubmitButtonTheme;
+			sourceTree = "<group>";
+		};
+		3287E226271985A20037B623 /* FiledViewThemeAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				3287E227271986020037B623 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift */,
+			);
+			path = FiledViewThemeAdapter;
 			sourceTree = "<group>";
 		};
 		32CC737926C10E35006E9DCD /* AddressTests */ = {
@@ -1338,6 +1378,10 @@
 			children = (
 				44E10AD7269F02D3001F0D44 /* VGSCheckoutDefaultUITheme.swift */,
 				44C4C9002664BA5A00195505 /* VGSCheckoutTheme.swift */,
+				3287E21D271984F30037B623 /* CheckoutViewTheme */,
+				3287E21E271984F30037B623 /* FieldViewTheme */,
+				3287E226271985A20037B623 /* FiledViewThemeAdapter */,
+				3287E21F271984F30037B623 /* SubmitButtonTheme */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -2005,6 +2049,7 @@
 				4405DC5D26844B30004A83AD /* VGSExpDateTextField.swift in Sources */,
 				4405DC9526847247004A83AD /* UIDevice+extension.swift in Sources */,
 				4405DC8F26847247004A83AD /* VGSCheckoutLoggingConfiguration.swift in Sources */,
+				3287E228271986020037B623 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift in Sources */,
 				44D520CC26771AD8005AB588 /* VGSCreditCardAPIWorker.swift in Sources */,
 				4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */,
 				4405DCA026847247004A83AD /* VGSFieldNameToSubscriptMapper.swift in Sources */,
@@ -2094,8 +2139,10 @@
 				44A2A37A26A15008002B974B /* VGSCityFieldValidator.swift in Sources */,
 				4405DC1626844AD8004A83AD /* Enums.swift in Sources */,
 				4438577426B0218400EE5C7F /* VGSCheckoutBillingAddressOptions.swift in Sources */,
+				3287E2232719854E0037B623 /* VGSCheckoutViewThemeProtocol.swift in Sources */,
 				44D5CF2B268C495500312108 /* VGSFormTextFieldValidationProtocol.swift in Sources */,
 				4405DC6726844B30004A83AD /* VGSValidationRulePaymentCard.swift in Sources */,
+				3287E2212719850C0037B623 /* VGSCheckoutTextFieldThemeProtocol.swift in Sources */,
 				44EC95152669EE8700CE04F4 /* VGSCheckoutHostnamePolicy.swift in Sources */,
 				44EC94F926690D5600CE04F4 /* VGSCheckoutExpirationDateOptions.swift in Sources */,
 				44C4C92726651AD700195505 /* VGSCheckout.swift in Sources */,
@@ -2115,6 +2162,7 @@
 				4438578326B022EE00EE5C7F /* VGSCheckoutBillingAddressPostalCodeOptions.swift in Sources */,
 				4405DC9226847247004A83AD /* VGSLogEvent.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFieldView.swift in Sources */,
+				3287E225271985850037B623 /* VGSCheckoutSubmitButtonThemeProtocol.swift in Sources */,
 				44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */,
 				4405DC5E26844B30004A83AD /* VGSTextField+UIBuilder.swift in Sources */,
 			);

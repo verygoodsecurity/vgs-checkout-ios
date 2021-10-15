@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 #endif
 
-internal class VGSTextFieldViewUIConfigurationHandler {
+internal class VGSTextFieldViewUIConfigurationHandler: VGSCheckoutTextFieldThemeAdapterProtocol {
     
 		internal let theme: VGSCheckoutTextFieldThemeProtocol
 		internal weak var view: VGSTextFieldViewProtocol?
@@ -29,7 +29,7 @@ internal class VGSTextFieldViewUIConfigurationHandler {
         view?.textField.font = theme.textFieldTextFont
         view?.textField.adjustsFontForContentSizeCategory = true
 
-			  // placeholder UI.
+			  // Placeholder UI.
         view?.placeholderView.hintLabel.textColor = theme.textFieldHintTextColor
         view?.placeholderView.hintLabel.font = theme.textFieldHintTextFont
 
@@ -39,22 +39,26 @@ internal class VGSTextFieldViewUIConfigurationHandler {
     }
     
 		internal func initial() {
-        applyTheme(theme.adapt(theme: theme, for: .initial))
+        let stateTheme = self.adapt(theme: theme, for: .initial)
+        applyTheme(stateTheme)
 				view?.placeholderView.hintComponentView.accessory = .none
     }
     
 		internal func filled() {
-        applyTheme(theme.adapt(theme: theme, for: .filled))
-				view?.placeholderView.hintComponentView.accessory = .none
+        let stateTheme = self.adapt(theme: theme, for: .filled)
+        applyTheme(stateTheme)
+        view?.placeholderView.hintComponentView.accessory = .none
     }
     
 		internal func invalid() {
-        applyTheme(theme.adapt(theme: theme, for: .invalid))
+        let stateTheme = self.adapt(theme: theme, for: .invalid)
+        applyTheme(stateTheme)
 				view?.placeholderView.hintComponentView.accessory = .invalid
     }
     
 		internal func focused() {
-        applyTheme(theme.adapt(theme: theme, for: .focused))
+        let stateTheme = self.adapt(theme: theme, for: .focused)
+        applyTheme(stateTheme)
 				view?.placeholderView.hintComponentView.accessory = .none
     }
 }

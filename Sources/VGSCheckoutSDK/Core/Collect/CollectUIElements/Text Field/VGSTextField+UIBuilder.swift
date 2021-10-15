@@ -2,9 +2,7 @@
 //  VGSTextField+UIBuilder.swift
 //  VGSCheckoutSDK
 //
-//  Created by Vitalii Obertynskyi on 9/28/19.
-//  Copyright © 2019 Vitalii Obertynskyi. All rights reserved.
-//
+
 
 import Foundation
 #if os(iOS)
