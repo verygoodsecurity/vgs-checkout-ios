@@ -1,8 +1,8 @@
-[![CircleCI](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main.svg?style=svg&circle-token=8f652123b81dcce5b55b0701af3de08d04cffac7)](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main)
+[![CircleCI](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main.svg?style=svg)](https://circleci.com/gh/verygoodsecurity/vgs-checkout-ios/tree/main)
 [![UT](https://img.shields.io/badge/Unit_Test-pass-green)]()
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![swift](https://img.shields.io/badge/swift-5-orange)]()
-
+<img src="./VGSZeroData.png" height="20">
 # VGS Checkout iOS SDK
 
 VGS provides you with a Universal Checkout and User Experience which is fully integrated with our payment optimization solution. We offer a single, customized, consistent experience to your customers across devices and browsers that you control. Provide a unified experience with all the features you want and no compromises to ensure your customers have the best experience with no distractions.
@@ -115,7 +115,7 @@ var checkoutConfiguration = VGSCheckoutCustomConfiguration(vaultID: "<VAULT_ID>"
 
 /// Set field names
 checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
-checkoutConfiguration.billingAddressCountryFi sET eldOptions.fieldName = "billing_address.country"
+checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
 //... 
 
 /// Show billing address section
