@@ -16,8 +16,8 @@ internal class VGSAddressCountriesDataProvider {
 		let name: String
 	}
 
-	/// Countries with address verification support.
-	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
+//	/// Countries with address verification support.
+//	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
 
 	/// First country in picker.
 	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us
@@ -37,11 +37,45 @@ internal class VGSAddressCountriesDataProvider {
 		}
 	}
 
+  /// List of  country models that match provided valid `countryISOCodes`. Order will be the same as order in `countryISOCodes`. Returns all countries if no valid `countryISOCodes`.
+  static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {
+    let allCountries = provideAllCountries()
+    guard let countryCodes = countryISOCodes, !countryCodes.isEmpty else {
+      let message = "No valid country ISO Codes provided. All countries will be used."
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+      return allCountries
+    }
+    
+    var validCountryModels = [CountryModel]()
+    var invalidCountryISOCodes = [String]()
+    for countryCode in countryCodes {
+      if let countryModel = allCountries.first(where: {$0.code == countryCode}) {
+        validCountryModels.append(countryModel)
+      } else {
+        invalidCountryISOCodes.append(countryCode)
+      }
+    }
+    if !invalidCountryISOCodes.isEmpty {
+      let message = "Invalid country ISO Codes provided and will be ignored: \(invalidCountryISOCodes.description) \n\n NOTE: Check valid country ISO codes here: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .warning)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+    }
+    
+    guard !validCountryModels.isEmpty else {
+      let message = "No valid country ISO Codes provided. All countries will be used.\n\n NOTE: Check valid country ISO codes here: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ."
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+      return allCountries
+    }
+    return validCountryModels
+  }
+  
 	/// List of available countries in alphabetical order. US will be on the top of the list.
 	static func provideAllCountries() -> [CountryModel] {
 		// Filter valid coutries.
 	  let filtered = provideCountries()
-
+    
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
 			let unsortedFiltered = filtered.filter({ $0.code != defaultFirstCountryCode.rawValue})

@@ -9,6 +9,15 @@ import UIKit
 
 /// Data source for country picker.
 internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourceProtocol {
+  
+  private(set) var countries = VGSAddressCountriesDataProvider.provideAllCountries()
+  
+  /// Init woth array of valid countries' ISO-Codes
+  convenience init(validCountryISOCodes: [String]?) {
+    self.init()
+    countries = VGSAddressCountriesDataProvider.provideCountriesWithISOCode(validCountryISOCodes)
+  }
+  
 	func pickerField(_ pickerField: VGSPickerTextField, titleForRow row: Int) -> String? {
 		guard row >= 0,
 					row < countries.count
@@ -28,10 +37,6 @@ internal class VGSCountryPickerDataSource: NSObject, VGSPickerTextFieldDataSourc
 
 		return countries[row].code
 	}
-
-	lazy var countries: [VGSAddressCountriesDataProvider.CountryModel] = {
-		return VGSAddressCountriesDataProvider.provideAllCountries()
-	}()
 
 	func numberOfRows() -> Int {
 		return countries.count

@@ -49,6 +49,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
       formConfiguration.billingAddressVisibility = newValue
     }
   }
+  
+  /// Billing address country field options.
+  public var billingAddressCountryFieldOptions: VGSCheckoutMultiplexingBillingAddressCountryOptions {
+    get {
+      return formConfiguration.addressOptions.countryOptions
+    }
+
+    set {
+      formConfiguration.addressOptions.countryOptions = newValue
+    }
+  }
 
   // MARK: - Internal
   

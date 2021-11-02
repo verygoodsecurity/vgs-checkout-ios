@@ -36,7 +36,8 @@ internal class VGSAddressDataFormConfigurationManager {
 		}
 
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
+    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
 
@@ -153,7 +154,9 @@ internal class VGSAddressDataFormConfigurationManager {
     }
     
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: VGSCountryPickerDataSource())
+    let countryOptions = multiplexingConfiguration.billingAddressCountryFieldOptions
+    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
 		countryConfiguration.type = .none
 		countryConfiguration.isRequiredValidOnly = true
 
