@@ -27,7 +27,7 @@ class VGSValidCountriesDataSourceTest: VGSCheckoutBaseTestCase {
     ]
     
     for testCase in testDataSource {
-      let countryModelSource = VGSCountryPickerDataSource(validCountries: testCase.inputCodes)
+      let countryModelSource = VGSCountryPickerDataSource(validCountryISOCodes: testCase.inputCodes)
       let countryModelsISOCodes = countryModelSource.countries.compactMap({$0.code})
       XCTAssertTrue(testCase.expectedResult == countryModelsISOCodes, "VALIDATION ERROR: different country codes in \n expectedResult: \n \(testCase.expectedResult.description) \n countryModelsISOCodes: \n \(countryModelsISOCodes)")
     }
@@ -42,7 +42,7 @@ class VGSValidCountriesDataSourceTest: VGSCheckoutBaseTestCase {
     ]
     
     for testCase in testDataSource {
-      let countryModelSource = VGSCountryPickerDataSource(validCountries: testCase.inputCodes)
+      let countryModelSource = VGSCountryPickerDataSource(validCountryISOCodes: testCase.inputCodes)
       let countryModelsISOCodes = countryModelSource.countries.compactMap({$0.code})
       XCTAssertTrue(testCase.expectedResult == countryModelsISOCodes, "VALIDATION ERROR: different country codes in \n expectedResult: \n \(testCase.expectedResult.description) \n countryModelsISOCodes: \n \(countryModelsISOCodes)")
     }
@@ -64,7 +64,7 @@ class VGSValidCountriesDataSourceTest: VGSCheckoutBaseTestCase {
     ]
     
     for testCase in testDataSource {
-      let countryModelSource = VGSCountryPickerDataSource(validCountries: testCase.inputCodes)
+      let countryModelSource = VGSCountryPickerDataSource(validCountryISOCodes: testCase.inputCodes)
       let countryModelsISOCodes = countryModelSource.countries.compactMap({$0.code})
       XCTAssertTrue(testCase.expectedResult == countryModelsISOCodes, "VALIDATION ERROR: different country codes in \n expectedResult: \n \(testCase.expectedResult.description) \n countryModelsISOCodes: \n \(countryModelsISOCodes)")
     }
