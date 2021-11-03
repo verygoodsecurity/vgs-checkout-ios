@@ -41,11 +41,11 @@ internal class VGSAddressCountriesDataProvider {
   static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {
     let allCountries = provideAllCountries()
     
-    guard let countryCodes = countryISOCodes {
+    guard let countryCodes = countryISOCodes else {
       return allCountries
     }
     
-    guard !countryCodes.isEmpty {
+    guard !countryCodes.isEmpty else {
       let message = "No valid country ISO Codes provided. All countries will be used."
       let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
       VGSCheckoutLogger.shared.forwardLogEvent(event)
