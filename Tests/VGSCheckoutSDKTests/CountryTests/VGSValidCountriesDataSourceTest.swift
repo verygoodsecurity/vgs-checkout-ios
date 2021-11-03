@@ -36,8 +36,8 @@ class VGSValidCountriesDataSourceTest: VGSCheckoutBaseTestCase {
   func testValidWithInvalidCountryCodesReturnsTrue() {
     let testDataSource = [TestCountriesDataSource(inputCodes: ["AU", "xxxx", "https://vgs.com", "IT"],
                                               expectedResult: ["AU", "IT"]),
-                          TestCountriesDataSource(inputCodes: ["ZZZ", "00", "TR", "HU", "it", ""],
-                                              expectedResult: ["TR", "HU"])
+                          TestCountriesDataSource(inputCodes: ["ZZZ", "00", "TR", "HU", "iT", "", "it", "IT", "ITT"],
+                                              expectedResult: ["TR", "HU", "IT"])
     
     ]
     
@@ -59,7 +59,7 @@ class VGSValidCountriesDataSourceTest: VGSCheckoutBaseTestCase {
                                                   expectedResult: allCountriesCodes),
                           TestCountriesDataSource(inputCodes: nil,
                                               expectedResult: allCountriesCodes),
-                          TestCountriesDataSource(inputCodes: ["ZZZ", "00", "it", ""],
+                          TestCountriesDataSource(inputCodes: ["ZZZ", "00", "itT", ""],
                                               expectedResult: allCountriesCodes)
     ]
     
