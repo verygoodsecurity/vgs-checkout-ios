@@ -19,11 +19,17 @@ public protocol VGSCheckoutConfigurationProtocol {
 }
 
 /// Internal protocol for VGSCheckout configuration.
-internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol {
+internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol, VGSCheckoutConfigurationAnalyticsProtocol {
 
 	/// Payment flow type.
 	var paymentFlowType: VGSPaymentFlowIdentifier {get}
+}
+
+/// Internal protocol for analytics details from VGSCheckout Configuration.
+internal protocol VGSCheckoutConfigurationAnalyticsProtocol {
   
+  /// Returns an array of features used
+  func contentAnalytics() -> [String]
 }
 
 /// Defines payment flow identifiers.
@@ -80,26 +86,6 @@ internal enum VGSPaymentInstrument {
 		}
 	}
 
-	/// Custom headers from custom user configuration. Not available in multiplexing.
-	internal var customHeaders: [String: String] {
-		switch self {
-		case .multiplexing:
-			return [:]
-		case .vault(let configuration):
-			return configuration.routeConfiguration.requestOptions.customHeaders
-		}
-	}
-
-	/// Extra data from custom user configuration. Not available in multiplexing.
-	internal var extraData: [String: Any]? {
-		switch self {
-		case .multiplexing:
-			return nil
-		case .vault(let configuration):
-			return configuration.routeConfiguration.requestOptions.extraData
-		}
-	}
-
 	/// An array of valid countries set by user.
 	internal var validCountries: [String]? {
 		switch self {
@@ -109,4 +95,14 @@ internal enum VGSPaymentInstrument {
 			return configuration.billingAddressCountryFieldOptions.validCountries
 		}
 	}
+  
+  /// Checkout Configuration.
+  internal var configuration: VGSCheckoutBasicConfigurationProtocol {
+    switch self {
+    case .vault(let configuration):
+      return configuration
+    case .multiplexing(let configuration):
+      return configuration
+    }
+  }
 }

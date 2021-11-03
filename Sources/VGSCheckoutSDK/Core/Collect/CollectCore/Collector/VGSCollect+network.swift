@@ -59,46 +59,31 @@ extension VGSCollect {
 
 	/// Track befre submit with invalid fields.
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
-	internal func trackBeforeSubmit(with invalidFields: [String], payload: [String: Any]?, customHeaders: [String: String]) {
-		// Content analytics.
-		var extraAnalyticsInfo: [String: Any] = [:]
-		let contentData = contentForAnalytics(from: payload, customHeaders: customHeaders)
+  internal func trackBeforeSubmit(with invalidFields: [String], configurationAnalytics: VGSCheckoutConfigurationAnalyticsProtocol) {
+    
+    var extraAnalyticsInfo: [String: Any] = [:]
 
+		// Content analytics.
+    var contentAnalytics = configurationAnalytics.contentAnalytics()
+    // Always track custom hostname feature regardless its resolving status.
+    switch apiClient.hostURLPolicy {
+    case .customHostURL:
+      contentAnalytics.append("custom_hostname")
+    default:
+      break
+    }
+    extraAnalyticsInfo["content"] = contentAnalytics
+    
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty {
 				extraAnalyticsInfo["fieldTypes"] = invalidFields
 			}
 
-			extraAnalyticsInfo["content"] = contentData
 			extraAnalyticsInfo["statusCode"] = error.code
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .failed, extraData: extraAnalyticsInfo)
 		} else {
 			extraAnalyticsInfo["statusCode"] = 200
-			extraAnalyticsInfo["content"] = contentData
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(self.formAnalyticsDetails, type: .beforeSubmit, status: .success, extraData: extraAnalyticsInfo)
 		}
-	}
-
-	/// Custom content for analytics from headers and payload.
-	/// - Parameter payload: `[String: Any]` payload object.
-	/// - Returns: `[String]` object.
-	private func contentForAnalytics(from payload: [String: Any]?, customHeaders: [String: String]) -> [String] {
-		var content: [String] = []
-		if !(payload?.isEmpty ?? true) {
-			content.append("custom_data")
-		}
-		if !(customHeaders.isEmpty) {
-			content.append("custom_header")
-		}
-
-		// Always track custom hostname feature regardless its resolving status.
-		switch apiClient.hostURLPolicy {
-		case .customHostURL:
-			content.append("custom_hostname")
-		default:
-			break
-		}
-
-		return content
 	}
 }
