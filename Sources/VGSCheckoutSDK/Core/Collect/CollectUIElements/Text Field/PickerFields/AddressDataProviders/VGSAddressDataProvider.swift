@@ -36,7 +36,7 @@ internal class VGSAddressCountriesDataProvider {
 			return nil
 		}
 	}
-
+  
   /// List of  country models that match provided valid `countryISOCodes`. Order will be the same as order in `countryISOCodes`. Returns all countries if no valid `countryISOCodes`.
   static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {
     let allCountries = provideAllCountries()
@@ -47,9 +47,12 @@ internal class VGSAddressCountriesDataProvider {
       return allCountries
     }
     
+    /// Normalize case sensitive country codes and remove duplicates.
+    let normalizeCountryCodes = normalizeCountryCodes(countryCodes)
+    
     var validCountryModels = [CountryModel]()
     var invalidCountryISOCodes = [String]()
-    for countryCode in countryCodes {
+    for countryCode in normalizeCountryCodes {
       if let countryModel = allCountries.first(where: {$0.code == countryCode}) {
         validCountryModels.append(countryModel)
       } else {
@@ -110,4 +113,9 @@ internal class VGSAddressCountriesDataProvider {
 			return name1.compare(name2) == .orderedAscending ? true : false
 		}
 	}
+  
+  // Normalize case sensitive country codes and remove duplicates.
+  fileprivate  static func normalizeCountryCodes(_ countryCodes: [String]) -> [String] {
+    return countryCodes.map({return $0.uppercased()}).uniqued()
+  }
 }
