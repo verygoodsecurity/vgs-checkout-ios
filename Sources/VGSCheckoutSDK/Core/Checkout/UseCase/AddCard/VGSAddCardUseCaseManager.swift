@@ -130,12 +130,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			switch vaultConfiguration.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+				addressDataSectionViewModel.updateInitialPostalCodeUI()
 			case .hidden:
 				break
 			}
 		case .multiplexing:
 			// Always display address section for multiplexing.
 			formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+			addressDataSectionViewModel.updateInitialPostalCodeUI()
 		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)

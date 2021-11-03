@@ -36,6 +36,16 @@ internal class VGSAddressCountriesDataProvider {
 			return nil
 		}
 	}
+
+	/// Provides first country ISO.
+	/// - Parameter countryISOCodes: `[String]?` object, an optional array of valid countries from configuration.
+	/// - Returns: `VGSCountriesISO` object of the first country in list.
+	static func provideFirstCountryISO(for countryISOCodes: [String]?) -> VGSCountriesISO {
+		let validCountries = provideCountriesWithISOCode(countryISOCodes)
+		let firstCountryISO = VGSCountriesISO(rawValue: validCountries.first?.code ?? "US") ?? defaultFirstCountryCode
+
+		return firstCountryISO
+	}
   
   /// List of  country models that match provided valid `countryISOCodes`. Order will be the same as order in `countryISOCodes`. Returns all countries if no valid `countryISOCodes`.
   static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {

@@ -84,12 +84,14 @@ internal class VGSAddressDataFormConfigurationManager {
 		])
 		postalCodeConfiguration.returnKeyType = .done
 
-		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
+		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
+		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
 
 		postalCodeTextField.configuration = postalCodeConfiguration
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
 	}
 
 	/*
@@ -189,11 +191,15 @@ internal class VGSAddressDataFormConfigurationManager {
 		postalCodeConfiguration.type = .none
 		postalCodeConfiguration.isRequiredValidOnly = true
 
-		let firstCountryCode = VGSAddressCountriesDataProvider.defaultFirstCountryCode
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryCode))
+		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
+		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+
+
+
+		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
 		postalCodeTextField.configuration = postalCodeConfiguration
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryCode)
+		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
 
 	}
 
@@ -204,7 +210,7 @@ internal class VGSAddressDataFormConfigurationManager {
 	///   - addressFormView: `VGSBillingAddressDetailsSectionView` object, address form view.
 	///   - vgsCollect: `VGSCollect` object, an instance of VGSColelct.
 	///   - formValidationHelper: `VGSFormValidationHelper` object, validation helper.
-	internal static func updatePostalCodeViewIfNeeded(with countryISO: VGSCountriesISO, paymentInstrument: VGSPaymentInstrument, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
+	internal static func updatePostalCodeViewIfNeeded(with countryISO: VGSCountriesISO, addressFormView: VGSBillingAddressDetailsSectionView, vgsCollect: VGSCollect, formValidationHelper: VGSFormValidationHelper) {
 		let postalCodeFieldView = addressFormView.postalCodeFieldView
 		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 

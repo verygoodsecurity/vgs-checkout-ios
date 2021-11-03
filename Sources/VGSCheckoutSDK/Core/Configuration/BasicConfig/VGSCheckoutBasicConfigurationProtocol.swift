@@ -99,4 +99,14 @@ internal enum VGSPaymentInstrument {
 			return configuration.routeConfiguration.requestOptions.extraData
 		}
 	}
+
+	/// An array of valid countries set by user.
+	internal var validCountries: [String]? {
+		switch self {
+		case .vault(let configuration):
+			return configuration.billingAddressCountryFieldOptions.validCountries
+		case .multiplexing(let configuration):
+			return configuration.billingAddressCountryFieldOptions.validCountries
+		}
+	}
 }
