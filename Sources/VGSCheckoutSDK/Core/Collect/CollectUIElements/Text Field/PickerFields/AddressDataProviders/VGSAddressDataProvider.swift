@@ -40,12 +40,15 @@ internal class VGSAddressCountriesDataProvider {
   /// List of  country models that match provided valid `countryISOCodes`. Order will be the same as order in `countryISOCodes`. Returns all countries if no valid `countryISOCodes`.
   static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {
     let allCountries = provideAllCountries()
-    guard let countryCodes = countryISOCodes, !countryCodes.isEmpty else {
-      if countryCodes.isEmpty {
-        let message = "No valid country ISO Codes provided. All countries will be used."
-        let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
-        VGSCheckoutLogger.shared.forwardLogEvent(event)
-      }
+    
+    guard let countryCodes = countryISOCodes {
+      return allCountries
+    }
+    
+    guard !countryCodes.isEmpty {
+      let message = "No valid country ISO Codes provided. All countries will be used."
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
       return allCountries
     }
     
