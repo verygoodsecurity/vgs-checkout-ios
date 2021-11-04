@@ -26,7 +26,7 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 
 	func sendData(with completion: @escaping VGSCheckoutRequestResultCompletion) {
 
-		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(multiplexingConfiguration.token)"]
+		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(multiplexingConfiguration.accessToken)"]
 
 		let multiplexingPath = "/financial_instruments"
 
