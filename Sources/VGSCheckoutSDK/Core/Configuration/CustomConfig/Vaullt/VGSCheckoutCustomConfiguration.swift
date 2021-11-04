@@ -167,6 +167,9 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
     if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
       content.append("valid_countries")
     }
+
+		content.append(requestOptions.mergePolicy.analyticsName)
+
     return content
   }
 }

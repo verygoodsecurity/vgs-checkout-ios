@@ -85,4 +85,18 @@ public enum VGSCheckoutDataMergePolicy {
 				]
 	*/
 	case nestedWithArrayMerge
+
+	/// Name for analytics.
+	internal var analyticsName: String {
+		switch self {
+		case .flat:
+			return "flat_json"
+		case .nestedJSON:
+			return "nested_json"
+		case .nestedWithArrayMerge:
+			return "nested_json_array_merge"
+		case .nestedWithArrayOverwrite:
+			return  "nested_json_array_overwrite"
+		}
+	}
 }
