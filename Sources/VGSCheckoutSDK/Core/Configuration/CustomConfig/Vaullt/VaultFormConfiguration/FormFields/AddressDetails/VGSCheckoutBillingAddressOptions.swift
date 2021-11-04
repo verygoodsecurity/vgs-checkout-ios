@@ -25,3 +25,13 @@ public struct VGSCheckoutBillingAddressOptions {
 	/// no:doc
 	public init() {}
 }
+
+/// Holds Multiplexing billing address options.
+public struct VGSCheckoutMultiplexingBillingAddressOptions {
+
+  /// Country field options.
+  public var countryOptions = VGSCheckoutMultiplexingBillingAddressCountryOptions()
+
+  public init() {}
+}
+

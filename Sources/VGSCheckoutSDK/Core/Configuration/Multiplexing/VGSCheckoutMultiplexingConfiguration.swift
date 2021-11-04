@@ -6,7 +6,7 @@ import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfigurationProtocol {
-
+  
   // MARK: - Attributes
   
 	/// `String` object, organization vault id.
@@ -49,6 +49,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
       formConfiguration.billingAddressVisibility = newValue
     }
   }
+  
+  /// Billing address country field options.
+  public var billingAddressCountryFieldOptions: VGSCheckoutMultiplexingBillingAddressCountryOptions {
+    get {
+      return formConfiguration.addressOptions.countryOptions
+    }
+
+    set {
+      formConfiguration.addressOptions.countryOptions = newValue
+    }
+  }
 
   // MARK: - Internal
   
@@ -57,4 +68,13 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
   
   /// Form configuration options. Check `VGSCheckoutMultiplexingFormConfiguration` for default settings.
   internal var formConfiguration = VGSMultiplexingFormConfiguration()
+  
+  /// Features usage analytics.
+  internal func contentAnalytics() -> [String] {
+    var content: [String] = []
+    if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
+      content.append("valid_countries")
+    }
+    return content
+  }
 }
