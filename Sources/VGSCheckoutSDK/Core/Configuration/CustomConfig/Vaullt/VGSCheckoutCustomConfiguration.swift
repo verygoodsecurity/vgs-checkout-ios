@@ -6,7 +6,7 @@ import Foundation
 
 /// Holds configuration for vault payment processing with custom configuration, conforms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProtocol {
-  
+
 	/// `String` object, organization vault id.
 	public let vaultID: String
 
@@ -153,23 +153,15 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 			formConfiguration.addressOptions.postalCodeOptions = newValue
 		}
 	}
-  
-  /// Features usage analytics.
-  internal func contentAnalytics() -> [String] {
-    var content: [String] = []
-    let requestOptions = routeConfiguration.requestOptions
-    if !(requestOptions.extraData?.isEmpty ?? true) {
-      content.append("custom_data")
-    }
-    if !(requestOptions.customHeaders.isEmpty) {
-      content.append("custom_header")
-    }
-    if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
-      content.append("valid_countries")
-    }
 
-		content.append(requestOptions.mergePolicy.analyticsName)
+	/// Form validation behavior, default is `.onSubmit`.
+	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+		get {
+			return formConfiguration.formValidationBehaviour
+		}
 
-    return content
-  }
+		set {
+			formConfiguration.formValidationBehaviour = newValue
+		}
+	}
 }

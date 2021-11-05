@@ -21,7 +21,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	}
 
 	/// Validation behavior.
-	internal let validationBehavior: VGSFormValidationBehaviour
+	internal let validationBehavior: VGSCheckoutFormValidationBehaviour
 
 	/// Card form view.
 	internal let billingAddressFormView: VGSBillingAddressDetailsSectionView
@@ -50,7 +50,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Initialization
   
-	internal required init(vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager, paymentInstrument: VGSPaymentInstrument) {
+	internal required init(vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager, paymentInstrument: VGSPaymentInstrument) {
     self.vgsCollect = vgsCollect
 		self.paymentInstrument = paymentInstrument
     self.validationBehavior = validationBehavior
@@ -59,14 +59,14 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     self.autoFocusManager = autoFocusManager
   }
 
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutCustomConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutCustomConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
 		self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .vault(configuration))
 
     setupBillingAddressForm(with: configuration)
     buildForm()
 	}
   
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .multiplexing(configuration))
 
 		setupBillingAddressForm(with: configuration)
@@ -263,13 +263,18 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 				}
 			}
 
-			// Clear postal code on country change.
-			if let previousCountryCode = lastSelectedCountryCode {
-				if previousCountryCode != currentCountryCode {
-					postalCodeFieldView?.updateUI(for: .filled)
-					postalCodeFieldView?.validationErrorView.viewUIState = .valid
+			switch validationBehavior {
+				case .onSubmit:
+					// Clear postal code error on country change.
+					if let previousCountryCode = lastSelectedCountryCode {
+						if previousCountryCode != currentCountryCode {
+							postalCodeFieldView?.updateUI(for: .filled)
+							postalCodeFieldView?.validationErrorView.viewUIState = .valid
+						}
+					}
+				case .onEdit:
+				   break
 				}
-			}
 
 			lastSelectedCountryCode = currentCountryCode
 
@@ -286,6 +291,10 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 
 				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new configuration.
 				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
+
+				if validationBehavior == .onEdit {
+					formValidationHelper.revalidatePostalCodeFieldIfNeeded()
+				}
 				
 				// Revalidate the entire form - on switching countries previous postal code can be invalid now.
 				updateFormState()

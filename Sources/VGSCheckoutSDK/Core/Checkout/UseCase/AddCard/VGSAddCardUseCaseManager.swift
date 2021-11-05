@@ -99,25 +99,37 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 	/// Close bar button item.
 	internal var closeBarButtomItem: UIBarButtonItem?
+
+	/// Validation bevaior, default is `.onSubmit`.
+	internal var validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit
   
 	// MARK: - Initialization
 
-  init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
+	init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
 
-		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: .onSubmit)
+		switch paymentInstrument {
+		case .vault(let config):
+			self.validationBehavior = config.formValidationBehaviour
+		case .multiplexing(let config):
+			break
+			// FIXME - add validation behavior to multiplexing.
+			//self.validationBehavior = config.formValidationBehaviour
+		}
+
+		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: self.validationBehavior)
 		let autoFocusManager = VGSFieldAutofocusManager(fieldViewsManager: VGSFieldViewsManager(fieldViews: []))
 
-		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+		self.cardDataSectionViewModel = VGSCardDataSectionViewModel(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 
     switch paymentInstrument {
     case .vault(let configuration):
-      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom"])
     case .multiplexing(let configuration):
-      self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: .onSubmit, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
+			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "multiplexing"])
     }
 
@@ -144,8 +156,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
 
 		super.init()
 
-		// Initally pay button is always enabled.
-		self.addCardSectionFormView.saveCardButton.status = .enabled
+		switch self.validationBehavior {
+			case .onSubmit:
+				// Initally pay button is always enabled.
+				self.addCardSectionFormView.saveCardButton.status = .enabled
+			case .onEdit:
+				// Initally pay button is disabled.
+				self.addCardSectionFormView.saveCardButton.status = .disabled
+		}
 	}
 
 	/// Builds view controller for save card flow.
@@ -226,6 +244,21 @@ extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 			self.state = .invalid
 		case .valid:
 			self.state = .valid
+		}
+		updateSubmitButtonUI(with: state)
+	}
+
+	internal func updateSubmitButtonUI(with formState: VGSFormSectionState) {
+		switch validationBehavior {
+		case .onSubmit:
+			break
+		case .onEdit:
+			switch formState {
+			case .invalid:
+				addCardSectionFormView.saveCardButton.status = .disabled
+			case .valid:
+				addCardSectionFormView.saveCardButton.status = .enabled
+			}
 		}
 	}
 }

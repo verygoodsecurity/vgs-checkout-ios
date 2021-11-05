@@ -84,6 +84,9 @@ extension CheckoutBasicFlowVC: CheckoutFlowMainViewDelegate {
 
 		checkoutConfiguration.routeConfiguration.path = "post"
 
+		// Update configuration for UITests cases.
+		UITestsConfigurationManager.updateCustomCheckoutConfigurationForUITests(&checkoutConfiguration)
+
 		/* Set custom date user input/output JSON format.
 
 		checkoutConfiguration.expirationDateFieldOptions.inputDateFormat = .shortYearThenMonth

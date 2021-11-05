@@ -25,7 +25,7 @@ internal enum VGSFormSectionState {
 }
 
 /// Defines validation behavior.
-internal enum VGSFormValidationBehaviour {
+public enum VGSCheckoutFormValidationBehaviour {
 	case onSubmit
 	case onEdit
 }
@@ -42,7 +42,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	}
 
 	/// Validation behaviour.
-	internal let validationBehavior: VGSFormValidationBehaviour
+	internal let validationBehavior: VGSCheckoutFormValidationBehaviour
 
 	/// Card form view.
 	internal let cardDetailsSectionView: VGSCardDetailsSectionView
@@ -71,7 +71,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
   
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior
