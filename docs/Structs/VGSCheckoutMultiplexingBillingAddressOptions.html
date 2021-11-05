@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>VGSCheckoutDelegate Protocol Reference</title>
+    <title>VGSCheckoutMultiplexingBillingAddressOptions Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Protocol/VGSCheckoutDelegate" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Struct/VGSCheckoutMultiplexingBillingAddressOptions" class="dashAnchor"></a>
 
-    <a title="VGSCheckoutDelegate Protocol Reference"></a>
+    <a title="VGSCheckoutMultiplexingBillingAddressOptions Structure Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">VGSCheckoutSDK Reference</a>
       <img class="carat" src="../img/carat.png" />
-      VGSCheckoutDelegate Protocol Reference
+      VGSCheckoutMultiplexingBillingAddressOptions Structure Reference
     </p>
 
     <div class="content-wrapper">
@@ -230,18 +230,18 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>VGSCheckoutDelegate</h1>
+            <h1>VGSCheckoutMultiplexingBillingAddressOptions</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VGSCheckoutDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">VGSCheckoutMultiplexingBillingAddressOptions</span></code></pre>
 
                 </div>
               </div>
-            <p>A set of methods to notify about changes in checkout state.</p>
+            <p>Holds Multiplexing billing address options.</p>
 
               <div class="slightly-smaller">
-                <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Checkout/CheckoutDelegate/VGSCheckoutDelegate.swift#L8-L15">Show on GitHub</a>
+                <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/CustomConfig/Vaullt/VaultFormConfiguration/FormFields/AddressDetails/VGSCheckoutBillingAddressOptions.swift#L30-L36">Show on GitHub</a>
               </div>
           </div>
         </section>
@@ -253,9 +253,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14VGSCheckoutSDK0A8DelegateP17checkoutDidFinish4withyAA0A13RequestResultO_tF"></a>
-                    <a name="//apple_ref/swift/Method/checkoutDidFinish(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14VGSCheckoutSDK0A8DelegateP17checkoutDidFinish4withyAA0A13RequestResultO_tF">checkoutDidFinish(with:<wbr>)</a>
+                    <a name="/s:14VGSCheckoutSDK0A33MultiplexingBillingAddressOptionsV07countryF0AA0acde7CountryF0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/countryOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A33MultiplexingBillingAddressOptionsV07countryF0AA0acde7CountryF0Vvp">countryOptions</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -263,68 +263,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Tells the delegate that checkout flow did finish with result.</p>
+                        <p>Country field options.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">checkoutDidFinish</span><span class="p">(</span><span class="n">with</span> <span class="nv">requestResult</span><span class="p">:</span> <span class="kt"><a href="../Enums/VGSCheckoutRequestResult.html">VGSCheckoutRequestResult</a></span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>requestResult</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code><a href="../Enums/VGSCheckoutRequestResult.html">VGSCheckoutRequestResult</a></code> object, holds result of checkout flow.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Checkout/CheckoutDelegate/VGSCheckoutDelegate.swift#L11">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14VGSCheckoutSDK0A8DelegateP17checkoutDidCancelyyF"></a>
-                    <a name="//apple_ref/swift/Method/checkoutDidCancel()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14VGSCheckoutSDK0A8DelegateP17checkoutDidCancelyyF">checkoutDidCancel()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Tells the delegate that user cancelled checkout flow (closed checkout screen.)</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">checkoutDidCancel</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">countryOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutMultiplexingBillingAddressCountryOptions.html">VGSCheckoutMultiplexingBillingAddressCountryOptions</a></span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Checkout/CheckoutDelegate/VGSCheckoutDelegate.swift#L14">Show on GitHub</a>
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/CustomConfig/Vaullt/VaultFormConfiguration/FormFields/AddressDetails/VGSCheckoutBillingAddressOptions.swift#L33">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

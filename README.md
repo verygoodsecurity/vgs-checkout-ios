@@ -91,7 +91,7 @@ VGS Checkout SDK works with different configuration types. You can get more info
 
 ```swift
 /// Create multiplexing configuration with access token.
-if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(token: "<MULTIPLEXING_ACCESS_TOKEN>",
+if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>",
                                                                       vaultID: "<VAULT_ID>",
                                                                   environment: "<ENVIRONMENT>") {
                                                                     
