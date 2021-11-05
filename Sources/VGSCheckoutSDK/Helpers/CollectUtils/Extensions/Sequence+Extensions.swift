@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Sequence where Element: Hashable {
+internal extension Sequence where Element: Hashable {
   /// Returns unique elements in sequance.
   func uniqued() -> [Element] {
     var set = Set<Element>()
