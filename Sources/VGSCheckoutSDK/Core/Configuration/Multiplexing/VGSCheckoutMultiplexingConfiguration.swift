@@ -6,7 +6,7 @@ import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfigurationProtocol {
-
+  
   // MARK: - Attributes
   
 	/// `String` object, organization vault id.
@@ -16,20 +16,20 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
 	public let environment: String
 
 	/// Multiplexing app access token.
-	private(set) public var token: String
+	private(set) public var accessToken: String
 
   // MARK: - Initialization
   
 	/// Configuration initializer (failable).
 	/// - Parameters:
-  ///   - token: `String` object, should be valid access token for multiplexing app.
+  ///   - accessToken: `String` object, should be valid access token for multiplexing app.
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init?(token: String, vaultID: String, environment: String = "sandbox") {
-		guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(token, vaultId: vaultID, environment: environment) else {
+	public init?(accessToken: String, vaultID: String, environment: String = "sandbox") {
+		guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(accessToken, vaultId: vaultID, environment: environment) else {
             return nil
         }
-    self.token = token
+    self.accessToken = accessToken
 		self.vaultID = vaultID
 		self.environment = environment
 	}
@@ -49,6 +49,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
       formConfiguration.billingAddressVisibility = newValue
     }
   }
+  
+  /// Billing address country field options.
+  public var billingAddressCountryFieldOptions: VGSCheckoutMultiplexingBillingAddressCountryOptions {
+    get {
+      return formConfiguration.addressOptions.countryOptions
+    }
+
+    set {
+      formConfiguration.addressOptions.countryOptions = newValue
+    }
+  }
 
   // MARK: - Internal
   
@@ -57,4 +68,13 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
   
   /// Form configuration options. Check `VGSCheckoutMultiplexingFormConfiguration` for default settings.
   internal var formConfiguration = VGSMultiplexingFormConfiguration()
+  
+  /// Features usage analytics.
+  internal func contentAnalytics() -> [String] {
+    var content: [String] = []
+    if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
+      content.append("valid_countries")
+    }
+    return content
+  }
 }

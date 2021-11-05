@@ -97,7 +97,22 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		// Country field cannot be empty so make it filled from start.
 		billingAddressFormView.countryFieldView.uiConfigurationHandler?.filled()
 
-		lastSelectedCountryCode = countryPickerField?.selectedOutputValue
+		let validCountries = paymentInstrument.validCountries
+		let firstCountryISO = VGSAddressCountriesDataProvider.provideFirstCountryISO(for: validCountries)
+
+		lastSelectedCountryCode = firstCountryISO.rawValue
+	}
+
+	/// Updates initial UI. Since validation manager is constructed later than init is called we need this method to refresh state for firstCountryCode.
+	internal func updateInitialPostalCodeUI() {
+		let validCountries = paymentInstrument.validCountries
+		let firstCountryISO = VGSAddressCountriesDataProvider.provideFirstCountryISO(for: validCountries)
+
+		// Update collect and validation helpers country without postal code.
+		VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: firstCountryISO,  addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
+
+		updatePostalCodeField(with: firstCountryISO)
+		updateFormState()
 	}
 
 	// MARK: - Helpers
@@ -261,7 +276,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 
 				// Update collect and validation helpers country without postal code.
-				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
+				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry,  addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 
 				// Uncomment this code to enable other countries without AWS support
 //				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, paymentInstrument: paymentInstrument, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
@@ -269,7 +284,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 				//updateStateField(with: newCountry)
 				updatePostalCodeField(with: newCountry)
 
-				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new files configuration.
+				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new configuration.
 				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
 				
 				// Revalidate the entire form - on switching countries previous postal code can be invalid now.

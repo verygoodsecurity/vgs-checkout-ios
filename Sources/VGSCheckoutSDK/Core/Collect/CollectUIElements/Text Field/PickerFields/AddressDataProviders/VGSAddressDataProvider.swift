@@ -16,8 +16,8 @@ internal class VGSAddressCountriesDataProvider {
 		let name: String
 	}
 
-	/// Countries with address verification support.
-	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
+//	/// Countries with address verification support.
+//	private static let countriesWithAVSSupport = ["US", "CA", "NZ", "GB", "AU"]
 
 	/// First country in picker.
 	internal static let defaultFirstCountryCode: VGSCountriesISO = VGSCountriesISO.us
@@ -37,11 +37,63 @@ internal class VGSAddressCountriesDataProvider {
 		}
 	}
 
+	/// Provides first country ISO.
+	/// - Parameter countryISOCodes: `[String]?` object, an optional array of valid countries from configuration.
+	/// - Returns: `VGSCountriesISO` object of the first country in list.
+	static func provideFirstCountryISO(for countryISOCodes: [String]?) -> VGSCountriesISO {
+		let validCountries = provideCountriesWithISOCode(countryISOCodes)
+		let firstCountryISO = VGSCountriesISO(rawValue: validCountries.first?.code ?? "US") ?? defaultFirstCountryCode
+
+		return firstCountryISO
+	}
+  
+  /// List of  country models that match provided valid `countryISOCodes`. Order will be the same as order in `countryISOCodes`. Returns all countries if no valid `countryISOCodes`.
+  static func provideCountriesWithISOCode(_ countryISOCodes: [String]?) -> [CountryModel] {
+    let allCountries = provideAllCountries()
+    
+    guard let countryCodes = countryISOCodes else {
+      return allCountries
+    }
+    
+    guard !countryCodes.isEmpty else {
+      let message = "No valid country ISO Codes provided. All countries will be used."
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+      return allCountries
+    }
+    
+    /// Normalize case sensitive country codes and remove duplicates.
+    let normalizeCountryCodes = normalizeCountryCodes(countryCodes)
+    
+    var validCountryModels = [CountryModel]()
+    var invalidCountryISOCodes = [String]()
+    for countryCode in normalizeCountryCodes {
+      if let countryModel = allCountries.first(where: {$0.code == countryCode}) {
+        validCountryModels.append(countryModel)
+      } else {
+        invalidCountryISOCodes.append(countryCode)
+      }
+    }
+    if !invalidCountryISOCodes.isEmpty {
+      let message = "Invalid country ISO Codes provided and will be ignored: \(invalidCountryISOCodes.description) \n\n NOTE: Check valid country ISO codes here: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .warning)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+    }
+    
+    guard !validCountryModels.isEmpty else {
+      let message = "No valid country ISO Codes provided. All countries will be used.\n\n NOTE: Check valid country ISO codes here: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ."
+      let event = VGSLogEvent(level: .warning, text: message, severityLevel: .error)
+      VGSCheckoutLogger.shared.forwardLogEvent(event)
+      return allCountries
+    }
+    return validCountryModels
+  }
+  
 	/// List of available countries in alphabetical order. US will be on the top of the list.
 	static func provideAllCountries() -> [CountryModel] {
 		// Filter valid coutries.
 	  let filtered = provideCountries()
-
+    
 		// Insert selected country on the top of the list.
 		if let model = firstCountryModel {
 			let unsortedFiltered = filtered.filter({ $0.code != defaultFirstCountryCode.rawValue})
@@ -76,4 +128,9 @@ internal class VGSAddressCountriesDataProvider {
 			return name1.compare(name2) == .orderedAscending ? true : false
 		}
 	}
+  
+  // Normalize case sensitive country codes and remove duplicates.
+  fileprivate  static func normalizeCountryCodes(_ countryCodes: [String]) -> [String] {
+    return countryCodes.map({return $0.uppercased()}).uniqued()
+  }
 }

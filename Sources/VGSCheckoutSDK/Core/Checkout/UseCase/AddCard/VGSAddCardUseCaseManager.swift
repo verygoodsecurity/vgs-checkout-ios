@@ -130,12 +130,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			switch vaultConfiguration.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+				addressDataSectionViewModel.updateInitialPostalCodeUI()
 			case .hidden:
 				break
 			}
 		case .multiplexing:
 			// Always display address section for multiplexing.
 			formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+			addressDataSectionViewModel.updateInitialPostalCodeUI()
 		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)
@@ -185,7 +187,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 	@objc fileprivate func saveCardDidTap() {
 				let invalidFieldNames = cardDataSectionViewModel.formValidationHelper.analyticsInvalidFieldNames
 		// Explicitly set payload and custom headers to analytics event content since we track beforeSubmit regardless sending API request.
-		vgsCollect.trackBeforeSubmit(with: invalidFieldNames, payload: paymentInstrument.extraData, customHeaders: paymentInstrument.customHeaders)
+    vgsCollect.trackBeforeSubmit(with: invalidFieldNames, configurationAnalytics: paymentInstrument.configuration)
         switch state {
         case .valid:
             state = .processing
