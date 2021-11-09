@@ -104,6 +104,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 				/// Invalid ZIP.
 				static let invalidZIP: VGSUITestElement = .init(type: .label, identifier: "ZIP is invalid")
+
+				/// Invalid postal code.
+				static let invalidPostalCode: VGSUITestElement = .init(type: .label, identifier: "Postal code is invalid")
 			}
 		}
 

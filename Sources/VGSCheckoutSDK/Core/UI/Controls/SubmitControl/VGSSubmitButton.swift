@@ -175,6 +175,7 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.stopAnimating()
 			iconAccessory = .none
 		case .enabled:
+			accessibilityTraits = [.button]
 			isUserInteractionEnabled = true
 			backgroundColor =
 				uiTheme.checkoutSubmitButtonBackgroundColor
@@ -185,6 +186,7 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.stopAnimating()
 			iconAccessory = .none
 		case .processing:
+			accessibilityTraits = [.button, .notEnabled]
 			isUserInteractionEnabled = false
 			backgroundColor =
 				uiTheme.checkoutSubmitButtonBackgroundColor

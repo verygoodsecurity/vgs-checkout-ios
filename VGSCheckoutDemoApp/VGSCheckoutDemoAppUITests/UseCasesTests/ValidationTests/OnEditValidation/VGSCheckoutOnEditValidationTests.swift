@@ -62,6 +62,18 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Dismiss keyboard.
 		dismissKeyboardForCardDetails()
+
+		// Verify error is disabled for invalid zip code.
+		verifyInvalidZipCodeError()
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
+
+		// Verify error is not disabled for valid zip code.
+		verifyValidZipCodeNoError()
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
 	}
 
 	// MARK: - Helpers
@@ -155,5 +167,35 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		// Verify card errors are not displayed.
 		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
 		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.exists(in: app))
+	}
+
+	/// Verifies error is not displayed for valid zip code.
+	func verifyValidZipCodeNoError() {
+    // Swipe up to bottom.
+		app.swipeUp()
+
+		// Type valid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("12345")
+
+		// Focus to city field.
+		VGSTextField.BillingAddress.city.find(in: app).tap()
+
+		// Verify invalid zip code error is not displayed.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+	}
+
+	/// Verifies invalid zip code error is displayed.
+	func verifyInvalidZipCodeError() {
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Type valid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("1234", shouldClear: true)
+
+		// Focus to city field.
+		VGSTextField.BillingAddress.city.find(in: app).tap()
+
+		// Verify invalid zip code error is not displayed.
+		XCTAssertTrue(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
 	}
 }
