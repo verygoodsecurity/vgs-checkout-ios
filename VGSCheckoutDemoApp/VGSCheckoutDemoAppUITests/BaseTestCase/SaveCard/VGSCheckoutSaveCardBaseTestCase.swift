@@ -87,6 +87,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 				/// Invalid card number.
 				static let invalidCardNumber: VGSUITestElement = .init(type: .label, identifier: "Invalid card number")
 
+				/// Emoty card number.
+				static let emptyCardNumber: VGSUITestElement = .init(type: .label, identifier: "Card number is empty")
+
 				/// Invalid expiry date.
 				static let invalidExpiryDate: VGSUITestElement = .init(type: .label, identifier: "Invalid expiry date")
 
@@ -225,6 +228,16 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Tap on billing address section label to close keyboard.
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
+	/// Dismiss keyboard for card details.
+	func dismissKeyboardForCardDetails() {
+		// Tap on view to close keyboard.
+		// Tap on card details section label to close keyboard.
+		Labels.CheckoutSectionTitles.cardDetails.find(in: app).tap()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.3)
 	}
 
 	/// Verify postal code UI.
