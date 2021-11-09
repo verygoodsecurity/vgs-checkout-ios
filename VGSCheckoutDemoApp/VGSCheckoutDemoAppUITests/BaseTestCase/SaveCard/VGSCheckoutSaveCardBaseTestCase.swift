@@ -61,7 +61,7 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		static let startCheckout: VGSUITestElement = .init(type: .button, identifier: "VGSDemoApp.Screens.CustomConfigFlow.SaveCardButton")
 
 		/// Save card button (custom `UIControl`) in checkout.
-		static let checkoutSaveCard: VGSUITestElement = .init(type: .label, identifier: "Save Card")
+		static let checkoutSaveCard: VGSUITestElement = .init(type: .button, identifier: "VGSCheckoutSDK.Buttons.SubmitButton")
 	}
 
 	/// Labels.

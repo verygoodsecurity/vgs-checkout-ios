@@ -5,9 +5,18 @@
 
 import Foundation
 import XCTest
-import VGSCheckoutDemoApp
 
-/// Test custom config use case.
+/// Defines features for UI tests to set in launch arguments.
+enum VGSCheckoutUITestsFeature: String {
+
+	/// On sumbit validation.
+	case onSumbitValidation
+
+	/// On edit validation.
+	case onEditValidation
+}
+
+/// Tests for `.onEdit` validation feature..
 class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 	/// Setup
@@ -15,7 +24,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		super.setUp()
 
 		// Append onEdit validation feature.
-		app.launchArguments.append(VGSCheckoutTestFeature.onEditValidation)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onEditValidation.rawValue)
 	}
 
 	/// Test success flow with onedit validation.
@@ -45,22 +54,14 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		// Verify error is hidden only after editing incorrect field.
 		verifyHideErrorOnEditing()
 
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
 
+		// Verifies errors for valid card are not displayed.
+		verifyNoErrorForValidCard()
 
-
-		// Verify there is no error in cardHolder field after endEditing field event and changing focus without any initial input (cardHolder is not dirty).
-
-		// Fill in billing addreess.
-		fillInCorrectBillingAddress()
-
-		// Wait for keyboard dismiss.
-		wait(forTimeInterval: 0.5)
-
-		// Tap to save card data.
-		tapToSaveCardInCheckout()
-
-		// Check success alert.
-		verifySuccessAlertExists()
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
 	}
 
 	// MARK: - Helpers
@@ -73,6 +74,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		app.swipeUp()
 
 		// Verify if save card button is disabled.
+		print(Buttons.checkoutSaveCard.find(in: app).isEnabled)
 		XCTAssertTrue(Buttons.checkoutSaveCard.find(in: app).isEnabled == isEnabled)
 
 		// Swipe down to the top of the screen.
@@ -88,7 +90,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		VGSTextField.CardDetails.expirationDate.find(in: app).tap()
 
 		// Verify empty card error is not displayed.
-		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.find(in: app))
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.exists(in: app))
 	}
 
 	/// Verifies empty card error is displayed for dirty field.
@@ -103,7 +105,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		VGSTextField.CardDetails.expirationDate.find(in: app).tap()
 
 		// Verify empty card error is displayed.
-		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.find(in: app))
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.exists(in: app))
 	}
 
 	/// Verifies invalid card number error is displayed.
@@ -115,7 +117,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		VGSTextField.CardDetails.expirationDate.find(in: app).tap()
 
 		// Verify empty card error is displayed.
-		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.find(in: app))
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
 	}
 
 	/// Verifies error is hidden only on editing.
@@ -127,18 +129,31 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		VGSTextField.CardDetails.expirationDate.find(in: app).tap()
 
 		// Verify empty card error is displayed.
-		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.find(in: app))
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
 
 		// Focus card number again.
-		VGSTextField.CardDetails.cardNumber.find(in: app)
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
 
 		// Verify error is still displayed.
-		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.find(in: app))
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
 
 		// Start typing smth in card number.
 		VGSTextField.CardDetails.cardNumber.find(in: app).type("411", shouldClear: false)
 
 		// Verify error is not displayed after editing card number.
-		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.find(in: app))
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
+	}
+
+	/// Verifies no error for valid card.
+	func verifyNoErrorForValidCard() {
+		// Focus card number field and type smth.
+		VGSTextField.CardDetails.cardNumber.find(in: app).type("4111111111111111", shouldClear: true)
+
+		// Focus card exp date.
+		VGSTextField.CardDetails.expirationDate.find(in: app).tap()
+
+		// Verify card errors are not displayed.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCardNumber.exists(in: app))
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.exists(in: app))
 	}
 }

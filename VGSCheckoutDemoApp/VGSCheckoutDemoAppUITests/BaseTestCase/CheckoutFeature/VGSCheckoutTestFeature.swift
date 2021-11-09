@@ -4,7 +4,3 @@
 
 import Foundation
 
-//enum VGSCheckoutTestFeature: String {
-//	case onSumbitValidation
-//	case onEditValidation
-//}

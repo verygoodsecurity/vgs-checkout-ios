@@ -6,7 +6,7 @@ import Foundation
 import VGSCheckoutSDK
 
 /// Defines features for UI tests to set in launch arguments.
-public enum VGSCheckoutUITestsFeature: String {
+enum VGSCheckoutUITestsFeature: String {
 
 	/// On sumbit validation.
 	case onSumbitValidation
