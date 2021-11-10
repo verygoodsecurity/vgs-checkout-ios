@@ -85,8 +85,14 @@ internal class VGSFormValidationHelper {
 	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field view.
 	/// - Returns: `String?` object, error message or nil.
 	private func errorMessage(for fieldView: VGSTextFieldViewProtocol) -> String? {
-		// Display errors only for invalid and dirty fields.
-		guard !fieldView.textFieldState.isValid && fieldView.textFieldState.isDirty else {return nil}
+
+		// Display errors only for invalid fields.
+		guard !fieldView.textFieldState.isValid else {return nil}
+
+		// On edit validation display errors for only dirty fields.
+		if validationBehaviour == .onEdit && !fieldView.textFieldState.isDirty {
+			return nil
+		}
 
 		let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: fieldView.fieldType)
 
