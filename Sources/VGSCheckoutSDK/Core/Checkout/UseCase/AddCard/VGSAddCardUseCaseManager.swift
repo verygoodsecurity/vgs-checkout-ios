@@ -110,12 +110,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
 
-		switch paymentInstrument {
-		case .vault(let config):
-			self.validationBehavior = config.formValidationBehaviour
-		case .multiplexing(let config):
-			self.validationBehavior = config.formValidationBehaviour
-		}
+		self.validationBehavior = paymentInstrument.formValidationBehaviour
 
 		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: self.validationBehavior)
 		let autoFocusManager = VGSFieldAutofocusManager(fieldViewsManager: VGSFieldViewsManager(fieldViews: []))
