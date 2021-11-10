@@ -17,7 +17,7 @@ internal struct VGSCustomFormConfiguration {
   var billingAddressVisibility: VGSCheckoutBillingAddressVisibility = .hidden
 
 	/// Form validation behavior, default is `.onSubmit`.
-	var formValidationBehaviour = VGSCheckoutFormValidationBehaviour.onEdit
+	var formValidationBehaviour = VGSCheckoutFormValidationBehaviour.onSubmit
 
 	/// no:doc
   init() {}
