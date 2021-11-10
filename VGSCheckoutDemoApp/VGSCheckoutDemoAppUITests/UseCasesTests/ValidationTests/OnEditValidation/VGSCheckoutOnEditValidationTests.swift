@@ -19,16 +19,19 @@ enum VGSCheckoutUITestsFeature: String {
 /// Tests for `.onEdit` validation feature..
 class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
-	/// Setup
+	/// Setup.
 	override func setUp() {
 		super.setUp()
-
+		
 		// Append onEdit validation feature.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.onEditValidation.rawValue)
+
+		// Launch app.
+		app.launch()
 	}
 
-	/// Test success flow with onedit validation.
-	func testOnEditValidationSuccessFlow() {
+	/// Test onEdit validation errors.
+	func testOnEditValidationErrros() {
 		// Navigate to Custom config use case.
 		navigateToCustomConfigUseCase()
 
