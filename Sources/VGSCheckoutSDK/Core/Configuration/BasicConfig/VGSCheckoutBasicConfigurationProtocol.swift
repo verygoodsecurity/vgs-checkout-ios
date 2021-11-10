@@ -97,7 +97,7 @@ internal enum VGSPaymentInstrument {
 	}
 
 	/// Form validation behaviour.
-	internal var validationBehaviour: VGSCheckoutFormValidationBehaviour {
+	internal var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
 		switch self {
 		case .vault(let configuration):
 			return configuration.formValidationBehaviour
