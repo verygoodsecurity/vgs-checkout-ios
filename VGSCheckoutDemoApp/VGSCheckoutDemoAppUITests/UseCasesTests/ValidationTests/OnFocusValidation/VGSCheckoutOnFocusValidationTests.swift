@@ -1,27 +1,27 @@
 //
-//  VGSCheckoutOnEditValidationTests.swift
+//  VGSCheckoutOnFocusValidationTests.swift
 //  VGSCheckoutDemoAppUITests
 //
 
 import Foundation
 import XCTest
 
-/// Tests for `.onEdit` validation feature..
-class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
+/// Tests for `.onFocus` validation feature.
+class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 	/// Setup.
 	override func setUp() {
 		super.setUp()
 		
-		// Append onEdit validation feature.
+		// Append onFocus validation feature.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.rawValue)
 
 		// Launch app.
 		app.launch()
 	}
 
-	/// Test onEdit validation errors.
-	func testOnEditValidationErrros() {
+	/// Test onFocus validation errors.
+	func testOnFocusValidationErrros() {
 		// Navigate to Custom config use case.
 		navigateToCustomConfigUseCase()
 
