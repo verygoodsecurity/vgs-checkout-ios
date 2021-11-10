@@ -50,7 +50,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	// MARK: - Initialization
   
-	internal required init(vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager, paymentInstrument: VGSPaymentInstrument) {
+	internal required init(vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager, paymentInstrument: VGSPaymentInstrument) {
     self.vgsCollect = vgsCollect
 		self.paymentInstrument = paymentInstrument
     self.validationBehavior = validationBehavior
@@ -66,7 +66,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     buildForm()
 	}
   
-  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+  internal convenience init(vgsCollect: VGSCollect, configuration: VGSCheckoutMultiplexingConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
     self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .multiplexing(configuration))
 
 		setupBillingAddressForm(with: configuration)
@@ -272,7 +272,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 							postalCodeFieldView?.validationErrorView.viewUIState = .valid
 						}
 					}
-				case .onEdit:
+				case .onFocus:
 				   break
 				}
 
@@ -292,7 +292,7 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new configuration.
 				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
 
-				if validationBehavior == .onEdit {
+				if validationBehavior == .onFocus {
 					formValidationHelper.revalidatePostalCodeFieldIfNeeded()
 				}
 				

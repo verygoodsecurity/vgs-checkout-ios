@@ -11,8 +11,8 @@ enum VGSCheckoutUITestsFeature: String {
 	/// On sumbit validation.
 	case onSumbitValidation
 
-	/// On edit validation.
-	case onEditValidation
+	/// On focus validation.
+	case onFocusValidation
 }
 
 /// Configuration manager for UI tests.
@@ -27,8 +27,8 @@ internal class UITestsConfigurationManager {
 
 		uiTestsFeatures.forEach { testFeautre in
 			switch testFeautre {
-			case .onEditValidation:
-				configuration.formValidationBehaviour = .onEdit
+			case .onFocusValidation:
+				configuration.formValidationBehaviour = .onFocus
 			case .onSumbitValidation:
 				configuration.formValidationBehaviour = .onSubmit
 			}

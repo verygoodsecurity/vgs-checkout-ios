@@ -114,9 +114,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		case .vault(let config):
 			self.validationBehavior = config.formValidationBehaviour
 		case .multiplexing(let config):
-			break
-			// FIXME - add validation behavior to multiplexing.
-			//self.validationBehavior = config.formValidationBehaviour
+			self.validationBehavior = config.formValidationBehaviour
 		}
 
 		let formValidationHelper = VGSFormValidationHelper(fieldViews: [], validationBehaviour: self.validationBehavior)
@@ -160,7 +158,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .onSubmit:
 				// Initally pay button is always enabled.
 				self.addCardSectionFormView.saveCardButton.status = .enabled
-			case .onEdit:
+			case .onFocus:
 				// Initally pay button is disabled.
 				self.addCardSectionFormView.saveCardButton.status = .disabled
 		}
@@ -252,7 +250,7 @@ extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 		switch validationBehavior {
 		case .onSubmit:
 			break
-		case .onEdit:
+		case .onFocus:
 			switch formState {
 			case .invalid:
 				addCardSectionFormView.saveCardButton.status = .disabled

@@ -34,7 +34,7 @@ internal class VGSFormValidationHelper {
 	internal func updateFieldViewOnBeginEditingTextField(_ fieldView: VGSTextFieldViewProtocol) {
 		// Keep error styles when field is just focused, remove styles only from valid field.
 		switch validationBehaviour {
-		case .onEdit:
+		case .onFocus:
 			removeErrorStyleOnlyForValidFieldView(fieldView)
 		case .onSubmit:
 			removeErrorStyleOnlyForValidFieldView(fieldView)
@@ -45,7 +45,7 @@ internal class VGSFormValidationHelper {
 	internal func updateFieldViewOnTextChangeInTextField(_ fieldView: VGSTextFieldViewProtocol) {
 		// Always remove error styles on textChange.
 		switch validationBehaviour {
-		case .onEdit:
+		case .onFocus:
 			applyValidStyleAndFocus(for: fieldView)
 		case .onSubmit:
 			applyValidStyleAndFocus(for: fieldView)
@@ -55,7 +55,7 @@ internal class VGSFormValidationHelper {
 	/// Update Form View UI elements on end editing.
 	internal func updateFieldViewOnEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
 		switch validationBehaviour {
-		case .onEdit:
+		case .onFocus:
 			// Show error on end editing.
 			if let errorText = errorMessage(for: fieldView) {
 				// Expand all fields in section if at least one field in section is invalid.
@@ -90,7 +90,7 @@ internal class VGSFormValidationHelper {
 		guard !fieldView.textFieldState.isValid else {return nil}
 
 		// On edit validation display errors for only dirty fields.
-		if validationBehaviour == .onEdit && !fieldView.textFieldState.isDirty {
+		if validationBehaviour == .onFocus && !fieldView.textFieldState.isDirty {
 			return nil
 		}
 

@@ -61,6 +61,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
     }
   }
 
+	/// Form validation behavior, default is `.onSubmit`.
+	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+		get {
+			return formConfiguration.formValidationBehaviour
+		}
+
+		set {
+			formConfiguration.formValidationBehaviour = newValue
+		}
+	}
+
   // MARK: - Internal
   
 	/// Payment flow type (internal use only).

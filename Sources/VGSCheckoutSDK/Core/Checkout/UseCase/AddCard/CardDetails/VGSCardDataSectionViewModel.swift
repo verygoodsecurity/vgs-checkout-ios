@@ -24,10 +24,14 @@ internal enum VGSFormSectionState {
 	case invalid
 }
 
-/// Defines validation behavior.
+/// Defines form validation behavior.
 public enum VGSCheckoutFormValidationBehaviour {
+
+	/// Validate fields and display errors on submit.
 	case onSubmit
-	case onEdit
+
+	/// Validate fields and display errors on switching to the next field.
+	case onFocus
 }
 
 /// Holds logic for card form setup and handling events.
@@ -71,7 +75,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
   
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour = .onSubmit, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+	internal init(paymentInstrument: VGSPaymentInstrument, vgsCollect: VGSCollect, validationBehavior: VGSCheckoutFormValidationBehaviour, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
 		self.paymentInstrument = paymentInstrument
 		self.vgsCollect = vgsCollect
 		self.validationBehavior = validationBehavior

@@ -6,16 +6,6 @@
 import Foundation
 import XCTest
 
-/// Defines features for UI tests to set in launch arguments.
-enum VGSCheckoutUITestsFeature: String {
-
-	/// On sumbit validation.
-	case onSumbitValidation
-
-	/// On edit validation.
-	case onEditValidation
-}
-
 /// Tests for `.onEdit` validation feature..
 class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
@@ -24,7 +14,7 @@ class VGSCheckoutOnEditValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		super.setUp()
 		
 		// Append onEdit validation feature.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.onEditValidation.rawValue)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.rawValue)
 
 		// Launch app.
 		app.launch()
