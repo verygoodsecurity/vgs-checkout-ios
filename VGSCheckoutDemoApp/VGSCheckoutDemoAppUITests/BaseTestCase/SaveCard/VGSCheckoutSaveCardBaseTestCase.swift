@@ -160,6 +160,12 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		// Select Bolivia (country without postal code).
 		selectCountry("Bolivia", currentCounryName: "United States")
 
+		// Type Bolivia billing address.
+		fillInBoliviaBillingAddress()
+	}
+
+	// Types Bolivia billing address.
+	func fillInBoliviaBillingAddress() {
 		// Type in address line 1.
 		VGSTextField.BillingAddress.addressLine1.find(in: app).type("c. Andres Muñoz # 1078")
 
@@ -175,6 +181,27 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		// Verify postal code/zip is not displayed.
 		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
 		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
+	// Types Canada billing address.
+	func fillInCanadaBillingAddress() {
+		// Type in address line 1.
+		VGSTextField.BillingAddress.addressLine1.find(in: app).type("1115 No. 3 Road")
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+
+		// Swipe up to make other address fields visible.
+		app.swipeUp()
+
+		// Type in City.
+		VGSTextField.BillingAddress.city.find(in: app).type("Richmond")
+
+		// Type in postal code.
+		VGSTextField.BillingAddress.postalCode.find(in: app).type("V6X 2B8")
 
 		// Tap on billing address section label to close keyboard.
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
