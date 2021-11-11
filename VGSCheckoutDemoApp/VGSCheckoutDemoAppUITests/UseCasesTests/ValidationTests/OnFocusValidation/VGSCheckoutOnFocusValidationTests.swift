@@ -14,7 +14,7 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		super.setUp()
 		
 		// Append onFocus validation feature.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.rawValue)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.launchArgument)
 
 		// Launch app.
 		app.launch()
