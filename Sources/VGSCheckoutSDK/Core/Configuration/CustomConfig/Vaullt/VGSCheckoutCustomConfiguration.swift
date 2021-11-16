@@ -179,6 +179,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 			content.append("valid_countries")
 		}
 
+		content.append(formValidationBehaviour.analyticsName)
 		content.append(requestOptions.mergePolicy.analyticsName)
 
 		return content

@@ -86,6 +86,8 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
     if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
       content.append("valid_countries")
     }
+
+		content.append(formValidationBehaviour.analyticsName)
     return content
   }
 }

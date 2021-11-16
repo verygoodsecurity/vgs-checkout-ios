@@ -32,6 +32,16 @@ public enum VGSCheckoutFormValidationBehaviour {
 
 	/// Validate fields and display errors on switching to the next field.
 	case onFocus
+
+	/// Analytics key name.
+	internal var analyticsName: String {
+		switch self {
+		case .onSubmit:
+			return "onsubmit-validation"
+		case .onFocus:
+			return "onfocus-validation"
+		}
+	}
 }
 
 /// Holds logic for card form setup and handling events.
