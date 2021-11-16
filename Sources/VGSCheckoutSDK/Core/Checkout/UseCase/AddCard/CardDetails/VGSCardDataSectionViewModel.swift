@@ -37,9 +37,9 @@ public enum VGSCheckoutFormValidationBehaviour {
 	internal var analyticsName: String {
 		switch self {
 		case .onSubmit:
-			return "onsubmit-validation"
+			return "on_submit_validation"
 		case .onFocus:
-			return "onfocus-validation"
+			return "on_focus_validation"
 		}
 	}
 }
