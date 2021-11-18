@@ -250,5 +250,14 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Check cvc error is displayed since CVV should have 4 digits for amex.
 		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCVC.exists(in: app))
+
+		// Enter visa card number again.
+		VGSTextField.CardDetails.cardNumber.find(in: app).type("41111111 11111111", shouldClear: true)
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
+
+		// Check there is no cvc error.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCVC.exists(in: app))
 	}
 }
