@@ -68,8 +68,11 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		// Dismiss keyboard.
 		dismissKeyboardForCardDetails()
 
-		// Verifies postal code/zip errors are updated correctly on country change.
+		// Verify postal code/zip errors are updated correctly on country change.
 		verifyUpdatePostalCodeErrorOnCountryChange()
+
+		// Verify CVC errors are displayed correctly.
+		verifyCVCValidationErrors()
 	}
 
 	// MARK: - Helpers
@@ -220,5 +223,32 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Verify error for postal code is not displayed.
 		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidPostalCode.exists(in: app))
+	}
+
+	/// Verifies CVC validation errors on different card numbers.
+	func verifyCVCValidationErrors() {
+		// Swipe down to up.
+		app.swipeDown()
+
+		// Enter visa card number.
+		VGSTextField.CardDetails.cardNumber.find(in: app).type("41111111 11111111", shouldClear: true)
+
+		// Enter valid CVC for visa.
+		VGSTextField.CardDetails.cvc.find(in: app).type("333", shouldClear: true)
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
+
+		// Check there is no cvc error.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.CardDetails.invalidCVC.exists(in: app))
+
+		// Enter amex card number.
+		VGSTextField.CardDetails.cardNumber.find(in: app).type("340000099900036", shouldClear: true)
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
+
+		// Check cvc error is displayed since CVV should have 4 digits for amex.
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.invalidCVC.exists(in: app))
 	}
 }
