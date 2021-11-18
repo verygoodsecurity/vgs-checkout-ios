@@ -56,6 +56,7 @@ internal class VGSFormValidationHelper {
 	internal func updateFieldViewOnEndEditing(_ fieldView: VGSTextFieldViewProtocol) {
 		switch validationBehaviour {
 		case .onFocus:
+			updateFieldStylesOnEditingForFocusValidation(in: fieldView)
 			// Show error on end editing.
 			if let errorText = errorMessage(for: fieldView) {
 				// Expand all fields in section if at least one field in section is invalid.
@@ -64,7 +65,25 @@ internal class VGSFormValidationHelper {
 			} else {
 				applyEndEditingStyle(for: fieldView)
 			}
+
+			// Validate cvc field view on card number update.
+			guard let cvcFieldView = fieldViewsManager.fieldViews.filter({$0.fieldType == .cvc}).first else {return}
+			if fieldView.fieldType == .cardNumber {
+				updateFieldStylesOnEditingForFocusValidation(in: cvcFieldView)
+			}
 		case .onSubmit:
+			applyEndEditingStyle(for: fieldView)
+		}
+	}
+
+	/// Update styles for onFocus validation on end editing.
+	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field view.
+	internal func updateFieldStylesOnEditingForFocusValidation(in fieldView: VGSTextFieldViewProtocol) {
+		if let errorText = errorMessage(for: fieldView) {
+			// Expand all fields in section if at least one field in section is invalid.
+			updateAllSectionOnErrorIfNeeded()
+			applyErrorStyle(for: fieldView, errorText: errorText)
+		} else {
 			applyEndEditingStyle(for: fieldView)
 		}
 	}
