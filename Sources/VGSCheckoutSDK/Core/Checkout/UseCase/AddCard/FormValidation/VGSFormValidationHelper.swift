@@ -58,7 +58,7 @@ internal class VGSFormValidationHelper {
 		case .onFocus:
 			updateFieldStylesOnEditingForFocusValidation(in: fieldView)
 			// Show error on end editing.
-			if let errorText = errorMessage(for: fieldView) {
+			if let errorText = errorMessageOnFocus(for: fieldView) {
 				// Expand all fields in section if at least one field in section is invalid.
 				updateAllSectionOnErrorIfNeeded()
 				applyErrorStyle(for: fieldView, errorText: errorText)
@@ -79,7 +79,7 @@ internal class VGSFormValidationHelper {
 	/// Update styles for onFocus validation on end editing.
 	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field view.
 	internal func updateFieldStylesOnEditingForFocusValidation(in fieldView: VGSTextFieldViewProtocol) {
-		if let errorText = errorMessage(for: fieldView) {
+		if let errorText = errorMessageOnFocus(for: fieldView) {
 			// Expand all fields in section if at least one field in section is invalid.
 			updateAllSectionOnErrorIfNeeded()
 			applyErrorStyle(for: fieldView, errorText: errorText)
@@ -100,10 +100,10 @@ internal class VGSFormValidationHelper {
 		}
 	}
 
-	/// Provides error message for field view.
+	/// Provides error message for field view for onFocus flow.
 	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field view.
 	/// - Returns: `String?` object, error message or nil.
-	private func errorMessage(for fieldView: VGSTextFieldViewProtocol) -> String? {
+	private func errorMessageOnFocus(for fieldView: VGSTextFieldViewProtocol) -> String? {
 
 		// Display errors only for invalid fields.
 		guard !fieldView.textFieldState.isValid else {return nil}
@@ -146,7 +146,7 @@ internal class VGSFormValidationHelper {
 			return
 		}
 
-		if let errorText = errorMessage(for: fieldView) {
+		if let errorText = errorMessageOnFocus(for: fieldView) {
 			applyErrorStyle(for: fieldView, errorText: errorText)
 			// Expand all fields in section if at least one field in section is invalid.
 			updateAllSectionOnErrorIfNeeded()
