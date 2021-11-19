@@ -77,6 +77,12 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 	/// Tests for onFocus validation when user taps to submit data.
 	func testSubmitErrorsOnFocusValidation() {
+		// Navigate to Custom config use case.
+		navigateToCustomConfigUseCase()
+
+		// Open checkout screen.
+		startCheckout()
+
 		// Swipe to save card button.
 		app.swipeUp()
 
