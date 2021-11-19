@@ -95,7 +95,7 @@ internal class VGSFormValidationHelper {
 		updateAllSectionOnErrorIfNeeded()
 
 		for fieldView in invalidFieldViews {
-			let errorText = errorMessage(for: fieldView)
+			let errorText = errorMessageOnSubmit(for: fieldView)
 			applyErrorStyle(for: fieldView, errorText: errorText)
 		}
 	}
@@ -113,6 +113,20 @@ internal class VGSFormValidationHelper {
 			return nil
 		}
 
+		return errorMessageText(for: fieldView)
+	}
+
+	/// Provides error message for fields on Submit.
+	/// - Parameter fieldView: `VGSTextFieldViewProtocol` object, field view.
+	/// - Returns: `String?` object, error message or nil.
+	internal func errorMessageOnSubmit(for fieldView: VGSTextFieldViewProtocol) -> String? {
+		// Display errors only for invalid fields.
+		guard !fieldView.textFieldState.isValid else {return nil}
+
+		return errorMessageText(for: fieldView)
+	}
+
+	internal func errorMessageText(for fieldView: VGSTextFieldViewProtocol) -> String? {
 		let validator = VGSFormFieldsValidatorFactory.provideFieldValidator(for: fieldView.fieldType)
 
 		let errorMessage: String?
