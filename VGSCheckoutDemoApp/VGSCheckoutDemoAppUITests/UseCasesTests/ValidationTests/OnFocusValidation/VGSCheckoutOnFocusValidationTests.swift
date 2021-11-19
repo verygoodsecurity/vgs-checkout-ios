@@ -29,7 +29,7 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		startCheckout()
 
 		// Verify save button is initially disabled.
-		verifySaveCardButtonUserInteraction(isEnabled: false)
+		verifySaveCardButtonUserInteraction(isEnabled: true)
 
 		// Verify error is displayed only for dirty field in card number.
 		verifyNoEmptyCardError()
