@@ -154,8 +154,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 				// Initally pay button is always enabled.
 				self.addCardSectionFormView.saveCardButton.status = .enabled
 			case .onFocus:
-				// Initally pay button is disabled.
-				self.addCardSectionFormView.saveCardButton.status = .disabled
+				// Initally pay button is enabled.
+				self.addCardSectionFormView.saveCardButton.status = .enabled
 		}
 	}
 
@@ -246,12 +246,7 @@ extension VGSAddCardUseCaseManager: VGSFormSectionPresenterDelegate {
 		case .onSubmit:
 			break
 		case .onFocus:
-			switch formState {
-			case .invalid:
-				addCardSectionFormView.saveCardButton.status = .disabled
-			case .valid:
-				addCardSectionFormView.saveCardButton.status = .enabled
-			}
+			break
 		}
 	}
 }
