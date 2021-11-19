@@ -28,7 +28,7 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 		// Open checkout screen.
 		startCheckout()
 
-		// Verify save button is initially disabled.
+		// Verify save button is initially enabled.
 		verifySaveCardButtonUserInteraction(isEnabled: true)
 
 		// Verify error is displayed only for dirty field in card number.
@@ -73,6 +73,21 @@ class VGSCheckoutOnFocusValidationTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Verify CVC errors are displayed correctly.
 		verifyCVCValidationErrors()
+	}
+
+	/// Tests for onFocus validation when user taps to submit data.
+	func testSubmitErrorsOnFocusValidation() {
+		// Swipe to save card button.
+		app.swipeUp()
+
+		// Tap to save card in checkout.
+		Buttons.checkoutSaveCard.find(in: app).tap()
+
+		// Swipe to top.
+		app.swipeDown()
+
+		// Check errors are displayed.
+		XCTAssertTrue(Labels.CheckoutErrorLabels.CardDetails.emptyCardNumber.exists(in: app))
 	}
 
 	// MARK: - Helpers
