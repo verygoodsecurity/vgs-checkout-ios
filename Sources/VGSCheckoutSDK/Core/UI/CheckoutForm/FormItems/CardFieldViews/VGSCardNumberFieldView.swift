@@ -97,6 +97,7 @@ internal class VGSCardNumberFieldView: UIView, VGSTextFieldViewProtocol {
     }
 }
 
+/// no:doc
 extension VGSCardNumberFieldView: VGSTextFieldDelegate {
     func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
         delegate?.vgsFieldViewDidBeginEditing(self)

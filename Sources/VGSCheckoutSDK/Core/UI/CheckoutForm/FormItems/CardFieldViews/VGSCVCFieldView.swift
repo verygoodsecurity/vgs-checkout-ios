@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 #endif
 
+/// CVC field view.
 internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
     weak var delegate: VGSTextFieldViewDelegate?
     
@@ -96,6 +97,7 @@ internal class VGSCVCFieldView: UIView, VGSTextFieldViewProtocol {
     }
 }
 
+/// no:doc
 extension VGSCVCFieldView: VGSTextFieldDelegate {
     func vgsTextFieldDidBeginEditing(_ textField: VGSTextField) {
         delegate?.vgsFieldViewDidBeginEditing(self)

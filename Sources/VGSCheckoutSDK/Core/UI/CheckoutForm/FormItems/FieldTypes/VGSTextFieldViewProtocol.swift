@@ -62,9 +62,18 @@ extension VGSTextFieldViewUIConfigurationProtocol {
     }
 }
 
+/// Defines field UI state.
 public enum VGSCheckoutFieldUIState {
+
+	/// Initial field.
 	case initial
+
+	/// Focused field.
 	case focused
+
+	/// Field has input text.
 	case filled
+
+	/// Field contains invalid data.
 	case invalid
 }

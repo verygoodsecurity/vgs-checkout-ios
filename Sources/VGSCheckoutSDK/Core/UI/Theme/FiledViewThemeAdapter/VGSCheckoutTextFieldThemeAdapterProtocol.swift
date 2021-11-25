@@ -10,11 +10,18 @@ import UIKit
 #endif
 
 internal protocol VGSCheckoutTextFieldThemeAdapterProtocol {
-  /// Adapts `VGSCheckoutTextFieldThemeProtocol` for specifics `VGSCheckoutFieldUIState`.
+  /// Adapts `VGSCheckoutTextFieldThemeProtocol` for specific `VGSCheckoutFieldUIState`.
   func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol
 }
 
+/// no:doc
 extension VGSCheckoutTextFieldThemeAdapterProtocol {
+
+	/// Adapts UI theme options for state.
+	/// - Parameters:
+	///   - theme: `VGSCheckoutTextFieldThemeProtocol` object, UI theme.
+	///   - state: `VGSCheckoutFieldUIState` object, field UI state.
+	/// - Returns: `VGSCheckoutTextFieldViewUIAttributesProtocol` object, text field attributes.
   public func adapt(theme: VGSCheckoutTextFieldThemeProtocol, for state: VGSCheckoutFieldUIState) -> VGSCheckoutTextFieldViewUIAttributesProtocol {
     switch state {
     case .initial:
