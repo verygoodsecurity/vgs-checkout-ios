@@ -54,7 +54,7 @@ class CheckoutFlowMainView: UIView {
 		button.backgroundColor = .systemBlue
 		button.layer.cornerRadius = 6
 		button.layer.masksToBounds = true
-		button.setTitle("SAVE CARD", for: .normal)
+		button.setTitle("ADD CARD", for: .normal)
 		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title2).demoapp_bold()
 		button.titleLabel?.adjustsFontForContentSizeCategory = true
 

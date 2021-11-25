@@ -12,6 +12,9 @@ internal struct VGSMultiplexingFormConfiguration {
 
   /// Address options.
   var addressOptions = VGSCheckoutMultiplexingBillingAddressOptions()
+
+	/// Form validation behavior, default is `.onSubmit`.
+	var formValidationBehaviour = VGSCheckoutFormValidationBehaviour.onSubmit
   
   /// no:doc
   internal init() {}

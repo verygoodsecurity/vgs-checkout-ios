@@ -95,6 +95,16 @@ internal enum VGSPaymentInstrument {
 			return configuration.billingAddressCountryFieldOptions.validCountries
 		}
 	}
+
+	/// Form validation behaviour.
+	internal var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+		switch self {
+		case .vault(let configuration):
+			return configuration.formValidationBehaviour
+		case .multiplexing(let configuration):
+			return configuration.formValidationBehaviour
+		}
+	}
   
   /// Checkout Configuration.
   internal var configuration: VGSCheckoutBasicConfigurationProtocol {

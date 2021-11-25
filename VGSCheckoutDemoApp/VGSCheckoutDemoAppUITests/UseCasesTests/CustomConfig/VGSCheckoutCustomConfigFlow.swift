@@ -8,6 +8,14 @@ import XCTest
 /// Test custom config use case.
 class VGSCheckoutCustomConfigFlow: VGSCheckoutSaveCardBaseTestCase {
 
+	/// Setup tests.
+	override func setUp() {
+		super.setUp()
+
+		// Launch app.
+		app.launch()
+	}
+
 	/// Test success flow for correct inputs.
 	func testSuccessFlow() {
 		// Navigate to Custom config use case.
