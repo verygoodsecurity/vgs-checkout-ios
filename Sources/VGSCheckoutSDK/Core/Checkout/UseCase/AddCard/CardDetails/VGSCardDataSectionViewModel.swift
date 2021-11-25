@@ -30,7 +30,7 @@ public enum VGSCheckoutFormValidationBehaviour {
 	/// Validate fields and display errors on submit.
 	case onSubmit
 
-	/// Validate fields and display errors on end editing. Revalidate form on submit.s
+	/// Validate fields and display errors on end editing. Revalidate form on submit.
 	case onFocus
 
 	/// Analytics key name.
