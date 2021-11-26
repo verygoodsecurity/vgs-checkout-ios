@@ -61,6 +61,17 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
     }
   }
 
+	/// Form validation behavior, default is `.onSubmit`.
+	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+		get {
+			return formConfiguration.formValidationBehaviour
+		}
+
+		set {
+			formConfiguration.formValidationBehaviour = newValue
+		}
+	}
+
   // MARK: - Internal
   
 	/// Payment flow type (internal use only).
@@ -75,6 +86,8 @@ public struct VGSCheckoutMultiplexingConfiguration: VGSCheckoutBasicConfiguratio
     if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
       content.append("valid_countries")
     }
+
+		content.append(formValidationBehaviour.analyticsName)
     return content
   }
 }

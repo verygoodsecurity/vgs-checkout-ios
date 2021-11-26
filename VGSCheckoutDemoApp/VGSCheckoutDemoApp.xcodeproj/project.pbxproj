@@ -23,6 +23,10 @@
 		441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E5265F6CC50080B01E /* OrderDataProvider.swift */; };
 		441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */; };
 		441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927EA265FA3E60080B01E /* UIFont+Extensions.swift */; };
+		44282B752735210200223A66 /* VGSCheckoutTestFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44282B742735210200223A66 /* VGSCheckoutTestFeature.swift */; };
+		44282B7C2735248400223A66 /* UITestsConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44282B7B2735248300223A66 /* UITestsConfigurationManager.swift */; };
+		4428DD1D273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4428DD1C273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift */; };
+		4428DD25273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4428DD24273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift */; };
 		445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */; };
 		445C126326F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */; };
 		445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */; };
@@ -81,6 +85,10 @@
 		441927E5265F6CC50080B01E /* OrderDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataProvider.swift; sourceTree = "<group>"; };
 		441927E7265F6F0E0080B01E /* CheckoutFlowMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFlowMainView.swift; sourceTree = "<group>"; };
 		441927EA265FA3E60080B01E /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		44282B742735210200223A66 /* VGSCheckoutTestFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutTestFeature.swift; sourceTree = "<group>"; };
+		44282B7B2735248300223A66 /* UITestsConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestsConfigurationManager.swift; sourceTree = "<group>"; };
+		4428DD1C273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnFocusValidationTests.swift; sourceTree = "<group>"; };
+		4428DD24273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutValidCountriesTests.swift; sourceTree = "<group>"; };
 		445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppBaseTestCase.swift; sourceTree = "<group>"; };
 		445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomConfigFlow.swift; sourceTree = "<group>"; };
 		445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSaveCardBaseTestCase.swift; sourceTree = "<group>"; };
@@ -281,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				441927D3265F63540080B01E /* UITestsMockedData.plist */,
+				44282B7B2735248300223A66 /* UITestsConfigurationManager.swift */,
 			);
 			path = MockedData;
 			sourceTree = "<group>";
@@ -343,10 +352,43 @@
 			path = "UIFont+Extensions";
 			sourceTree = "<group>";
 		};
+		44282B73273520C800223A66 /* CheckoutFeature */ = {
+			isa = PBXGroup;
+			children = (
+				44282B742735210200223A66 /* VGSCheckoutTestFeature.swift */,
+			);
+			path = CheckoutFeature;
+			sourceTree = "<group>";
+		};
+		44282B762735231400223A66 /* ValidationTests */ = {
+			isa = PBXGroup;
+			children = (
+				4428DD1B273BD99200071CB8 /* OnFocusValidation */,
+			);
+			path = ValidationTests;
+			sourceTree = "<group>";
+		};
+		4428DD1B273BD99200071CB8 /* OnFocusValidation */ = {
+			isa = PBXGroup;
+			children = (
+				4428DD1C273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift */,
+			);
+			path = OnFocusValidation;
+			sourceTree = "<group>";
+		};
+		4428DD22273CF5B000071CB8 /* ValidCountries */ = {
+			isa = PBXGroup;
+			children = (
+				4428DD24273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift */,
+			);
+			path = ValidCountries;
+			sourceTree = "<group>";
+		};
 		445C125C26F996BB00D6F3DD /* BaseTestCase */ = {
 			isa = PBXGroup;
 			children = (
 				445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */,
+				44282B73273520C800223A66 /* CheckoutFeature */,
 				445C126526F9995100D6F3DD /* SaveCard */,
 			);
 			path = BaseTestCase;
@@ -355,6 +397,8 @@
 		445C125F26F9986B00D6F3DD /* UseCasesTests */ = {
 			isa = PBXGroup;
 			children = (
+				4428DD22273CF5B000071CB8 /* ValidCountries */,
+				44282B762735231400223A66 /* ValidationTests */,
 				445C126026F9987800D6F3DD /* CustomConfig */,
 			);
 			path = UseCasesTests;
@@ -696,6 +740,7 @@
 				441927D7265F64A60080B01E /* CheckoutBasicFlowVC.swift in Sources */,
 				44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */,
 				441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */,
+				44282B7C2735248400223A66 /* UITestsConfigurationManager.swift in Sources */,
 				44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */,
 				44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */,
 				441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */,
@@ -715,14 +760,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4428DD25273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift in Sources */,
 				445C126326F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift in Sources */,
 				445C126C26F99A2900D6F3DD /* VGSUITestElementType.swift in Sources */,
 				445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */,
 				445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */,
 				445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */,
 				445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */,
+				44282B752735210200223A66 /* VGSCheckoutTestFeature.swift in Sources */,
 				445C126A26F99A0700D6F3DD /* VGSUITestElement.swift in Sources */,
 				3286E10D265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift in Sources */,
+				4428DD1D273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

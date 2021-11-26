@@ -32,6 +32,7 @@ public struct VGSCheckoutMultiplexingBillingAddressOptions {
   /// Country field options.
   public var countryOptions = VGSCheckoutMultiplexingBillingAddressCountryOptions()
 
+	/// no:doc
   public init() {}
 }
 

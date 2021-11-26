@@ -137,6 +137,9 @@ internal class VGSSubmitButton: UIControl {
 		// Allow the subviews simply passes the event through.
 		stackView.isUserInteractionEnabled = false
 
+		accessibilityIdentifier = "VGSCheckoutSDK.Buttons.SubmitButton"
+		accessibilityTraits = [.button]
+
 		let leftPadding = UIView()
 		let rightPadding = UIView()
 
@@ -161,6 +164,7 @@ internal class VGSSubmitButton: UIControl {
 
 		switch status {
 		case .disabled:
+			accessibilityTraits = [.button, .notEnabled]
 			isUserInteractionEnabled = false
 			backgroundColor =
       uiTheme.checkoutSubmitButtonBackgroundColor.withAlphaComponent(0.6)
@@ -171,6 +175,7 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.stopAnimating()
 			iconAccessory = .none
 		case .enabled:
+			accessibilityTraits = [.button]
 			isUserInteractionEnabled = true
 			backgroundColor =
 				uiTheme.checkoutSubmitButtonBackgroundColor
@@ -181,6 +186,7 @@ internal class VGSSubmitButton: UIControl {
 			activityIndicatorView.stopAnimating()
 			iconAccessory = .none
 		case .processing:
+			accessibilityTraits = [.button, .notEnabled]
 			isUserInteractionEnabled = false
 			backgroundColor =
 				uiTheme.checkoutSubmitButtonBackgroundColor

@@ -15,13 +15,10 @@ class VGSCheckoutDemoAppBaseTestCase: XCTestCase {
 	override func setUp() {
 		super.setUp()
 
-		continueAfterFailure = false
-
-		app = XCUIApplication()
-		app.launchArguments.append("VGSCheckoutDemoAppUITests")
-
 		// Start the app.
-		app.launch()
+		app = XCUIApplication()
+		continueAfterFailure = false
+		app.launchArguments.append("VGSCheckoutDemoAppUITests")
 	}
 
 	/// Tear down tests.

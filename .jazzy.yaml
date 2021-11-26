@@ -60,6 +60,9 @@ custom_categories:
   - VGSCheckoutTextFieldThemeProtocol
   - VGSCheckoutSubmitButtonThemeProtocol
   - VGSCheckoutViewThemeProtocol
+- name: Form Validation Behaviour
+  children:
+  - VGSCheckoutFormValidationBehaviour
 - name: APIConfiguration
   children:
   - VGSCheckoutRequestOptions

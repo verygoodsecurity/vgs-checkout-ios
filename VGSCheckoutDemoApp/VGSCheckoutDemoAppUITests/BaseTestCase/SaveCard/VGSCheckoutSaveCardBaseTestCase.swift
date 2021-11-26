@@ -61,7 +61,7 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		static let startCheckout: VGSUITestElement = .init(type: .button, identifier: "VGSDemoApp.Screens.CustomConfigFlow.SaveCardButton")
 
 		/// Save card button (custom `UIControl`) in checkout.
-		static let checkoutSaveCard: VGSUITestElement = .init(type: .label, identifier: "Save Card")
+		static let checkoutSaveCard: VGSUITestElement = .init(type: .button, identifier: "VGSCheckoutSDK.Buttons.SubmitButton")
 	}
 
 	/// Labels.
@@ -87,6 +87,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 				/// Invalid card number.
 				static let invalidCardNumber: VGSUITestElement = .init(type: .label, identifier: "Invalid card number")
 
+				/// Emoty card number.
+				static let emptyCardNumber: VGSUITestElement = .init(type: .label, identifier: "Card number is empty")
+
 				/// Invalid expiry date.
 				static let invalidExpiryDate: VGSUITestElement = .init(type: .label, identifier: "Invalid expiry date")
 
@@ -101,6 +104,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 				/// Invalid ZIP.
 				static let invalidZIP: VGSUITestElement = .init(type: .label, identifier: "ZIP is invalid")
+
+				/// Invalid postal code.
+				static let invalidPostalCode: VGSUITestElement = .init(type: .label, identifier: "Postal code is invalid")
 			}
 		}
 
@@ -154,6 +160,12 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		// Select Bolivia (country without postal code).
 		selectCountry("Bolivia", currentCounryName: "United States")
 
+		// Type Bolivia billing address.
+		fillInBoliviaBillingAddress()
+	}
+
+	// Types Bolivia billing address.
+	func fillInBoliviaBillingAddress() {
 		// Type in address line 1.
 		VGSTextField.BillingAddress.addressLine1.find(in: app).type("c. Andres Muñoz # 1078")
 
@@ -169,6 +181,27 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		// Verify postal code/zip is not displayed.
 		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
 		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
+	// Types Canada billing address.
+	func fillInCanadaBillingAddress() {
+		// Type in address line 1.
+		VGSTextField.BillingAddress.addressLine1.find(in: app).type("1115 No. 3 Road")
+
+		// Tap on billing address section label to close keyboard.
+		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+
+		// Swipe up to make other address fields visible.
+		app.swipeUp()
+
+		// Type in City.
+		VGSTextField.BillingAddress.city.find(in: app).type("Richmond")
+
+		// Type in postal code.
+		VGSTextField.BillingAddress.postalCode.find(in: app).type("V6X 2B8")
 
 		// Tap on billing address section label to close keyboard.
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
@@ -225,6 +258,16 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Tap on billing address section label to close keyboard.
 		Labels.CheckoutSectionTitles.billingAddress.find(in: app).tap()
+	}
+
+	/// Dismiss keyboard for card details.
+	func dismissKeyboardForCardDetails() {
+		// Tap on view to close keyboard.
+		// Tap on card details section label to close keyboard.
+		Labels.CheckoutSectionTitles.cardDetails.find(in: app).tap()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.3)
 	}
 
 	/// Verify postal code UI.

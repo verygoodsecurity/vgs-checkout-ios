@@ -1,22 +1,8 @@
 {
   "warnings": [
     {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Configuration/CustomConfig/Vaullt/VaultFormConfiguration/FormFields/AddressDetails/VGSCheckoutBillingAddressOptions.swift",
-      "line": 35,
-      "symbol": "VGSCheckoutMultiplexingBillingAddressOptions.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCVCFieldView.swift",
-      "line": 99,
-      "symbol": "VGSCVCFieldView",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardNumberFieldView.swift",
-      "line": 100,
+      "line": 101,
       "symbol": "VGSCardNumberFieldView",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -36,24 +22,10 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/FieldTypes/VGSTextFieldViewProtocol.swift",
-      "line": 65,
-      "symbol": "VGSCheckoutFieldUIState",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/Theme/FiledViewThemeAdapter/VGSCheckoutTextFieldThemeAdapterProtocol.swift",
-      "line": 17,
+      "line": 18,
       "symbol": "VGSCheckoutTextFieldThemeAdapterProtocol",
       "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Helpers/Extenions/UIKit+Extensions/UIFont+Extensions/UIFont+Extensions.swift",
-      "line": 11,
-      "symbol": "UIFont.vgsPreferredFont(forTextStyle:weight:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     }
   ],
