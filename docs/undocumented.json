@@ -1,0 +1,33 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardNumberFieldView.swift",
+      "line": 101,
+      "symbol": "VGSCardNumberFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardholderFieldView.swift",
+      "line": 168,
+      "symbol": "VGSCardholderFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSExpirationDateFieldView.swift",
+      "line": 99,
+      "symbol": "VGSExpirationDateFieldView",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/Theme/FiledViewThemeAdapter/VGSCheckoutTextFieldThemeAdapterProtocol.swift",
+      "line": 18,
+      "symbol": "VGSCheckoutTextFieldThemeAdapterProtocol",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/eugene/vgs-checkout-ios"
+}

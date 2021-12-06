@@ -1,0 +1,16 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '11.0'
+
+target 'VGSCheckoutDemoApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for VGSCheckoutDemoApp
+
+  pod 'VGSCheckoutSDK', :path => "../"
+
+	# Pod to display progress hud in demo app.
+	# https://github.com/SVProgressHUD/SVProgressHUD
+	pod 'SVProgressHUD'
+
+end
