@@ -84,25 +84,26 @@ class ViewController: UIViewController {
 ### Choose Checkout SDK Configuration
 VGS Checkout SDK works with different configuration types. You can get more info about available configrurations in VGS Checkout SDK [docs](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration).
 
-***VGSCheckoutMultiplexingConfiguration setup***<br/>
+***VGSCheckoutMultiplexingAddCardConfiguration setup***<br/>
 
-`VGSCheckoutMultiplexingConfiguration` requires valid access token for [Multiplexing App](https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing).
+`VGSCheckoutMultiplexingAddCardConfiguration` requires valid access token for [Multiplexing App](https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing).
  Use your `tenantId` for payment orchestration. You can get it in your [organisation dashboard].
 
 ```swift
-/// Create multiplexing configuration for payment orchestration with access token.
-if let multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>",
-                                                                      tenantId: "<TENANT_ID>",
-                                                                  environment: "<ENVIRONMENT>") {
-                                                                    
-  /// Init Checkout with tenantId.
-  vgsCheckout = VGSCheckout(configuration: multiplexingConfiguration)
-} else {
-  /// Multiplexing App initialization failed because invalid access token.
-  print("ERROR: Invalid Access Token for Multiplexing App!")
+// Create multiplexing add configuration with access token.
+VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>", tenantId: "<TENANT_ID>", "<ENVIRONMENT>") {[weak self] configuration in
+		guard let strongSelf = self else {return}
+		configuration.billingAddressVisibility = .visible
+		
+		strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
+		strongSelf.vgsCheckout?.delegate = strongSelf
+		// Present checkout configuration.
+		strongSelf.vgsCheckout?.present(from: strongSelf)
+} failure: {[weak self] error in
+		print("ERROR!: Cannot create VGSCheckoutMultiplexingAddCardConfiguration!")
 }
-```
 
+```
 
 ***VGSCheckoutCustomConfiguration setup***<br/>
 

@@ -137,13 +137,13 @@ extension CheckoutBasicFlowVC: VGSCheckoutDelegate {
 		var message = ""
 
 		switch requestResult {
-		case .success(let statusCode, let data, let response):
+		case .success(let statusCode, let data, let response, let info):
 			title = "Checkout status: Success!"
 			message = "status code is: \(statusCode)"
 			let text = DemoAppResponseParser.stringifySuccessResponse(from: data) ?? ""
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
-		case .failure(let statusCode, let data, let response, let error):
+		case .failure(let statusCode, let data, let response, let error, let info):
 			title = "Checkout status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 		}

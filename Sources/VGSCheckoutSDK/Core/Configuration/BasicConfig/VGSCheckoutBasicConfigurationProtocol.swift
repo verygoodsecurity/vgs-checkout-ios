@@ -56,7 +56,7 @@ internal enum VGSPaymentInstrument {
 	 - Parameters:
 			- configuration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
 	*/
-	case multiplexing(_ configuration: VGSCheckoutMultiplexingConfiguration)
+	case multiplexing(_ configuration:  VGSCheckoutMultiplexingAddCardConfiguration)
 
 	/// Initializer (failable).
 	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
@@ -74,7 +74,7 @@ internal enum VGSPaymentInstrument {
 				return nil
 			}
 		case .multiplexing:
-			if let multiplexingConfig = checkoutConfiguration as? VGSCheckoutMultiplexingConfiguration {
+			if let multiplexingConfig = checkoutConfiguration as?  VGSCheckoutMultiplexingAddCardConfiguration {
 				self = .multiplexing(multiplexingConfig)
 				return
 			} else {
