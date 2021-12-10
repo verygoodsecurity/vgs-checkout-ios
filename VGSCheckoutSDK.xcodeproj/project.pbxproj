@@ -185,7 +185,7 @@
 		44D520CE26771E56005AB588 /* VGSCheckoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520CD26771E56005AB588 /* VGSCheckoutDelegate.swift */; };
 		44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520D226771EFD005AB588 /* VGSCheckoutRequestResult.swift */; };
 		44D520D926772937005AB588 /* VGSAddCardAPIWorkerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520D826772937005AB588 /* VGSAddCardAPIWorkerFactory.swift */; };
-		44D520E6267870CE005AB588 /* VGSCheckoutMultiplexingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingConfiguration.swift */; };
+		44D520E6267870CE005AB588 /* VGSCheckoutMultiplexingAddCardConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingAddCardConfiguration.swift */; };
 		44D520F226788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520F126788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift */; };
 		44D5CF1E268C381C00312108 /* VGSFormValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF1D268C381C00312108 /* VGSFormValidationHelper.swift */; };
 		44D5CF21268C3C7E00312108 /* VGSCardNumberFieldValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5CF20268C3C7E00312108 /* VGSCardNumberFieldValidator.swift */; };
@@ -429,7 +429,7 @@
 		44D520CD26771E56005AB588 /* VGSCheckoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDelegate.swift; sourceTree = "<group>"; };
 		44D520D226771EFD005AB588 /* VGSCheckoutRequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutRequestResult.swift; sourceTree = "<group>"; };
 		44D520D826772937005AB588 /* VGSAddCardAPIWorkerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCardAPIWorkerFactory.swift; sourceTree = "<group>"; };
-		44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMultiplexingConfiguration.swift; sourceTree = "<group>"; };
+		44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingAddCardConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMultiplexingAddCardConfiguration.swift; sourceTree = "<group>"; };
 		44D520F126788594005AB588 /* VGSAddCreditCardMultiplexingAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddCreditCardMultiplexingAPIWorker.swift; sourceTree = "<group>"; };
 		44D5CF1D268C381C00312108 /* VGSFormValidationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSFormValidationHelper.swift; sourceTree = "<group>"; };
 		44D5CF20268C3C7E00312108 /* VGSCardNumberFieldValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardNumberFieldValidator.swift; sourceTree = "<group>"; };
@@ -1491,7 +1491,7 @@
 		44D520E4267870A5005AB588 /* Multiplexing */ = {
 			isa = PBXGroup;
 			children = (
-				44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingConfiguration.swift */,
+				44D520E5267870CD005AB588 /* VGSCheckoutMultiplexingAddCardConfiguration.swift */,
 				326B6B0C2704C7A10028BACD /* MultiplexingFormConfiguration */,
 				034834B926E0B7DC00AE59F7 /* ConfigurationValidation */,
 			);
@@ -2136,7 +2136,7 @@
 				4405DC1826844AD8004A83AD /* VGSCollect+internal.swift in Sources */,
 				44D520CE26771E56005AB588 /* VGSCheckoutDelegate.swift in Sources */,
 				326B6B102704C7A10028BACD /* VGSCheckoutBillingAddressVisibility.swift in Sources */,
-				44D520E6267870CE005AB588 /* VGSCheckoutMultiplexingConfiguration.swift in Sources */,
+				44D520E6267870CE005AB588 /* VGSCheckoutMultiplexingAddCardConfiguration.swift in Sources */,
 				4405DC1B26844AD8004A83AD /* VGSCollect+fieldNameMapping.swift in Sources */,
 				4405DC6D26844B30004A83AD /* VGSValidationRule.swift in Sources */,
 				44D520D926772937005AB588 /* VGSAddCardAPIWorkerFactory.swift in Sources */,
@@ -2382,7 +2382,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vgs.framework.VGSCheckout;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2410,7 +2410,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vgs.framework.VGSCheckout;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

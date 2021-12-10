@@ -139,10 +139,14 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .hidden:
 				break
 			}
-		case .multiplexing:
-			// Always display address section for multiplexing.
-			formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
-			addressDataSectionViewModel.updateInitialPostalCodeUI()
+		case .multiplexing(let multiplexingConfig):
+			switch multiplexingConfig.billingAddressVisibility {
+			case .visible:
+				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
+				addressDataSectionViewModel.updateInitialPostalCodeUI()
+			case .hidden:
+				break
+			}
 		}
 
 		self.apiWorker = VGSAddCardAPIWorkerFactory.buildAPIWorker(for: paymentInstrument, vgsCollect: vgsCollect)

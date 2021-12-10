@@ -81,7 +81,7 @@ extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
 						// Close checkout with success request result.
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
-				case .failure(_, _, _, let error):
+				case .failure(_, _, _, let error, _):
 					// Do not close checkout for `noConnection` error.
 					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
 						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {

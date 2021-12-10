@@ -12,7 +12,7 @@ import Foundation
 internal typealias VGSErrorInfoKey = String
 
 /// An error domain string used to produce `VGSError` from `VGSCheckout` -  **"vgscollect.sdk"**
-internal let VGSCheckoutErrorDomain = "vgscollect.sdk"
+internal let VGSCheckoutErrorDomain = "vgscheckout.sdk"
 
 // MARK: - VGSErrorInfoKeys
 
