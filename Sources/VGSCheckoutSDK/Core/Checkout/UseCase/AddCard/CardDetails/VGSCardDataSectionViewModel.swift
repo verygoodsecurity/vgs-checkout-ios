@@ -124,8 +124,8 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 	}
 
 	/// Setup card form with multiplexing config.
-	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
-	private func setupCardForm(with multiplexingConfiguration: VGSCheckoutMultiplexingConfiguration) {
+	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingAddCardConfiguration` object, multiplexing configuration.
+	private func setupCardForm(with multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
