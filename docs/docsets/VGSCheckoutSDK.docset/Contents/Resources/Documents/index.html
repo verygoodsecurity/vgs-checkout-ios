@@ -70,9 +70,6 @@
                 <a class="nav-group-task-link" href="Structs/VGSCheckoutCustomConfiguration.html">VGSCheckoutCustomConfiguration</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/VGSCheckoutMultiplexingConfiguration.html">VGSCheckoutMultiplexingConfiguration</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/VGSCheckoutFieldVisibility.html">VGSCheckoutFieldVisibility</a>
               </li>
               <li class="nav-group-task">
@@ -237,8 +234,19 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20Protocols.html#/s:14VGSCheckoutSDK0A4InfoP">VGSCheckoutInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Other%20Structs.html">Other Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutMultiplexingAddCardConfiguration.html">VGSCheckoutMultiplexingAddCardConfiguration</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/VGSCheckoutMultiplexingBillingAddressCountryOptions.html">VGSCheckoutMultiplexingBillingAddressCountryOptions</a>
               </li>
@@ -338,21 +346,24 @@ To use Swift Package Manager, in Xcode add the <a href="https://github.com/veryg
 
 <p>VGS Checkout SDK works with different configuration types. You can get more info about available configrurations in VGS Checkout SDK <a href="https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration">docs</a>.</p>
 
-<p><strong><em>VGSCheckoutMultiplexingConfiguration setup</em></strong><br/></p>
+<p><strong><em>VGSCheckoutMultiplexingAddCardConfiguration setup</em></strong><br/></p>
 
-<p><code><a href="Structs/VGSCheckoutMultiplexingConfiguration.html">VGSCheckoutMultiplexingConfiguration</a></code> requires valid access token for <a href="https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing">Multiplexing App</a>.
+<p><code><a href="Structs/VGSCheckoutMultiplexingAddCardConfiguration.html">VGSCheckoutMultiplexingAddCardConfiguration</a></code> requires valid access token for <a href="https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing">Multiplexing App</a>.
  Use your <code>tenantId</code> for payment orchestration. You can get it in your [organisation dashboard].</p>
-<pre class="highlight swift"><code><span class="c1">/// Create multiplexing configuration for payment orchestration with access token.</span>
-<span class="k">if</span> <span class="k">let</span> <span class="nv">multiplexingConfiguration</span> <span class="o">=</span> <span class="kt">VGSCheckoutMultiplexingConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="s">"&lt;MULTIPLEXING_ACCESS_TOKEN&gt;"</span><span class="p">,</span>
-                                                                      <span class="nv">tenantId</span><span class="p">:</span> <span class="s">"&lt;TENANT_ID&gt;"</span><span class="p">,</span>
-                                                                  <span class="nv">environment</span><span class="p">:</span> <span class="s">"&lt;ENVIRONMENT&gt;"</span><span class="p">)</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="c1">// Create multiplexing add configuration with access token.</span>
+<span class="kt">VGSCheckoutMultiplexingAddCardConfiguration</span><span class="o">.</span><span class="nf">createConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="s">"&lt;MULTIPLEXING_ACCESS_TOKEN&gt;"</span><span class="p">,</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="s">"&lt;TENANT_ID&gt;"</span><span class="p">,</span> <span class="nv">environment</span><span class="p">:</span> <span class="s">"&lt;ENVIRONMENT&gt;"</span><span class="p">)</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">configuration</span> <span class="k">in</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">strongSelf</span> <span class="o">=</span> <span class="k">self</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="n">billingAddressVisibility</span> <span class="o">=</span> <span class="o">.</span><span class="n">visible</span>
 
-  <span class="c1">/// Init Checkout with tenantId.</span>
-  <span class="n">vgsCheckout</span> <span class="o">=</span> <span class="kt">VGSCheckout</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">multiplexingConfiguration</span><span class="p">)</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="c1">/// Multiplexing App initialization failed because invalid access token.</span>
-  <span class="nf">print</span><span class="p">(</span><span class="s">"ERROR: Invalid Access Token for Multiplexing App!"</span><span class="p">)</span>
+        <span class="n">strongSelf</span><span class="o">.</span><span class="n">vgsCheckout</span> <span class="o">=</span> <span class="kt">VGSCheckout</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+        <span class="n">strongSelf</span><span class="o">.</span><span class="n">vgsCheckout</span><span class="p">?</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">strongSelf</span>
+        <span class="c1">// Present checkout configuration.</span>
+        <span class="n">strongSelf</span><span class="o">.</span><span class="n">vgsCheckout</span><span class="p">?</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">strongSelf</span><span class="p">)</span>
+<span class="p">}</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">error</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"ERROR! Cannot create multiplexing configuration!"</span><span class="p">)</span>
 <span class="p">}</span>
+
 </code></pre>
 
 <p><strong><em>VGSCheckoutCustomConfiguration setup</em></strong><br/></p>
@@ -421,7 +432,7 @@ You can easily opt-out of metrics collection in <code>VGSCheckoutAnalyticsClient
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2021-12-06)</p>
+      <p>&copy; 2021 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2021-12-10)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

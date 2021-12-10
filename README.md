@@ -91,7 +91,7 @@ VGS Checkout SDK works with different configuration types. You can get more info
 
 ```swift
 // Create multiplexing add configuration with access token.
-VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>", tenantId: "<TENANT_ID>", "<ENVIRONMENT>") {[weak self] configuration in
+VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>", tenantId: "<TENANT_ID>", environment: "<ENVIRONMENT>") {[weak self] configuration in
 		guard let strongSelf = self else {return}
 		configuration.billingAddressVisibility = .visible
 		
@@ -100,7 +100,8 @@ VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<M
 		// Present checkout configuration.
 		strongSelf.vgsCheckout?.present(from: strongSelf)
 } failure: {[weak self] error in
-		print("ERROR!: Cannot create VGSCheckoutMultiplexingAddCardConfiguration!")
+		print(error.localizedDescription)
+		print("ERROR! Cannot create multiplexing configuration!")
 }
 
 ```

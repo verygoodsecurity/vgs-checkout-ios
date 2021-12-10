@@ -30,7 +30,7 @@ public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfi
 
 	// MARK: - Public
 
-	/// Creates Multiplexing Save Card config
+	/// Creates Multiplexing Add Card config.
 	/// - Parameters:
 	///   - accessToken: `String` object, should be valid access token for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
