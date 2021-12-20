@@ -161,7 +161,10 @@ internal class APIClient {
 		// Setup URLRequest.
 		let jsonData = try? JSONSerialization.data(withJSONObject: value)
 		var request = URLRequest(url: url)
-		request.httpBody = jsonData
+
+		if method != .get {
+			request.httpBody = jsonData
+		}
 		request.httpMethod = method.rawValue
 		request.allHTTPHeaderFields = headers
 

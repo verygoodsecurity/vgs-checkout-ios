@@ -37,9 +37,6 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	/// Form configuration options. Check `VGSCheckoutFormConfiguration` for default settings.
 	internal var formConfiguration: VGSCustomFormConfiguration = VGSCustomFormConfiguration()
 
-	/// Payment flow type (internal use only).
-	internal let paymentFlowType: VGSPaymentFlowIdentifier = .vault
-
   // MARK: - Card Data Fields Configuration
   
 	/// Card number field options.

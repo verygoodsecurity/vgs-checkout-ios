@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Holds UI for add card section form.
-internal class VGSAddCardFormView: VGSFormView {
+internal class VGSSaveCardFormView: VGSFormView {
 
 	/// Defines layout style.
 	internal enum LayoutStyle {
@@ -23,10 +23,10 @@ internal class VGSAddCardFormView: VGSFormView {
 	internal let viewLayoutStyle: LayoutStyle
 
 	/// Background stack view.
-	fileprivate let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
+	internal let backgroundStackView: UIStackView = VGSAddCardFormViewBuilder.buildBackgroundStackView()
 
-	/// Save card button.
-	internal let saveCardButton: VGSSubmitButton
+	/// Submit button.
+	internal let submitButton: VGSSubmitButton
 
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
@@ -43,14 +43,14 @@ internal class VGSAddCardFormView: VGSFormView {
 	/// Initializer.
   internal init(cardDetailsView: VGSCardDetailsSectionView, billingAddressView: VGSBillingAddressDetailsSectionView, viewLayoutStyle: LayoutStyle = .fullScreen, uiTheme: VGSCheckoutThemeProtocol) {
         self.uiTheme = uiTheme
-        self.saveCardButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
+        self.submitButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 
 		self.viewLayoutStyle = viewLayoutStyle
 		self.cardDetailsSectionView = cardDetailsView
 		self.billingAddressSectionView = billingAddressView
 		super.init()
 
-		self.saveCardButton.delegate = self
+		self.submitButton.delegate = self
 		stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.spacing = 8
@@ -72,7 +72,7 @@ internal class VGSAddCardFormView: VGSFormView {
 		switch viewLayoutStyle {
 		case .fullScreen:
 			addFormItemView(backgroundStackView)
-			payButtonContainerView.addContentView(saveCardButton)
+			payButtonContainerView.addContentView(submitButton)
 
 			backgroundStackView.addArrangedSubview(cardDetailsSectionView)
 			backgroundStackView.addArrangedSubview(billingAddressSectionView)
@@ -84,7 +84,7 @@ internal class VGSAddCardFormView: VGSFormView {
 
 // MARK: - VGSSubmitButtonDelegateProtocol
 
-extension VGSAddCardFormView: VGSSubmitButtonDelegateProtocol {
+extension VGSSaveCardFormView: VGSSubmitButtonDelegateProtocol {
 	func statusDidChange(in button: VGSSubmitButton) {
     button.updateUI(with: uiTheme)
   }

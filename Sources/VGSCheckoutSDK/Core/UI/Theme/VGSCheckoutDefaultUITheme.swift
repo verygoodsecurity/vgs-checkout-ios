@@ -66,5 +66,20 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutSubmitButtonTitleColor: UIColor = .white
 
 	/// The font of the submit button title. Default is `.title3` with `.regular` weight.
-	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .regular)
+	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .callout, weight: .regular)
+
+	/// The background color of the checkbox for unselected state. Default is `.vgsSystemGray2Color`.
+	public var checkoutCheckboxUnselectedColor: UIColor = UIColor.vgsSystemGray2Color
+
+	/// The background color of the checkbox for selected state. Default is `.systemBlue`.
+	public var checkoutCheckboxSelectedColor: UIColor = UIColor.systemBlue
+
+	/// The checkmark tint color in checkbox. Default is `.white`.
+	public var checkoutCheckmarkTintColor: UIColor = .white
+
+	/// The text color of the hint in checkbox. Default is `.vgsInputBlackTextColor`.
+	public var checkoutCheckboxHintColor: UIColor = .vgsInputBlackTextColor
+
+	/// The font of the hint in checkbox. Default is `.footnote`.
+	public var checkoutCheckboxHintFont: UIFont = .preferredFont(forTextStyle: .footnote)
 }

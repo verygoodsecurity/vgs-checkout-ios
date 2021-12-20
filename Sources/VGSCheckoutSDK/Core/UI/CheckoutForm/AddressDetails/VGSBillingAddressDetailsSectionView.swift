@@ -149,7 +149,7 @@ internal class VGSBillingAddressDetailsSectionView: UIView {
 	// MARK: - Initialization
 
 	/// Initialization.
-	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
+	/// - Parameter checkoutConfigurationType: `VGScheckoutConfigurationType` object, payment instrument.
   init(uiTheme: VGSCheckoutThemeProtocol) {
         self.uiTheme = uiTheme
 		super.init(frame: .zero)

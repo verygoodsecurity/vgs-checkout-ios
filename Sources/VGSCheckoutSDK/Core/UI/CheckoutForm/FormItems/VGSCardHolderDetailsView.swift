@@ -23,7 +23,7 @@ internal class VGSCardHolderDetailsView: UIView {
 	internal var fieldsDistribution: FieldsDistribution = .singleLine
 
 	/// Payment instrument.
-	fileprivate let paymentInstrument: VGSPaymentInstrument
+	fileprivate let checkoutConfigurationType: VGSCheckoutConfigurationType
 
 	/// Horizontal stack view for card holder name.
 	internal lazy var cardHolderNameStackView: UIStackView = {
@@ -37,8 +37,8 @@ internal class VGSCardHolderDetailsView: UIView {
 
 	// MARK: - Initialization
 
-	internal init(paymentInstrument: VGSPaymentInstrument) {
-		self.paymentInstrument = paymentInstrument
+	internal init(checkoutConfigurationType: VGSCheckoutConfigurationType) {
+		self.checkoutConfigurationType = checkoutConfigurationType
 		super.init(frame: .zero)
 
 		setupUI()
@@ -56,8 +56,8 @@ internal class VGSCardHolderDetailsView: UIView {
 		addSubview(cardHolderNameStackView)
 		cardHolderNameStackView.checkout_constraintViewToSuperviewEdges()
 
-		switch paymentInstrument {
-		case .vault(let configuration):
+		switch checkoutConfigurationType {
+		case .custom(let configuration):
 			let cardHolderDetails = configuration.cardHolderFieldOptions
 			if cardHolderDetails.fieldVisibility == .visible {
 				switch cardHolderDetails.fieldNameType {
@@ -67,7 +67,7 @@ internal class VGSCardHolderDetailsView: UIView {
 //					setupSplittedFieldName()
 				}
 			}
-		case .multiplexing:
+		case .multiplexingAddCard, .multiplexingPayment:
 			setupSingleFieldName()
 		}
 	}

@@ -29,6 +29,9 @@ internal enum VGSErrorType: Int {
 
 		/// When multiplexing JWT token is not valid.
 		case invalidJWTToken = 1484
+
+		/// When fin ID not found on Save card request during payment flow.
+		case finIdNotFound = 1485
 }
 
 /// An error produced by `VGSCheckout`. Works similar to default `NSError` in iOS.
