@@ -14,7 +14,7 @@ public class VGSCheckout {
 	public weak var delegate: VGSCheckoutDelegate?
 
 	/// Checkout coordinator.
-	fileprivate var checkoutCoordinator: VGSCheckoutFlowCoordinator?
+	internal var checkoutCoordinator: VGSCheckoutFlowCoordinator?
 
 	/// Payment instrument.
 	internal let checkoutConfigurationType: VGSCheckoutConfigurationType

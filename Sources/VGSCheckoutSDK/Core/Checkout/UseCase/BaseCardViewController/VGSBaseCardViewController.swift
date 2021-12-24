@@ -35,10 +35,10 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 	// MARK: - Vars
 
 	/// Manager for card data logic.
-	fileprivate let cardDataSectionViewModel: VGSCardDataSectionViewModel
+	internal let cardDataSectionViewModel: VGSCardDataSectionViewModel
 
 	/// Manager for billing address logic.
-	fileprivate let addressDataSectionViewModel: VGSAddressDataSectionViewModel
+	internal let addressDataSectionViewModel: VGSAddressDataSectionViewModel
 
 	/// Main view.
 	internal let addCardSectionFormView: VGSSaveCardFormView
