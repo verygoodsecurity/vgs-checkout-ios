@@ -8,20 +8,20 @@ import Foundation
 internal struct VGSMultiplexingPaymentInfo {
 	
 	/// Payment amount in decinals.
-	let amount: Int
+	let amount: Int64
 
 	/// Curency.
 	let currency: String
 
 	init?(json: JsonData) {
-		guard let amount = json["amount"] as? Int, let currency = json["currency"] as? String else {
+		guard let amount = json["amount"] as? Int64, let currency = json["currency"] as? String else {
 			return nil
 		}
 		self.amount = amount
 		self.currency = currency
 	}
 
-	init(amount: Int, currency: String) {
+	init(amount: Int64, currency: String) {
 		self.amount = amount
 		self.currency = currency
 	}
