@@ -83,6 +83,16 @@ public struct VGSCheckoutMultiplexingPaymentConfiguration: VGSCheckoutBasicConfi
 
 	/// Checkout UI elements  configuration.
 	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+  
+  /// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
+  public var saveCardOptionEnabled: Bool {
+    get {
+      return formConfiguration.showSaveCardOption
+    }
+    set {
+      formConfiguration.showSaveCardOption = newValue
+    }
+  }
 
 	/// Billing address visibility.
 	public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
