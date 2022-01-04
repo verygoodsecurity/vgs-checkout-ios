@@ -15,7 +15,7 @@ internal class VGSMultiplexingPayWithCardViewModel {
 	// MARK: - Vars
 
 	/// Configuration.
-	private let multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration
+	private(set) var multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration
 
 	let apiWorker: VGSMultiplexingPaymentsAPIWorker
 
@@ -40,4 +40,6 @@ internal class VGSMultiplexingPayWithCardViewModel {
 
 		return text
 	}
+  
+  internal var saveCardCheckboxSelected: Bool = true
 }

@@ -11,7 +11,7 @@ import UIKit
 internal class VGSCheckboxButton: UIControl {
 
 	// MARK: - Vars
-
+  
 	/// Stack view.
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView(frame: .zero)
@@ -23,6 +23,8 @@ internal class VGSCheckboxButton: UIControl {
 
 		return stackView
 	}()
+  
+  var onTap: (() -> Void)?
 
 	/// Checkbox.
 	internal let checkbox: VGSCheckbox
@@ -102,5 +104,6 @@ internal class VGSCheckboxButton: UIControl {
 	@objc private func didTap() {
 		isSelected.toggle()
 		sendActions(for: .touchUpInside)
+    onTap?()
 	}
 }
