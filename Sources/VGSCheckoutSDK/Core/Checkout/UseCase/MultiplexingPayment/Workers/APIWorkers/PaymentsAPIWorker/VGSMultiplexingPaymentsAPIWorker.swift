@@ -14,17 +14,23 @@ internal final class VGSMultiplexingPaymentsAPIWorker {
 	/// Configuration.
 	private let multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration
 
+  /// Financial instruments path.
+  private let multiplexingFinInstrumentsPath = "/financial_instruments"
+
+  /// Transfers path.
+  private let multiplexingTransfersPath = "/transfers"
+
+  
 	init(multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration, vgsCollect: VGSCollect) {
 		self.multiplexingConfiguration = multiplexingConfiguration
 		self.vgsCollect = vgsCollect
 	}
 
-	internal func createFinIDAndSendTransfer(with completion: @escaping VGSCheckoutRequestResultCompletion) {
+  internal func createFinIDAndSendTransfer(with paymentMethod: VGSCheckoutPaymentMethod, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(multiplexingConfiguration.accessToken)"]
 
-		let multiplexingPath = "/financial_instruments"
 
-		vgsCollect.sendData(path: multiplexingPath, method: .post) {[weak self] response in
+		vgsCollect.sendData(path: multiplexingFinInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}
 			switch response {
 			case .success(let code, let data, let response):
@@ -35,7 +41,7 @@ internal final class VGSMultiplexingPaymentsAPIWorker {
 					return
 				}
 
-				strongSelf.sendTransfer(with: id, completion: completion)
+        strongSelf.sendTransfer(with: paymentMethod, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
@@ -43,19 +49,18 @@ internal final class VGSMultiplexingPaymentsAPIWorker {
 		}
 	}
 
-	internal func sendTransfer(with finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func sendTransfer(with paymentMethod: VGSCheckoutPaymentMethod, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		let transderPayload: [String: Any] = [
 			"order_id": multiplexingConfiguration.orderId,
 			"financial_instrument_id": finId
 		]
-
-		let multiplexingPath = "/transfers"
-
 		// Use API client sendRequest since we don't need to send collected data again.
-		vgsCollect.apiClient.sendRequest(path: multiplexingPath, method: .post, value: transderPayload) { response in
+		vgsCollect.apiClient.sendRequest(path: multiplexingTransfersPath, method: .post, value: transderPayload) { response in
 			switch response {
 			case .success(let code, let data, let response):
-				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, nil)
+        /// Additional checkaout flow info.
+        let info = VGSCheckoutPaymentFlowInfo(paymentMethod: paymentMethod)
+				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, info)
 				completion(requestResult)
 			case .failure(let code, let data, let response, let error):
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)

@@ -53,13 +53,19 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 		addCardSectionFormView.submitButton.title = viewModel.submitButtonTitle
 
 		// Add checkbox button.
-		checkboxButton.isSelected = true
-		let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()
-		containerView.addContentView(checkboxButton)
-		if let indexOfButton = addCardSectionFormView.backgroundStackView.arrangedSubviews.firstIndex(of: addCardSectionFormView.payButtonContainerView) {
-			addCardSectionFormView.backgroundStackView.insertArrangedSubview(containerView, at: indexOfButton)
-		}
-	}
+    if viewModel.multiplexingConfiguration.saveCardOptionEnabled {
+      checkboxButton.isSelected = viewModel.saveCardCheckboxSelected
+      let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()
+      containerView.addContentView(checkboxButton)
+      if let indexOfButton = addCardSectionFormView.backgroundStackView.arrangedSubviews.firstIndex(of: addCardSectionFormView.payButtonContainerView) {
+        addCardSectionFormView.backgroundStackView.insertArrangedSubview(containerView, at: indexOfButton)
+      }
+      
+      checkboxButton.onTap = { [weak self] in
+        self?.viewModel.saveCardCheckboxSelected = self?.checkboxButton.isSelected ?? true
+      }
+    }
+  }
 }
 
 // MARK: - VGSCheckoutBaseCardViewControllerDelegate
@@ -68,7 +74,9 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 	func submitButtonDidTap(in formState: VGSBaseCardViewController.FormState, viewController: VGSBaseCardViewController) {
 		switch formState {
 		case .processing:
-			viewModel.apiWorker.createFinIDAndSendTransfer{[weak self] requestResult in
+    // TODO: handle other payment methods after save card flow implemented
+      let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
+      viewModel.apiWorker.createFinIDAndSendTransfer(with: .newCard(cardInfo)){[weak self] requestResult in
 				guard let strongSelf = self else {return}
 				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
 				guard let service = strongSelf.paymentService else {return}

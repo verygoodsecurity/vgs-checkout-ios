@@ -17,7 +17,7 @@ internal final class VGSFormatAmountUtils {
 	///   - currencyCode: `String` object, currency.
 	///   - localeIdentifier: `String?` object, locale identifier.
 	/// - Returns: The formatted currency amount.
-	internal static func formatted(amount: Int, currencyCode: String, localeIdentifier: String? = nil) -> String? {
+	internal static func formatted(amount: Int64, currencyCode: String, localeIdentifier: String? = nil) -> String? {
 		let decimalAmount = decimalAmount(amount, currencyCode: currencyCode, localeIdentifier: localeIdentifier)
 
 		return currencyFormatter(currencyCode: currencyCode, localeIdentifier: localeIdentifier).string(from: decimalAmount)
@@ -29,7 +29,7 @@ internal final class VGSFormatAmountUtils {
 	///   - amount: `Int` object, amount in decimals.
 	///   - currencyCode: `String` object, currency.
 	///   - localeIdentifier: `String?` object, locale identifier.
-	internal static func decimalAmount(_ amount: Int, currencyCode: String, localeIdentifier: String? = nil) -> NSDecimalNumber {
+	internal static func decimalAmount(_ amount: Int64, currencyCode: String, localeIdentifier: String? = nil) -> NSDecimalNumber {
 			let defaultFormatter = currencyFormatter(currencyCode: currencyCode, localeIdentifier: localeIdentifier)
 			let maximumFractionDigits = maxFractionDigits(for: currencyCode, localeIdentifier: localeIdentifier)
 			defaultFormatter.maximumFractionDigits = maximumFractionDigits

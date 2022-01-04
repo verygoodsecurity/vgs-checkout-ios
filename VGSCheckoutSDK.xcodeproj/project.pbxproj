@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		034834BB26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */; };
+		039BF507278440EA00345F7A /* VGSCheckoutPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039BF506278440EA00345F7A /* VGSCheckoutPaymentMethod.swift */; };
 		03B674A026B308EC0001E5AD /* VGSPostalCodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */; };
 		326B6B102704C7A10028BACD /* VGSCheckoutBillingAddressVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B6B0E2704C7A10028BACD /* VGSCheckoutBillingAddressVisibility.swift */; };
 		326B6B112704C7A10028BACD /* VGSMultiplexingFormConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B6B0F2704C7A10028BACD /* VGSMultiplexingFormConfiguration.swift */; };
@@ -271,6 +272,7 @@
 
 /* Begin PBXFileReference section */
 		034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutMultiplexingCredentialsValidator.swift; sourceTree = "<group>"; };
+		039BF506278440EA00345F7A /* VGSCheckoutPaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPaymentMethod.swift; sourceTree = "<group>"; };
 		03B6749F26B308EC0001E5AD /* VGSPostalCodeFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPostalCodeFieldView.swift; sourceTree = "<group>"; };
 		326B6B0E2704C7A10028BACD /* VGSCheckoutBillingAddressVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressVisibility.swift; sourceTree = "<group>"; };
 		326B6B0F2704C7A10028BACD /* VGSMultiplexingFormConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSMultiplexingFormConfiguration.swift; sourceTree = "<group>"; };
@@ -551,6 +553,14 @@
 				034834BA26E0B7F600AE59F7 /* VGSCheckoutMultiplexingCredentialsValidator.swift */,
 			);
 			path = ConfigurationValidation;
+			sourceTree = "<group>";
+		};
+		039BF505278440D900345F7A /* CheckoutPaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				039BF506278440EA00345F7A /* VGSCheckoutPaymentMethod.swift */,
+			);
+			path = CheckoutPaymentMethod;
 			sourceTree = "<group>";
 		};
 		326B6B0C2704C7A10028BACD /* MultiplexingFormConfiguration */ = {
@@ -931,7 +941,6 @@
 		44014FD62767169B00C3EDFD /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				440AB61F27687D2D00D7C003 /* APIWorker */,
 				44014FD92767182A00C3EDFD /* OrderAPIWorker */,
 				44014FD7276716C200C3EDFD /* VGSCheckoutMultiplexingPaymentConfiguration.swift */,
 			);
@@ -1487,13 +1496,6 @@
 			path = PaymentsAPIWorker;
 			sourceTree = "<group>";
 		};
-		440AB61F27687D2D00D7C003 /* APIWorker */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APIWorker;
-			sourceTree = "<group>";
-		};
 		440AB620276B031000D7C003 /* Checkbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -1818,6 +1820,7 @@
 		44D520D026771ECF005AB588 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				039BF505278440D900345F7A /* CheckoutPaymentMethod */,
 				44D520D126771ED7005AB588 /* CheckoutRequestResult */,
 			);
 			path = Models;
@@ -2413,6 +2416,7 @@
 				44C4C9092664ECD200195505 /* VGSCheckoutCustomConfiguration.swift in Sources */,
 				44E10ACD269D6C60001F0D44 /* VGSCheckoutLocalizationSettings.swift in Sources */,
 				44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */,
+				039BF507278440EA00345F7A /* VGSCheckoutPaymentMethod.swift in Sources */,
 				440AB625276B047400D7C003 /* VGSCheckboxButton.swift in Sources */,
 				44014FB12767080200C3EDFD /* VGSCardNumberFieldValidator.swift in Sources */,
 				44E10ACB269D4508001F0D44 /* VGSCheckoutLocalizationUtils.swift in Sources */,

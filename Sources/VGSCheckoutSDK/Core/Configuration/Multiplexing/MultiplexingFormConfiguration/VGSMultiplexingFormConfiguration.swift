@@ -16,6 +16,8 @@ internal struct VGSMultiplexingFormConfiguration {
 	/// Form validation behavior, default is `.onSubmit`.
 	var formValidationBehaviour = VGSCheckoutFormValidationBehaviour.onSubmit
   
+  var showSaveCardOption = true
+  
   /// no:doc
   internal init() {}
 }
