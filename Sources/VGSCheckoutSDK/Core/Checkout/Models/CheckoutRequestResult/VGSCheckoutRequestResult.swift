@@ -7,6 +7,12 @@ import Foundation
 /// Checkout addtional info in `VGSCheckoutRequestResult`.
 public protocol VGSCheckoutInfo {}
 
+/// Additional Payment Flow info.
+public struct VGSCheckoutPaymentFlowInfo: VGSCheckoutInfo {
+  /// Payment method choosen by user.
+  let paymentMethod: VGSCheckoutPaymentMethod
+}
+
 /// Basic Checkout addtional info.
 internal protocol VGSCheckoutBasicExtraData {}
 
