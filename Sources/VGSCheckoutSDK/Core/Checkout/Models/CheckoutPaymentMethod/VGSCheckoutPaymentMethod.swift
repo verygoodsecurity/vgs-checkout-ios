@@ -13,14 +13,16 @@ public enum VGSCheckoutPaymentMethod {
 
 /// Saved payment card details.
 public struct VGSCheckoutPaymentCardInfo {
-  let isDefault: Bool
+  /// `true` if selected as default payment card.
+  public let isDefault: Bool
 //  let last4: String
 //  let cardBrand: VGSCheckoutPaymentCards.CardBrand
 }
 
 /// New payment card details.
 public struct VGSCheckoutNewPaymentCardInfo {
-  let shouldSave: Bool
+  /// `true` if selected to be saved for future payments.
+  public let shouldSave: Bool
 //  let last4: String
 //  let cardBrand: VGSCheckoutPaymentCards.CardBrand
 }
