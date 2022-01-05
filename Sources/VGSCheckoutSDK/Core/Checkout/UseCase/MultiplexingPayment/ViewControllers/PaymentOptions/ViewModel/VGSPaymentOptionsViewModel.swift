@@ -1,11 +1,12 @@
 //
-//  VGSMultiplexingPayWithCardViewModel.swift
+//  VGSPaymentOptionsViewModel.swift
 //  VGSCheckoutSDK
+
 
 import Foundation
 
-/// Pay with card component view model for multiplexing configuration.
-internal class VGSMultiplexingPayWithCardViewModel {
+/// Payment options component view model for multiplexing configuration.
+internal class VGSPaymentOptionsViewModel {
 
 	internal init(multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration, vgsCollect: VGSCollect) {
 		self.multiplexingConfiguration = multiplexingConfiguration
@@ -40,6 +41,6 @@ internal class VGSMultiplexingPayWithCardViewModel {
 
 		return text
 	}
-  
-  internal var saveCardCheckboxSelected: Bool = true
+
+	internal var saveCardCheckboxSelected: Bool = true
 }

@@ -11,8 +11,8 @@ import UIKit
 internal class VGSPaymentOptionsMainView: UIView {
 
 	/// Submit button.
-	internal let submitButton: VGSSubmitButton = VGSSubmitButton(frame: .zero)
-
+	internal let submitButton: VGSSubmitButton
+	
 	/// Pay button container view to add insets.
 	internal let payButtonContainerView: VGSContainerItemView = VGSAddCardFormViewBuilder.buildPaymentButtonContainerView()
 
@@ -21,7 +21,8 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	// MARK: - Initialization
 
-	internal init(theme: VGSCheckoutThemeProtocol) {
+	internal init(uiTheme: VGSCheckoutThemeProtocol) {
+		submitButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 		super.init(frame: .zero)
 		setupUI()
 	}
@@ -44,11 +45,9 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	private func setupSubmitButtonUI() {
 		addSubview(payButtonContainerView)
-		submitButton.status = .enabled
-		submitButton.title = "Pay $53.00"
-		submitButton.backgroundColor = UIColor.red
+		payButtonContainerView.paddings = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		payButtonContainerView.addContentView(submitButton)
-		payButtonContainerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		payButtonContainerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24).isActive = true
 		payButtonContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		payButtonContainerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 	}

@@ -7,12 +7,12 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for save card flow.
+/// Holds UI for pay with card flow.
 internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	// MARK: - Vars
 
-	// Save card service.
+	// Pay with card service.
 	fileprivate weak var paymentService: VGSCheckoutPaymentService?
 
 	// View model.
