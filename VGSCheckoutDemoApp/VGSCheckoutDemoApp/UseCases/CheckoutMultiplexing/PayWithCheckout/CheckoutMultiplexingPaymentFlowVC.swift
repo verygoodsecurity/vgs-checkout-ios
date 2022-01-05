@@ -116,6 +116,7 @@ extension CheckoutMultiplexingPaymentFlowVC: CheckoutFlowMainViewDelegate {
 		VGSCheckoutMultiplexingPaymentConfiguration.createConfiguration(accessToken: token, orderId: orderId, tenantId: DemoAppConfiguration.shared.multiplexingTenantId) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
+			configuration.savedPaymentCardsIds = ["1234", "5678"]
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
 			strongSelf.vgsCheckout?.delegate = strongSelf
 			// Present checkout configuration.

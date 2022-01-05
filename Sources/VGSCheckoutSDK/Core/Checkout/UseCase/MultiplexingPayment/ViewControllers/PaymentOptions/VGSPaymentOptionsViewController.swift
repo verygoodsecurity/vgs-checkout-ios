@@ -15,6 +15,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	init(paymentService: VGSCheckoutPaymentService) {
 		mainView = VGSPaymentOptionsMainView(theme: paymentService.uiTheme)
+		mainView.translatesAutoresizingMaskIntoConstraints = false
+		
 		super.init(nibName: nil, bundle: nil)
 	}
 
@@ -30,6 +32,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		super.viewDidLoad()
 
 		view.addSubview(mainView)
+		mainView.backgroundColor = .yellow
 		mainView.checkout_constraintViewToSuperviewEdges()
 	}
 }

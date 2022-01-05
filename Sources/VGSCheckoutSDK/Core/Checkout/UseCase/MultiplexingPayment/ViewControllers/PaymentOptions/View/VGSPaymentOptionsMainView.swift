@@ -23,6 +23,7 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	internal init(theme: VGSCheckoutThemeProtocol) {
 		super.init(frame: .zero)
+		setupUI()
 	}
 
 	/// no:doc
@@ -43,6 +44,9 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	private func setupSubmitButtonUI() {
 		addSubview(payButtonContainerView)
+		submitButton.status = .enabled
+		submitButton.title = "Pay $53.00"
+		submitButton.backgroundColor = UIColor.red
 		payButtonContainerView.addContentView(submitButton)
 		payButtonContainerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		payButtonContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
