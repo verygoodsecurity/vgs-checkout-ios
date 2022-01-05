@@ -127,6 +127,9 @@ public struct VGSCheckoutMultiplexingPaymentConfiguration: VGSCheckoutBasicConfi
 		}
 	}
 
+	/// An array of financial instruments ids representing saved cards.
+	public var savedPaymentCardsIds: [String] = []
+
 	// MARK: - Internal
 
 	/// Form configuration options. Check `VGSCheckoutMultiplexingFormConfiguration` for default settings.

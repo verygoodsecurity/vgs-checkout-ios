@@ -33,9 +33,21 @@ internal class VGSCheckoutPaymentService: NSObject, VGSCheckoutServiceProtocol {
 	/// Builds view controller for save card flow.
 	/// - Returns: `UIViewController` object, view controller with save card form.
 	internal func buildCheckoutViewController() -> UIViewController {
-		let saveCardViewController = VGSPayWithCardViewController(paymentService: self)
-		let navigationController = UINavigationController(rootViewController: saveCardViewController)
+		switch checkoutConfigurationType {
+		case .multiplexingPayment(let configuration):
+			if configuration.savedPaymentCardsIds.isEmpty {
+				let saveCardViewController = VGSPayWithCardViewController(paymentService: self)
+				let navigationController = UINavigationController(rootViewController: saveCardViewController)
 
-		return navigationController
+				return navigationController
+			} else {
+				let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
+				let navigationController = UINavigationController(rootViewController: paymentOptionsVC)
+
+				return navigationController
+			}
+		default:
+			fatalError("wrong flow")
+		}
 	}
 }
