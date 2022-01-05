@@ -64,6 +64,9 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		navigationItem.leftBarButtonItem = closeBarButtomItem
 
 		mainView.backgroundColor = .yellow
+
+		mainView.tableView.register(VGSPaymentOptionCardTableViewCell.self, forCellReuseIdentifier: "VGSPaymentOptionCardTableViewCell")
+		mainView.tableView.dataSource = self
 	}
 
 	/// Handles tap on close button.
@@ -71,5 +74,24 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 //		VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .cancel)
 		guard let service = paymentService else {return}
 		paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .cancelled, in: service)
+	}
+}
+
+extension VGSPaymentOptionsViewController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return viewModel.paymentOptions.count
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let option = viewModel.paymentOptions[indexPath.row]
+		switch option {
+		case .savedCard(let card):
+			let cardPaymentOptionCell = mainView.tableView.dequeueReusableCell(withIdentifier: "VGSPaymentOptionCardTableViewCell") as! VGSPaymentOptionCardTableViewCell
+			cardPaymentOptionCell.configure(with: card.paymentOptionCellViewModel, uiTheme: uiTheme)
+
+			return cardPaymentOptionCell
+		case .newCard:
+			fatalError("not implemented")
+		}
 	}
 }

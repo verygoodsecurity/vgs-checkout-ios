@@ -7,15 +7,29 @@ import Foundation
 import UIKit
 #endif
 
+// GET array of saved card by id1,id2
+
 internal struct VGSSavedCardModel {
 	internal let id: String
 	internal let cardBrand: String
 	internal let last4: String
 	internal let expDate: String
 	internal let cardHolder: String
+	internal var isSelected = false
+
+	internal var paymentOptionCellViewModel: VGSPaymentOptionCardCellViewModel {
+		var image = VGSCheckoutPaymentCards.visa.brand.brandIcon
+		if cardBrand == VGSCheckoutPaymentCards.maestro.name {
+			image = VGSCheckoutPaymentCards.maestro.brandIcon
+		}
+
+		let last4Text = "**** \(last4) | \(expDate)"
+
+		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
+	}
 }
 
-internal enum VGSPaymentMethod {
+internal enum VGSPaymentOption {
 	case savedCard(_ card: VGSSavedCardModel)
 	case newCard
 }
@@ -29,6 +43,10 @@ internal struct VGSPaymentOptionCardCellViewModel {
 
 /// Holds UI for payment options screen.
 internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
+
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+	}
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -49,6 +67,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	fileprivate lazy var cardBrandImageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
+		imageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
 		imageView.contentMode = .scaleAspectFit
 
 		return imageView
@@ -73,20 +92,29 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	}()
 
 	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol) {
+
 		contentView.subviews.forEach { subview in
 			subview.removeFromSuperview()
 		}
 
 		let optionsItemView = VGSPaymentOptionItemView(uiTheme: uiTheme)
+		optionsItemView.translatesAutoresizingMaskIntoConstraints  = false
 		contentView.addSubview(optionsItemView)
-		optionsItemView.checkout_constraintViewToSuperviewEdges()
+
+		optionsItemView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+		optionsItemView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+		optionsItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+		optionsItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
 		optionsItemView.stackView.arrangedSubviews.forEach { arrangedSubview in
 			optionsItemView.stackView.removeArrangedSubview(arrangedSubview)
 		}
 
+		cardBrandImageView.image = viewModel.cardBrandImage
 		cardDetailsVerticalStackView.addArrangedSubview(cardHolderLabel)
+		cardHolderLabel.text = viewModel.cardHolder
 		cardDetailsVerticalStackView.addArrangedSubview(cardDetailsLabel)
+		cardDetailsLabel.text = viewModel.last4AndExpDateText
 
 		optionsItemView.stackView.addArrangedSubview(cardBrandImageView)
 		optionsItemView.stackView.addArrangedSubview(cardDetailsVerticalStackView)

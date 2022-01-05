@@ -7,8 +7,28 @@ import Foundation
 import UIKit
 #endif
 
+internal class SelfSizedTableView: UITableView {
+	var maxHeight: CGFloat = UIScreen.main.bounds.size.height
+
+	override func reloadData() {
+		super.reloadData()
+		self.invalidateIntrinsicContentSize()
+		self.layoutIfNeeded()
+	}
+
+	override var intrinsicContentSize: CGSize {
+		 setNeedsLayout()
+		 layoutIfNeeded()
+		 let height = contentSize.height
+		 return CGSize(width: contentSize.width, height: height)
+	}
+}
+
 /// Holds UI for payment options screen.
 internal class VGSPaymentOptionsMainView: UIView {
+
+	/// Table view.
+	internal let tableView = SelfSizedTableView(frame: .zero)
 
 	/// Submit button.
 	internal let submitButton: VGSSubmitButton
@@ -37,9 +57,13 @@ internal class VGSPaymentOptionsMainView: UIView {
 	/// Setup UI.
 	internal func setupUI() {
 		addSubview(formView)
+		formView.translatesAutoresizingMaskIntoConstraints = false
 		formView.checkout_constraintViewToSuperviewEdges()
 		formView.stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		formView.stackView.isLayoutMarginsRelativeArrangement = true
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		tableView.isScrollEnabled = false
+		formView.stackView.addArrangedSubview(tableView)
 		setupSubmitButtonUI()
 	}
 
