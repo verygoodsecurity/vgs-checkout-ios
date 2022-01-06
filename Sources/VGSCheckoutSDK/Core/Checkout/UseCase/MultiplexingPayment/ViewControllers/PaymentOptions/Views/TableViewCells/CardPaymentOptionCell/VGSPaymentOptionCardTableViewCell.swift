@@ -44,21 +44,62 @@ internal struct VGSPaymentOptionCardCellViewModel {
 /// Holds UI for payment options screen.
 internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
+	// no:doc
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		selectionStyle = .none
+		contentView.backgroundColor = .clear
+		backgroundColor = .clear
+		contentView.addSubview(itemContainerView)
+
+		itemContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+		itemContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+		itemContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+		itemContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+		horizontalStackView.addArrangedSubview(cardBrandImageView)
+		horizontalStackView.addArrangedSubview(cardDetailsStackView)
+
+		cardDetailsStackView.addArrangedSubview(cardHolderLabel)
+		cardDetailsStackView.addArrangedSubview(cardDetailsLabel)
+
+		itemContainerView.stackView.addArrangedSubview(horizontalStackView)
 	}
 
+	/// no:doc
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	/// Container view.
+	internal lazy var itemContainerView: VGSPaymentOptionItemContainerView = {
+		let view = VGSPaymentOptionItemContainerView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.stackView.setContentCompressionResistancePriority(.required, for: .vertical)
+		view.layer.cornerRadius = 6
+		view.layer.masksToBounds = true
+
+		return view
+	}()
+
+	/// Horizontal stack view.
+	internal lazy var horizontalStackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .horizontal
+		stackView.spacing = 4
+		stackView.alignment = .center
+
+		return stackView
+	}()
+
 	/// Vertical stack view.
-	internal lazy var cardDetailsVerticalStackView: UIStackView = {
+	internal lazy var cardDetailsStackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.alignment = .fill
-		stackView.spacing = 4
+		stackView.distribution = .equalCentering
 
 		return stackView
 	}()
@@ -77,7 +118,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	fileprivate lazy var cardHolderLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.numberOfLines = 1
+		label.numberOfLines = 0
 
 		return label
 	}()
@@ -86,37 +127,23 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	fileprivate lazy var cardDetailsLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.numberOfLines = 1
+		label.numberOfLines = 0
 
 		return label
 	}()
 
 	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol) {
 
-		contentView.subviews.forEach { subview in
-			subview.removeFromSuperview()
-		}
+		cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
+		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
 
-		let optionsItemView = VGSPaymentOptionItemView(uiTheme: uiTheme)
-		optionsItemView.translatesAutoresizingMaskIntoConstraints  = false
-		contentView.addSubview(optionsItemView)
+		cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsTitleColor
+		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
 
-		optionsItemView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-		optionsItemView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-		optionsItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-		optionsItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-
-		optionsItemView.stackView.arrangedSubviews.forEach { arrangedSubview in
-			optionsItemView.stackView.removeArrangedSubview(arrangedSubview)
-		}
+		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
 
 		cardBrandImageView.image = viewModel.cardBrandImage
-		cardDetailsVerticalStackView.addArrangedSubview(cardHolderLabel)
 		cardHolderLabel.text = viewModel.cardHolder
-		cardDetailsVerticalStackView.addArrangedSubview(cardDetailsLabel)
 		cardDetailsLabel.text = viewModel.last4AndExpDateText
-
-		optionsItemView.stackView.addArrangedSubview(cardBrandImageView)
-		optionsItemView.stackView.addArrangedSubview(cardDetailsVerticalStackView)
 	}
 }

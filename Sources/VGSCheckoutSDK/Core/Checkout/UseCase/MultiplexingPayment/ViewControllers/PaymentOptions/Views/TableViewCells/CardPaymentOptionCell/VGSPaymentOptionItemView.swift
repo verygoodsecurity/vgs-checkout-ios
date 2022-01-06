@@ -1,5 +1,5 @@
 //
-//  VGSPaymentOptionItemView.swift
+//  VGSPaymentOptionItemContainerView.swift
 //  VGSCheckoutSDK
 
 import Foundation
@@ -8,16 +8,13 @@ import UIKit
 #endif
 
 /// Payment option item view.
-internal class VGSPaymentOptionItemView: UIView {
-
-	/// Theme object.
-	internal let uiTheme: VGSCheckoutThemeProtocol
+internal class VGSPaymentOptionItemContainerView: UIView {
 
 	/// Stack view.
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-		stackView.axis = .horizontal
+		stackView.axis = .vertical
 		stackView.alignment = .fill
 		stackView.spacing = 8
 		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 4, right: 16)
@@ -26,8 +23,7 @@ internal class VGSPaymentOptionItemView: UIView {
 		return stackView
 	}()
 
-	init(uiTheme: VGSCheckoutThemeProtocol) {
-		self.uiTheme = uiTheme
+	init() {
 		super.init(frame: .zero)
 		setupUI()
 	}

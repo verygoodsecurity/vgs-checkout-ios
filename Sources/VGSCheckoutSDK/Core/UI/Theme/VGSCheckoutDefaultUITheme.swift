@@ -90,13 +90,13 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutSavedCardCardholderTitleColor: UIColor = .systemBlue
 
 	/// The text font of the card holder title in saved card item.
-	public var checkoutSavedCardCardholderTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
+	public var checkoutSavedCardCardholderTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .footnote, weight: .medium)
 
 	/// The text color of the last 4 and exp date in saved card item.
 	public var checkoutSavedCardDetailsTitleColor: UIColor = .vgsSystemGray2Color
 
 	/// The text font of the of the last 4 and exp date in saved card item.
-	public var checkoutSavedCardDetailsTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
+	public var checkoutSavedCardDetailsTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .footnote, weight: .medium)
 
 	/// The border color of the saved card item when selected.
 	public var checkoutSavedCardSelectedBorderColor: UIColor = .systemBlue

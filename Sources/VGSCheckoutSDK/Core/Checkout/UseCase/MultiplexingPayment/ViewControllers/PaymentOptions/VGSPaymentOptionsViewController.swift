@@ -67,6 +67,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 		mainView.tableView.register(VGSPaymentOptionCardTableViewCell.self, forCellReuseIdentifier: "VGSPaymentOptionCardTableViewCell")
 		mainView.tableView.dataSource = self
+
+		mainView.tableView.reloadData()
 	}
 
 	/// Handles tap on close button.
