@@ -84,7 +84,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutCheckboxHintFont: UIFont = .preferredFont(forTextStyle: .footnote)
 
 	/// The background color of the saved card item.
-	public var checkoutPaymentOptionBackgroundColor: UIColor = .vgsSystemBackground
+	public var checkoutPaymentOptionBackgroundColor: UIColor = .white
 
 	/// The text color of the card holder title in saved card item.
 	public var checkoutSavedCardCardholderTitleColor: UIColor = .systemBlue

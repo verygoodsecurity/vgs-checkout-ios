@@ -63,7 +63,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		closeBarButtomItem = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
 		navigationItem.leftBarButtonItem = closeBarButtomItem
 
-		mainView.backgroundColor = .yellow
+		mainView.backgroundColor = uiTheme.checkoutViewBackgroundColor
+		mainView.tableView.backgroundColor = .clear
 
 		mainView.tableView.register(VGSPaymentOptionCardTableViewCell.self, forCellReuseIdentifier: "VGSPaymentOptionCardTableViewCell")
 		mainView.tableView.dataSource = self

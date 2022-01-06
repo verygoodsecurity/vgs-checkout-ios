@@ -14,11 +14,12 @@ internal class VGSPaymentOptionItemContainerView: UIView {
 	internal lazy var stackView: UIStackView = {
 		let stackView = UIStackView()
 		stackView.translatesAutoresizingMaskIntoConstraints = false
-		stackView.axis = .vertical
+		stackView.axis = .horizontal
 		stackView.alignment = .fill
 		stackView.spacing = 8
 		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 4, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
+		stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60).isActive = true
 
 		return stackView
 	}()
@@ -33,6 +34,7 @@ internal class VGSPaymentOptionItemContainerView: UIView {
 		fatalError("not implemented")
 	}
 
+	/// Setup UI.
 	private func setupUI() {
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()

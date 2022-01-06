@@ -62,12 +62,19 @@ internal class VGSPaymentOptionsMainView: UIView {
 	internal func setupUI() {
 		addSubview(formView)
 		formView.translatesAutoresizingMaskIntoConstraints = false
-		formView.checkout_constraintViewToSuperviewEdges()
+		formView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		formView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+		formView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		formView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -75).isActive = true
+
 		formView.stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		formView.stackView.isLayoutMarginsRelativeArrangement = true
+
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.isScrollEnabled = false
+
 		formView.stackView.addArrangedSubview(tableView)
+		formView.scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
 		setupSubmitButtonUI()
 	}
 
