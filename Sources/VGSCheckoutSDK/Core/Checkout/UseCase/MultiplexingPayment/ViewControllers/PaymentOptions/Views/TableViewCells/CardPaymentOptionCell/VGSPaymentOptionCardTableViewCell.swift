@@ -23,7 +23,7 @@ internal struct VGSSavedCardModel {
 			image = VGSCheckoutPaymentCards.maestro.brandIcon
 		}
 
-		let last4Text = "**** \(last4) | \(expDate)"
+		let last4Text = "•••• \(last4) | \(expDate)"
 
 		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
 	}

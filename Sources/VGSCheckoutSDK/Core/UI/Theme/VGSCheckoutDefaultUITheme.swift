@@ -82,4 +82,28 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 
 	/// The font of the hint in checkbox. Default is `.footnote`.
 	public var checkoutCheckboxHintFont: UIFont = .preferredFont(forTextStyle: .footnote)
+
+	/// The background color of the saved card item.
+	public var checkoutPaymentOptionBackgroundColor: UIColor = .vgsSystemBackground
+
+	/// The text color of the card holder title in saved card item.
+	public var checkoutSavedCardCardholderTitleColor: UIColor = .systemBlue
+
+	/// The text font of the card holder title in saved card item.
+	public var checkoutSavedCardCardholderTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
+
+	/// The text color of the last 4 and exp date in saved card item.
+	public var checkoutSavedCardDetailsTitleColor: UIColor = .vgsSystemGray2Color
+
+	/// The text font of the of the last 4 and exp date in saved card item.
+	public var checkoutSavedCardDetailsTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
+
+	/// The border color of the saved card item when selected.
+	public var checkoutSavedCardSelectedBorderColor: UIColor = .systemBlue
+
+	/// The text color for new card payment option title.
+	public var checkoutPaymentOptionNewCardTitleColor: UIColor = .systemBlue
+
+	/// The font for new card payment option title.
+	public var checkoutPaymentOptionNewCardTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
 }

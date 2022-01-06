@@ -43,3 +43,31 @@ public protocol VGSCheckoutCheckboxThemeProtocol {
 	/// The font of the hint in checkbox.
 	var checkoutCheckboxHintFont: UIFont { get set }
 }
+
+/// Defines Payment options UI Theme.
+public protocol VGSCheckoutPaymentOptionsThemeProtocol {
+
+	/// The background color of the saved card item.
+	var checkoutPaymentOptionBackgroundColor: UIColor {get set}
+
+	/// The text color of the card holder title in saved card item.
+	var checkoutSavedCardCardholderTitleColor: UIColor {get set}
+
+	/// The text font of the card holder title in saved card item.
+	var checkoutSavedCardCardholderTitleFont: UIFont {get set}
+
+	/// The text color of the last 4 and exp date in saved card item.
+	var checkoutSavedCardDetailsTitleColor: UIColor {get set}
+
+	/// The text font of the of the last 4 and exp date in saved card item.
+	var checkoutSavedCardDetailsTitleFont: UIFont {get set}
+
+	/// The border color of the saved card item when selected.
+	var checkoutSavedCardSelectedBorderColor: UIColor {get set}
+
+	/// The text color for new card payment option title.
+	var checkoutPaymentOptionNewCardTitleColor: UIColor {get set}
+
+	/// The font for new card payment option title.
+	var checkoutPaymentOptionNewCardTitleFont: UIFont {get set}
+}
