@@ -116,7 +116,6 @@ extension CheckoutMultiplexingPaymentFlowVC: CheckoutFlowMainViewDelegate {
 		VGSCheckoutMultiplexingPaymentConfiguration.createConfiguration(accessToken: token, orderId: orderId, tenantId: DemoAppConfiguration.shared.multiplexingTenantId) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
-			configuration.savedPaymentCardsIds = ["1234", "5678"]
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
 			strongSelf.vgsCheckout?.delegate = strongSelf
 			// Present checkout configuration.
@@ -124,8 +123,6 @@ extension CheckoutMultiplexingPaymentFlowVC: CheckoutFlowMainViewDelegate {
 		} failure: {[weak self] error in
 			SVProgressHUD.showError(withStatus: "Cannot create add card multiplexing config! Error: \(error.localizedDescription)")
 		}
-
-
 
 		// Create multiplexing configuration with token.
 //		if var multiplexingConfiguration = VGSCheckoutMultiplexingConfiguration(accessToken: token, tenantId: DemoAppConfiguration.shared.multiplexingTenantId, environment: DemoAppConfiguration.shared.environment) {
