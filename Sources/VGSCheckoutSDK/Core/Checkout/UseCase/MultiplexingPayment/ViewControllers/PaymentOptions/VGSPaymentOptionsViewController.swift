@@ -68,17 +68,20 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 		mainView.tableView.register(VGSPaymentOptionCardTableViewCell.self, forCellReuseIdentifier: "VGSPaymentOptionCardTableViewCell")
 		mainView.tableView.dataSource = self
+		mainView.tableView.delegate = self
 
 		mainView.tableView.reloadData()
 	}
 
 	/// Handles tap on close button.
 	@objc fileprivate func closeButtonDidTap() {
-//		VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .cancel)
 		guard let service = paymentService else {return}
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.vgsCollect.formAnalyticsDetails, type: .cancel)
 		paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .cancelled, in: service)
 	}
 }
+
+// MARK: - UITableViewDataSource
 
 extension VGSPaymentOptionsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,6 +98,44 @@ extension VGSPaymentOptionsViewController: UITableViewDataSource {
 			return cardPaymentOptionCell
 		case .newCard:
 			fatalError("not implemented")
+		}
+	}
+}
+
+
+// MARK: - UITableViewDelegate
+
+extension VGSPaymentOptionsViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let index = indexPath.row
+		var paymentOption = viewModel.paymentOptions[index]
+		switch paymentOption {
+		case.savedCard(var savedCard):
+			guard let lastSelectedId = viewModel.previsouslySelectedID else {return}
+
+			if savedCard.id == lastSelectedId {
+				return
+			} else {
+				savedCard.updateSelectionState(with: true)
+				viewModel.paymentOptions[index] = .savedCard(savedCard)
+				for i in 0...viewModel.paymentOptions.count - 1 {
+					var option = viewModel.paymentOptions[i]
+					switch option {
+					case .savedCard(var card):
+						card.updateSelectionState(with: false);
+						if card.id == lastSelectedId {
+							viewModel.paymentOptions[i] = .savedCard(card)
+						}
+					case .newCard:
+						continue
+					}
+				}
+			}
+
+			viewModel.previsouslySelectedID = savedCard.id
+			tableView.reloadData()
+		case .newCard:
+			break
 		}
 	}
 }

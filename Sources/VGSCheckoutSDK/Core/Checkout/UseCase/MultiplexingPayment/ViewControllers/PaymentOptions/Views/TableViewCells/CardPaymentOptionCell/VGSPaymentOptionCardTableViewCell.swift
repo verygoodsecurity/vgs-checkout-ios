@@ -27,6 +27,10 @@ internal struct VGSSavedCardModel {
 
 		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
 	}
+
+	mutating func updateSelectionState(with selectionState: Bool) {
+		isSelected = selectionState
+	}
 }
 
 internal enum VGSPaymentOption {
@@ -111,6 +115,18 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		return label
 	}()
 
+	///
+	fileprivate lazy var checkboxContainerView: UIView = {
+		let view = UIView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
+
+	/// Checkbox
+	fileprivate var checkbox: VGSRoundedCheckbox?
+
 	// MARK: - Interface
 
 	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol) {
@@ -126,6 +142,16 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		cardBrandImageView.image = viewModel.cardBrandImage
 		cardHolderLabel.text = viewModel.cardHolder
 		cardDetailsLabel.text = viewModel.last4AndExpDateText
+
+		if checkbox == nil {
+			let roundedCheckbox = VGSRoundedCheckbox(theme: uiTheme)
+			roundedCheckbox.translatesAutoresizingMaskIntoConstraints = false
+			checkboxContainerView.addSubview(roundedCheckbox)
+			roundedCheckbox.centerXAnchor.constraint(equalTo: checkboxContainerView.centerXAnchor).isActive = true
+			roundedCheckbox.centerYAnchor.constraint(equalTo: checkboxContainerView.centerYAnchor).isActive = true
+			checkbox = roundedCheckbox
+		}
+		checkbox?.isSelected = viewModel.isSelected
 	}
 
 	// MARK: - Helpers
@@ -144,6 +170,8 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 		itemContainerView.stackView.addArrangedSubview(cardBrandImageView)
 		itemContainerView.stackView.addArrangedSubview(cardDetailsStackView)
+		itemContainerView.stackView.addArrangedSubview(checkboxContainerView)
+		checkboxContainerView.widthAnchor.constraint(equalToConstant: 22).isActive = true
 
 		cardDetailsStackView.addArrangedSubview(cardHolderLabel)
 		cardDetailsStackView.addArrangedSubview(cardDetailsLabel)

@@ -8,26 +8,41 @@ import Foundation
 /// Payment options component view model for multiplexing configuration.
 internal class VGSPaymentOptionsViewModel {
 
+	internal var previsouslySelectedID: String? = nil
+
 	internal init(multiplexingConfiguration: VGSCheckoutMultiplexingPaymentConfiguration, vgsCollect: VGSCollect) {
 		self.multiplexingConfiguration = multiplexingConfiguration
 		self.apiWorker = VGSMultiplexingPaymentsAPIWorker(multiplexingConfiguration: multiplexingConfiguration, vgsCollect: vgsCollect)
+
+		/// Preselect first card.
+		let firstPaymentOption = paymentOptions[0]
+			switch firstPaymentOption {
+			case .savedCard(let card):
+				var firstSavedCard = card
+				firstSavedCard.isSelected = true
+				paymentOptions[0] = .savedCard(firstSavedCard)
+				self.previsouslySelectedID = card.id
+			default:
+				break
+		}
 	}
 
 	// MARK: - Vars
 
+	/// An array of payment options.
 	internal var paymentOptions: [VGSPaymentOption] = [
 		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
 		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
 //		.newCard
 	]
 
