@@ -1,5 +1,5 @@
 //
-//  CheckoutMultiplexingFlowVC.swift
+//  CheckoutAddCardVC.swift
 //  VGSCheckoutDemoApp
 
 import Foundation
@@ -11,7 +11,7 @@ import SVProgressHUD
 
 // swiftlint:disable all
 /*
- Multiplexing flow use case demo.
+ Payment orchestration save card flow use case demo.
 
  Step 1: Setup your custom backend for payment orchestration.
  Step 2: Send request to your backend and fetch access token required for payment orchestration flow.
@@ -20,7 +20,7 @@ import SVProgressHUD
  Step 4: Implement `checkoutDidFinish` method and parse response to get financial instrument `id` in response json.
  Step 5: Initiate `/transfer` request with financial instrument using your backend by sending request from mobile app.
 */
-class CheckoutMultiplexingFlowVC: UIViewController {
+class CheckoutAddCardVC: UIViewController {
 
 	// MARK: - Vars
 
@@ -28,7 +28,7 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 	fileprivate var vgsCheckout: VGSCheckout?
 
 	/// Sends request to your custom backend required for payment orchestration setup.
-	fileprivate let paymentOrchestrationAPIClient = MultiplexingCustomBackendAPIClient()
+	fileprivate let paymentOrchestrationAPIClient = PaymentOrchestrationCustomBackendAPIClient()
 
 	/// ID to start payment transfer.
 	fileprivate var financialInstrumentID: String?
@@ -64,20 +64,20 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 
 // MARK: - CheckoutFlowMainViewDelegate
 
-extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
+extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
 
 		guard let id = financialInstrumentID else {
 			// Start progress hud animation until token is fetched.
 			SVProgressHUD.show()
-			paymentOrchestrationAPIClient.fetchMultiplexingToken { token in
+			paymentOrchestrationAPIClient.fetchToken { token in
 				SVProgressHUD.dismiss()
 
 				// Uncomment the line below to simulate 401 error and set invalid token to payment orchestration.
 				// let invalidToken = "Some invalid token"
 
-				self.presentMultiplexingCheckout(with: token)
+				self.presentCheckout(with: token)
 			} failure: { errorText in
 				SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
 			}
@@ -96,7 +96,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 	/// Presents payment orchestration checkout flow.
 	/// - Parameter token: `String` object, should be valid access payment orchestration token.
-	fileprivate func presentMultiplexingCheckout(with accessToken: String) {
+	fileprivate func presentCheckout(with accessToken: String) {
 		// Create payment orchestration add configuration with access token.
 		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId) {[weak self] configuration in
 			guard let strongSelf = self else {return}
@@ -113,10 +113,10 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 
 // MARK: - VGSCheckoutDelegate
 
-extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
+extension CheckoutAddCardVC: VGSCheckoutDelegate {
 
 	func checkoutDidCancel() {
-		CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout Multiplexing status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
+		CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout payment orchestration status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
 	}
 
 	func checkoutDidFinish(with requestResult: VGSCheckoutRequestResult) {
@@ -126,7 +126,7 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 
 		switch requestResult {
 		case .success(let statusCode, let data, let response, let info):
-			title = "Checkout Multiplexing status: Success!"
+			title = "Checkout Payment orchestration status: Success!"
 			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
@@ -139,16 +139,16 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 				message = "status code is: \(statusCode). Card was saved successfully but cannot obtain financial instrument id"
 			}
 		case .failure(let statusCode, _, _, let error, let info):
-			title = "Checkout Multiplexing status: Failed!"
+			title = "Checkout Payment orchestration status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 
 			// If not authorized - suggest user to retry and refetch token.
 			if statusCode == 401 {
 				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
 					SVProgressHUD.show()
-					self.paymentOrchestrationAPIClient.fetchMultiplexingToken { token in
+					self.paymentOrchestrationAPIClient.fetchToken { token in
 						SVProgressHUD.dismiss()
-						self.presentMultiplexingCheckout(with: token)
+						self.presentCheckout(with: token)
 					} failure: { _ in
 						SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
 					}

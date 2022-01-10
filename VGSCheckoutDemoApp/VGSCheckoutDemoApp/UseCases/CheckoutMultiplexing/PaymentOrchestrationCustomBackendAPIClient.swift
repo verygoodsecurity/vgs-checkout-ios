@@ -1,11 +1,11 @@
 //
-//  MultiplexingCustomBackendAPIClient.swift
+//  PaymentOrchestrationCustomBackendAPIClient.swift
 //  VGSCheckoutDemoApp
 
 import Foundation
 
-/// Your Custom API client for multiplexing.
-final class MultiplexingCustomBackendAPIClient {
+/// Your Custom API client for payment orchestration.
+final class PaymentOrchestrationCustomBackendAPIClient {
 
 	/// Succcess completion for token fetch.
 	typealias FetchTokenCompletionSuccess = (_ token: String) -> Void
@@ -22,14 +22,14 @@ final class MultiplexingCustomBackendAPIClient {
 	// Use your own backend to fetch access_token token.
 	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/get-auth-token")!
 
-	// Use your own backend to send payment to multiplexing.
+	// Use your own backend to send payment to payment orchestration backend.
 	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/transfers")!
 
-	/// Fetch multiplexing token from your own backend.
+	/// Fetch payment orchestration token from your own backend.
 	/// - Parameters:
 	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
 	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
-	func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+	func fetchToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
 
 		var request = URLRequest(url: yourCustomBackendTokenURL)
 		request.httpMethod = "POST"
@@ -57,7 +57,7 @@ final class MultiplexingCustomBackendAPIClient {
 		task.resume()
 	}
 
-	/// Initiate transfer request on multiplexing from your custom backend.
+	/// Initiate transfer request on payment orchestration backend from your custom backend.
 	/// - Parameters:
 	///   - financialInstrumentID: `String` object, id of financial instrument.
 	///   - amount: `String` object, amount of transaction.

@@ -112,7 +112,7 @@
         <!--Payment Orchestration-->
         <scene sceneID="ngu-m2-sgi">
             <objects>
-                <viewController id="fHt-gm-Djy" customClass="CheckoutMultiplexingFlowVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fHt-gm-Djy" customClass="CheckoutAddCardVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0J1-BI-2gN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
