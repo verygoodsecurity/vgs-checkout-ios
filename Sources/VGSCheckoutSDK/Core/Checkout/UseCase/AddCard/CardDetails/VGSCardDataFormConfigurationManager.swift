@@ -100,7 +100,7 @@ internal class VGSCardDataFormConfigurationManager {
 		}
 	}
 
-	/* Sample of multiplexing payload:
+	/* Sample of payment orchestration payload:
 	 {
 		 "card" : {
 			 "billing_address" : {
@@ -119,7 +119,7 @@ internal class VGSCardDataFormConfigurationManager {
 	 }
 	*/
 
-	internal static func setupCardForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
+	internal static func setupCardForm(with configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
 
 		let fieldViews = cardSectionView.fieldViews
 
@@ -167,7 +167,7 @@ internal class VGSCardDataFormConfigurationManager {
 		cvcCardNum.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_security_code")
 
 		guard let cardHolderName = fieldViews.first(where: {$0.fieldType == .cardholderName}) else {
-			assertionFailure("Invalid multiplexing setup!")
+			assertionFailure("Invalid payment orchestration setup!")
 			return
 		}
 

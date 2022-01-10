@@ -139,8 +139,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .hidden:
 				break
 			}
-		case .paymentOrchestration(let multiplexingConfig):
-			switch multiplexingConfig.billingAddressVisibility {
+		case .paymentOrchestration(let configuration):
+			switch configuration.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
 				addressDataSectionViewModel.updateInitialPostalCodeUI()

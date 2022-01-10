@@ -105,8 +105,8 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
-		case .paymentOrchestration(let multiplexingConfig):
-			setupCardForm(with: multiplexingConfig)
+		case .paymentOrchestration(let configuration):
+			setupCardForm(with: configuration)
 		}
 
 		for item in fieldViews {
@@ -123,10 +123,10 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 		VGSCardDataFormConfigurationManager.setupCardForm(with: vaultConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
-	/// Setup card form with multiplexing config.
-	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingAddCardConfiguration` object, multiplexing configuration.
-	private func setupCardForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
-		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
+	/// Setup card form with payment orchestration config.
+	/// - Parameter configuration: `VGSCheckoutAddCardConfiguration` object, payment orchestration configuration.
+	private func setupCardForm(with configuration:  VGSCheckoutAddCardConfiguration) {
+		VGSCardDataFormConfigurationManager.setupCardForm(with: configuration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 
 	/// Handles tap in form views to make textField first responder when tap is outside the textField.

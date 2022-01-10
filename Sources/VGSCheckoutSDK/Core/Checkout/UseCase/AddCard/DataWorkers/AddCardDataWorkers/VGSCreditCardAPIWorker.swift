@@ -12,7 +12,7 @@ internal protocol VGSAddCreditCardAPIWorkerProtocol {
 	func sendData(with completion: @escaping VGSCheckoutRequestResultCompletion)
 }
 
-/// Holds logic for sending data to vault (non-multiplexing flow).
+/// Holds logic for sending data to vault flow.
 internal class VGSAddCreditCardVaultAPIWorker: VGSAddCreditCardAPIWorkerProtocol {
 
 	// MARK: - Vars

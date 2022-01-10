@@ -118,15 +118,15 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 	// MARK: - Helpers
 
 	/// Setup billing address form with vault configuration.
-	/// - Parameter multiplexingConfiguration: `VGSCheckoutCustomConfiguration` object, vault configuration.
+	/// - Parameter vaultConfiguration: `VGSCheckoutCustomConfiguration` object, vault configuration.
 	private func setupBillingAddressForm(with vaultConfiguration: VGSCheckoutCustomConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: vaultConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
-	/// Setup billing address form with multiplexing configuration.
-	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
-	private func setupBillingAddressForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
-		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
+	/// Setup billing address form with configuration.
+	/// - Parameter configuration: `VGSCheckoutAddCardConfiguration` object, payment orchestration configuration.
+	private func setupBillingAddressForm(with configuration:  VGSCheckoutAddCardConfiguration) {
+		VGSAddressDataFormConfigurationManager.setupAddressForm(with: configuration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 
 	/// Handles tap in form views to make textField first responder when tap is outside the textField.

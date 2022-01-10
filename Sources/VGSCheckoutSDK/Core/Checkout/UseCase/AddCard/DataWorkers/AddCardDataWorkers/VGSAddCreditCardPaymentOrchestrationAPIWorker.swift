@@ -13,13 +13,13 @@ internal class VGSAddCreditCardPaymentOrchestrationAPIWorker: VGSAddCreditCardAP
 	internal let vgsCollect: VGSCollect
 
 	/// Configuration.
-	internal let paymentOrchestrationConfiguration:  VGSCheckoutAddCardConfiguration
+	internal let paymentOrchestrationConfiguration: VGSCheckoutAddCardConfiguration
 
 	// MARK: - Initialization
 
-	init(vgsCollect: VGSCollect, multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
+	init(vgsCollect: VGSCollect, paymentOrchestrationConfiguration: VGSCheckoutAddCardConfiguration) {
 		self.vgsCollect = vgsCollect
-		self.paymentOrchestrationConfiguration = multiplexingConfiguration
+		self.paymentOrchestrationConfiguration = paymentOrchestrationConfiguration
 	}
 
 	// MARK: - VGSAddCreditCardAPIWorkerProtocol
@@ -28,9 +28,9 @@ internal class VGSAddCreditCardPaymentOrchestrationAPIWorker: VGSAddCreditCardAP
 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(paymentOrchestrationConfiguration.accessToken)"]
 
-		let multiplexingPath = "/financial_instruments"
+		let paymentOrchestration = "/financial_instruments"
 
-		vgsCollect.sendData(path: multiplexingPath, method: .post) { response in
+		vgsCollect.sendData(path: paymentOrchestration, method: .post) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response)
