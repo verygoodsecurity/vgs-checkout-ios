@@ -280,7 +280,7 @@
 
 <ul>
 <li><strong>Customized Universal Checkout</strong> - shape the solution you need with our universal checkout solution. It’s easy to customize your integration with no heavy lifting to have a uniform experience across platforms and devices.<br/></li>
-<li><strong>Checkout for Payment Orchestration</strong> - save time and payment costs on by integration with <a href="https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing">Multiplexing App</a>.</li>
+<li><strong>Checkout for Payment Orchestration</strong> - save time and payment costs on by integration with <a href="https://www.verygoodsecurity.com/docs/payment-optimization/orchestration">Payment Optimization App</a>.</li>
 </ul>
 <h1 id='table-of-contents' class='heading'>Table of contents</h1>
 
@@ -346,12 +346,12 @@ To use Swift Package Manager, in Xcode add the <a href="https://github.com/veryg
 
 <p>VGS Checkout SDK works with different configuration types. You can get more info about available configrurations in VGS Checkout SDK <a href="https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration">docs</a>.</p>
 
-<p><strong><em>VGSCheckoutMultiplexingAddCardConfiguration setup</em></strong><br/></p>
+<p><strong><em>VGSCheckoutAddCardConfiguration setup</em></strong><br/></p>
 
-<p><code>VGSCheckoutMultiplexingAddCardConfiguration</code> requires valid access token for <a href="https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing">Multiplexing App</a>.
+<p><code><a href="Structs/VGSCheckoutAddCardConfiguration.html">VGSCheckoutAddCardConfiguration</a></code> requires valid access token for <a href="https://www.verygoodsecurity.com/docs/payment-optimization/orchestration">Payment Orchestration App</a>.
  Use your <code>tenantId</code> for payment orchestration. You can get it in your [organisation dashboard].</p>
-<pre class="highlight swift"><code><span class="c1">// Create multiplexing add configuration with access token.</span>
-<span class="kt">VGSCheckoutMultiplexingAddCardConfiguration</span><span class="o">.</span><span class="nf">createConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="s">"&lt;MULTIPLEXING_ACCESS_TOKEN&gt;"</span><span class="p">,</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="s">"&lt;TENANT_ID&gt;"</span><span class="p">,</span> <span class="nv">environment</span><span class="p">:</span> <span class="s">"&lt;ENVIRONMENT&gt;"</span><span class="p">)</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">configuration</span> <span class="k">in</span>
+<pre class="highlight swift"><code><span class="c1">// Create payment orchestration add card configuration with access token.</span>
+<span class="kt">VGSCheckoutAddCardConfiguration</span><span class="o">.</span><span class="nf">createConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="s">"&lt;ACCESS_TOKEN&gt;"</span><span class="p">,</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="s">"&lt;TENANT_ID&gt;"</span><span class="p">,</span> <span class="nv">environment</span><span class="p">:</span> <span class="s">"&lt;ENVIRONMENT&gt;"</span><span class="p">)</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">configuration</span> <span class="k">in</span>
         <span class="k">guard</span> <span class="k">let</span> <span class="nv">strongSelf</span> <span class="o">=</span> <span class="k">self</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
         <span class="n">configuration</span><span class="o">.</span><span class="n">billingAddressVisibility</span> <span class="o">=</span> <span class="o">.</span><span class="n">visible</span>
 
@@ -361,7 +361,7 @@ To use Swift Package Manager, in Xcode add the <a href="https://github.com/veryg
         <span class="n">strongSelf</span><span class="o">.</span><span class="n">vgsCheckout</span><span class="p">?</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">strongSelf</span><span class="p">)</span>
 <span class="p">}</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">error</span> <span class="k">in</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"ERROR! Cannot create multiplexing configuration!"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"ERROR! Cannot create configuration!"</span><span class="p">)</span>
 <span class="p">}</span>
 
 </code></pre>
