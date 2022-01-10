@@ -1,5 +1,5 @@
 //
-//  VGSCheckbox.swift
+//  VGSRoundedCheckbox.swift
 //  VGSCheckoutSDK
 
 import Foundation
@@ -7,8 +7,8 @@ import Foundation
 import UIKit
 #endif
 
-/// Custom checkbox control.
-internal class VGSCheckbox: UIView {
+/// Custom rounded checkbox control.
+internal class VGSRoundedCheckbox: UIView {
 
 	/// Unselected state image.
 	private let unselectedStateImage = UIImage(named: "radio_button_unselected", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
@@ -51,7 +51,13 @@ internal class VGSCheckbox: UIView {
 		self.theme = theme
 		super.init(frame: .zero)
 
-		setupUI()
+		addSubview(imageView)
+		imageView.checkout_constraintViewToSuperviewEdges()
+		addSubview(checkmarkImageView)
+		checkmarkImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+		checkmarkImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+		checkmarkImageView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+		checkmarkImageView.heightAnchor.constraint(equalToConstant: 8).isActive = true
 	}
 
 	/// no:doc
@@ -62,34 +68,23 @@ internal class VGSCheckbox: UIView {
 	/// Updates UI.
 	internal func updateUI() {
 		if isSelected {
-			checkmarkImageView.isHidden = false
+			imageView.image = nil
 			imageView.backgroundColor = theme.checkoutCheckboxSelectedColor
 			checkmarkImageView.tintColor = theme.checkoutCheckmarkTintColor
-			imageView.layer.borderWidth = 0
+			imageView.layer.cornerRadius = 11
+			imageView.layer.masksToBounds = true
+			checkmarkImageView.isHidden = false
 		} else {
 			checkmarkImageView.isHidden = true
+			imageView.tintColor = theme.checkoutCheckboxUnselectedColor
+			imageView.image = unselectedStateImage
 			imageView.backgroundColor = .clear
-			imageView.layer.borderWidth = 1
-			imageView.layer.borderColor = theme.checkoutCheckboxUnselectedColor.cgColor
+			imageView.layer.masksToBounds = false
 		}
 	}
 
 	/// no:doc
 	internal override var intrinsicContentSize: CGSize {
 		return CGSize(width: 22, height: 22)
-	}
-
-	/// Setup UI.
-	private func setupUI() {
-		addSubview(imageView)
-		imageView.checkout_constraintViewToSuperviewEdges()
-		addSubview(checkmarkImageView)
-		checkmarkImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-		checkmarkImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-		checkmarkImageView.widthAnchor.constraint(equalToConstant: 10).isActive = true
-		checkmarkImageView.heightAnchor.constraint(equalToConstant: 8).isActive = true
-
-		imageView.layer.cornerRadius = 3
-		imageView.layer.masksToBounds = true
 	}
 }
