@@ -1,32 +1,32 @@
 //
-//  VGSAddCreditCardMultiplexingAPIWorker.swift
+//  VGSAddCreditCardPaymentOrchestrationAPIWorker.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
-/// Holds logic for sending data to vault (non-multiplexing flow).
-internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerProtocol {
+/// Holds logic for sending data to payment orchestration flow.
+internal class VGSAddCreditCardPaymentOrchestrationAPIWorker: VGSAddCreditCardAPIWorkerProtocol {
 
 	// MARK: - Vars
 
 	/// Collect instance.
 	internal let vgsCollect: VGSCollect
 
-	/// Multiplexing configuration.
-	internal let multiplexingConfiguration:  VGSCheckoutAddCardConfiguration
+	/// Configuration.
+	internal let paymentOrchestrationConfiguration:  VGSCheckoutAddCardConfiguration
 
 	// MARK: - Initialization
 
 	init(vgsCollect: VGSCollect, multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
 		self.vgsCollect = vgsCollect
-		self.multiplexingConfiguration = multiplexingConfiguration
+		self.paymentOrchestrationConfiguration = multiplexingConfiguration
 	}
 
 	// MARK: - VGSAddCreditCardAPIWorkerProtocol
 
 	func sendData(with completion: @escaping VGSCheckoutRequestResultCompletion) {
 
-		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(multiplexingConfiguration.accessToken)"]
+		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(paymentOrchestrationConfiguration.accessToken)"]
 
 		let multiplexingPath = "/financial_instruments"
 

@@ -11,7 +11,7 @@ internal class VGSAddCardAPIWorkerFactory {
 		case .vault(let configuration):
 			return VGSAddCreditCardVaultAPIWorker(vgsCollect: vgsCollect, vaultConfiguration: configuration)
 		case .paymentOrchestration(let multiplexingConfiguration):
-			return VGSAddCreditCardMultiplexingAPIWorker(vgsCollect: vgsCollect, multiplexingConfiguration: multiplexingConfiguration)
+			return VGSAddCreditCardPaymentOrchestrationAPIWorker(vgsCollect: vgsCollect, multiplexingConfiguration: multiplexingConfiguration)
 		}
 	}
 }

@@ -51,12 +51,12 @@ internal enum VGSPaymentInstrument {
 	case vault(_ configuration: VGSCheckoutCustomConfiguration)
 
 	/**
-	 Payment instrument for multiplexing flow.
+	 Payment instrument for payment orchestration flow.
 
 	 - Parameters:
-			- configuration: `VGSCheckoutMultiplexingConfiguration` object, payment optimization configuration.
+			- configuration: `VGSCheckoutAddCardConfiguration` object, payment optimization configuration.
 	*/
-	case paymentOrchestration(_ configuration:  VGSCheckoutAddCardConfiguration)
+	case paymentOrchestration(_ configuration: VGSCheckoutAddCardConfiguration)
 
 	/// Initializer (failable).
 	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
@@ -74,8 +74,8 @@ internal enum VGSPaymentInstrument {
 				return nil
 			}
 		case .paymentOptimization:
-			if let multiplexingConfig = checkoutConfiguration as?  VGSCheckoutAddCardConfiguration {
-				self = .paymentOrchestration(multiplexingConfig)
+			if let config = checkoutConfiguration as?  VGSCheckoutAddCardConfiguration {
+				self = .paymentOrchestration(config)
 				return
 			} else {
 				return nil

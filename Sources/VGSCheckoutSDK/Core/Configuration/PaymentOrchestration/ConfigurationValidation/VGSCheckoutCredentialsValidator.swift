@@ -8,7 +8,7 @@ import Foundation
 /// Check and Validates Token Scope.
 internal class VGSCheckoutCredentialsValidator {
 
-	/// Multiplexing Role Scope not allowed for Save Card flow.
+	/// Payment optimization role Scope not allowed for Save Card flow.
 	static let restrictedRolesScope: String = "transfers:"
 
 	/// Returns JWT scope validation result.
