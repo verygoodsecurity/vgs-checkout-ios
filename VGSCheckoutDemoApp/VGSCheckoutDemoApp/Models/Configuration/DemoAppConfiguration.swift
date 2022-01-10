@@ -20,7 +20,7 @@ class DemoAppConfiguration {
 		}
 	}
 
-	/// Set your vault id here https://www.verygoodsecurity.com/terminology/nomenclature#vault
+	/// Set your vault id here. https://www.verygoodsecurity.com/terminology/nomenclature#vault
 	var vaultId = "vaultId"
 
 	/// Set tenant id matching your payment orchestration configuration.
@@ -29,7 +29,7 @@ class DemoAppConfiguration {
 	/// Set environment - `sandbox` for testing or `live` for production.
 	var environment = "sandbox"
 
-	/// Path to backend URL to fetch token for multipexing.
+	/// Path to backend URL to fetch token for payment orchestration.
 	var paymentOrchestrationServicePath = ""
 
 	/// Setup mocked data.
