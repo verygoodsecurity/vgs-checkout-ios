@@ -116,14 +116,14 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 			if savedCard.id == lastSelectedId {
 				return
 			} else {
-				savedCard.updateSelectionState(with: true)
+				savedCard.isSelected = true
 				viewModel.paymentOptions[index] = .savedCard(savedCard)
 				for i in 0...viewModel.paymentOptions.count - 1 {
-					var option = viewModel.paymentOptions[i]
+					let option = viewModel.paymentOptions[i]
 					switch option {
 					case .savedCard(var card):
-						card.updateSelectionState(with: false);
 						if card.id == lastSelectedId {
+							card.isSelected = false
 							viewModel.paymentOptions[i] = .savedCard(card)
 						}
 					case .newCard:
