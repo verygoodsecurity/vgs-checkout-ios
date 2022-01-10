@@ -24,13 +24,13 @@ class DemoAppConfiguration {
 	var vaultId = "vaultId"
 
 	/// Set tenant id matching your payment orchestration configuration.
-	var multiplexingTenantId = "tenantId"
+	var paymentOrchestrationTenantId = "tenantId"
 
 	/// Set environment - `sandbox` for testing or `live` for production.
 	var environment = "sandbox"
 
 	/// Path to backend URL to fetch token for multipexing.
-	var multiplexingServicePath = ""
+	var paymentOrchestrationServicePath = ""
 
 	/// Setup mocked data.
 	private func setupMockedTestDataIfNeeded() {

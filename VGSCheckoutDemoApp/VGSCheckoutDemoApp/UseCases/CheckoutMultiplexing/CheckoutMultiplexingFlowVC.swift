@@ -13,9 +13,9 @@ import SVProgressHUD
 /*
  Multiplexing flow use case demo.
 
- Step 1: Setup your custom backend for multiplexing.
- Step 2: Send request to your backend and fetch access token required for multiplexing flow.
- Step 3: Create `VGSCheckoutMultiplexingConfiguration` with fetched token and present Checkout.
+ Step 1: Setup your custom backend for payment orchestration.
+ Step 2: Send request to your backend and fetch access token required for payment orchestration flow.
+ Step 3: Create `VGSCheckoutAddCardConfiguration` with fetched token and present Checkout.
          Implement `VGSCheckoutDelegate` protocol to get notified when checkout flow will be finished.
  Step 4: Implement `checkoutDidFinish` method and parse response to get financial instrument `id` in response json.
  Step 5: Initiate `/transfer` request with financial instrument using your backend by sending request from mobile app.
@@ -27,8 +27,8 @@ class CheckoutMultiplexingFlowVC: UIViewController {
 	/// Checkout instance.
 	fileprivate var vgsCheckout: VGSCheckout?
 
-	/// Sends request to your custom backend required for multiplexing setup.
-	fileprivate let multiplexingCustomAPIClient = MultiplexingCustomBackendAPIClient()
+	/// Sends request to your custom backend required for payment orchestration setup.
+	fileprivate let paymentOrchestrationAPIClient = MultiplexingCustomBackendAPIClient()
 
 	/// ID to start payment transfer.
 	fileprivate var financialInstrumentID: String?
@@ -71,34 +71,34 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 		guard let id = financialInstrumentID else {
 			// Start progress hud animation until token is fetched.
 			SVProgressHUD.show()
-			multiplexingCustomAPIClient.fetchMultiplexingToken { token in
+			paymentOrchestrationAPIClient.fetchMultiplexingToken { token in
 				SVProgressHUD.dismiss()
 
-				// Uncomment the line below to simulate 401 error and set invalid token to multiplexing.
+				// Uncomment the line below to simulate 401 error and set invalid token to payment orchestration.
 				// let invalidToken = "Some invalid token"
 
 				self.presentMultiplexingCheckout(with: token)
 			} failure: { errorText in
-				SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+				SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
 			}
 			return
 		}
 
 		// Start progress hud animation until payment transfer is finished.
 		SVProgressHUD.show()
-		multiplexingCustomAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") { responseText in
-			SVProgressHUD.showSuccess(withStatus: "Successfully finished multiplexing transfer!")
+		paymentOrchestrationAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") { responseText in
+			SVProgressHUD.showSuccess(withStatus: "Successfully finished payment orchestration transfer!")
 			self.mainView.responseTextView.text = responseText
 		} failure: { errorMessage in
 			SVProgressHUD.showError(withStatus: "Cannot complete transfer!")
 		}
 	}
 
-	/// Presents multiplexing checkout flow.
-	/// - Parameter token: `String` object, should be valid access multiplexing token.
+	/// Presents payment orchestration checkout flow.
+	/// - Parameter token: `String` object, should be valid access payment orchestration token.
 	fileprivate func presentMultiplexingCheckout(with accessToken: String) {
-		// Create multiplexing add configuration with access token.
-		VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.multiplexingTenantId) {[weak self] configuration in
+		// Create payment orchestration add configuration with access token.
+		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
@@ -106,7 +106,7 @@ extension CheckoutMultiplexingFlowVC: CheckoutFlowMainViewDelegate {
 			// Present checkout configuration.
 			strongSelf.vgsCheckout?.present(from: strongSelf)
 		} failure: {[weak self] error in
-			SVProgressHUD.showError(withStatus: "Cannot create add card multiplexing config! Error: \(error.localizedDescription)")
+			SVProgressHUD.showError(withStatus: "Cannot create add card payment orchestration config! Error: \(error.localizedDescription)")
 		}
 	}
 }
@@ -131,7 +131,7 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
 
-			if let id = multiplexingCustomAPIClient.multiplexingFinancialInstrumentID(from: data) {
+			if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
 				financialInstrumentID = id
 				message = "status code is: \(statusCode). Press BUY to send payment!"
 				mainView.button.setTitle("BUY", for: .normal)
@@ -146,11 +146,11 @@ extension CheckoutMultiplexingFlowVC: VGSCheckoutDelegate {
 			if statusCode == 401 {
 				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
 					SVProgressHUD.show()
-					self.multiplexingCustomAPIClient.fetchMultiplexingToken { token in
+					self.paymentOrchestrationAPIClient.fetchMultiplexingToken { token in
 						SVProgressHUD.dismiss()
 						self.presentMultiplexingCheckout(with: token)
 					} failure: { _ in
-						SVProgressHUD.showError(withStatus: "Cannot fetch multiplexing token!")
+						SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
 					}
 				}
 

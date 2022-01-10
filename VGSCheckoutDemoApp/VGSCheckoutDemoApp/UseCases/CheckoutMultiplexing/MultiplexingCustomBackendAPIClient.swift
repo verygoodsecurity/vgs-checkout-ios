@@ -20,10 +20,10 @@ final class MultiplexingCustomBackendAPIClient {
 	typealias SendTransferCompletionFail = (_ errorMessage: String) -> Void
 
 	// Use your own backend to fetch access_token token.
-	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/get-auth-token")!
+	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/get-auth-token")!
 
 	// Use your own backend to send payment to multiplexing.
-	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/transfers")!
+	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/transfers")!
 
 	/// Fetch multiplexing token from your own backend.
 	/// - Parameters:
@@ -70,7 +70,7 @@ final class MultiplexingCustomBackendAPIClient {
 		request.httpMethod = "POST"
 
 		let transderPayload: [String: Any] = [
-			"tnt": DemoAppConfiguration.shared.multiplexingTenantId,
+			"tnt": DemoAppConfiguration.shared.paymentOrchestrationTenantId,
 			"amount": amount,
 			"currency": currency,
 			"fi_id": financialInstrumentID
@@ -102,10 +102,10 @@ final class MultiplexingCustomBackendAPIClient {
 		task.resume()
 	}
 
-	/// Financial instrument id from success multiplexing save card response.
+	/// Financial instrument id from success payment orchestration save card response.
 	/// - Parameter data: `Data?` object, response data.
-	/// - Returns: `String?` object, multiplexing financial instrument id or `nil`.
-	func multiplexingFinancialInstrumentID(from data: Data?) -> String? {
+	/// - Returns: `String?` object, financial instrument id or `nil`.
+	func financialInstrumentID(from data: Data?) -> String? {
 		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
 				if let dataJSON = jsonData["data"] as? [String: Any] {
 					if let financialInstumentID = dataJSON["id"] as? String {
