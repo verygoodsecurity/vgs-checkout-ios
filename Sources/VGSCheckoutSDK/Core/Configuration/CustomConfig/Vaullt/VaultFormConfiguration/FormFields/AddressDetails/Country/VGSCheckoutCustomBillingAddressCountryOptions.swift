@@ -1,11 +1,11 @@
 //
-//  VGSCheckoutSDKBillingAddressCountryOptions.swift
+//  VGSCheckoutCustomBillingAddressCountryOptions.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
-/// Holds billing address country field options.
-public struct VGSCheckoutBillingAddressCountryOptions {
+/// Holds billing address country field options for custom configuration.
+public struct VGSCheckoutCustomBillingAddressCountryOptions {
 
 	/// Field name in your route configuration.
 	public var fieldName = ""
@@ -19,9 +19,8 @@ public struct VGSCheckoutBillingAddressCountryOptions {
 	public init() {}
 }
 
-
-/// Holds Multiplexing billing address country field options.
-public struct VGSCheckoutMultiplexingBillingAddressCountryOptions {
+/// Holds billing address country field options.
+public struct VGSCheckoutBillingAddressCountryOptions {
   
   //// List of valid country codes in ISO-3166-1-alpha-2 format.
   /// - NOTE: Countries order in array will match countries order in country picker view.
@@ -31,4 +30,3 @@ public struct VGSCheckoutMultiplexingBillingAddressCountryOptions {
   /// no:doc
   public init() {}
 }
-

@@ -1,14 +1,14 @@
 //
-//  VGSCheckoutSDKBillingAddressOptions.swift
+//  VGSCheckoutCustomConfiguationBillingAddressOptions.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
-/// Holds billing address options.
-public struct VGSCheckoutBillingAddressOptions {
+/// Holds billing address options for custom configuration.
+public struct VGSCheckoutCustomConfiguationBillingAddressOptions {
 
 	/// Country field options.
-	public var countryOptions = VGSCheckoutBillingAddressCountryOptions()
+	public var countryOptions = VGSCheckoutCustomBillingAddressCountryOptions()
 
 	/// Address line 1 field options.
 	public var addressLine1Options = VGSCheckoutBillingAddressLine1Options()
@@ -26,13 +26,12 @@ public struct VGSCheckoutBillingAddressOptions {
 	public init() {}
 }
 
-/// Holds Multiplexing billing address options.
-public struct VGSCheckoutMultiplexingBillingAddressOptions {
+/// Holds payment orchestration billing address options.
+public struct VGSCheckoutBillingAddressOptions {
 
   /// Country field options.
-  public var countryOptions = VGSCheckoutMultiplexingBillingAddressCountryOptions()
+  public var countryOptions = VGSCheckoutBillingAddressCountryOptions()
 
 	/// no:doc
   public init() {}
 }
-

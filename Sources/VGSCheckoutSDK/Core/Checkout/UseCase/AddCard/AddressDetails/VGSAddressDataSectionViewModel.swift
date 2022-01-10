@@ -66,8 +66,8 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
     buildForm()
 	}
   
-  internal convenience init(vgsCollect: VGSCollect, configuration:  VGSCheckoutMultiplexingAddCardConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
-    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .multiplexing(configuration))
+  internal convenience init(vgsCollect: VGSCollect, configuration:  VGSCheckoutAddCardConfiguration, validationBehavior: VGSCheckoutFormValidationBehaviour, uiTheme: VGSCheckoutThemeProtocol, formValidationHelper: VGSFormValidationHelper, autoFocusManager: VGSFieldAutofocusManager) {
+    self.init(vgsCollect: vgsCollect, validationBehavior: validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager, paymentInstrument: .paymentOrchestration(configuration))
 
 		setupBillingAddressForm(with: configuration)
     buildForm()
@@ -125,7 +125,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	/// Setup billing address form with multiplexing configuration.
 	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
-	private func setupBillingAddressForm(with multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration) {
+	private func setupBillingAddressForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 

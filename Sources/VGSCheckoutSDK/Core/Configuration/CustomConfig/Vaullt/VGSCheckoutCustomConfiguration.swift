@@ -100,7 +100,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
   }
   
 	/// Billing address country field options.
-	public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
+	public var billingAddressCountryFieldOptions: VGSCheckoutCustomBillingAddressCountryOptions {
 		get {
 			return formConfiguration.addressOptions.countryOptions
 		}

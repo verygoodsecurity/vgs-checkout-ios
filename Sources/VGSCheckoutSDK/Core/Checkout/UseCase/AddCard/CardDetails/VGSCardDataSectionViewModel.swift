@@ -105,7 +105,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 		switch paymentInstrument {
 		case .vault(let configuration):
 			setupCardForm(with: configuration)
-		case .multiplexing(let multiplexingConfig):
+		case .paymentOrchestration(let multiplexingConfig):
 			setupCardForm(with: multiplexingConfig)
 		}
 
@@ -125,7 +125,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 	/// Setup card form with multiplexing config.
 	/// - Parameter multiplexingConfiguration: `VGSCheckoutMultiplexingAddCardConfiguration` object, multiplexing configuration.
-	private func setupCardForm(with multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration) {
+	private func setupCardForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: multiplexingConfiguration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 

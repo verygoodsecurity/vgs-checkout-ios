@@ -137,7 +137,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 	*/
 
-	internal static func setupAddressForm(with multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
+	internal static func setupAddressForm(with multiplexingConfiguration:  VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.textField

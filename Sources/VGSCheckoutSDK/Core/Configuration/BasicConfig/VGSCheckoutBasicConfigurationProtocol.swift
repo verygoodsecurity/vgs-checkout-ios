@@ -35,8 +35,8 @@ internal enum VGSPaymentFlowIdentifier {
 	/// Use regular vault flow.
 	case vault
 
-	/// Use multiplexing flow for payment optimization.
-	case multiplexing
+	/// Use for payment optimization.
+	case paymentOptimization
 }
 
 /// Defines paymnet processing flow.
@@ -54,9 +54,9 @@ internal enum VGSPaymentInstrument {
 	 Payment instrument for multiplexing flow.
 
 	 - Parameters:
-			- configuration: `VGSCheckoutMultiplexingConfiguration` object, multiplexing configuration.
+			- configuration: `VGSCheckoutMultiplexingConfiguration` object, payment optimization configuration.
 	*/
-	case multiplexing(_ configuration:  VGSCheckoutMultiplexingAddCardConfiguration)
+	case paymentOrchestration(_ configuration:  VGSCheckoutAddCardConfiguration)
 
 	/// Initializer (failable).
 	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
@@ -73,9 +73,9 @@ internal enum VGSPaymentInstrument {
 			} else {
 				return nil
 			}
-		case .multiplexing:
-			if let multiplexingConfig = checkoutConfiguration as?  VGSCheckoutMultiplexingAddCardConfiguration {
-				self = .multiplexing(multiplexingConfig)
+		case .paymentOptimization:
+			if let multiplexingConfig = checkoutConfiguration as?  VGSCheckoutAddCardConfiguration {
+				self = .paymentOrchestration(multiplexingConfig)
 				return
 			} else {
 				return nil
@@ -88,7 +88,7 @@ internal enum VGSPaymentInstrument {
 		switch self {
 		case .vault(let configuration):
 			return configuration.vaultID
-		case .multiplexing(let configuration):
+		case .paymentOrchestration(let configuration):
 			return configuration.tenantId
 		}
 	}
@@ -98,7 +98,7 @@ internal enum VGSPaymentInstrument {
 		switch self {
 		case .vault(let configuration):
 			return configuration.billingAddressCountryFieldOptions.validCountries
-		case .multiplexing(let configuration):
+		case .paymentOrchestration(let configuration):
 			return configuration.billingAddressCountryFieldOptions.validCountries
 		}
 	}
@@ -108,7 +108,7 @@ internal enum VGSPaymentInstrument {
 		switch self {
 		case .vault(let configuration):
 			return configuration.formValidationBehaviour
-		case .multiplexing(let configuration):
+		case .paymentOrchestration(let configuration):
 			return configuration.formValidationBehaviour
 		}
 	}
@@ -118,7 +118,7 @@ internal enum VGSPaymentInstrument {
     switch self {
     case .vault(let configuration):
       return configuration
-    case .multiplexing(let configuration):
+    case .paymentOrchestration(let configuration):
       return configuration
     }
   }

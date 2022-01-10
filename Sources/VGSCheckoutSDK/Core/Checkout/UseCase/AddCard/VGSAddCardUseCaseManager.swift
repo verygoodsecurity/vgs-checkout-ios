@@ -121,7 +121,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
     case .vault(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom"])
-    case .multiplexing(let configuration):
+    case .paymentOrchestration(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "multiplexing"])
     }
@@ -139,7 +139,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .hidden:
 				break
 			}
-		case .multiplexing(let multiplexingConfig):
+		case .paymentOrchestration(let multiplexingConfig):
 			switch multiplexingConfig.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
@@ -193,7 +193,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		switch paymentInstrument {
 		case .vault:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
-		case .multiplexing:
+		case .paymentOrchestration:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
 		}
 	}

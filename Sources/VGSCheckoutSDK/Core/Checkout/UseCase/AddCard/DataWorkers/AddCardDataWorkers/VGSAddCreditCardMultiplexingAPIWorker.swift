@@ -13,11 +13,11 @@ internal class VGSAddCreditCardMultiplexingAPIWorker: VGSAddCreditCardAPIWorkerP
 	internal let vgsCollect: VGSCollect
 
 	/// Multiplexing configuration.
-	internal let multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration
+	internal let multiplexingConfiguration:  VGSCheckoutAddCardConfiguration
 
 	// MARK: - Initialization
 
-	init(vgsCollect: VGSCollect, multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration) {
+	init(vgsCollect: VGSCollect, multiplexingConfiguration:  VGSCheckoutAddCardConfiguration) {
 		self.vgsCollect = vgsCollect
 		self.multiplexingConfiguration = multiplexingConfiguration
 	}
