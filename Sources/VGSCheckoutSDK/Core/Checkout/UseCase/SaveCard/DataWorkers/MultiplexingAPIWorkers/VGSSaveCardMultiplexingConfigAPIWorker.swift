@@ -1,3 +1,5 @@
+import Foundation
+
 /// Holds logic for sending data to multiplexing.
 internal class VGSSaveCardMultiplexingConfigAPIWorker: VGSSaveCardAPIWorkerProtocol {
 
