@@ -35,10 +35,10 @@ internal class VGSCheckoutPaymentService: NSObject, VGSCheckoutServiceProtocol {
 	internal func buildCheckoutViewController() -> UIViewController {
 		switch checkoutConfigurationType {
 		case .multiplexingPayment(let configuration):
-			let saveCardViewController = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
-			let navigationController = UINavigationController(rootViewController: saveCardViewController)
-			return navigationController
+			let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
+			let navigationController = UINavigationController(rootViewController: paymentOptionsVC)
 
+			return navigationController
 
 //			if configuration.savedPaymentCardsIds.isEmpty {
 //				let saveCardViewController = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
