@@ -42,6 +42,13 @@ internal class VGSAddCardFormViewBuilder {
 		return view
 	}
 
+	static func buildChecboxButtonContainerView() -> VGSContainerItemView {
+		let view = VGSContainerItemView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.paddings = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+		return view
+	}
+
 	/// Builds error view.
 	/// - Returns: `VGSValidationErrorView` object, view to display error message.
 	static func buildErrorView() -> VGSValidationErrorView {

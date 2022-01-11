@@ -10,6 +10,23 @@ import UIKit
 /// Encapsulates navigation logic between different user flows.
 internal class VGSCheckoutFlowCoordinator {
 
+	// MARK: - Vars
+
+	/// Payment instrument.
+	private let checkoutConfigurationType: VGSCheckoutConfigurationType?
+
+	/// Checkout service provider.
+	internal let checkoutServiceProvider: VGSCheckoutServiceProviderProtocol
+
+	// MARK: - Initializaer
+
+	init(checkoutConfigurationType: VGSCheckoutConfigurationType, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
+		self.checkoutConfigurationType = checkoutConfigurationType
+		self.checkoutServiceProvider = VGSCheckoutServiceProviderFactory.buildCheckoutServiceProvider(with: checkoutConfigurationType, vgsCollect: vgsCollect, uiTheme: uiTheme)
+	}
+
+	// MARK: - Interface
+
 	/// Root view controller.
 	internal var rootController: UIViewController?
 

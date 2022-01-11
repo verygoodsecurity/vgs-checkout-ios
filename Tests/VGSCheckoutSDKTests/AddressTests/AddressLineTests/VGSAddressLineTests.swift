@@ -28,12 +28,12 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
                               "Street 1, phone +109379997",
                               "a, b, c",
                               "3333"]
-    
-		guard let addressLine1TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField else {
+
+		guard let addressLine1TextField = getBillingAddressFormView()?.addressLine1FieldView.textField else {
 			return
 		}
     
-		guard let addressLine2TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField else {
+		guard let addressLine2TextField = getBillingAddressFormView()?.addressLine2FieldView.textField else {
 			return
 		}
     
@@ -45,11 +45,11 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
     }
     
     func testEmptyAddress() {
-			guard let addressLine1TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine1FieldView.textField else {
+			guard let addressLine1TextField = getBillingAddressFormView()?.addressLine1FieldView.textField else {
 				return
 			}
 
-			guard let addressLine2TextField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.billingAddressFormView.addressLine2FieldView.textField else {
+			guard let addressLine2TextField = getBillingAddressFormView()?.addressLine2FieldView.textField else {
 				return
 			}
       
@@ -62,4 +62,9 @@ class VGSAddressLineTests: VGSCheckoutBaseTestCase {
         XCTAssertTrue(addressLine2TextField.state.isValid, "VALIDATION ERROR: address is invalid for addressLine2TextFieldField, but should be valid!")
     }
   }
+
+	func getBillingAddressFormView() -> VGSBillingAddressDetailsSectionView? {
+		guard let navVC = checkout.checkoutCoordinator?.rootController as? UINavigationController, let cardVC = navVC.viewControllers.first as? VGSBaseCardViewController else {return nil}
+		return cardVC.addressDataSectionViewModel.billingAddressFormView
+	}
 }

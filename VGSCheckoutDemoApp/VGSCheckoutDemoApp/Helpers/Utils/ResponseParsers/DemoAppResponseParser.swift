@@ -110,6 +110,28 @@ class DemoAppResponseParser {
 		return ""
 	}
 
+	/// Log success request.
+	/// - Parameters:
+	///   - response: `URLResponse?` object.
+	///   - data: `Data?` object of success request.
+	///   - code: `Int` object, status code.
+	internal static func logSuccessResponse(_ response: URLResponse?, data: Data?, code: Int) {
+
+		print("✅ Success ⬇️ VGSCheckout request url: \(stringFromURL(response?.url))")
+		print("✅ Success ⬇️ VGSCheckout response code: \(code)")
+
+		if let httpResponse = response as? HTTPURLResponse {
+			print("✅ Success ⬇️ VGSCheckout response headers:")
+			print(normalizeHeadersForLogs(httpResponse.allHeaderFields))
+		}
+
+		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+				print("✅ Success ⬇️ VGSCheckout response JSON:")
+				print(stringifyJSONForLogs(jsonData))
+			}
+		print("------------------------------------")
+	}
+
 	/// Stringify `JSON` for logging.
 	/// - Parameter vgsJSON: `[String: Any]` object.
 	/// - Returns: `String` object, pretty printed `JSON`.

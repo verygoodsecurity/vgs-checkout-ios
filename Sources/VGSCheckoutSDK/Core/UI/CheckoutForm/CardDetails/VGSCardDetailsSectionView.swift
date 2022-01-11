@@ -137,14 +137,14 @@ internal class VGSCardDetailsSectionView: UIView {
 	}()
 
 	/// Payment instrument.
-	fileprivate let paymentInstrument: VGSPaymentInstrument
+	fileprivate let checkoutConfigurationType: VGSCheckoutConfigurationType
 
 	// MARK: - Initialization
 
 	/// Initialization.
-	/// - Parameter paymentInstrument: `VGSPaymentInstrument` object, payment instrument.
-  init(paymentInstrument: VGSPaymentInstrument, uiTheme: VGSCheckoutThemeProtocol) {
-		self.paymentInstrument = paymentInstrument
+	/// - Parameter checkoutConfigurationType: `VGScheckoutConfigurationType` object, payment instrument.
+  init(checkoutConfigurationType: VGSCheckoutConfigurationType, uiTheme: VGSCheckoutThemeProtocol) {
+		self.checkoutConfigurationType = checkoutConfigurationType
     self.uiTheme = uiTheme
 		super.init(frame: .zero)
 
@@ -175,15 +175,15 @@ internal class VGSCardDetailsSectionView: UIView {
 		headerContainerView.addContentView(headerView)
 		rootStackView.addArrangedSubview(headerContainerView)
 
-		switch paymentInstrument {
-		case .vault(let configuration):
+		switch checkoutConfigurationType {
+		case .custom(let configuration):
 			switch configuration.cardHolderFieldOptions.fieldVisibility {
 			case .visible:
 				verticalStackView.addArrangedSubview(cardHolderFieldView)
 			default:
 				break
 			}
-		case .multiplexing:
+		case .multiplexingAddCard, .multiplexingPayment:
 			verticalStackView.addArrangedSubview(cardHolderFieldView)
 		}
 

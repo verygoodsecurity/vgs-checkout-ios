@@ -34,7 +34,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   }
   
   func testValidPostalCodesReturnsTrue() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
@@ -45,7 +45,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
       let validPostalCodes = country.validPostalCodes
       
       //select country in checkout textfield
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
 
       for postalCode in validPostalCodes {
         postalCodeField.setText(postalCode)
@@ -56,7 +56,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   }
   
   func testEmptyPostalCodesReturnsFalse() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
@@ -66,14 +66,14 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
 
     for country in countries {
       // set selected country in checkout textfield
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
       
       XCTAssertTrue(!postalCodeField.state.isValid, "VALIDATION ERROR: Empty postal code is valid for country \(country), but should be not valid!")
     }
   }
   
   func testInvalidPostalCodesReturnsFalse() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
@@ -84,7 +84,7 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
       let validPostalCodes = country.invalidPostalCodes
       
       //select country in checkout textfield
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
 
       for postalCode in validPostalCodes {
         postalCodeField.setText(postalCode)
@@ -95,25 +95,25 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   }
   
   func testDynamicPlaceholderChanges() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
       
     for (country, countryData) in testCountryData {
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
       XCTAssertTrue(postalCodeField.textField.placeholder == countryData.placeholder, "Placeholder error: wrong placeholder for country \(country) - \(String(describing: postalCodeField.textField.placeholder))")
     }
   }
   
   func testEmptyPostalCodeErrorsPerCountry() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
       
     for (country, countryData) in testCountryData {
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
       guard let errorText = postalCodeField.state.validationErrors.first else {
         XCTFail("ERROR: no empty field error message for country \(country)")
         return
@@ -123,13 +123,13 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
   }
   
   func testWrongPostalCodeErrorsPerCountry() {
-    guard let postalCodeField = checkout.addCardUseCaseManager?.addressDataSectionViewModel.postalCodeFieldView?.textField else {
+    guard let postalCodeField = getAddressDataSectionViewModel()?.postalCodeFieldView?.textField else {
       XCTFail("ERROR: NO PostalCodeField")
       return
     }
       
     for (country, countryData) in testCountryData {
-      checkout.addCardUseCaseManager?.addressDataSectionViewModel.updatePostalCodeField(with: country)
+			getAddressDataSectionViewModel()?.updatePostalCodeField(with: country)
       postalCodeField.setText(country.invalidPostalCodes.first)
       
       guard let errorText = postalCodeField.state.validationErrors.first else {
@@ -152,4 +152,9 @@ class VGSPostalCodeValidationTest: VGSCheckoutBaseTestCase {
                                                   emptyErrorText: VGSAddressPostalCode.postalCode.emptyErrorText)
     ]
   }
+
+	func getAddressDataSectionViewModel() -> VGSAddressDataSectionViewModel? {
+		guard let navVC = checkout.checkoutCoordinator?.rootController as? UINavigationController, let cardVC = navVC.viewControllers.first as? VGSBaseCardViewController else {return nil}
+		return cardVC.addressDataSectionViewModel
+	}
 }
