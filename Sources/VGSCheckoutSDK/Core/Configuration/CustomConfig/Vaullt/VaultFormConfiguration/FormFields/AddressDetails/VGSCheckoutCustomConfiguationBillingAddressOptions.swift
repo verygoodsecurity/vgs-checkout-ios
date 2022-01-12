@@ -11,16 +11,16 @@ public struct VGSCheckoutCustomConfiguationBillingAddressOptions {
 	public var countryOptions = VGSCheckoutCustomBillingAddressCountryOptions()
 
 	/// Address line 1 field options.
-	public var addressLine1Options = VGSCheckoutBillingAddressLine1Options()
+	public var addressLine1Options = VGSCheckoutCustomBillingAddressLine1Options()
 
 	/// Address line 2 field options.
-	public var addressLine2Options = VGSCheckoutBillingAddressLine2Options()
+	public var addressLine2Options = VGSCheckoutCustomBillingAddressLine2Options()
 
 	/// City field options.
-	public var cityOptions = VGSCheckoutBillingAddressCityOptions()
+	public var cityOptions = VGSCheckoutCustomBillingAddressCityOptions()
 
 	/// Postal code (zip for US) field options.
-	public var postalCodeOptions = VGSCheckoutBillingAddressPostalCodeOptions()
+	public var postalCodeOptions = VGSCheckoutCustomBillingAddressPostalCodeOptions()
 
 	/// no:doc
 	public init() {}

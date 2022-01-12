@@ -1,11 +1,11 @@
 //
-//  VGSCheckoutSDKBillingAddressLine1Options.swift
+//  VGSCheckoutCustomBillingAddressLine1Options.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
 /// Holds billing address, address line 1 field options.
-public struct VGSCheckoutBillingAddressLine1Options {
+public struct VGSCheckoutCustomBillingAddressLine1Options {
 
 	/// Field name in your route configuration.
 	public var fieldName = ""

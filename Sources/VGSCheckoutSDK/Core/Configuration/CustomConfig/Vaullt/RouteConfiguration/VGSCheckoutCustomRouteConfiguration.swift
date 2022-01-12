@@ -1,11 +1,11 @@
 //
-//  VGSCheckoutSDKRouteConfiguration.swift
+//  VGSCheckoutCustomRouteConfiguration.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
 /// Checkout route configuration.
-public struct VGSCheckoutRouteConfiguration {
+public struct VGSCheckoutCustomRouteConfiguration {
 
 	/// Inbound rout path for your organization vault.
 	public var path = ""

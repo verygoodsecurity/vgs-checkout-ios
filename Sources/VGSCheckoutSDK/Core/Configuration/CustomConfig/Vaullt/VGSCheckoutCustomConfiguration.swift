@@ -26,15 +26,15 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 
   // MARK: - API Configuration
   
-	/// Route configuration, default is `VGSCheckoutRouteConfiguration` object.
-	public var routeConfiguration: VGSCheckoutRouteConfiguration = VGSCheckoutRouteConfiguration()
+	/// Route configuration, default is `VGSCheckoutCustomRouteConfiguration` object.
+	public var routeConfiguration: VGSCheckoutCustomRouteConfiguration = VGSCheckoutCustomRouteConfiguration()
 
   // MARK: - UI Configuration
 
   /// Form UI configuration attributes, default is `VGSCheckoutDefaultTheme` object.
   public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
-	/// Form configuration options. Check `VGSCheckoutFormConfiguration` for default settings.
+	/// Form configuration options. Check `VGSCustomFormConfiguration` for default settings.
 	internal var formConfiguration: VGSCustomFormConfiguration = VGSCustomFormConfiguration()
 
 	/// Payment flow type (internal use only).
@@ -111,7 +111,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	}
 
 	/// Billing address, address line 1 field options.
-	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressLine1Options {
+	public var billingAddressLine1FieldOptions: VGSCheckoutCustomBillingAddressLine1Options {
 		get {
 			return formConfiguration.addressOptions.addressLine1Options
 		}
@@ -122,7 +122,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	}
 
 	/// Billing address, address line 2 field options.
-	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressLine2Options {
+	public var billingAddressLine2FieldOptions: VGSCheckoutCustomBillingAddressLine2Options {
 		get {
 			return formConfiguration.addressOptions.addressLine2Options
 		}
@@ -133,7 +133,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	}
 
 	/// Billing address city field options.
-	public var billingAddressCityFieldOptions: VGSCheckoutBillingAddressCityOptions {
+	public var billingAddressCityFieldOptions: VGSCheckoutCustomBillingAddressCityOptions {
 		get {
 			return formConfiguration.addressOptions.cityOptions
 		}
@@ -144,7 +144,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	}
 
 	/// Billing address postal code field options.
-	public var billingAddressPostalCodeFieldOptions: VGSCheckoutBillingAddressPostalCodeOptions {
+	public var billingAddressPostalCodeFieldOptions: VGSCheckoutCustomBillingAddressPostalCodeOptions {
 		get {
 			return formConfiguration.addressOptions.postalCodeOptions
 		}
