@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds request options.
-public struct VGSCheckoutRequestOptions {
+public struct VGSCheckoutCustomConfigurationRequestOptions {
 
 	/// HTTP Method. Default is `post`.
 	public var method: VGSCheckoutHTTPMethod = .post

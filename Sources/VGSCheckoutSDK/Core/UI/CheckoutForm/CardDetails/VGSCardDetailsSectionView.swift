@@ -183,7 +183,7 @@ internal class VGSCardDetailsSectionView: UIView {
 			default:
 				break
 			}
-		case .multiplexing:
+		case .paymentOrchestration:
 			verticalStackView.addArrangedSubview(cardHolderFieldView)
 		}
 

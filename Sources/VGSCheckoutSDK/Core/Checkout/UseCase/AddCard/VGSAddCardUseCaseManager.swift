@@ -120,10 +120,10 @@ internal class VGSAddCardUseCaseManager: NSObject {
     switch paymentInstrument {
     case .vault(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom"])
-    case .multiplexing(let configuration):
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom", "configType": "addCard"])
+    case .paymentOrchestration(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "multiplexing"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
     }
 
 		self.addCardSectionFormView = VGSAddCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)
@@ -139,8 +139,8 @@ internal class VGSAddCardUseCaseManager: NSObject {
 			case .hidden:
 				break
 			}
-		case .multiplexing(let multiplexingConfig):
-			switch multiplexingConfig.billingAddressVisibility {
+		case .paymentOrchestration(let configuration):
+			switch configuration.billingAddressVisibility {
 			case .visible:
 				formValidationHelper.fieldViewsManager.appendFieldViews(self.addressDataSectionViewModel.billingAddressFormView.fieldViews)
 				addressDataSectionViewModel.updateInitialPostalCodeUI()
@@ -193,7 +193,7 @@ internal class VGSAddCardUseCaseManager: NSObject {
 		switch paymentInstrument {
 		case .vault:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
-		case .multiplexing:
+		case .paymentOrchestration:
 			delegate?.addCardFlowDidChange(with: .cancelled, in: self)
 		}
 	}

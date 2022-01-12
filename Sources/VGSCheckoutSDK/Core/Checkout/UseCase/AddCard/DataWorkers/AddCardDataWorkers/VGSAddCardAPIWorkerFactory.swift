@@ -10,8 +10,8 @@ internal class VGSAddCardAPIWorkerFactory {
 		switch paymentInstrument {
 		case .vault(let configuration):
 			return VGSAddCreditCardVaultAPIWorker(vgsCollect: vgsCollect, vaultConfiguration: configuration)
-		case .multiplexing(let multiplexingConfiguration):
-			return VGSAddCreditCardMultiplexingAPIWorker(vgsCollect: vgsCollect, multiplexingConfiguration: multiplexingConfiguration)
+		case .paymentOrchestration(let paymentOrchestration):
+			return VGSAddCreditCardPaymentOrchestrationAPIWorker(vgsCollect: vgsCollect, paymentOrchestrationConfiguration: paymentOrchestration)
 		}
 	}
 }

@@ -22,10 +22,6 @@
 	<string>$(CUSTOM_VAULT)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MULTIPLEXING_SERVICE_URL</key>
-	<string>$(MULTIPLEXING_SERVICE_URL)</string>
-	<key>MULTIPLEXING_VAULT</key>
-	<string>$(MULTIPLEXING_VAULT)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
