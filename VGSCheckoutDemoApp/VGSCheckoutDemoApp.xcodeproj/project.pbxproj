@@ -273,7 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				441927D5265F64550080B01E /* CheckoutBasicSetup */,
-				44D520EE26787AF2005AB588 /* CheckoutMultiplexing */,
+				44D520EE26787AF2005AB588 /* CheckoutPaymentOrchestration */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -473,13 +473,13 @@
 			path = ResponseParsers;
 			sourceTree = "<group>";
 		};
-		44D520EE26787AF2005AB588 /* CheckoutMultiplexing */ = {
+		44D520EE26787AF2005AB588 /* CheckoutPaymentOrchestration */ = {
 			isa = PBXGroup;
 			children = (
 				44D520EF26787B18005AB588 /* CheckoutAddCardVC.swift */,
 				44F4CAA22763311E0069F6A4 /* PaymentOrchestrationCustomBackendAPIClient.swift */,
 			);
-			path = CheckoutMultiplexing;
+			path = CheckoutPaymentOrchestration;
 			sourceTree = "<group>";
 		};
 		44FC9F74265FC4CF001CDD79 /* DemoInsetContainerView */ = {
