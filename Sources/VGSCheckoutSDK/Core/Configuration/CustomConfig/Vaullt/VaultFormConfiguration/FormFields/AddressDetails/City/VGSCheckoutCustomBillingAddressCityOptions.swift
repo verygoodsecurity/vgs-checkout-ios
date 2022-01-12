@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds billing address city field options.
-public struct VGSCheckoutBillingAddressCityOptions {
+public struct VGSCheckoutCustomBillingAddressCityOptions {
 
 	/// Field name in your route configuration.
 	public var fieldName = ""

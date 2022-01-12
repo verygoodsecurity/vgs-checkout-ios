@@ -15,7 +15,7 @@ VGS provides you with a Universal Checkout and User Experience which is fully in
 **Depending on the needs we provide you with two solutions:**
 
 -  **Customized Universal Checkout** - shape the solution you need with our universal checkout solution. It’s easy to customize your integration with no heavy lifting to have a uniform experience across platforms and devices.<br/>
--  **Checkout for Payment Orchestration** - save time and payment costs on by integration with [Multiplexing App](https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing).
+-  **Checkout for Payment Orchestration** - save time and payment costs on by integration with [Payment Optimization App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration).
 
 Table of contents
 =================
@@ -84,14 +84,14 @@ class ViewController: UIViewController {
 ### Choose Checkout SDK Configuration
 VGS Checkout SDK works with different configuration types. You can get more info about available configrurations in VGS Checkout SDK [docs](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration).
 
-***VGSCheckoutMultiplexingAddCardConfiguration setup***<br/>
+***VGSCheckoutAddCardConfiguration setup***<br/>
 
-`VGSCheckoutMultiplexingAddCardConfiguration` requires valid access token for [Multiplexing App](https://www.verygoodsecurity.com/docs/payment-optimization/multiplexing).
+`VGSCheckoutAddCardConfiguration` requires valid access token for [Payment Orchestration App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration).
  Use your `tenantId` for payment orchestration. You can get it in your [organisation dashboard].
 
 ```swift
-// Create multiplexing add configuration with access token.
-VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<MULTIPLEXING_ACCESS_TOKEN>", tenantId: "<TENANT_ID>", environment: "<ENVIRONMENT>") {[weak self] configuration in
+// Create payment orchestration add card configuration with access token.
+VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: "<ACCESS_TOKEN>", tenantId: "<TENANT_ID>", environment: "<ENVIRONMENT>") {[weak self] configuration in
 		guard let strongSelf = self else {return}
 		configuration.billingAddressVisibility = .visible
 		
@@ -101,7 +101,7 @@ VGSCheckoutMultiplexingAddCardConfiguration.createConfiguration(accessToken: "<M
 		strongSelf.vgsCheckout?.present(from: strongSelf)
 } failure: {[weak self] error in
 		print(error.localizedDescription)
-		print("ERROR! Cannot create multiplexing configuration!")
+		print("ERROR! Cannot create configuration!")
 }
 
 ```

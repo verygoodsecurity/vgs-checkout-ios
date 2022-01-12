@@ -67,7 +67,7 @@ internal class VGSCardHolderDetailsView: UIView {
 //					setupSplittedFieldName()
 				}
 			}
-		case .multiplexing:
+		case .paymentOrchestration:
 			setupSingleFieldName()
 		}
 	}

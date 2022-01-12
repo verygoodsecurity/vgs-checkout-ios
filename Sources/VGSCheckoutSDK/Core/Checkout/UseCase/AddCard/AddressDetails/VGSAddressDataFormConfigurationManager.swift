@@ -137,7 +137,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 	*/
 
-	internal static func setupAddressForm(with multiplexingConfiguration:  VGSCheckoutMultiplexingAddCardConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
+	internal static func setupAddressForm(with configuration:  VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, addressFormView: VGSBillingAddressDetailsSectionView) {
 
 		let countryTextField = addressFormView.countryFieldView.countryTextField
 		let addressLine1TextField = addressFormView.addressLine1FieldView.textField
@@ -145,7 +145,7 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityTextField = addressFormView.cityFieldView.textField
 		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
-    let addressVisibility = multiplexingConfiguration.formConfiguration.billingAddressVisibility
+    let addressVisibility = configuration.formConfiguration.billingAddressVisibility
     
     switch addressVisibility {
     case .hidden:
@@ -156,7 +156,7 @@ internal class VGSAddressDataFormConfigurationManager {
     }
     
 		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
-    let countryOptions = multiplexingConfiguration.billingAddressCountryFieldOptions
+    let countryOptions = configuration.billingAddressCountryFieldOptions
     let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
 		countryConfiguration.type = .none
@@ -235,9 +235,9 @@ internal class VGSAddressDataFormConfigurationManager {
 		switch paymentInstrument {
 		case .vault:
 			break
-		case .multiplexing:
+		case .paymentOrchestration:
 			// If country does not support Address verification hide all other fields and unregister them from collect.
-			// Otherwise register and show fields again. Only for multiplexing flow.
+			// Otherwise register and show fields again. Only for payment orchestration flow.
 			let isAddressVerificationAvailable = VGSBillingAddressUtils.isAddressVerificationAvailable(for: countryISO)
 
 			if isAddressVerificationAvailable {

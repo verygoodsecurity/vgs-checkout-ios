@@ -1,11 +1,11 @@
 //
-//  MultiplexingCustomBackendAPIClient.swift
+//  PaymentOrchestrationCustomBackendAPIClient.swift
 //  VGSCheckoutDemoApp
 
 import Foundation
 
-/// Your Custom API client for multiplexing.
-final class MultiplexingCustomBackendAPIClient {
+/// Your Custom API client for payment orchestration.
+final class PaymentOrchestrationCustomBackendAPIClient {
 
 	/// Succcess completion for token fetch.
 	typealias FetchTokenCompletionSuccess = (_ token: String) -> Void
@@ -20,16 +20,16 @@ final class MultiplexingCustomBackendAPIClient {
 	typealias SendTransferCompletionFail = (_ errorMessage: String) -> Void
 
 	// Use your own backend to fetch access_token token.
-	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/get-auth-token")!
+	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/get-auth-token")!
 
-	// Use your own backend to send payment to multiplexing.
-	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.multiplexingServicePath + "/transfers")!
+	// Use your own backend to send payment to payment orchestration backend.
+	fileprivate let yourCustomBackendSendPaymentURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/transfers")!
 
-	/// Fetch multiplexing token from your own backend.
+	/// Fetch payment orchestration token from your own backend.
 	/// - Parameters:
 	///   - success: `FetchTokenCompletionSuccess` object, completion on success request with token.
 	///   - failure: `FetchTokenCompletionFail` object, completion on failed request with error message.
-	func fetchMultiplexingToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
+	func fetchToken(with success: @escaping FetchTokenCompletionSuccess, failure: @escaping FetchTokenCompletionFail) {
 
 		var request = URLRequest(url: yourCustomBackendTokenURL)
 		request.httpMethod = "POST"
@@ -57,7 +57,7 @@ final class MultiplexingCustomBackendAPIClient {
 		task.resume()
 	}
 
-	/// Initiate transfer request on multiplexing from your custom backend.
+	/// Initiate transfer request on payment orchestration backend from your custom backend.
 	/// - Parameters:
 	///   - financialInstrumentID: `String` object, id of financial instrument.
 	///   - amount: `String` object, amount of transaction.
@@ -70,7 +70,7 @@ final class MultiplexingCustomBackendAPIClient {
 		request.httpMethod = "POST"
 
 		let transderPayload: [String: Any] = [
-			"tnt": DemoAppConfiguration.shared.multiplexingTenantId,
+			"tnt": DemoAppConfiguration.shared.paymentOrchestrationTenantId,
 			"amount": amount,
 			"currency": currency,
 			"fi_id": financialInstrumentID
@@ -102,10 +102,10 @@ final class MultiplexingCustomBackendAPIClient {
 		task.resume()
 	}
 
-	/// Financial instrument id from success multiplexing save card response.
+	/// Financial instrument id from success payment orchestration save card response.
 	/// - Parameter data: `Data?` object, response data.
-	/// - Returns: `String?` object, multiplexing financial instrument id or `nil`.
-	func multiplexingFinancialInstrumentID(from data: Data?) -> String? {
+	/// - Returns: `String?` object, financial instrument id or `nil`.
+	func financialInstrumentID(from data: Data?) -> String? {
 		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
 				if let dataJSON = jsonData["data"] as? [String: Any] {
 					if let financialInstumentID = dataJSON["id"] as? String {

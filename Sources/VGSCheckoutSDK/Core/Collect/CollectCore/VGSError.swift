@@ -27,7 +27,7 @@ internal enum VGSErrorType: Int {
 		/// When VGS config URL is not valid.
 		case invalidConfigurationURL = 1480
 
-		/// When multiplexing JWT token is not valid.
+		/// When payment orchestration JWT token is not valid.
 		case invalidJWTToken = 1484
 }
 

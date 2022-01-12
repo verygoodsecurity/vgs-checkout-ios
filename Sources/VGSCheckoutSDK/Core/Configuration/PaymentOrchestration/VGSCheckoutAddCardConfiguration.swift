@@ -1,16 +1,16 @@
 //
-//  VGSCheckoutMultiplexingAddCardConfiguration.swift
+//  VGSCheckoutAddCardConfiguration.swift
 //  VGSCheckoutSDK
 
 import Foundation
 
-/// Holds configuration with predefined setup for work with payment orchestration/multiplexing app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol {
+/// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
+public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol {
 
-	/// A callback to be run with a `VGSCheckoutMultiplexingAddCardConfiguration` on configuration setup succeed.
+	/// A callback to be run with a `VGSCheckoutAddCardConfiguration` on configuration setup succeed.
 	/// - Parameters:
-	///   - configuration:  `VGSCheckoutMultiplexingAddCardConfiguration` object, configuration. 
-	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutMultiplexingAddCardConfiguration) -> Void
+	///   - configuration:  `VGSCheckoutAddCardConfiguration` object, configuration.
+	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutAddCardConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
 	/// - Parameters:
@@ -30,7 +30,7 @@ public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfi
 
 	// MARK: - Public
 
-	/// Creates Multiplexing Add Card config.
+	/// Creates Add Card config.
 	/// - Parameters:
 	///   - accessToken: `String` object, should be valid access token for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
@@ -38,13 +38,13 @@ public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfi
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
 	public static func createConfiguration(accessToken: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
-		guard VGSMultiplexingCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
+		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
 			failure(error as Error)
 			return
 		}
 
-		var saveCardConfiguration = VGSCheckoutMultiplexingAddCardConfiguration(accessToken: accessToken, tenantId: tenantId, environment: environment)
+		var saveCardConfiguration = VGSCheckoutAddCardConfiguration(accessToken: accessToken, tenantId: tenantId, environment: environment)
 		success(&saveCardConfiguration)
 	}
 
@@ -78,7 +78,7 @@ public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfi
   }
   
   /// Billing address country field options.
-  public var billingAddressCountryFieldOptions: VGSCheckoutMultiplexingBillingAddressCountryOptions {
+  public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
     get {
       return formConfiguration.addressOptions.countryOptions
     }
@@ -102,10 +102,10 @@ public struct VGSCheckoutMultiplexingAddCardConfiguration: VGSCheckoutBasicConfi
   // MARK: - Internal
   
 	/// Payment flow type (internal use only).
-	internal let paymentFlowType: VGSPaymentFlowIdentifier = .multiplexing
+	internal let paymentFlowType: VGSPaymentFlowIdentifier = .paymentOptimization
   
-  /// Form configuration options. Check `VGSCheckoutMultiplexingFormConfiguration` for default settings.
-  internal var formConfiguration = VGSMultiplexingFormConfiguration()
+  /// Form configuration options. Check `VGSPaymentOrchestrationFormConfiguration` for default settings.
+  internal var formConfiguration = VGSPaymentOrchestrationFormConfiguration()
   
   /// Features usage analytics.
   internal func contentAnalytics() -> [String] {

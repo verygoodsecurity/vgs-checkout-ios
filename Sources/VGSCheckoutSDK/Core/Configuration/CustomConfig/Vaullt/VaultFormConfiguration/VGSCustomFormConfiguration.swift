@@ -11,7 +11,7 @@ internal struct VGSCustomFormConfiguration {
   var cardOptions = VGSCheckoutCardOptions()
 
 	/// Address options.
-  var addressOptions = VGSCheckoutBillingAddressOptions()
+  var addressOptions = VGSCheckoutCustomConfiguationBillingAddressOptions()
 
 	/// Billing address visibility. Default is `.hidden` - address section is hidden.
   var billingAddressVisibility: VGSCheckoutBillingAddressVisibility = .hidden

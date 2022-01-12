@@ -1,14 +1,14 @@
 //
-//  VGSCheckoutSDKMutliplexingCredentialsValidator.swift
+//  VGSCheckoutCredentialsValidator.swift
 //  VGSCheckoutSDK
 //
 
 import Foundation
 
-/// Check and Validates Multiplexing Token Scope.
-internal class VGSMultiplexingCredentialsValidator {
+/// Check and Validates Token Scope.
+internal class VGSCheckoutCredentialsValidator {
 
-	/// Multiplexing Role Scope not allowed for Save Card flow.
+	/// Payment optimization role Scope not allowed for Save Card flow.
 	static let restrictedRolesScope: String = "transfers:"
 
 	/// Returns JWT scope validation result.
