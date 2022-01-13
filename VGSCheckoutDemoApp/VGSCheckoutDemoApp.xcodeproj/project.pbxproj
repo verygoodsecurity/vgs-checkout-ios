@@ -35,9 +35,10 @@
 		445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */; };
 		445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */; };
 		445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */; };
+		4468CA2A278FFDC300296DA7 /* CheckoutAddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA28278FFDC300296DA7 /* CheckoutAddCardVC.swift */; };
+		4468CA2D278FFDE600296DA7 /* CheckoutTransfersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA2C278FFDE600296DA7 /* CheckoutTransfersVC.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
-		44D520F026787B18005AB588 /* CheckoutAddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520EF26787B18005AB588 /* CheckoutAddCardVC.swift */; };
 		44E10AD0269D7A5A001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AD2269D7A5A001F0D44 /* Localizable.strings */; };
 		44F4CAA32763311E0069F6A4 /* PaymentOrchestrationCustomBackendAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F4CAA22763311E0069F6A4 /* PaymentOrchestrationCustomBackendAPIClient.swift */; };
 		44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC9F75265FC4F7001CDD79 /* DemoInsetContainerView.swift */; };
@@ -98,9 +99,10 @@
 		445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		4468CA28278FFDC300296DA7 /* CheckoutAddCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutAddCardVC.swift; sourceTree = "<group>"; };
+		4468CA2C278FFDE600296DA7 /* CheckoutTransfersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTransfersVC.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
-		44D520EF26787B18005AB588 /* CheckoutAddCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddCardVC.swift; sourceTree = "<group>"; };
 		44E10AD1269D7A5A001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44E10AD3269D7A79001F0D44 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44E10AD4269D7A84001F0D44 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -448,6 +450,22 @@
 			path = "UIApplication+Extensions";
 			sourceTree = "<group>";
 		};
+		4468CA26278FFDC300296DA7 /* Transfers */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA2C278FFDE600296DA7 /* CheckoutTransfersVC.swift */,
+			);
+			path = Transfers;
+			sourceTree = "<group>";
+		};
+		4468CA27278FFDC300296DA7 /* AddCard */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA28278FFDC300296DA7 /* CheckoutAddCardVC.swift */,
+			);
+			path = AddCard;
+			sourceTree = "<group>";
+		};
 		44C4C9332666011A00195505 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,7 +494,8 @@
 		44D520EE26787AF2005AB588 /* CheckoutPaymentOrchestration */ = {
 			isa = PBXGroup;
 			children = (
-				44D520EF26787B18005AB588 /* CheckoutAddCardVC.swift */,
+				4468CA27278FFDC300296DA7 /* AddCard */,
+				4468CA26278FFDC300296DA7 /* Transfers */,
 				44F4CAA22763311E0069F6A4 /* PaymentOrchestrationCustomBackendAPIClient.swift */,
 			);
 			path = CheckoutPaymentOrchestration;
@@ -737,10 +756,10 @@
 				4403862026CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift in Sources */,
 				441927E0265F67DE0080B01E /* ShoppingCartView.swift in Sources */,
 				44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */,
+				4468CA2A278FFDC300296DA7 /* CheckoutAddCardVC.swift in Sources */,
 				441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */,
 				445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */,
 				441927DD265F673C0080B01E /* UIView+Extensions.swift in Sources */,
-				44D520F026787B18005AB588 /* CheckoutAddCardVC.swift in Sources */,
 				441927D7265F64A60080B01E /* CheckoutBasicFlowVC.swift in Sources */,
 				44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */,
 				441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */,
@@ -749,6 +768,7 @@
 				44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */,
 				441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */,
 				441927E3265F6ACE0080B01E /* OrderItem.swift in Sources */,
+				4468CA2D278FFDE600296DA7 /* CheckoutTransfersVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -171,3 +171,15 @@
 
 /* General OK button title for error popup title. */
 "vgs_checkout_error_dialog_ok_button_ttile" = "Ok";
+
+/* Navigation bar title for `Pay with card` flow. */
+"vgs_checkout_pay_with_card_navigation_bar_title" = "New card";
+
+/* Hint for checkbox save card option */
+"vgs_checkout_pay_with_card_save_card_checkbox_hint" = "Save this card";
+
+/* Pay with card button text. */
+"vgs_checkout_pay_with_card_button_title" = "Pay";
+
+/* Pay with new card option title. */
+"vgs_checkout_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";

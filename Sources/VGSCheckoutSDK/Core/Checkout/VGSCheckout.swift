@@ -14,13 +14,10 @@ public class VGSCheckout {
 	public weak var delegate: VGSCheckoutDelegate?
 
 	/// Checkout coordinator.
-	fileprivate var checkoutCoordinator = VGSCheckoutFlowCoordinator()
-
-	/// Handles add card flow.
-	internal var addCardUseCaseManager: VGSAddCardUseCaseManager?
+	internal var checkoutCoordinator: VGSCheckoutFlowCoordinator?
 
 	/// Payment instrument.
-	internal let paymentInstrument: VGSPaymentInstrument
+	internal let checkoutConfigurationType: VGSCheckoutConfigurationType
 
 	/// VGS collect.
 	internal let vgsCollect: VGSCollect
@@ -34,65 +31,66 @@ public class VGSCheckout {
 	/// - Parameters:
 	///   - configuration: `VGSCheckoutConfigurationProtocol` object, should be valid checkout configuration.
 	public init(configuration: VGSCheckoutConfigurationProtocol) {
-		guard let paymentInstrument = VGSPaymentInstrument(configuration: configuration) else {
+		guard let checkoutConfigurationType = VGSCheckoutConfigurationType(configuration: configuration) else {
 			fatalError("VGSCheckout critical error! Unsupported configuration!")
 		}
 
-		self.paymentInstrument = paymentInstrument
-		vgsCollect = VGSCollect(vaultID: paymentInstrument.mainCheckoutId, environment: configuration.environment, paymentFlow: paymentInstrument)
+		self.checkoutConfigurationType = checkoutConfigurationType
+		vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, paymentFlow: checkoutConfigurationType)
 		self.uiTheme = configuration.uiTheme
 	}
 
 	// MARK: - Interface
 
 	/// Present drop-in checkout.
-  /// - Parameters:
+	/// - Parameters:
 	///   -  viewController: `UIViewController` object, view controller to present checkout.
 	///   -  animated: `Bool` object, boolean flag indicating whether controller should be presented with animation, default is `true`.
 	public func present(from viewController: UIViewController, animated: Bool = true) {
 
-		self.addCardUseCaseManager = VGSAddCardUseCaseManager(paymentInstrument: paymentInstrument, vgsCollect: vgsCollect, uiTheme: uiTheme)
-		addCardUseCaseManager?.delegate = self
+		self.checkoutCoordinator = VGSCheckoutFlowCoordinator(checkoutConfigurationType: checkoutConfigurationType, vgsCollect: vgsCollect, uiTheme: uiTheme)
+		var currectCheckoutService = checkoutCoordinator?.checkoutServiceProvider.checkoutService
 
-		let checkoutViewController = addCardUseCaseManager?.buildCheckoutViewController()
+		currectCheckoutService?.serviceDelegate = self
+
+		let checkoutViewController = checkoutCoordinator?.checkoutServiceProvider.checkoutService.buildCheckoutViewController()
 
 		if let vc = checkoutViewController {
-			checkoutCoordinator.setRootViewController(vc)
+			checkoutCoordinator?.setRootViewController(vc)
 			vc.modalPresentationStyle = .overFullScreen
 			viewController.present(vc, animated: animated, completion: nil)
 		}
 	}
 }
 
-// MARK: - VGSAddCardUseCaseManagerDelegate
+// MARK: - VGSCheckoutServiceDelegateProtocol
 
-extension VGSCheckout: VGSAddCardUseCaseManagerDelegate {
-	func addCardFlowDidChange(with state: VGSAddCardFlowState, in useCaseManager: VGSAddCardUseCaseManager) {
+extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
+
+	/// Handles changes in checkout service state.
+	/// - Parameters:
+	///   - state: `VGSAddCardFlowState` object, checkout service state.
+	///   - service: `VGSCheckoutServiceProtocol` object, checkout service.
+	func checkoutServiceStateDidChange(with state: VGSAddCardFlowState, in service: VGSCheckoutServiceProtocol) {
+
+		guard let coordintator = checkoutCoordinator else {return}
 		switch state {
 		case .cancelled:
-			checkoutCoordinator.dismissRootViewController(with: {
+			coordintator.dismissRootViewController(with: {
 				// Close checkout.
 				self.delegate?.checkoutDidCancel()
 			})
 		case .requestSubmitted(let requestResult):
 				switch requestResult {
 				case .success:
-					checkoutCoordinator.dismissRootViewController {
+					coordintator.dismissRootViewController {
 						// Close checkout with success request result.
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 				case .failure(_, _, _, let error, _):
-					// Do not close checkout for `noConnection` error.
-					if let responseError = error, VGSCheckoutErrorUtils.isNoConnectionError(error), let viewController = checkoutCoordinator.rootController {
-						VGSDialogHelper.presentErrorAlertDialog(with: responseError.localizedDescription, in: viewController, completion: {
-							// Reset UI state to valid (previous state before submit).
-							self.addCardUseCaseManager?.state = .valid
-						})
-					} else {
-						// Close checkout with error request result.
-						checkoutCoordinator.dismissRootViewController {
-							self.delegate?.checkoutDidFinish(with: requestResult)
-						}
+					coordintator.dismissRootViewController {
+						// Close checkout with success request result.
+						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 			 }
 		}
