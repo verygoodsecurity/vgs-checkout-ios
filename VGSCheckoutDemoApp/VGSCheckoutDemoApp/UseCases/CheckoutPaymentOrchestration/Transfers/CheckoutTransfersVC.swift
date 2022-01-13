@@ -111,8 +111,10 @@ extension CheckoutTransfersVC: CheckoutFlowMainViewDelegate {
 	/// - Parameter token: `String` object, should be valid access token.
 	/// - Parameter orderId: `String` object, should be orderId.
 	fileprivate func presentCheckout(with token: String, orderId: String) {
+
+		var options = VGSCheckoutPaymentOptions()		options.methods = .savedCards(["", ""])
 		// Creates payment orchestration payment configuration with access token and order id.
-		VGSCheckoutPaymentConfiguration.createConfiguration(accessToken: token, orderId: orderId, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId) {[weak self] configuration in
+		VGSCheckoutPaymentConfiguration.createConfiguration(accessToken: token, orderId: orderId, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)

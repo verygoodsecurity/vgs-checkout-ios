@@ -1,0 +1,68 @@
+//
+//  VGSSavedCardsAPIWorker.swift
+//  VGSCheckoutSDK
+
+import Foundation
+
+internal final class VGSSavedPaymentMethodsAPIWorker {
+
+	internal typealias FetchSavedCardsCompletionSuccess = ( _ savedCards: [VGSSavedCardModel]) -> Void
+	internal typealias FetchSavedCardsCompletionFailure = ( _ error: Error?) -> Void
+
+	internal typealias FetchFinInstrumentCompletionSuccess = ( _ savedCard: VGSSavedCardModel) -> Void
+	internal typealias FetchFinInstrumentCompletionFailure = ( _ error: Error?) -> Void
+
+
+	init(vgsCollect: VGSCollect, accessToken: String) {
+		self.vgsCollect = vgsCollect
+		self.accessToken = accessToken
+	}
+
+	internal let vgsCollect: VGSCollect
+	internal let accessToken: String
+
+	internal func fetchSavedPaymentMethods(_ methods: VGSCheckoutSavedPaymentMethods, success: @escaping FetchSavedCardsCompletionSuccess, failure: @escaping FetchSavedCardsCompletionFailure) {
+		switch methods {
+		case .savedCards(let savedCardIds):
+			var fetchedSavedCards = [VGSSavedCardModel]()
+			let dispatchGroup = DispatchGroup()
+			for idx in 0..<savedCardIds.count {
+					dispatchGroup.enter()
+				fetchPaymentInstrument(with: savedCardIds[idx]) { savedCard in
+					fetchedSavedCards.append(savedCard)
+					dispatchGroup.leave()
+				} failure: { error in
+					dispatchGroup.leave()
+				}
+			}
+			dispatchGroup.notify(queue: .main) {
+					success(fetchedSavedCards)
+			}
+
+		default:
+			fatalError("not implemented")
+		}
+	}
+
+	internal func fetchPaymentInstrument(with id: String, success: @escaping FetchFinInstrumentCompletionSuccess, failure: @escaping FetchFinInstrumentCompletionFailure) {
+
+		let path = "financial_instruments/\(id)"
+
+		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(accessToken)"]
+
+		vgsCollect.apiClient.sendRequest(path: path, method: .get, value: nil) { response in
+			switch response {
+			case .success(let code, let data, let response):
+				guard let jsonData = data, let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any], let savedCard = VGSSavedCardModel(json: json) else {
+					failure(nil)
+					return
+				 }
+
+				print("Fetched order info success!")
+				success(savedCard)
+			case .failure(let code, let data, let response, let error):
+				failure(nil)
+			}
+		}
+	}
+}

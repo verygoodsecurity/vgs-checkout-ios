@@ -17,6 +17,25 @@ internal struct VGSSavedCardModel {
 	internal let cardHolder: String
 	internal var isSelected = false
 
+	init?(json: JsonData) {
+		guard let dataJSON = json["data"] as? JsonData,
+					let id = dataJSON["id"] as? String,
+				let cardJSON = dataJSON["card"] as? JsonData,
+		let cardNumber = cardJSON["number"] as? String,
+		let name = cardJSON["name"] as? String,
+		let expYear = cardJSON["exp_year"] as? Int,
+		let expMonth = cardJSON["exp_month"] as? Int,
+		let brand = cardJSON["brand"] as? String
+		else {
+			return nil
+		}
+		self.id = id
+		self.cardHolder = name
+		self.last4 = String(cardNumber.suffix(4))
+		self.expDate = "\(expMonth)/" + "\(expYear)"
+		self.cardBrand = brand
+	}
+
 	internal var paymentOptionCellViewModel: VGSPaymentOptionCardCellViewModel {
 		var image = VGSCheckoutPaymentCards.visa.brand.brandIcon
 		if cardBrand == VGSCheckoutPaymentCards.maestro.name {

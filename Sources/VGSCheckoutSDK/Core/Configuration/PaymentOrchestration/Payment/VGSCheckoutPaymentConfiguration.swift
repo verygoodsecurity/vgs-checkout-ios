@@ -42,9 +42,23 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	///   - options: `VGSCheckoutPaymentOptions` object, payment options.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", options: VGSCheckoutPaymentOptions? = nil, success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+
+		var savedCardsToFetch = [String]()
+		if let savedPaymentMethods = options?.methods {
+			switch savedPaymentMethods {
+			case .savedCards(let savedCards):
+				if savedCards.count > 5 {
+					//savedCardsToFetch = savedCards.prefix(5)
+				}
+			case .userId(let _):
+				break
+			}
+		}
+
 		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
 			failure(error as Error)
@@ -55,8 +69,19 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 		let orderAPIWorker = VGSPayoptTransfersOrderAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
 		orderAPIWorker.fetchPaymentConfiguration(for: orderId) { paymentInfo in
 			print("succcess")
+
 			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment)
-			success(&paymentCardConfiguration)
+			if let methods = options?.methods {
+				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
+				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
+					paymentCardConfiguration.savedCards = savedCards
+					success(&paymentCardConfiguration)
+				} failure: { error in
+					success(&paymentCardConfiguration)
+				}
+			} else {
+				success(&paymentCardConfiguration)
+			}
 		} failure: { error in
 			failure(error)
 		}
@@ -120,6 +145,8 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 		}
 	}
 
+	internal var savedCards: [VGSSavedCardModel] = []
+
 	/// An array of financial instruments ids representing saved cards.
 	internal var savedPaymentCardsIds: [String] = []
 
@@ -150,3 +177,15 @@ internal protocol VGSCheckoutPaymentOrchestrationBasicConfiguration {
 	var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {get set}
 }
 
+public enum VGSCheckoutSavedPaymentMethods {
+	case savedCards( _ ids: [String])
+	case userId(_ id: String)
+}
+
+public struct VGSCheckoutPaymentOptions {
+	public var methods: VGSCheckoutSavedPaymentMethods? = nil
+
+	public init() {
+
+	}
+}
