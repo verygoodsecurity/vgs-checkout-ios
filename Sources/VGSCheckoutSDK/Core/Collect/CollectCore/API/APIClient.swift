@@ -109,7 +109,7 @@ internal class APIClient {
 
 	// MARK: - Send request
 
-	func sendRequest(path: String, method: HTTPMethod = .post, value: BodyData, completion block: ((_ response: VGSResponse) -> Void)? ) {
+	func sendRequest(path: String, method: HTTPMethod = .post, value: BodyData?, completion block: ((_ response: VGSResponse) -> Void)? ) {
 
 		let sendRequestBlock: (URL?) -> Void = {url in
 			guard let requestURL = url else {
@@ -147,7 +147,7 @@ internal class APIClient {
 		}
 	}
 
-	private  func sendRequest(to url: URL, method: HTTPMethod = .post, value: BodyData, completion block: ((_ response: VGSResponse) -> Void)? ) {
+	private  func sendRequest(to url: URL, method: HTTPMethod = .post, value: BodyData?, completion block: ((_ response: VGSResponse) -> Void)? ) {
 
 		// Add headers.
 		var headers = APIClient.defaultHttpHeaders
@@ -159,9 +159,11 @@ internal class APIClient {
 			})
 		}
 		// Setup URLRequest.
-		let jsonData = try? JSONSerialization.data(withJSONObject: value)
 		var request = URLRequest(url: url)
-		request.httpBody = jsonData
+		if let data = value {
+			let jsonData = try? JSONSerialization.data(withJSONObject: data)
+			request.httpBody = jsonData
+		}
 		request.httpMethod = method.rawValue
 		request.allHTTPHeaderFields = headers
 

@@ -54,37 +54,36 @@ internal class VGSPayoptTransfersOrderAPIWorker {
 		let mockedPaymentInfo = VGSPayoptTransfersOrderInfo(amount: 5300, currency: "USD")
 		success(mockedPaymentInfo)
 		return
+		return
 
-//		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(accessToken)"]
-//
-//		let path = "orders/\(orderId)"
-//
-//		vgsCollect.sendData(path: path, method: .post) { response in
-//			switch response {
-//			case .success(let code, let data, let response):
-//				guard let jsonData = data, let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any], let dataJSON = json["data"] as? [String: Any], let paymentInfo = VGSPayoptTransfersOrderInfo(json: dataJSON) else {
-//					let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
-//						NSLocalizedDescriptionKey: "Cannot fetch order id info",
-//						"statusCode": code
-//					])
-//					failure(fetchOrderError as Error)
-//					return
-//				 }
-//
-//				print("Fetched order info success!")
-//				success(paymentInfo)
-//			case .failure(let code, let data, let response, let error):
-//				// TODO: - add cannot fetch order info error code.
-//				let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
-//					NSLocalizedDescriptionKey: "Cannot fetch order id info",
-//					"statusCode": code,
-//					"extraError": error
-//				])
-//
-//				failure(fetchOrderError as Error)
-//			}
-//		}
+		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(accessToken)"]
+
+		let path = "orders/\(orderId)"
+
+		vgsCollect.apiClient.sendRequest(path: path, method: .get, value: nil) { response in
+			switch response {
+			case .success(let code, let data, let response):
+				guard let jsonData = data, let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any], let dataJSON = json["data"] as? [String: Any], let paymentInfo = VGSPayoptTransfersOrderInfo(json: dataJSON) else {
+					let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
+						NSLocalizedDescriptionKey: "Cannot fetch order id info",
+						"statusCode": code
+					])
+					failure(fetchOrderError as Error)
+					return
+				 }
+
+				print("Fetched order info success!")
+				success(paymentInfo)
+			case .failure(let code, let data, let response, let error):
+				// TODO: - add cannot fetch order info error code.
+				let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
+					NSLocalizedDescriptionKey: "Cannot fetch order id info",
+					"statusCode": code,
+					"extraError": error
+				])
+
+				failure(fetchOrderError as Error)
+			}
+		}
 	}
 }
-
-
