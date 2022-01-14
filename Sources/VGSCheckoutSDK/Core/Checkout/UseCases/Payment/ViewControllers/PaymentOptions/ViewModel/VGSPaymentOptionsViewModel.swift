@@ -78,5 +78,20 @@ internal class VGSPaymentOptionsViewModel {
 		return text
 	}
 
+	/// Selected payment card info.
+	internal var selectedPaymentCardInfo: VGSCheckoutPaymentCardInfo? {
+		guard let selectedId = previsouslySelectedID else {return nil}
+		let savedCardModels = paymentOptions.compactMap { option -> VGSSavedCardModel? in
+			switch option {
+			case .savedCard(let card):
+				return card
+			case .newCard:
+				return nil
+			}
+		}
+		guard let firstModel = savedCardModels.first(where: {$0.id == selectedId}) else {return nil}
+		return VGSCheckoutPaymentCardInfo(isDefault: true, id: selectedId)
+	}
+
 	internal var saveCardCheckboxSelected: Bool = true
 }

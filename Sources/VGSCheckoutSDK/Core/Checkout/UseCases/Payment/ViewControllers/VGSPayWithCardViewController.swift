@@ -82,9 +82,8 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 	func submitButtonDidTap(in formState: VGSBaseCardViewController.FormState, viewController: VGSBaseCardViewController) {
 		switch formState {
 		case .processing:
-    // TODO: handle other payment methods after save card flow implemented
       let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
-      viewModel.apiWorker.createFinIDAndSendTransfer(with: .newCard(cardInfo)){[weak self] requestResult in
+      viewModel.apiWorker.createFinIDAndSendTransfer(with: cardInfo) {[weak self] requestResult in
 				guard let strongSelf = self else {return}
 				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
 				guard let service = strongSelf.paymentService else {return}

@@ -10,6 +10,16 @@ import UIKit
 /// Holds UI and view model for payment options screen.
 internal class VGSPaymentOptionsViewController: UIViewController {
 
+	/// Defines screen state.
+	internal enum ScreenState {
+
+		/// Initial screen state.
+		case initial
+
+		/// Processing state.
+		case processing
+	}
+
 	/// View model.
 	fileprivate let viewModel: VGSPaymentOptionsViewModel
 
@@ -24,6 +34,25 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Close bar button item.
 	fileprivate var closeBarButtomItem: UIBarButtonItem?
+
+	/// Screen state.
+	fileprivate var screenState: ScreenState = .initial {
+		didSet {
+			switch screenState {
+			case .initial:
+				break
+			case .processing:
+				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
+				let info = VGSCheckoutPaymentFlowInfo(paymentMethod: .savedCard(cardInfo))
+				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
+					guard let strongSelf = self else {return}
+					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+					guard let service = strongSelf.paymentService else {return}
+					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+				})
+			}
+		}
+	}
 
 	// MARK: - Initialization
 
@@ -63,6 +92,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		closeBarButtomItem = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
 		navigationItem.leftBarButtonItem = closeBarButtomItem
 
+		mainView.submitButton.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
+
 		mainView.backgroundColor = uiTheme.checkoutViewBackgroundColor
 		mainView.tableView.backgroundColor = .clear
 
@@ -79,6 +110,11 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		guard let service = paymentService else {return}
 		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.vgsCollect.formAnalyticsDetails, type: .cancel)
 		paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .cancelled, in: service)
+	}
+
+	/// Handles tap on submit button.
+	@objc fileprivate func submitButtonDidTap() {
+		screenState = .processing
 	}
 }
 

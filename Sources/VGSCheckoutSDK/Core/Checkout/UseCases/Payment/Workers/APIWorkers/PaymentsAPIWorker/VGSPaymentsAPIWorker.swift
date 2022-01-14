@@ -31,7 +31,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 		self.vgsCollect = vgsCollect
 	}
 
-  internal func createFinIDAndSendTransfer(with paymentMethod: VGSCheckoutPaymentMethod, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func createFinIDAndSendTransfer(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
@@ -45,7 +45,8 @@ internal final class VGSPayoptTransfersAPIWorker {
 					return
 				}
 
-        strongSelf.sendTransfer(with: paymentMethod, finId: id, completion: completion)
+				var paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
+        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
@@ -53,7 +54,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 		}
 	}
 
-	internal func sendTransfer(with paymentMethod: VGSCheckoutPaymentMethod, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentFlowInfo, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		let transderPayload: [String: Any] = [
 			"order_id": configuration.orderId,
 			"financial_instrument_id": finId
@@ -62,8 +63,8 @@ internal final class VGSPayoptTransfersAPIWorker {
 		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transderPayload) { response in
 			switch response {
 			case .success(let code, let data, let response):
-        /// Additional checkaout flow info.
-        let info = VGSCheckoutPaymentFlowInfo(paymentMethod: paymentMethod)
+        /// Additional checkout flow info.
+        let info = paymentInfo
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, info)
 				completion(requestResult)
 			case .failure(let code, let data, let response, let error):
