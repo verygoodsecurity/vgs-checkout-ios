@@ -108,7 +108,6 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Table view setup.
 	private func setupTableView() {
-		mainView.tableView.backgroundColor = .clear
 		mainView.tableView.register(VGSPaymentOptionCardTableViewCell.self, forCellReuseIdentifier: VGSPaymentOptionCardTableViewCell.cellIdentifier)
 		mainView.tableView.register(VGSPaymentOptionNewCardTableViewCell.self, forCellReuseIdentifier: VGSPaymentOptionNewCardTableViewCell.cellIdentifier)
 		mainView.tableView.dataSource = self

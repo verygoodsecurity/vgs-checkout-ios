@@ -77,7 +77,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		return label
 	}()
 
-	///
+	/// Checkbox container view.
 	fileprivate lazy var checkboxContainerView: UIView = {
 		let view = UIView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -85,8 +85,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		return view
 	}()
 
-
-	/// Checkbox
+	/// Checkbox.
 	fileprivate var checkbox: VGSRoundedCheckbox?
 
 	// MARK: - Interface
@@ -114,11 +113,17 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 			checkbox = roundedCheckbox
 		}
 		checkbox?.isSelected = viewModel.isSelected
+		if viewModel.isSelected {
+			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
+			itemContainerView.layer.borderWidth = 1
+		} else {
+			itemContainerView.layer.borderWidth = 0
+		}
 	}
 
 	// MARK: - Helpers
 
-	/// Setup UI.
+	/// Setups UI.
 	private func setupUI() {
 		selectionStyle = .none
 		contentView.backgroundColor = .clear

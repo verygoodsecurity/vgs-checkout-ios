@@ -9,7 +9,7 @@ internal struct VGSSavedCardModel {
 
 	// MARK: - Vars
 
-	/// Id.
+	/// Fin instrument id.
 	internal let id: String
 
 	/// Card brand name.

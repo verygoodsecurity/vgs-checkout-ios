@@ -24,6 +24,8 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	// MARK: - Initialization
 
+	/// Initializer
+	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	internal init(uiTheme: VGSCheckoutThemeProtocol) {
 		submitButton = VGSAddCardFormViewBuilder.buildPaymentButton(with: uiTheme)
 		super.init(frame: .zero)
@@ -37,7 +39,7 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 	// MARK: - Helpers
 
-	/// Setup UI.
+	/// Setups UI.
 	internal func setupUI() {
 		addSubview(formView)
 		formView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +55,7 @@ internal class VGSPaymentOptionsMainView: UIView {
 
 		formView.stackView.addArrangedSubview(tableView)
 		formView.scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+		
 		setupSubmitButtonUI()
 	}
 
@@ -60,6 +63,8 @@ internal class VGSPaymentOptionsMainView: UIView {
 	private func setupTableViewUI() {
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.isScrollEnabled = false
+		tableView.separatorStyle = .none
+		tableView.backgroundColor = .clear
 	}
 
 	/// Setups submit button.
