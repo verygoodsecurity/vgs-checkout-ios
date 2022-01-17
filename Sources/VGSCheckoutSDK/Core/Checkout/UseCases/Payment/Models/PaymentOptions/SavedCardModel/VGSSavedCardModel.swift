@@ -13,7 +13,10 @@ internal struct VGSSavedCardModel {
 	internal let id: String
 
 	/// Card brand name.
-	internal let cardBrand: String
+	internal let cardBrandName: String
+
+	/// Card brand.
+	internal let cardBrand: VGSCheckoutPaymentCards.CardBrand
 
 	/// Last 4 digits.
 	internal let last4: String
@@ -58,7 +61,8 @@ internal struct VGSSavedCardModel {
 		self.cardHolder = name
 		self.last4 = String(cardNumber.suffix(4))
 		self.expDate = "\(expMonth)/" + "\(expYear)"
-		self.cardBrand = brand
+		self.cardBrandName = brand
+		self.cardBrand = VGSCheckoutPaymentCards.CardBrand(brand)
 	}
 
 	/// Initializer
@@ -70,18 +74,16 @@ internal struct VGSSavedCardModel {
 	///   - cardHolder: `String` object, card holder name.
 	internal init(id: String, cardBrand: String, last4: String, expDate: String, cardHolder: String) {
 		self.id = id
-		self.cardBrand = cardBrand
+		self.cardBrandName = cardBrand
 		self.last4 = last4
 		self.expDate = expDate
 		self.cardHolder = cardHolder
+		self.cardBrand = VGSCheckoutPaymentCards.CardBrand(cardBrand)
 	}
 
 	/// Payment option cell view model.
 	internal var paymentOptionCellViewModel: VGSPaymentOptionCardCellViewModel {
-		var image = VGSCheckoutPaymentCards.visa.brand.brandIcon
-		if cardBrand == VGSCheckoutPaymentCards.maestro.name {
-			image = VGSCheckoutPaymentCards.maestro.brandIcon
-		}
+		let image = cardBrand.brandIcon
 
 		let last4Text = "•••• \(last4) | \(expDate)"
 

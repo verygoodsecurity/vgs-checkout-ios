@@ -7,13 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-internal struct VGSPaymentOptionCardCellViewModel {
-	internal let cardBrandImage: UIImage?
-	internal let cardHolder: String?
-	internal let last4AndExpDateText: String?
-	internal var isSelected: Bool
-}
-
 /// Holds UI for saved card payment option cell.
 internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 

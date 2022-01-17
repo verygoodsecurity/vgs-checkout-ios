@@ -214,6 +214,8 @@
 		4468CA422795486900296DA7 /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA412795486900296DA7 /* SelfSizedTableView.swift */; };
 		4468CA452795541800296DA7 /* VGSPaymentOptionNewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA442795541800296DA7 /* VGSPaymentOptionNewCardTableViewCell.swift */; };
 		4468CA482795551D00296DA7 /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA472795551D00296DA7 /* UITableViewCell+Extensions.swift */; };
+		4468CA4A27956F0200296DA7 /* VGSPaymentOptionCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA4927956F0100296DA7 /* VGSPaymentOptionCardCellViewModel.swift */; };
+		4468CA4E279570AF00296DA7 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA4D279570AF00296DA7 /* String+Extensions.swift */; };
 		446CEA2826E876A1005ECE75 /* VGSValidationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CEA2726E876A1005ECE75 /* VGSValidationErrorView.swift */; };
 		446CEA2B26E9D0A1005ECE75 /* VGSUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */; };
 		447A752F278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */; };
@@ -495,6 +497,8 @@
 		4468CA412795486900296DA7 /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		4468CA442795541800296DA7 /* VGSPaymentOptionNewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPaymentOptionNewCardTableViewCell.swift; sourceTree = "<group>"; };
 		4468CA472795551D00296DA7 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		4468CA4927956F0100296DA7 /* VGSPaymentOptionCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPaymentOptionCardCellViewModel.swift; sourceTree = "<group>"; };
+		4468CA4D279570AF00296DA7 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		446CEA2726E876A1005ECE75 /* VGSValidationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSValidationErrorView.swift; sourceTree = "<group>"; };
 		446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUIConstants.swift; sourceTree = "<group>"; };
 		447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressVisibility.swift; sourceTree = "<group>"; };
@@ -1683,6 +1687,7 @@
 			isa = PBXGroup;
 			children = (
 				4468CA3E2795458800296DA7 /* VGSSavedCardModel.swift */,
+				4468CA4927956F0100296DA7 /* VGSPaymentOptionCardCellViewModel.swift */,
 			);
 			path = SavedCardModel;
 			sourceTree = "<group>";
@@ -1709,6 +1714,22 @@
 				4468CA472795551D00296DA7 /* UITableViewCell+Extensions.swift */,
 			);
 			path = "UITableViewCell+Extensions";
+			sourceTree = "<group>";
+		};
+		4468CA4B2795709000296DA7 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA4C2795709800296DA7 /* String+Extensions */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		4468CA4C2795709800296DA7 /* String+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA4D279570AF00296DA7 /* String+Extensions.swift */,
+			);
+			path = "String+Extensions";
 			sourceTree = "<group>";
 		};
 		446CEA2626E87675005ECE75 /* ValidationErrorView */ = {
@@ -1872,6 +1893,7 @@
 		44C4C8F72664B1D600195505 /* Extenions */ = {
 			isa = PBXGroup;
 			children = (
+				4468CA4B2795709000296DA7 /* Foundation */,
 				44EBEBFD266F8CC200270953 /* VGSCollect+Extensions */,
 				44C4C8F82664B1DD00195505 /* UIKit+Extensions */,
 			);
@@ -2567,6 +2589,7 @@
 				4468CA10278F333A00296DA7 /* VGSCardDataSectionViewModel.swift in Sources */,
 				4405DC9926847247004A83AD /* URL+Extensions.swift in Sources */,
 				4468CA02278F333A00296DA7 /* VGSPayWithCardViewController.swift in Sources */,
+				4468CA4A27956F0200296DA7 /* VGSPaymentOptionCardCellViewModel.swift in Sources */,
 				44FF1A6526C3864500BA85AF /* VGSCheckoutErrorUtils.swift in Sources */,
 				44E10AAB2696C346001F0D44 /* VGSStateDataSourceProvider.swift in Sources */,
 				4468C9FC278F333A00296DA7 /* VGSPayWithCardViewModelFactory.swift in Sources */,
@@ -2611,6 +2634,7 @@
 				4468C9F2278F333A00296DA7 /* VGSFormValidationHelper.swift in Sources */,
 				44EC950226690DF800CE04F4 /* VGSCheckoutFieldVisibility.swift in Sources */,
 				44C4C8ED2664B18B00195505 /* VGSCardNumberFieldView.swift in Sources */,
+				4468CA4E279570AF00296DA7 /* String+Extensions.swift in Sources */,
 				44E10ADF26A020F7001F0D44 /* VGSTextFieldViewProtocol.swift in Sources */,
 				4405DCA426847247004A83AD /* VGSFieldNameSubscriptType.swift in Sources */,
 				4468CA22278F39D200296DA7 /* VGSFormatAmountUtils.swift in Sources */,

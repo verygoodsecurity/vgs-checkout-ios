@@ -228,9 +228,11 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 
 // MARK: - VGSSubmitButtonDelegateProtocol
 
+/// no:doc
 extension VGSPaymentOptionsViewController: VGSSubmitButtonDelegateProtocol {
+
+	/// no:doc
 	func statusDidChange(in button: VGSSubmitButton) {
 		mainView.submitButton.updateUI(with: uiTheme)
 	}
 }
-
