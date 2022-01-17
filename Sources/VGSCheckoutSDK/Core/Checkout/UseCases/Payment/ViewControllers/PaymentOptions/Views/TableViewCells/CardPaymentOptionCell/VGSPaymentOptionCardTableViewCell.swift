@@ -7,67 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-// GET array of saved card by id1,id2
-
-internal struct VGSSavedCardModel {
-	internal let id: String
-	internal let cardBrand: String
-	internal let last4: String
-	internal let expDate: String
-	internal let cardHolder: String
-	internal var isSelected = false
-
-	init?(json: JsonData) {
-		guard let dataJSON = json["data"] as? JsonData,
-					let id = dataJSON["id"] as? String,
-				let cardJSON = dataJSON["card"] as? JsonData,
-		let cardNumber = cardJSON["number"] as? String,
-		let name = cardJSON["name"] as? String,
-		let expYear = cardJSON["exp_year"] as? Int,
-		let expMonth = cardJSON["exp_month"] as? Int,
-		let brand = cardJSON["brand"] as? String
-		else {
-			return nil
-		}
-		self.id = id
-		self.cardHolder = name
-		self.last4 = String(cardNumber.suffix(4))
-		self.expDate = "\(expMonth)/" + "\(expYear)"
-		self.cardBrand = brand
-	}
-
-	internal var paymentOptionCellViewModel: VGSPaymentOptionCardCellViewModel {
-		var image = VGSCheckoutPaymentCards.visa.brand.brandIcon
-		if cardBrand == VGSCheckoutPaymentCards.maestro.name {
-			image = VGSCheckoutPaymentCards.maestro.brandIcon
-		}
-
-		let last4Text = "•••• \(last4) | \(expDate)"
-
-		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
-	}
-}
-
-internal extension Array where Element == VGSSavedCardModel {
-	func reorderByIds(_ cardIds: [String]) -> [VGSSavedCardModel] {
-		var orderedArray: [VGSSavedCardModel] = []
-		cardIds.forEach { id in
-			for card in self {
-				if card.id == id {
-					orderedArray.append(card)
-				}
-			}
-		}
-
-		return orderedArray
-	}
-}
-
-internal enum VGSPaymentOption {
-	case savedCard(_ card: VGSSavedCardModel)
-	case newCard
-}
-
 internal struct VGSPaymentOptionCardCellViewModel {
 	internal let cardBrandImage: UIImage?
 	internal let cardHolder: String?

@@ -7,27 +7,6 @@ import Foundation
 import UIKit
 #endif
 
-internal class SelfSizedTableView: UITableView {
-	var maxHeight: CGFloat = UIScreen.main.bounds.size.height
-
-	override func reloadData() {
-		super.reloadData()
-		self.invalidateIntrinsicContentSize()
-		self.layoutIfNeeded()
-	}
-
-	override var contentSize: CGSize {
-			didSet {
-					invalidateIntrinsicContentSize()
-			}
-	}
-
-	override var intrinsicContentSize: CGSize {
-			layoutIfNeeded()
-			return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
-	}
-}
-
 /// Holds UI for payment options screen.
 internal class VGSPaymentOptionsMainView: UIView {
 
@@ -70,14 +49,20 @@ internal class VGSPaymentOptionsMainView: UIView {
 		formView.stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		formView.stackView.isLayoutMarginsRelativeArrangement = true
 
-		tableView.translatesAutoresizingMaskIntoConstraints = false
-		tableView.isScrollEnabled = false
+		setupTableViewUI()
 
 		formView.stackView.addArrangedSubview(tableView)
 		formView.scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
 		setupSubmitButtonUI()
 	}
 
+	/// Setups table view.
+	private func setupTableViewUI() {
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		tableView.isScrollEnabled = false
+	}
+
+	/// Setups submit button.
 	private func setupSubmitButtonUI() {
 		addSubview(payButtonContainerView)
 		payButtonContainerView.paddings = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)

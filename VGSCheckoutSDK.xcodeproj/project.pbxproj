@@ -209,6 +209,9 @@
 		4468CA3327904E7100296DA7 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA3227904E7100296DA7 /* UITableView+Extensions.swift */; };
 		4468CA352790504600296DA7 /* VGSCollectFieldNameMappingPolicy+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA342790504600296DA7 /* VGSCollectFieldNameMappingPolicy+Extensions.swift */; };
 		4468CA382790522900296DA7 /* VGSSavedCardsAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA372790522900296DA7 /* VGSSavedCardsAPIWorker.swift */; };
+		4468CA3D2795456B00296DA7 /* VGSPaymentOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA3C2795456A00296DA7 /* VGSPaymentOption.swift */; };
+		4468CA3F2795458800296DA7 /* VGSSavedCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA3E2795458800296DA7 /* VGSSavedCardModel.swift */; };
+		4468CA422795486900296DA7 /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468CA412795486900296DA7 /* SelfSizedTableView.swift */; };
 		446CEA2826E876A1005ECE75 /* VGSValidationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CEA2726E876A1005ECE75 /* VGSValidationErrorView.swift */; };
 		446CEA2B26E9D0A1005ECE75 /* VGSUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */; };
 		447A752F278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */; };
@@ -485,6 +488,9 @@
 		4468CA3227904E7100296DA7 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		4468CA342790504600296DA7 /* VGSCollectFieldNameMappingPolicy+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSCollectFieldNameMappingPolicy+Extensions.swift"; sourceTree = "<group>"; };
 		4468CA372790522900296DA7 /* VGSSavedCardsAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSSavedCardsAPIWorker.swift; sourceTree = "<group>"; };
+		4468CA3C2795456A00296DA7 /* VGSPaymentOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPaymentOption.swift; sourceTree = "<group>"; };
+		4468CA3E2795458800296DA7 /* VGSSavedCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSSavedCardModel.swift; sourceTree = "<group>"; };
+		4468CA412795486900296DA7 /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		446CEA2726E876A1005ECE75 /* VGSValidationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSValidationErrorView.swift; sourceTree = "<group>"; };
 		446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUIConstants.swift; sourceTree = "<group>"; };
 		447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressVisibility.swift; sourceTree = "<group>"; };
@@ -1384,6 +1390,7 @@
 				4468C9B8278F333A00296DA7 /* VGSCheckoutPaymentService.swift */,
 				4468C9B9278F333A00296DA7 /* ViewModels */,
 				4468C9BD278F333A00296DA7 /* ViewControllers */,
+				4468CA392795452900296DA7 /* Models */,
 				4468C9C9278F333A00296DA7 /* Workers */,
 			);
 			path = Payment;
@@ -1650,6 +1657,39 @@
 			path = SavedCardsAPIWorker;
 			sourceTree = "<group>";
 		};
+		4468CA392795452900296DA7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA3A2795453700296DA7 /* PaymentOptions */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4468CA3A2795453700296DA7 /* PaymentOptions */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA3C2795456A00296DA7 /* VGSPaymentOption.swift */,
+				4468CA3B2795455B00296DA7 /* SavedCardModel */,
+			);
+			path = PaymentOptions;
+			sourceTree = "<group>";
+		};
+		4468CA3B2795455B00296DA7 /* SavedCardModel */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA3E2795458800296DA7 /* VGSSavedCardModel.swift */,
+			);
+			path = SavedCardModel;
+			sourceTree = "<group>";
+		};
+		4468CA402795485E00296DA7 /* SelfSizedTableView */ = {
+			isa = PBXGroup;
+			children = (
+				4468CA412795486900296DA7 /* SelfSizedTableView.swift */,
+			);
+			path = SelfSizedTableView;
+			sourceTree = "<group>";
+		};
 		446CEA2626E87675005ECE75 /* ValidationErrorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1777,6 +1817,7 @@
 		44C4C8DC2664B18B00195505 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				4468CA402795485E00296DA7 /* SelfSizedTableView */,
 				4468CA23278F3B8700296DA7 /* CheckboxButton */,
 				4468C97C278F2AA500296DA7 /* Checkbox */,
 				44C4C8DD2664B18B00195505 /* SubmitControl */,
@@ -2495,6 +2536,7 @@
 				44E10ACD269D6C60001F0D44 /* VGSCheckoutLocalizationSettings.swift in Sources */,
 				44EBEBFF266F8CDD00270953 /* VGSCollect+CheckoutExtensions.swift in Sources */,
 				44E10ACB269D4508001F0D44 /* VGSCheckoutLocalizationUtils.swift in Sources */,
+				4468CA3D2795456B00296DA7 /* VGSPaymentOption.swift in Sources */,
 				4468CA04278F333A00296DA7 /* VGSCreditCardAPIWorker.swift in Sources */,
 				4438578126B022D200EE5C7F /* VGSCheckoutCustomBillingAddressCityOptions.swift in Sources */,
 				4405DC9F26847247004A83AD /* VGSExpirationDateTextFieldUtils.swift in Sources */,
@@ -2556,8 +2598,10 @@
 				4468CA25278F3B8700296DA7 /* VGSCheckboxButton.swift in Sources */,
 				4405DC9426847247004A83AD /* ExpDateFormatConvertor.swift in Sources */,
 				4438578326B022EE00EE5C7F /* VGSCheckoutCustomBillingAddressPostalCodeOptions.swift in Sources */,
+				4468CA3F2795458800296DA7 /* VGSSavedCardModel.swift in Sources */,
 				4405DC9226847247004A83AD /* VGSLogEvent.swift in Sources */,
 				44C4C8EC2664B18B00195505 /* VGSCardholderFieldView.swift in Sources */,
+				4468CA422795486900296DA7 /* SelfSizedTableView.swift in Sources */,
 				4468C98E278F320600296DA7 /* VGSCheckoutTextFieldThemeAdapterProtocol.swift in Sources */,
 				4468C9F8278F333A00296DA7 /* VGSCheckoutFlowCoordinator.swift in Sources */,
 				44D520D326771EFD005AB588 /* VGSCheckoutRequestResult.swift in Sources */,
