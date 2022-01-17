@@ -27,14 +27,12 @@ public struct VGSCheckoutPaymentCardInfo {
   /// `true` if selected as default payment card.
   public let isDefault: Bool
 	public let id: String
-//  let last4: String
-//  let cardBrand: VGSCheckoutPaymentCards.CardBrand
+	public var response: URLResponse?
 }
 
 /// New payment card details.
 public struct VGSCheckoutNewPaymentCardInfo {
   /// `true` if selected to be saved for future payments.
   public let shouldSave: Bool
-//  let last4: String
-//  let cardBrand: VGSCheckoutPaymentCards.CardBrand
+	public var response: URLResponse?
 }
