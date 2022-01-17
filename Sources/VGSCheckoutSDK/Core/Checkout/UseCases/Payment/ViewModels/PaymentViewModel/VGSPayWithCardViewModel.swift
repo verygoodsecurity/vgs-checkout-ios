@@ -17,7 +17,8 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 	/// Configuration.
 	private(set) var configuration: VGSCheckoutPaymentConfiguration
 
-	let apiWorker: VGSPayoptTransfersAPIWorker
+	/// Api worker.
+	internal let apiWorker: VGSPayoptTransfersAPIWorker
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {

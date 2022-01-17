@@ -45,10 +45,11 @@ internal final class VGSPayoptTransfersAPIWorker {
 					return
 				}
 
-				var paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
+				let paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
         strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
+				let paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
+				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
 				completion(requestResult)
 			}
 		}
@@ -68,7 +69,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, info)
 				completion(requestResult)
 			case .failure(let code, let data, let response, let error):
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
+				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
 				completion(requestResult)
 			}
 		}
