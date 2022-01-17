@@ -29,10 +29,10 @@ internal final class VGSPayoptTransfersAPIWorker {
 	init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect) {
 		self.configuration = configuration
 		self.vgsCollect = vgsCollect
+		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 	}
 
 	internal func createFinIDAndSendTransfer(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
-		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}

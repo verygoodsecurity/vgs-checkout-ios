@@ -45,6 +45,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
 				mainView.isUserInteractionEnabled = false
 				closeBarButtomItem?.isEnabled = false
+				mainView.submitButton.status = .processing
+				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
 				let info = VGSCheckoutPaymentFlowInfo(paymentMethod: .savedCard(cardInfo))
 				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
 					guard let strongSelf = self else {return}
@@ -122,6 +124,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Submit button setup.
 	private func setupSubmitButton() {
+		mainView.submitButton.delegate = self
 		mainView.submitButton.title = viewModel.submitButtonTitle
 		mainView.submitButton.status = .enabled
 		mainView.submitButton.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
@@ -222,3 +225,12 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 		}
 	}
 }
+
+// MARK: - VGSSubmitButtonDelegateProtocol
+
+extension VGSPaymentOptionsViewController: VGSSubmitButtonDelegateProtocol {
+	func statusDidChange(in button: VGSSubmitButton) {
+		mainView.submitButton.updateUI(with: uiTheme)
+	}
+}
+
