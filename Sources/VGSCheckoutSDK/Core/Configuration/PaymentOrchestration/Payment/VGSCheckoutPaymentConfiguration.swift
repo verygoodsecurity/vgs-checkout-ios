@@ -169,10 +169,23 @@ internal protocol VGSCheckoutPaymentOrchestrationBasicConfiguration {
 }
 
 public enum VGSCheckoutSavedPaymentMethods {
+
+
 	case savedCards( _ ids: [String])
 	case userId(_ id: String)
 }
 
+public struct VGSCheckoutSavedPaymentMethods2 {
+	public var savedCards: [String] = []
+
+	// public var userID: String? - will be in future
+
+	public init() {
+
+	}
+}
+
+///
 public struct VGSCheckoutPaymentOptions {
 	public var methods: VGSCheckoutSavedPaymentMethods? = nil
 

@@ -90,4 +90,13 @@ public extension UIColor {
 			return UIColor(hexString: "#AEAEB2")
 		}
 	}
+
+	///:nodoc: VGS systemGray color (with fallback to earlier versions).
+	static var vgsSystemGrayColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor.systemGray
+		} else {
+			return UIColor(hexString: "#AEAEB2")
+		}
+	}
 }

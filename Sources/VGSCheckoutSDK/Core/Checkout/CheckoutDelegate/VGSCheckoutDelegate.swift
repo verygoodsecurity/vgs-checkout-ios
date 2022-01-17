@@ -12,4 +12,15 @@ public protocol VGSCheckoutDelegate: AnyObject {
 
 	/// Tells the delegate that user cancelled checkout flow (closed checkout screen.)
 	func checkoutDidCancel()
+
+	func saveCardDidSuccess(with data: Data?, response: URLResponse?)
+
+	func threeDSDidFinish(with data: Data?, response: URLResponse?)
+}
+
+/// Defeault protocol implementation.
+public extension VGSCheckoutDelegate {
+	func saveCardDidSuccess(with data: Data?, response: URLResponse?) {}
+
+	func threeDSDidFinish(with data: Data?, response: URLResponse?) {}
 }

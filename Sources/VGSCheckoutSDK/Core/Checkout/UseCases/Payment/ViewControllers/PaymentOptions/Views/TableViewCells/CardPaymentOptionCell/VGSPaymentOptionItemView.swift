@@ -16,8 +16,8 @@ internal class VGSPaymentOptionItemContainerView: UIView {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .horizontal
 		stackView.alignment = .fill
-		stackView.spacing = 8
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 16, bottom: 4, right: 16)
+		stackView.spacing = 16
+		stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		stackView.isLayoutMarginsRelativeArrangement = true
 		stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60).isActive = true
 

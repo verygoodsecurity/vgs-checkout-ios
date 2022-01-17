@@ -30,7 +30,7 @@ internal class VGSPaymentOptionNewCardTableViewCell: UITableViewCell {
 		let view = VGSPaymentOptionItemContainerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.stackView.setContentCompressionResistancePriority(.required, for: .vertical)
-		view.layer.cornerRadius = 6
+		view.layer.cornerRadius = 8
 		view.layer.masksToBounds = true
 
 		return view

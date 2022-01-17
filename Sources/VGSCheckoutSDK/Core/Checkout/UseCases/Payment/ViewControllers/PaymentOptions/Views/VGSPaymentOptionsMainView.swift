@@ -54,7 +54,7 @@ internal class VGSPaymentOptionsMainView: UIView {
 		setupTableViewUI()
 
 		formView.stackView.addArrangedSubview(tableView)
-		formView.scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+		formView.scrollView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 32, right: 0)
 		
 		setupSubmitButtonUI()
 	}

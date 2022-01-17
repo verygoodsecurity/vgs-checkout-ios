@@ -13,7 +13,7 @@ public enum VGSCheckoutPaymentMethod {
 	internal init(paymentOption: VGSPaymentOption) {
 		switch paymentOption {
 		case .savedCard(let card):
-			self = .savedCard(VGSCheckoutPaymentCardInfo(isDefault: false, id: card.id))
+			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
 			return
 		case .newCard:
 			self = .newCard(VGSCheckoutNewPaymentCardInfo(shouldSave: false))
@@ -24,8 +24,6 @@ public enum VGSCheckoutPaymentMethod {
 
 /// Saved payment card details.
 public struct VGSCheckoutPaymentCardInfo {
-  /// `true` if selected as default payment card.
-  public let isDefault: Bool
 	public let id: String
 	public var response: URLResponse?
 }
@@ -34,5 +32,10 @@ public struct VGSCheckoutPaymentCardInfo {
 public struct VGSCheckoutNewPaymentCardInfo {
   /// `true` if selected to be saved for future payments.
   public let shouldSave: Bool
-	public var response: URLResponse?
+
+	/// Response data.
+	public var createCardResponse: URLResponse?
+
+	/// Response data.
+	public var createCardData: Data?
 }

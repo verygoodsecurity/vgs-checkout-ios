@@ -182,4 +182,7 @@
 "vgs_checkout_pay_with_card_button_title" = "Pay";
 
 /* Pay with new card option title. */
-"vgs_checkout_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";
+"vgs_checkout_payment_options_pay_with_new_card_title" = "Pay with new card";
+
+/* Navigation bar title for `Payment options` flow. */
+"vgs_checkout_payment_options_navigation_bar_title" = "Checkout";

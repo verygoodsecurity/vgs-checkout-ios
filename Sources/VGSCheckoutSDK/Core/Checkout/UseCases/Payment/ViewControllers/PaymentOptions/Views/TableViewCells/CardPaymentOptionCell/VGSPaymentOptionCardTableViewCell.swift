@@ -30,7 +30,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		let view = VGSPaymentOptionItemContainerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.stackView.setContentCompressionResistancePriority(.required, for: .vertical)
-		view.layer.cornerRadius = 6
+		view.layer.cornerRadius = 8
 		view.layer.masksToBounds = true
 
 		return view
@@ -42,9 +42,10 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.alignment = .fill
-		stackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 4, right: 0)
+		stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 8, right: 0)
 		stackView.isLayoutMarginsRelativeArrangement = true
-		stackView.distribution = .equalCentering
+		stackView.distribution = .fill
+		stackView.spacing = 4
 
 		return stackView
 	}()
@@ -101,7 +102,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
 
 		cardBrandImageView.image = viewModel.cardBrandImage
-		cardHolderLabel.text = viewModel.cardHolder
+		cardHolderLabel.text = viewModel.cardHolder?.uppercased()
 		cardDetailsLabel.text = viewModel.last4AndExpDateText
 
 		if checkbox == nil {
@@ -114,9 +115,11 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		}
 		checkbox?.isSelected = viewModel.isSelected
 		if viewModel.isSelected {
+			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
 			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
 			itemContainerView.layer.borderWidth = 1
 		} else {
+			cardHolderLabel.textColor = UIColor.vgsInputBlackTextColor
 			itemContainerView.layer.borderWidth = 0
 		}
 	}

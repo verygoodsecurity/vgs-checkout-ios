@@ -66,10 +66,10 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutSubmitButtonTitleColor: UIColor = .white
 
 	/// The font of the submit button title. Default is `.title3` with `.regular` weight.
-	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .callout, weight: .regular, maximumPointSize: 25)
+	public var checkoutSubmitButtonTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .callout, weight: .semibold, maximumPointSize: 25)
 
 	/// The background color of the checkbox for unselected state. Default is `.vgsSystemGray2Color`.
-	public var checkoutCheckboxUnselectedColor: UIColor = UIColor.vgsSystemGray2Color
+	public var checkoutCheckboxUnselectedColor: UIColor = UIColor.systemBlue
 
 	/// The background color of the checkbox for selected state. Default is `.systemBlue`.
 	public var checkoutCheckboxSelectedColor: UIColor = UIColor.systemBlue
@@ -81,7 +81,7 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutCheckboxHintColor: UIColor = .vgsInputBlackTextColor
 
 	/// The font of the hint in checkbox. Default is `.footnote`.
-	public var checkoutCheckboxHintFont: UIFont = .preferredFont(forTextStyle: .footnote)
+	public var checkoutCheckboxHintFont: UIFont = .preferredFont(forTextStyle: .callout)
 
 	/// The background color of the payment option item.
 	public var checkoutPaymentOptionBackgroundColor: UIColor = .vgsPaymentOptionBackgroundColor
@@ -90,13 +90,13 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutSavedCardCardholderTitleColor: UIColor = .systemBlue
 
 	/// The text font of the card holder title in saved card item.
-	public var checkoutSavedCardCardholderTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .footnote, weight: .medium)
+	public var checkoutSavedCardCardholderTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .caption1, weight: .semibold, maximumPointSize: 18)
 
 	/// The text color of the last 4 and exp date in saved card item.
-	public var checkoutSavedCardDetailsTitleColor: UIColor = .vgsSystemGray2Color
+	public var checkoutSavedCardDetailsTitleColor: UIColor = .vgsSystemGrayColor
 
 	/// The text font of the of the last 4 and exp date in saved card item.
-	public var checkoutSavedCardDetailsTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .footnote, weight: .medium)
+	public var checkoutSavedCardDetailsTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .callout, weight: .medium, maximumPointSize: 16)
 
 	/// The border color of the saved card item when selected.
 	public var checkoutSavedCardSelectedBorderColor: UIColor = .systemBlue
@@ -105,5 +105,5 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
 	public var checkoutPaymentOptionNewCardTitleColor: UIColor = .systemBlue
 
 	/// The font for new card payment option title.
-	public var checkoutPaymentOptionNewCardTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title2, weight: .regular)
+	public var checkoutPaymentOptionNewCardTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .callout, weight: .semibold, maximumPointSize: 18)
 }

@@ -6,9 +6,9 @@ import Foundation
 import UIKit
 
 /// Additional Payment Flow info.
-public struct VGSCheckoutPaymentFlowInfo: VGSCheckoutInfo {
+public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
 	/// Payment method choosen by user.
-	let paymentMethod: VGSCheckoutPaymentMethod
+	public let paymentMethod: VGSCheckoutPaymentMethod
 }
 
 /// Payopt transfers api Worker.
@@ -34,6 +34,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 
 	internal func createFinIDAndSendTransfer(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 
+		var info = newCardInfo
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}
 			switch response {
@@ -45,17 +46,18 @@ internal final class VGSPayoptTransfersAPIWorker {
 					return
 				}
 
-				let paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
+				info.createCardResponse = response
+				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(info))
         strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
-				let paymentInfo = VGSCheckoutPaymentFlowInfo(paymentMethod: .newCard(newCardInfo))
+				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
 				completion(requestResult)
 			}
 		}
 	}
 
-	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentFlowInfo, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		let transderPayload: [String: Any] = [
 			"order_id": configuration.orderId,
 			"financial_instrument_id": finId
