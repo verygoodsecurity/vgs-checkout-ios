@@ -34,6 +34,9 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	/// Payment orchestration access token.
 	private(set) public var accessToken: String
 
+	/// Max cards to fetch.
+	internal static let maxSavedCardsCount: Int = 10
+
 	// MARK: - Public
 
 	/// Creates payment config.
@@ -46,18 +49,6 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
 	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", options: VGSCheckoutPaymentOptions? = nil, success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
-
-		var savedCardsToFetch = [String]()
-		if let savedPaymentMethods = options?.methods {
-			switch savedPaymentMethods {
-			case .savedCards(let savedCards):
-				if savedCards.count > 5 {
-					//savedCardsToFetch = savedCards.prefix(5)
-				}
-			case .userId(let _):
-				break
-			}
-		}
 
 		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])

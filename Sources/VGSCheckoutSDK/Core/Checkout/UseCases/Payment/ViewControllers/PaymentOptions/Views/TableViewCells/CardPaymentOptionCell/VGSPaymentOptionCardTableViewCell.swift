@@ -48,6 +48,21 @@ internal struct VGSSavedCardModel {
 	}
 }
 
+internal extension Array where Element == VGSSavedCardModel {
+	func reorderByIds(_ cardIds: [String]) -> [VGSSavedCardModel] {
+		var orderedArray: [VGSSavedCardModel] = []
+		cardIds.forEach { id in
+			for card in self {
+				if card.id == id {
+					orderedArray.append(card)
+				}
+			}
+		}
+
+		return orderedArray
+	}
+}
+
 internal enum VGSPaymentOption {
 	case savedCard(_ card: VGSSavedCardModel)
 	case newCard

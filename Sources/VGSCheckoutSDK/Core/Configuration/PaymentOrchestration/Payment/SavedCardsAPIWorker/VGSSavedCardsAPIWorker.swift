@@ -23,7 +23,14 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 
 	internal func fetchSavedPaymentMethods(_ methods: VGSCheckoutSavedPaymentMethods, success: @escaping FetchSavedCardsCompletionSuccess, failure: @escaping FetchSavedCardsCompletionFailure) {
 		switch methods {
-		case .savedCards(let savedCardIds):
+		case .savedCards(var savedCardIds):
+			let maxCount = VGSCheckoutPaymentConfiguration.maxSavedCardsCount
+			if savedCardIds.count > maxCount {
+				let event = VGSLogEvent(level: .warning, text: "Max saved cards limit to fetch is \(maxCount)! Current saved cards count is: \(savedCardIds.count)!", severityLevel: .warning)
+				VGSCheckoutLogger.shared.forwardCriticalLogEvent(event)
+				savedCardIds = Array(savedCardIds[0..<maxCount])
+			}
+
 			var fetchedSavedCards = [VGSSavedCardModel]()
 			let dispatchGroup = DispatchGroup()
 			for idx in 0..<savedCardIds.count {
@@ -36,7 +43,9 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 				}
 			}
 			dispatchGroup.notify(queue: .main) {
-					success(fetchedSavedCards)
+				// Reorder fetched by ids since it can be different depending on API request.
+				fetchedSavedCards = fetchedSavedCards.reorderByIds(savedCardIds)
+				success(fetchedSavedCards)
 			}
 
 		default:
