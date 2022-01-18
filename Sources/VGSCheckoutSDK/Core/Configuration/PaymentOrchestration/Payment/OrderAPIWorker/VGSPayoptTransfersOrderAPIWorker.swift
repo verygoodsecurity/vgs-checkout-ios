@@ -64,7 +64,7 @@ internal class VGSPayoptTransfersOrderAPIWorker {
 			switch response {
 			case .success(let code, let data, let response):
 				guard let jsonData = data, let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any], let dataJSON = json["data"] as? [String: Any], let paymentInfo = VGSPayoptTransfersOrderInfo(json: dataJSON) else {
-					let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
+					let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.orderIDInfoNotFound.rawValue, userInfo: [
 						NSLocalizedDescriptionKey: "Cannot fetch order id info",
 						"statusCode": code
 					])
@@ -76,7 +76,7 @@ internal class VGSPayoptTransfersOrderAPIWorker {
 				success(paymentInfo)
 			case .failure(let code, let data, let response, let error):
 				// TODO: - add cannot fetch order info error code.
-				let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: 1476, userInfo: [
+				let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.orderIDInfoNotFound.rawValue, userInfo: [
 					NSLocalizedDescriptionKey: "Cannot fetch order id info",
 					"statusCode": code,
 					"extraError": error
