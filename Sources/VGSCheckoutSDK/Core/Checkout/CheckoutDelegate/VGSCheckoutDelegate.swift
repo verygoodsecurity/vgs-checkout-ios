@@ -15,7 +15,7 @@ public protocol VGSCheckoutDelegate: AnyObject {
 
 	/// Tells the delegate that save card succeeded and fin instrument created.
 	/// - Parameter data: `Data?` object, holds response data with created financial instrument for saved card.
-	/// - Parameter response: `URLResponse?` object, holds response object with created financial instrument for saved card.
+	/// - Parameter response: `URLResponse?` object, holds URL response object with created financial instrument for saved card.
 	func saveCardDidSuccess(with data: Data?, response: URLResponse?)
 }
 
