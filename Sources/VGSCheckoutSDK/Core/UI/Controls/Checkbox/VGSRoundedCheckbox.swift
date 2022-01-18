@@ -7,6 +7,18 @@ import Foundation
 import UIKit
 #endif
 
+/// Rounded checkbox theme.
+internal protocol VGSRoundedCheckboxTheme {
+	/// The background color of the checkbox for unselected state.
+	var unselectedColor: UIColor { get set }
+
+	/// The background color of the checkbox for selected state.
+	var selectedColor: UIColor { get set }
+
+	/// The checkmark tint color in checkbox.
+	var checkmarkTintColor: UIColor { get set }
+}
+
 /// Custom rounded checkbox control.
 internal class VGSRoundedCheckbox: UIView {
 
@@ -43,11 +55,11 @@ internal class VGSRoundedCheckbox: UIView {
 	}
 
 	/// Theme object.
-	fileprivate let theme: VGSCheckoutThemeProtocol
+	fileprivate let theme: VGSRoundedCheckboxTheme
 
 	// MARK: - Override
 
-	init(theme: VGSCheckoutThemeProtocol) {
+	init(theme: VGSRoundedCheckboxTheme) {
 		self.theme = theme
 		super.init(frame: .zero)
 
@@ -69,14 +81,14 @@ internal class VGSRoundedCheckbox: UIView {
 	internal func updateUI() {
 		if isSelected {
 			imageView.image = nil
-			imageView.backgroundColor = theme.checkoutCheckboxSelectedColor
-			checkmarkImageView.tintColor = theme.checkoutCheckmarkTintColor
+			imageView.backgroundColor = theme.selectedColor
+			checkmarkImageView.tintColor = theme.checkmarkTintColor
 			imageView.layer.cornerRadius = 11
 			imageView.layer.masksToBounds = true
 			checkmarkImageView.isHidden = false
 		} else {
 			checkmarkImageView.isHidden = true
-			imageView.tintColor = theme.checkoutCheckboxUnselectedColor
+			imageView.tintColor = theme.unselectedColor
 			imageView.image = unselectedStateImage
 			imageView.backgroundColor = .clear
 			imageView.layer.masksToBounds = false

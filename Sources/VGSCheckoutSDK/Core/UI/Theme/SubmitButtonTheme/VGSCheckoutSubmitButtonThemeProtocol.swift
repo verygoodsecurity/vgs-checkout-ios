@@ -53,11 +53,17 @@ public protocol VGSCheckoutPaymentOptionsThemeProtocol {
 	/// The text color of the card holder title in saved card item.
 	var checkoutSavedCardCardholderTitleColor: UIColor {get set}
 
+	/// The text color of the card holder title in saved card item in selected state.
+	var checkoutSavedCardCardholderSelectedTitleColor: UIColor {get set}
+
 	/// The text font of the card holder title in saved card item.
 	var checkoutSavedCardCardholderTitleFont: UIFont {get set}
 
 	/// The text color of the last 4 and exp date in saved card item.
 	var checkoutSavedCardDetailsTitleColor: UIColor {get set}
+
+	/// The text color of the last 4 and exp date in saved card item in selected state.
+	var checkoutSavedCardDetailsSelectedTitleColor: UIColor {get set}
 
 	/// The text font of the of the last 4 and exp date in saved card item.
 	var checkoutSavedCardDetailsTitleFont: UIFont {get set}
@@ -70,4 +76,13 @@ public protocol VGSCheckoutPaymentOptionsThemeProtocol {
 
 	/// The font for new card payment option title.
 	var checkoutPaymentOptionNewCardTitleFont: UIFont {get set}
+
+	/// The background color of the payment option checkbox for unselected state.
+	var checkoutPaymentOptionCheckboxUnselectedColor: UIColor { get set }
+
+	/// The background color of the payment option checkbox for selected state.
+	var checkoutPaymentOptionCheckboxSelectedColor: UIColor { get set }
+
+	/// The checkmark tint color in the payment option checkbox.
+	var checkoutPaymentOptionCheckmarkTintColor: UIColor { get set }
 }
