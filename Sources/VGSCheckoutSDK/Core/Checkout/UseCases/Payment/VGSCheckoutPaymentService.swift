@@ -37,6 +37,11 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 
 	// MARK: - Initialization
 
+	/// Initializer.
+	/// - Parameters:
+	///   - checkoutConfigurationType: `VGSCheckoutConfigurationType` object, configuration type.
+	///   - vgsCollect: `VGSCollect` object, collect object.
+	///   - uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	required init(checkoutConfigurationType: VGSCheckoutConfigurationType, vgsCollect: VGSCollect, uiTheme: VGSCheckoutThemeProtocol) {
 		self.checkoutConfigurationType = checkoutConfigurationType
 		self.vgsCollect = vgsCollect
@@ -65,6 +70,7 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	}
 
 	/// Builds payment options screen.
+	/// Returns: `UIViewController` object, view controller for payment options.
 	internal func buildPaymentOptionsVC() -> UIViewController {
 		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
 
@@ -72,6 +78,7 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	}
 
 	/// Builds pay with new card vc.
+	/// Returns: `UIViewController` object, view controller for pay with new card.
 	internal func buildPayWithNewCardVC() -> UIViewController {
 		let payWithNewCardVC = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
 
