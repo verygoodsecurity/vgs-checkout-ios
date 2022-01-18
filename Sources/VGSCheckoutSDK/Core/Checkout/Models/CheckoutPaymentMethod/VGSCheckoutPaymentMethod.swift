@@ -25,17 +25,10 @@ public enum VGSCheckoutPaymentMethod {
 /// Saved payment card details.
 public struct VGSCheckoutPaymentCardInfo {
 	public let id: String
-	public var response: URLResponse?
 }
 
 /// New payment card details.
 public struct VGSCheckoutNewPaymentCardInfo {
   /// `true` if selected to be saved for future payments.
   public let shouldSave: Bool
-
-	/// Response data.
-	public var createCardResponse: URLResponse?
-
-	/// Response data.
-	public var createCardData: Data?
 }

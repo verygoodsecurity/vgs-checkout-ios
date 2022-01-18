@@ -26,9 +26,14 @@ internal final class VGSPayoptTransfersAPIWorker {
   /// Transfers path.
   private let transfersPath = "/transfers"
 
-	init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect) {
+	/// Checkout service.
+	private weak var checkoutService: VGSCheckoutPayoptTransfersService?
+
+	init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
+
 		self.configuration = configuration
 		self.vgsCollect = vgsCollect
+		self.checkoutService = checkoutService
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 	}
 
@@ -46,7 +51,11 @@ internal final class VGSPayoptTransfersAPIWorker {
 					return
 				}
 
-				info.createCardResponse = response
+				/// Notifies delegate with save card success event.
+				if let service = strongSelf.checkoutService {
+					service.serviceDelegate?.checkoutServiceStateDidChange(with: .saveCardDidSuccess(data, response), in: service)
+				}
+
 				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(info))
         strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):

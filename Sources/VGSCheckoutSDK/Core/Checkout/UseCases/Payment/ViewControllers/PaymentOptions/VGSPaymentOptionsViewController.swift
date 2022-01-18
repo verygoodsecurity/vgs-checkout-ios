@@ -64,7 +64,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// - Parameter paymentService: `VGSCheckoutPayoptTransfersService` object, pay opt  checkout transfer service.
 	init(paymentService: VGSCheckoutPayoptTransfersService) {
 		self.paymentService = paymentService
-		self.viewModel = VGSPayWithCardViewModelFactory.buildPaymentOptionsViewModel(with: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect)
+		self.viewModel = VGSPayWithCardViewModelFactory.buildPaymentOptionsViewModel(with: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, checkoutService: paymentService)
 		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.uiTheme)
 		self.uiTheme = paymentService.uiTheme
 

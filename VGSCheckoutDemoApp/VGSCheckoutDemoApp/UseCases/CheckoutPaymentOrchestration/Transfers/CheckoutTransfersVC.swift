@@ -154,10 +154,9 @@ extension CheckoutTransfersVC: VGSCheckoutDelegate {
 					let paymentMethod = paymentResultInfo.paymentMethod
 					switch paymentMethod {
 					case .savedCard(let savedCardInfo):
-						break
+						print(savedCardInfo)
 					case .newCard(let newCardInfo):
-						let response = newCardInfo.createCardResponse
-						print(response)
+						print(newCardInfo)
 					}
 				}
 			}
@@ -197,11 +196,8 @@ extension CheckoutTransfersVC: VGSCheckoutDelegate {
 	}
 
 	func saveCardDidSuccess(with data: Data?, response: URLResponse?) {
-
-	}
-
-	func threeDSDidFinish(with data: Data?, response: URLResponse?) {
-
+		let savedCardInfo = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
+		print("Saved card instrument: \(savedCardInfo)")
 	}
 }
 

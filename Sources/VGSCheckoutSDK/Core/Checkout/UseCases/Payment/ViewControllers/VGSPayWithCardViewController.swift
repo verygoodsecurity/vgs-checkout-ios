@@ -33,7 +33,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 	init(paymentService: VGSCheckoutPayoptTransfersService, initialScreen: InitialScreen) {
 		self.paymentService = paymentService
 		self.initialScreen = initialScreen
-		self.viewModel = VGSPayWithCardViewModelFactory.buildAddCardViewModel(with: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect)
+		self.viewModel = VGSPayWithCardViewModelFactory.buildAddCardViewModel(with: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, checkoutService: paymentService)
 		self.checkboxButton = VGSCheckboxButton(text: VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_save_card_checkbox_hint"), theme: paymentService.uiTheme)
 		super.init(checkoutConfigurationType: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, uiTheme: paymentService.uiTheme)
 	}

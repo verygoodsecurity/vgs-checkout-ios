@@ -20,6 +20,9 @@ internal enum VGSAddCardFlowState {
 
 	/// User cancelled checkout flow.
 	case cancelled
+
+	/// Save card did success on transfer.
+	case saveCardDidSuccess(_ data: Data?, _ response: URLResponse?)
 }
 
 /// Handles `Save card` use case logic.

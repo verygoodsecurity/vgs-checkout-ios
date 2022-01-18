@@ -10,9 +10,9 @@ internal class VGSPaymentOptionsViewModel {
 
 	internal var previsouslySelectedID: String?
 
-	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect) {
+	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
 		self.configuration = configuration
-		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect)
+		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 		let savedCards = configuration.savedCards
 		let savedCardsOptions = savedCards.map({return VGSPaymentOption.savedCard($0)})
 

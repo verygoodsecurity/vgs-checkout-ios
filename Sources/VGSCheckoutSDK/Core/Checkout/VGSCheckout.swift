@@ -93,6 +93,8 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 			 }
+		case .saveCardDidSuccess(let data, let response):
+			self.delegate?.saveCardDidSuccess(with: data, response: response)
 		}
 	}
 }
