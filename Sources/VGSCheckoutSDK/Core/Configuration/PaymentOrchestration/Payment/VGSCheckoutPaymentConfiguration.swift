@@ -45,10 +45,12 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	///   - options: `VGSCheckoutPaymentOptions` object, payment options.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", options: VGSCheckoutPaymentOptions? = nil, success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+
+		/// No additional options by default now.
+		let options: VGSCheckoutPaymentOptions? = nil
 
 		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
@@ -168,28 +170,17 @@ internal protocol VGSCheckoutPaymentOrchestrationBasicConfiguration {
 	var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {get set}
 }
 
-public enum VGSCheckoutSavedPaymentMethods {
-
+/// Saved payment methods.
+internal enum VGSCheckoutSavedPaymentMethods {
 
 	case savedCards( _ ids: [String])
-	case userId(_ id: String)
+	//case userId(_ id: String)
 }
 
-public struct VGSCheckoutSavedPaymentMethods2 {
-	public var savedCards: [String] = []
+/// Additional options
+internal struct VGSCheckoutPaymentOptions {
+	internal var methods: VGSCheckoutSavedPaymentMethods? = nil
 
-	// public var userID: String? - will be in future
-
-	public init() {
-
-	}
-}
-
-///
-public struct VGSCheckoutPaymentOptions {
-	public var methods: VGSCheckoutSavedPaymentMethods? = nil
-
-	public init() {
-
-	}
+	/// no:doc
+	internal init() {}
 }

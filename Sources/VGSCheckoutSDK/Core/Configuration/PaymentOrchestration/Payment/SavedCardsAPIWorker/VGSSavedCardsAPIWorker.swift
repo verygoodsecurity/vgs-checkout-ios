@@ -4,6 +4,7 @@
 
 import Foundation
 
+/// Holds API logic for fetchings saved payment methods.
 internal final class VGSSavedPaymentMethodsAPIWorker {
 
 	internal typealias FetchSavedCardsCompletionSuccess = ( _ savedCards: [VGSSavedCardModel]) -> Void
