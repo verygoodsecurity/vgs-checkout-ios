@@ -74,9 +74,7 @@ public extension UIColor {
 	///:nodoc:
 	static var vgsPaymentOptionBackgroundColor: UIColor {
 		if #available(iOS 13.0, *) {
-			return UIColor {(traits) -> UIColor in
-				return traits.userInterfaceStyle == .light ? UIColor.white : UIColor.white.withAlphaComponent(0.05)
-			}
+			return UIColor.secondarySystemGroupedBackground
 		} else {
 			return .white
 		}
