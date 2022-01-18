@@ -52,39 +52,39 @@ public class VGSCheckoutPaymentCards {
       case custom(brandName: String)
 
 		  /// Normalized brandname.
-			internal var normalizedBrandName: String {
-				switch self {
-				case .elo:
-					return "elo"
-				case .visaElectron:
-					return "visaelectron"
-				case .maestro:
-					return "maestro"
-				case .forbrugsforeningen:
-					return "forbrugsforeningen"
-				case .dankort:
-					return "dankort"
-				case .visa:
-					return "visa"
-				case .mastercard:
-					return "mastercard"
-				case .amex:
-					return "amex"
-				case .hipercard:
-					return "hipercard"
-				case .dinersClub:
-					return "hipercard"
-				case .discover:
-					return "discover"
-				case .unionpay:
-					return "unionpay"
-				case .jcb:
-					return "jcb"
-				case .unknown:
-					return "uknown"
-				case .custom(let brandName):
-					return brandName
-				}
+		internal var normalizedBrandName: String {
+						switch self {
+						case .elo:
+							return "elo"
+						case .visaElectron:
+							return "visaelectron"
+						case .maestro:
+							return "maestro"
+						case .forbrugsforeningen:
+							return "forbrugsforeningen"
+						case .dankort:
+							return "dankort"
+						case .visa:
+							return "visa"
+						case .mastercard:
+							return "mastercard"
+						case .amex:
+							return "americanexpress"
+						case .hipercard:
+							return "hipercard"
+						case .dinersClub:
+							return "dinersclub"
+						case .discover:
+							return "discover"
+						case .unionpay:
+							return "unionpay"
+						case .jcb:
+							return "jcb"
+						case .unknown:
+							return "uknown"
+						case .custom(let brandName):
+							return brandName
+						}
 			}
 
 		  /// An array of non-custom brands.
