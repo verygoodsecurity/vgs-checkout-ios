@@ -16,10 +16,15 @@ public extension UIFont {
 	///   - weight: `Weight` object, font weight.
 	///   - maximumPointSize: `CGFloat?` object, max font size in points, default is `nil`.
 	/// - Returns: `UIFont` object.
-		static func vgsPreferredFont(forTextStyle style: TextStyle, weight: Weight, maximumPointSize: CGFloat? = nil) -> UIFont {
+		static func vgsPreferredFont(forTextStyle style: TextStyle, weight: Weight? = nil, maximumPointSize: CGFloat? = nil) -> UIFont {
 				let metrics = UIFontMetrics(forTextStyle: style)
 				let desc = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style)
-				let font = UIFont.systemFont(ofSize: desc.pointSize, weight: weight)
+				let font: UIFont
+				if let fontWeight = weight {
+					font = UIFont.systemFont(ofSize: desc.pointSize, weight: fontWeight)
+				} else {
+					font = UIFont.systemFont(ofSize: desc.pointSize)
+				}
 
 				if let maximumPointSize = maximumPointSize {
 					return metrics.scaledFont(for: font, maximumPointSize: maximumPointSize)

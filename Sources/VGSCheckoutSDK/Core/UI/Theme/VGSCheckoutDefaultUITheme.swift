@@ -31,13 +31,13 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   public var textFieldFocusedColor: UIColor = .systemBlue
 
 	/// The font of the textfield. Default is `.body` with `.medium` weight.
-	public var textFieldTextFont: UIFont = .vgsPreferredFont(forTextStyle: .body, weight: .medium)
+	public var textFieldTextFont: UIFont = .vgsPreferredFont(forTextStyle: .body, weight: .medium, maximumPointSize: 22)
 
 	/// The text color of the textfield hint (above the text field). Default is `.vgsSystemGray2Color` (black).
 	public var textFieldHintTextColor: UIColor = .vgsSystemGray2Color
 
 	/// The font of the textfield hint (above the text field). Default is `.caption1`.
-	public var textFieldHintTextFont: UIFont = .preferredFont(forTextStyle: .caption1)
+	public var textFieldHintTextFont: UIFont = .vgsPreferredFont(forTextStyle: .caption1, maximumPointSize: 24)
 
 	/// The view's background color. Default is `.vgsSystemBackground` (white).
   public var checkoutViewBackgroundColor: UIColor = .vgsSystemBackground
@@ -46,13 +46,13 @@ public struct VGSCheckoutDefaultTheme: VGSCheckoutThemeProtocol {
   public var checkoutSectionViewBackgroundColor: UIColor = .vgsSectionBackgroundColor
 
 	/// The font of the section title. Default is `.title3` with `.bold` weight.
-	public var checkoutFormSectionTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .bold)
+	public var checkoutFormSectionTitleFont: UIFont = .vgsPreferredFont(forTextStyle: .title3, weight: .bold, maximumPointSize: 26)
 
 	/// The text color of the section title. Default is `.vgsSectionTitleColor`.
 	public var checkoutFormSectionTitleColor: UIColor = .vgsSectionTitleColor
 
 	/// The font of the error label. Default is `.caption2`.
-  public var textFieldErrorLabelFont: UIFont = .preferredFont(forTextStyle: .caption2)
+  public var textFieldErrorLabelFont: UIFont = .vgsPreferredFont(forTextStyle: .caption2, maximumPointSize: 16)
   
   /// Submit button attributes
 

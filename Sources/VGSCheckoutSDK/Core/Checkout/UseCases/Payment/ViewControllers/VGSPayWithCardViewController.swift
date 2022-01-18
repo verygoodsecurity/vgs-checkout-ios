@@ -61,6 +61,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 		addCardSectionFormView.submitButton.title = viewModel.submitButtonTitle
 
 		// Add checkbox button.
+		checkboxButton.translatesAutoresizingMaskIntoConstraints = false
     if viewModel.configuration.saveCardOptionEnabled {
       checkboxButton.isSelected = viewModel.saveCardCheckboxSelected
       let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()

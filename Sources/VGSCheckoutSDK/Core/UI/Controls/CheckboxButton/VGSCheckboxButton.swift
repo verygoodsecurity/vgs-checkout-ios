@@ -41,6 +41,14 @@ internal class VGSCheckboxButton: UIControl {
 		return label
 	}()
 
+	/// Checkbox container view.
+	fileprivate lazy var checkboxContainerView: UIView = {
+		let view = UIView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
 	// MARK: - Initializer
 
 	/// no:doc
@@ -56,14 +64,17 @@ internal class VGSCheckboxButton: UIControl {
 		label.textColor = theme.checkoutCheckboxHintColor
 		label.font = theme.checkoutCheckboxHintFont
 
-		checkbox.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-		checkbox.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+		checkbox.translatesAutoresizingMaskIntoConstraints = false
+		checkboxContainerView.addSubview(checkbox)
+		checkbox.centerXAnchor.constraint(equalTo: checkboxContainerView.centerXAnchor).isActive = true
+		checkbox.centerYAnchor.constraint(equalTo: checkboxContainerView.centerYAnchor).isActive = true
+		checkboxContainerView.widthAnchor.constraint(equalToConstant: 22).isActive = true
 		checkbox.backgroundColor = .clear
 
 		addSubview(stackView)
 		stackView.checkout_constraintViewToSuperviewEdges()
 
-		stackView.addArrangedSubview(checkbox)
+		stackView.addArrangedSubview(checkboxContainerView)
 		stackView.addArrangedSubview(label)
 
 		let didTapGestureRecognizer = UITapGestureRecognizer(

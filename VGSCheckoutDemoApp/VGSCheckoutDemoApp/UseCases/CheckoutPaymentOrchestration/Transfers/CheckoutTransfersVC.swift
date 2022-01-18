@@ -113,7 +113,8 @@ extension CheckoutTransfersVC: CheckoutFlowMainViewDelegate {
 	fileprivate func presentCheckout(with token: String, orderId: String) {
 
 		var options = VGSCheckoutPaymentOptions()
-		options.methods = .savedCards(["", ""])
+		options.methods = .savedCards(["FNjx8t1eqVDG3ATcTDwQApU3", "FNiXR9hArCfh11yj3VvbHsZe"])
+
 		// Creates payment orchestration payment configuration with access token and order id.
 		VGSCheckoutPaymentConfiguration.createConfiguration(accessToken: token, orderId: orderId, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
@@ -150,7 +151,19 @@ extension CheckoutTransfersVC: VGSCheckoutDelegate {
 			mainView.responseTextView.isHidden = false
 			mainView.responseTextView.text = text
 
-		case .failure(let statusCode, _, _, let error, _):
+		case .failure(let statusCode, _, _, let error, let info):
+			if let extraInfo = info {
+				if let paymentResultInfo = extraInfo as? VGSCheckoutPaymentResultInfo {
+					let paymentMethod = paymentResultInfo.paymentMethod
+					switch paymentMethod {
+					case .savedCard(let savedCardInfo):
+						break
+					case .newCard(let newCardInfo):
+						let response = newCardInfo.createCardResponse
+						print(response)
+					}
+				}
+			}
 			title = "Checkout status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
 
@@ -184,6 +197,14 @@ extension CheckoutTransfersVC: VGSCheckoutDelegate {
 		self.present(alert, animated: true, completion: nil)
 
 		orderId = nil
+	}
+
+	func saveCardDidSuccess(with data: Data?, response: URLResponse?) {
+
+	}
+
+	func threeDSDidFinish(with data: Data?, response: URLResponse?) {
+
 	}
 }
 
