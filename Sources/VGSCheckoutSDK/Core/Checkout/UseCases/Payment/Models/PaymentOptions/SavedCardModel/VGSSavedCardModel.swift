@@ -58,8 +58,7 @@ internal struct VGSSavedCardModel {
 			return nil
 		}
 		self.id = id
-//		self.cardHolder = name
-		self.cardHolder = "Vitaliy Svishov"
+		self.cardHolder = name
 		self.last4 = String(cardNumber.suffix(4))
 		self.expDate = "\(expMonth)/" + "\(expYear)"
 		self.cardBrandName = brand
