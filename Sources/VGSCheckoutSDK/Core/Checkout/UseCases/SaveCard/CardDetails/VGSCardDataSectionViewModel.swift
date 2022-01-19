@@ -127,7 +127,7 @@ final internal class VGSCardDataSectionViewModel: VGSBaseFormSectionProtocol, VG
 
 	/// Setup card form with payopt config.
 	/// - Parameter configuration: `VGSCheckoutPaymentOrchestrationBasicConfiguration` object, payopt configuration.
-	private func setupCardForm(with configuration: VGSCheckoutPaymentOrchestrationBasicConfiguration) {
+	private func setupCardForm(with configuration: VGSCheckoutPayoptBasicConfiguration) {
 		VGSCardDataFormConfigurationManager.setupCardForm(with: configuration, vgsCollect: vgsCollect, cardSectionView: cardDetailsSectionView)
 	}
 

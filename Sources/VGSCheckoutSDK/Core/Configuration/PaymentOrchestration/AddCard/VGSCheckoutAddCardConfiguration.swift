@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPaymentOrchestrationBasicConfiguration {
+public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
 	/// A callback to be run with a `VGSCheckoutAddCardConfiguration` on configuration setup succeed.
 	/// - Parameters:

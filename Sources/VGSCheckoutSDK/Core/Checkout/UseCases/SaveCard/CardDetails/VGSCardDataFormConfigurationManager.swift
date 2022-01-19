@@ -119,7 +119,7 @@ internal class VGSCardDataFormConfigurationManager {
 	 }
 	*/
 
-	internal static func setupCardForm(with configuration: VGSCheckoutPaymentOrchestrationBasicConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
+	internal static func setupCardForm(with configuration: VGSCheckoutPayoptBasicConfiguration, vgsCollect: VGSCollect, cardSectionView: VGSCardDetailsSectionView) {
 
 		let fieldViews = cardSectionView.fieldViews
 

@@ -132,7 +132,7 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 
 	/// Setup billing address form with payopt configuration.
 	/// - Parameter configuration: `VGSCheckoutPaymentOrchestrationBasicConfiguration` object, payopt configuration.
-	private func setupBillingAddressForm(with configuration: VGSCheckoutPaymentOrchestrationBasicConfiguration) {
+	private func setupBillingAddressForm(with configuration: VGSCheckoutPayoptBasicConfiguration) {
 		VGSAddressDataFormConfigurationManager.setupAddressForm(with: configuration, vgsCollect: vgsCollect, addressFormView: billingAddressFormView)
 	}
 

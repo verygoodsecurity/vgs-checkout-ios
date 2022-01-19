@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPaymentOrchestrationBasicConfiguration {
+public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
@@ -161,16 +161,6 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	}
 }
 
-internal protocol VGSCheckoutPaymentOrchestrationBasicConfiguration {
-
-	/// Form configuration options.
-	var formConfiguration: VGSPaymentOrchestrationFormConfiguration {get set}
-
-	var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {get set}
-
-	var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {get set}
-}
-
 /// Saved payment methods.
 internal enum VGSCheckoutSavedPaymentMethods {
 
@@ -181,7 +171,4 @@ internal enum VGSCheckoutSavedPaymentMethods {
 /// Additional options
 internal struct VGSCheckoutPaymentOptions {
 	internal var methods: VGSCheckoutSavedPaymentMethods? = nil
-
-	/// no:doc
-	internal init() {}
 }
