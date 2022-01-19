@@ -108,38 +108,38 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	///   - uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol) {
 
-		cardBrandImageView.image = viewModel.cardBrandImage
-		cardHolderLabel.text = viewModel.cardHolder?.uppercased()
-		cardDetailsLabel.text = viewModel.last4AndExpDateText
-
-		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
-		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
-
-		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
-
-		let cellCheckboxTheme = CardCellCheckboxTheme(unselectedColor: uiTheme.checkoutPaymentOptionCheckboxUnselectedColor, selectedColor: uiTheme.checkoutPaymentOptionCheckboxSelectedColor, checkmarkTintColor: uiTheme.checkoutPaymentOptionCheckmarkTintColor)
-
-		if checkbox == nil {
-			let roundedCheckbox = VGSRoundedCheckbox(theme: cellCheckboxTheme)
-			roundedCheckbox.translatesAutoresizingMaskIntoConstraints = false
-			checkboxContainerView.addSubview(roundedCheckbox)
-			roundedCheckbox.centerXAnchor.constraint(equalTo: checkboxContainerView.centerXAnchor).isActive = true
-			roundedCheckbox.centerYAnchor.constraint(equalTo: checkboxContainerView.centerYAnchor).isActive = true
-			checkbox = roundedCheckbox
-		}
-		checkbox?.isSelected = viewModel.isSelected
-
-		if viewModel.isSelected {
-			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
-			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsSelectedTitleColor
-			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
-			itemContainerView.layer.borderWidth = 1
-		} else {
-			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
-			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsTitleColor
-			itemContainerView.layer.borderWidth = 1
-			itemContainerView.layer.borderColor = UIColor.clear.cgColor
-		}
+//		cardBrandImageView.image = viewModel.cardBrandImage
+//		cardHolderLabel.text = viewModel.cardHolder?.uppercased()
+//		cardDetailsLabel.text = viewModel.last4AndExpDateText
+//
+//		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
+//		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
+//
+//		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
+//
+//		let cellCheckboxTheme = CardCellCheckboxTheme(unselectedColor: uiTheme.checkoutPaymentOptionCheckboxUnselectedColor, selectedColor: uiTheme.checkoutPaymentOptionCheckboxSelectedColor, checkmarkTintColor: uiTheme.checkoutPaymentOptionCheckmarkTintColor)
+//
+//		if checkbox == nil {
+//			let roundedCheckbox = VGSRoundedCheckbox(theme: cellCheckboxTheme)
+//			roundedCheckbox.translatesAutoresizingMaskIntoConstraints = false
+//			checkboxContainerView.addSubview(roundedCheckbox)
+//			roundedCheckbox.centerXAnchor.constraint(equalTo: checkboxContainerView.centerXAnchor).isActive = true
+//			roundedCheckbox.centerYAnchor.constraint(equalTo: checkboxContainerView.centerYAnchor).isActive = true
+//			checkbox = roundedCheckbox
+//		}
+//		checkbox?.isSelected = viewModel.isSelected
+//
+//		if viewModel.isSelected {
+//			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
+//			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsSelectedTitleColor
+//			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
+//			itemContainerView.layer.borderWidth = 1
+//		} else {
+//			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
+//			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsTitleColor
+//			itemContainerView.layer.borderWidth = 1
+//			itemContainerView.layer.borderColor = UIColor.clear.cgColor
+//		}
 	}
 
 	// MARK: - Helpers

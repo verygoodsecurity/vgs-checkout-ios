@@ -60,9 +60,9 @@ internal class VGSPaymentOptionNewCardTableViewCell: UITableViewCell {
 	// MARK: - Interface
 
 	internal func configure(with uiTheme: VGSCheckoutThemeProtocol) {
-		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
-		payWithCardLabel.textColor = uiTheme.checkoutPaymentOptionNewCardTitleColor
-		payWithCardLabel.font = uiTheme.checkoutPaymentOptionNewCardTitleFont
+//		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
+//		payWithCardLabel.textColor = uiTheme.checkoutPaymentOptionNewCardTitleColor
+//		payWithCardLabel.font = uiTheme.checkoutPaymentOptionNewCardTitleFont
 	}
 
 	// MARK: - Helpers
