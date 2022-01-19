@@ -100,10 +100,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		mainView.translatesAutoresizingMaskIntoConstraints = false
 		mainView.backgroundColor = uiTheme.checkoutViewBackgroundColor
 		view.addSubview(mainView)
-		mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-		mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-		mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+		mainView.checkout_constraintViewToSafeAreaLayoutGuideEdges()
 	}
 
 	/// Table view setup.
