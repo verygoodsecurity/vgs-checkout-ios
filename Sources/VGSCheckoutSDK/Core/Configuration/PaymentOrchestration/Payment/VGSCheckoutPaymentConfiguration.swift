@@ -64,17 +64,18 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 			print("succcess")
 
 			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment)
-			if let methods = options?.methods {
-				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
-				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
-					paymentCardConfiguration.savedCards = savedCards
-					success(&paymentCardConfiguration)
-				} failure: { error in
-					success(&paymentCardConfiguration)
-				}
-			} else {
-				success(&paymentCardConfiguration)
-			}
+			success(&paymentCardConfiguration)
+//			if let methods = options?.methods {
+//				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
+//				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
+//					paymentCardConfiguration.savedCards = savedCards
+//					success(&paymentCardConfiguration)
+//				} failure: { error in
+//					success(&paymentCardConfiguration)
+//				}
+//			} else {
+//				success(&paymentCardConfiguration)
+//			}
 		} failure: { error in
 			failure(error)
 		}

@@ -45,6 +45,7 @@ class CheckoutTransfersVC: UIViewController {
 
 	// MARK: - Lifecycle
 
+	// no:doc
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
