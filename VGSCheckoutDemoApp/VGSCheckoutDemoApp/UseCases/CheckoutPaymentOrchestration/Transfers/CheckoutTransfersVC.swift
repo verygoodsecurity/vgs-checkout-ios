@@ -153,8 +153,6 @@ extension CheckoutTransfersVC: VGSCheckoutDelegate {
 				if let paymentResultInfo = extraInfo as? VGSCheckoutPaymentResultInfo {
 					let paymentMethod = paymentResultInfo.paymentMethod
 					switch paymentMethod {
-					case .savedCard(let savedCardInfo):
-						print(savedCardInfo)
 					case .newCard(let newCardInfo):
 						print(newCardInfo)
 					}

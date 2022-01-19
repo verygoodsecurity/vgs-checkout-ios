@@ -14,7 +14,7 @@ public enum VGSCheckoutPaymentMethod {
 	 - Parameters:
 			- cardInfo: `VGSCheckoutPaymentCardInfo` object, contains information about selected card used for payment.
 	*/
-  case savedCard(_ cardInfo: VGSCheckoutPaymentCardInfo)
+  //case savedCard(_ cardInfo: VGSCheckoutPaymentCardInfo)
 
 	/**
 	 User paid with new card.
@@ -29,8 +29,9 @@ public enum VGSCheckoutPaymentMethod {
 	internal init(paymentOption: VGSPaymentOption) {
 		switch paymentOption {
 		case .savedCard(let card):
-			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
-			return
+			fatalError("not implemented!")
+//			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
+//			return
 		case .newCard:
 			self = .newCard(VGSCheckoutNewPaymentCardInfo(shouldSave: false))
 			return
@@ -39,7 +40,7 @@ public enum VGSCheckoutPaymentMethod {
 }
 
 /// Holds additional information for payment method when user paid with selected card from provided saved cards.
-public struct VGSCheckoutPaymentCardInfo {
+internal struct VGSCheckoutPaymentCardInfo {
 	public let id: String
 }
 
