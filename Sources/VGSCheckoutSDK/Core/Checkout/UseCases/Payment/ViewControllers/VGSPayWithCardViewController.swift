@@ -7,15 +7,11 @@ import Foundation
 import UIKit
 #endif
 
-/// Holds UI for pay with card flow.
+/// Holds UI for pay with new card flow.
 internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
-	internal enum InitialScreen {
-		case payWithNewCard
-		case paymentOptions
-	}
-
-	fileprivate let initialScreen: InitialScreen
+	/// Initial screen.
+	fileprivate let initialScreen: VGSCheckoutPayoptTransfersService.InitialScreen
 
 	// MARK: - Vars
 
@@ -30,7 +26,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	// MARK: - Initialization
 
-	init(paymentService: VGSCheckoutPayoptTransfersService, initialScreen: InitialScreen) {
+	init(paymentService: VGSCheckoutPayoptTransfersService, initialScreen: VGSCheckoutPayoptTransfersService.InitialScreen) {
 		self.paymentService = paymentService
 		self.initialScreen = initialScreen
 		self.viewModel = VGSPayWithCardViewModelFactory.buildAddCardViewModel(with: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, checkoutService: paymentService)
@@ -54,6 +50,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	// MARK: - Override
 
+	/// Setups UI.
 	override func setupUI() {
 		super.setupUI()
 
@@ -63,15 +60,21 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 		// Add checkbox button.
 		checkboxButton.translatesAutoresizingMaskIntoConstraints = false
     if viewModel.configuration.saveCardOptionEnabled {
-      checkboxButton.isSelected = viewModel.saveCardCheckboxSelected
+			// Preselect checkbox by default.
+      checkboxButton.isSelected = true
+			viewModel.saveCardCheckboxSelected = true
+
+			// Insert checkbox button.
       let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()
       containerView.addContentView(checkboxButton)
       if let indexOfButton = addCardSectionFormView.backgroundStackView.arrangedSubviews.firstIndex(of: addCardSectionFormView.payButtonContainerView) {
         addCardSectionFormView.backgroundStackView.insertArrangedSubview(containerView, at: indexOfButton)
       }
-      
+
+			// Bind view model to checkbox button action.
       checkboxButton.onTap = { [weak self] in
-        self?.viewModel.saveCardCheckboxSelected = self?.checkboxButton.isSelected ?? true
+				guard let strongSelf = self else {return}
+				strongSelf.viewModel.saveCardCheckboxSelected = strongSelf.checkboxButton.isSelected
       }
     }
   }
@@ -79,7 +82,10 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 // MARK: - VGSCheckoutBaseCardViewControllerDelegate
 
+// no:doc
 extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegate {
+
+	// no:doc
 	func submitButtonDidTap(in formState: VGSBaseCardViewController.FormState, viewController: VGSBaseCardViewController) {
 		switch formState {
 		case .processing:

@@ -41,6 +41,7 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 
 		return text
 	}
-  
-  internal var saveCardCheckboxSelected: Bool = true
+
+	/// `true` if user checked saved card option, nil if saved card option is set to false in checkout configuration.
+  internal var saveCardCheckboxSelected: Bool?
 }
