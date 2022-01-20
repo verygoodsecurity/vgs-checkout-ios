@@ -7,6 +7,110 @@ import Foundation
 import UIKit
 #endif
 
+/// Holds UI for saved card accessory options view.
+internal class VGSSavedCardOptionAccessoryView: UIView {
+
+	// MARK: - Constants
+
+	/// Remove icon size.
+	private let removeIconSize: CGSize = CGSize(width: 20, height: 20)
+
+	/// Remove card icon image.
+	private let image = UIImage(named: "saved_card_remove_card_icon", in: BundleUtils.shared.resourcesBundle, compatibleWith: nil)
+
+	// MARK: - Vars
+
+	/// Checkbox.
+	private let checkbox: VGSRoundedCheckbox
+
+	/// Defines state for view.
+	enum AccessoryViewState {
+
+		/// Hidden.
+		case hidden
+
+		/// Selected - display checkbox.
+		case selected(_ isSelected: Bool)
+
+		/// Delete card - display remove card icon.
+		case delete
+	}
+
+	/// UI theme.
+	private let uiTheme: VGSCheckoutThemeProtocol
+
+	/// Remove card image view.
+	fileprivate lazy var removeCardImageView: UIImageView = {
+		let imageView = UIImageView(frame: .zero)
+		imageView.translatesAutoresizingMaskIntoConstraints = false
+		imageView.widthAnchor.constraint(equalToConstant: removeIconSize.width).isActive = true
+		imageView.heightAnchor.constraint(equalToConstant: removeIconSize.height).isActive = true
+		imageView.contentMode = .scaleAspectFit
+
+		return imageView
+	}()
+
+	/// View current state.
+	internal var accessoryViewState: AccessoryViewState = .hidden {
+		didSet {
+			updateUI()
+		}
+	}
+
+	// MARK: - Initializer
+
+	/// no:doc
+	init(uiTheme: VGSCheckoutThemeProtocol) {
+		self.uiTheme = uiTheme
+		let checkboxTheme = VGSRoundedCheckbox.generateCheckboxThemeForSavedCard(from: uiTheme)
+		self.checkbox = VGSRoundedCheckbox(theme: checkboxTheme)
+		super.init(frame: .zero)
+	}
+
+	/// no:doc
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
+	// MARK: - Interface
+
+	// MARK: - Helpers
+
+	/// Setups UI.
+	private func setupUI() {
+		setupCheckboxUI()
+	}
+
+	/// Setups checkbox UI.
+	private func setupCheckboxUI() {
+		addSubview(checkbox)
+		checkbox.translatesAutoresizingMaskIntoConstraints = false
+		checkbox.checkout_constraintViewToSuperviewCenter()
+	}
+
+	/// Setups remove button UI.
+	private func setupRemoveButtonUI() {
+		addSubview(removeCardImageView)
+		removeCardImageView.checkout_constraintViewToSuperviewCenter()
+	}
+
+	/// Updates UI with current state.
+	private func updateUI() {
+		switch accessoryViewState {
+		case .hidden:
+			checkbox.isHidden = true
+			removeCardImageView.isHidden = true
+		case .selected(let isSelected):
+			checkbox.isHidden = false
+			removeCardImageView.isHidden = true
+			checkbox.isSelected = isSelected
+		case .delete:
+			checkbox.isHidden = true
+			removeCardImageView.isHidden = false
+		}
+	}
+}
+
 /// Holds UI for saved card payment option cell.
 internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 

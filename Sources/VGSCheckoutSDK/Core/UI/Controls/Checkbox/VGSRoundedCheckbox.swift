@@ -99,4 +99,13 @@ internal class VGSRoundedCheckbox: UIView {
 	internal override var intrinsicContentSize: CGSize {
 		return CGSize(width: 22, height: 22)
 	}
+
+	/// Generates ui theme for saved card rounded checkbox.
+	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
+	/// - Returns: `CardCellCheckboxTheme` object, CardCellCheckboxTheme
+	static func generateCheckboxThemeForSavedCard(from uiTheme: VGSCheckoutThemeProtocol) -> VGSRoundedCheckboxTheme {
+		let cellCheckboxTheme = VGSPaymentOptionCardTableViewCell.CardCellCheckboxTheme(unselectedColor: uiTheme.checkoutPaymentOptionCheckboxUnselectedColor, selectedColor: uiTheme.checkoutPaymentOptionCheckboxSelectedColor, checkmarkTintColor: uiTheme.checkoutPaymentOptionCheckmarkTintColor)
+
+		return cellCheckboxTheme
+	}
 }

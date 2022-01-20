@@ -28,6 +28,21 @@ internal extension UIView {
 		NSLayoutConstraint.activate(constraints)
 	}
 
+	/// Constraints view to super view center.
+	func checkout_constraintViewToSuperviewCenter() {
+		guard let view = superview else {
+			assertionFailure("No superview!")
+			return
+		}
+
+		let constraints = [
+			centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			centerYAnchor.constraint(equalTo: view.centerYAnchor),
+		]
+
+		NSLayoutConstraint.activate(constraints)
+	}
+
 	/// Constraints view to super view safe area layout guide.
 	func checkout_constraintViewToSafeAreaLayoutGuideEdges() {
 		guard let view = superview else {
