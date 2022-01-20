@@ -67,7 +67,7 @@ internal class VGSPaymentOptionsViewModel {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
 	}
 
-	/// Root navigation bar title.
+	/// Navigation bar title.
 	internal var rootNavigationTitle: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_navigation_bar_title")
 	}
