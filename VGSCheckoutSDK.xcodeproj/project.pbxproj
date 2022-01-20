@@ -141,6 +141,7 @@
 		4438578326B022EE00EE5C7F /* VGSCheckoutCustomBillingAddressPostalCodeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438578226B022EE00EE5C7F /* VGSCheckoutCustomBillingAddressPostalCodeOptions.swift */; };
 		444ABEFF2797D53300320868 /* VGSPayoptTransfersViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABEFE2797D53300320868 /* VGSPayoptTransfersViewModelFactory.swift */; };
 		444ABF012797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF002797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift */; };
+		444ABF0427992ECA00320868 /* VGSSavedCardOptionAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF0327992ECA00320868 /* VGSSavedCardOptionAccessoryView.swift */; };
 		4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */; };
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
 		4468C974278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468C973278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift */; };
@@ -425,6 +426,7 @@
 		4438578226B022EE00EE5C7F /* VGSCheckoutCustomBillingAddressPostalCodeOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomBillingAddressPostalCodeOptions.swift; sourceTree = "<group>"; };
 		444ABEFE2797D53300320868 /* VGSPayoptTransfersViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VGSPayoptTransfersViewModelFactory.swift; path = Sources/VGSCheckoutSDK/Core/Checkout/UseCases/Payment/ViewModels/VGSPayoptTransfersViewModelFactory.swift; sourceTree = SOURCE_ROOT; };
 		444ABF002797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPayoptBasicConfiguration.swift; sourceTree = "<group>"; };
+		444ABF0327992ECA00320868 /* VGSSavedCardOptionAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSSavedCardOptionAccessoryView.swift; sourceTree = "<group>"; };
 		4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
 		4468C973278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomRouteConfiguration.swift; sourceTree = "<group>"; };
@@ -1181,6 +1183,14 @@
 			path = PostalCode;
 			sourceTree = "<group>";
 		};
+		444ABF0227992EB200320868 /* SavedCardAccessoryView */ = {
+			isa = PBXGroup;
+			children = (
+				444ABF0327992ECA00320868 /* VGSSavedCardOptionAccessoryView.swift */,
+			);
+			path = SavedCardAccessoryView;
+			sourceTree = "<group>";
+		};
 		4450EEDB26E737B0007866C3 /* UIFont+Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1472,6 +1482,7 @@
 			isa = PBXGroup;
 			children = (
 				4468C9C4278F333A00296DA7 /* VGSPaymentOptionCardTableViewCell.swift */,
+				444ABF0227992EB200320868 /* SavedCardAccessoryView */,
 				4468C9C5278F333A00296DA7 /* VGSPaymentOptionItemView.swift */,
 			);
 			path = CardPaymentOptionCell;
@@ -2464,6 +2475,7 @@
 				4468CA06278F333A00296DA7 /* VGSSaveCardPayoptAddCardAPIWorker.swift in Sources */,
 				4405DC2026844AD8004A83AD /* APIClient.swift in Sources */,
 				4468C9E4278F333A00296DA7 /* VGSCheckoutServiceProtocol.swift in Sources */,
+				444ABF0427992ECA00320868 /* VGSSavedCardOptionAccessoryView.swift in Sources */,
 				44E10A8626936235001F0D44 /* VGSPickerTextField.swift in Sources */,
 				4405DC6526844B30004A83AD /* VGSTextField+CVC.swift in Sources */,
 				44C4C8FB2664B1FD00195505 /* UIView+Extensions.swift in Sources */,
