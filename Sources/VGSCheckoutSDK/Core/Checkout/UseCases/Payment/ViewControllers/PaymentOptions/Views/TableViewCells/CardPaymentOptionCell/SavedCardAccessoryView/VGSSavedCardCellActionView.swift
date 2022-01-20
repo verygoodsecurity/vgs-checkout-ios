@@ -8,15 +8,30 @@ import UIKit
 #endif
 
 /// A set of methods to notify about changes in saved card option accessory view.
-internal protocol VGSSavedCardOptionAccessoryViewDelegate: AnyObject {
+internal protocol VGSSavedCardOptionActionViewDelegate: AnyObject {
 
 	/// Tells the delegate that remove card button was tapped.
-	/// - Parameter view: `VGSSavedCardOptionAccessoryView` object, accessory view object.
-	func removeCardDidTapInView(in view: VGSSavedCardOptionAccessoryView)
+	/// - Parameter view: `VGSSavedCardCellActionView` object, action view object.
+	func removeCardDidTapInView(in view: VGSSavedCardCellActionView)
 }
 
 /// Holds UI for saved card accessory options view.
-internal class VGSSavedCardOptionAccessoryView: UIView {
+internal class VGSSavedCardCellActionView: UIView {
+
+	/// Defines state for view.
+	enum ActionViewState {
+
+		/// Hidden.
+		case hidden
+
+		/// Selection, display checkbox in selected/unselected state.
+		/// - Parameters:
+		///	 - isSelected: `Bool` object, indicates selection result.
+		case selected(_ isSelected: Bool)
+
+		/// Delete card, display remove card icon.
+		case delete
+	}
 
 	// MARK: - Constants
 
@@ -28,23 +43,10 @@ internal class VGSSavedCardOptionAccessoryView: UIView {
 
 	// MARK: - Vars
 
-	internal weak var delegate: VGSSavedCardOptionAccessoryViewDelegate?
+	internal weak var delegate: VGSSavedCardOptionActionViewDelegate?
 
 	/// Checkbox.
 	private let checkbox: VGSRoundedCheckbox
-
-	/// Defines state for view.
-	enum AccessoryViewState {
-
-		/// Hidden.
-		case hidden
-
-		/// Selected - display checkbox.
-		case selected(_ isSelected: Bool)
-
-		/// Delete card - display remove card icon.
-		case delete
-	}
 
 	/// UI theme.
 	private let uiTheme: VGSCheckoutThemeProtocol
@@ -58,8 +60,8 @@ internal class VGSSavedCardOptionAccessoryView: UIView {
 		return button
 	}()
 
-	/// View current state.
-	internal var accessoryViewState: AccessoryViewState = .hidden {
+	/// View current state. Default is `hidden`.
+	internal var actionViewState: ActionViewState = .hidden {
 		didSet {
 			updateUI()
 		}
@@ -67,12 +69,14 @@ internal class VGSSavedCardOptionAccessoryView: UIView {
 
 	// MARK: - Initializer
 
-	/// no:doc
+	/// Initializer.
+	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	init(uiTheme: VGSCheckoutThemeProtocol) {
 		self.uiTheme = uiTheme
 		let checkboxTheme = VGSRoundedCheckbox.generateCheckboxThemeForSavedCard(from: uiTheme)
 		self.checkbox = VGSRoundedCheckbox(theme: checkboxTheme)
 		super.init(frame: .zero)
+		setupUI()
 	}
 
 	/// no:doc
@@ -87,6 +91,7 @@ internal class VGSSavedCardOptionAccessoryView: UIView {
 	/// Setups UI.
 	private func setupUI() {
 		setupCheckboxUI()
+		setupRemoveButtonUI()
 	}
 
 	/// Setups checkbox UI.
@@ -105,7 +110,7 @@ internal class VGSSavedCardOptionAccessoryView: UIView {
 
 	/// Updates UI with current state.
 	private func updateUI() {
-		switch accessoryViewState {
+		switch actionViewState {
 		case .hidden:
 			checkbox.isHidden = true
 			removeCardButton.isHidden = true

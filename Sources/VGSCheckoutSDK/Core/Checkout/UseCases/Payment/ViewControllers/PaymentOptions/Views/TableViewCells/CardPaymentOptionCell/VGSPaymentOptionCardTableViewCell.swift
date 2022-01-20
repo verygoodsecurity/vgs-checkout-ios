@@ -90,16 +90,8 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		return label
 	}()
 
-	/// Checkbox container view.
-	fileprivate lazy var checkboxContainerView: UIView = {
-		let view = UIView(frame: .zero)
-		view.translatesAutoresizingMaskIntoConstraints = false
-
-		return view
-	}()
-
-	/// Checkbox.
-	fileprivate var checkbox: VGSRoundedCheckbox?
+	/// Action view.
+	fileprivate var saveCardActionView: VGSSavedCardCellActionView?
 
 	// MARK: - Interface
 
@@ -118,17 +110,15 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
 
-		let cellCheckboxTheme = CardCellCheckboxTheme(unselectedColor: uiTheme.checkoutPaymentOptionCheckboxUnselectedColor, selectedColor: uiTheme.checkoutPaymentOptionCheckboxSelectedColor, checkmarkTintColor: uiTheme.checkoutPaymentOptionCheckmarkTintColor)
-
-		if checkbox == nil {
-			let roundedCheckbox = VGSRoundedCheckbox(theme: cellCheckboxTheme)
-			roundedCheckbox.translatesAutoresizingMaskIntoConstraints = false
-			checkboxContainerView.addSubview(roundedCheckbox)
-			roundedCheckbox.centerXAnchor.constraint(equalTo: checkboxContainerView.centerXAnchor).isActive = true
-			roundedCheckbox.centerYAnchor.constraint(equalTo: checkboxContainerView.centerYAnchor).isActive = true
-			checkbox = roundedCheckbox
+		if saveCardActionView == nil {
+			let actionView = VGSSavedCardCellActionView(uiTheme: uiTheme)
+			actionView.translatesAutoresizingMaskIntoConstraints = false
+			actionView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+			itemContainerView.stackView.addArrangedSubview(actionView)
+			saveCardActionView = actionView
 		}
-		checkbox?.isSelected = viewModel.isSelected
+
+		saveCardActionView?.actionViewState = .selected(viewModel.isSelected)
 
 		if viewModel.isSelected {
 			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
@@ -159,8 +149,6 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 		itemContainerView.stackView.addArrangedSubview(cardBrandImageView)
 		itemContainerView.stackView.addArrangedSubview(cardDetailsStackView)
-		itemContainerView.stackView.addArrangedSubview(checkboxContainerView)
-		checkboxContainerView.widthAnchor.constraint(equalToConstant: 22).isActive = true
 
 		cardDetailsStackView.addArrangedSubview(cardHolderLabel)
 		cardDetailsStackView.addArrangedSubview(cardDetailsLabel)
