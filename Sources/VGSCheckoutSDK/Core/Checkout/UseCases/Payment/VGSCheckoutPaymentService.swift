@@ -72,13 +72,15 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	/// Builds view controller for save card flow.
 	/// - Returns: `UIViewController` object, view controller with save card form.
 	internal func buildCheckoutViewController() -> UIViewController {
+		let vc: UIViewController
 		switch initialScreen {
 		case .payWithNewCard:
-			return buildPayWithNewCardVC()
+			vc = buildPayWithNewCardVC()
 		case .paymentOptions:
 			//			fatalError("not implemented")
-			return buildPaymentOptionsVC()
+			vc = buildPaymentOptionsVC()
 		}
+		return UINavigationController(rootViewController: vc)
 	}
 
 	/// Builds payment options screen.

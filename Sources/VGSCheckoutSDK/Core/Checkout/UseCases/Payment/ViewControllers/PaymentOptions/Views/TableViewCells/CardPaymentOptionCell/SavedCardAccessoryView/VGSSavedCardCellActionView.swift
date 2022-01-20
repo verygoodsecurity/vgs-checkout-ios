@@ -29,8 +29,8 @@ internal class VGSSavedCardCellActionView: UIView {
 		///	 - isSelected: `Bool` object, indicates selection result.
 		case selected(_ isSelected: Bool)
 
-		/// Delete card, display remove card icon.
-		case delete
+		/// Remove card, display remove card icon.
+		case remove
 	}
 
 	// MARK: - Constants
@@ -56,6 +56,7 @@ internal class VGSSavedCardCellActionView: UIView {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setImage(removeCardImage, for: .normal)
+		button.imageView?.contentMode = .scaleAspectFit
 
 		return button
 	}()
@@ -118,7 +119,7 @@ internal class VGSSavedCardCellActionView: UIView {
 			checkbox.isHidden = false
 			removeCardButton.isHidden = true
 			checkbox.isSelected = isSelected
-		case .delete:
+		case .remove:
 			checkbox.isHidden = true
 			removeCardButton.isHidden = false
 		}

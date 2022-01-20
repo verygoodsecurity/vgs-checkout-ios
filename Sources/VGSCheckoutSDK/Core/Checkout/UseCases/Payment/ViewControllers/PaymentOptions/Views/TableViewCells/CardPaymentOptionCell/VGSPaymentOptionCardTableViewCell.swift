@@ -99,7 +99,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	/// - Parameters:
 	///   - viewModel: `VGSPaymentOptionCardCellViewModel` object, cell view model.
 	///   - uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
-	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol) {
+	internal func configure(with viewModel: VGSPaymentOptionCardCellViewModel, uiTheme: VGSCheckoutThemeProtocol, isEditing: Bool) {
 
 		cardBrandImageView.image = viewModel.cardBrandImage
 		cardHolderLabel.text = viewModel.cardHolder?.uppercased()
@@ -113,12 +113,17 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		if saveCardActionView == nil {
 			let actionView = VGSSavedCardCellActionView(uiTheme: uiTheme)
 			actionView.translatesAutoresizingMaskIntoConstraints = false
-			actionView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+			actionView.widthAnchor.constraint(equalToConstant: 20).isActive = true
 			itemContainerView.stackView.addArrangedSubview(actionView)
 			saveCardActionView = actionView
+			saveCardActionView?.delegate = self
 		}
 
-		saveCardActionView?.actionViewState = .selected(viewModel.isSelected)
+		if isEditing {
+			saveCardActionView?.actionViewState = .remove
+		} else {
+			saveCardActionView?.actionViewState = .selected(viewModel.isSelected)
+		}
 
 		if viewModel.isSelected {
 			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
@@ -152,5 +157,13 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 		cardDetailsStackView.addArrangedSubview(cardHolderLabel)
 		cardDetailsStackView.addArrangedSubview(cardDetailsLabel)
+	}
+}
+
+// MARK: - VGSSavedCardOptionActionViewDelegate
+
+extension VGSPaymentOptionCardTableViewCell: VGSSavedCardOptionActionViewDelegate {
+	func removeCardDidTapInView(in view: VGSSavedCardCellActionView) {
+		print("remove card did tap!")
 	}
 }
