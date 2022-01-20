@@ -2,7 +2,6 @@
 //  VGSPaymentOptionsViewModel.swift
 //  VGSCheckoutSDK
 
-
 import Foundation
 
 /// Payment options component view model for payopt transfers configuration.
@@ -38,16 +37,16 @@ internal class VGSPaymentOptionsViewModel {
 	internal var paymentOptions: [VGSPaymentOption] = [
 		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith Smith Smith Smith Smith Smith M")),
 		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/24", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/25", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/26", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/27", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/28", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/29", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/30", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/31", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/32", cardHolder: "John Smith")),
+		.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/33", cardHolder: "John Smith")),
 		.newCard
 	]
 
@@ -89,9 +88,7 @@ internal class VGSPaymentOptionsViewModel {
 				return nil
 			}
 		}
-		guard let firstModel = savedCardModels.first(where: {$0.id == selectedId}) else {return nil}
+		guard savedCardModels.first(where: {$0.id == selectedId}) != nil else {return nil}
 		return VGSCheckoutPaymentCardInfo(id: selectedId)
 	}
-
-	internal var saveCardCheckboxSelected: Bool = true
 }
