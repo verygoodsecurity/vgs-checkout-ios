@@ -46,18 +46,17 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 		self.checkoutConfigurationType = checkoutConfigurationType
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
-		self.initialScreen = .payWithNewCard
-//		switch checkoutConfigurationType {
-//
-//			case .payoptTransfers(let configuration):
-//				if configuration.savedCards.isEmpty {
-//					self.initialScreen = .payWithNewCard
-//				} else {
-//					self.initialScreen = .paymentOptions
-//				}
-//			default:
-//				fatalError("wrong flow")
-//			}
+//		self.initialScreen = .payWithNewCard
+		switch checkoutConfigurationType {
+			case .payoptTransfers(let configuration):
+				if !configuration.savedCards.isEmpty {
+					self.initialScreen = .payWithNewCard
+				} else {
+					self.initialScreen = .paymentOptions
+				}
+			default:
+				fatalError("wrong flow")
+			}
 	}
 
 	/// Builds view controller for save card flow.
@@ -67,7 +66,7 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 		case .payWithNewCard:
 			return buildPayWithNewCardVC()
 		case .paymentOptions:
-			fatalError("not implemented")
+//			fatalError("not implemented")
 			return buildPaymentOptionsVC()
 		}
 	}

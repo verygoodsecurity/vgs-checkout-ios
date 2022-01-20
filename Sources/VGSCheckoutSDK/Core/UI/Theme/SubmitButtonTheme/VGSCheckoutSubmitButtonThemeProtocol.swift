@@ -45,7 +45,7 @@ public protocol VGSCheckoutCheckboxThemeProtocol {
 }
 
 /// Defines Payment options UI Theme.
-internal protocol VGSCheckoutPaymentOptionsThemeProtocol {
+public protocol VGSCheckoutPaymentOptionsThemeProtocol {
 
 	/// The background color of the saved card item.
 	var checkoutPaymentOptionBackgroundColor: UIColor {get set}
