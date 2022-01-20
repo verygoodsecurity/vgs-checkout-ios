@@ -7,8 +7,14 @@ import Foundation
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
 
+	/// Last selected card saved card id.
 	internal var previsouslySelectedID: String?
 
+	/// Initializer.
+	/// - Parameters:
+	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
+	///   - vgsCollect: `VGSCollect` object, vgs collect.
+	///   - checkoutService: `VGSCheckoutPayoptTransfersService` object, payopt transfers service.
 	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
 		self.configuration = configuration
 		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
@@ -53,7 +59,8 @@ internal class VGSPaymentOptionsViewModel {
 	/// Configuration.
 	private(set) var configuration: VGSCheckoutPaymentConfiguration
 
-	let apiWorker: VGSPayoptTransfersAPIWorker
+	/// Transfers API worker.
+	internal let apiWorker: VGSPayoptTransfersAPIWorker
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {
