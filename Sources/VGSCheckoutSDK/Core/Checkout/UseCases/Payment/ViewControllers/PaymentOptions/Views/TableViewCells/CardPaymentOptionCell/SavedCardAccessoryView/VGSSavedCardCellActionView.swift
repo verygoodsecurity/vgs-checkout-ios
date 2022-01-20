@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 #endif
 
-/// A set of methods to notify about changes in saved card option accessory view.
+/// A set of methods to notify about changes in saved card option action view.
 internal protocol VGSSavedCardOptionActionViewDelegate: AnyObject {
 
 	/// Tells the delegate that remove card button was tapped.
@@ -57,6 +57,7 @@ internal class VGSSavedCardCellActionView: UIView {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setImage(removeCardImage, for: .normal)
 		button.imageView?.contentMode = .scaleAspectFit
+//		button.contentEdgeInsets.right = -8
 
 		return button
 	}()

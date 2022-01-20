@@ -44,6 +44,8 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		view.stackView.setContentCompressionResistancePriority(.required, for: .vertical)
 		view.layer.cornerRadius = 8
 		view.layer.masksToBounds = true
+		// Decrease right inset so remove card button can have bigger tap zone.
+		view.stackView.layoutMargins.right = view.stackView.layoutMargins.right - 4
 
 		return view
 	}()
@@ -107,13 +109,13 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
 		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
-
 		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
 
 		if saveCardActionView == nil {
 			let actionView = VGSSavedCardCellActionView(uiTheme: uiTheme)
 			actionView.translatesAutoresizingMaskIntoConstraints = false
-			actionView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+			actionView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//			actionView.backgroundColor = .yellow
 			itemContainerView.stackView.addArrangedSubview(actionView)
 			saveCardActionView = actionView
 			saveCardActionView?.delegate = self
