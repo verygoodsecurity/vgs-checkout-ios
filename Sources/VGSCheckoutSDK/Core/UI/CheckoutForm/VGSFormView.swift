@@ -78,17 +78,17 @@ internal class VGSFormView: UIView {
 	// MARK: - Override
 
 	/// no:doc
-	override internal var intrinsicContentSize: CGSize {
-		let targetWidth = superview?.bounds.width ?? UIScreen.main.bounds.width
-		let targetHeight = UIView.layoutFittingCompressedSize.height
-
-		let targetSize = CGSize(width: targetWidth, height: targetHeight)
-
-		// Return size of stack view content.
-		let size = stackView.systemLayoutSizeFitting(targetSize,
-																						 withHorizontalFittingPriority: .required,
-																						 verticalFittingPriority: .fittingSizeLevel)
-
-		return size
-	}
+//	override internal var intrinsicContentSize: CGSize {
+//		let targetWidth = superview?.bounds.width ?? UIScreen.main.bounds.width
+//		let targetHeight = UIView.layoutFittingCompressedSize.height
+//
+//		let targetSize = CGSize(width: targetWidth, height: targetHeight)
+//
+//		// Return size of stack view content.
+//		let size = stackView.systemLayoutSizeFitting(targetSize,
+//																						 withHorizontalFittingPriority: .required,
+//																						 verticalFittingPriority: .fittingSizeLevel)
+//
+//		return size
+//	}
 }
