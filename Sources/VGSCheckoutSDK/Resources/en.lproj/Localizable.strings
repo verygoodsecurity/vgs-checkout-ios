@@ -184,17 +184,23 @@
 /* Pay with new card option title. */
 "vgs_checkout_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";
 
-/* Navigation bar title for `Payment options` flow. */
+/* Navigation bar title for Payment options flow. */
 "vgs_checkout_payment_options_navigation_bar_title" = "Checkout";
 
-/* Title for cancel action in remove card popup in payment options list. */
-"vgs_checkout_remove_card_popup_cancel_title" = "Cancel"
+/* Navigation bar button item to edit saved cards in Payment options flow. */
+"vgs_checkout_payment_options_edit_cards_button_title" = "Edit";
 
-/* Title for remove action in remove card popup in payment options list. */
-"vgs_checkout_remove_card_popup_remove_card_title" = "Remove"
+/* Navigation bar button item to cancel editing saved cards in Payment options flow. */
+"vgs_checkout_payment_options_cancel_edit_cards_button_title" = "Cancel";
 
-/* Title for remove card popup in payment options list. */
-"vgs_checkout_remove_card_popup_title" = "Remove card"
+/* Title for cancel button in remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_cancel_button_title" = "Cancel";
 
-/* Message for remove card popup in payment options list. */
-"vgs_checkout_remove_card_popup_message" = "Are you sure you want to remove selected card?"
+/* Title for remove button in remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_remove_card_button_title" = "Remove";
+
+/* Title for remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_title" = "Remove card";
+
+/* Description message for remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_description" = "Are you sure you want to remove selected card?";

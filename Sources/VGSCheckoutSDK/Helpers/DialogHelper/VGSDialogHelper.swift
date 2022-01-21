@@ -55,9 +55,10 @@ internal class VGSDialogHelper {
 	///   - title: `String` object, title text.
 	///   - message: `String` object,  message text.
 	///   - viewController: `UIViewController` object, controller to present alert from.
+	///   - cancelActionTitle: `String` object, cancel action title text.
 	///   - actionTitle: `String` object, action title text.
 	///   - completion: `(() -> Void)?` object, completion block triggered on alert action button tap.
-	static func presentDescturctiveActionAlert(with title: String, message: String, in viewController: UIViewController, actionTitle: String, completion: @escaping  (() -> Void)) {
+	static func presentDescturctiveActionAlert(with title: String, message: String, in viewController: UIViewController, cancelActionTitle: String, actionTitle: String, completion: @escaping  (() -> Void)) {
 
 		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
@@ -67,7 +68,7 @@ internal class VGSDialogHelper {
 			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
 		}
 
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
 		let destructiveAction = UIAlertAction(title: actionTitle, style: .destructive) { _ in
 			completion()
 		}

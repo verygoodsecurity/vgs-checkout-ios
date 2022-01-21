@@ -56,6 +56,27 @@ internal class VGSPaymentOptionsViewModel {
 		.newCard
 	]
 
+	/// Remove card popup texts.
+	enum RemoveCardPopupConstants: String {
+
+		/// Popup title.
+		case title = "vgs_checkout_remove_card_popup_title"
+
+		/// Popup message.
+		case messageText = "vgs_checkout_remove_card_popup_message"
+
+		/// Popup cancel action title.
+		case cancelActionTitle = "vgs_checkout_remove_card_popup_cancel_title"
+
+		/// Popup remove card action title.
+		case removeActionTitle = "vgs_checkout_remove_card_popup_remove_card_button_title"
+
+		/// Localized text.
+		internal var localized: String {
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.rawValue)
+		}
+	}
+
 	/// Configuration.
 	private(set) var configuration: VGSCheckoutPaymentConfiguration
 

@@ -315,7 +315,8 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionCardTableViewCellDele
 
 		let cardIdToRemove = savedCardModel.id
 
-		VGSDialogHelper.presentDescturctiveActionAlert(with: "Remove card", message: "Are you sure you want to remove selected card?", in: self, actionTitle: "Remove") {[weak self] in
+		let constants = VGSPaymentOptionsViewModel.RemoveCardPopupConstants.self
+		VGSDialogHelper.presentDescturctiveActionAlert(with: constants.title.localized, message: constants.messageText.localized + "(\(savedCardModel.last4)", in: self, cancelActionTitle: constants.cancelActionTitle.localized, actionTitle: constants.removeActionTitle.localized) {[weak self] in
 			guard let strongSelf = self else {
 				return
 			}
