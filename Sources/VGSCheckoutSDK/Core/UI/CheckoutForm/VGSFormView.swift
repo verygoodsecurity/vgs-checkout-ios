@@ -74,21 +74,4 @@ internal class VGSFormView: UIView {
 		stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
 		stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
 	}
-
-	// MARK: - Override
-
-	/// no:doc
-//	override internal var intrinsicContentSize: CGSize {
-//		let targetWidth = superview?.bounds.width ?? UIScreen.main.bounds.width
-//		let targetHeight = UIView.layoutFittingCompressedSize.height
-//
-//		let targetSize = CGSize(width: targetWidth, height: targetHeight)
-//
-//		// Return size of stack view content.
-//		let size = stackView.systemLayoutSizeFitting(targetSize,
-//																						 withHorizontalFittingPriority: .required,
-//																						 verticalFittingPriority: .fittingSizeLevel)
-//
-//		return size
-//	}
 }

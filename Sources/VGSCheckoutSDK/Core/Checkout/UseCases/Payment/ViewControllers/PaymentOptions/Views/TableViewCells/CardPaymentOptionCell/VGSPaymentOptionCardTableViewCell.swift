@@ -79,6 +79,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 1
+		label.adjustsFontSizeToFitWidth = true
 
 		return label
 	}()
@@ -115,7 +116,6 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 			let actionView = VGSSavedCardCellActionView(uiTheme: uiTheme)
 			actionView.translatesAutoresizingMaskIntoConstraints = false
 			actionView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-//			actionView.backgroundColor = .yellow
 			itemContainerView.stackView.addArrangedSubview(actionView)
 			saveCardActionView = actionView
 			saveCardActionView?.delegate = self
