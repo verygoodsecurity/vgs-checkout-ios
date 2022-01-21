@@ -65,7 +65,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					let option = viewModel.paymentOptions[index]
 					switch option {
 					case .savedCard(var card):
-						if card.id == viewModel.previsouslySelectedID {
+						if card.id == viewModel.lastSelectedSavedCardId {
 							card.isSelected = true
 							viewModel.paymentOptions[index] = .savedCard(card)
 						}
@@ -257,7 +257,7 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 
 		switch paymentOption {
 		case.savedCard(var savedCard):
-			guard let lastSelectedId = viewModel.previsouslySelectedID else {return}
+			guard let lastSelectedId = viewModel.lastSelectedSavedCardId else {return}
 
 			/// Ignore same card selection.
 			if savedCard.id == lastSelectedId {
@@ -283,7 +283,7 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 			}
 
 			// Save new selected id.
-			viewModel.previsouslySelectedID = savedCard.id
+			viewModel.lastSelectedSavedCardId = savedCard.id
 			tableView.reloadData()
 		case .newCard:
 			navigateToNewCardScreen()

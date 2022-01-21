@@ -186,3 +186,15 @@
 
 /* Navigation bar title for `Payment options` flow. */
 "vgs_checkout_payment_options_navigation_bar_title" = "Checkout";
+
+/* Title for cancel action in remove card popup in payment options list. */
+"vgs_checkout_remove_card_popup_cancel_title" = "Cancel"
+
+/* Title for remove action in remove card popup in payment options list. */
+"vgs_checkout_remove_card_popup_remove_card_title" = "Remove"
+
+/* Title for remove card popup in payment options list. */
+"vgs_checkout_remove_card_popup_title" = "Remove card"
+
+/* Message for remove card popup in payment options list. */
+"vgs_checkout_remove_card_popup_message" = "Are you sure you want to remove selected card?"

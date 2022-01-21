@@ -8,7 +8,7 @@ import Foundation
 internal class VGSPaymentOptionsViewModel {
 
 	/// Last selected card saved card id.
-	internal var previsouslySelectedID: String?
+	internal var lastSelectedSavedCardId: String?
 
 	/// Initializer.
 	/// - Parameters:
@@ -31,7 +31,7 @@ internal class VGSPaymentOptionsViewModel {
 				var firstSavedCard = card
 				firstSavedCard.isSelected = true
 				paymentOptions[0] = .savedCard(firstSavedCard)
-				self.previsouslySelectedID = card.id
+				self.lastSelectedSavedCardId = card.id
 			default:
 				break
 		}
@@ -86,7 +86,7 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Selected payment card info.
 	internal var selectedPaymentCardInfo: VGSCheckoutPaymentCardInfo? {
-		guard let selectedId = previsouslySelectedID else {return nil}
+		guard let selectedId = lastSelectedSavedCardId else {return nil}
 		let savedCardModels = paymentOptions.compactMap { option -> VGSSavedCardModel? in
 			switch option {
 			case .savedCard(let card):
