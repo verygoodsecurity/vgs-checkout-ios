@@ -49,4 +49,32 @@ internal class VGSDialogHelper {
 
 		viewController.present(alert, animated: true, completion: nil)
 	}
+
+	/// Presents error dialog with desctructive action.
+	/// - Parameters:
+	///   - title: `String` object, title text.
+	///   - message: `String` object,  message text.
+	///   - viewController: `UIViewController` object, controller to present alert from.
+	///   - actionTitle: `String` object, action title text.
+	///   - completion: `(() -> Void)?` object, completion block triggered on alert action button tap.
+	static func presentDescturctiveActionAlert(with title: String, message: String, in viewController: UIViewController, actionTitle: String, completion: @escaping  (() -> Void)) {
+
+		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+		if let popoverController = alert.popoverPresentationController {
+			popoverController.sourceView = viewController.view //to set the source of your alert
+			popoverController.sourceRect = CGRect(x: viewController.view.bounds.midX, y: viewController.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+		}
+
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let destructiveAction = UIAlertAction(title: actionTitle, style: .destructive) { _ in
+			completion()
+		}
+
+		alert.addAction(cancelAction)
+		alert.addAction(destructiveAction)
+
+		viewController.present(alert, animated: true, completion: nil)
+	}
 }

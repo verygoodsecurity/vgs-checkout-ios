@@ -7,6 +7,10 @@ import Foundation
 import UIKit
 #endif
 
+internal protocol VGSPaymentOptionCardTableViewCellDelegate: AnyObject {
+	func removeCardDidTap(in savedCardCell: VGSPaymentOptionCardTableViewCell)
+}
+
 /// Holds UI for saved card payment option cell.
 internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
@@ -36,6 +40,9 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 	}
 
 	// MARK: - Vars
+
+	/// Celld delegate.
+	internal weak var delegate: VGSPaymentOptionCardTableViewCellDelegate?
 
 	/// Container view.
 	internal lazy var itemContainerView: VGSPaymentOptionItemContainerView = {
@@ -166,6 +173,6 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 extension VGSPaymentOptionCardTableViewCell: VGSSavedCardOptionActionViewDelegate {
 	func removeCardDidTapInView(in view: VGSSavedCardCellActionView) {
-		print("remove card did tap!")
+		delegate?.removeCardDidTap(in: self)
 	}
 }

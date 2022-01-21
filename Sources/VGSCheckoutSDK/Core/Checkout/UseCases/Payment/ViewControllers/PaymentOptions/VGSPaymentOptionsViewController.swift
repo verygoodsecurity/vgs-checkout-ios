@@ -233,6 +233,7 @@ extension VGSPaymentOptionsViewController: UITableViewDataSource {
 		case .savedCard(let card):
 			let cell: VGSPaymentOptionCardTableViewCell = tableView.dequeue(cellForRowAt: indexPath)
 			cell.configure(with: card.paymentOptionCellViewModel, uiTheme: uiTheme, isEditing: screenState.isEditingSavedCard)
+			cell.delegate = self
 
 			return cell
 		case .newCard:
@@ -298,5 +299,34 @@ extension VGSPaymentOptionsViewController: VGSSubmitButtonDelegateProtocol {
 	/// no:doc
 	func statusDidChange(in button: VGSSubmitButton) {
 		mainView.submitButton.updateUI(with: uiTheme)
+	}
+}
+
+// MARK: - VGSPaymentOptionCardTableViewCellDelegate
+
+/// no:doc
+extension VGSPaymentOptionsViewController: VGSPaymentOptionCardTableViewCellDelegate {
+
+	/// no:doc
+	func removeCardDidTap(in savedCardCell: VGSPaymentOptionCardTableViewCell) {
+		guard let savedCardIndex = mainView.tableView.indexPath(for: savedCardCell)?.row, let savedCardModel = viewModel.paymentOptions[savedCardIndex].savedCardModel else {
+			return
+		}
+
+		let cardIdToRemove = savedCardModel.id
+
+		VGSDialogHelper.presentDescturctiveActionAlert(with: "Remove card", message: "Are you sure you want to remove selected card?", in: self, actionTitle: "Remove") {[weak self] in
+			guard let strongSelf = self else {
+				return
+			}
+			strongSelf.viewModel.paymentOptions = strongSelf.viewModel.paymentOptions.filter({ option in
+				guard let card = option.savedCardModel else {
+					return true
+				}
+
+				return card.id != cardIdToRemove
+			})
+			strongSelf.mainView.tableView.reloadData()
+		}
 	}
 }
