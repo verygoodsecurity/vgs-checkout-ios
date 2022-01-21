@@ -63,10 +63,10 @@ internal class VGSPaymentOptionsViewModel {
 		case title = "vgs_checkout_remove_card_popup_title"
 
 		/// Popup message.
-		case messageText = "vgs_checkout_remove_card_popup_message"
+		case messageText = "vgs_checkout_remove_card_popup_description"
 
 		/// Popup cancel action title.
-		case cancelActionTitle = "vgs_checkout_remove_card_popup_cancel_title"
+		case cancelActionTitle = "vgs_checkout_remove_card_popup_cancel_button_title"
 
 		/// Popup remove card action title.
 		case removeActionTitle = "vgs_checkout_remove_card_popup_remove_card_button_title"

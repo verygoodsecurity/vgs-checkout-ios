@@ -32,9 +32,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				return false
 			}
 		}
-
 	}
-
 
 	/// View model.
 	fileprivate let viewModel: VGSPaymentOptionsViewModel
@@ -65,10 +63,14 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					let option = viewModel.paymentOptions[index]
 					switch option {
 					case .savedCard(var card):
+						// If no last selected card set first as initial.
+						if viewModel.lastSelectedSavedCardId == nil && index == 0 {
+							card.isSelected = true
+						}
 						if card.id == viewModel.lastSelectedSavedCardId {
 							card.isSelected = true
-							viewModel.paymentOptions[index] = .savedCard(card)
 						}
+						viewModel.paymentOptions[index] = .savedCard(card)
 					case .newCard:
 						continue
 					}
@@ -267,7 +269,7 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 				savedCard.isSelected = true
 				viewModel.paymentOptions[index] = .savedCard(savedCard)
 
-				// Remove selection from the previous card
+				// Remove selection from the previous card.
 				for index in 0..<viewModel.paymentOptions.count {
 					let option = viewModel.paymentOptions[index]
 					switch option {
@@ -327,7 +329,12 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionCardTableViewCellDele
 
 				return card.id != cardIdToRemove
 			})
+			if strongSelf.viewModel.lastSelectedSavedCardId == cardIdToRemove {
+				strongSelf.viewModel.lastSelectedSavedCardId = nil
+			}
 			strongSelf.mainView.tableView.reloadData()
+			guard let service = strongSelf.paymentService else {return}
+			service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(cardIdToRemove), in: service)
 		}
 	}
 }

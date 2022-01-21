@@ -203,4 +203,4 @@
 "vgs_checkout_remove_card_popup_title" = "Remove card";
 
 /* Description message for remove card popup in Payment options list. */
-"vgs_checkout_remove_card_popup_description" = "Are you sure you want to remove selected card?";
+"vgs_checkout_remove_card_popup_description" = "Are you sure you want to remove selected card";
