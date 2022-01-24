@@ -71,9 +71,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 			switch screenState {
 			case .initial:
 				editCardsBarButtomItem.title = editTitle
-				// Restore selection from the previous card.
-				viewModel.paymentOptions.selectSavedCardAfterEditing(with: viewModel.lastSelectedSavedCardId)
-				mainView.tableView.reloadData()
+				// Restore selection from the previous card if needed.
+				viewModel.handleCancelEditSavedCardsTap()
 			case .processingTransfer:
 				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
 				mainView.isUserInteractionEnabled = false
@@ -158,8 +157,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		mainView.submitButton.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
 	}
 
-	/// Navigates to new card screen.
-	fileprivate func navigateToNewCardScreen() {
+	/// Navigates to pay with new card screen.
+	fileprivate func navigateToPayWithNewCardScreen() {
 		guard let service = paymentService else {return}
 		let vc = VGSPayWithCardViewController(paymentService: service, initialScreen: .paymentOptions)
 		navigationController?.pushViewController(vc, animated: true)
@@ -274,17 +273,24 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 	// no:doc
 	func savedCardDidRemove(with id: String) {
 		mainView.tableView.reloadData()
+
+		// Notify Checkout with remove saved card action.
 		guard let service = paymentService else {return}
 		service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(id), in: service)
 	}
 
 	// no:doc
 	func payWithNewCardDidTap() {
-		navigateToNewCardScreen()
+		navigateToPayWithNewCardScreen()
 	}
 
 	// no:doc
-	func savedCardDidUpdateForEditing() {
+	func savedCardDidUpdateBeforeEditing() {
+		mainView.tableView.reloadData()
+	}
+
+	// no:doc
+	func savedCardDidUpdateAfterEditing() {
 		mainView.tableView.reloadData()
 	}
 }

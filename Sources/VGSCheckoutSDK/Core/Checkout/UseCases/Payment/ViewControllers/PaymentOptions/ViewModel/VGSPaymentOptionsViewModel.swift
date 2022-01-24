@@ -120,7 +120,26 @@ internal class VGSPaymentOptionsViewModel {
 	/// Handled tap on edit saved cards button - removes selection state.
 	internal func handleEditModeTap() {
 		paymentOptions.unselectAllSavedCards()
-		delegate?.savedCardDidUpdateForEditing()
+		delegate?.savedCardDidUpdateBeforeEditing()
+	}
+
+	internal func handleCancelEditSavedCardsTap() {
+		guard let savedCard = paymentOptions.first?.savedCardModel else {
+			// No saved cards.
+			return
+		}
+
+		if lastSelectedSavedCardId == nil {
+			// Preselect first.
+			paymentOptions.preselectFirstSavedCard()
+			if let id = paymentOptions.first?.savedCardModel?.id {
+				self.lastSelectedSavedCardId = id
+			}
+		} else {
+			// Preselect last.
+			paymentOptions.selectSavedCardAfterEditing(with: lastSelectedSavedCardId)
+		}
+		delegate?.savedCardDidUpdateAfterEditing()
 	}
 
 	/// Handles remove saved card action.

@@ -10,8 +10,11 @@ internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
 	/// Tells the delegate that saved card selection state was updated.
 	func savedCardSelectionDidUpdate()
 
-	/// Tells the delegate that saved cards were updated for editing.
-	func savedCardDidUpdateForEditing()
+	/// Tells the delegate that saved cards were updated before editing.
+	func savedCardDidUpdateBeforeEditing()
+
+	/// Tells the delegate that saved cards were updated after editing.
+	func savedCardDidUpdateAfterEditing()
 
 	/// Tells the delegate that user removed saved card.
 	/// - Parameter id: `String` object, saved card instrument id.
