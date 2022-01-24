@@ -33,8 +33,10 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		}
 	}
 
+	/// Close button title.
 	fileprivate let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
 
+	/// Edit button title.
 	fileprivate let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
 
 	/// View model.

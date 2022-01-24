@@ -143,6 +143,7 @@
 		444ABF012797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF002797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift */; };
 		444ABF0427992ECA00320868 /* VGSSavedCardCellActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF0327992ECA00320868 /* VGSSavedCardCellActionView.swift */; };
 		444ABF06279E85B200320868 /* VGSPaymentOptionsViewModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF05279E85B200320868 /* VGSPaymentOptionsViewModel+Extensions.swift */; };
+		444ABF09279E96BD00320868 /* VGSPaymentOptionsViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ABF08279E96BD00320868 /* VGSPaymentOptionsViewModelDelegate.swift */; };
 		4450EEDD26E737C1007866C3 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */; };
 		4455C84E266E6908000CD666 /* VGSCardHolderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */; };
 		4468C974278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468C973278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift */; };
@@ -429,6 +430,7 @@
 		444ABF002797D55A00320868 /* VGSCheckoutPayoptBasicConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPayoptBasicConfiguration.swift; sourceTree = "<group>"; };
 		444ABF0327992ECA00320868 /* VGSSavedCardCellActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSSavedCardCellActionView.swift; sourceTree = "<group>"; };
 		444ABF05279E85B200320868 /* VGSPaymentOptionsViewModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VGSPaymentOptionsViewModel+Extensions.swift"; sourceTree = "<group>"; };
+		444ABF08279E96BD00320868 /* VGSPaymentOptionsViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPaymentOptionsViewModelDelegate.swift; sourceTree = "<group>"; };
 		4450EEDC26E737C1007866C3 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		4455C84D266E6908000CD666 /* VGSCardHolderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCardHolderDetailsView.swift; sourceTree = "<group>"; };
 		4468C973278ED99100296DA7 /* VGSCheckoutCustomRouteConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomRouteConfiguration.swift; sourceTree = "<group>"; };
@@ -1467,6 +1469,7 @@
 			children = (
 				4468C9C0278F333A00296DA7 /* VGSPaymentOptionsViewModel.swift */,
 				444ABF05279E85B200320868 /* VGSPaymentOptionsViewModel+Extensions.swift */,
+				444ABF08279E96BD00320868 /* VGSPaymentOptionsViewModelDelegate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2545,6 +2548,7 @@
 				4405DC8E26847247004A83AD /* VGSCheckoutLogLevel.swift in Sources */,
 				4405DC6E26844B30004A83AD /* VGSValidatior.swift in Sources */,
 				4468C9FA278F333A00296DA7 /* VGSCheckoutPaymentService.swift in Sources */,
+				444ABF09279E96BD00320868 /* VGSPaymentOptionsViewModelDelegate.swift in Sources */,
 				4405DC6226844B30004A83AD /* VGSCVCTextField.swift in Sources */,
 				44EC951B2669F23D00CE04F4 /* BundleUtils.swift in Sources */,
 				4405DCA326847247004A83AD /* VGSDeepMergeUtils.swift in Sources */,

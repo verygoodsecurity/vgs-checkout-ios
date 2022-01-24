@@ -4,13 +4,6 @@
 
 import Foundation
 
-internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
-	func savedCardSelectionDidUpdate()
-	func savedCardDidUpdateForEditing()
-	func savedCardDidRemove(with id: String)
-	func payWithNewCardDidTap()
-}
-
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
 
@@ -74,6 +67,8 @@ internal class VGSPaymentOptionsViewModel {
 		return text
 	}
 
+	/// Handles tap on payment option. Updates selection state if needed.
+	/// - Parameter index: `Int` object, index.
 	internal func handlePaymentOptionTap(at index: Int) {
 		guard let paymentOption = paymentOptions[safe: index] else {
 			assertionFailure("payment option not found at index: \(index)")
@@ -115,15 +110,21 @@ internal class VGSPaymentOptionsViewModel {
 		}
 	}
 
+	/// Provides saved card model for specified index.
+	/// - Parameter index: `Int` object, index.
+	/// - Returns: `VGSSavedCardModel?` object, saved card model.
 	internal func savedCardModel(at index: Int) -> VGSSavedCardModel? {
 		return paymentOptions[safe: index]?.savedCardModel
 	}
 
+	/// Handled tap on edit saved cards button - removes selection state.
 	internal func handleEditModeTap() {
 		paymentOptions.unselectAllSavedCards()
 		delegate?.savedCardDidUpdateForEditing()
 	}
 
+	/// Handles remove saved card action.
+	/// - Parameter cardIdToRemove: `String` object, card fin instrument id to remove.
 	internal func hadleRemoveSavedCard(with cardIdToRemove: String) {
 		paymentOptions.removeSavedCard(with: cardIdToRemove)
 		if lastSelectedSavedCardId == cardIdToRemove {

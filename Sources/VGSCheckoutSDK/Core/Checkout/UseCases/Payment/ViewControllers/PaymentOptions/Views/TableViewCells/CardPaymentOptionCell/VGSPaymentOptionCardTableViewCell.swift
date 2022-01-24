@@ -7,7 +7,11 @@ import Foundation
 import UIKit
 #endif
 
+/// A set of methods to notify about changes in `VGSPaymentOptionCardTableViewCell` cell.
 internal protocol VGSPaymentOptionCardTableViewCellDelegate: AnyObject {
+
+	/// Tells the delegate that user tappped removed card.
+	/// - Parameter savedCardCell: `VGSPaymentOptionCardTableViewCell` object, saved card cell.
 	func removeCardDidTap(in savedCardCell: VGSPaymentOptionCardTableViewCell)
 }
 
@@ -171,7 +175,10 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 
 // MARK: - VGSSavedCardOptionActionViewDelegate
 
+/// no:doc
 extension VGSPaymentOptionCardTableViewCell: VGSSavedCardOptionActionViewDelegate {
+
+	/// no:doc
 	func removeCardDidTapInView(in view: VGSSavedCardCellActionView) {
 		delegate?.removeCardDidTap(in: self)
 	}
