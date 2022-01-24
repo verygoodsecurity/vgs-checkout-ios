@@ -138,7 +138,7 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 			saveCardActionView?.actionViewState = .selected(viewModel.isSelected)
 		}
 
-		if viewModel.isSelected {
+		if viewModel.isSelected && !isEditing {
 			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
 			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsSelectedTitleColor
 			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor

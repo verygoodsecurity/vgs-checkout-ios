@@ -200,6 +200,7 @@ extension VGSPaymentOptionsViewController: UITableViewDataSource {
 
 	/// no:doc
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
 		let option = viewModel.paymentOptions[indexPath.row]
 		switch option {
 		case .savedCard(let card):
@@ -277,6 +278,9 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 		// Notify Checkout with remove saved card action.
 		guard let service = paymentService else {return}
 		service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(id), in: service)
+		if !viewModel.paymentOptions.hasSavedCards {
+			navigationItem.rightBarButtonItem = nil
+		}
 	}
 
 	// no:doc

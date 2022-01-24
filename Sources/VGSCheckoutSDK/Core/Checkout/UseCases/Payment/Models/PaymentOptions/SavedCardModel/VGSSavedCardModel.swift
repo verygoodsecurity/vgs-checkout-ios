@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds saved card data.
-internal struct VGSSavedCardModel {
+internal class VGSSavedCardModel {
 
 	// MARK: - Vars
 

@@ -10,9 +10,6 @@ internal class VGSPaymentOptionsViewModel {
 	/// An object that acts as a view model delegate.
 	internal weak var delegate: VGSPaymentOptionsViewModelDelegate?
 
-	/// Last selected card saved card id.
-	internal var lastSelectedSavedCardId: String?
-
 	/// Initializer.
 	/// - Parameters:
 	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
@@ -21,17 +18,12 @@ internal class VGSPaymentOptionsViewModel {
 	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
 		self.configuration = configuration
 		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
-		let savedCards = configuration.savedCards
-		let savedCardsOptions = savedCards.map({return VGSPaymentOption.savedCard($0)})
 
-//		self.paymentOptions = savedCardsOptions
-//		self.paymentOptions.append(.newCard)
+		//		self.paymentOptions = savedCardsOptions
+		//		self.paymentOptions.append(.newCard)
 
 		/// Preselect first card by default.
 		paymentOptions.preselectFirstSavedCard()
-		if let id = paymentOptions.first?.savedCardModel?.id {
-			self.lastSelectedSavedCardId = id
-		}
 	}
 
 	// MARK: - Vars
@@ -76,34 +68,29 @@ internal class VGSPaymentOptionsViewModel {
 		}
 
 		switch paymentOption {
-		case.savedCard(var savedCard):
-			guard let lastSelectedId = lastSelectedSavedCardId else {return}
-
-			/// Ignore same card selection.
-			if savedCard.id == lastSelectedId {
+		case.savedCard(let savedCard):
+			// Ignore deselect current card.
+			if savedCard.isSelected {
+				print("ignore current selection")
 				return
 			} else {
-				// Select new card.
 				savedCard.isSelected = true
-				paymentOptions[index] = .savedCard(savedCard)
 
-				// Remove selection from the last selected card.
-				for index in 0..<paymentOptions.count {
-					let option = paymentOptions[index]
+				for savedCardIndex in 0..<paymentOptions.count {
+					let option = paymentOptions[savedCardIndex]
 					switch option {
-					case .savedCard(var card):
-						if card.id == lastSelectedId {
-							card.isSelected = false
-							paymentOptions[index] = .savedCard(card)
+					case .savedCard(var previousCard):
+						print("savedCardIndex: \(savedCardIndex), index: \(index)")
+						if savedCardIndex != index {
+							print("unmard card!")
+							previousCard.isSelected = false
 						}
 					case .newCard:
 						continue
 					}
 				}
 			}
-
-			// Save new selected id.
-			lastSelectedSavedCardId = savedCard.id
+			print("current new savedCard.id: \(savedCard.id)")
 			delegate?.savedCardSelectionDidUpdate()
 		case .newCard:
 			delegate?.payWithNewCardDidTap()
@@ -119,7 +106,6 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Handled tap on edit saved cards button - removes selection state.
 	internal func handleEditModeTap() {
-		paymentOptions.unselectAllSavedCards()
 		delegate?.savedCardDidUpdateBeforeEditing()
 	}
 
@@ -129,15 +115,8 @@ internal class VGSPaymentOptionsViewModel {
 			return
 		}
 
-		if lastSelectedSavedCardId == nil {
-			// Preselect first.
+		if !paymentOptions.hasSelectedCard {
 			paymentOptions.preselectFirstSavedCard()
-			if let id = paymentOptions.first?.savedCardModel?.id {
-				self.lastSelectedSavedCardId = id
-			}
-		} else {
-			// Preselect last.
-			paymentOptions.selectSavedCardAfterEditing(with: lastSelectedSavedCardId)
 		}
 		delegate?.savedCardDidUpdateAfterEditing()
 	}
@@ -146,15 +125,16 @@ internal class VGSPaymentOptionsViewModel {
 	/// - Parameter cardIdToRemove: `String` object, card fin instrument id to remove.
 	internal func hadleRemoveSavedCard(with cardIdToRemove: String) {
 		paymentOptions.removeSavedCard(with: cardIdToRemove)
-		if lastSelectedSavedCardId == cardIdToRemove {
-			lastSelectedSavedCardId = nil
+		if !paymentOptions.hasSelectedCard {
+			paymentOptions.preselectFirstSavedCard()
 		}
+
 		delegate?.savedCardDidRemove(with: cardIdToRemove)
 	}
 
 	/// Selected payment card info.
 	internal var selectedPaymentCardInfo: VGSCheckoutPaymentCardInfo? {
-		guard let selectedId = lastSelectedSavedCardId else {return nil}
+		guard let selectedId = paymentOptions.selectedCardId else {return nil}
 		let savedCardModels = paymentOptions.compactMap { paymentOption -> VGSSavedCardModel? in
 			switch paymentOption {
 			case .savedCard(let card):
