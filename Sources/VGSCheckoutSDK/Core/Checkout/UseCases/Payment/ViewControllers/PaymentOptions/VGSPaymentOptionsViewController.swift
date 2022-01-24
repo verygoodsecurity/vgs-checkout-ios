@@ -33,6 +33,10 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		}
 	}
 
+	fileprivate let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
+
+	fileprivate let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
+
 	/// View model.
 	fileprivate let viewModel: VGSPaymentOptionsViewModel
 
@@ -47,7 +51,6 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Close bar button item.
 	fileprivate lazy var closeBarButtomItem: UIBarButtonItem = {
-		let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
 		let item = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
 
 		return item
@@ -55,8 +58,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Edit cards bar button item.
 	fileprivate lazy var editCardsBarButtomItem: UIBarButtonItem = {
-		let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
-		let item = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editCardsButtonDidTap))
+		let item = UIBarButtonItem(title: editTitle, style: .done, target: self, action: #selector(editCardsButtonDidTap))
 
 		return item
 	}()
@@ -66,7 +68,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		didSet {
 			switch screenState {
 			case .initial:
-				editCardsBarButtomItem.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
+				editCardsBarButtomItem.title = editTitle
 				// Restore selection from the previous card.
 				viewModel.paymentOptions.selectSavedCardAfterEditing(with: viewModel.lastSelectedSavedCardId)
 				mainView.tableView.reloadData()
@@ -77,15 +79,15 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				editCardsBarButtomItem.isEnabled = false
 				mainView.submitButton.status = .processing
 				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
-//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
-//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
-//					guard let strongSelf = self else {return}
-//					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
-//					guard let service = strongSelf.paymentService else {return}
-//					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
-//				})
+				//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
+				//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
+				//					guard let strongSelf = self else {return}
+				//					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+				//					guard let service = strongSelf.paymentService else {return}
+				//					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+				//				})
 			case .editingSavedCards:
-				editCardsBarButtomItem.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
+				editCardsBarButtomItem.title = closeTitle
 				viewModel.handleEditModeTap()
 			}
 		}
@@ -244,30 +246,15 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionCardTableViewCellDele
 
 	/// no:doc
 	func removeCardDidTap(in savedCardCell: VGSPaymentOptionCardTableViewCell) {
-		guard let savedCardIndex = mainView.tableView.indexPath(for: savedCardCell)?.row, let savedCardModel = viewModel.paymentOptions[savedCardIndex].savedCardModel else {
-			return
-		}
-
-		let cardIdToRemove = savedCardModel.id
+		guard let savedCardIndex = mainView.tableView.indexPath(for: savedCardCell)?.row, let savedCardModel = viewModel.savedCardModel(at: savedCardIndex) else {return}
 
 		let constants = VGSPaymentOptionsViewModel.RemoveCardPopupConstants.self
-		VGSDialogHelper.presentDescturctiveActionAlert(with: constants.title.localized, message: constants.messageText.localized + " •••• \(savedCardModel.last4)?", in: self, cancelActionTitle: constants.cancelActionTitle.localized, actionTitle: constants.removeActionTitle.localized) {[weak self] in
+		VGSDialogHelper.presentDescturctiveActionAlert(with: constants.title.localized, message: constants.messageText.localized + " \(savedCardModel.maskedLast4)?", in: self, cancelActionTitle: constants.cancelActionTitle.localized, actionTitle: constants.removeActionTitle.localized) {[weak self] in
 			guard let strongSelf = self else {
 				return
 			}
-			strongSelf.viewModel.paymentOptions = strongSelf.viewModel.paymentOptions.filter({ option in
-				guard let card = option.savedCardModel else {
-					return true
-				}
 
-				return card.id != cardIdToRemove
-			})
-			if strongSelf.viewModel.lastSelectedSavedCardId == cardIdToRemove {
-				strongSelf.viewModel.lastSelectedSavedCardId = nil
-			}
-			strongSelf.mainView.tableView.reloadData()
-			guard let service = strongSelf.paymentService else {return}
-			service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(cardIdToRemove), in: service)
+			strongSelf.viewModel.hadleRemoveSavedCard(with: savedCardModel.id)
 		}
 	}
 }
@@ -283,8 +270,10 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 	}
 
 	// no:doc
-	func savedCardDidRemove() {
+	func savedCardDidRemove(with id: String) {
 		mainView.tableView.reloadData()
+		guard let service = paymentService else {return}
+		service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(id), in: service)
 	}
 
 	// no:doc

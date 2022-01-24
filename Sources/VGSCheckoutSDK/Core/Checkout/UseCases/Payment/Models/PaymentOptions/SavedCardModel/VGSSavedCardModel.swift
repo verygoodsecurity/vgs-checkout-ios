@@ -89,6 +89,11 @@ internal struct VGSSavedCardModel {
 
 		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
 	}
+
+	/// Masled last 4 digits.
+	internal var maskedLast4: String {
+		return "•••• \(last4)"
+	}
 }
 
 // no:doc

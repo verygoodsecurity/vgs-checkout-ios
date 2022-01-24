@@ -7,7 +7,7 @@ import Foundation
 internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
 	func savedCardSelectionDidUpdate()
 	func savedCardDidUpdateForEditing()
-	func savedCardDidRemove()
+	func savedCardDidRemove(with id: String)
 	func payWithNewCardDidTap()
 }
 
@@ -115,9 +115,21 @@ internal class VGSPaymentOptionsViewModel {
 		}
 	}
 
+	internal func savedCardModel(at index: Int) -> VGSSavedCardModel? {
+		return paymentOptions[safe: index]?.savedCardModel
+	}
+
 	internal func handleEditModeTap() {
 		paymentOptions.unselectAllSavedCards()
 		delegate?.savedCardDidUpdateForEditing()
+	}
+
+	internal func hadleRemoveSavedCard(with cardIdToRemove: String) {
+		paymentOptions.removeSavedCard(with: cardIdToRemove)
+		if lastSelectedSavedCardId == cardIdToRemove {
+			lastSelectedSavedCardId = nil
+		}
+		delegate?.savedCardDidRemove(with: cardIdToRemove)
 	}
 
 	/// Selected payment card info.

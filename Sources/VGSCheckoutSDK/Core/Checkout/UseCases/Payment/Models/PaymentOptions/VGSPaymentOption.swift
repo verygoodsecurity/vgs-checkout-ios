@@ -84,4 +84,16 @@ internal extension Array where Element == VGSPaymentOption {
 				break
 		}
 	}
+
+	/// Removes selected card by id.
+	/// - Parameter id: `String` object, id to remove.
+	mutating func removeSavedCard(with id: String) {
+		self = filter({ option in
+			guard let card = option.savedCardModel else {
+				return true
+			}
+
+			return card.id != id
+		})
+	}
 }

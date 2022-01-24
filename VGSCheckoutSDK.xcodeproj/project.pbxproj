@@ -1193,6 +1193,14 @@
 			path = SavedCardAccessoryView;
 			sourceTree = "<group>";
 		};
+		444ABF07279E8E8800320868 /* PayWithNewCard */ = {
+			isa = PBXGroup;
+			children = (
+				4468C9C8278F333A00296DA7 /* VGSPayWithCardViewController.swift */,
+			);
+			path = PayWithNewCard;
+			sourceTree = "<group>";
+		};
 		4450EEDB26E737B0007866C3 /* UIFont+Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1438,8 +1446,8 @@
 		4468C9BD278F333A00296DA7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				444ABF07279E8E8800320868 /* PayWithNewCard */,
 				4468C9BE278F333A00296DA7 /* PaymentOptions */,
-				4468C9C8278F333A00296DA7 /* VGSPayWithCardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1447,9 +1455,9 @@
 		4468C9BE278F333A00296DA7 /* PaymentOptions */ = {
 			isa = PBXGroup;
 			children = (
+				4468C9C7278F333A00296DA7 /* VGSPaymentOptionsViewController.swift */,
 				4468C9BF278F333A00296DA7 /* ViewModel */,
 				4468C9C1278F333A00296DA7 /* Views */,
-				4468C9C7278F333A00296DA7 /* VGSPaymentOptionsViewController.swift */,
 			);
 			path = PaymentOptions;
 			sourceTree = "<group>";
