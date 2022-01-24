@@ -22,8 +22,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		/// Editing saved cards.
 		case editingSavedCards
 
-//		case removeSaveCardsRequestState
-
+		/// A boolean flag, `true` if current state is editing saved cards.
 		var isEditingSavedCard: Bool {
 			switch self {
 			case .editingSavedCards:
@@ -59,22 +58,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 			case .initial:
 				editCardsBarButtomItem?.title = "Edit"
 				// Restore selection from the previous card.
-				for index in 0..<viewModel.paymentOptions.count {
-					let option = viewModel.paymentOptions[index]
-					switch option {
-					case .savedCard(var card):
-						// If no last selected card set first as initial.
-						if viewModel.lastSelectedSavedCardId == nil && index == 0 {
-							card.isSelected = true
-						}
-						if card.id == viewModel.lastSelectedSavedCardId {
-							card.isSelected = true
-						}
-						viewModel.paymentOptions[index] = .savedCard(card)
-					case .newCard:
-						continue
-					}
-				}
+				viewModel.paymentOptions.selectSavedCardAfterEditing(with: viewModel.lastSelectedSavedCardId)
 				mainView.tableView.reloadData()
 			case .processingTransfer:
 				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
@@ -92,21 +76,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 			case .editingSavedCards:
 				editCardsBarButtomItem?.title = "Cancel"
 				// Remove selection from all cards.
-				for index in 0..<viewModel.paymentOptions.count {
-					let option = viewModel.paymentOptions[index]
-					switch option {
-					case .savedCard(var card):
-							card.isSelected = false
-							viewModel.paymentOptions[index] = .savedCard(card)
-					case .newCard:
-						continue
-					}
-				}
+				viewModel.paymentOptions.unselectAllSavedCards()
 				mainView.tableView.reloadData()
-
-//				viewModel.previsouslySelectedID = nil
-
-				// Reload cards with remove options.
 			}
 		}
 	}
@@ -135,6 +106,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.viewModel.delegate = self
 		view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 		title = viewModel.rootNavigationTitle
 
@@ -175,7 +147,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Right bar button item setup.
 	private func setupEditCardsBarButton() {
 		let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
-		editCardsBarButtomItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editCardsButtonDidTap))
+		editCardsBarButtomItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editCardsButtonDidTap))
 		navigationItem.rightBarButtonItem = editCardsBarButtomItem
 	}
 
@@ -255,41 +227,7 @@ extension VGSPaymentOptionsViewController: UITableViewDelegate {
 	/// no:doc
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let index = indexPath.row
-		let paymentOption = viewModel.paymentOptions[index]
-
-		switch paymentOption {
-		case.savedCard(var savedCard):
-			guard let lastSelectedId = viewModel.lastSelectedSavedCardId else {return}
-
-			/// Ignore same card selection.
-			if savedCard.id == lastSelectedId {
-				return
-			} else {
-				// Select new card.
-				savedCard.isSelected = true
-				viewModel.paymentOptions[index] = .savedCard(savedCard)
-
-				// Remove selection from the previous card.
-				for index in 0..<viewModel.paymentOptions.count {
-					let option = viewModel.paymentOptions[index]
-					switch option {
-					case .savedCard(var card):
-						if card.id == lastSelectedId {
-							card.isSelected = false
-							viewModel.paymentOptions[index] = .savedCard(card)
-						}
-					case .newCard:
-						continue
-					}
-				}
-			}
-
-			// Save new selected id.
-			viewModel.lastSelectedSavedCardId = savedCard.id
-			tableView.reloadData()
-		case .newCard:
-			navigateToNewCardScreen()
-		}
+		viewModel.handlePaymentOptionTap(at: index)
 	}
 }
 
@@ -336,5 +274,25 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionCardTableViewCellDele
 			guard let service = strongSelf.paymentService else {return}
 			service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(cardIdToRemove), in: service)
 		}
+	}
+}
+
+// MARK: - VGSPaymentOptionsViewModelDelegate
+
+// no:doc
+extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
+
+	// no:doc
+	func savedCardSelectionDidUpdate() {
+		mainView.tableView.reloadData()
+	}
+
+	// no:doc
+	func savedCardDidRemove() {
+		mainView.tableView.reloadData()
+	}
+
+	func payWithNewCardDidTap() {
+		navigateToNewCardScreen()
 	}
 }

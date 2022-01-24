@@ -4,8 +4,16 @@
 
 import Foundation
 
+internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
+	func savedCardSelectionDidUpdate()
+	func savedCardDidRemove()
+	func payWithNewCardDidTap()
+}
+
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
+
+	internal weak var delegate: VGSPaymentOptionsViewModelDelegate?
 
 	/// Last selected card saved card id.
 	internal var lastSelectedSavedCardId: String?
@@ -40,21 +48,26 @@ internal class VGSPaymentOptionsViewModel {
 	// MARK: - Vars
 
 	/// An array of payment options.
-	internal var paymentOptions: [VGSPaymentOption] = [
-		.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith Smith Smith Smith Smith Smith M")),
-		.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/24", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/25", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/26", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/27", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/28", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/29", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/30", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/31", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/32", cardHolder: "John Smith")),
-		.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/33", cardHolder: "John Smith")),
-		.newCard
-	]
+	internal var paymentOptions: [VGSPaymentOption] = provideMockedData()
+
+	// no:doc
+	static private func provideMockedData() -> [VGSPaymentOption] {
+		return [
+			.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith Smith Smith Smith Smith Smith M")),
+			.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/24", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/25", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/26", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/27", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/28", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/29", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/30", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/31", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/32", cardHolder: "John Smith")),
+			.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/33", cardHolder: "John Smith")),
+			.newCard
+		]
+	}
 
 	/// Remove card popup texts.
 	enum RemoveCardPopupConstants: String {
@@ -103,6 +116,47 @@ internal class VGSPaymentOptionsViewModel {
 		}
 
 		return text
+	}
+
+	internal func handlePaymentOptionTap(at index: Int) {
+		guard let paymentOption = paymentOptions[safe: index] else {
+			assertionFailure("payment option not found at index: \(index)")
+			return
+		}
+
+		switch paymentOption {
+		case.savedCard(var savedCard):
+			guard let lastSelectedId = lastSelectedSavedCardId else {return}
+
+			/// Ignore same card selection.
+			if savedCard.id == lastSelectedId {
+				return
+			} else {
+				// Select new card.
+				savedCard.isSelected = true
+				paymentOptions[index] = .savedCard(savedCard)
+
+				// Remove selection from the last selected card.
+				for index in 0..<paymentOptions.count {
+					let option = paymentOptions[index]
+					switch option {
+					case .savedCard(var card):
+						if card.id == lastSelectedId {
+							card.isSelected = false
+							paymentOptions[index] = .savedCard(card)
+						}
+					case .newCard:
+						continue
+					}
+				}
+			}
+
+			// Save new selected id.
+			lastSelectedSavedCardId = savedCard.id
+			delegate?.savedCardSelectionDidUpdate()
+		case .newCard:
+			delegate?.payWithNewCardDidTap()
+		}
 	}
 
 	/// Selected payment card info.
