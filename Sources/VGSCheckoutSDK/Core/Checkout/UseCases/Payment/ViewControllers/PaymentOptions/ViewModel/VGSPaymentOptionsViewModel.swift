@@ -76,10 +76,11 @@ internal class VGSPaymentOptionsViewModel {
 			} else {
 				savedCard.isSelected = true
 
+				// Remove selection from the previous card.
 				for savedCardIndex in 0..<paymentOptions.count {
 					let option = paymentOptions[savedCardIndex]
 					switch option {
-					case .savedCard(var previousCard):
+					case .savedCard(let previousCard):
 						print("savedCardIndex: \(savedCardIndex), index: \(index)")
 						if savedCardIndex != index {
 							print("unmard card!")
@@ -112,9 +113,11 @@ internal class VGSPaymentOptionsViewModel {
 	internal func handleCancelEditSavedCardsTap() {
 		guard let savedCard = paymentOptions.first?.savedCardModel else {
 			// No saved cards.
+			delegate?.savedCardDidUpdateAfterEditing()
 			return
 		}
 
+		// If no preselected card - preselect the first one.
 		if !paymentOptions.hasSelectedCard {
 			paymentOptions.preselectFirstSavedCard()
 		}
