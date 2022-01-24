@@ -46,24 +46,35 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	fileprivate weak var paymentService: VGSCheckoutPayoptTransfersService?
 
 	/// Close bar button item.
-	fileprivate var closeBarButtomItem: UIBarButtonItem?
+	fileprivate lazy var closeBarButtomItem: UIBarButtonItem = {
+		let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
+		let item = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
+
+		return item
+	}()
 
 	/// Edit cards bar button item.
-	fileprivate var editCardsBarButtomItem: UIBarButtonItem?
+	fileprivate lazy var editCardsBarButtomItem: UIBarButtonItem = {
+		let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
+		let item = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editCardsButtonDidTap))
+
+		return item
+	}()
 
 	/// Screen state.
 	fileprivate var screenState: ScreenState = .initial {
 		didSet {
 			switch screenState {
 			case .initial:
-				editCardsBarButtomItem?.title = "Edit"
+				editCardsBarButtomItem.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
 				// Restore selection from the previous card.
 				viewModel.paymentOptions.selectSavedCardAfterEditing(with: viewModel.lastSelectedSavedCardId)
 				mainView.tableView.reloadData()
 			case .processingTransfer:
 				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
 				mainView.isUserInteractionEnabled = false
-				closeBarButtomItem?.isEnabled = false
+				closeBarButtomItem.isEnabled = false
+				editCardsBarButtomItem.isEnabled = false
 				mainView.submitButton.status = .processing
 				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
 //				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
@@ -74,10 +85,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 //					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
 //				})
 			case .editingSavedCards:
-				editCardsBarButtomItem?.title = "Cancel"
-				// Remove selection from all cards.
-				viewModel.paymentOptions.unselectAllSavedCards()
-				mainView.tableView.reloadData()
+				editCardsBarButtomItem.title = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
+				viewModel.handleEditModeTap()
 			}
 		}
 	}
@@ -106,14 +115,14 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.viewModel.delegate = self
+		viewModel.delegate = self
 		view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 		title = viewModel.rootNavigationTitle
+		navigationItem.leftBarButtonItem = closeBarButtomItem
+		navigationItem.rightBarButtonItem = editCardsBarButtomItem
 
 		setupMainView()
 		setupSubmitButton()
-		setupCloseButton()
-		setupEditCardsBarButton()
 		setupTableView()
 
 		mainView.tableView.reloadData()
@@ -135,20 +144,6 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		mainView.tableView.register(VGSPaymentOptionNewCardTableViewCell.self, forCellReuseIdentifier: VGSPaymentOptionNewCardTableViewCell.cellIdentifier)
 		mainView.tableView.dataSource = self
 		mainView.tableView.delegate = self
-	}
-
-	/// Left close bar button item setup.
-	private func setupCloseButton() {
-		let closeTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
-		closeBarButtomItem = UIBarButtonItem(title: closeTitle, style: .plain, target: self, action: #selector(closeButtonDidTap))
-		navigationItem.leftBarButtonItem = closeBarButtomItem
-	}
-
-	/// Right bar button item setup.
-	private func setupEditCardsBarButton() {
-		let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_cancel_button_title")
-		editCardsBarButtomItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editCardsButtonDidTap))
-		navigationItem.rightBarButtonItem = editCardsBarButtomItem
 	}
 
 	/// Submit button setup.
@@ -292,7 +287,13 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 		mainView.tableView.reloadData()
 	}
 
+	// no:doc
 	func payWithNewCardDidTap() {
 		navigateToNewCardScreen()
+	}
+
+	// no:doc
+	func savedCardDidUpdateForEditing() {
+		mainView.tableView.reloadData()
 	}
 }

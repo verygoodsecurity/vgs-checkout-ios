@@ -71,4 +71,17 @@ internal extension Array where Element == VGSPaymentOption {
 			}
 		}
 	}
+
+	/// Preselects first payment card
+	mutating func preselectFirstSavedCard() {
+		guard let firstPaymentOption = self.first else {return}
+			switch firstPaymentOption {
+			case .savedCard(let card):
+				var firstSavedCard = card
+				firstSavedCard.isSelected = true
+				self[0] = .savedCard(firstSavedCard)
+			default:
+				break
+		}
+	}
 }

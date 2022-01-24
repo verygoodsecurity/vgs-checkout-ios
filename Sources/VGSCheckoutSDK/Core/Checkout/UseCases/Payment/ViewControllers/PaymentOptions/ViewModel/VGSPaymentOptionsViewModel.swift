@@ -6,6 +6,7 @@ import Foundation
 
 internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
 	func savedCardSelectionDidUpdate()
+	func savedCardDidUpdateForEditing()
 	func savedCardDidRemove()
 	func payWithNewCardDidTap()
 }
@@ -13,6 +14,7 @@ internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
 
+	/// An object that acts as a view model delegate.
 	internal weak var delegate: VGSPaymentOptionsViewModelDelegate?
 
 	/// Last selected card saved card id.
@@ -32,16 +34,10 @@ internal class VGSPaymentOptionsViewModel {
 //		self.paymentOptions = savedCardsOptions
 //		self.paymentOptions.append(.newCard)
 
-		/// Preselect first card.
-		let firstPaymentOption = paymentOptions[0]
-			switch firstPaymentOption {
-			case .savedCard(let card):
-				var firstSavedCard = card
-				firstSavedCard.isSelected = true
-				paymentOptions[0] = .savedCard(firstSavedCard)
-				self.lastSelectedSavedCardId = card.id
-			default:
-				break
+		/// Preselect first card by default.
+		paymentOptions.preselectFirstSavedCard()
+		if let id = paymentOptions.first?.savedCardModel?.id {
+			self.lastSelectedSavedCardId = id
 		}
 	}
 
@@ -49,46 +45,6 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// An array of payment options.
 	internal var paymentOptions: [VGSPaymentOption] = provideMockedData()
-
-	// no:doc
-	static private func provideMockedData() -> [VGSPaymentOption] {
-		return [
-			.savedCard(VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1234", expDate: "12/22", cardHolder: "John Smith Smith Smith Smith Smith Smith M")),
-			.savedCard(VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "5678", expDate: "01/23", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "3", cardBrand: "visa", last4: "1234", expDate: "12/24", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "4", cardBrand: "maestro", last4: "5678", expDate: "01/25", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "5", cardBrand: "visa", last4: "1234", expDate: "12/26", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "6", cardBrand: "maestro", last4: "5678", expDate: "01/27", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "7", cardBrand: "visa", last4: "1234", expDate: "12/28", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "8", cardBrand: "maestro", last4: "5678", expDate: "01/29", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "9", cardBrand: "visa", last4: "1234", expDate: "12/30", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "10", cardBrand: "maestro", last4: "5678", expDate: "01/31", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "11", cardBrand: "visa", last4: "1234", expDate: "12/32", cardHolder: "John Smith")),
-			.savedCard(VGSSavedCardModel(id: "12", cardBrand: "maestro", last4: "5678", expDate: "01/33", cardHolder: "John Smith")),
-			.newCard
-		]
-	}
-
-	/// Remove card popup texts.
-	enum RemoveCardPopupConstants: String {
-
-		/// Popup title.
-		case title = "vgs_checkout_remove_card_popup_title"
-
-		/// Popup message.
-		case messageText = "vgs_checkout_remove_card_popup_description"
-
-		/// Popup cancel action title.
-		case cancelActionTitle = "vgs_checkout_remove_card_popup_cancel_button_title"
-
-		/// Popup remove card action title.
-		case removeActionTitle = "vgs_checkout_remove_card_popup_remove_card_button_title"
-
-		/// Localized text.
-		internal var localized: String {
-			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.rawValue)
-		}
-	}
 
 	/// Configuration.
 	private(set) var configuration: VGSCheckoutPaymentConfiguration
@@ -159,11 +115,16 @@ internal class VGSPaymentOptionsViewModel {
 		}
 	}
 
+	internal func handleEditModeTap() {
+		paymentOptions.unselectAllSavedCards()
+		delegate?.savedCardDidUpdateForEditing()
+	}
+
 	/// Selected payment card info.
 	internal var selectedPaymentCardInfo: VGSCheckoutPaymentCardInfo? {
 		guard let selectedId = lastSelectedSavedCardId else {return nil}
-		let savedCardModels = paymentOptions.compactMap { option -> VGSSavedCardModel? in
-			switch option {
+		let savedCardModels = paymentOptions.compactMap { paymentOption -> VGSSavedCardModel? in
+			switch paymentOption {
 			case .savedCard(let card):
 				return card
 			case .newCard:
