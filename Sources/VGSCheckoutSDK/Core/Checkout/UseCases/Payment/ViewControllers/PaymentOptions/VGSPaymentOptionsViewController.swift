@@ -82,7 +82,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				mainView.submitButton.status = .processing
 				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-					self.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .saveCardDidSuccess(nil, nil), in: self.paymentService!)
+					self.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .requestSubmitted(.success(1, nil, nil, nil)), in: self.paymentService!)
 				}
 
 				//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
