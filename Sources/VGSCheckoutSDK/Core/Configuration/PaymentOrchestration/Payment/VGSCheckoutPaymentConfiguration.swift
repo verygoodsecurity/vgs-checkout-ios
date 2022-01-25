@@ -52,11 +52,11 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 		/// No additional options by default now.
 		let options: VGSCheckoutPaymentOptions? = nil
 
-		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
-			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
-			failure(error as Error)
-			return
-		}
+//		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
+//			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
+//			failure(error as Error)
+//			return
+//		}
 
 		let vgsCollect = VGSCollect(id: tenantId, environment: environment)
 		let orderAPIWorker = VGSPayoptTransfersOrderAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
