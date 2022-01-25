@@ -70,6 +70,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		didSet {
 			switch screenState {
 			case .initial:
+				mainView.submitButton.status = .enabled
 				editCardsBarButtomItem.title = editTitle
 				// Restore selection from the previous card if needed.
 				viewModel.handleCancelEditSavedCardsTap()
@@ -80,6 +81,10 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				editCardsBarButtomItem.isEnabled = false
 				mainView.submitButton.status = .processing
 				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+					self.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .saveCardDidSuccess(nil, nil), in: self.paymentService!)
+				}
+
 				//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
 				//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
 				//					guard let strongSelf = self else {return}
@@ -88,6 +93,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				//					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
 				//				})
 			case .editingSavedCards:
+				mainView.submitButton.status = .disabled
 				editCardsBarButtomItem.title = closeTitle
 				viewModel.handleEditModeTap()
 			}
