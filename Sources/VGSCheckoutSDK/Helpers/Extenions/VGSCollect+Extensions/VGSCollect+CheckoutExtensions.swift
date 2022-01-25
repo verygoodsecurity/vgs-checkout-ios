@@ -19,8 +19,8 @@ internal extension VGSCollect {
 				self.init(id: vaultID, environment: environment)
 			case .customHostname(let customHostname):
 				self.init(id: vaultID, environment: environment, hostname: customHostname)
-			case .local(let localhost, let port):
-				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
+//			case .local(let localhost, let port):
+//				self.init(id: vaultID, environment: environment, hostname: localhost, satellitePort: port)
 			}
 		case .payoptAddCard, .payoptTransfers:
 			self.init(id: vaultID, environment: environment)
