@@ -71,7 +71,7 @@ internal class VGSPaymentOptionsViewModel {
 		case.savedCard(let savedCard):
 			// Ignore deselect current card.
 			if savedCard.isSelected {
-				print("ignore current selection")
+				//print("ignore current selection")
 				return
 			} else {
 				savedCard.isSelected = true
@@ -81,9 +81,9 @@ internal class VGSPaymentOptionsViewModel {
 					let option = paymentOptions[savedCardIndex]
 					switch option {
 					case .savedCard(let previousCard):
-						print("savedCardIndex: \(savedCardIndex), index: \(index)")
+						//print("savedCardIndex: \(savedCardIndex), index: \(index)")
 						if savedCardIndex != index {
-							print("unmard card!")
+							//print("unmard card!")
 							previousCard.isSelected = false
 						}
 					case .newCard:
@@ -91,7 +91,7 @@ internal class VGSPaymentOptionsViewModel {
 					}
 				}
 			}
-			print("current new savedCard.id: \(savedCard.id)")
+			//print("current new savedCard.id: \(savedCard.id)")
 			delegate?.savedCardSelectionDidUpdate()
 		case .newCard:
 			delegate?.payWithNewCardDidTap()
