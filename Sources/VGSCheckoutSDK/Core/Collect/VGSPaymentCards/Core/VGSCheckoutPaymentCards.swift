@@ -50,7 +50,72 @@ public class VGSCheckoutPaymentCards {
       case unknown
       /// Custom Payment Card Brand. Should have unique `brandName`.
       case custom(brandName: String)
-  }
+
+		  /// Normalized brandname.
+		internal var normalizedBrandName: String {
+						switch self {
+						case .elo:
+							return "elo"
+						case .visaElectron:
+							return "visaelectron"
+						case .maestro:
+							return "maestro"
+						case .forbrugsforeningen:
+							return "forbrugsforeningen"
+						case .dankort:
+							return "dankort"
+						case .visa:
+							return "visa"
+						case .mastercard:
+							return "mastercard"
+						case .amex:
+							return "americanexpress"
+						case .hipercard:
+							return "hipercard"
+						case .dinersClub:
+							return "dinersclub"
+						case .discover:
+							return "discover"
+						case .unionpay:
+							return "unionpay"
+						case .jcb:
+							return "jcb"
+						case .unknown:
+							return "uknown"
+						case .custom(let brandName):
+							return brandName
+						}
+			}
+
+		  /// An array of non-custom brands.
+			internal static var allNonCustomBrands: [CardBrand] {
+				return [
+					.elo,
+					.visaElectron,
+					.maestro,
+					.forbrugsforeningen,
+					.dankort,
+					.visa,
+					.mastercard,
+					.amex,
+					.hipercard,
+					.dinersClub,
+					.discover,
+					.unionpay,
+					.jcb
+				]
+			}
+
+		/// Initializer.
+		/// - Parameter jsonCardBrandName: `String` object, card brand name from JSON.
+			internal init(_ jsonCardBrandName: String) {
+				guard let brand = VGSCheckoutPaymentCards.CardBrand.allNonCustomBrands.first(where: {return jsonCardBrandName.normalizedCardBrandName == $0.normalizedBrandName}) else {
+					self = .unknown
+					return
+				}
+				self = brand
+			}
+		}
   
     // MARK: - Payment Card Models
   

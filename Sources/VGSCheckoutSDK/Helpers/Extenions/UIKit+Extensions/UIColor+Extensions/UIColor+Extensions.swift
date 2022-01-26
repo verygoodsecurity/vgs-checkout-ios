@@ -71,10 +71,28 @@ public extension UIColor {
 		}
 	}
 
+	///:nodoc:
+	static var vgsPaymentOptionBackgroundColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor.secondarySystemGroupedBackground
+		} else {
+			return .white
+		}
+	}
+
 	///:nodoc: VGS systemGray2 color (with fallback to earlier versions).
 	static var vgsSystemGray2Color: UIColor {
 		if #available(iOS 13.0, *) {
 			return UIColor.systemGray2
+		} else {
+			return UIColor(hexString: "#AEAEB2")
+		}
+	}
+
+	///:nodoc: VGS systemGray color (with fallback to earlier versions).
+	static var vgsSystemGrayColor: UIColor {
+		if #available(iOS 13.0, *) {
+			return UIColor.systemGray
 		} else {
 			return UIColor(hexString: "#AEAEB2")
 		}

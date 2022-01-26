@@ -171,3 +171,36 @@
 
 /* General OK button title for error popup title. */
 "vgs_checkout_error_dialog_ok_button_ttile" = "Ok";
+
+/* Navigation bar title for `Pay with card` flow. */
+"vgs_checkout_pay_with_card_navigation_bar_title" = "New card";
+
+/* Hint for checkbox save card option */
+"vgs_checkout_pay_with_card_save_card_checkbox_hint" = "Save this card";
+
+/* Pay with card button text. */
+"vgs_checkout_pay_with_card_button_title" = "Pay";
+
+/* Pay with new card option title. */
+"vgs_checkout_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";
+
+/* Navigation bar title for Payment options flow. */
+"vgs_checkout_payment_options_navigation_bar_title" = "Checkout";
+
+/* Navigation bar button item to edit saved cards in Payment options flow. */
+"vgs_checkout_payment_options_edit_cards_button_title" = "Edit";
+
+/* Navigation bar button item to cancel editing saved cards in Payment options flow. */
+"vgs_checkout_payment_options_cancel_edit_cards_button_title" = "Cancel";
+
+/* Title for cancel button in remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_cancel_button_title" = "Cancel";
+
+/* Title for remove button in remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_remove_card_button_title" = "Remove";
+
+/* Title for remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_title" = "Remove card";
+
+/* Description message for remove card popup in Payment options list. */
+"vgs_checkout_remove_card_popup_description" = "Are you sure you want to remove selected card";

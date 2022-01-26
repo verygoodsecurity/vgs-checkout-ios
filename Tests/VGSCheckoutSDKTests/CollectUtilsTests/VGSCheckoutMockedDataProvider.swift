@@ -12,6 +12,13 @@ final class VGSCheckoutMockedDataProvider {
 
 	var vaultID: String = ""
 
+	/// Not real dummy mocked token for unit tests.
+	var dummyMockedTestJWTToken = ""
+
+	/// Not real dummy mocked invalid token for unit tests.
+	var dummyMockedTestInvalidJWTToken = ""
+
+	/// no:doc
 	private init() {
 		setupMockedData()
 	}
@@ -36,6 +43,10 @@ final class VGSCheckoutMockedDataProvider {
 			}
 
 			vaultID = dictionary["vaultID"] as? String ?? ""
+			dummyMockedTestJWTToken = dictionary["dummyMockedTestJWTToken"] as? String ?? ""
+			dummyMockedTestInvalidJWTToken = dictionary["dummyMockedTestInvalidJWTToken"] as? String ?? ""
 		  print("vaultID in mock data: \(vaultID)")
+			print("dummyMockedTestJWTToken in mock data: \(dummyMockedTestJWTToken)")
+			print("dummyMockedTestInvalidJWTToken in mock data: \(dummyMockedTestInvalidJWTToken)")
 		}
 }
