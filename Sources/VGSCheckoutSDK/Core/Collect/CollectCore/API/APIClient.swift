@@ -3,7 +3,6 @@
 //  VGSCheckoutSDK
 //
 
-
 import Foundation
 
 internal class APIClient {
@@ -32,7 +31,7 @@ internal class APIClient {
 	internal var hostURLPolicy: APIHostURLPolicy
 
 	/// Serial queue for syncing requests on resolving hostname flow.
-	private let dataSyncQueue: DispatchQueue = .init(label: "iOS.VGSCollect.ResolveHostNameRequestsQueue")
+	private let dataSyncQueue: DispatchQueue = .init(label: "iOS.VGSCheckout.ResolveHostNameRequestsQueue")
 
 	/// Semaphore for sync logic.
 	private let syncSemaphore: DispatchSemaphore = {
