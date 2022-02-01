@@ -9,13 +9,13 @@
 import Foundation
 
 /// Check Sum Algorithm Types
-public enum VGSCheckoutCheckSumAlgorithmType {
+internal enum VGSCheckoutCheckSumAlgorithmType {
   
   /// Luhn Algorithm
   case luhn
 }
 
-public extension VGSCheckoutCheckSumAlgorithmType {
+internal extension VGSCheckoutCheckSumAlgorithmType {
 
 	///no:doc
 	func validate(_ input: String) -> Bool {
