@@ -7,56 +7,50 @@ import Foundation
 
 /// VGSCheckout configuration, public interface.
 public protocol VGSCheckoutConfigurationProtocol {
-  
-  /// UI elements configuration theme.
-  var uiTheme: VGSCheckoutThemeProtocol {get}
+
+	/// UI elements configuration theme.
+	var uiTheme: VGSCheckoutThemeProtocol {get}
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	var environment: String {get}
 }
 
 /// Internal protocol for VGSCheckout configuration.
-internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol, VGSCheckoutConfigurationAnalyticsProtocol {
-
-	/// Payment flow type.
-	var paymentFlowType: VGSPaymentFlowIdentifier {get}
-}
+internal protocol VGSCheckoutBasicConfigurationProtocol: VGSCheckoutConfigurationProtocol, VGSCheckoutConfigurationAnalyticsProtocol {}
 
 /// Internal protocol for analytics details from VGSCheckout Configuration.
 internal protocol VGSCheckoutConfigurationAnalyticsProtocol {
-  
-  /// Returns an array of features used
-  func contentAnalytics() -> [String]
+
+	/// Returns an array of features used
+	func contentAnalytics() -> [String]
 }
 
-/// Defines payment flow identifiers.
-internal enum VGSPaymentFlowIdentifier {
-
-	/// Use regular vault flow.
-	case vault
-
-	/// Use for payment optimization.
-	case paymentOptimization
-}
-
-/// Defines paymnet processing flow.
-internal enum VGSPaymentInstrument {
+/// Defines checkout configuration type.
+internal enum VGSCheckoutConfigurationType {
 
 	/**
 	 Payment instrument for general flow.
 
 	 - Parameters:
-			- configuration: `VGSCheckoutCustomConfiguration` object, vault configuration.
+			- configuration: `VGSCheckoutCustomConfiguration` object, custom configuration.
 	*/
-	case vault(_ configuration: VGSCheckoutCustomConfiguration)
+	case custom(_ configuration: VGSCheckoutCustomConfiguration)
 
 	/**
-	 Payment instrument for payment orchestration flow.
+	 Payment instrument for payment optimization add card flow.
 
 	 - Parameters:
-			- configuration: `VGSCheckoutAddCardConfiguration` object, payment optimization configuration.
+			- configuration: `VGSCheckoutAddCardConfiguration` object, pay opt add card configuration.
 	*/
-	case paymentOrchestration(_ configuration: VGSCheckoutAddCardConfiguration)
+	case payoptAddCard(_ configuration: VGSCheckoutAddCardConfiguration)
+
+	/**
+	 Configuration for payment optimization transfers flow.
+
+	 - Parameters:
+			- configuration: `VGSCheckoutPaymentConfiguration` object, payment optimization payment configuration.
+	*/
+	case payoptTransfers(_ configuration: VGSCheckoutPaymentConfiguration)
 
 	/// Initializer (failable).
 	/// - Parameter configuration: `VGSCheckoutConfigurationProtocol` object, should be valid configuration.
@@ -65,30 +59,33 @@ internal enum VGSPaymentInstrument {
 			return nil
 		}
 
-		switch checkoutConfiguration.paymentFlowType {
-		case .vault:
-			if let vaultConfig = checkoutConfiguration as? VGSCheckoutCustomConfiguration {
-				self = .vault(vaultConfig)
-				return
-			} else {
-				return nil
-			}
-		case .paymentOptimization:
-			if let config = checkoutConfiguration as?  VGSCheckoutAddCardConfiguration {
-				self = .paymentOrchestration(config)
-				return
-			} else {
-				return nil
-			}
+		if let customConfig = checkoutConfiguration as? VGSCheckoutCustomConfiguration {
+			self = .custom(customConfig)
+			return
 		}
+
+		if let config
+				= checkoutConfiguration as? VGSCheckoutAddCardConfiguration {
+			self = .payoptAddCard(config)
+			return
+		}
+
+		if let config = checkoutConfiguration as? VGSCheckoutPaymentConfiguration {
+			self = .payoptTransfers(config)
+			return
+		}
+
+		return nil
 	}
 
 	/// Checkout id.
 	internal var mainCheckoutId: String {
 		switch self {
-		case .vault(let configuration):
+		case .custom(let configuration):
 			return configuration.vaultID
-		case .paymentOrchestration(let configuration):
+		case .payoptAddCard(let configuration):
+			return configuration.tenantId
+		case .payoptTransfers(let configuration):
 			return configuration.tenantId
 		}
 	}
@@ -96,9 +93,11 @@ internal enum VGSPaymentInstrument {
 	/// An array of valid countries set by user.
 	internal var validCountries: [String]? {
 		switch self {
-		case .vault(let configuration):
+		case .custom(let configuration):
 			return configuration.billingAddressCountryFieldOptions.validCountries
-		case .paymentOrchestration(let configuration):
+		case .payoptAddCard(let configuration):
+			return configuration.billingAddressCountryFieldOptions.validCountries
+		case .payoptTransfers(let configuration):
 			return configuration.billingAddressCountryFieldOptions.validCountries
 		}
 	}
@@ -106,20 +105,36 @@ internal enum VGSPaymentInstrument {
 	/// Form validation behaviour.
 	internal var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
 		switch self {
-		case .vault(let configuration):
+		case .custom(let configuration):
 			return configuration.formValidationBehaviour
-		case .paymentOrchestration(let configuration):
+		case .payoptAddCard(let configuration):
+			return configuration.formValidationBehaviour
+		case .payoptTransfers(let configuration):
 			return configuration.formValidationBehaviour
 		}
 	}
-  
-  /// Checkout Configuration.
-  internal var configuration: VGSCheckoutBasicConfigurationProtocol {
-    switch self {
-    case .vault(let configuration):
-      return configuration
-    case .paymentOrchestration(let configuration):
-      return configuration
-    }
-  }
+
+	/// Checkout Configuration.
+	internal var configuration: VGSCheckoutBasicConfigurationProtocol {
+		switch self {
+		case .custom(let configuration):
+			return configuration
+		case .payoptAddCard(let configuration):
+			return configuration
+		case .payoptTransfers(let configuration):
+			return configuration
+		}
+	}
+
+	/// `true` if address section is visible.
+	internal var isAddressVisible: Bool {
+		switch self {
+		case .custom(let configuration):
+			return configuration.billingAddressVisibility == .visible
+		case .payoptAddCard(let configuration):
+			return configuration.billingAddressVisibility == .visible
+		case .payoptTransfers(let configuration):
+			return configuration.billingAddressVisibility == .visible
+		}
+	}
 }

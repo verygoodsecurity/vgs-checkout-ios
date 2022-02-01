@@ -143,15 +143,15 @@ class ValidationRulesTest: VGSCheckoutBaseTestCase {
       XCTAssertTrue(textfield.state.validationErrors.count == 1)
       XCTAssertTrue(textfield.state.validationErrors.first == error)
       
-      textfield.textField.secureText = "0122"
+      textfield.textField.secureText = "0127"
       XCTAssertTrue(textfield.state.isValid == true)
       XCTAssertTrue(textfield.state.validationErrors.count == 0)
       
-      textfield.textField.secureText = "1222"
+      textfield.textField.secureText = "1227"
       XCTAssertTrue(textfield.state.isValid == true)
       XCTAssertTrue(textfield.state.validationErrors.count == 0)
       
-      textfield.textField.secureText = "0022"
+      textfield.textField.secureText = "0027"
       XCTAssertTrue(textfield.state.isValid == false)
       XCTAssertTrue(textfield.state.validationErrors.count == 1)
       XCTAssertTrue(textfield.state.validationErrors.first == error)
@@ -160,12 +160,12 @@ class ValidationRulesTest: VGSCheckoutBaseTestCase {
         VGSValidationRuleCardExpirationDate(dateFormat: .longYear, error: error)
       ])
       textfield.configuration = config
-      textfield.textField.secureText = "1022"
+      textfield.textField.secureText = "1027"
       XCTAssertTrue(textfield.state.isValid == false)
       XCTAssertTrue(textfield.state.validationErrors.count == 1)
       XCTAssertTrue(textfield.state.validationErrors.first == error)
       
-      textfield.textField.secureText = "102022"
+      textfield.textField.secureText = "102027"
       XCTAssertTrue(textfield.state.isValid)
       XCTAssertTrue(textfield.state.validationErrors.count == 0)
     }

@@ -159,7 +159,7 @@ internal class VGSSubmitButton: UIControl {
 	/// Update UI.
 	internal func updateUI(with uiTheme: VGSCheckoutSubmitButtonThemeProtocol) {
 
-		layer.cornerRadius = 6.0
+		layer.cornerRadius = 4.0
 		layer.masksToBounds = true
 
 		switch status {

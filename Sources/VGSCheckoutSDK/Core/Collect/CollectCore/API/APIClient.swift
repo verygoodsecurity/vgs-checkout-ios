@@ -3,7 +3,6 @@
 //  VGSCheckoutSDK
 //
 
-
 import Foundation
 
 internal class APIClient {
@@ -32,10 +31,19 @@ internal class APIClient {
 	internal var hostURLPolicy: APIHostURLPolicy
 
 	/// Serial queue for syncing requests on resolving hostname flow.
-	private let dataSyncQueue: DispatchQueue = .init(label: "iOS.VGSCollect.ResolveHostNameRequestsQueue")
+	private let dataSyncQueue: DispatchQueue = .init(label: "iOS.VGSCheckout.ResolveHostNameRequestsQueue")
 
 	/// Semaphore for sync logic.
-	private let syncSemaphore: DispatchSemaphore = .init(value: 1)
+	private let syncSemaphore: DispatchSemaphore = {
+		// DispatchSemaphore checks to see whether the semaphore’s associated value is less at deinit than at init, and if so, it fails. In short, if the value is less, libDispatch concludes that the semaphore is still being used.
+		// https://stackoverflow.com/a/70458886
+
+		// Semantically the same as DispatchSemaphore(value: 1) but does not crash on deinit/dealloc if its current value != 1.
+		// See https://lists.apple.com/archives/cocoa-dev/2014/Apr/msg00484.html.
+		let semaphore = DispatchSemaphore(value: 0)
+		semaphore.signal()
+		return semaphore
+	}()
 
 	/// Default headers.
 	internal static let defaultHttpHeaders: HTTPHeaders = {
@@ -109,7 +117,7 @@ internal class APIClient {
 
 	// MARK: - Send request
 
-	func sendRequest(path: String, method: HTTPMethod = .post, value: BodyData, completion block: ((_ response: VGSResponse) -> Void)? ) {
+	func sendRequest(path: String, method: HTTPMethod = .post, value: BodyData?, completion block: ((_ response: VGSResponse) -> Void)? ) {
 
 		let sendRequestBlock: (URL?) -> Void = {url in
 			guard let requestURL = url else {
@@ -147,7 +155,7 @@ internal class APIClient {
 		}
 	}
 
-	private  func sendRequest(to url: URL, method: HTTPMethod = .post, value: BodyData, completion block: ((_ response: VGSResponse) -> Void)? ) {
+	private  func sendRequest(to url: URL, method: HTTPMethod = .post, value: BodyData?, completion block: ((_ response: VGSResponse) -> Void)? ) {
 
 		// Add headers.
 		var headers = APIClient.defaultHttpHeaders
@@ -159,9 +167,11 @@ internal class APIClient {
 			})
 		}
 		// Setup URLRequest.
-		let jsonData = try? JSONSerialization.data(withJSONObject: value)
 		var request = URLRequest(url: url)
-		request.httpBody = jsonData
+		if let data = value {
+			let jsonData = try? JSONSerialization.data(withJSONObject: data)
+			request.httpBody = jsonData
+		}
 		request.httpMethod = method.rawValue
 		request.allHTTPHeaderFields = headers
 

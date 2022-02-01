@@ -59,8 +59,8 @@ extension VGSCheckoutPaymentCards.CardBrand {
           resultIcon = UIImage(named: "hipercard", in: bundle, compatibleWith: nil)
         case .unknown:
           resultIcon = Self.defaultUnknownBrandIcon
-        case .custom(brandName: _):
-          resultIcon = Self.defaultUnknownBrandIcon
+//        case .custom(brandName: _):
+//          resultIcon = Self.defaultUnknownBrandIcon
         }
         return resultIcon
     }

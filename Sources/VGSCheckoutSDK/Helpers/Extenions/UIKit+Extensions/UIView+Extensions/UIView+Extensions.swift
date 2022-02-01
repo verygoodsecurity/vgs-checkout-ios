@@ -8,7 +8,10 @@ import Foundation
 import UIKit
 #endif
 
+/// no:doc
 internal extension UIView {
+
+	/// Constraints view to super view.
 	func checkout_constraintViewToSuperviewEdges() {
 		guard let view = superview else {
 			assertionFailure("No superview!")
@@ -20,6 +23,38 @@ internal extension UIView {
 			trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			bottomAnchor.constraint(equalTo: view.bottomAnchor),
 			topAnchor.constraint(equalTo: view.topAnchor)
+		]
+
+		NSLayoutConstraint.activate(constraints)
+	}
+
+	/// Constraints view to super view center.
+	func checkout_constraintViewToSuperviewCenter() {
+		guard let view = superview else {
+			assertionFailure("No superview!")
+			return
+		}
+
+		let constraints = [
+			centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			centerYAnchor.constraint(equalTo: view.centerYAnchor),
+		]
+
+		NSLayoutConstraint.activate(constraints)
+	}
+
+	/// Constraints view to super view safe area layout guide.
+	func checkout_constraintViewToSafeAreaLayoutGuideEdges() {
+		guard let view = superview else {
+			assertionFailure("No superview!")
+			return
+		}
+
+		let constraints = [
+			leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+			trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+			bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+			topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
 		]
 
 		NSLayoutConstraint.activate(constraints)
@@ -37,31 +72,30 @@ internal extension UIView {
 		}
 	}
 
-    func checkout_constraintViewWithPaddingsToSuperview(_ leading: CGFloat, trailing: CGFloat, bottom: CGFloat, top: CGFloat) {
-        guard let view = superview else {
-            assertionFailure("No superview!")
-            return
-        }
-
-        let constraints = [
-            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading),
-            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom),
-            topAnchor.constraint(equalTo: view.topAnchor, constant: top)
-        ]
-
-        NSLayoutConstraint.activate(constraints)
-    }
-    
-    func checkout_defaultSectionViewConstraints() {
-        checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: 0, top: 16)
-    }
-}
-
-internal extension UIResponder {
-
-	  /// First parent view controller of responder.
-		var vgsParentViewController: UIViewController? {
-				return next as? UIViewController ?? next?.vgsParentViewController
+	/// Constrain view to superview with insets
+	/// - Parameters:
+	///   - leading: `CGFloat` object, leading inset.
+	///   - trailing: `CGFloat` object, trailing inset.
+	///   - bottom: `CGFloat` object, bottom inset.
+	///   - top: `CGFloat` object, top inset.
+	func checkout_constraintViewWithPaddingsToSuperview(_ leading: CGFloat, trailing: CGFloat, bottom: CGFloat, top: CGFloat) {
+		guard let view = superview else {
+			assertionFailure("No superview!")
+			return
 		}
+
+		let constraints = [
+			leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading),
+			trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing),
+			bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom),
+			topAnchor.constraint(equalTo: view.topAnchor, constant: top)
+		]
+
+		NSLayoutConstraint.activate(constraints)
+	}
+
+	/// Setups default section insets.
+	func checkout_defaultSectionViewConstraints() {
+		checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: 0, top: 16)
+	}
 }

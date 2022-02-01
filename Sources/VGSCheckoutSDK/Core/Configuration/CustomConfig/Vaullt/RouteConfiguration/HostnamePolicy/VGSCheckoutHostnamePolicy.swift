@@ -26,5 +26,5 @@ public enum VGSCheckoutHostnamePolicy {
 
 	 - port: `Int` object, custom port for Satellite configuration.
 	*/
-	case local(_ localhost: String, port: Int)
+	// case local(_ localhost: String, port: Int)
 }

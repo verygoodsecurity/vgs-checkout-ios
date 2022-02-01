@@ -33,7 +33,6 @@ custom_categories:
   children:
   - VGSCheckoutConfigurationProtocol
   - VGSCheckoutCustomConfiguration
-  - VGSCheckoutMultiplexingConfiguration
   - VGSCheckoutFieldVisibility
   - VGSCheckoutBillingAddressVisibility
 - name: Card Details Configuration
@@ -45,14 +44,14 @@ custom_categories:
   - VGSCheckoutCardExpDateFormat
   - VGSCheckoutExpDateSeparateSerializer
   - VGSCheckoutCVCOptions
-- name: Billing Address Details Configuration
+- name: Custom Billing Address Details Configuration
   children:
-  - VGSCheckoutBillingAddressOptions
-  - VGSCheckoutBillingAddressCountryOptions
-  - VGSCheckoutBillingAddressLine1Options
-  - VGSCheckoutBillingAddressLine2Options
-  - VGSCheckoutBillingAddressCityOptions
-  - VGSCheckoutBillingAddressPostalCodeOptions
+  - VGSCheckoutCustomBillingAddressOptions
+  - VGSCheckoutCustomBillingAddressCountryOptions
+  - VGSCheckoutCustomBillingAddressLine1Options
+  - VGSCheckoutCustomBillingAddressLine2Options
+  - VGSCheckoutCustomBillingAddressCityOptions
+  - VGSCheckoutCustomBillingAddressPostalCodeOptions
 - name: UITheme
   children:
   - VGSCheckoutDefaultTheme
@@ -65,19 +64,12 @@ custom_categories:
   - VGSCheckoutFormValidationBehaviour
 - name: APIConfiguration
   children:
-  - VGSCheckoutRequestOptions
-  - VGSCheckoutRouteConfiguration
+  - VGSCheckoutCustomConfigurationRequestOptions
+  - VGSCheckoutCustomRouteConfiguration
   - VGSCheckoutHTTPMethod
   - VGSCheckoutHostnamePolicy
   - VGSCheckoutDataMergePolicy
   - VGSCheckoutRequestResult
-- name: PaymentCards
-  children:
-  - VGSCheckoutPaymentCards
-  - VGSCheckoutPaymentCardModel
-  - VGSCheckoutUnknownPaymentCardModel
-  - VGSCheckoutCustomPaymentCardModel
-  - VGSCheckoutCheckSumAlgorithmType
 - name: Debugging
   children:
   - VGSCheckoutLogger

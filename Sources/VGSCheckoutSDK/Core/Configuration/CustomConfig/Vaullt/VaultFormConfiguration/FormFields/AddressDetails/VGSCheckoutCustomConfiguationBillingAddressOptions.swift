@@ -27,11 +27,11 @@ public struct VGSCheckoutCustomConfiguationBillingAddressOptions {
 }
 
 /// Holds payment orchestration billing address options.
-public struct VGSCheckoutBillingAddressOptions {
+internal struct VGSCheckoutBillingAddressOptions {
 
   /// Country field options.
-  public var countryOptions = VGSCheckoutBillingAddressCountryOptions()
+	internal var countryOptions = VGSCheckoutBillingAddressCountryOptions()
 
 	/// no:doc
-  public init() {}
+	internal init() {}
 }

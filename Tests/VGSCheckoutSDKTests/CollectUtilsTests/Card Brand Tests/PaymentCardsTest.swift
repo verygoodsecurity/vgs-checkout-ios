@@ -60,7 +60,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       XCTFail("Failt state card text files")
     }
   }
-  
+
+	/*
   func testCustomBrandPriority() {
     let customBrandName = "custom-brand-1"
     let customBrand = VGSCheckoutCustomPaymentCardModel(name: customBrandName,
@@ -232,6 +233,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     VGSCheckoutPaymentCards.cutomPaymentCardModels = customBrands
     XCTAssertTrue(VGSCheckoutPaymentCards.availableCardBrands.count == VGSCheckoutPaymentCards.defaultCardModels.count + customBrands.count)
    }
+
+	 */
   
   func resetCardBrands() {
     VGSCheckoutPaymentCards.elo = VGSCheckoutPaymentCardModel(brand: .elo)
@@ -250,4 +253,5 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     
     VGSCheckoutPaymentCards.cutomPaymentCardModels = []
   }
+
 }
