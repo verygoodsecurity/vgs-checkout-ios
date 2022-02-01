@@ -12,11 +12,6 @@ VGS provides you with a Universal Checkout and User Experience which is fully in
   <img src="vgs-checkout-ios-add-card-2.png" width="200" alt="VGS Checkout iOS SDK Edit State" hspace="20">
 </p>
 
-**Depending on the needs we provide you with two solutions:**
-
--  **Customized Universal Checkout** - shape the solution you need with our universal checkout solution. It’s easy to customize your integration with no heavy lifting to have a uniform experience across platforms and devices.<br/>
--  **Checkout for Payment Orchestration** - save time and payment costs on by integration with [Payment Optimization App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration).
-
 Table of contents
 =================
 
@@ -26,7 +21,7 @@ Table of contents
       * [CocoaPods](#cocoapods)
       * [Swift Package Manager](#swift-package-manager) 
    * [Usage](#usage)
-      * [Checkout SDK Configuration](#choose-checkout-sdk-configuration)
+      * [Checkout SDK Configuration](#setup-checkout-configuration)
       * [Present Checkout](#present-vgscheckout-form-with-configuration-object)
    * [Demo Application](#demo-application)
    * [Documentation](#documentation)
@@ -81,30 +76,9 @@ class ViewController: UIViewController {
 }
 ```
 
-### Choose Checkout SDK Configuration
-VGS Checkout SDK works with different configuration types. You can get more info about available configrurations in VGS Checkout SDK [docs](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration).
+### Setup Checkout Configuration
+Depends on your needs, you can setup Checkout Configuration that will work with [Payment Orchestration App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration) or your custom API. You can get more info about Configruration in VGS Checkout SDK [docs](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration).
 
-***VGSCheckoutAddCardConfiguration setup***<br/>
-
-`VGSCheckoutAddCardConfiguration` requires valid access token for [Payment Orchestration App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration).
- Use your `tenantId` for payment orchestration. You can get it in your [organisation dashboard].
-
-```swift
-// Create payment orchestration add card configuration with access token.
-VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: "<ACCESS_TOKEN>", tenantId: "<TENANT_ID>", environment: "<ENVIRONMENT>") {[weak self] configuration in
-		guard let strongSelf = self else {return}
-		configuration.billingAddressVisibility = .visible
-		
-		strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
-		strongSelf.vgsCheckout?.delegate = strongSelf
-		// Present checkout configuration.
-		strongSelf.vgsCheckout?.present(from: strongSelf)
-} failure: {[weak self] error in
-		print(error.localizedDescription)
-		print("ERROR! Cannot create configuration!")
-}
-
-```
 
 ***VGSCheckoutCustomConfiguration setup***<br/>
 
