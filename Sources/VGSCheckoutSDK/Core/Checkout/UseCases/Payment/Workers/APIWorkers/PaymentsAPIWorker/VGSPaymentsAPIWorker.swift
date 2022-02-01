@@ -6,9 +6,9 @@ import Foundation
 import UIKit
 
 /// Additional Payment Flow info.
-public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
+internal struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
 	/// Payment method choosen by user.
-	public let paymentMethod: VGSCheckoutPaymentMethod
+	internal let paymentMethod: VGSCheckoutPaymentMethod
 }
 
 /// Payopt transfers api Worker.

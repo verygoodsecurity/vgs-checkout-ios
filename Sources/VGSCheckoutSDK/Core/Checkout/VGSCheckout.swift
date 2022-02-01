@@ -94,9 +94,11 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 					}
 			 }
 		case .saveCardDidSuccess(let data, let response):
-			self.delegate?.saveCardDidSuccess(with: data, response: response)
+			break
+//			self.delegate?.saveCardDidSuccess(with: data, response: response)
 		case .savedCardDidRemove(let id):
-			self.delegate?.savedCardDidRemove(id)
+			break
+//			self.delegate?.savedCardDidRemove(id)
 		}
 	}
 }

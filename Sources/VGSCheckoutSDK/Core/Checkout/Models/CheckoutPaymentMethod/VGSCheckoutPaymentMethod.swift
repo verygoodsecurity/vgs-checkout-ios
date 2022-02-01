@@ -45,13 +45,13 @@ internal struct VGSCheckoutPaymentCardInfo {
 }
 
 /// Holds additional information for payment method when user paid with new card.
-public struct VGSCheckoutNewPaymentCardInfo {
+internal struct VGSCheckoutNewPaymentCardInfo {
 
   /// `true` if user selected `Save card for future payments options`,  will be`nil` when `isSaveCardOptionEnabled` is set to `false`.
-  public let shouldSave: Bool?
+	internal let shouldSave: Bool?
 
 	/// no:doc
-	public init(shouldSave: Bool?) {
+	internal init(shouldSave: Bool?) {
 		self.shouldSave = shouldSave
 	}
 }

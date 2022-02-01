@@ -49,7 +49,7 @@ public class VGSCheckoutPaymentCards {
       /// Not supported card brand - "unknown"
       case unknown
       /// Custom Payment Card Brand. Should have unique `brandName`.
-      case custom(brandName: String)
+//      case custom(brandName: String)
 
 		  /// Normalized brandname.
 		internal var normalizedBrandName: String {
@@ -82,8 +82,8 @@ public class VGSCheckoutPaymentCards {
 							return "jcb"
 						case .unknown:
 							return "uknown"
-						case .custom(let brandName):
-							return brandName
+//						case .custom(let brandName):
+//							return brandName
 						}
 			}
 
@@ -222,8 +222,8 @@ public extension VGSCheckoutPaymentCards.CardBrand {
            (.unionpay, .unionpay),
            (.jcb, .jcb),
            (.unknown, .unknown): return true
-      case (.custom(let lhsString), .custom(let rhsString)):
-        return lhsString == rhsString
+//      case (.custom(let lhsString), .custom(let rhsString)):
+//        return lhsString == rhsString
       default:
         return false
       }

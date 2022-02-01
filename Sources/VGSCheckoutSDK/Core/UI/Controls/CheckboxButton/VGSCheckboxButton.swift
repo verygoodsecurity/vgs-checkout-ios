@@ -61,8 +61,8 @@ internal class VGSCheckboxButton: UIControl {
 		accessibilityLabel = text
 		accessibilityTraits = UISwitch().accessibilityTraits
 		label.text = text
-		label.textColor = theme.checkoutCheckboxHintColor
-		label.font = theme.checkoutCheckboxHintFont
+//		label.textColor = theme.checkoutCheckboxHintColor
+//		label.font = theme.checkoutCheckboxHintFont
 
 		checkbox.translatesAutoresizingMaskIntoConstraints = false
 		checkboxContainerView.addSubview(checkbox)

@@ -53,14 +53,14 @@ public struct VGSCheckoutCustomPaymentCardModel: VGSCheckoutPaymentCardModelProt
 	///   - cvcLengths: `[Int]` object, array of valid card number CVC. Default is `[3]`.
 	///   - checkSumAlgorithm: `CheckSumAlgorithmType?` object, should be valid checkSumAlgorithm object, default is `.luhn`.
 	///   - brandIcon: `UIImage?`, card image icon.
-  public init(name: String, regex: String, formatPattern: String, cardNumberLengths: [Int], cvcLengths: [Int] = [3], checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? = .luhn, brandIcon: UIImage?) {
-    self.brand = .custom(brandName: name)
-    self.name = name
-    self.regex = regex
-    self.formatPattern = formatPattern
-    self.cardNumberLengths = cardNumberLengths
-    self.cvcLengths = cvcLengths
-    self.checkSumAlgorithm = checkSumAlgorithm
-    self.brandIcon = brandIcon
-  }
+//  public init(name: String, regex: String, formatPattern: String, cardNumberLengths: [Int], cvcLengths: [Int] = [3], checkSumAlgorithm: VGSCheckoutCheckSumAlgorithmType? = .luhn, brandIcon: UIImage?) {
+//    self.brand = .custom(brandName: name)
+//    self.name = name
+//    self.regex = regex
+//    self.formatPattern = formatPattern
+//    self.cardNumberLengths = cardNumberLengths
+//    self.cvcLengths = cvcLengths
+//    self.checkSumAlgorithm = checkSumAlgorithm
+//    self.brandIcon = brandIcon
+//  }
 }
