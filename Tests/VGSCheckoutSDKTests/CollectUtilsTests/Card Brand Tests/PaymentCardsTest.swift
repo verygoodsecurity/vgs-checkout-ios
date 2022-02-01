@@ -17,13 +17,13 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       config.type = .cardNumber
       cardTextField.configuration = config
     
-//      resetCardBrands()
+      resetCardBrands()
   }
 
   override func tearDown() {
     collector = nil
     cardTextField = nil
-//    resetCardBrands()
+    resetCardBrands()
   }
   
   func testEditingDefaultBrands() {
@@ -233,6 +233,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     VGSCheckoutPaymentCards.cutomPaymentCardModels = customBrands
     XCTAssertTrue(VGSCheckoutPaymentCards.availableCardBrands.count == VGSCheckoutPaymentCards.defaultCardModels.count + customBrands.count)
    }
+
+	 */
   
   func resetCardBrands() {
     VGSCheckoutPaymentCards.elo = VGSCheckoutPaymentCardModel(brand: .elo)
@@ -251,5 +253,5 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     
     VGSCheckoutPaymentCards.cutomPaymentCardModels = []
   }
-	 */
+
 }
