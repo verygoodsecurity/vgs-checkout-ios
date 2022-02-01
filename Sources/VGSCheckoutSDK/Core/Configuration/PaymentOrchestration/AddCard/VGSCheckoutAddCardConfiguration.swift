@@ -39,8 +39,8 @@ internal struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationPr
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
 	internal static func createConfiguration(accessToken: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
 		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
-			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
-			failure(error as Error)
+//			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
+//			failure(error as Error)
 			return
 		}
 

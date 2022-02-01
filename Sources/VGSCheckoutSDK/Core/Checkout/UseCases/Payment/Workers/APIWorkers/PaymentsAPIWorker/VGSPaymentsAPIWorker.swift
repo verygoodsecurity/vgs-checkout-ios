@@ -45,9 +45,9 @@ internal final class VGSPayoptTransfersAPIWorker {
 			switch response {
 			case .success(let code, let data, let response):
 				guard let id = VGSPayoptTransfersAPIWorker.financialInstrumentID(from: data) else {
-					let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
-					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
-					completion(requestResult)
+//					let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
+//					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
+//					completion(requestResult)
 					return
 				}
 
