@@ -6,7 +6,7 @@
 import Foundation
 
 /// Describes selected payment method.
-public enum VGSCheckoutPaymentMethod {
+internal enum VGSCheckoutPaymentMethod {
 
 	/**
 	 User paid with saved card option provided in saved payment methods.
