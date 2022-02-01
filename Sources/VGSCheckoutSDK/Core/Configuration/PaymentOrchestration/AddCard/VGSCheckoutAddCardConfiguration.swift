@@ -5,28 +5,28 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
+internal struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
 	/// A callback to be run with a `VGSCheckoutAddCardConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutAddCardConfiguration` object, configuration.
-	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutAddCardConfiguration) -> Void
+	internal typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutAddCardConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
 	/// - Parameters:
 	///   - error: `Error` object, the error on configuration setup fail.
-	public typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
+	internal typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
 
   // MARK: - Attributes
   
 	/// `String` object, payment orchestration tenant id.
-	public let tenantId: String
+	internal let tenantId: String
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public let environment: String
+	internal let environment: String
 
 	/// Payment orchestration access token.
-	private(set) public var accessToken: String
+	private(set) internal var accessToken: String
 
 	// MARK: - Public
 
@@ -37,10 +37,10 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+	internal static func createConfiguration(accessToken: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
 		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
-			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
-			failure(error as Error)
+//			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
+//			failure(error as Error)
 			return
 		}
 
@@ -64,10 +64,10 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   // MARK: - UI Configuration
   
 	/// Checkout UI elements  configuration.
-	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+	internal var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
   /// Billing address visibility.
-  public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
+	internal var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
     get {
       return formConfiguration.billingAddressVisibility
     }
@@ -78,7 +78,7 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   }
   
   /// Billing address country field options.
-  public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
+	internal var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
     get {
       return formConfiguration.addressOptions.countryOptions
     }
@@ -89,7 +89,7 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   }
 
 	/// Form validation behavior, default is `.onSubmit`.
-	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+	internal var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
 		get {
 			return formConfiguration.formValidationBehaviour
 		}

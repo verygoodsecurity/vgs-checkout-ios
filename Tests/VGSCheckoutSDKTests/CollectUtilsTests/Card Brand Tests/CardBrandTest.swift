@@ -133,7 +133,8 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
             XCTAssert(state.bin.isEmpty == true, "Specific Not Valid Card number \(number), tate.bin.isEmpty == true fail")
         }
     }
-  
+
+    /*
     func testCustomizedValidBrands() {
       
       /// Create custom brand model
@@ -238,4 +239,5 @@ class CardBrandTest: VGSCheckoutBaseTestCase {
     }
     XCTAssertTrue(state2.cardBrand == customBrandModel.brand)
   }
+		*/
 }

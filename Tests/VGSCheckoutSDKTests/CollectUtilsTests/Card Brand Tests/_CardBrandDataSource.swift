@@ -158,8 +158,8 @@ extension VGSCheckoutPaymentCards.CardBrand {
                 "6062828888666688"]
         case .unknown:
             return []
-        case .custom(brandName: _):
-          return []
+//        case .custom(brandName: _):
+//          return []
       }
     }
   
@@ -229,8 +229,8 @@ extension VGSCheckoutPaymentCards.CardBrand {
         return ["384100", "3841009", "606282", "6062820", "637568"]
       case .unknown:
           return []
-      case .custom(brandName: _):
-          return []
+//      case .custom(brandName: _):
+//          return []
     }
   }
 }

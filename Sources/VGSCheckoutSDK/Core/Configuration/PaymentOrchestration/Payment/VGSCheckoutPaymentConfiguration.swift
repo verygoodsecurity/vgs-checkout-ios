@@ -5,34 +5,34 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
+internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutPaymentConfiguration` object, configuration.
-	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
+	internal typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
 	/// - Parameters:
 	///   - error: `Error` object, the error on configuration setup fail.
-	public typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
+	internal typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
 
 	// MARK: - Attributes
 
 	/// `String` object, payment orchestration tenant id.
-	public let tenantId: String
+	internal let tenantId: String
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public let environment: String
+	internal let environment: String
 
 	/// Order id.
-	public let orderId: String
+	internal let orderId: String
 
 	/// Holds order info.
 	internal let paymentInfo: VGSPayoptTransfersOrderInfo
 
 	/// Payment orchestration access token.
-	private(set) public var accessToken: String
+	private(set) internal var accessToken: String
 
 	/// Max cards to fetch.
 	internal static let maxSavedCardsCount: Int = 10
@@ -101,13 +101,13 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	// MARK: - UI Configuration
 
 	/// Checkout UI elements  configuration.
-	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+	internal var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
   /// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
-  public var saveCardOptionEnabled: Bool = true
+	internal var saveCardOptionEnabled: Bool = true
 
 	/// Billing address visibility.
-	public var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
+	internal var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
 		get {
 			return formConfiguration.billingAddressVisibility
 		}
@@ -118,7 +118,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	}
 
 	/// Billing address country field options.
-	public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
+	internal var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
 		get {
 			return formConfiguration.addressOptions.countryOptions
 		}
@@ -129,7 +129,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	}
 
 	/// Form validation behavior, default is `.onSubmit`.
-	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
+	internal var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
 		get {
 			return formConfiguration.formValidationBehaviour
 		}
