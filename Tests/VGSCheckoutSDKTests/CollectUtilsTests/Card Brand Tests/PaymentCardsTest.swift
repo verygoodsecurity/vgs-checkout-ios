@@ -17,13 +17,13 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       config.type = .cardNumber
       cardTextField.configuration = config
     
-      resetCardBrands()
+//      resetCardBrands()
   }
 
   override func tearDown() {
     collector = nil
     cardTextField = nil
-    resetCardBrands()
+//    resetCardBrands()
   }
   
   func testEditingDefaultBrands() {
@@ -60,7 +60,8 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
       XCTFail("Failt state card text files")
     }
   }
-  
+
+	/*
   func testCustomBrandPriority() {
     let customBrandName = "custom-brand-1"
     let customBrand = VGSCheckoutCustomPaymentCardModel(name: customBrandName,
@@ -250,4 +251,5 @@ class PaymentCardsTest: VGSCheckoutBaseTestCase {
     
     VGSCheckoutPaymentCards.cutomPaymentCardModels = []
   }
+	 */
 }
