@@ -44,7 +44,7 @@ import VGSCheckoutSDK
 //}
 
 enum CheckoutUIThemeOption {
-	case font(_ font: UIFont)
+	case font(_ font: UIFont, _ textSample: String)
 	case color(_ color: UIColor)
 }
 
@@ -86,6 +86,8 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		buttonContainerView.translatesAutoresizingMaskIntoConstraints = false
 		button.translatesAutoresizingMaskIntoConstraints = false
 		buttonContainerView.paddings = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+
+		button.titleEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 		buttonContainerView.addContentView(button)
 
 		button.layer.cornerRadius = 8
@@ -111,6 +113,7 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		tableView.checkoutDemo_constraintViewToSuperviewEdges()
 
 		tableView.register(CheckoutCustomThemeColorOptionCell.self, forCellReuseIdentifier: CheckoutCustomThemeColorOptionCell.cellIdentifier)
+		tableView.register(CheckoutCustomThemeFontOptionCell.self, forCellReuseIdentifier: CheckoutCustomThemeFontOptionCell.cellIdentifier)
 		tableView.dataSource = self
 		tableView.delegate = self
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
@@ -174,7 +177,20 @@ extension CheckoutCustomUIThemeVC: UITableViewDelegate {
 
 	/// no:doc
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let item = dataSource[indexPath.section].items[indexPath.row]
 
+		switch item.option {
+		case .color(let color):
+			break
+		case .font(let font, let textSample):
+			if #available(iOS 13.0, *) {
+				let vc = UIFontPickerViewController()
+//				vc.delegate = self
+				present(vc, animated: true)
+			} else {
+				// Fallback on earlier versions
+			}
+		}
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -200,10 +216,9 @@ extension CheckoutCustomUIThemeVC: UITableViewDataSource {
 			cell.configureWithColorOption(with: color, optionName: item.name, optionDescription: item.optionDescription)
 
 			return cell
-		case .font(let font):
-			let cell = UITableViewCell(style: .default, reuseIdentifier: "id")
-			cell.textLabel?.text = item.name
-			cell.textLabel?.font = font
+		case .font(let font, let textSample):
+			let cell: CheckoutCustomThemeFontOptionCell = tableView.dequeue(cellForRowAt: indexPath)
+			cell.configureWithFontOption(with: font, optionName: item.name, optionDescription: item.optionDescription, textSample: textSample)
 
 			return cell
 		}
@@ -236,7 +251,7 @@ class CheckoutUIThemeDataSourceProvider {
 		let textFieldTextColorItem = CheckoutUIThemeItem(name: "Text field text color", optionDescription: "The text color of the textfield.", option: textFieldTextColorOption)
 
 		let textFieldTextFont = uiTheme.textFieldTextFont
-		let textFieldTextFontOption = CheckoutUIThemeOption.font(textFieldTextFont)
+		let textFieldTextFontOption = CheckoutUIThemeOption.font(textFieldTextFont, "4111 1111 1111 1111")
 		let textFieldTextFontItem = CheckoutUIThemeItem(name: "Text field text font", optionDescription: "The text font of the textfield.", option: textFieldTextFontOption)
 
 		return CheckoutCustomUIThemeSection(title: "Text field UI theme options", items: [textFieldTextColorItem, textFieldTextFontItem])
@@ -273,6 +288,9 @@ class CheckoutCustomThemeColorOptionCell: UITableViewCell {
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.alignment = .fill
+
+		stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		stackView.isLayoutMarginsRelativeArrangement = true
 
 		return stackView
 	}()
@@ -477,3 +495,83 @@ extension UIColor {
 	}
 
 // swiftlint:enable all
+
+class CheckoutCustomThemeFontOptionCell: UITableViewCell {
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		self.setupUI()
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
+	fileprivate lazy var optionNameLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+
+		return label
+	}()
+
+	fileprivate lazy var optionDescriptionLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.numberOfLines = 0
+
+		return label
+	}()
+
+	fileprivate lazy var fontDescriptionLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.numberOfLines = 0
+
+		return label
+	}()
+
+	fileprivate lazy var textSampleLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.numberOfLines = 0
+
+		return label
+	}()
+
+	fileprivate lazy var verticalStackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .vertical
+		stackView.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+		stackView.isLayoutMarginsRelativeArrangement = true
+		stackView.spacing = 4
+		stackView.alignment = .fill
+
+		return stackView
+	}()
+
+	private func setupUI() {
+		addSubview(verticalStackView)
+		verticalStackView.checkoutDemo_constraintViewToSuperviewEdges()
+
+		verticalStackView.addArrangedSubview(optionNameLabel)
+		verticalStackView.addArrangedSubview(optionDescriptionLabel)
+		verticalStackView.addArrangedSubview(fontDescriptionLabel)
+		verticalStackView.addArrangedSubview(textSampleLabel)
+	}
+
+	func configureWithFontOption(with font: UIFont, optionName: String, optionDescription: String, textSample: String) {
+		optionNameLabel.text = optionName
+		optionDescriptionLabel.text = optionDescription
+		fontDescriptionLabel.text = "Font family: \(font.familyName) size: \(font.pointSize)"
+		textSampleLabel.text = textSample
+		textSampleLabel.font = font
+	}
+}
+
+extension CheckoutCustomUIThemeVC: UIFontPickerViewControllerDelegate {
+	@available(iOS 13.0, *)
+	func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
+	guard let descriptor = viewController.selectedFontDescriptor else { return }
+	let font = UIFont(descriptor: descriptor, size: 36)
+	}
+}
