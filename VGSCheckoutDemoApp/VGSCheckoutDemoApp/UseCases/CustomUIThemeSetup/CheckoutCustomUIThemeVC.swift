@@ -70,6 +70,9 @@ class CheckoutCustomUIThemeVC: UIViewController {
 
 	// MARK: - Vars
 
+	fileprivate let buttonContainerView = DemoInsetContainerView(frame: .zero)
+	fileprivate let button = UIButton(frame: .zero)
+
 	/// Table view.
 	fileprivate let tableView = UITableView(frame: .zero)
 
@@ -80,6 +83,22 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		super.viewDidLoad()
 
 		setupTableView()
+		buttonContainerView.translatesAutoresizingMaskIntoConstraints = false
+		button.translatesAutoresizingMaskIntoConstraints = false
+		buttonContainerView.paddings = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+		buttonContainerView.addContentView(button)
+
+		button.layer.cornerRadius = 8
+		button.layer.masksToBounds = true
+
+		view.addSubview(buttonContainerView)
+		button.backgroundColor = .systemBlue
+		button.setTitle("Start checkout", for: .normal)
+		buttonContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+		buttonContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+		buttonContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+
+		button.addTarget(self, action: #selector(startCheckout), for: .touchUpInside)
 	}
 
 	// MARK: - Helpers
@@ -94,7 +113,57 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		tableView.register(CheckoutCustomThemeColorOptionCell.self, forCellReuseIdentifier: CheckoutCustomThemeColorOptionCell.cellIdentifier)
 		tableView.dataSource = self
 		tableView.delegate = self
+		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
 		tableView.reloadData()
+	}
+
+	var vgsCheckout: VGSCheckout?
+
+	@objc private func startCheckout() {
+		var checkoutConfiguration = VGSCheckoutCustomConfiguration(vaultID: DemoAppConfiguration.shared.vaultId, environment: DemoAppConfiguration.shared.environment)
+
+		checkoutConfiguration.cardHolderFieldOptions.fieldNameType = .single("cardHolder_name")
+		checkoutConfiguration.cardNumberFieldOptions.fieldName = "card_number"
+		checkoutConfiguration.expirationDateFieldOptions.fieldName = "exp_data"
+		checkoutConfiguration.cvcFieldOptions.fieldName = "card_cvc"
+
+		checkoutConfiguration.billingAddressVisibility = .visible
+
+		checkoutConfiguration.billingAddressCountryFieldOptions.fieldName = "billing_address.country"
+		checkoutConfiguration.billingAddressCityFieldOptions.fieldName = "billing_address.city"
+		checkoutConfiguration.billingAddressLine1FieldOptions.fieldName = "billing_address.addressLine1"
+		checkoutConfiguration.billingAddressLine2FieldOptions.fieldName = "billing_address.addressLine2"
+		checkoutConfiguration.billingAddressPostalCodeFieldOptions.fieldName = "billing_address.postal_code"
+
+		// Produce nested json for fields with `.` notation.
+		checkoutConfiguration.routeConfiguration.requestOptions.mergePolicy = .nestedJSON
+
+		checkoutConfiguration.routeConfiguration.path = "post"
+
+		// Update configuration for UITests cases.
+		UITestsConfigurationManager.updateCustomCheckoutConfigurationForUITests(&checkoutConfiguration)
+
+		/* Set custom date user input/output JSON format.
+
+		checkoutConfiguration.expirationDateFieldOptions.inputDateFormat = .shortYearThenMonth
+		checkoutConfiguration.expirationDateFieldOptions.outputDateFormat = .longYearThenMonth
+
+		let expDateSerializer = VGSCheckoutExpDateSeparateSerializer(monthFieldName: "card_date.month", yearFieldName: "card_date.year")
+		checkoutConfiguration.expirationDateFieldOptions.serializers = [expDateSerializer]
+		*/
+
+		// Init Checkout with vault and ID.
+		vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)
+
+		//VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
+
+		/// Change default valid card number lengthes
+//		VGSPaymentCards.visa.cardNumberLengths = [16]
+//		/// Change default format pattern
+//		VGSPaymentCards.visa.formatPattern = "#### #### #### ####"
+
+		// Present checkout configuration.
+		vgsCheckout?.present(from: self)
 	}
 }
 
@@ -390,7 +459,7 @@ internal extension UITableView {
 		}
 }
 
-// swiftlint:enable all
+
 
 extension UIColor {
 			func toHexString() -> String {
@@ -406,3 +475,5 @@ extension UIColor {
 					return String(format:"#%06x", rgb)
 			}
 	}
+
+// swiftlint:enable all
