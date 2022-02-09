@@ -68,6 +68,8 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		}
 	}
 
+	var currentSelectedIndexPath: IndexPath? = nil
+
 	// MARK: - Vars
 
 	fileprivate let buttonContainerView = DemoInsetContainerView(frame: .zero)
@@ -142,9 +144,10 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		checkoutConfiguration.routeConfiguration.requestOptions.mergePolicy = .nestedJSON
 
 		checkoutConfiguration.routeConfiguration.path = "post"
+		checkoutConfiguration.uiTheme = CheckoutUIThemeDataSourceProvider.provideNewTheme(from: dataSource)
 
 		// Update configuration for UITests cases.
-		UITestsConfigurationManager.updateCustomCheckoutConfigurationForUITests(&checkoutConfiguration)
+//		UITestsConfigurationManager.updateCustomCheckoutConfigurationForUITests(&checkoutConfiguration)
 
 		/* Set custom date user input/output JSON format.
 
@@ -178,6 +181,7 @@ extension CheckoutCustomUIThemeVC: UITableViewDelegate {
 	/// no:doc
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let item = dataSource[indexPath.section].items[indexPath.row]
+		currentSelectedIndexPath = indexPath
 
 		switch item.option {
 		case .color(let color):
@@ -185,7 +189,7 @@ extension CheckoutCustomUIThemeVC: UITableViewDelegate {
 		case .font(let font, let textSample):
 			if #available(iOS 13.0, *) {
 				let vc = UIFontPickerViewController()
-//				vc.delegate = self
+				vc.delegate = self
 				present(vc, animated: true)
 			} else {
 				// Fallback on earlier versions
@@ -255,6 +259,27 @@ class CheckoutUIThemeDataSourceProvider {
 		let textFieldTextFontItem = CheckoutUIThemeItem(name: "Text field text font", optionDescription: "The text font of the textfield.", option: textFieldTextFontOption)
 
 		return CheckoutCustomUIThemeSection(title: "Text field UI theme options", items: [textFieldTextColorItem, textFieldTextFontItem])
+	}
+
+	static func provideNewTheme(from dataSource: [CheckoutCustomUIThemeSection]) -> VGSCheckoutThemeProtocol {
+		var theme = VGSCheckoutDefaultTheme()
+
+		for section in dataSource {
+			if section.title == "Text field UI theme options" {
+				for item in section.items {
+					if item.name == "Text field text font" {
+						switch item.option {
+						case .font(let font, _):
+							theme.textFieldTextFont = font
+						case .color(let color):
+							break
+						}
+					}
+				}
+			}
+		}
+
+		return theme
 	}
 }
 
@@ -572,6 +597,15 @@ extension CheckoutCustomUIThemeVC: UIFontPickerViewControllerDelegate {
 	@available(iOS 13.0, *)
 	func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
 	guard let descriptor = viewController.selectedFontDescriptor else { return }
-	let font = UIFont(descriptor: descriptor, size: 36)
+		let newFont = UIFont(descriptor: descriptor, size: 16)
+		guard let indexPath = currentSelectedIndexPath else {return}
+		var itemToUpdate = dataSource[indexPath.section].items[indexPath.row]
+		switch itemToUpdate.option {
+		case .font(let font, let text):
+			let newOption = CheckoutUIThemeOption.font(newFont, text)
+			dataSource[indexPath.section].items[indexPath.row] = CheckoutUIThemeItem(name: itemToUpdate.name, optionDescription: itemToUpdate.optionDescription, option: newOption)
+		case .color:
+			break
+		}
 	}
 }
