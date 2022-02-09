@@ -50,6 +50,7 @@ enum CheckoutUIThemeOption {
 
 struct CheckoutUIThemeItem {
 	let name: String
+	let optionDescription: String
 	var option: CheckoutUIThemeOption
 }
 
@@ -89,6 +90,8 @@ class CheckoutCustomUIThemeVC: UIViewController {
 		tableView.separatorStyle = .none
 		view.addSubview(tableView)
 		tableView.checkoutDemo_constraintViewToSuperviewEdges()
+
+		tableView.register(CheckoutCustomThemeColorOptionCell.self, forCellReuseIdentifier: CheckoutCustomThemeColorOptionCell.cellIdentifier)
 		tableView.dataSource = self
 		tableView.delegate = self
 		tableView.reloadData()
@@ -121,16 +124,20 @@ extension CheckoutCustomUIThemeVC: UITableViewDataSource {
 		let sectionItem = dataSource[indexPath.section]
 		let item = sectionItem.items[indexPath.row]
 
-		let cell = UITableViewCell(style: .default, reuseIdentifier: "id")
-		cell.textLabel?.text = item.name
 		switch item.option {
 		case .color(let color):
-			cell.textLabel?.textColor = color
-		case .font(let font):
-			cell.textLabel?.font = font
-		}
+			let cell: CheckoutCustomThemeColorOptionCell = tableView.dequeue(cellForRowAt: indexPath)
 
-		return cell
+			cell.configureWithColorOption(with: color, optionName: item.name, optionDescription: item.optionDescription)
+
+			return cell
+		case .font(let font):
+			let cell = UITableViewCell(style: .default, reuseIdentifier: "id")
+			cell.textLabel?.text = item.name
+			cell.textLabel?.font = font
+
+			return cell
+		}
 	}
 
 	/// no:doc
@@ -157,12 +164,245 @@ class CheckoutUIThemeDataSourceProvider {
 
 		let texctextFieldTextColor = uiTheme.textFieldTextColor
 		let textFieldTextColorOption = CheckoutUIThemeOption.color(texctextFieldTextColor)
-		let textFieldTextColorItem = CheckoutUIThemeItem(name: "Text field text color", option: textFieldTextColorOption)
+		let textFieldTextColorItem = CheckoutUIThemeItem(name: "Text field text color", optionDescription: "The text color of the textfield.", option: textFieldTextColorOption)
 
 		let textFieldTextFont = uiTheme.textFieldTextFont
 		let textFieldTextFontOption = CheckoutUIThemeOption.font(textFieldTextFont)
-		let textFieldTextFontItem = CheckoutUIThemeItem(name: "Text field text font", option: textFieldTextFontOption)
+		let textFieldTextFontItem = CheckoutUIThemeItem(name: "Text field text font", optionDescription: "The text font of the textfield.", option: textFieldTextFontOption)
 
 		return CheckoutCustomUIThemeSection(title: "Text field UI theme options", items: [textFieldTextColorItem, textFieldTextFontItem])
 	}
 }
+
+class CheckoutCustomThemeColorOptionCell: UITableViewCell {
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		self.setupUI()
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
+	fileprivate lazy var optionNameLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+
+		return label
+	}()
+
+	fileprivate lazy var optionDescriptionLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.numberOfLines = 0
+
+		return label
+	}()
+
+	fileprivate lazy var verticalStackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .vertical
+		stackView.alignment = .fill
+
+		return stackView
+	}()
+
+	fileprivate lazy var lightModeColorView: ThemeOptionItemColorDetailView = {
+		let view = ThemeOptionItemColorDetailView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
+	fileprivate lazy var darkModeColorView: ThemeOptionItemColorDetailView = {
+		let view = ThemeOptionItemColorDetailView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		return view
+	}()
+
+	private func setupUI() {
+		addSubview(verticalStackView)
+		verticalStackView.checkoutDemo_constraintViewToSuperviewEdges()
+
+		verticalStackView.addArrangedSubview(optionNameLabel)
+		verticalStackView.addArrangedSubview(optionDescriptionLabel)
+		verticalStackView.addArrangedSubview(lightModeColorView)
+		verticalStackView.addArrangedSubview(darkModeColorView)
+	}
+
+	func configureWithColorOption(with color: UIColor, optionName: String, optionDescription: String) {
+		optionNameLabel.text = optionName
+		optionDescriptionLabel.text = optionDescription
+
+		lightModeColorView.configure(with: color, mode: .light, name: optionName)
+		darkModeColorView.configure(with: color, mode: .dark, name: optionName)
+	}
+}
+
+/// Payment option item view.
+internal class ThemeOptionItemColorDetailView: UIView {
+
+	enum Mode {
+		case light
+		case dark
+
+		var title: String {
+			switch self {
+			case .light:
+				return "light mode"
+			case .dark:
+				return "dark mode"
+			}
+		}
+
+		var color: UIColor {
+			switch self {
+			case .light:
+				return UIColor(demoHexString: "FFFFFF")
+			case .dark:
+				return UIColor(demoHexString: "000000")
+			}
+		}
+	}
+
+	fileprivate lazy var optionNameLabel: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
+
+		return label
+	}()
+
+	/// Stack view.
+	fileprivate lazy var stackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .horizontal
+		stackView.alignment = .fill
+
+		return stackView
+	}()
+
+	/// Picked color container view.
+	fileprivate lazy var pickedColorContainerView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		view.heightAnchor.constraint(equalToConstant: 44).isActive = true
+		view.widthAnchor.constraint(equalToConstant: 44).isActive = true
+
+		view.layer.borderColor = UIColor.green.cgColor
+		view.layer.borderWidth = 1
+
+		return view
+	}()
+
+	fileprivate lazy var pickedColorView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+
+		view.heightAnchor.constraint(equalToConstant: 32).isActive = true
+		view.widthAnchor.constraint(equalToConstant: 32).isActive = true
+
+		view.layer.cornerRadius = 16
+		view.layer.masksToBounds = true
+
+		return view
+	}()
+
+	init() {
+		super.init(frame: .zero)
+		setupUI()
+	}
+
+	/// no:doc
+	required init?(coder: NSCoder) {
+		fatalError("not implemented")
+	}
+
+	/// Setup UI.
+	private func setupUI() {
+		addSubview(stackView)
+		stackView.checkoutDemo_constraintViewToSuperviewEdges()
+
+		stackView.addArrangedSubview(optionNameLabel)
+		let emptyView = UIView()
+		emptyView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.addArrangedSubview(emptyView)
+		stackView.addArrangedSubview(pickedColorContainerView)
+
+		pickedColorContainerView.addSubview(pickedColorView)
+		pickedColorView.centerXAnchor.constraint(equalTo: pickedColorContainerView.centerXAnchor).isActive = true
+		pickedColorView.centerYAnchor.constraint(equalTo: pickedColorContainerView.centerYAnchor).isActive = true
+	}
+
+	func configure(with color: UIColor, mode: ThemeOptionItemColorDetailView.Mode, name: String) {
+		var text = "Color in light mode: \(color.toHexString())"
+		pickedColorContainerView.backgroundColor = mode.color
+		pickedColorView.backgroundColor = color
+
+		switch mode {
+		case .dark:
+			if #available(iOS 13.0, *) {
+				pickedColorContainerView.overrideUserInterfaceStyle = .dark
+			} else {
+				// Fallback on earlier versions
+			}
+
+			var colorText = color.toHexString()
+			if #available(iOS 13.0, *) {
+				colorText = color.resolvedColor(with: UITraitCollection(userInterfaceStyle: .dark)).toHexString()
+			} else {
+				// Fallback on earlier versions
+			}
+			text = "Color in dark mode: \(colorText)"
+		case .light:
+			if #available(iOS 13.0, *) {
+				pickedColorContainerView.overrideUserInterfaceStyle = .light
+			} else {
+				// Fallback on earlier versions
+			}
+			var colorText = color.toHexString()
+			if #available(iOS 13.0, *) {
+				colorText = color.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light)).toHexString()
+			} else {
+				// Fallback on earlier versions
+			}
+			text = "Color in light mode: \(colorText)"
+		}
+
+		optionNameLabel.text = text
+	}
+}
+
+extension UITableViewCell {
+	static var cellIdentifier: String {
+		return "\(self)"
+	}
+}
+
+// swiftlint:disable all
+
+internal extension UITableView {
+		func dequeue<T: UITableViewCell>(cellForRowAt indexPath: IndexPath) -> T {
+			return dequeueReusableCell(withIdentifier: "\(T.self)", for: indexPath) as! T
+		}
+}
+
+// swiftlint:enable all
+
+extension UIColor {
+			func toHexString() -> String {
+					var r:CGFloat = 0
+					var g:CGFloat = 0
+					var b:CGFloat = 0
+					var a:CGFloat = 0
+
+					getRed(&r, green: &g, blue: &b, alpha: &a)
+
+					let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+
+					return String(format:"#%06x", rgb)
+			}
+	}
