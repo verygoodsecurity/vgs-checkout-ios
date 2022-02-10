@@ -81,6 +81,28 @@ class CheckoutCustomUIThemeVC: UIViewController {
 
 	// MARK: - Lifecycle
 
+	lazy var modeRightBarButtonItem: UIBarButtonItem = {
+		let barItem = UIBarButtonItem(title: "Revert Theme", style: .plain, target: self, action: #selector(updateTheme))
+
+		return barItem
+	}()
+
+	@objc func updateTheme() {
+		if #available(iOS 13.0, *) {
+			let current = traitCollection.userInterfaceStyle
+			switch current {
+			case .unspecified:
+				break
+			case .light:
+				UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .dark
+			case .dark:
+				UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .light
+			}
+		} else {
+			// Fallback on earlier versions
+		}
+	}
+
 	/// no:doc
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -95,6 +117,8 @@ class CheckoutCustomUIThemeVC: UIViewController {
 
 		button.layer.cornerRadius = 8
 		button.layer.masksToBounds = true
+
+		navigationItem.rightBarButtonItem = modeRightBarButtonItem
 
 		view.addSubview(buttonContainerView)
 		button.backgroundColor = .systemBlue
@@ -688,9 +712,26 @@ extension CheckoutCustomUIThemeVC: CheckoutCustomThemeColorOptionCellDelegate {
 
 		switch item.option {
 		case .color(let color):
+
+
+
 			// Create a SheetyColors view with your configuration
 			var config = SheetyColorsConfig(alphaEnabled: true, hapticFeedbackEnabled: true, initialColor: color, title: "Create a color", type: .rgb)
+
 			let sheetyColors = SheetyColorsController(withConfig: config)
+
+			if #available(iOS 13.0, *) {
+				switch mode {
+				case .light:
+					sheetyColors.overrideUserInterfaceStyle = .light
+				case .dark:
+					sheetyColors.overrideUserInterfaceStyle = .dark
+				}
+			} else {
+				// Fallback on earlier versions
+			}
+
+
 
 			// Add a button to accept the selected color
 
