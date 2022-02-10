@@ -13,4 +13,8 @@ target 'VGSCheckoutDemoApp' do
 	# https://github.com/SVProgressHUD/SVProgressHUD
 	pod 'SVProgressHUD'
 
+	# Pod to display color picker sheet in demo app.
+	# https://github.com/chrs1885/SheetyColors
+	pod 'SheetyColors'
+
 end

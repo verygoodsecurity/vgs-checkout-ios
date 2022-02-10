@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 #endif
 import VGSCheckoutSDK
+import SheetyColors
 
 ///// Defines UI Theme for text field.
 //public protocol VGSCheckoutTextFieldThemeProtocol {
@@ -218,6 +219,7 @@ extension CheckoutCustomUIThemeVC: UITableViewDataSource {
 			let cell: CheckoutCustomThemeColorOptionCell = tableView.dequeue(cellForRowAt: indexPath)
 
 			cell.configureWithColorOption(with: color, optionName: item.name, optionDescription: item.optionDescription)
+			cell.delegate = self
 
 			return cell
 		case .font(let font, let textSample):
@@ -275,6 +277,14 @@ class CheckoutUIThemeDataSourceProvider {
 							break
 						}
 					}
+					if item.name == "Text field text color" {
+						switch item.option {
+						case .font:
+							break
+						case .color(let color):
+							theme.textFieldTextColor = color
+						}
+					}
 				}
 			}
 		}
@@ -283,9 +293,17 @@ class CheckoutUIThemeDataSourceProvider {
 	}
 }
 
+protocol CheckoutCustomThemeColorOptionCellDelegate: AnyObject {
+	func didSelectColor(in cell: CheckoutCustomThemeColorOptionCell, mode: ThemeOptionItemColorDetailView.Mode)
+}
+
 class CheckoutCustomThemeColorOptionCell: UITableViewCell {
+
+	weak var delegate: CheckoutCustomThemeColorOptionCellDelegate?
+
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		selectionStyle = .none
 		self.setupUI()
 	}
 
@@ -335,7 +353,7 @@ class CheckoutCustomThemeColorOptionCell: UITableViewCell {
 	}()
 
 	private func setupUI() {
-		addSubview(verticalStackView)
+		contentView.addSubview(verticalStackView)
 		verticalStackView.checkoutDemo_constraintViewToSuperviewEdges()
 
 		verticalStackView.addArrangedSubview(optionNameLabel)
@@ -348,8 +366,28 @@ class CheckoutCustomThemeColorOptionCell: UITableViewCell {
 		optionNameLabel.text = optionName
 		optionDescriptionLabel.text = optionDescription
 
+		let lightButton = UIButton(frame: .zero)
+		lightButton.translatesAutoresizingMaskIntoConstraints = false
+		lightModeColorView.addSubview(lightButton)
+		lightButton.checkoutDemo_constraintViewToSuperviewEdges()
+		lightButton.addTarget(self, action: #selector(lightButtonColorDidTap), for: .touchUpInside)
+
+		let darkButton = UIButton(frame: .zero)
+		darkButton.translatesAutoresizingMaskIntoConstraints = false
+		darkModeColorView.addSubview(darkButton)
+		darkButton.checkoutDemo_constraintViewToSuperviewEdges()
+		darkButton.addTarget(self, action: #selector(darkButtonColorDidTap), for: .touchUpInside)
+
 		lightModeColorView.configure(with: color, mode: .light, name: optionName)
 		darkModeColorView.configure(with: color, mode: .dark, name: optionName)
+	}
+
+	@objc func lightButtonColorDidTap() {
+		delegate?.didSelectColor(in: self, mode: .light)
+	}
+
+	@objc func darkButtonColorDidTap() {
+		delegate?.didSelectColor(in: self, mode: .dark)
 	}
 }
 
@@ -605,6 +643,72 @@ extension CheckoutCustomUIThemeVC: UIFontPickerViewControllerDelegate {
 			let newOption = CheckoutUIThemeOption.font(newFont, text)
 			dataSource[indexPath.section].items[indexPath.row] = CheckoutUIThemeItem(name: itemToUpdate.name, optionDescription: itemToUpdate.optionDescription, option: newOption)
 		case .color:
+			break
+		}
+	}
+
+	fileprivate func updateColorItem(with color: UIColor, mode: ThemeOptionItemColorDetailView.Mode) {
+		guard let indexPath = currentSelectedIndexPath else {return}
+		var itemToUpdate = dataSource[indexPath.section].items[indexPath.row]
+		switch itemToUpdate.option {
+		case .font:
+			break
+		case .color(var previousColor):
+			if #available(iOS 13.0, *) {
+			 let newColor: UIColor
+			 switch mode {
+			 case .light:
+				 let oldDarkColor = previousColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .dark))
+				 newColor = UIColor {(traits) -> UIColor in
+					 return traits.userInterfaceStyle == .dark ? oldDarkColor : color
+				}
+			 case .dark:
+				 let oldLightColor = previousColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
+				 newColor = UIColor {(traits) -> UIColor in
+					 return traits.userInterfaceStyle == .dark ? color : oldLightColor
+				}
+			 }
+
+			 let newOption = CheckoutUIThemeOption.color(newColor)
+			 dataSource[indexPath.section].items[indexPath.row] = CheckoutUIThemeItem(name: itemToUpdate.name, optionDescription: itemToUpdate.optionDescription, option: newOption)
+			} else {
+				// Fallback on earlier versions
+			}
+		}
+	}
+}
+
+extension CheckoutCustomUIThemeVC: CheckoutCustomThemeColorOptionCellDelegate {
+	func didSelectColor(in cell: CheckoutCustomThemeColorOptionCell, mode: ThemeOptionItemColorDetailView.Mode) {
+		guard let indexPath = tableView.indexPath(for: cell) else {return}
+		currentSelectedIndexPath = indexPath
+
+		let item = dataSource[indexPath.section].items[indexPath.row]
+		currentSelectedIndexPath = indexPath
+
+		switch item.option {
+		case .color(let color):
+			// Create a SheetyColors view with your configuration
+			var config = SheetyColorsConfig(alphaEnabled: true, hapticFeedbackEnabled: true, initialColor: color, title: "Create a color", type: .rgb)
+			let sheetyColors = SheetyColorsController(withConfig: config)
+
+			// Add a button to accept the selected color
+
+			let selectAction = UIAlertAction(title: "Save Color", style: .default, handler: { _ in
+				print("selected color: \(sheetyColors.color)")
+				self.updateColorItem(with: sheetyColors.color, mode: mode)
+			})
+
+			sheetyColors.addAction(selectAction)
+
+			// Add a cancel button
+			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+			sheetyColors.addAction(cancelAction)
+
+
+			// Now, present it to the user
+			present(sheetyColors, animated: true, completion: nil)
+		default:
 			break
 		}
 	}
