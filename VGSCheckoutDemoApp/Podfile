@@ -13,4 +13,7 @@ target 'VGSCheckoutDemoApp' do
 	# https://github.com/SVProgressHUD/SVProgressHUD
 	pod 'SVProgressHUD'
 
+	pod 'VGSCheckoutSDK/CardIO', :path => "../"
+#	pod 'CardIOSDK'
+
 end

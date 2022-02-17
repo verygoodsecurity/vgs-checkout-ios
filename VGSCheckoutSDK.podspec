@@ -36,4 +36,10 @@ Pod::Spec.new do |spec|
 			'CardIcon' => ['Sources/VGSCheckoutSDK/Resources/*']
 		}
   end
+
+	spec.subspec 'CardIO' do |cardIO|
+		cardIO.source_files  = "Sources/VGSCheckoutCardIO", "Sources/VGSCheckoutCardIO/**/*.{swift}", "Sources/VGSCheckoutCardIO/**/*.{h, m}"
+		cardIO.dependency "VGSCheckoutSDK/Core"
+		cardIO.dependency "CardIOSDK", "5.5.7"
+	end
 end

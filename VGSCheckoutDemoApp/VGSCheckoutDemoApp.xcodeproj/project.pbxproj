@@ -88,6 +88,7 @@
 		44282B7B2735248300223A66 /* UITestsConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestsConfigurationManager.swift; sourceTree = "<group>"; };
 		4428DD1C273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnFocusValidationTests.swift; sourceTree = "<group>"; };
 		4428DD24273CF5F900071CB8 /* VGSCheckoutValidCountriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutValidCountriesTests.swift; sourceTree = "<group>"; };
+		442EF6DC27BA442600C326EA /* CardIO.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CardIO.xcframework; path = Pods/CardIOSDK/Sources/CardIOSDK/CardIO.xcframework; sourceTree = "<group>"; };
 		445C125D26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppBaseTestCase.swift; sourceTree = "<group>"; };
 		445C126226F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomConfigFlow.swift; sourceTree = "<group>"; };
 		445C126626F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutSaveCardBaseTestCase.swift; sourceTree = "<group>"; };
@@ -496,6 +497,7 @@
 		FFE93316FFF2D68A7E3059CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				442EF6DC27BA442600C326EA /* CardIO.xcframework */,
 				093EF2C2324E0D23DEB2717A /* Pods_VGSCheckoutDemoApp.framework */,
 			);
 			name = Frameworks;
@@ -932,7 +934,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4445Y664U5;
 				INFOPLIST_FILE = VGSCheckoutDemoApp/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -953,7 +955,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4445Y664U5;
 				INFOPLIST_FILE = VGSCheckoutDemoApp/Application/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
