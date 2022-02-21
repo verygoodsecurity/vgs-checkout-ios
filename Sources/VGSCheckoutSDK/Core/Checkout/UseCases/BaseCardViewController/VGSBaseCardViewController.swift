@@ -191,6 +191,14 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 		setupMainUI()
 	}
 
+	/// no:doc
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+
+		// Hide view on finish scan.
+		scanView.subviews.first?.isHidden = true
+	}
+
 	// MARK: - Helpers
 
 	private func setupDelegates() {
@@ -211,6 +219,8 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 
 	/// Handles tap on close button.
 	@objc fileprivate func closeButtonDidTap() {
+		// Hide view on finish scan.
+		scanView.subviews.first?.isHidden = true
 		VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .cancel)
 		delegate?.closeButtonDidTap(in: self)
 	}
