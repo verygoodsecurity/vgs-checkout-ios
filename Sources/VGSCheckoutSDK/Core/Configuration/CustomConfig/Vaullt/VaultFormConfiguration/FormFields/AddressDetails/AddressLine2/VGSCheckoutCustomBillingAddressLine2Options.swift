@@ -16,6 +16,9 @@ public struct VGSCheckoutCustomBillingAddressLine2Options: VGSCheckoutAddressOpt
 	/// A boolean flag, true if field is required for form, default is `false`. If field is not visible this value will be ignored.
 	public var isRequired: Bool = false
 
+	/// Field type.
+	internal let fieldType: VGSAddCardFormFieldType = .addressLine2
+
 	/// no:doc
 	public init() {}
 }

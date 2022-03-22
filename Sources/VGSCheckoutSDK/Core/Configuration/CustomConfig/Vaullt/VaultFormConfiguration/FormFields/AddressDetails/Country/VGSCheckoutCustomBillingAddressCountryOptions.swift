@@ -33,6 +33,9 @@ internal struct VGSCheckoutBillingAddressCountryOptions: VGSCheckoutAddressOptio
 	/// A boolean flag, true if field is required for form, default is `true`. If field is not visible this value will be ignored.
 	public var isRequired: Bool = true
 
+	/// Field type.
+	internal let fieldType: VGSAddCardFormFieldType = .country
+
   /// no:doc
   public init() {}
 }
