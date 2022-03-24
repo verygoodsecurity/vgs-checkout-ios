@@ -55,6 +55,16 @@ internal class VGSAddressDataFormConfigurationManager {
 					countryTextField.selectFirstRow()
 				} else {
 					addressFormView.countryFieldView.isHidden = true
+
+					var hasCountries = false
+					if let countries = countryOptions.validCountries {
+						hasCountries = !countries.isEmpty
+					}
+
+					if !hasCountries {
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden. You should provide validCountries array", severityLevel: .warning)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
+					}
 				}
 			case .addressLine1:
 				if option.visibility == .visible {
