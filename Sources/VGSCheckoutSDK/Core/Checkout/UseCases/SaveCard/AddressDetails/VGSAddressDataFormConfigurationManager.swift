@@ -35,63 +35,7 @@ internal class VGSAddressDataFormConfigurationManager {
 			break
 		}
 
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
-    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
-		countryConfiguration.type = .none
-		countryConfiguration.isRequiredValidOnly = true
-
-		countryTextField.configuration = countryConfiguration
-
-		// Force select first row in picker.
-		countryTextField.selectFirstRow()
-
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
-		addressLine1Configuration.type = .none
-    addressLine1Configuration.keyboardType = .default
-		addressLine1Configuration.isRequiredValidOnly = true
-		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-
-		addressLine1TextField.configuration = addressLine1Configuration
-
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
-		addressLine2Configuration.type = .none
-    addressLine2Configuration.keyboardType = .default
-		addressLine2Configuration.isRequiredValidOnly = false
-
-		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
-		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
-
-		addressLine2TextField.configuration = addressLine2Configuration
-
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
-		cityConfiguration.type = .none
-    cityConfiguration.keyboardType = .default
-		cityConfiguration.isRequiredValidOnly = true
-		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-
-		cityTextField.configuration = cityConfiguration
-
-		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
-		postalCodeConfiguration.type = .none
-		postalCodeConfiguration.isRequiredValidOnly = true
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-		postalCodeConfiguration.returnKeyType = .done
-
-		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
-		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
-
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
-
-		postalCodeTextField.configuration = postalCodeConfiguration
-
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+		let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 
 		let addressFieldsOptions = [vaultConfiguration.billingAddressCountryFieldOptions, vaultConfiguration.billingAddressLine1FieldOptions, vaultConfiguration.billingAddressLine2FieldOptions, vaultConfiguration.billingAddressCityFieldOptions, vaultConfiguration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
 
@@ -136,11 +80,11 @@ internal class VGSAddressDataFormConfigurationManager {
 					addressLine2Configuration.type = .none
 					addressLine2Configuration.keyboardType = .default
 
-					if option.isRequired {
-						addressLine2Configuration.isRequiredValidOnly = true
-					} else {
-						addressLine2Configuration.isRequired = false
-					}
+//					if option.isRequired {
+//						addressLine2Configuration.isRequiredValidOnly = true
+//					} else {
+//						addressLine2Configuration.isRequired = false
+//					}
 
 					addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
 					addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
