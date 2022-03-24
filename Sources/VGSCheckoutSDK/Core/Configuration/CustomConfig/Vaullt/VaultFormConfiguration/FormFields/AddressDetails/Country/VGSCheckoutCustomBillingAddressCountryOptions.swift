@@ -5,7 +5,7 @@
 import Foundation
 
 /// Holds billing address country field options for custom configuration.
-public struct VGSCheckoutCustomBillingAddressCountryOptions {
+public struct VGSCheckoutCustomBillingAddressCountryOptions: VGSCheckoutAddressOptionsProtocol {
 
 	/// Field name in your route configuration.
 	public var fieldName = ""
