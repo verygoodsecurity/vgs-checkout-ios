@@ -80,12 +80,6 @@ internal class VGSAddressDataFormConfigurationManager {
 					addressLine2Configuration.type = .none
 					addressLine2Configuration.keyboardType = .default
 
-//					if option.isRequired {
-//						addressLine2Configuration.isRequiredValidOnly = true
-//					} else {
-//						addressLine2Configuration.isRequired = false
-//					}
-
 					addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
 					addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
 
