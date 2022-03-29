@@ -71,11 +71,11 @@ internal class VGSAddressDataFormConfigurationManager {
 					let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
 					addressLine1Configuration.type = .none
 					addressLine1Configuration.keyboardType = .default
-					if option.isRequired {
-						addressLine1Configuration.isRequiredValidOnly = true
-					} else {
-						addressLine1Configuration.isRequired = false
-					}
+//					if option.isRequired {
+//						addressLine1Configuration.isRequiredValidOnly = true
+//					} else {
+//						addressLine1Configuration.isRequired = false
+//					}
 					addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
 						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 					])
@@ -102,11 +102,11 @@ internal class VGSAddressDataFormConfigurationManager {
 					let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
 					cityConfiguration.type = .none
 					cityConfiguration.keyboardType = .default
-					if option.isRequired {
-						cityConfiguration.isRequiredValidOnly = true
-					} else {
-						cityConfiguration.isRequired = false
-					}
+//					if option.isRequired {
+//						cityConfiguration.isRequiredValidOnly = true
+//					} else {
+//						cityConfiguration.isRequired = false
+//					}
 					cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
 						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
 					])
@@ -117,22 +117,25 @@ internal class VGSAddressDataFormConfigurationManager {
 				}
 			case .postalCode:
 				if option.visibility == .visible {
-					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
-					postalCodeConfiguration.type = .none
-					if option.isRequired {
-						postalCodeConfiguration.isRequiredValidOnly = true
-					} else {
-						postalCodeConfiguration.isRequired = false
-					}
-					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
-						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-					])
-					postalCodeConfiguration.returnKeyType = .done
-
 					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
 					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
 
+					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
+					postalCodeConfiguration.type = .none
+//					if option.isRequired {
+					postalCodeConfiguration.isRequiredValidOnly = true
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
+
 					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					//					} else {
+					//						postalCodeConfiguration.isRequired = false
+					//					}
+
+					postalCodeConfiguration.returnKeyType = .done
+
+
 
 					postalCodeTextField.configuration = postalCodeConfiguration
 
