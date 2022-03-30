@@ -39,6 +39,14 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		let addressFieldsOptions = [vaultConfiguration.billingAddressCountryFieldOptions, vaultConfiguration.billingAddressLine1FieldOptions, vaultConfiguration.billingAddressLine2FieldOptions, vaultConfiguration.billingAddressCityFieldOptions, vaultConfiguration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
 
+		// Check if has visible address fields.
+		let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
+		if visibleAddressFields.isEmpty {
+			// Hide address view.
+			addressFormView.isHidden = true
+			return
+		}
+
 		for option in addressFieldsOptions {
 			switch option.fieldType {
 			case .country:
