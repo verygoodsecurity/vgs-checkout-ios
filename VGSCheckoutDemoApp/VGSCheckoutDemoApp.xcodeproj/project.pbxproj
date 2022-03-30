@@ -35,6 +35,7 @@
 		445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */; };
 		445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */; };
 		445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */; };
+		44B601CE27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
 		44E10AD0269D7A5A001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AD2269D7A5A001F0D44 /* Localizable.strings */; };
@@ -96,6 +97,7 @@
 		445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnlyPostalCodeTests.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
 		44E10AD1269D7A5A001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 		445C125F26F9986B00D6F3DD /* UseCasesTests */ = {
 			isa = PBXGroup;
 			children = (
+				44B601CC27F4557100F2CCFA /* BillingAddress */,
 				4428DD22273CF5B000071CB8 /* ValidCountries */,
 				44282B762735231400223A66 /* ValidationTests */,
 				445C126026F9987800D6F3DD /* CustomConfig */,
@@ -441,6 +444,14 @@
 				445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */,
 			);
 			path = "UIApplication+Extensions";
+			sourceTree = "<group>";
+		};
+		44B601CC27F4557100F2CCFA /* BillingAddress */ = {
+			isa = PBXGroup;
+			children = (
+				44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */,
+			);
+			path = BillingAddress;
 			sourceTree = "<group>";
 		};
 		44C4C9332666011A00195505 /* Configuration */ = {
@@ -756,6 +767,7 @@
 				445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */,
 				445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */,
 				44282B752735210200223A66 /* VGSCheckoutTestFeature.swift in Sources */,
+				44B601CE27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift in Sources */,
 				445C126A26F99A0700D6F3DD /* VGSUITestElement.swift in Sources */,
 				3286E10D265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift in Sources */,
 				4428DD1D273BD99200071CB8 /* VGSCheckoutOnFocusValidationTests.swift in Sources */,
