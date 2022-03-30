@@ -120,6 +120,18 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 				/// Zip hint.
 				static let zipHint: VGSUITestElement = .init(type: .label, identifier: "ZIP")
+
+				/// Country hint.
+				static let countryHint: VGSUITestElement = .init(type: .label, identifier: "COUNTRY")
+
+				/// Address line 1 hint.
+				static let addressLine1Hint: VGSUITestElement = .init(type: .label, identifier: "ADDRESS LINE 1")
+
+				/// Address line 2 hint.
+				static let addressLine2Hint: VGSUITestElement = .init(type: .label, identifier: "ADDRESS LINE 2 (OPTIONAL)")
+
+				/// City hint.
+				static let cityHint: VGSUITestElement = .init(type: .label, identifier: "CITY")
 			}
 		}
 	}

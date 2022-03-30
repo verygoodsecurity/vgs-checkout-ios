@@ -5,7 +5,7 @@
 import Foundation
 import XCTest
 
-/// Tests for `.onlyZipCodeField` feature.
+/// Tests for `.onlyPostalCodeField` feature.
 class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 
 	/// Setup.
@@ -16,11 +16,11 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.launchArgument)
 	}
 
-	/// Test valid countries feature with Bolivia first in list - Bolivia doesn't have postal code.
-	func testValidCountriesWithBoliviaFirst() {
+	/// Test validation when only zip code field is available (for USA).
+	func testOnlyZipCodeField() {
 		// Append valid countries.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["US"]).launchArgument)
-		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyZipFieldInAddress.launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -31,14 +31,8 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Open checkout screen.
 		startCheckout()
 
-		// Verify postal code/zip fields are not displayed for Bolivia.
-		verifyNoPostalCodeUI()
-
-		// Verify Bolivia is displayed in country field.
-		verifyCountryFieldUI(for: "Bolivia")
-
-		// Swipe down.
-		app.swipeDown()
+		// Verify ZIP field is available.
+		verifyOnlyZipFieldIsVisible()
 
 		// Fill in correct card data.
 		fillInCorrectCardData()
@@ -46,8 +40,11 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Swipe up.
 		app.swipeUp()
 
-		// Type Bolivia billing address.
-		fillInBoliviaBillingAddress()
+		// Verify zip code error is displayed for invalid zip.
+		verifyInvalidZipCodeError()
+
+		// Verify zip code error is not displayed for valid zip.
+		verifyValidZipCodeNoError()
 
 		// Wait for keyboard dismiss.
 		wait(forTimeInterval: 0.5)
@@ -59,10 +56,11 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
-	/// Test valid countries feature with Canada first in list - Canada has postal code.
-	func testValidCountriesWithCanadaFirst() {
+	/// Test validation when only postal code field is available (for CA).
+	func testOnlyPostalCodeField() {
 		// Append valid countries.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["CA", "US"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["CA"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -73,29 +71,20 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Open checkout screen.
 		startCheckout()
 
-		// Verify postal code UI is displayed.
-		verifyPostalCodeUI()
+		// Verify ZIP field is available.
+		verifyOnlyPostalCodeFieldIsVisible()
 
-		// Verify Canada is displayed in country field.
-		verifyCountryFieldUI(for: "Canada")
+		// Fill in correct card data.
+		fillInCorrectCardData()
 
-		// Verify error for invalid Canada postal code is displayed.
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify postal code error is displayed for invalid CA postal code.
 		verifyPostalCodeErrorsForCanada()
 
-		// Verify errors are updated correctly on country change.
-		verifyErrorsUpdateOnSwitchingCaToUS()
-
-		// Swipe down.
-		app.swipeDown()
-
-		// Fill in correct card data.
-		fillInCorrectCardData()
-
-		// Swipe up.
-		app.swipeUp()
-
-		// Type Canada billing address.
-		fillInCanadaBillingAddress()
+		// Verify postal code error is not displayed for valid CA postal code.
+		verifyPostalCodeNoErrorsForCanada()
 
 		// Wait for keyboard dismiss.
 		wait(forTimeInterval: 0.5)
@@ -105,52 +94,9 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Check success alert.
 		verifySuccessAlertExists()
-	}
-
-	/// Test valid countries feature with empty list - should be all countries with US first.
-	func testValidCountriesWithEmptyList() {
-		// Append valid countries.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries([]).launchArgument)
-
-		// Launch app.
-		app.launch()
-
-		// Navigate to Custom config use case.
-		navigateToCustomConfigUseCase()
-
-		// Open checkout screen.
-		startCheckout()
-
-		// Verify zip code UI is displayed.
-		verifyZIPUI()
-
-		// Verify United States is displayed in country field.
-		verifyCountryFieldUI(for: "United States")
 	}
 
 	// MARK: - Helpers
-
-	/// Verifies postal code/zip fields are hidden.
-	func verifyNoPostalCodeUI() {
-		// Swipe up to bottom.
-		app.swipeUp()
-
-		// Verify zip field is not displayed.
-		XCTAssertFalse(VGSTextField.BillingAddress.zip.exists(in: app))
-		// Verify postal code field is not displayed.
-		XCTAssertFalse(VGSTextField.BillingAddress.postalCode.exists(in: app))
-	}
-
-	/// Verifies correct country name is displayed in country field.
-	/// - Parameter countryName: `String` object, country name.
-	func verifyCountryFieldUI(for countryName: String) {
-		// Swipe up to bottom.
-		app.swipeUp()
-
-		// Verify country text field.
-		let countryField = VGSUITestElement(type: .textField, identifier: countryName)
-		XCTAssertTrue(countryField.exists(in: app))
-	}
 
 	/// Verifies error is not displayed for valid zip code.
 	func verifyValidZipCodeNoError() {
@@ -160,8 +106,8 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Type valid zip code.
 		VGSTextField.BillingAddress.zip.find(in: app).type("12345")
 
-		// Focus to city field.
-		VGSTextField.BillingAddress.city.find(in: app).tap()
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
 
 		// Verify invalid zip code error is not displayed.
 		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
@@ -175,8 +121,8 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Type invalid zip code.
 		VGSTextField.BillingAddress.zip.find(in: app).type("1234", shouldClear: true)
 
-		// Focus to city field.
-		VGSTextField.BillingAddress.city.find(in: app).tap()
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
 
 		// Verify invalid zip code error is displayed.
 		XCTAssertTrue(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
@@ -223,10 +169,64 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Type invalid postal code for Canada.
 		VGSTextField.BillingAddress.postalCode.find(in: app).type("12345", shouldClear: true)
 
-		// Focus to city field.
-		VGSTextField.BillingAddress.city.find(in: app).tap()
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
 
 		// Check postal code errors.
 		XCTAssertTrue(Labels.CheckoutErrorLabels.BillingAddress.invalidPostalCode.exists(in: app))
+	}
+
+	/// Verifies no postal code errors are displayed correctly for Canada.
+	func verifyPostalCodeNoErrorsForCanada() {
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Type valid postal code for Canada.
+		VGSTextField.BillingAddress.postalCode.find(in: app).type("N0K1W0", shouldClear: true)
+
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
+
+		// Check postal code errors.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidPostalCode.exists(in: app))
+	}
+
+	/// Verifies only zip field is visible.
+	func verifyOnlyZipFieldIsVisible() {
+		// Swipe down.
+		app.swipeDown()
+
+		// Verify ZIP field is available.
+		verifyZIPUI()
+
+		// Verifies other address fields are hidden.
+		verifyAddressFieldsAreHidden()
+	}
+
+	/// Verifies only postal code field is visible.
+	func verifyOnlyPostalCodeFieldIsVisible() {
+		// Swipe down.
+		app.swipeDown()
+
+		// Verify postal code field is available.
+		verifyPostalCodeUI()
+
+		// Verifies other address fields are hidden.
+		verifyAddressFieldsAreHidden()
+	}
+
+	// Verifies other address fields are hidden.
+	func verifyAddressFieldsAreHidden() {
+		// Verify country hint doesn't exists.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.countryHint.exists(in: app))
+
+		// Verify address line 1 hint doesn't exists.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine1Hint.exists(in: app))
+
+		// Verify address line 2 hint doesn't exists.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine2Hint.exists(in: app))
+
+		// Verify city hint doesn't exists.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.cityHint.exists(in: app))
 	}
 }

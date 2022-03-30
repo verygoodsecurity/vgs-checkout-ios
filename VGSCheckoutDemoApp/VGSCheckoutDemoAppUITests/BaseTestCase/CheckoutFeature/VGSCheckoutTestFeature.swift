@@ -16,8 +16,8 @@ enum VGSCheckoutUITestsFeature {
 	/// List of valid countries in billing address.
 	case validCountries( _ countries: [String])
 
-	/// Only zip field in address is visible.
-	case onlyPostalFieldInAddress
+	/// Only postal code field in address is visible.
+	case onlyPostalCodeFieldInAddress
 
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
@@ -28,7 +28,7 @@ enum VGSCheckoutUITestsFeature {
 			return "onFocusValidation"
 		case .validCountries(let countries):
 			return "validCountries=" + countries.joined(separator: ".")
-		case .onlyPostalFieldInAddress:
+		case .onlyPostalCodeFieldInAddress:
 			return "onlyPostalCodeFieldInAddress"
 		}
 	}
