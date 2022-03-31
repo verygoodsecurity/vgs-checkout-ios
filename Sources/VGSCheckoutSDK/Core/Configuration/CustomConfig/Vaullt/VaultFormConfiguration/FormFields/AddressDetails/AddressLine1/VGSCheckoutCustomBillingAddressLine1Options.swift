@@ -19,3 +19,16 @@ public struct VGSCheckoutCustomBillingAddressLine1Options: VGSCheckoutAddressOpt
 	/// no:doc
 	public init() {}
 }
+
+/// Holds billing address, address line 1 field options for payment orchestration.
+public struct VGSCheckoutBillingAddressLine1Options: VGSCheckoutAddressOptionsProtocol {
+
+	/// Field visibility, default is `.visible`.
+	public var visibility: VGSCheckoutFieldVisibility = .visible
+
+	/// Field type.
+	internal let fieldType: VGSAddCardFormFieldType = .addressLine1
+
+	/// no:doc
+	public init() {}
+}

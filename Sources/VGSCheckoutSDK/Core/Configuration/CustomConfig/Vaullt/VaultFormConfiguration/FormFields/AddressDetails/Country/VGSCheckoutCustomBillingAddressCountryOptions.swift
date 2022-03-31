@@ -25,7 +25,7 @@ public struct VGSCheckoutCustomBillingAddressCountryOptions: VGSCheckoutAddressO
 	public init() {}
 }
 
-/// Holds billing address country field options.
+/// Holds billing address country field options for payment orchestration.
 public struct VGSCheckoutBillingAddressCountryOptions: VGSCheckoutAddressOptionsProtocol {
   
   //// List of valid country codes in ISO-3166-1-alpha-2 format.
