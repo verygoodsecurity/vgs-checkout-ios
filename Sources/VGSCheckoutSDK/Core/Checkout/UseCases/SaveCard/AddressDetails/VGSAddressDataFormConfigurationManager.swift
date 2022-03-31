@@ -35,63 +35,126 @@ internal class VGSAddressDataFormConfigurationManager {
 			break
 		}
 
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
-    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
-		countryConfiguration.type = .none
-		countryConfiguration.isRequiredValidOnly = true
+		let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 
-		countryTextField.configuration = countryConfiguration
+		let addressFieldsOptions = [vaultConfiguration.billingAddressCountryFieldOptions, vaultConfiguration.billingAddressLine1FieldOptions, vaultConfiguration.billingAddressLine2FieldOptions, vaultConfiguration.billingAddressCityFieldOptions, vaultConfiguration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
 
-		// Force select first row in picker.
-		countryTextField.selectFirstRow()
+		// Check if has visible address fields.
+		let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
+		if visibleAddressFields.isEmpty {
+			// Hide address view.
+			addressFormView.isHidden = true
+			return
+		}
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
-		addressLine1Configuration.type = .none
-    addressLine1Configuration.keyboardType = .default
-		addressLine1Configuration.isRequiredValidOnly = true
-		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
+		for option in addressFieldsOptions {
+			switch option.fieldType {
+			case .country:
+				if option.visibility == .visible {
+					let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
+					let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+					countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
+					countryConfiguration.type = .none
+					countryConfiguration.isRequiredValidOnly = true
 
-		addressLine1TextField.configuration = addressLine1Configuration
+					countryTextField.configuration = countryConfiguration
 
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
-		addressLine2Configuration.type = .none
-    addressLine2Configuration.keyboardType = .default
-		addressLine2Configuration.isRequiredValidOnly = false
+					// Force select first row in picker.
+					countryTextField.selectFirstRow()
+				} else {
+					addressFormView.countryFieldView.isHidden = true
 
-		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
-		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+					var hasCountries = false
+					if let countries = countryOptions.validCountries {
+						hasCountries = !countries.isEmpty
+					}
 
-		addressLine2TextField.configuration = addressLine2Configuration
+					if !hasCountries {
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden. You should provide validCountries array", severityLevel: .warning)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
+					}
+				}
+			case .addressLine1:
+				if option.visibility == .visible {
+					let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
+					addressLine1Configuration.type = .none
+					addressLine1Configuration.keyboardType = .default
+//					if option.isRequired {
+//						addressLine1Configuration.isRequiredValidOnly = true
+//					} else {
+//						addressLine1Configuration.isRequired = false
+//					}
+					addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
-		cityConfiguration.type = .none
-    cityConfiguration.keyboardType = .default
-		cityConfiguration.isRequiredValidOnly = true
-		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
+					addressLine1TextField.configuration = addressLine1Configuration
+				} else {
+					addressFormView.addressLine1FieldView.isHidden = true
+				}
+			case .addressLine2:
+				if option.visibility == .visible {
+					let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
+					addressLine2Configuration.type = .none
+					addressLine2Configuration.keyboardType = .default
 
-		cityTextField.configuration = cityConfiguration
+					addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+					addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
 
-		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
-		postalCodeConfiguration.type = .none
-		postalCodeConfiguration.isRequiredValidOnly = true
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-		postalCodeConfiguration.returnKeyType = .done
+					addressLine2TextField.configuration = addressLine2Configuration
+				} else {
+					addressFormView.addressLine2FieldView.isHidden = true
+				}
+			case .city:
+				if option.visibility == .visible {
+					let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
+					cityConfiguration.type = .none
+					cityConfiguration.keyboardType = .default
+//					if option.isRequired {
+//						cityConfiguration.isRequiredValidOnly = true
+//					} else {
+//						cityConfiguration.isRequired = false
+//					}
+					cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
-		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+					cityTextField.configuration = cityConfiguration
+				} else {
+					addressFormView.cityFieldView.isHidden = true
+				}
+			case .postalCode:
+				if option.visibility == .visible {
+					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
+					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
 
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
+					postalCodeConfiguration.type = .none
+//					if option.isRequired {
+					postalCodeConfiguration.isRequiredValidOnly = true
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		postalCodeTextField.configuration = postalCodeConfiguration
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					//					} else {
+					//						postalCodeConfiguration.isRequired = false
+					//					}
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+					postalCodeConfiguration.returnKeyType = .done
+
+
+
+					postalCodeTextField.configuration = postalCodeConfiguration
+
+					VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+				} else {
+					addressFormView.postalCodeFieldView.isHidden = true
+				}
+			default:
+				break
+			}
+		}
 	}
 
 	/*

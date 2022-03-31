@@ -17,6 +17,9 @@ enum VGSCheckoutUITestsFeature {
 	/// List of valid countries in billing address.
 	case validCountries( _ countries: [String])
 
+	/// Only postal code field in address is visible.
+	case onlyPostalCodeFieldInAddress
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -26,6 +29,8 @@ enum VGSCheckoutUITestsFeature {
 			return "onFocusValidation"
 		case .validCountries(let countries):
 			return "validCountries=" + countries.joined(separator: ".")
+		case .onlyPostalCodeFieldInAddress:
+			return "onlyPostalCodeFieldInAddress"
 		}
 	}
 
@@ -36,6 +41,9 @@ enum VGSCheckoutUITestsFeature {
 			return
 		} else if launchArgument == VGSCheckoutUITestsFeature.onFocusValidation.launchArgument {
 			self = .onFocusValidation
+			return
+		} else if launchArgument == VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument {
+			self = .onlyPostalCodeFieldInAddress
 			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
@@ -66,6 +74,12 @@ internal class UITestsConfigurationManager {
 				configuration.formValidationBehaviour = .onSubmit
 			case .validCountries(let countries):
 				configuration.billingAddressCountryFieldOptions.validCountries = countries
+			case .onlyPostalCodeFieldInAddress:
+				configuration.billingAddressCountryFieldOptions.visibility = .hidden
+				configuration.billingAddressLine1FieldOptions.visibility = .hidden
+				configuration.billingAddressLine2FieldOptions.visibility = .hidden
+				configuration.billingAddressCityFieldOptions.visibility = .hidden
+				configuration.billingAddressCityFieldOptions.visibility = .hidden
 			}
 		}
 	}
