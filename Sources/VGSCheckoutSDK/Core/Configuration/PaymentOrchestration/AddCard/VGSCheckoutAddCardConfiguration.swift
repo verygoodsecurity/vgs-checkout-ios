@@ -88,6 +88,50 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
     }
   }
 
+	/// Billing address line 1 field options.
+	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressLine1Options {
+		get {
+			return formConfiguration.addressOptions.addressLine1Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine1Options = newValue
+		}
+	}
+
+	/// Billing address line 2 field options.
+	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressLine2Options {
+		get {
+			return formConfiguration.addressOptions.addressLine2Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine2Options = newValue
+		}
+	}
+
+	/// Billing address city field options.
+	public var billingAddressCityFieldOptions: VGSCheckoutBillingAddressCityOptions {
+		get {
+			return formConfiguration.addressOptions.cityOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.cityOptions = newValue
+		}
+	}
+
+	/// Billing address postal code field options.
+	public var billingAddressPostalCodeFieldOptions: VGSCheckoutBillingAddressPostalCodeOptions {
+		get {
+			return formConfiguration.addressOptions.postalCodeOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.postalCodeOptions = newValue
+		}
+	}
+
 	/// Form validation behavior, default is `.onSubmit`.
 	public var formValidationBehaviour: VGSCheckoutFormValidationBehaviour {
 		get {
