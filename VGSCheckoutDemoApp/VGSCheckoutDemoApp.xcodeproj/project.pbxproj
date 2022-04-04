@@ -35,6 +35,8 @@
 		445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */; };
 		445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */; };
 		445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */; };
+		4472AC2427FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC2227FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift */; };
+		4472AC2527FAAC2A005A0870 /* CheckoutAddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */; };
 		44B601CE27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
@@ -97,6 +99,8 @@
 		445C126E26F99A6300D6F3DD /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		445C127026F99A8F00D6F3DD /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		4472AC2227FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentOrchestrationCustomBackendAPIClient.swift; sourceTree = "<group>"; };
+		4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutAddCardVC.swift; sourceTree = "<group>"; };
 		44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnlyPostalCodeTests.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				441927D5265F64550080B01E /* CheckoutBasicSetup */,
+				4472AC2127FAAC2A005A0870 /* CheckoutPaymentOrchestration */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -444,6 +449,15 @@
 				445C127526FAEE6800D6F3DD /* UIApplication+Extensions.swift */,
 			);
 			path = "UIApplication+Extensions";
+			sourceTree = "<group>";
+		};
+		4472AC2127FAAC2A005A0870 /* CheckoutPaymentOrchestration */ = {
+			isa = PBXGroup;
+			children = (
+				4472AC2227FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift */,
+				4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */,
+			);
+			path = CheckoutPaymentOrchestration;
 			sourceTree = "<group>";
 		};
 		44B601CC27F4557100F2CCFA /* BillingAddress */ = {
@@ -736,7 +750,9 @@
 				441927E8265F6F0E0080B01E /* CheckoutFlowMainView.swift in Sources */,
 				445C127626FAEE6800D6F3DD /* UIApplication+Extensions.swift in Sources */,
 				441927DD265F673C0080B01E /* UIView+Extensions.swift in Sources */,
+				4472AC2427FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift in Sources */,
 				441927D7265F64A60080B01E /* CheckoutBasicFlowVC.swift in Sources */,
+				4472AC2527FAAC2A005A0870 /* CheckoutAddCardVC.swift in Sources */,
 				44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */,
 				441927E6265F6CC50080B01E /* OrderDataProvider.swift in Sources */,
 				44282B7C2735248400223A66 /* UITestsConfigurationManager.swift in Sources */,
