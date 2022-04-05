@@ -18,7 +18,6 @@ import SVProgressHUD
  Step 3: Create `VGSCheckoutAddCardConfiguration` with fetched token and present Checkout.
          Implement `VGSCheckoutDelegate` protocol to get notified when checkout flow will be finished.
  Step 4: Implement `checkoutDidFinish` method and parse response to get financial instrument `id` in response json.
- Step 5: Initiate `/transfer` request with financial instrument using your backend by sending request from mobile app.
 */
 class CheckoutAddCardVC: UIViewController {
 
@@ -83,15 +82,6 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 			}
 			return
 		}
-
-		// Start progress hud animation until payment transfer is finished.
-		SVProgressHUD.show()
-		paymentOrchestrationAPIClient.initiateTransfer(with: id, amount: "53", currency: "USD") { responseText in
-			SVProgressHUD.showSuccess(withStatus: "Successfully finished payment orchestration transfer!")
-			self.mainView.responseTextView.text = responseText
-		} failure: { errorMessage in
-			SVProgressHUD.showError(withStatus: "Cannot complete transfer!")
-		}
 	}
 
 	/// Presents payment orchestration checkout flow.
@@ -101,6 +91,13 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
+			configuration.billingAddressCountryFieldOptions.visibility = .hidden
+			configuration.billingAddressLine1FieldOptions.visibility = .hidden
+			configuration.billingAddressCountryFieldOptions.validCountries = ["US"]
+			configuration.billingAddressLine2FieldOptions.visibility = .hidden
+			configuration.billingAddressCityFieldOptions.visibility = .hidden
+			configuration.billingAddressPostalCodeFieldOptions.visibility = .visible
+
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
 			strongSelf.vgsCheckout?.delegate = strongSelf
 			// Present checkout configuration.
@@ -133,10 +130,8 @@ extension CheckoutAddCardVC: VGSCheckoutDelegate {
 
 			if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
 				financialInstrumentID = id
-				message = "status code is: \(statusCode). Press BUY to send payment!"
-				mainView.button.setTitle("BUY", for: .normal)
-			} else {
-				message = "status code is: \(statusCode). Card was saved successfully but cannot obtain financial instrument id"
+				message = "status code is: \(statusCode). Fin instrument id is \(id)"
+				mainView.button.setTitle("CARD WAS SAVED", for: .normal)
 			}
 		case .failure(let statusCode, _, _, let error, let info):
 			title = "Checkout Payment orchestration status: Failed!"
