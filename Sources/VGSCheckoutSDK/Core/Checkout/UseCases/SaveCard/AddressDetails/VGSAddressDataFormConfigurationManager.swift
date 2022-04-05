@@ -128,6 +128,24 @@ internal class VGSAddressDataFormConfigurationManager {
 					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
 					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
 
+					if !firstCountryISOCode.hasPostalCode {
+						let isOnlyPostalCodeVisible: Bool = {
+							let otherAddressFields = addressFieldsOptions.filter({$0.fieldType != .postalCode})
+							let otherVisibleFields = otherAddressFields.filter({$0.visibility == .visible})
+
+							return otherVisibleFields.isEmpty
+						}()
+
+						if isOnlyPostalCodeVisible {
+							let event = VGSLogEvent(level: .warning, text: "Postal code field is visible. Valid country \(firstCountryRawCode) does not have postal code. Address section view will be hidden", severityLevel: .warning)
+							VGSCheckoutLogger.shared.forwardLogEvent(event)
+
+							// Hide address view.
+							addressFormView.isHidden = true
+							return
+						}
+					}
+
 					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
 					postalCodeConfiguration.type = .none
 //					if option.isRequired {
@@ -230,6 +248,7 @@ internal class VGSAddressDataFormConfigurationManager {
 
 		// Check if has visible address fields.
 		let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
+
 		if visibleAddressFields.isEmpty {
 			// Hide address view.
 			addressFormView.isHidden = true
@@ -316,6 +335,24 @@ internal class VGSAddressDataFormConfigurationManager {
 				if option.visibility == .visible {
 					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
 					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+
+					if !firstCountryISOCode.hasPostalCode {
+						let isOnlyPostalCodeVisible: Bool = {
+							let otherAddressFields = addressFieldsOptions.filter({$0.fieldType != .postalCode})
+							let otherVisibleFields = otherAddressFields.filter({$0.visibility == .visible})
+
+							return otherVisibleFields.isEmpty
+						}()
+
+						if isOnlyPostalCodeVisible {
+							let event = VGSLogEvent(level: .warning, text: "Postal code field is visible. Valid country \(firstCountryRawCode) does not have postal code. Address section view will be hidden", severityLevel: .warning)
+							VGSCheckoutLogger.shared.forwardLogEvent(event)
+
+							// Hide address view.
+							addressFormView.isHidden = true
+							return
+						}
+					}
 
 					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.postal_code")
 					postalCodeConfiguration.type = .none
