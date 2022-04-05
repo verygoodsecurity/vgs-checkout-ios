@@ -277,6 +277,15 @@ internal class VGSAddressDataFormConfigurationManager {
 						hasCountries = !countries.isEmpty
 					}
 
+					// For payment orchestration if country field is hidden bind country field to collect anyway since we cannot identify country by postal code only.
+					let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+
+					let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
+					countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
+					countryConfiguration.type = .none
+					countryTextField.configuration = countryConfiguration
+					countryTextField.selectFirstRow()
+
 					if !hasCountries {
 						let event = VGSLogEvent(level: .warning, text: "Country field is hidden. You should provide validCountries array", severityLevel: .warning)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
