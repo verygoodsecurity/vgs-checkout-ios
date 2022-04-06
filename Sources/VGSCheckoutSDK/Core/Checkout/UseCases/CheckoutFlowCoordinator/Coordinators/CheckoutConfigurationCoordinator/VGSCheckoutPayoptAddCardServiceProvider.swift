@@ -25,7 +25,7 @@ internal final class VGSCheckoutPayoptAddCardServiceProvider: VGSCheckoutService
 		guard let checkoutConfigurationType = VGSCheckoutConfigurationType(configuration: configuration) else {
 			fatalError("Invalid configuration for payopt add card service provier!")
 		}
-		self.checkoutService = VGSSaveCardCheckoutService(checkoutConfigurationType: checkoutConfigurationType, vgsCollect: vgsCollect, uiTheme: uiTheme)
+		self.checkoutService = VGSPayoptAddCardCheckoutService(checkoutConfigurationType: checkoutConfigurationType, vgsCollect: vgsCollect, uiTheme: uiTheme)
 	}
 
 	// MARK: - Vars
