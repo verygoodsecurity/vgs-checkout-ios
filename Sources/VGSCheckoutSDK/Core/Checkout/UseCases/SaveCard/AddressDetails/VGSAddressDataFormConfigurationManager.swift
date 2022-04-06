@@ -70,7 +70,7 @@ internal class VGSAddressDataFormConfigurationManager {
 					}
 
 					if !hasCountries {
-						let event = VGSLogEvent(level: .warning, text: "Country field is hidden. You should provide validCountries array", severityLevel: .warning)
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden in billing address. You should provide validCountries array.", severityLevel: .warning)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
 					}
 				}
@@ -287,7 +287,7 @@ internal class VGSAddressDataFormConfigurationManager {
 					countryTextField.selectFirstRow()
 
 					if !hasCountries {
-						let event = VGSLogEvent(level: .warning, text: "Country field is hidden. You should provide validCountries array", severityLevel: .warning)
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden in billing address. You should provide validCountries array.", severityLevel: .warning)
 						VGSCheckoutLogger.shared.forwardLogEvent(event)
 					}
 				}
