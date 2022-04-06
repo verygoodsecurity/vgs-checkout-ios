@@ -96,6 +96,50 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+
+	/// Test address section is hidden when no postal code.
+	func testAddressSectionHiddenWhenNoPostalCode() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["BO"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Custom config use case.
+		navigateToCustomConfigUseCase()
+
+		// Open checkout screen.
+		startCheckout()
+
+		// Verify ZIP field is hidden.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Verify Postal code field is hidden.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
+
+		// Verify other fields are hidden.
+		verifyAddressFieldsAreHidden()
+
+		// Verify address section is hidden.
+		XCTAssertFalse(Labels.CheckoutSectionTitles.billingAddress.exists(in: app))
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
+	}
+
 	// MARK: - Helpers
 
 	/// Verifies error is not displayed for valid zip code.
