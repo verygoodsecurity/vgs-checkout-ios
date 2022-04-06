@@ -79,7 +79,7 @@ internal class VGSSaveCardCheckoutService: NSObject, VGSCheckoutServiceProtocol 
 		self.uiTheme = uiTheme
 		//		self.initialScreen = .payWithNewCard
 		switch checkoutConfigurationType {
-		case .payoptTransfers(let configuration):
+		case .payoptAddCard(let configuration):
 			if !configuration.savedCards.isEmpty {
 					self.initialScreen = .payWithNewCard
 				} else {
