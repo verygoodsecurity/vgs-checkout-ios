@@ -206,13 +206,13 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 }
 
 /// Saved payment methods.
-internal enum VGSCheckoutSavedPaymentMethods {
+public enum VGSCheckoutSavedPaymentMethods {
 
 	case savedCards( _ ids: [String])
 	//case userId(_ id: String)
 }
 
 /// Additional options
-internal struct VGSCheckoutPaymentOptions {
-	internal var methods: VGSCheckoutSavedPaymentMethods? = nil
+public struct VGSCheckoutPaymentOptions {
+	public var methods: VGSCheckoutSavedPaymentMethods? = nil
 }

@@ -72,30 +72,30 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	/// Builds view controller for save card flow.
 	/// - Returns: `UIViewController` object, view controller with save card form.
 	internal func buildCheckoutViewController() -> UIViewController {
-		let vc: UIViewController
-		switch initialScreen {
-		case .payWithNewCard:
-			vc = buildPayWithNewCardVC()
-		case .paymentOptions:
-			//			fatalError("not implemented")
-			vc = buildPaymentOptionsVC()
-		}
-		return UINavigationController(rootViewController: vc)
+//		let vc: UIViewController
+//		switch initialScreen {
+//		case .payWithNewCard:
+//			vc = buildPayWithNewCardVC()
+//		case .paymentOptions:
+//			//			fatalError("not implemented")
+//			vc = buildPaymentOptionsVC()
+//		}
+		return UINavigationController(rootViewController: UIViewController())
 	}
 
 	/// Builds payment options screen.
 	/// Returns: `UIViewController` object, view controller for payment options.
-	internal func buildPaymentOptionsVC() -> UIViewController {
-		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
-
-		return paymentOptionsVC
-	}
-
-	/// Builds pay with new card vc.
-	/// Returns: `UIViewController` object, view controller for pay with new card.
-	internal func buildPayWithNewCardVC() -> UIViewController {
-		let payWithNewCardVC = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
-
-		return payWithNewCardVC
-	}
+//	internal func buildPaymentOptionsVC() -> UIViewController {
+//		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
+//
+//		return paymentOptionsVC
+//	}
+//
+//	/// Builds pay with new card vc.
+//	/// Returns: `UIViewController` object, view controller for pay with new card.
+//	internal func buildPayWithNewCardVC() -> UIViewController {
+//		let payWithNewCardVC = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
+//
+//		return payWithNewCardVC
+//	}
 }

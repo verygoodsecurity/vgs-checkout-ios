@@ -90,12 +90,12 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 		switch formState {
 		case .processing:
       let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
-      viewModel.apiWorker.createFinIDAndSendTransfer(with: cardInfo) {[weak self] requestResult in
-				guard let strongSelf = self else {return}
-				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
-				guard let service = strongSelf.paymentService else {return}
-				strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
-			}
+//      viewModel.apiWorker.createFinIDAndSendTransfer(with: cardInfo) {[weak self] requestResult in
+//				guard let strongSelf = self else {return}
+//				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+//				guard let service = strongSelf.paymentService else {return}
+//				strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+//			}
 		default:
 			break
 		}

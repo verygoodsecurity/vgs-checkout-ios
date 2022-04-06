@@ -49,7 +49,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	fileprivate let uiTheme: VGSCheckoutThemeProtocol
 
 	// Pay with card service.
-	fileprivate weak var paymentService: VGSCheckoutPayoptTransfersService?
+	fileprivate weak var paymentService: VGSSaveCardCheckoutService?
 
 	/// Close bar button item.
 	fileprivate lazy var closeBarButtomItem: UIBarButtonItem = {
@@ -99,8 +99,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	// MARK: - Initialization
 
 	/// Initializer
-	/// - Parameter paymentService: `VGSCheckoutPayoptTransfersService` object, pay opt  checkout transfer service.
-	init(paymentService: VGSCheckoutPayoptTransfersService) {
+	/// - Parameter paymentService: `VGSSaveCardCheckoutService` object, pay opt  checkout transfer service.
+	init(paymentService: VGSSaveCardCheckoutService) {
 		self.paymentService = paymentService
 		self.viewModel = VGSPayoptTransfersViewModelFactory.buildPaymentOptionsViewModel(with: paymentService)
 		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.uiTheme)
@@ -162,8 +162,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Navigates to pay with new card screen.
 	fileprivate func navigateToPayWithNewCardScreen() {
 		guard let service = paymentService else {return}
-		let vc = VGSPayWithCardViewController(paymentService: service, initialScreen: .paymentOptions)
-		navigationController?.pushViewController(vc, animated: true)
+		let saveCardViewController = VGSSaveCardViewController(saveCardService: service)
+		navigationController?.pushViewController(saveCardViewController, animated: true)
 	}
 
 	// MARK: - Actions

@@ -15,9 +15,9 @@ internal class VGSPaymentOptionsViewModel {
 	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
 	///   - vgsCollect: `VGSCollect` object, vgs collect.
 	///   - checkoutService: `VGSCheckoutPayoptTransfersService` object, payopt transfers service.
-	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
+	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSSaveCardCheckoutService) {
 		self.configuration = configuration
-		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
+//		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
 		//		self.paymentOptions = savedCardsOptions
 		//		self.paymentOptions.append(.newCard)
@@ -32,14 +32,15 @@ internal class VGSPaymentOptionsViewModel {
 	internal var paymentOptions: [VGSPaymentOption] = provideMockedData()
 
 	/// Configuration.
-	private(set) var configuration: VGSCheckoutPaymentConfiguration
+	private(set) var configuration: VGSCheckoutAddCardConfiguration
 
 	/// Transfers API worker.
-	internal let apiWorker: VGSPayoptTransfersAPIWorker
+//	internal let apiWorker: VGSPayoptTransfersAPIWorker
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
+//		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
 	}
 
 	/// Navigation bar title.
@@ -48,16 +49,16 @@ internal class VGSPaymentOptionsViewModel {
 	}
 
 	/// Formatted amount.
-	internal var formattedAmount: String {
-		let paymentInfo = configuration.paymentInfo
-		guard let text = VGSFormatAmountUtils.formatted(amount: paymentInfo.amount, currencyCode: paymentInfo.currency) else {
-			let event = VGSLogEvent(level: .warning, text: "Cannot format amount: \(paymentInfo.amount) currency: \(paymentInfo.currency)", severityLevel: .warning)
-			VGSCheckoutLogger.shared.forwardLogEvent(event)
-			return ""
-		}
-
-		return text
-	}
+//	internal var formattedAmount: String {
+//		let paymentInfo = configuration.paymentInfo
+//		guard let text = VGSFormatAmountUtils.formatted(amount: paymentInfo.amount, currencyCode: paymentInfo.currency) else {
+//			let event = VGSLogEvent(level: .warning, text: "Cannot format amount: \(paymentInfo.amount) currency: \(paymentInfo.currency)", severityLevel: .warning)
+//			VGSCheckoutLogger.shared.forwardLogEvent(event)
+//			return ""
+//		}
+//
+//		return text
+//	}
 
 	/// Handles tap on payment option. Updates selection state if needed.
 	/// - Parameter index: `Int` object, index.
