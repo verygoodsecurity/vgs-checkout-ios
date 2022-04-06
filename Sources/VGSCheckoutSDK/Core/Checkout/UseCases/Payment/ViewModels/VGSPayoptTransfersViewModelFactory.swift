@@ -21,7 +21,7 @@ internal final class VGSPayoptTransfersViewModelFactory {
 	/// - Parameters:
 	///   - checkoutService: `VGSSaveCardCheckoutService` object, save card checkout configuration service.
 	/// - Returns: `VGSPaymentOptionsViewModel` object, payment options view model.
-	internal static func buildPaymentOptionsViewModel(with checkoutService: VGSSaveCardCheckoutService) -> VGSPaymentOptionsViewModel {
+	internal static func buildPaymentOptionsViewModel(with checkoutService: VGSPayoptAddCardCheckoutService) -> VGSPaymentOptionsViewModel {
 		return VGSPaymentOptionsViewModel(configuration: checkoutService.configuration, vgsCollect: checkoutService.vgsCollect, checkoutService: checkoutService)
 	}
 }

@@ -14,8 +14,8 @@ internal class VGSPaymentOptionsViewModel {
 	/// - Parameters:
 	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
 	///   - vgsCollect: `VGSCollect` object, vgs collect.
-	///   - checkoutService: `VGSCheckoutPayoptTransfersService` object, payopt transfers service.
-	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSSaveCardCheckoutService) {
+	///   - checkoutService: `VGSPayoptAddCardCheckoutService` object, payopt add card service.
+	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSPayoptAddCardCheckoutService) {
 		self.configuration = configuration
 //		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
