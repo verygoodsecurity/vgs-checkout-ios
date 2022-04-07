@@ -63,14 +63,14 @@ internal class VGSCheckbox: UIView {
 	internal func updateUI() {
 		if isSelected {
 			checkmarkImageView.isHidden = false
-//			imageView.backgroundColor = theme.checkoutCheckboxSelectedColor
-//			checkmarkImageView.tintColor = theme.checkoutCheckmarkTintColor
+			imageView.backgroundColor = theme.checkoutCheckboxSelectedColor
+			checkmarkImageView.tintColor = theme.checkoutCheckmarkTintColor
 			imageView.layer.borderWidth = 0
 		} else {
 			checkmarkImageView.isHidden = true
 			imageView.backgroundColor = .clear
 			imageView.layer.borderWidth = 1
-//			imageView.layer.borderColor = theme.checkoutCheckboxUnselectedColor.cgColor
+			imageView.layer.borderColor = theme.checkoutCheckboxUnselectedColor.cgColor
 		}
 	}
 

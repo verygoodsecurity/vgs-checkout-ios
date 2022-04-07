@@ -162,8 +162,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Navigates to pay with new card screen.
 	fileprivate func navigateToPayWithNewCardScreen() {
 		guard let service = paymentService else {return}
-//		let saveCardViewController = VGSSaveCardViewController(saveCardService: service)
-//		navigationController?.pushViewController(saveCardViewController, animated: true)
+		let saveCardViewController = VGSPayWithCardViewController(paymentService: service, initialScreen: service.initialScreen)
+		navigationController?.pushViewController(saveCardViewController, animated: true)
 	}
 
 	// MARK: - Actions
