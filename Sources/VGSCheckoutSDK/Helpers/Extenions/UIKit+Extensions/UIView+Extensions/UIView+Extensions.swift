@@ -99,3 +99,104 @@ internal extension UIView {
 		checkout_constraintViewWithPaddingsToSuperview(16, trailing: -16, bottom: 0, top: 16)
 	}
 }
+
+internal extension UIView {
+
+		static let loadingViewTag = 1938123987
+		static let overlayViewTag = 1938123988
+
+	private var overlayView: UIView {
+		let view: UIView = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = .vgsSystemBackground
+		view.alpha = 0.5
+		view.tag = UIView.overlayViewTag
+		return view
+	}
+
+	private var activityIndicatorView: UIActivityIndicatorView {
+		let view: UIActivityIndicatorView
+		if #available(iOS 13.0, *) {
+			view = UIActivityIndicatorView(style: .large)
+		} else {
+			view = UIActivityIndicatorView(style: .whiteLarge)
+		}
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.tag = UIView.loadingViewTag
+		return view
+	}
+
+	private func setActivityIndicatorView() {
+				 guard !isDisplayingActivityIndicatorOverlay() else { return }
+				 let overlayView: UIView = self.overlayView
+				 let activityIndicatorView: UIActivityIndicatorView = self.activityIndicatorView
+
+				 //add subviews
+				 overlayView.addSubview(activityIndicatorView)
+				 addSubview(overlayView)
+
+				 //add overlay constraints
+				 overlayView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+				 overlayView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+
+				 //add indicator constraints
+				 activityIndicatorView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor).isActive = true
+				 activityIndicatorView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor).isActive = true
+
+				 //animate indicator
+				 activityIndicatorView.startAnimating()
+		 }
+
+		 private func removeActivityIndicatorView() {
+				 guard let overlayView: UIView = getOverlayView(), let activityIndicator: UIActivityIndicatorView = getActivityIndicatorView() else {
+						 return
+				 }
+				 UIView.animate(withDuration: 0.2, animations: {
+						 overlayView.alpha = 0.0
+						 activityIndicator.stopAnimating()
+				 }) { _ in
+						 activityIndicator.removeFromSuperview()
+						 overlayView.removeFromSuperview()
+				 }
+		 }
+
+		 private func isDisplayingActivityIndicatorOverlay() -> Bool {
+				 getActivityIndicatorView() != nil && getOverlayView() != nil
+		 }
+
+		 private func getActivityIndicatorView() -> UIActivityIndicatorView? {
+			 viewWithTag(UIView.loadingViewTag) as? UIActivityIndicatorView
+		 }
+
+		 private func getOverlayView() -> UIView? {
+			 viewWithTag(UIView.overlayViewTag)
+		 }
+}
+
+// no:doc
+internal extension UIView {
+		func displayAnimatedActivityIndicatorView() {
+				setActivityIndicatorView()
+		}
+
+		func hideAnimatedActivityIndicatorView() {
+				removeActivityIndicatorView()
+		}
+}
+
+internal extension UIViewController {
+		private var overlayContainerView: UIView {
+				if let navigationView: UIView = navigationController?.view {
+						return navigationView
+				}
+				return view
+		}
+
+		func displayLoader() {
+				overlayContainerView.displayAnimatedActivityIndicatorView()
+		}
+
+		func hideLoader() {
+				overlayContainerView.hideAnimatedActivityIndicatorView()
+		}
+}

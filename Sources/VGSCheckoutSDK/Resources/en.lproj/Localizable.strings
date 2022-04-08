@@ -205,3 +205,8 @@
 /* Description message for remove card popup in Payment options list. */
 "vgs_checkout_remove_card_popup_description" = "Are you sure you want to remove selected card";
 
+/* Remove card error popup title. */
+"vgs_checkout_remove_card_error_popup_title" = "Something went wrong";
+
+/* Remove card error popup description. */
+"vgs_checkout_remove_card_error_popup_description" = "Cannot remove card";
