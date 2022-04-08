@@ -50,4 +50,19 @@ extension VGSPaymentOptionsViewModel {
 			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.rawValue)
 		}
 	}
+
+	/// Remove card error popup texts.
+	enum RemoveCardErrorPopupConstants: String {
+
+		/// Popup title.
+		case title = "vgs_checkout_remove_card_error_popup_title"
+
+		/// Popup message.
+		case messageText = 	"vgs_checkout_remove_card_error_popup_description"
+
+		/// Localized text.
+		internal var localized: String {
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: self.rawValue)
+		}
+	}
 }
