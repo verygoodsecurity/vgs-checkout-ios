@@ -224,6 +224,7 @@
 		446CEA2B26E9D0A1005ECE75 /* VGSUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */; };
 		4472AC2E27FD6864005A0870 /* VGSCheckoutPayoptTransfersServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC2D27FD6864005A0870 /* VGSCheckoutPayoptTransfersServiceProvider.swift */; };
 		4472AC3327FD691A005A0870 /* VGSPayoptAddCardCheckoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC3227FD691A005A0870 /* VGSPayoptAddCardCheckoutService.swift */; };
+		4472AC3927FEEC68005A0870 /* VGSRemoveSavedCardAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC3827FEEC68005A0870 /* VGSRemoveSavedCardAPIWorker.swift */; };
 		447A752F278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */; };
 		447A7530278C3B0100D125EB /* VGSPaymentOrchestrationFormConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447A752E278C3B0100D125EB /* VGSPaymentOrchestrationFormConfiguration.swift */; };
 		44C1B71F27E87D7D0073A338 /* VGSCheckoutAddressOptionsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1B71E27E87D7D0073A338 /* VGSCheckoutAddressOptionsProtocol.swift */; };
@@ -514,6 +515,7 @@
 		446CEA2A26E9D0A1005ECE75 /* VGSUIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSUIConstants.swift; sourceTree = "<group>"; };
 		4472AC2D27FD6864005A0870 /* VGSCheckoutPayoptTransfersServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPayoptTransfersServiceProvider.swift; sourceTree = "<group>"; };
 		4472AC3227FD691A005A0870 /* VGSPayoptAddCardCheckoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSPayoptAddCardCheckoutService.swift; sourceTree = "<group>"; };
+		4472AC3827FEEC68005A0870 /* VGSRemoveSavedCardAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSRemoveSavedCardAPIWorker.swift; sourceTree = "<group>"; };
 		447A752D278C3B0100D125EB /* VGSCheckoutBillingAddressVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSCheckoutBillingAddressVisibility.swift; sourceTree = "<group>"; };
 		447A752E278C3B0100D125EB /* VGSPaymentOrchestrationFormConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VGSPaymentOrchestrationFormConfiguration.swift; sourceTree = "<group>"; };
 		44C1B71E27E87D7D0073A338 /* VGSCheckoutAddressOptionsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutAddressOptionsProtocol.swift; sourceTree = "<group>"; };
@@ -1521,6 +1523,7 @@
 		4468C9CA278F333A00296DA7 /* APIWorkers */ = {
 			isa = PBXGroup;
 			children = (
+				4472AC3727FEEC4B005A0870 /* RemoveSavedCardAPIWorker */,
 				4468C9CB278F333A00296DA7 /* PaymentsAPIWorker */,
 			);
 			path = APIWorkers;
@@ -1822,6 +1825,14 @@
 				4472AC3227FD691A005A0870 /* VGSPayoptAddCardCheckoutService.swift */,
 			);
 			path = PayOptAddCard;
+			sourceTree = "<group>";
+		};
+		4472AC3727FEEC4B005A0870 /* RemoveSavedCardAPIWorker */ = {
+			isa = PBXGroup;
+			children = (
+				4472AC3827FEEC68005A0870 /* VGSRemoveSavedCardAPIWorker.swift */,
+			);
+			path = RemoveSavedCardAPIWorker;
 			sourceTree = "<group>";
 		};
 		447A752B278C3B0100D125EB /* FormConfiguration */ = {
@@ -2563,6 +2574,7 @@
 				4405DC1D26844AD8004A83AD /* VGSError.swift in Sources */,
 				44C4C9052664EC7600195505 /* VGSCheckoutBasicConfigurationProtocol.swift in Sources */,
 				44EC94F626690D2D00CE04F4 /* VGSCheckoutCVCOptions.swift in Sources */,
+				4472AC3927FEEC68005A0870 /* VGSRemoveSavedCardAPIWorker.swift in Sources */,
 				4405DC6426844B30004A83AD /* VGSTextField+state.swift in Sources */,
 				4468C9F1278F333A00296DA7 /* VGSFormTextFieldValidationProtocol.swift in Sources */,
 				4468C98C278F320600296DA7 /* VGSCheckoutTextFieldThemeProtocol.swift in Sources */,
