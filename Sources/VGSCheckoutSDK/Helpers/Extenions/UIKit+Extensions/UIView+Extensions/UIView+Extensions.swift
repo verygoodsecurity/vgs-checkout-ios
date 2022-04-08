@@ -100,11 +100,16 @@ internal extension UIView {
 	}
 }
 
+/// no:doc
 internal extension UIView {
 
-		static let loadingViewTag = 1938123987
-		static let overlayViewTag = 1938123988
+	/// Loading view tag.
+	static let loadingViewTag = 1938123987
 
+	/// Overlay view tag.
+	static let overlayViewTag = 1938123988
+
+	/// Loader overlay view.
 	private var overlayView: UIView {
 		let view: UIView = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +119,7 @@ internal extension UIView {
 		return view
 	}
 
+	/// Activity indicator view.
 	private var activityIndicatorView: UIActivityIndicatorView {
 		let view: UIActivityIndicatorView
 		if #available(iOS 13.0, *) {
@@ -126,77 +132,71 @@ internal extension UIView {
 		return view
 	}
 
+	/// Sets activity indicator view.
 	private func setActivityIndicatorView() {
-				 guard !isDisplayingActivityIndicatorOverlay() else { return }
-				 let overlayView: UIView = self.overlayView
-				 let activityIndicatorView: UIActivityIndicatorView = self.activityIndicatorView
+		guard !isDisplayingActivityIndicatorOverlay() else { return }
+		let overlayView: UIView = self.overlayView
+		let activityIndicatorView: UIActivityIndicatorView = self.activityIndicatorView
 
-				 //add subviews
-				 overlayView.addSubview(activityIndicatorView)
-				 addSubview(overlayView)
+		//add subviews
+		overlayView.addSubview(activityIndicatorView)
+		addSubview(overlayView)
 
-				 //add overlay constraints
-				 overlayView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-				 overlayView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+		//add overlay constraints
+		overlayView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+		overlayView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
-				 //add indicator constraints
-				 activityIndicatorView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor).isActive = true
-				 activityIndicatorView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor).isActive = true
+		//add indicator constraints
+		activityIndicatorView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor).isActive = true
+		activityIndicatorView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor).isActive = true
 
-				 //animate indicator
-				 activityIndicatorView.startAnimating()
-		 }
+		//animate indicator
+		activityIndicatorView.startAnimating()
+	}
 
-		 private func removeActivityIndicatorView() {
-				 guard let overlayView: UIView = getOverlayView(), let activityIndicator: UIActivityIndicatorView = getActivityIndicatorView() else {
-						 return
-				 }
-				 UIView.animate(withDuration: 0.2, animations: {
-						 overlayView.alpha = 0.0
-						 activityIndicator.stopAnimating()
-				 }) { _ in
-						 activityIndicator.removeFromSuperview()
-						 overlayView.removeFromSuperview()
-				 }
-		 }
+	/// Removes activity indicator view.
+	private func removeActivityIndicatorView() {
+		guard let overlayView: UIView = getOverlayView(), let activityIndicator: UIActivityIndicatorView = getActivityIndicatorView() else {
+			return
+		}
+		UIView.animate(withDuration: 0.2, animations: {
+			overlayView.alpha = 0.0
+			activityIndicator.stopAnimating()
+		}) { _ in
+			activityIndicator.removeFromSuperview()
+			overlayView.removeFromSuperview()
+		}
+	}
 
-		 private func isDisplayingActivityIndicatorOverlay() -> Bool {
-				 getActivityIndicatorView() != nil && getOverlayView() != nil
-		 }
+	/// Checks if loader is displayed.
+	/// - Returns: `Bool` object, `true` if loader is displayed.
+	private func isDisplayingActivityIndicatorOverlay() -> Bool {
+		getActivityIndicatorView() != nil && getOverlayView() != nil
+	}
 
-		 private func getActivityIndicatorView() -> UIActivityIndicatorView? {
-			 viewWithTag(UIView.loadingViewTag) as? UIActivityIndicatorView
-		 }
+	/// Gets activity indicator view in view hierarchy by tag.
+	/// - Returns: `getActivityIndicatorView?` object, activity indicator view.
+	private func getActivityIndicatorView() -> UIActivityIndicatorView? {
+		viewWithTag(UIView.loadingViewTag) as? UIActivityIndicatorView
+	}
 
-		 private func getOverlayView() -> UIView? {
-			 viewWithTag(UIView.overlayViewTag)
-		 }
+	/// Gets overlay view in view hierarchy by tag.
+	/// - Returns: `UIView?` object, overlay view.
+	private func getOverlayView() -> UIView? {
+		viewWithTag(UIView.overlayViewTag)
+	}
 }
 
 // no:doc
 internal extension UIView {
-		func displayAnimatedActivityIndicatorView() {
-				setActivityIndicatorView()
-		}
 
-		func hideAnimatedActivityIndicatorView() {
-				removeActivityIndicatorView()
-		}
-}
+	/// Displays activity indicator views.
+	func displayAnimatedActivityIndicatorView() {
+		setActivityIndicatorView()
+	}
 
-internal extension UIViewController {
-		private var overlayContainerView: UIView {
-				if let navigationView: UIView = navigationController?.view {
-						return navigationView
-				}
-				return view
-		}
-
-		func displayLoader() {
-				overlayContainerView.displayAnimatedActivityIndicatorView()
-		}
-
-		func hideLoader() {
-				overlayContainerView.hideAnimatedActivityIndicatorView()
-		}
+	/// Hides activity indicator views.
+	func hideAnimatedActivityIndicatorView() {
+		removeActivityIndicatorView()
+	}
 }
