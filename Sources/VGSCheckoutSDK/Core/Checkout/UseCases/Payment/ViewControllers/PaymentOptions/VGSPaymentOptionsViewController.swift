@@ -133,6 +133,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					hideLoader()
 
 					//  Remove callback.
+					guard let service = paymentService else {return}
+					service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(finID), in: service)
 				case .failure(let finID, let error):
 					// Display error dialog.
 					VGSDialogHelper.presentAlertDialog(with: VGSPaymentOptionsViewModel.RemoveCardErrorPopupConstants.title.localized, message: VGSPaymentOptionsViewModel.RemoveCardErrorPopupConstants.messageText.localized, okActionTitle: "Ok", in: self) {[weak self] in
