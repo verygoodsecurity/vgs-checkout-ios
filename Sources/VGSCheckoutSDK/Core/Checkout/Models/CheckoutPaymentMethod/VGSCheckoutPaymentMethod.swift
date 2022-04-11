@@ -6,7 +6,7 @@
 import Foundation
 
 /// Describes selected payment method.
-internal enum VGSCheckoutPaymentMethod {
+public enum VGSCheckoutPaymentMethod {
 
 	/**
 	 User paid with saved card option provided in saved payment methods.
@@ -14,7 +14,7 @@ internal enum VGSCheckoutPaymentMethod {
 	 - Parameters:
 			- cardInfo: `VGSCheckoutPaymentCardInfo` object, contains information about selected card used for payment.
 	*/
-  //case savedCard(_ cardInfo: VGSCheckoutPaymentCardInfo)
+	case savedCard(_ cardInfo: VGSCheckoutPaymentCardInfo)
 
 	/**
 	 User paid with new card.
@@ -29,9 +29,8 @@ internal enum VGSCheckoutPaymentMethod {
 	internal init(paymentOption: VGSPaymentOption) {
 		switch paymentOption {
 		case .savedCard(let card):
-			fatalError("not implemented!")
-//			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
-//			return
+			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
+			return
 		case .newCard:
 			self = .newCard(VGSCheckoutNewPaymentCardInfo(shouldSave: false))
 			return
@@ -40,15 +39,15 @@ internal enum VGSCheckoutPaymentMethod {
 }
 
 /// Holds additional information for payment method when user paid with selected card from provided saved cards.
-internal struct VGSCheckoutPaymentCardInfo {
+public struct VGSCheckoutPaymentCardInfo {
 	public let id: String
 }
 
-/// Holds additional information for payment method when user paid with new card.
-internal struct VGSCheckoutNewPaymentCardInfo {
+/// Holds additional information for payment method when user adds new card.
+public struct VGSCheckoutNewPaymentCardInfo {
 
   /// `true` if user selected `Save card for future payments options`,  will be`nil` when `isSaveCardOptionEnabled` is set to `false`.
-	internal let shouldSave: Bool?
+	public let shouldSave: Bool?
 
 	/// no:doc
 	internal init(shouldSave: Bool?) {

@@ -26,6 +26,9 @@ internal enum VGSAddCardFlowState {
 
 	/// Saved card was removed by user from payment options list.
 	case savedCardDidRemove(_ id: String)
+
+	/// User pressed pay button with saved card.
+	case payWithSavedCard(_ id: String)
 }
 
 /// Handles `Save card` use case logic for custom configuration.

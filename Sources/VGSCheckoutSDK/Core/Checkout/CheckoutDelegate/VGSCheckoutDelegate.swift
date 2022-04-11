@@ -21,6 +21,10 @@ public protocol VGSCheckoutDelegate: AnyObject {
 	/// Tells the delegate that user removed saved card from payment options methods.
 	/// - Parameter id: `String` object, removed saved card financial instrument id.
 	func savedCardDidRemove(_ id: String)
+
+	/// Tells the delegate that user selected saved card from payment options methods for payment and pressed pay button.
+	/// - Parameter id: `String` object, saved card financial instrument id.
+	func payWithSavedCard(_ id: String)
 }
 
 // Defeault protocol implementation.
@@ -31,4 +35,7 @@ public extension VGSCheckoutDelegate {
 
 	/// no:doc
 	func savedCardDidRemove(_ id: String) {}
+
+	/// no:doc
+	func payWithSavedCard(_ id: String) {}
 }

@@ -9,7 +9,7 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 
 	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkourService: VGSPayoptAddCardCheckoutService) {
 		self.configuration = configuration
-//		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkourService)
+		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkourService)
 	}
 
 	// MARK: - Vars
@@ -18,7 +18,7 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 	private(set) var configuration: VGSCheckoutAddCardConfiguration
 
 	/// Api worker.
-//	internal let apiWorker: VGSPayoptTransfersAPIWorker
+  internal let apiWorker: VGSPayoptTransfersAPIWorker
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {

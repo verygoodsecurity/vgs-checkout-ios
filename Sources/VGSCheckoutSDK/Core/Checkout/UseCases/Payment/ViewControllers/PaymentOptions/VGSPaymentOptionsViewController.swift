@@ -92,11 +92,18 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				mainView.submitButton.status = .enabled
 			case .processingTransfer:
 				guard let cardInfo = viewModel.selectedPaymentCardInfo else {return}
-				mainView.isUserInteractionEnabled = false
-				closeBarButtomItem.isEnabled = false
-				editCardsBarButtomItem.isEnabled = false
-				mainView.submitButton.status = .processing
-				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
+
+				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
+
+				/// Notifies delegate that user pressed pay with selected card id.
+				guard let service = paymentService else {return}
+				service.serviceDelegate?.checkoutServiceStateDidChange(with: .payWithSavedCard(cardInfo.id), in: service)
+//
+//				mainView.isUserInteractionEnabled = false
+//				closeBarButtomItem.isEnabled = false
+//				editCardsBarButtomItem.isEnabled = false
+//				mainView.submitButton.status = .processing
+//				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
 				//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
 				//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
 				//					guard let strongSelf = self else {return}

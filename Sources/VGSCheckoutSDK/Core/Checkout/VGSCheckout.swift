@@ -65,6 +65,7 @@ public class VGSCheckout {
 
 // MARK: - VGSCheckoutServiceDelegateProtocol
 
+/// no:doc
 extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 
 	/// Handles changes in checkout service state.
@@ -98,6 +99,11 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 //			self.delegate?.saveCardDidSuccess(with: data, response: response)
 		case .savedCardDidRemove(let id):
 			self.delegate?.savedCardDidRemove(id)
+		case .payWithSavedCard(let id):
+			coordintator.dismissRootViewController {
+				// Close checkout with saved card id.
+				self.delegate?.payWithSavedCard(id)
+			}
 		}
 	}
 }
