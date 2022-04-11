@@ -48,11 +48,11 @@ internal class VGSPaymentOptionNewCardTableViewCell: UITableViewCell {
 	}()
 
 	/// Pay with card label.
-	fileprivate lazy var payWithCardLabel: UILabel = {
+	fileprivate lazy var addNewCardLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 0
-		label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_pay_with_new_card_title")
+		label.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_add_new_card_title")
 
 		return label
 	}()
@@ -63,8 +63,8 @@ internal class VGSPaymentOptionNewCardTableViewCell: UITableViewCell {
 	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	internal func configure(with uiTheme: VGSCheckoutThemeProtocol) {
 		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
-		payWithCardLabel.textColor = uiTheme.checkoutPaymentOptionNewCardTitleColor
-		payWithCardLabel.font = uiTheme.checkoutPaymentOptionNewCardTitleFont
+		addNewCardLabel.textColor = uiTheme.checkoutPaymentOptionNewCardTitleColor
+		addNewCardLabel.font = uiTheme.checkoutPaymentOptionNewCardTitleFont
 	}
 
 	// MARK: - Helpers
@@ -82,6 +82,6 @@ internal class VGSPaymentOptionNewCardTableViewCell: UITableViewCell {
 		itemContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
 		itemContainerView.stackView.addArrangedSubview(newCardImageView)
-		itemContainerView.stackView.addArrangedSubview(payWithCardLabel)
+		itemContainerView.stackView.addArrangedSubview(addNewCardLabel)
 	}
 }

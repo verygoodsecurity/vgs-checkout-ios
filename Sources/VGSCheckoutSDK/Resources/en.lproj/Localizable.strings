@@ -210,3 +210,6 @@
 
 /* Remove card error popup description. */
 "vgs_checkout_remove_card_error_popup_description" = "Cannot remove card";
+
+/* Add new card option title. */
+"vgs_checkout_payment_options_add_new_card_title" = "ADD NEW CARD";
