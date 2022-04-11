@@ -95,7 +95,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
 
-				/// Notifies delegate that user pressed pay with selected card id.
+				/// Notifies delegate that user pressed pay with selected card id and close checkout.
 				guard let service = paymentService else {return}
 				service.serviceDelegate?.checkoutServiceStateDidChange(with: .payWithSavedCard(cardInfo.id), in: service)
 //

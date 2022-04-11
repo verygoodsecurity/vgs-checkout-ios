@@ -133,6 +133,11 @@ extension CheckoutAddCardVC: VGSCheckoutDelegate {
 				message = "status code is: \(statusCode). Fin instrument id is \(id)"
 				mainView.button.setTitle("CARD WAS SAVED", for: .normal)
 			}
+
+			if let cardInfo = info as? VGSCheckoutPaymentResultInfo
+			{
+				print("cardInfo: \(cardInfo)")
+			}
 		case .failure(let statusCode, _, _, let error, let info):
 			title = "Checkout Payment orchestration status: Failed!"
 			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
@@ -164,6 +169,14 @@ extension CheckoutAddCardVC: VGSCheckoutDelegate {
 		}
 
 		self.present(alert, animated: true, completion: nil)
+	}
+
+	func savedCardDidRemove(_ id: String) {
+		print("Hanlde removed saved card by id: \(id)")
+	}
+
+	func payWithSavedCard(_ id: String) {
+		print("Handle transfer with saved card id: \(id)")
 	}
 }
 
