@@ -22,7 +22,7 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
+		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_add_card_button_title")
 //		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
 	}
 

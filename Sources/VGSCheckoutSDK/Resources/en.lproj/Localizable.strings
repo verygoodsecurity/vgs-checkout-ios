@@ -213,3 +213,6 @@
 
 /* Add new card option title. */
 "vgs_checkout_payment_options_add_new_card_title" = "ADD NEW CARD";
+
+/* Add card button text. */
+"vgs_checkout_add_card_button_title" = "SAVE";
