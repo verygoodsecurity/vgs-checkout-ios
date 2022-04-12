@@ -94,7 +94,7 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 		options.methods = .savedCards([""])
 
 		// Create payment orchestration add configuration with access token.
-		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: "sandbox", options: options) {[weak self] configuration in
+		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
 			configuration.billingAddressCountryFieldOptions.visibility = .hidden
