@@ -54,10 +54,9 @@ internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProt
 		self.checkoutConfigurationType = checkoutConfigurationType
 		self.vgsCollect = vgsCollect
 		self.uiTheme = uiTheme
-		//		self.initialScreen = .payWithNewCard
 		switch checkoutConfigurationType {
 		case .payoptAddCard(let configuration):
-			if !configuration.savedCards.isEmpty {
+			if  configuration.savedCards.isEmpty {
 					self.initialScreen = .payWithNewCard
 				} else {
 					self.initialScreen = .paymentOptions
@@ -92,9 +91,8 @@ internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProt
 	/// Builds pay with new card vc.
 	/// Returns: `UIViewController` object, view controller for pay with new card.
 	internal func buildPayWithNewCardVC() -> UIViewController {
-//		let saveCardViewController = VGSSaveCardViewController(saveCardService: self)
+		let saveCardViewController = VGSPayWithCardViewController(paymentService: self, initialScreen: initialScreen)
 
-		// FIXME - add correct view controller.
-		return UIViewController()
+		return saveCardViewController
 	}
 }

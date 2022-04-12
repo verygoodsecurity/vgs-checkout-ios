@@ -20,8 +20,8 @@ internal class VGSPaymentOptionsViewModel {
 		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect)
 //		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
-		//		self.paymentOptions = savedCardsOptions
-		//		self.paymentOptions.append(.newCard)
+		self.paymentOptions = configuration.savedCards.map({return .savedCard($0)})
+		self.paymentOptions.append(.newCard)
 
 		/// Preselect first card by default.
 		paymentOptions.preselectFirstSavedCard()
@@ -30,7 +30,7 @@ internal class VGSPaymentOptionsViewModel {
 	// MARK: - Vars
 
 	/// An array of payment options.
-	internal var paymentOptions: [VGSPaymentOption] = provideMockedData()
+	internal var paymentOptions: [VGSPaymentOption] = []
 
 	/// Configuration.
 	private(set) var configuration: VGSCheckoutAddCardConfiguration
