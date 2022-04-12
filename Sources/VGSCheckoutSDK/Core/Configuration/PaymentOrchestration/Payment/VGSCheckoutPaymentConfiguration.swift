@@ -215,4 +215,6 @@ public enum VGSCheckoutSavedPaymentMethods {
 /// Additional options
 public struct VGSCheckoutPaymentOptions {
 	public var methods: VGSCheckoutSavedPaymentMethods? = nil
+
+	public init() {}
 }

@@ -87,8 +87,14 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 	/// Presents payment orchestration checkout flow.
 	/// - Parameter token: `String` object, should be valid access payment orchestration token.
 	fileprivate func presentCheckout(with accessToken: String) {
+
+		// Create payment options.
+		var options = VGSCheckoutPaymentOptions()
+		// Add array of saved cards:
+		options.methods = .savedCards([""])
+
 		// Create payment orchestration add configuration with access token.
-		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId) {[weak self] configuration in
+		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: "sandbox", options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
 			configuration.billingAddressCountryFieldOptions.visibility = .hidden
