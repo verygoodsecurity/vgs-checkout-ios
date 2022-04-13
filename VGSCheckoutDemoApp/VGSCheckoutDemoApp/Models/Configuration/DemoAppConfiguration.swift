@@ -46,6 +46,8 @@ class DemoAppConfiguration {
 			}
 
 			self.vaultId = dictionary["vaultID"] as? String ?? ""
+			self.paymentOrchestrationTenantId = dictionary["tenantID"] as? String ?? ""
+			self.paymentOrchestrationServicePath = dictionary["payoptMockedAPIPath"] as? String ?? ""
 		}
 	}
 }

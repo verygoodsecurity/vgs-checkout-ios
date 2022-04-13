@@ -33,7 +33,7 @@ jobs:
           name: Run UI Tests
           command: >
             cd VGSCheckoutDemoApp/VGSCheckoutDemoApp/Models/MockedData &&
-            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
+            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && plutil -insert tenantID -string ${CHECKOUT_TENANT_ID} UITestsMockedData.plist && plutil -insert payoptMockedAPIPath -string ${CHECKOUT_PAYOPT_MOCK_API_PATH} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
             pod install &&
             xcrun instruments -w "iPhone 13 Pro Max (15.0) [" || true &&
             xcodebuild test -workspace VGSCheckoutDemoApp.xcworkspace
@@ -49,7 +49,7 @@ jobs:
           name: Run UI Tests
           command: >
             cd VGSCheckoutDemoApp/VGSCheckoutDemoApp/Models/MockedData &&
-            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
+            plutil -insert vaultID -string ${COLLECT_UNIT_TESTS_VAULT_ID} UITestsMockedData.plist && plutil -insert tenantID -string ${CHECKOUT_TENANT_ID} UITestsMockedData.plist && plutil -insert payoptMockedAPIPath -string ${CHECKOUT_PAYOPT_MOCK_API_PATH} UITestsMockedData.plist && cd .. && cd .. && cd .. && ls &&
             pod install &&
             xcrun instruments -w "iPhone 12 (14.2) [" || true &&
             xcodebuild test -workspace VGSCheckoutDemoApp.xcworkspace
