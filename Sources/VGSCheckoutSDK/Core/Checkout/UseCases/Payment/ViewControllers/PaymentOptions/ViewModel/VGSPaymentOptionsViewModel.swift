@@ -3,6 +3,9 @@
 //  VGSCheckoutSDK
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
@@ -22,6 +25,11 @@ internal class VGSPaymentOptionsViewModel {
 
 		self.paymentOptions = configuration.savedCards.map({return .savedCard($0)})
 		self.paymentOptions.append(.newCard)
+
+		/// For UITests use mocked data.
+		if UIApplication.isRunningUITest {
+			self.paymentOptions = VGSPaymentOptionsViewModel.provideMockedData()
+		}
 
 		/// Preselect first card by default.
 		paymentOptions.preselectFirstSavedCard()

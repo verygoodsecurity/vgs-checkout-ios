@@ -133,6 +133,7 @@
 		4405DD9A26859FAD004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6C26859FAC004A83AD /* VGSExpDateSerialization_MapWithArrayMerge.json */; };
 		4405DD9B26859FAD004A83AD /* VGSExpDateSerialization_CustomConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */; };
 		4405DDA12685E699004A83AD /* CardIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4405DDA02685E699004A83AD /* CardIcon.xcassets */; };
+		4412574A2806AA6600C27A34 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441257492806AA6600C27A34 /* UIApplication+Extensions.swift */; };
 		4438576A26AAB74700EE5C7F /* VGSAddressPostalCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438576926AAB74700EE5C7F /* VGSAddressPostalCode.swift */; };
 		4438577126AFC72900EE5C7F /* VGSBillingAddressUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438577026AFC72900EE5C7F /* VGSBillingAddressUtils.swift */; };
 		4438577426B0218400EE5C7F /* VGSCheckoutCustomConfiguationBillingAddressOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438577326B0218400EE5C7F /* VGSCheckoutCustomConfiguationBillingAddressOptions.swift */; };
@@ -425,6 +426,7 @@
 		4405DD6E26859FAC004A83AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4405DD9F2685B55C004A83AD /* VGSCheckoutSDKTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VGSCheckoutSDKTests.xctestplan; sourceTree = "<group>"; };
 		4405DDA02685E699004A83AD /* CardIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CardIcon.xcassets; sourceTree = "<group>"; };
+		441257492806AA6600C27A34 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		4438576926AAB74700EE5C7F /* VGSAddressPostalCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSAddressPostalCode.swift; sourceTree = "<group>"; };
 		4438577026AFC72900EE5C7F /* VGSBillingAddressUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSBillingAddressUtils.swift; sourceTree = "<group>"; };
 		4438577326B0218400EE5C7F /* VGSCheckoutCustomConfiguationBillingAddressOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutCustomConfiguationBillingAddressOptions.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,14 @@
 				4405DD6D26859FAC004A83AD /* VGSExpDateSerialization_CustomConfig.json */,
 			);
 			path = ExpDateSplitSerializerTestJSONs;
+			sourceTree = "<group>";
+		};
+		441257482806AA4B00C27A34 /* UIApplication+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				441257492806AA6600C27A34 /* UIApplication+Extensions.swift */,
+			);
+			path = "UIApplication+Extensions";
 			sourceTree = "<group>";
 		};
 		4438577226B0217800EE5C7F /* AddressDetails */ = {
@@ -2000,6 +2010,7 @@
 		44C4C8F82664B1DD00195505 /* UIKit+Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				441257482806AA4B00C27A34 /* UIApplication+Extensions */,
 				4472AC4A27FFF42C005A0870 /* UIViewController+Extensions */,
 				4468CA462795550800296DA7 /* UITableViewCell+Extensions */,
 				4468CA3027904E4900296DA7 /* UITableView+Extensions */,
@@ -2653,6 +2664,7 @@
 				4468CA08278F333A00296DA7 /* VGSSaveCardViewModelProtocol.swift in Sources */,
 				4468CA0E278F333A00296DA7 /* VGSAddressDataFormConfigurationManager.swift in Sources */,
 				4405DC2326844AD8004A83AD /* APIClient+Utils.swift in Sources */,
+				4412574A2806AA6600C27A34 /* UIApplication+Extensions.swift in Sources */,
 				4405DC6626844B30004A83AD /* VGSTextFieldDelegate.swift in Sources */,
 				4405DCB826848B28004A83AD /* VGSCheckoutCheckSumAlgorithmType.swift in Sources */,
 				4405DC9026847247004A83AD /* VGSCheckoutLogger.swift in Sources */,
