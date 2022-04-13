@@ -3,7 +3,6 @@
 //  VGSCheckoutSDK
 
 import Foundation
-import UIKit
 
 /// Additional Payment Flow info.
 public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
