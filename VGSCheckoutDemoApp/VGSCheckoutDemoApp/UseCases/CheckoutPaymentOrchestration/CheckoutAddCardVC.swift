@@ -97,12 +97,12 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
-			configuration.billingAddressCountryFieldOptions.visibility = .hidden
-			configuration.billingAddressLine1FieldOptions.visibility = .hidden
-			configuration.billingAddressCountryFieldOptions.validCountries = ["US"]
-			configuration.billingAddressLine2FieldOptions.visibility = .hidden
-			configuration.billingAddressCityFieldOptions.visibility = .hidden
-			configuration.billingAddressPostalCodeFieldOptions.visibility = .visible
+//			configuration.billingAddressCountryFieldOptions.visibility = .hidden
+//			configuration.billingAddressLine1FieldOptions.visibility = .hidden
+//			configuration.billingAddressCountryFieldOptions.validCountries = ["US"]
+//			configuration.billingAddressLine2FieldOptions.visibility = .hidden
+//			configuration.billingAddressCityFieldOptions.visibility = .hidden
+//			configuration.billingAddressPostalCodeFieldOptions.visibility = .visible
 
 			strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
 			strongSelf.vgsCheckout?.delegate = strongSelf

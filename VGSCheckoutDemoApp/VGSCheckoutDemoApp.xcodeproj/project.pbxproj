@@ -10,6 +10,7 @@
 		3286E102265EC309001FECEB /* VGSCheckoutDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E101265EC309001FECEB /* VGSCheckoutDemoAppTests.swift */; };
 		3286E10D265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */; };
 		4403862026CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */; };
+		44125747280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44125746280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift */; };
 		441927CD265F62D10080B01E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441927C3265F62D10080B01E /* AppDelegate.swift */; };
 		441927CF265F62D10080B01E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 441927C6265F62D10080B01E /* Assets.xcassets */; };
 		441927D0265F62D10080B01E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 441927C7265F62D10080B01E /* LaunchScreen.storyboard */; };
@@ -73,6 +74,7 @@
 		3286E10C265EC30A001FECEB /* VGSCheckoutDemoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutDemoAppUITests.swift; sourceTree = "<group>"; };
 		3286E10E265EC30A001FECEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutDemoDialogHelper.swift; sourceTree = "<group>"; };
+		44125746280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutPayotAddCardConfigFlowTests.swift; sourceTree = "<group>"; };
 		441927C3265F62D10080B01E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		441927C4265F62D10080B01E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441927C6265F62D10080B01E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -202,6 +204,14 @@
 				4403861F26CBCA5C0056F2BA /* CheckoutDemoDialogHelper.swift */,
 			);
 			path = DialogHelper;
+			sourceTree = "<group>";
+		};
+		441257452806874400C27A34 /* PayOptAddCardConfig */ = {
+			isa = PBXGroup;
+			children = (
+				44125746280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift */,
+			);
+			path = PayOptAddCardConfig;
 			sourceTree = "<group>";
 		};
 		441927BD265F62D10080B01E /* Helpers */ = {
@@ -401,6 +411,7 @@
 		445C125F26F9986B00D6F3DD /* UseCasesTests */ = {
 			isa = PBXGroup;
 			children = (
+				441257452806874400C27A34 /* PayOptAddCardConfig */,
 				44B601CC27F4557100F2CCFA /* BillingAddress */,
 				4428DD22273CF5B000071CB8 /* ValidCountries */,
 				44282B762735231400223A66 /* ValidationTests */,
@@ -780,6 +791,7 @@
 				445C126C26F99A2900D6F3DD /* VGSUITestElementType.swift in Sources */,
 				445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */,
 				445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */,
+				44125747280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift in Sources */,
 				445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */,
 				445C127126F99A8F00D6F3DD /* XCUIElement+Extensions.swift in Sources */,
 				44282B752735210200223A66 /* VGSCheckoutTestFeature.swift in Sources */,
