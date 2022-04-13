@@ -22,7 +22,7 @@ class VGSCheckoutPayotAddCardConfigFlowTests: VGSCheckoutSaveCardBaseTestCase {
 		navigateToPayoptAddCardUseCase()
 
 		// Open checkout screen.
-		startCheckout()
+		startPayoptAddCardCheckout()
 
 		// Fill in card data.
 		fillInCorrectCardData()
@@ -37,7 +37,7 @@ class VGSCheckoutPayotAddCardConfigFlowTests: VGSCheckoutSaveCardBaseTestCase {
 		tapToSaveCardInCheckout()
 
 		// Check success alert.
-		verifySuccessAlertExists()
+		verifySuccessAddCardConfigAlertExists()
 	}
 
 	/// Test success flow for correct inputs and country without postal code.
@@ -46,7 +46,7 @@ class VGSCheckoutPayotAddCardConfigFlowTests: VGSCheckoutSaveCardBaseTestCase {
 		navigateToPayoptAddCardUseCase()
 
 		// Open checkout screen.
-		startCheckout()
+		startPayoptAddCardCheckout()
 
 		// Fill in card data.
 		fillInCorrectCardData()
@@ -61,7 +61,7 @@ class VGSCheckoutPayotAddCardConfigFlowTests: VGSCheckoutSaveCardBaseTestCase {
 		tapToSaveCardInCheckout()
 
 		// Check success alert.
-		verifySuccessAlertExists()
+		verifySuccessAddCardConfigAlertExists()
 	}
 
 	/// Test flow with incorrect input data.
@@ -70,7 +70,7 @@ class VGSCheckoutPayotAddCardConfigFlowTests: VGSCheckoutSaveCardBaseTestCase {
 		navigateToPayoptAddCardUseCase()
 
 		// Open checkout screen.
-		startCheckout()
+		startPayoptAddCardCheckout()
 
 		// Fill in wrong card data.
 		fillInWrongCardData()

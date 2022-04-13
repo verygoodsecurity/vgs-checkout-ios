@@ -47,6 +47,7 @@ class CheckoutAddCardVC: UIViewController {
 
 		view.addSubview(mainView)
 		mainView.checkoutDemo_constraintViewToSuperviewEdges()
+		mainView.button.accessibilityIdentifier = "VGSDemoApp.Screens.PayoptAddCardConfigFlow.SaveCardButton"
 		mainView.delegate = self
 
 		displayShoppingCartData()
