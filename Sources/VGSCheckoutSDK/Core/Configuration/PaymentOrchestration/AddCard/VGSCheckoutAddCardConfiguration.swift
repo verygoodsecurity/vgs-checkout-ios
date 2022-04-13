@@ -3,6 +3,9 @@
 //  VGSCheckoutSDK
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
@@ -57,6 +60,16 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 		var savedCardConfiguration = VGSCheckoutAddCardConfiguration(accessToken: accessToken, tenantId: tenantId, environment: environment)
 
 			let vgsCollect = VGSCollect(id: tenantId, environment: environment)
+
+		/// For UITests use mocked data.
+			if UIApplication.isRunningUITest && UIApplication.hasSavedCardInUITest {
+				savedCardConfiguration.savedCards = [
+					VGSSavedCardModel(id: "1", cardBrand: "visa", last4: "1231", expDate: "12/22", cardHolder: "John Smith"),
+				VGSSavedCardModel(id: "2", cardBrand: "maestro", last4: "1488", expDate: "01/23", cardHolder: "John Smith")]
+				success(&savedCardConfiguration)
+				return
+			}
+
 			if let methods = options?.methods {
 				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
 				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in

@@ -14,4 +14,9 @@ internal extension UIApplication {
 		static var isRunningUITest: Bool {
 				return ProcessInfo().arguments.contains("VGSCheckoutDemoAppUITests")
 		}
+
+		/// A boolean flag, true if app is running for UITests.
+		static var hasSavedCardInUITest: Bool {
+				return ProcessInfo().arguments.contains("savedCards")
+		}
 }
