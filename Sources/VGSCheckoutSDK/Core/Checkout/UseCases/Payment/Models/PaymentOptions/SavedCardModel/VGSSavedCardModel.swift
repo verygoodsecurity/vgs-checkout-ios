@@ -87,7 +87,7 @@ internal class VGSSavedCardModel {
 
 		let last4Text = "•••• \(last4) | \(expDate)"
 
-		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
+		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected, last4: self.last4)
 	}
 
 	/// Masled last 4 digits.

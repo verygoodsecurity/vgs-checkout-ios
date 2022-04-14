@@ -132,6 +132,11 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 			saveCardActionView?.delegate = self
 		}
 
+		if UIApplication.isRunningUITest {
+			let last4 = viewModel.last4 ?? ""
+			saveCardActionView?.removeCardButton.accessibilityIdentifier = "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard" + last4
+		}
+
 		if isEditing {
 			saveCardActionView?.actionViewState = .remove
 		} else {

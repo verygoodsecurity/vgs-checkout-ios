@@ -55,6 +55,9 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Edit button title.
 	fileprivate let editTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_edit_cards_button_title")
 
+	/// Cancel edit button title.
+	fileprivate let cancelEditTitle = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_cancel_edit_cards_button_title")
+
 	/// View model.
 	fileprivate let viewModel: VGSPaymentOptionsViewModel
 
@@ -113,7 +116,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				//				})
 			case .editingSavedCards:
 				mainView.submitButton.status = .disabled
-				editCardsBarButtomItem.title = closeTitle
+				editCardsBarButtomItem.title = cancelEditTitle
 				viewModel.handleEditModeTap()
 			case .removeCard(let removeCardState):
 				switch removeCardState {

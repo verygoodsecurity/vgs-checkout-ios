@@ -98,6 +98,10 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: options) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
+
+			// Update configuration for UITests cases.
+			UITestsConfigurationManager.updateAddCardCheckoutConfigurationForUITests(&configuration)
+			
 //			configuration.billingAddressCountryFieldOptions.visibility = .hidden
 //			configuration.billingAddressLine1FieldOptions.visibility = .hidden
 //			configuration.billingAddressCountryFieldOptions.validCountries = ["US"]

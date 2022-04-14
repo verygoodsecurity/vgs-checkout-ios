@@ -52,7 +52,7 @@ internal class VGSSavedCardCellActionView: UIView {
 	private let uiTheme: VGSCheckoutThemeProtocol
 
 	/// Remove card button.
-	fileprivate lazy var removeCardButton: UIButton = {
+	lazy var removeCardButton: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setImage(removeCardImage, for: .normal)

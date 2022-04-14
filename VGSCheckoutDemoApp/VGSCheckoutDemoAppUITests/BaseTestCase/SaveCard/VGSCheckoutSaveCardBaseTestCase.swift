@@ -142,6 +142,42 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		}
 	}
 
+	/// Saved cards list.
+	 enum SavedCardsList {
+
+		 /// Saved cards.
+		 enum SavedCards {
+
+			 /// First saved card.
+			 static let firstSavedCard: VGSUITestElement = .init(type: .label, identifier: "•••• 1231 | 12/22")
+
+			 /// Second saved card.
+			 static let secondSavedCard: VGSUITestElement = .init(type: .label, identifier: "•••• 1488 | 01/23")
+
+			 /// Add new card payment option.
+			 static let addNewCard: VGSUITestElement = .init(type: .label, identifier: "ADD NEW CARD")
+		 }
+
+		 /// Buttons.
+		 enum Buttons {
+
+			 /// Pay button.
+			 static let payButton: VGSUITestElement = .init(type: .button, identifier: "PAY")
+
+			 /// Edit button.
+			 static let editButton: VGSUITestElement = .init(type: .button, identifier: "Edit")
+
+			 /// Cancel button.
+			 static let cancelButton: VGSUITestElement = .init(type: .button, identifier: "Cancel")
+
+			 /// First saved card remove button.
+			 static let removeFirstSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1488")
+
+			 /// Second saved card remove button.
+			 static let removeSecondSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1231")
+		 }
+	 }
+
 	/// Fill in correct data.
 	func fillInCorrectCardData() {
 		VGSTextField.CardDetails.cardHolderName.find(in: app).type("Joe Business")
@@ -370,7 +406,7 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		Buttons.startPayoptAddCardCheckout.find(in: app).tap()
 
 		// Wait for checkout screen.
-		wait(forTimeInterval: 2.5)
+		wait(forTimeInterval: 3)
 	}
 
 	/// Tap to save card data.
