@@ -22,6 +22,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Saved cards.
 	case savedCards
 
+	/// Remove saved card success.
+	case successRemoveSavedCard
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -35,6 +38,8 @@ enum VGSCheckoutUITestsFeature {
 			return "onlyPostalCodeFieldInAddress"
 		case .savedCards:
 			return "savedCards"
+		case .successRemoveSavedCard:
+			return "successRemoveSavedCard"
 		}
 	}
 }

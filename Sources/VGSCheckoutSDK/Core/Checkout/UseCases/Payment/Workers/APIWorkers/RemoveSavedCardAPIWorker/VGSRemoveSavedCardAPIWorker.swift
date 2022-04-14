@@ -3,6 +3,9 @@
 //  VGSCheckoutSDK
 
 import Foundation
+#if os(iOS)
+import UIKit
+#endif
 
 /// Remove saved card completion success.
 internal typealias VGSRemoveSavedCardSuccessCompletion = (_ finID: String) -> Void
@@ -49,9 +52,12 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 	///   - failure: `VGSRemoveSavedCardFailCompletion` object, failure completion on remove card.
 	func removeSavedCard(with finId: String, success: @escaping VGSRemoveSavedCardSuccessCompletion, failure: @escaping VGSRemoveSavedCardFailCompletion) {
 
-		// Mock async success remove card.
-		DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-			success(finId)
+		if UIApplication.isRunningUITest && UIApplication.shouldTriggerSuccessRemoveSavedCard {
+			// Mock async success remove card.
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+				success(finId)
+			}
+			return
 		}
 
 		// Mock async failure remove card.

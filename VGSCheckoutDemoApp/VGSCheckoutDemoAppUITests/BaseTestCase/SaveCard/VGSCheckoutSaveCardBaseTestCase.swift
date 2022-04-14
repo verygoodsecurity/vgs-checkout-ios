@@ -158,6 +158,19 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 			 static let addNewCard: VGSUITestElement = .init(type: .label, identifier: "ADD NEW CARD")
 		 }
 
+		 /// Alerts.
+		 enum Alerts {
+
+			 /// First saved card remove card alert description.
+			 static let firstCardDescription = "Are you sure you want to remove selected card •••• 1231?"
+
+			 /// Second saved card remove card alert description.
+			 static let secondCardDescription = "Are you sure you want to remove selected card •••• 1488?"
+
+			 /// Remove button title.
+			 static let removeButton = "Remove"
+		 }
+
 		 /// Buttons.
 		 enum Buttons {
 
@@ -171,10 +184,10 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 			 static let cancelButton: VGSUITestElement = .init(type: .button, identifier: "Cancel")
 
 			 /// First saved card remove button.
-			 static let removeFirstSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1488")
+			 static let removeFirstSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1231")
 
 			 /// Second saved card remove button.
-			 static let removeSecondSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1231")
+			 static let removeSecondSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1488")
 		 }
 	 }
 

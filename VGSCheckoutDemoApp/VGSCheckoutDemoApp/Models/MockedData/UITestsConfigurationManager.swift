@@ -23,6 +23,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Saved cards.
 	case savedCards
 
+	/// Remove saved card success.
+	case successRemoveSavedCard
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -36,6 +39,8 @@ enum VGSCheckoutUITestsFeature {
 			return "onlyPostalCodeFieldInAddress"
 		case .savedCards:
 			return "savedCards"
+		case .successRemoveSavedCard:
+			return "successRemoveSavedCard"
 		}
 	}
 
@@ -53,6 +58,9 @@ enum VGSCheckoutUITestsFeature {
 		} else if launchArgument == VGSCheckoutUITestsFeature.savedCards.launchArgument {
 				self = .savedCards
 				return
+		} else if launchArgument == VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument {
+			self = .successRemoveSavedCard
+			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
 			let countriesList = countriesStringList.components(separatedBy: ".")

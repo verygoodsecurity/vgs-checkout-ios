@@ -18,6 +18,7 @@ class VGSCheckoutPayotAddCardSavedCardsTests: VGSCheckoutSaveCardBaseTestCase {
 	func testRemoveSavedCard() {
 		// Append saved cards.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.savedCards.launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -50,35 +51,62 @@ class VGSCheckoutPayotAddCardSavedCardsTests: VGSCheckoutSaveCardBaseTestCase {
 		/// Remove second card.
 		SavedCardsList.Buttons.removeSecondSavedCardButton.find(in: app).tap()
 
+		/// Wait for popup to be presented.
 		wait(forTimeInterval: 0.3)
 
-		print(app.alerts.element.staticTexts)
-
 		/// Verify remove card alert.
-		XCTAssert(app.alerts.element.staticTexts["Are you sure you want to remove selected card •••• 1231?"].exists)
+		XCTAssert(app.alerts.element.staticTexts[SavedCardsList.Alerts.secondCardDescription].exists)
 
 		/// Tap to remove.
-		app.alerts.element.buttons["Remove"].tap()
+		app.alerts.element.buttons[SavedCardsList.Alerts.removeButton].tap()
 
-		/// Wait to remove
-		wait(forTimeInterval: 0.7)
+		/// Wait for delete card.
+		wait(forTimeInterval: 2)
 
-//		/// Check first card exists.
-//		XCTAssertTrue(SavedCardsList.SavedCards.firstSavedCard.exists(in: app))
-//
-//		/// Check second doesn't card exists.
-//		XCTAssertFalse(SavedCardsList.SavedCards.secondSavedCard.exists(in: app))
-//
-//		/// Vefiry edit button exists.
-//		XCTAssertTrue(SavedCardsList.Buttons.editButton.exists(in: app))
-//
-//		/// Vefiry cancel button doesn't exists.
-//		XCTAssertFalse(SavedCardsList.Buttons.cancelButton.exists(in: app))
-//
-//		print(app.description)
-//
-//
-//		wait(forTimeInterval: 1000)
+		/// Check first card exists.
+		XCTAssertTrue(SavedCardsList.SavedCards.firstSavedCard.exists(in: app))
+
+		/// Check second doesn't card exists.
+		XCTAssertFalse(SavedCardsList.SavedCards.secondSavedCard.exists(in: app))
+
+		/// Check add new card exists.
+		XCTAssertTrue(SavedCardsList.SavedCards.addNewCard.exists(in: app))
+
+		/// Vefiry edit button exists.
+		XCTAssertTrue(SavedCardsList.Buttons.editButton.exists(in: app))
+
+		/// Vefiry cancel button doesn't exists.
+		XCTAssertFalse(SavedCardsList.Buttons.cancelButton.exists(in: app))
+
+		/// Tap to start editing mode for saved cards.
+		SavedCardsList.Buttons.editButton.find(in: app).tap()
+
+		/// Remove first card.
+		SavedCardsList.Buttons.removeFirstSavedCardButton.find(in: app).tap()
+
+		/// Wait for popup to be presented.
+		wait(forTimeInterval: 0.3)
+
+		/// Verify remove card alert.
+		XCTAssert(app.alerts.element.staticTexts[SavedCardsList.Alerts.firstCardDescription].exists)
+
+		/// Tap to remove.
+		app.alerts.element.buttons[SavedCardsList.Alerts.removeButton].tap()
+
+		/// Wait for delete card.
+		wait(forTimeInterval: 2)
+
+		/// Check first card doesn't exist.
+		XCTAssertFalse(SavedCardsList.SavedCards.firstSavedCard.exists(in: app))
+
+		/// Vefiry edit button doesn't exist. We have no more cards to edit.
+		XCTAssertFalse(SavedCardsList.Buttons.editButton.exists(in: app))
+
+		/// Vefiry cancel button doesn't exists.
+		XCTAssertFalse(SavedCardsList.Buttons.cancelButton.exists(in: app))
+
+		/// Check add new card exists.
+		XCTAssertTrue(SavedCardsList.SavedCards.addNewCard.exists(in: app))
 	}
 
 	/// Verifies saved items UI.
