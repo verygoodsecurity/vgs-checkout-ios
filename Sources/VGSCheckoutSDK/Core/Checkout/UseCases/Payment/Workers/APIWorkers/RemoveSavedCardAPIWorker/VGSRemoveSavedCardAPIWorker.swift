@@ -8,10 +8,10 @@ import UIKit
 #endif
 
 /// Remove saved card completion success.
-internal typealias VGSRemoveSavedCardSuccessCompletion = (_ finID: String) -> Void
+internal typealias VGSRemoveSavedCardSuccessCompletion = (_ finID: String, _ result: VGSCheckoutRequestResult) -> Void
 
 /// Remove saved card completion fail.
-internal typealias VGSRemoveSavedCardFailCompletion = (_ finID: String, _ error: Error?) -> Void
+internal typealias VGSRemoveSavedCardFailCompletion = (_ finID: String, _ result: VGSCheckoutRequestResult) -> Void
 
 /// Interface to remove saved card.
 internal protocol VGSRemoveSavedCardAPIWorkerProtocol {
@@ -55,7 +55,7 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 		if UIApplication.isRunningUITest && UIApplication.shouldTriggerSuccessRemoveSavedCard {
 			// Mock async success remove card.
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				success(finId)
+				success(finId, VGSCheckoutRequestResult.success(200, nil, nil, nil))
 			}
 			return
 		}
@@ -68,9 +68,9 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 //		vgsCollect.apiClient.sendRequest(path: path, method: .post, value: nil) { response in
 //			switch response {
 //			case .success(let code, let data, let response):
-//				success(finId)
+//				success(finId, VGSCheckoutRequestResult.success(code, data, response, nil))
 //			case .failure(let code, let data, let response, let error):
-//				failure(finId, error)
+//				failure(finId, VGSCheckoutRequestResult.failure(code, data, response, error, nil))
 //			}
 //		}
 	}

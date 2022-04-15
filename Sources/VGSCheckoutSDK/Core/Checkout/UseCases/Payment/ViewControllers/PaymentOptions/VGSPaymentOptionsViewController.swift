@@ -17,10 +17,10 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		case processingRemoveCard(_ finID: String)
 
 		/// Remove card request did succeed.
-		case success(_ finID: String)
+		case success(_ finID: String, _ requestResult: VGSCheckoutRequestResult)
 
 		/// Remove card request did fail.
-		case failure(_ finID: String, _ error: Error?)
+		case failure(_ finID: String, _ requestResult: VGSCheckoutRequestResult)
 	}
 
 	/// Defines screen state.
@@ -126,12 +126,12 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					mainView.submitButton.status = .disabled
 					mainView.tableView.isUserInteractionEnabled = false
 					displayLoader()
-					viewModel.removeSavedCardAPIWorker.removeSavedCard(with: finID) {[weak self] finID in
-						self?.screenState = .removeCard(.success(finID))
-					} failure: { [weak self] finID, error in
-						self?.screenState = .removeCard(.failure(finID, error))
+					viewModel.removeSavedCardAPIWorker.removeSavedCard(with: finID) {[weak self] finID, requestResult in
+						self?.screenState = .removeCard(.success(finID, requestResult))
+					} failure: { [weak self] finID, requestResult in
+						self?.screenState = .removeCard(.failure(finID, requestResult))
 					}
-				case .success(let finID):
+				case .success(let finID, let requestResult):
 					// Update UI.
 					navigationItem.leftBarButtonItem?.isEnabled = true
 					navigationItem.rightBarButtonItem?.isEnabled = true
@@ -139,9 +139,9 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					mainView.tableView.isUserInteractionEnabled = true
 
 					// Remove card in view model.
-					viewModel.hadleRemoveSavedCard(with: finID)
+					viewModel.hadleRemoveSavedCard(with: finID, requestResult: requestResult)
 					hideLoader()
-				case .failure(let finID, let error):
+				case .failure(let finID, let requestResult):
 					// Display error dialog.
 					VGSDialogHelper.presentAlertDialog(with: VGSPaymentOptionsViewModel.RemoveCardErrorPopupConstants.title.localized, message: VGSPaymentOptionsViewModel.RemoveCardErrorPopupConstants.messageText.localized, okActionTitle: "Ok", in: self) {[weak self] in
 						guard let strongSelf = self else {return}
@@ -153,6 +153,10 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 						strongSelf.screenState = .editingSavedCards
 
 						strongSelf.hideLoader()
+
+						// Notify delegate with remove card error.
+						guard let service = strongSelf.paymentService else {return}
+						service.serviceDelegate?.checkoutServiceStateDidChange(with: .removeSaveCardDidFinish(finID, requestResult), in: service)
 						// Send analytics error.
 					}
 				}
@@ -345,12 +349,12 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 	}
 
 	// no:doc
-	func savedCardDidRemove(with id: String) {
+	func savedCardDidRemove(with id: String, requestResult: VGSCheckoutRequestResult) {
 		mainView.tableView.reloadData()
 
 		// Notify Checkout with remove saved card action.
 		guard let service = paymentService else {return}
-		service.serviceDelegate?.checkoutServiceStateDidChange(with: .savedCardDidRemove(id), in: service)
+		service.serviceDelegate?.checkoutServiceStateDidChange(with: .removeSaveCardDidFinish(id, requestResult), in: service)
 		if !viewModel.paymentOptions.hasSavedCards {
 			navigationItem.rightBarButtonItem = nil
 		} else {

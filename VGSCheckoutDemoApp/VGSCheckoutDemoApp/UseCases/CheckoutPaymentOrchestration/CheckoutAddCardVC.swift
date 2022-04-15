@@ -182,8 +182,13 @@ extension CheckoutAddCardVC: VGSCheckoutDelegate {
 		self.present(alert, animated: true, completion: nil)
 	}
 
-	func savedCardDidRemove(_ id: String) {
-		print("Hanlde removed saved card by id: \(id)")
+	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult) {
+		switch result {
+		case .success(let _, let _, let _, let _):
+			print("Remove card with fin)instrument_id \(id) succeeded!")
+		case .failure(let _, let _, let _, let _, let _):
+			print("Remove card with fin)instrument_id \(id) failed!")
+		}
 	}
 
 	func payWithSavedCard(_ id: String) {

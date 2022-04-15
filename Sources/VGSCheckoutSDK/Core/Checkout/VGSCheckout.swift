@@ -94,11 +94,8 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 			 }
-		case .saveCardDidSuccess(let data, let response):
-			break
-//			self.delegate?.saveCardDidSuccess(with: data, response: response)
-		case .savedCardDidRemove(let id):
-			self.delegate?.savedCardDidRemove(id)
+		case .removeSaveCardDidFinish(let id, let result):
+			self.delegate?.removeCardDidFinish(with: id, result: result)
 		case .payWithSavedCard(let id):
 			coordintator.dismissRootViewController {
 				// Close checkout with saved card id.

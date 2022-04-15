@@ -57,7 +57,6 @@ internal class VGSSavedCardCellActionView: UIView {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setImage(removeCardImage, for: .normal)
 		button.imageView?.contentMode = .scaleAspectFit
-		button.contentEdgeInsets.right = -8
 
 		return button
 	}()

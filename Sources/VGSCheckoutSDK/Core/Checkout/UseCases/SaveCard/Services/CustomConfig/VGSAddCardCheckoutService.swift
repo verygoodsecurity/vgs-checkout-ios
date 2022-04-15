@@ -11,7 +11,7 @@ import UIKit
 internal enum VGSAddCardFlowState {
 
 	/**
-	 Request was sumitted with result.
+	 Request was submitted with result.
 
 	 - Parameters:
 			- result: request result of checkout save card flow.
@@ -21,11 +21,14 @@ internal enum VGSAddCardFlowState {
 	/// User cancelled checkout flow.
 	case cancelled
 
-	/// Save card success on transfer.
-	case saveCardDidSuccess(_ data: Data?, _ response: URLResponse?)
+	/**
+	 Remove card request was sumitted with result.
 
-	/// Saved card was removed by user from payment options list.
-	case savedCardDidRemove(_ id: String)
+	 - Parameters:
+	    - id: `String` object, removed card financial instrument id.
+			- result: `VGSCheckoutRequestResult`, request result of checkout save card flow.
+	*/
+	case removeSaveCardDidFinish(_ id: String, _ result: VGSCheckoutRequestResult)
 
 	/// User pressed pay button with saved card.
 	case payWithSavedCard(_ id: String)

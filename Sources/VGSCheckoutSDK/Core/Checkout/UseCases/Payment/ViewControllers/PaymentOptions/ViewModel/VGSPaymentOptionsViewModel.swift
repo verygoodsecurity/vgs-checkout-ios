@@ -133,13 +133,13 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Handles remove saved card action.
 	/// - Parameter cardIdToRemove: `String` object, card fin instrument id to remove.
-	internal func hadleRemoveSavedCard(with cardIdToRemove: String) {
+	internal func hadleRemoveSavedCard(with cardIdToRemove: String, requestResult: VGSCheckoutRequestResult) {
 		paymentOptions.removeSavedCard(with: cardIdToRemove)
 		if !paymentOptions.hasSelectedCard {
 			paymentOptions.preselectFirstSavedCard()
 		}
 
-		delegate?.savedCardDidRemove(with: cardIdToRemove)
+		delegate?.savedCardDidRemove(with: cardIdToRemove, requestResult: requestResult)
 	}
 
 	/// Selected payment card info.

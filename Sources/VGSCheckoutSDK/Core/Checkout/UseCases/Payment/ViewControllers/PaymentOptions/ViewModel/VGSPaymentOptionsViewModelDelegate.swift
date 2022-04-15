@@ -18,7 +18,8 @@ internal protocol VGSPaymentOptionsViewModelDelegate: AnyObject {
 
 	/// Tells the delegate that user removed saved card.
 	/// - Parameter id: `String` object, saved card instrument id.
-	func savedCardDidRemove(with id: String)
+	/// - Parameter requestResult: `VGSCheckoutRequestResult` object, request result.
+	func savedCardDidRemove(with id: String, requestResult: VGSCheckoutRequestResult)
 
 	/// Tells the delegate that pay with new card option was tapped.
 	func payWithNewCardDidTap()
