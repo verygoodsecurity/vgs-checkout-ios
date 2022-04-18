@@ -20,7 +20,7 @@ internal class VGSPaymentOptionsViewModel {
 	///   - checkoutService: `VGSPayoptAddCardCheckoutService` object, payopt add card service.
 	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSPayoptAddCardCheckoutService) {
 		self.configuration = configuration
-		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect)
+		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect, configuration: configuration)
 //		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
 		self.paymentOptions = configuration.savedCards.map({return .savedCard($0)})
