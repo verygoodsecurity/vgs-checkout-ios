@@ -33,7 +33,7 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 	internal let vgsCollect: VGSCollect
 
 	/// Path to remove card.
-	internal let path: String = "/"
+	internal let path: String = "/financial_instruments/"
 
 	// MARK: - Initialization
 
@@ -65,13 +65,15 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 //			failure(finId, nil)
 //		}
 
-//		vgsCollect.apiClient.sendRequest(path: path, method: .post, value: nil) { response in
-//			switch response {
-//			case .success(let code, let data, let response):
-//				success(finId, VGSCheckoutRequestResult.success(code, data, response, nil))
-//			case .failure(let code, let data, let response, let error):
-//				failure(finId, VGSCheckoutRequestResult.failure(code, data, response, error, nil))
-//			}
-//		}
+		let requestPath = path + finId
+
+		vgsCollect.apiClient.sendRequest(path: requestPath, method: .delete, value: nil) { response in
+			switch response {
+			case .success(let code, let data, let response):
+				success(finId, VGSCheckoutRequestResult.success(code, data, response, nil))
+			case .failure(let code, let data, let response, let error):
+				failure(finId, VGSCheckoutRequestResult.failure(code, data, response, error, nil))
+			}
+		}
 	}
 }
