@@ -51,17 +51,15 @@ internal final class VGSPayoptTransfersAPIWorker {
 //					return
 //				}
 
-				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(info))
-
 				/// Notifies delegate with checkout did finish request result success event.
 				if let service = strongSelf.checkoutService {
-					service.serviceDelegate?.checkoutServiceStateDidChange(with: .requestSubmitted(.success(code, data, response, paymentInfo)), in: service)
+					service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 				}
 
 //        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
-				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
+//				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
+				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
 			}
 		}

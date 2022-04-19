@@ -127,72 +127,69 @@ extension CheckoutAddCardVC: VGSCheckoutDelegate {
 		CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout payment orchestration status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
 	}
 
-	func checkoutDidFinish(with requestResult: VGSCheckoutRequestResult) {
+	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod) {
+		switch paymentMethod {
+		case .savedCard(let savedCardInfo):
+			print("Used did select card with fin id \(savedCardInfo.id)")
+		case .newCard(let requestResult, let newCardInfo):
+			var title = ""
+			var message = ""
 
-		var title = ""
-		var message = ""
+			switch requestResult {
+			case .success(let statusCode, let data, let response, let info):
+				title = "Checkout Payment orchestration status: Success!"
+				let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
+				mainView.responseTextView.isHidden = false
+				mainView.responseTextView.text = text
 
-		switch requestResult {
-		case .success(let statusCode, let data, let response, let info):
-			title = "Checkout Payment orchestration status: Success!"
-			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
-			mainView.responseTextView.isHidden = false
-			mainView.responseTextView.text = text
-
-			if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
-				financialInstrumentID = id
-				message = "status code is: \(statusCode). Fin instrument id is \(id)"
-				mainView.button.setTitle("CARD WAS SAVED", for: .normal)
-			}
-
-			if let cardInfo = info as? VGSCheckoutPaymentResultInfo
-			{
-				print("cardInfo: \(cardInfo)")
-			}
-		case .failure(let statusCode, _, _, let error, let info):
-			title = "Checkout Payment orchestration status: Failed!"
-			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
-
-			// If not authorized - suggest user to retry and refetch token.
-			if statusCode == 401 {
-				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
-					SVProgressHUD.show()
-					self.paymentOrchestrationAPIClient.fetchToken { token in
-						SVProgressHUD.dismiss()
-						self.presentCheckout(with: token)
-					} failure: { _ in
-						SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
-					}
+				if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
+					financialInstrumentID = id
+					message = "status code is: \(statusCode). Fin instrument id is \(id)"
+					mainView.button.setTitle("CARD WAS SAVED", for: .normal)
 				}
 
-				return
+				print("New card info: \(newCardInfo)")
+			case .failure(let statusCode, _, _, let error, let info):
+				title = "Checkout Payment orchestration status: Failed!"
+				message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
+
+				// If not authorized - suggest user to retry and refetch token.
+				if statusCode == 401 {
+					CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Multilexping token is invalid", in: self) {
+						SVProgressHUD.show()
+						self.paymentOrchestrationAPIClient.fetchToken { token in
+							SVProgressHUD.dismiss()
+							self.presentCheckout(with: token)
+						} failure: { _ in
+							SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
+						}
+					}
+
+					return
+				}
 			}
+
+			let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+			alert.addAction(UIAlertAction(title: "OK", style: .default))
+
+			if let popoverController = alert.popoverPresentationController {
+				popoverController.sourceView = self.view //to set the source of your alert
+				popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+				popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+			}
+
+			self.present(alert, animated: true, completion: nil)
 		}
-
-		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-
-		alert.addAction(UIAlertAction(title: "OK", style: .default))
-
-		if let popoverController = alert.popoverPresentationController {
-			popoverController.sourceView = self.view //to set the source of your alert
-			popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
-			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
-		}
-
-		self.present(alert, animated: true, completion: nil)
 	}
 
 	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult) {
 		switch result {
 		case .success(let _, let _, let _, let _):
-			print("Remove card with fin)instrument_id \(id) succeeded!")
+			print("Remove card with fin_instrument_id \(id) succeeded!")
 		case .failure(let _, let _, let _, let _, let _):
-			print("Remove card with fin)instrument_id \(id) failed!")
+			print("Remove card with fin_instrument_id \(id) failed!")
 		}
-	}
-
-	func payWithSavedCard(_ id: String) {
-		print("Handle transfer with saved card id: \(id)")
 	}
 }
 

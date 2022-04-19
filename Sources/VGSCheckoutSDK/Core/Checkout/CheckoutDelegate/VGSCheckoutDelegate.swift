@@ -18,17 +18,23 @@ public protocol VGSCheckoutDelegate: AnyObject {
 	/// - Parameter result: `VGSCheckoutRequestResult` object, remove card request result.
 	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult)
 
-	/// Tells the delegate that user selected saved card from payment options methods for payment and pressed pay button.
-	/// - Parameter id: `String` object, saved card financial instrument id.
-	func payWithSavedCard(_ id: String)
+	/// Tells the delegate that checkout flow did finish with payment method.
+	/// - Parameter paymentMethod: `VGSCheckoutPaymentMethod` object, holds payment method info.
+	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod)
 }
 
-// Defeault protocol implementation.
+/// no:doc
 public extension VGSCheckoutDelegate {
+
+	/// no:doc
+	func checkoutDidFinish(with requestResult: VGSCheckoutRequestResult) {}
+
+	/// no:dc
+	func checkoutDidCancel() {}
 
 	/// no:doc
 	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult) {}
 
 	/// no:doc
-	func payWithSavedCard(_ id: String) {}
+	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod) {}
 }

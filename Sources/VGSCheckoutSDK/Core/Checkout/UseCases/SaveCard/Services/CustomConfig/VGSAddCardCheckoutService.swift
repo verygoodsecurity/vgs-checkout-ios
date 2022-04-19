@@ -30,8 +30,16 @@ internal enum VGSAddCardFlowState {
 	*/
 	case removeSaveCardDidFinish(_ id: String, _ result: VGSCheckoutRequestResult)
 
-	/// User pressed pay button with saved card.
-	case payWithSavedCard(_ id: String)
+//	/// User pressed pay button with saved card.
+//	case payWithSavedCard(_ id: String)
+
+	/**
+	 Checkout did finish with payment method.
+
+	 - Parameters:
+			- paymentMethod: `VGSCheckoutPaymentMethod` object, payment method.
+	*/
+	case checkoutDidFinish(_ paymentMethod: VGSCheckoutPaymentMethod)
 }
 
 /// Handles `Save card` use case logic for custom configuration.

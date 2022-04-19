@@ -20,22 +20,22 @@ public enum VGSCheckoutPaymentMethod {
 	 User paid with new card.
 
 	 - Parameters:
-			- cardInfo: `VGSCheckoutNewPaymentCardInfo` object, contains information about new saved card payment.
+			- requestResult: `VGSCheckoutRequestResult` object, contains information about new saved card payment.
+			- cardInfo: `VGSCheckoutNewPaymentCardInfo` object, new card info object.
 	*/
-  case newCard(_ cardInfo: VGSCheckoutNewPaymentCardInfo)
+	case newCard(_ requestResult: VGSCheckoutRequestResult, _ cardInfo: VGSCheckoutNewPaymentCardInfo)
 
 	/// Initializer.
 	/// - Parameter paymentOption: `VGSPaymentOption` object, payment option.
-	internal init(paymentOption: VGSPaymentOption) {
-		switch paymentOption {
-		case .savedCard(let card):
-			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
-			return
-		case .newCard:
-			self = .newCard(VGSCheckoutNewPaymentCardInfo(shouldSave: false))
-			return
-		}
-	}
+//	internal init(paymentOption: VGSPaymentOption) {
+//		switch paymentOption {
+//		case .savedCard(let card):
+//			self = .savedCard(VGSCheckoutPaymentCardInfo(id: card.id))
+//			return
+//		case .newCard:
+//			fatalError("not implemented")
+//		}
+//	}
 }
 
 /// Holds additional information for payment method when user paid with selected card from provided saved cards.

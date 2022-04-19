@@ -100,7 +100,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 				/// Notifies delegate that user pressed pay with selected card id and close checkout.
 				guard let service = paymentService else {return}
-				service.serviceDelegate?.checkoutServiceStateDidChange(with: .payWithSavedCard(cardInfo.id), in: service)
+				service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.savedCard(VGSCheckoutPaymentCardInfo(id: cardInfo.id))), in: service)
 //
 //				mainView.isUserInteractionEnabled = false
 //				closeBarButtomItem.isEnabled = false
