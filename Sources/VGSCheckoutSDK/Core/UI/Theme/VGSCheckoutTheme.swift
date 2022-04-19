@@ -9,7 +9,7 @@ import UIKit
 #endif
 
 /// Defines basic UI Theme.
-public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol {
+public protocol VGSCheckoutThemeProtocol: VGSCheckoutTextFieldThemeProtocol, VGSCheckoutViewThemeProtocol, VGSCheckoutSubmitButtonThemeProtocol,
+		VGSCheckoutCheckboxThemeProtocol,
+		VGSCheckoutPaymentOptionsThemeProtocol{
 }
-
-// VGSCheckoutCheckboxThemeProtocol, VGSCheckoutPaymentOptionsThemeProtocol

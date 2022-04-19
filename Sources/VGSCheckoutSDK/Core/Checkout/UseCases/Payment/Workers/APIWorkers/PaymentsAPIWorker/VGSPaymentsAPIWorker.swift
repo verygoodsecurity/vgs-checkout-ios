@@ -3,22 +3,22 @@
 //  VGSCheckoutSDK
 
 import Foundation
-import UIKit
 
 /// Additional Payment Flow info.
-internal struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
+public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
+
 	/// Payment method choosen by user.
-	internal let paymentMethod: VGSCheckoutPaymentMethod
+	public let paymentMethod: VGSCheckoutPaymentMethod
 }
 
 /// Payopt transfers api Worker.
-internal final class VGSPayoptTransfersAPIWorker {
+internal final class VGSPayoptAddCardAPIWorker {
 
 	/// VGS Collect object.
 	private let vgsCollect: VGSCollect
 
 	/// Configuration.
-	private let configuration: VGSCheckoutPaymentConfiguration
+	private let configuration: VGSCheckoutAddCardConfiguration
 
   /// Financial instruments path.
   private let finInstrumentsPath = "/financial_instruments"
@@ -27,9 +27,9 @@ internal final class VGSPayoptTransfersAPIWorker {
   private let transfersPath = "/transfers"
 
 	/// Checkout service.
-	private weak var checkoutService: VGSCheckoutPayoptTransfersService?
+	private weak var checkoutService: VGSPayoptAddCardCheckoutService?
 
-	init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
+	init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSPayoptAddCardCheckoutService) {
 
 		self.configuration = configuration
 		self.vgsCollect = vgsCollect
@@ -37,35 +37,35 @@ internal final class VGSPayoptTransfersAPIWorker {
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 	}
 
-	internal func createFinIDAndSendTransfer(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func createFinID(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 
 		var info = newCardInfo
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}
 			switch response {
 			case .success(let code, let data, let response):
-				guard let id = VGSPayoptTransfersAPIWorker.financialInstrumentID(from: data) else {
+//				guard let id = VGSPayoptTransfersAPIWorker.financialInstrumentID(from: data) else {
 //					let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
 //					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 //					completion(requestResult)
-					return
-				}
+//					return
+//				}
 
-				/// Notifies delegate with save card success event.
+				/// Notifies delegate with checkout did finish request result success event.
 				if let service = strongSelf.checkoutService {
-					service.serviceDelegate?.checkoutServiceStateDidChange(with: .saveCardDidSuccess(data, response), in: service)
+					service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 				}
 
-				let paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(info))
-        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
+//        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
-				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
+//				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
+				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
 			}
 		}
 	}
 
+	/*
 	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		let transderPayload: [String: Any] = [
 			"order_id": configuration.orderId,
@@ -85,6 +85,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 			}
 		}
 	}
+	*/
 
 	/// Financial instrument id from success financial instrument response.
 	/// - Parameter data: `Data?` object, response data.

@@ -26,7 +26,7 @@ public protocol VGSCheckoutSubmitButtonThemeProtocol {
 }
 
 /// Defines Checkout checkbox UI Theme.
-internal protocol VGSCheckoutCheckboxThemeProtocol {
+public protocol VGSCheckoutCheckboxThemeProtocol {
 
 	/// The background color of the checkbox for unselected state.
 	var checkoutCheckboxUnselectedColor: UIColor { get set }
@@ -45,7 +45,7 @@ internal protocol VGSCheckoutCheckboxThemeProtocol {
 }
 
 /// Defines Payment options UI Theme.
-internal protocol VGSCheckoutPaymentOptionsThemeProtocol {
+public protocol VGSCheckoutPaymentOptionsThemeProtocol {
 
 	/// The background color of the saved card item.
 	var checkoutPaymentOptionBackgroundColor: UIColor {get set}

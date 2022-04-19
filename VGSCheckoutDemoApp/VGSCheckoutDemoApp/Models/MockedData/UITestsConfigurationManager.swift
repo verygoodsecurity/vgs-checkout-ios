@@ -20,6 +20,12 @@ enum VGSCheckoutUITestsFeature {
 	/// Only postal code field in address is visible.
 	case onlyPostalCodeFieldInAddress
 
+	/// Saved cards.
+	case savedCards
+
+	/// Remove saved card success.
+	case successRemoveSavedCard
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -31,6 +37,10 @@ enum VGSCheckoutUITestsFeature {
 			return "validCountries=" + countries.joined(separator: ".")
 		case .onlyPostalCodeFieldInAddress:
 			return "onlyPostalCodeFieldInAddress"
+		case .savedCards:
+			return "savedCards"
+		case .successRemoveSavedCard:
+			return "successRemoveSavedCard"
 		}
 	}
 
@@ -44,6 +54,12 @@ enum VGSCheckoutUITestsFeature {
 			return
 		} else if launchArgument == VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument {
 			self = .onlyPostalCodeFieldInAddress
+			return
+		} else if launchArgument == VGSCheckoutUITestsFeature.savedCards.launchArgument {
+				self = .savedCards
+				return
+		} else if launchArgument == VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument {
+			self = .successRemoveSavedCard
 			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
@@ -80,7 +96,37 @@ internal class UITestsConfigurationManager {
 				configuration.billingAddressLine2FieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
+			default:
+				break
 			}
 		}
 	}
+
+	/// Updates checkout configuration for UI tests.
+	/// - Parameter configuration: `VGSCheckoutAddCardConfiguration` object, configuration to update.
+	static func updateAddCardCheckoutConfigurationForUITests(_ configuration: inout VGSCheckoutAddCardConfiguration) {
+		// Get all features from the UI tests launch argument.
+		let uiTestsFeatures = ProcessInfo().arguments.compactMap({return VGSCheckoutUITestsFeature(launchArgument: $0)})
+		guard UIApplication.isRunningUITest, !uiTestsFeatures.isEmpty else {return}
+
+		uiTestsFeatures.forEach { testFeautre in
+			switch testFeautre {
+			case .onFocusValidation:
+				configuration.formValidationBehaviour = .onFocus
+			case .onSumbitValidation:
+				configuration.formValidationBehaviour = .onSubmit
+			case .validCountries(let countries):
+				configuration.billingAddressCountryFieldOptions.validCountries = countries
+			case .onlyPostalCodeFieldInAddress:
+				configuration.billingAddressCountryFieldOptions.visibility = .hidden
+				configuration.billingAddressLine1FieldOptions.visibility = .hidden
+				configuration.billingAddressLine2FieldOptions.visibility = .hidden
+				configuration.billingAddressCityFieldOptions.visibility = .hidden
+				configuration.billingAddressCityFieldOptions.visibility = .hidden
+			default:
+				break
+			}
+		}
+	}
+
 }

@@ -19,6 +19,12 @@ enum VGSCheckoutUITestsFeature {
 	/// Only postal code field in address is visible.
 	case onlyPostalCodeFieldInAddress
 
+	/// Saved cards.
+	case savedCards
+
+	/// Remove saved card success.
+	case successRemoveSavedCard
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -30,6 +36,10 @@ enum VGSCheckoutUITestsFeature {
 			return "validCountries=" + countries.joined(separator: ".")
 		case .onlyPostalCodeFieldInAddress:
 			return "onlyPostalCodeFieldInAddress"
+		case .savedCards:
+			return "savedCards"
+		case .successRemoveSavedCard:
+			return "successRemoveSavedCard"
 		}
 	}
 }

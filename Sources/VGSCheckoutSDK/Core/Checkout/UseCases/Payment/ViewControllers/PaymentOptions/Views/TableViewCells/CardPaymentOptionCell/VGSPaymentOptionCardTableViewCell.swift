@@ -119,9 +119,9 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		cardHolderLabel.text = viewModel.cardHolder?.uppercased()
 		cardDetailsLabel.text = viewModel.last4AndExpDateText
 
-//		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
-//		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
-//		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
+		cardHolderLabel.font = uiTheme.checkoutSavedCardCardholderTitleFont
+		cardDetailsLabel.font = uiTheme.checkoutSavedCardDetailsTitleFont
+		itemContainerView.backgroundColor = uiTheme.checkoutPaymentOptionBackgroundColor
 
 		if saveCardActionView == nil {
 			let actionView = VGSSavedCardCellActionView(uiTheme: uiTheme)
@@ -132,6 +132,11 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 			saveCardActionView?.delegate = self
 		}
 
+		if UIApplication.isRunningUITest {
+			let last4 = viewModel.last4 ?? ""
+			saveCardActionView?.removeCardButton.accessibilityIdentifier = "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard" + last4
+		}
+
 		if isEditing {
 			saveCardActionView?.actionViewState = .remove
 		} else {
@@ -139,13 +144,13 @@ internal class VGSPaymentOptionCardTableViewCell: UITableViewCell {
 		}
 
 		if viewModel.isSelected && !isEditing {
-//			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
-//			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsSelectedTitleColor
-//			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
+			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderSelectedTitleColor
+			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsSelectedTitleColor
+			itemContainerView.layer.borderColor = uiTheme.checkoutSavedCardSelectedBorderColor.cgColor
 			itemContainerView.layer.borderWidth = 1
 		} else {
-//			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
-//			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsTitleColor
+			cardHolderLabel.textColor = uiTheme.checkoutSavedCardCardholderTitleColor
+			cardDetailsLabel.textColor = uiTheme.checkoutSavedCardDetailsTitleColor
 			itemContainerView.layer.borderWidth = 1
 			itemContainerView.layer.borderColor = UIColor.clear.cgColor
 		}

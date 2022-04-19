@@ -19,3 +19,16 @@ public struct VGSCheckoutCustomBillingAddressCityOptions: VGSCheckoutAddressOpti
 	/// no:doc
 	public init() {}
 }
+
+/// Holds billing address city field options for payment orchestration.
+public struct VGSCheckoutBillingAddressCityOptions: VGSCheckoutAddressOptionsProtocol {
+
+	/// Field visibility, default is `.visible`.
+	public var visibility: VGSCheckoutFieldVisibility = .visible
+
+	/// Field type.
+	internal let fieldType: VGSAddCardFormFieldType = .city
+
+	/// no:doc
+	public init() {}
+}

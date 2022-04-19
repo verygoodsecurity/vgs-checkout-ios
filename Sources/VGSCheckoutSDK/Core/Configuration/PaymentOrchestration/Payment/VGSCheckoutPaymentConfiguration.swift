@@ -118,13 +118,57 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	}
 
 	/// Billing address country field options.
-	internal var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
+	public var billingAddressCountryFieldOptions: VGSCheckoutBillingAddressCountryOptions {
 		get {
 			return formConfiguration.addressOptions.countryOptions
 		}
 
 		set {
 			formConfiguration.addressOptions.countryOptions = newValue
+		}
+	}
+
+	/// Billing address line 1 field options.
+	public var billingAddressLine1FieldOptions: VGSCheckoutBillingAddressLine1Options {
+		get {
+			return formConfiguration.addressOptions.addressLine1Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine1Options = newValue
+		}
+	}
+
+	/// Billing address line 2 field options.
+	public var billingAddressLine2FieldOptions: VGSCheckoutBillingAddressLine2Options {
+		get {
+			return formConfiguration.addressOptions.addressLine2Options
+		}
+
+		set {
+			formConfiguration.addressOptions.addressLine2Options = newValue
+		}
+	}
+
+	/// Billing address city field options.
+	public var billingAddressCityFieldOptions: VGSCheckoutBillingAddressCityOptions {
+		get {
+			return formConfiguration.addressOptions.cityOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.cityOptions = newValue
+		}
+	}
+
+	/// Billing address postal code field options.
+	public var billingAddressPostalCodeFieldOptions: VGSCheckoutBillingAddressPostalCodeOptions {
+		get {
+			return formConfiguration.addressOptions.postalCodeOptions
+		}
+
+		set {
+			formConfiguration.addressOptions.postalCodeOptions = newValue
 		}
 	}
 
@@ -162,13 +206,15 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 }
 
 /// Saved payment methods.
-internal enum VGSCheckoutSavedPaymentMethods {
+public enum VGSCheckoutSavedPaymentMethods {
 
 	case savedCards( _ ids: [String])
 	//case userId(_ id: String)
 }
 
 /// Additional options
-internal struct VGSCheckoutPaymentOptions {
-	internal var methods: VGSCheckoutSavedPaymentMethods? = nil
+public struct VGSCheckoutPaymentOptions {
+	public var methods: VGSCheckoutSavedPaymentMethods? = nil
+
+	public init() {}
 }

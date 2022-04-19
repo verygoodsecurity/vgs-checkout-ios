@@ -60,6 +60,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		/// Save card button on demo screen.
 		static let startCheckout: VGSUITestElement = .init(type: .button, identifier: "VGSDemoApp.Screens.CustomConfigFlow.SaveCardButton")
 
+		/// Add card button on demo screen.
+		static let startPayoptAddCardCheckout: VGSUITestElement = .init(type: .button, identifier: "VGSDemoApp.Screens.PayoptAddCardConfigFlow.SaveCardButton")
+
 		/// Save card button (custom `UIControl`) in checkout.
 		static let checkoutSaveCard: VGSUITestElement = .init(type: .button, identifier: "VGSCheckoutSDK.Buttons.SubmitButton")
 	}
@@ -78,6 +81,9 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		/// Alert success title.
 		static let alertSuccessTitle = "Checkout status: Success!"
+
+		/// Alert pay opt add card success title.
+		static let alertPayoptAddCardSuccessTitle = "Checkout Payment orchestration status: Success!"
 
 		/// Checkout error labels.
 		enum CheckoutErrorLabels {
@@ -135,6 +141,55 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 			}
 		}
 	}
+
+	/// Saved cards list.
+	 enum SavedCardsList {
+
+		 /// Saved cards.
+		 enum SavedCards {
+
+			 /// First saved card.
+			 static let firstSavedCard: VGSUITestElement = .init(type: .label, identifier: "•••• 1231 | 12/22")
+
+			 /// Second saved card.
+			 static let secondSavedCard: VGSUITestElement = .init(type: .label, identifier: "•••• 1488 | 01/23")
+
+			 /// Add new card payment option.
+			 static let addNewCard: VGSUITestElement = .init(type: .label, identifier: "ADD NEW CARD")
+		 }
+
+		 /// Alerts.
+		 enum Alerts {
+
+			 /// First saved card remove card alert description.
+			 static let firstCardDescription = "Are you sure you want to remove selected card •••• 1231?"
+
+			 /// Second saved card remove card alert description.
+			 static let secondCardDescription = "Are you sure you want to remove selected card •••• 1488?"
+
+			 /// Remove button title.
+			 static let removeButton = "Remove"
+		 }
+
+		 /// Buttons.
+		 enum Buttons {
+
+			 /// Pay button.
+			 static let payButton: VGSUITestElement = .init(type: .button, identifier: "PAY")
+
+			 /// Edit button.
+			 static let editButton: VGSUITestElement = .init(type: .button, identifier: "Edit")
+
+			 /// Cancel button.
+			 static let cancelButton: VGSUITestElement = .init(type: .button, identifier: "Cancel")
+
+			 /// First saved card remove button.
+			 static let removeFirstSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1231")
+
+			 /// Second saved card remove button.
+			 static let removeSecondSavedCardButton: VGSUITestElement = .init(type: .button, identifier: "VGSCheckout.Screens.PaymentOptions.Buttons.RemoveSavedCard1488")
+		 }
+	 }
 
 	/// Fill in correct data.
 	func fillInCorrectCardData() {
@@ -252,6 +307,11 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		XCTAssertEqual(app.alerts.element.label, Labels.alertSuccessTitle)
 	}
 
+	/// Check whether success alert is presented in pay opt add card.
+	func verifySuccessAddCardConfigAlertExists() {
+		XCTAssertEqual(app.alerts.element.label, Labels.alertPayoptAddCardSuccessTitle)
+	}
+
 	/// Selects country name in country picker.
 	/// - Parameter countryName: `String` object, country name.
 	/// - Parameter currentCounryName: `String` object, country name displayed now.
@@ -351,6 +411,15 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Wait for checkout screen.
 		wait(forTimeInterval: 1.5)
+	}
+
+	/// Tap to start pay opt add card checkout.
+	func startPayoptAddCardCheckout() {
+		// Tap on collect button to send data.
+		Buttons.startPayoptAddCardCheckout.find(in: app).tap()
+
+		// Wait for checkout screen.
+		wait(forTimeInterval: 3)
 	}
 
 	/// Tap to save card data.

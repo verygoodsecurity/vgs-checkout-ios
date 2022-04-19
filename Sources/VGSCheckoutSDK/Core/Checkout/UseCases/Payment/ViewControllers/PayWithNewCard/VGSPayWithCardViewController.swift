@@ -11,12 +11,12 @@ import UIKit
 internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	/// Initial screen.
-	fileprivate let initialScreen: VGSCheckoutPayoptTransfersService.InitialScreen
+	fileprivate let initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen
 
 	// MARK: - Vars
 
 	// Pay with card service.
-	fileprivate weak var paymentService: VGSCheckoutPayoptTransfersService?
+	fileprivate weak var paymentService: VGSPayoptAddCardCheckoutService?
 
 	// View model.
 	fileprivate let viewModel: VGSPayoptTransfersPayWithNewCardViewModel
@@ -26,7 +26,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	// MARK: - Initialization
 
-	init(paymentService: VGSCheckoutPayoptTransfersService, initialScreen: VGSCheckoutPayoptTransfersService.InitialScreen) {
+	init(paymentService: VGSPayoptAddCardCheckoutService, initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen) {
 		self.paymentService = paymentService
 		self.initialScreen = initialScreen
 		self.viewModel = VGSPayoptTransfersViewModelFactory.buildPayWithNewCardViewModel(with: paymentService)
@@ -90,7 +90,7 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 		switch formState {
 		case .processing:
       let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
-      viewModel.apiWorker.createFinIDAndSendTransfer(with: cardInfo) {[weak self] requestResult in
+      viewModel.apiWorker.createFinID(with: cardInfo) {[weak self] requestResult in
 				guard let strongSelf = self else {return}
 				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
 				guard let service = strongSelf.paymentService else {return}
