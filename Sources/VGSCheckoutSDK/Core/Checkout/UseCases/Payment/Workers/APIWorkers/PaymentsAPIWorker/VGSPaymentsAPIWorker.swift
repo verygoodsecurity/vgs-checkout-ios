@@ -12,7 +12,7 @@ public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
 }
 
 /// Payopt transfers api Worker.
-internal final class VGSPayoptTransfersAPIWorker {
+internal final class VGSPayoptAddCardAPIWorker {
 
 	/// VGS Collect object.
 	private let vgsCollect: VGSCollect
@@ -37,7 +37,7 @@ internal final class VGSPayoptTransfersAPIWorker {
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 	}
 
-	internal func createFinIDAndSendTransfer(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func createFinID(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 
 		var info = newCardInfo
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
