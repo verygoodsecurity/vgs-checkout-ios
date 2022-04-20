@@ -71,14 +71,23 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 //		}
 
 		let requestPath = path + finId
+    let formAnalyticsDetails = vgsCollect.formAnalyticsDetails
 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
-
 		vgsCollect.apiClient.sendRequest(path: requestPath, method: .delete, value: nil) { response in
+      var extraData: [String: Any] = [:]
+      extraData["method"] = "DeleteFinInstrument"
+
 			switch response {
 			case .success(let code, let data, let response):
+        extraData["statusCode"] = code
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(formAnalyticsDetails, type: .finInstrument, status: .success, extraData: extraData)
 				success(finId, VGSCheckoutRequestResult.success(code, data, response, nil))
 			case .failure(let code, let data, let response, let error):
+        let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
+        extraData["statusCode"] = code
+        extraData["error"] = errorMessage
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(formAnalyticsDetails, type: .finInstrument, status: .failed, extraData: extraData)
 				failure(finId, VGSCheckoutRequestResult.failure(code, data, response, error, nil))
 			}
 		}

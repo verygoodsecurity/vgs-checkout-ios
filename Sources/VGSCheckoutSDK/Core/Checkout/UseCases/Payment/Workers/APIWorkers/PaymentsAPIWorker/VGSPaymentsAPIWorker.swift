@@ -39,11 +39,17 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 	internal func createFinID(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 
-		var info = newCardInfo
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}
+      
+      var extraData = [String: Any]()
+      extraData["method"] = "CreateFinInstrument"
+      
 			switch response {
 			case .success(let code, let data, let response):
+        extraData["statusCode"] = code
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .success, extraData: extraData)
+        
 //				guard let id = VGSPayoptTransfersAPIWorker.financialInstrumentID(from: data) else {
 //					let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
 //					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
@@ -58,6 +64,10 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 //        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
 			case .failure(let code, let data, let response, let error):
+        let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
+        extraData["statusCode"] = code
+        extraData["error"] = errorMessage
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .failed, extraData: extraData)
 //				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)

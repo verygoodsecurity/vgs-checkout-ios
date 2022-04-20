@@ -99,6 +99,17 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 		case .checkoutDidFinish(let paymentMethod):
 			coordintator.dismissRootViewController {[weak self] in
 				guard let strongSelf = self else {return}
+        
+        /// Analytics
+        var extraData = [String: Any]()
+        switch paymentMethod {
+        case .newCard(_, _):
+          extraData["paymentMethod"] = "newCard"
+        case .savedCard(_):
+          extraData["paymentMethod"] = "savedCard"
+        }
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .paymentMethodChoice, status: .success, extraData: extraData)
+        
 				strongSelf.delegate?.checkoutDidFinish(with: paymentMethod)
 			}
 		}
