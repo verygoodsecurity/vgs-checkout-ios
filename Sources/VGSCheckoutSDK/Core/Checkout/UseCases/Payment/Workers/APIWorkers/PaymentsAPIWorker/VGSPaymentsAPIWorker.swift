@@ -43,6 +43,8 @@ internal final class VGSPayoptAddCardAPIWorker {
 			guard let strongSelf = self else {return}
       
       var extraData = [String: Any]()
+			extraData["config"] = "payopt"
+			extraData["configType"] = "addCard"
       extraData["method"] = "CreateFinInstrument"
       
 			switch response {

@@ -53,6 +53,8 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
         extraData["statusCode"] = 200
         extraData["failedCount"] = failedCount
         extraData["totalCount"] = savedCardIds.count
+				extraData["config"] = "payopt"
+				extraData["configType"] = "addCard"
         VGSCheckoutAnalyticsClient.shared.trackFormEvent(formDetails, type: .finInstrument, status: .success, extraData: extraData)
         
 				// Reorder fetched by ids since it can be different depending on API request.
@@ -79,7 +81,6 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 					return
 				 }
 
-				print("Fetched order info success!")
 				success(savedCard)
 			case .failure(let code, let data, let response, let error):
 				failure(nil)

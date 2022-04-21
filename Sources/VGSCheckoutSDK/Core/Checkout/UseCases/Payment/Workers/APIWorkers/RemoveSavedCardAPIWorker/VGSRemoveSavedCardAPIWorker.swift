@@ -76,6 +76,8 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 		vgsCollect.apiClient.sendRequest(path: requestPath, method: .delete, value: nil) { response in
       var extraData: [String: Any] = [:]
+			extraData["config"] = "payopt"
+			extraData["configType"] = "addCard"
       extraData["method"] = "DeleteFinInstrument"
 
 			switch response {
