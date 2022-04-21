@@ -172,6 +172,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.uiTheme)
 		self.uiTheme = paymentService.uiTheme
 
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
+
 		super.init(nibName: nil, bundle: nil)
 	}
 
@@ -243,7 +245,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Handles tap on close button.
 	@objc fileprivate func closeButtonDidTap() {
 		guard let service = paymentService else {return}
-		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.vgsCollect.formAnalyticsDetails, type: .cancel)
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.vgsCollect.formAnalyticsDetails, type: .cancel, extraData: ["config": "payopt", "configType": "addCard"])
 		paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .cancelled, in: service)
 	}
 
