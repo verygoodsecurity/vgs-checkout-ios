@@ -92,10 +92,10 @@ extension CheckoutAddCardVC: CheckoutFlowMainViewDelegate {
 		// Create payment options.
 		var options = VGSCheckoutPaymentOptions()
 		// Add array of saved cards:
-		options.methods = .savedCards([""])
+		options.methods = .savedCards(["<FinId_1>", "<FinId_2>"])
 
 		// Create payment orchestration add configuration with access token.
-		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: options) {[weak self] configuration in
+		VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: accessToken, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: nil) {[weak self] configuration in
 			guard let strongSelf = self else {return}
 			configuration.billingAddressVisibility = .visible
 

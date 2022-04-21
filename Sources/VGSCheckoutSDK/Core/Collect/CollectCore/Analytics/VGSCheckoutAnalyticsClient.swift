@@ -19,6 +19,8 @@ internal enum VGSAnalyticsEventType: String {
 	case formInit = "Init"
 	case cancel = "Cancel"
 	case jwtValidation = "JWTValidation"
+  case finInstrument = "FinInstrument"
+  case addCardPaymentMethod = "AddCardPaymentMethod"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.

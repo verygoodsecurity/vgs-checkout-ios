@@ -3,7 +3,6 @@
 //  VGSCheckoutSDK
 //
 
-
 import Foundation
 
 // MARK: - Send data
@@ -76,7 +75,7 @@ extension VGSCollect {
     
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty {
-				extraAnalyticsInfo["fieldTypes"] = invalidFields
+				extraAnalyticsInfo["fieldTypes"] = Array(Set(invalidFields))
 			}
 
 			extraAnalyticsInfo["statusCode"] = error.code
