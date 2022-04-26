@@ -357,6 +357,7 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 		service.serviceDelegate?.checkoutServiceStateDidChange(with: .removeSaveCardDidFinish(id, requestResult), in: service)
 		if !viewModel.paymentOptions.hasSavedCards {
 			navigationItem.rightBarButtonItem = nil
+			mainView.submitButton.status = .disabled
 		} else {
 			editCardsBarButtomItem.title = editTitle
 		}
