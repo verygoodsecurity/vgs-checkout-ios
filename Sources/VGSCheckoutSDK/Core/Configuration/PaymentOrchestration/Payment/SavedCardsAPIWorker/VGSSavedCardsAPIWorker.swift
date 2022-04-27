@@ -73,6 +73,7 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(accessToken)"]
 
+		// Use API client directly since we don't need to send data from VGS Collect (it can contain data from VGSTextFields).
 		vgsCollect.apiClient.sendRequest(path: path, method: .get, value: nil) { response in
 			switch response {
 			case .success(let code, let data, let response):
