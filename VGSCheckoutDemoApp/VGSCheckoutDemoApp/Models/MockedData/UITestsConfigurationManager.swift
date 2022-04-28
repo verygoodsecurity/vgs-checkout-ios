@@ -66,6 +66,9 @@ enum VGSCheckoutUITestsFeature {
 		} else if launchArgument == VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument {
 			self = .successRemoveSavedCard
 			return
+		} else if launchArgument == VGSCheckoutUITestsFeature.removeCardDisabled.launchArgument {
+			self = .removeCardDisabled
+			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
 			let countriesList = countriesStringList.components(separatedBy: ".")
