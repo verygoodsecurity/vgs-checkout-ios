@@ -31,8 +31,8 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
 	public var isSaveCardOptionEnabled: Bool = true
 
-	/// A boolean flag indicating whether user can edit/remove saved cards. Default is `true`.
-	public var isEditingSavedCardsEnabled: Bool = true
+	/// A boolean flag indicating whether user can remove saved cards. Default is `true`.
+	public var isRemoveCardOptionEnabled: Bool = true
 
 	/// Payment orchestration access token.
 	private(set) internal var accessToken: String

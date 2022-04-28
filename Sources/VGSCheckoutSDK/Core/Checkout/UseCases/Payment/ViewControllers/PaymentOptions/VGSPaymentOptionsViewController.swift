@@ -195,7 +195,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 		// Enable editing saved cards.
 		if let service = paymentService {
-			if service.configuration.isEditingSavedCardsEnabled {
+			if service.configuration.isRemoveCardOptionEnabled {
 				navigationItem.rightBarButtonItem = editCardsBarButtomItem
 			}
 		}
