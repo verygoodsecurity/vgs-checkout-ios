@@ -131,9 +131,6 @@ class VGSCheckoutPayotAddCardSavedCardsTests: VGSCheckoutSaveCardBaseTestCase {
 
 		/// Vefiry edit button doesn't exist.
 		XCTAssertFalse(SavedCardsList.Buttons.editButton.exists(in: app))
-
-		/// Vefiry cancel button doesn't exists.
-		XCTAssertFalse(SavedCardsList.Buttons.cancelButton.exists(in: app))
 	}
 
 	/// Verifies saved items UI.
