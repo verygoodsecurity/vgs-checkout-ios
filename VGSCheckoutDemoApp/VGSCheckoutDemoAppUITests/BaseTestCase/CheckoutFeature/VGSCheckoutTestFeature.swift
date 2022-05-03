@@ -25,6 +25,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Remove saved card success.
 	case successRemoveSavedCard
 
+	/// Remove card option is disabled.
+	case removeCardDisabled
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -40,6 +43,8 @@ enum VGSCheckoutUITestsFeature {
 			return "savedCards"
 		case .successRemoveSavedCard:
 			return "successRemoveSavedCard"
+		case .removeCardDisabled:
+			return "removeCardDisabled"
 		}
 	}
 }

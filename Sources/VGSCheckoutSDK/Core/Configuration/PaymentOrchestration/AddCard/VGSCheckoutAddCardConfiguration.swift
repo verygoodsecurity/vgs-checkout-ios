@@ -28,8 +28,11 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
-	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
-	public var saveCardOptionEnabled: Bool = true
+	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
+	public var isSaveCardOptionEnabled: Bool = true
+
+	/// A boolean flag indicating whether user can remove saved cards. Default is `true`.
+	public var isRemoveCardOptionEnabled: Bool = true
 
 	/// Payment orchestration access token.
 	private(set) internal var accessToken: String

@@ -192,7 +192,13 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 		view.backgroundColor = uiTheme.checkoutViewBackgroundColor
 		title = viewModel.rootNavigationTitle
 		navigationItem.leftBarButtonItem = closeBarButtomItem
-		navigationItem.rightBarButtonItem = editCardsBarButtomItem
+
+		// Enable editing saved cards.
+		if let service = paymentService {
+			if service.configuration.isRemoveCardOptionEnabled {
+				navigationItem.rightBarButtonItem = editCardsBarButtomItem
+			}
+		}
 
 		setupMainView()
 		setupSubmitButton()
@@ -357,6 +363,7 @@ extension VGSPaymentOptionsViewController: VGSPaymentOptionsViewModelDelegate {
 		service.serviceDelegate?.checkoutServiceStateDidChange(with: .removeSaveCardDidFinish(id, requestResult), in: service)
 		if !viewModel.paymentOptions.hasSavedCards {
 			navigationItem.rightBarButtonItem = nil
+			mainView.submitButton.status = .disabled
 		} else {
 			editCardsBarButtomItem.title = editTitle
 		}

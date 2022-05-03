@@ -63,7 +63,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 		// Add checkbox button.
 		checkboxButton.translatesAutoresizingMaskIntoConstraints = false
-    if viewModel.configuration.saveCardOptionEnabled {
+    if viewModel.configuration.isSaveCardOptionEnabled {
 			// Preselect checkbox by default.
       checkboxButton.isSelected = true
 			viewModel.saveCardCheckboxSelected = true

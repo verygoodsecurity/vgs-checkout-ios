@@ -26,6 +26,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Remove saved card success.
 	case successRemoveSavedCard
 
+	/// Remove card option is disabled.
+	case removeCardDisabled
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -41,6 +44,8 @@ enum VGSCheckoutUITestsFeature {
 			return "savedCards"
 		case .successRemoveSavedCard:
 			return "successRemoveSavedCard"
+		case .removeCardDisabled:
+			return "removeCardDisabled"
 		}
 	}
 
@@ -60,6 +65,9 @@ enum VGSCheckoutUITestsFeature {
 				return
 		} else if launchArgument == VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument {
 			self = .successRemoveSavedCard
+			return
+		} else if launchArgument == VGSCheckoutUITestsFeature.removeCardDisabled.launchArgument {
+			self = .removeCardDisabled
 			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
@@ -123,6 +131,8 @@ internal class UITestsConfigurationManager {
 				configuration.billingAddressLine2FieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
+			case .removeCardDisabled:
+				configuration.isRemoveCardOptionEnabled = false
 			default:
 				break
 			}

@@ -18,6 +18,7 @@ class VGSCheckoutPayotAddCardSavedCardsTests: VGSCheckoutSaveCardBaseTestCase {
 	func testRemoveSavedCard() {
 		// Append saved cards.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.savedCards.launchArgument)
+		// Mock remove saved card success api request result.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.successRemoveSavedCard.launchArgument)
 
 		// Launch app.
@@ -107,6 +108,32 @@ class VGSCheckoutPayotAddCardSavedCardsTests: VGSCheckoutSaveCardBaseTestCase {
 
 		/// Check add new card exists.
 		XCTAssertTrue(SavedCardsList.SavedCards.addNewCard.exists(in: app))
+	}
+
+	/// Tests when remove card option is disabled.
+	func testRemoveCardOptionDisabledUI() {
+		// Append saved cards.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.savedCards.launchArgument)
+		// Disable remove saved card option.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.removeCardDisabled.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to payopt add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		/// Verifies saved items UI.
+		verifySavedCardsItems()
+
+		/// Vefiry edit button doesn't exist.
+		XCTAssertFalse(SavedCardsList.Buttons.editButton.exists(in: app))
+
+		/// Vefiry cancel button doesn't exist.
+		XCTAssertFalse(SavedCardsList.Buttons.cancelButton.exists(in: app))
 	}
 
 	/// Verifies saved items UI.
