@@ -176,6 +176,13 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 			content.append("valid_countries")
 		}
 
+		switch billingAddressVisibility {
+		case .hidden:
+			content.append("billing_address_hidden")
+		case .visible:
+			content.append("billing_address_visible")
+		}
+
 		content.append(formValidationBehaviour.analyticsName)
 		content.append(requestOptions.mergePolicy.analyticsName)
 

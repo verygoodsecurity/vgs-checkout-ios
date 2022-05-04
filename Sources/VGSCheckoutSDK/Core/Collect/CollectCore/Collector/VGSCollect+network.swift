@@ -58,7 +58,7 @@ extension VGSCollect {
 
 	/// Track befre submit with invalid fields.
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
-  internal func trackBeforeSubmit(with invalidFields: [String], configurationAnalytics: VGSCheckoutConfigurationAnalyticsProtocol) {
+	internal func trackBeforeSubmit(with invalidFields: [String], configurationAnalytics: VGSCheckoutConfigurationAnalyticsProtocol, extraContent: [String]) {
     
     var extraAnalyticsInfo: [String: Any] = [:]
 
@@ -71,8 +71,14 @@ extension VGSCollect {
     default:
       break
     }
+
+		// Add additional content.
+		for content in extraContent {
+			contentAnalytics.append(content)
+		}
+
     extraAnalyticsInfo["content"] = contentAnalytics
-    
+
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty {
 				extraAnalyticsInfo["fieldTypes"] = Array(Set(invalidFields))
