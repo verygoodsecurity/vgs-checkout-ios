@@ -63,25 +63,34 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 		// Add checkbox button.
 		checkboxButton.translatesAutoresizingMaskIntoConstraints = false
-    if viewModel.configuration.isSaveCardOptionEnabled {
+		if viewModel.configuration.isSaveCardOptionEnabled {
 			// Preselect checkbox by default.
-      checkboxButton.isSelected = true
+			checkboxButton.isSelected = true
 			viewModel.saveCardCheckboxSelected = true
 
 			// Insert checkbox button.
-      let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()
-      containerView.addContentView(checkboxButton)
-      if let indexOfButton = addCardSectionFormView.backgroundStackView.arrangedSubviews.firstIndex(of: addCardSectionFormView.payButtonContainerView) {
-        addCardSectionFormView.backgroundStackView.insertArrangedSubview(containerView, at: indexOfButton)
-      }
+			let containerView = VGSAddCardFormViewBuilder.buildChecboxButtonContainerView()
+			containerView.addContentView(checkboxButton)
+			if let indexOfButton = addCardSectionFormView.backgroundStackView.arrangedSubviews.firstIndex(of: addCardSectionFormView.payButtonContainerView) {
+				addCardSectionFormView.backgroundStackView.insertArrangedSubview(containerView, at: indexOfButton)
+			}
 
 			// Bind view model to checkbox button action.
-      checkboxButton.onTap = { [weak self] in
+			checkboxButton.onTap = { [weak self] in
 				guard let strongSelf = self else {return}
 				strongSelf.viewModel.saveCardCheckboxSelected = strongSelf.checkboxButton.isSelected
-      }
-    }
-  }
+
+				if let isSelected = strongSelf.viewModel.saveCardCheckboxSelected {
+					strongSelf.extraAnalyticsContent.removeAll()
+					if isSelected {
+						strongSelf.extraAnalyticsContent.append("save_card_checkbox_selected")
+					} else {
+						strongSelf.extraAnalyticsContent.append("save_card_checkbox_unselected")
+					}
+				}
+			}
+		}
+	}
 }
 
 // MARK: - VGSCheckoutBaseCardViewControllerDelegate
@@ -93,8 +102,8 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 	func submitButtonDidTap(in formState: VGSBaseCardViewController.FormState, viewController: VGSBaseCardViewController) {
 		switch formState {
 		case .processing:
-      let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
-      viewModel.apiWorker.createFinID(with: cardInfo) {[weak self] requestResult in
+			let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
+			viewModel.apiWorker.createFinID(with: cardInfo) {[weak self] requestResult in
 				guard let strongSelf = self else {return}
 				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
 				guard let service = strongSelf.paymentService else {return}

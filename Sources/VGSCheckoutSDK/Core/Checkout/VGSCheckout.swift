@@ -105,12 +105,13 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
         extraData["config"] = "payopt"
         extraData["configType"] = "addCard"
         switch paymentMethod {
-        case .newCard(_, _):
+        case .newCard:
           extraData["paymentMethod"] = "newCard"
-        case .savedCard(_):
+        case .savedCard:
           extraData["paymentMethod"] = "savedCard"
         }
-        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .addCardPaymentMethod, status: .success, extraData: extraData)
+
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .paymentMethodSelected, status: .success, extraData: extraData)
         
 				strongSelf.delegate?.checkoutDidFinish(with: paymentMethod)
 			}

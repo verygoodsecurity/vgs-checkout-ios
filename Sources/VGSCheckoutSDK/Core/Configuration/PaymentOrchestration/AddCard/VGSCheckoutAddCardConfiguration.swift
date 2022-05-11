@@ -193,6 +193,17 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
       content.append("valid_countries")
     }
 
+		switch billingAddressVisibility {
+		case .hidden:
+			content.append("billing_address_hidden")
+		case .visible:
+			content.append("billing_address_visible")
+		}
+
+		if isSaveCardOptionEnabled {
+			content.append("save_card_checkbox")
+		}
+
 		content.append(formValidationBehaviour.analyticsName)
     return content
   }
