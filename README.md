@@ -57,7 +57,7 @@ xcrun swift -version
 > NOTE: In some cases you can have multiple Swift tools versions installed.
 
 
-Follow the official Apple SPM guide [instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) for more details.\n  
+Follow the official Apple SPM guide [instructions](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) for more details.<br/>
 To use Swift Package Manager, in Xcode add the https://github.com/verygoodsecurity/vgs-checkout-ios.git dependency.
 
 
@@ -77,12 +77,30 @@ class ViewController: UIViewController {
 ```
 
 ### Setup Checkout Configuration
-Depends on your needs, you can setup Checkout Configuration that will work with [Payment Orchestration App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration) or your custom API. You can get more info about Configruration in VGS Checkout SDK [docs](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration).
+Depends on your needs, you can setup Checkout Configuration that will work with [Payment Orchestration App](https://www.verygoodsecurity.com/docs/payment-optimization/orchestration) or your custom API. Read more about [VGSCheckoutAddCardConfiguration](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/add-card-configuration) and [VGSCheckoutCustomConfiguration](https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/сustom-configuration).
 
+You should use your `vaultId` to initialize configuration instance, it can be found in your [organisation dashboard](https://dashboard.verygoodsecurity.com/).
+
+***VGSCheckoutAddCardConfiguration setup***<br/>
+
+> NOTE: Your backend should be responsible for retrieving `accessToken` which will allow you to create financial instruments with Payment Orchestration solution.
+
+```swift
+// Create  VGSCheckoutAddCardConfiguration with access token in your view controller.
+VGSCheckoutAddCardConfiguration.createConfiguration(accessToken: "<ACCESS_TOKEN>", tenantId: "<TENANT_ID>", environment: "sandbox") {[weak self] configuration in
+    guard let strongSelf = self else {return}
+    /// Show billing address section.
+    configuration.billingAddressVisibility = .visible
+    
+    /// Set valid countries. 
+    configuration.billingAddressCountryFieldOptions.validCountries = ["CA", "US", "AU"] 
+} failure: {[weak self] error in
+    print(error.localizedDescription)
+    print("ERROR! Cannot create VGSCheckoutAddCardConfiguration!")
+}
+```
 
 ***VGSCheckoutCustomConfiguration setup***<br/>
-
-Use your `vaultId` to initialize `VGSCheckoutCustomConfiguration` instance. You can get it in your [organisation dashboard](https://dashboard.verygoodsecurity.com/).
 
 ```swift
 /// Create VGSCheckoutCustomConfiguration instance with vaultID and environment
@@ -115,8 +133,10 @@ vgsCheckout = VGSCheckout(configuration: checkoutConfiguration)
 
 /// Present VGSCheckout Form
 vgsCheckout?.present(from: self)
-```
 
+/// Set Checkout delegate
+vgsCheckout?.delegate = self
+```
 
 ## Demo Application
 Demo application with different Checkout Configurations <a href="./VGSCheckoutDemoApp">here</a>.
