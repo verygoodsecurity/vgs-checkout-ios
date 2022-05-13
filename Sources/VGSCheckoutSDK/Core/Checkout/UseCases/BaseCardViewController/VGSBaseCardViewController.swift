@@ -99,12 +99,12 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 		switch checkoutConfigurationType {
 		case .custom(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom", "content": configuration.contentAnalytics()])
 		case .payoptAddCard(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 		case .payoptTransfers(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "transfers"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "transfers", "content": configuration.contentAnalytics()])
 		}
 
 		self.addCardSectionFormView = VGSSaveCardFormView(cardDetailsView: cardDataSectionViewModel.cardDetailsSectionView, billingAddressView: addressDataSectionViewModel.billingAddressFormView, viewLayoutStyle: .fullScreen, uiTheme: uiTheme)

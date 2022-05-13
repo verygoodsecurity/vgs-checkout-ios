@@ -34,7 +34,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 		super.init(checkoutConfigurationType: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, uiTheme: paymentService.uiTheme)
 
 		if initialScreen == .payWithNewCard {
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard", "content": checkoutConfigurationType.configuration.contentAnalytics()])
 		}
 	}
 
