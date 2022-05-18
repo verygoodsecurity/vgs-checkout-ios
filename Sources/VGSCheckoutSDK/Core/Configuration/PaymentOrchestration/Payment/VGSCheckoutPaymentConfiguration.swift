@@ -17,6 +17,9 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	///   - error: `Error` object, the error on configuration setup fail.
 	internal typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
 
+	/// Payopt flow type.
+	internal let payoptFlow: VGSCheckoutPayOptFlow = .transfers
+
 	// MARK: - Attributes
 
 	/// `String` object, payment orchestration tenant id.
@@ -103,8 +106,11 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	/// Checkout UI elements  configuration.
 	internal var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
-  /// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
-	internal var saveCardOptionEnabled: Bool = true
+	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
+	public var isSaveCardOptionEnabled: Bool = true
+
+	/// A boolean flag indicating whether user can remove saved cards. Default is `true`.
+	public var isRemoveCardOptionEnabled: Bool = true
 
 	/// Billing address visibility.
 	internal var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
@@ -183,6 +189,7 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 		}
 	}
 
+	/// An array of saved cards.
 	internal var savedCards: [VGSSavedCardModel] = []
 
 	/// An array of financial instruments ids representing saved cards.
@@ -198,6 +205,17 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 		var content: [String] = []
 		if !(billingAddressCountryFieldOptions.validCountries?.isEmpty ?? true) {
 			content.append("valid_countries")
+		}
+
+		switch billingAddressVisibility {
+		case .hidden:
+			content.append("billing_address_hidden")
+		case .visible:
+			content.append("billing_address_visible")
+		}
+
+		if isSaveCardOptionEnabled {
+			content.append("save_card_checkbox")
 		}
 
 		content.append(formValidationBehaviour.analyticsName)

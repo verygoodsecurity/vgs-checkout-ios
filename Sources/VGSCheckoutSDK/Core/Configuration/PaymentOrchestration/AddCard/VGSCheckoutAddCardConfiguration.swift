@@ -10,6 +10,9 @@ import UIKit
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
+	/// Payopt flow type.
+	internal let payoptFlow: VGSCheckoutPayOptFlow = .addCard
+
 	/// A callback to be run with a `VGSCheckoutAddCardConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutAddCardConfiguration` object, configuration.
