@@ -7,21 +7,24 @@ import Foundation
 import UIKit
 #endif
 
+/// Basic interface for payopt service.
+internal protocol VGSCheckoutBasicPayoptServiceProtocol: AnyObject {
+
+	/// Service delegate.
+	var serviceDelegate: VGSCheckoutServiceDelegateProtocol? {get set}
+
+	/// Checkout configuration type.
+	var checkoutConfigurationType: VGSCheckoutConfigurationType {get}
+
+	/// Configuration
+	var configuration: VGSCheckoutPayoptBasicConfiguration {get set}
+}
+
 /// Handles `Pay with card` use case logic.
-internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServiceProtocol {
-
-	/// Initial screen for transfer flow.
-	enum InitialScreen {
-
-		/// Payment options.
-		case paymentOptions
-
-		/// Pay with new card.
-		case payWithNewCard
-	}
+internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServiceProtocol, VGSCheckoutBasicPayoptServiceProtocol {
 
 	/// Initial screen.
-	internal let initialScreen: InitialScreen
+	internal let initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen
 
 	/// An object that acts as a delegate for Core `VGSCheckout` instance.
 	internal weak var serviceDelegate: VGSCheckoutServiceDelegateProtocol?
@@ -72,24 +75,23 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	/// Builds view controller for save card flow.
 	/// - Returns: `UIViewController` object, view controller with save card form.
 	internal func buildCheckoutViewController() -> UIViewController {
-//		let vc: UIViewController
-//		switch initialScreen {
-//		case .payWithNewCard:
-//			vc = buildPayWithNewCardVC()
-//		case .paymentOptions:
-//			//			fatalError("not implemented")
-//			vc = buildPaymentOptionsVC()
-//		}
-		return UINavigationController(rootViewController: UIViewController())
+		let vc: UIViewController
+		switch initialScreen {
+		case .payWithNewCard:
+			vc = buildPayWithNewCardVC()
+		case .paymentOptions:
+			vc = buildPaymentOptionsVC()
+		}
+		return UINavigationController(rootViewController: vc)
 	}
 
-	/// Builds payment options screen.
-	/// Returns: `UIViewController` object, view controller for payment options.
-//	internal func buildPaymentOptionsVC() -> UIViewController {
-//		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
-//
-//		return paymentOptionsVC
-//	}
+//	/ Builds payment options screen.
+//	/ Returns: `UIViewController` object, view controller for payment options.
+	internal func buildPaymentOptionsVC() -> UIViewController {
+		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
+
+		return paymentOptionsVC
+	}
 //
 //	/// Builds pay with new card vc.
 //	/// Returns: `UIViewController` object, view controller for pay with new card.

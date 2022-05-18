@@ -68,7 +68,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	fileprivate let uiTheme: VGSCheckoutThemeProtocol
 
 	// Pay with card service.
-	fileprivate weak var paymentService: VGSPayoptAddCardCheckoutService?
+	fileprivate weak var paymentService: VGSCheckoutBasicPayoptServiceProtocol?
 
 	/// Close bar button item.
 	fileprivate lazy var closeBarButtomItem: UIBarButtonItem = {
@@ -166,7 +166,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Initializer
 	/// - Parameter paymentService: `VGSSaveCardCheckoutService` object, pay opt  checkout transfer service.
-	init(paymentService: VGSPayoptAddCardCheckoutService) {
+	init(paymentService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.paymentService = paymentService
 		self.viewModel = VGSPayoptTransfersViewModelFactory.buildPaymentOptionsViewModel(with: paymentService)
 		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.uiTheme)
