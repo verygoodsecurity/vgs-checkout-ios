@@ -10,12 +10,15 @@ import UIKit
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
+	/// VGSCollect object.
+	let vgsCollect: VGSCollect
+
 	/// Payopt flow type.
 	internal let payoptFlow: VGSCheckoutPayOptFlow = .addCard
 
 	/// A callback to be run with a `VGSCheckoutAddCardConfiguration` on configuration setup succeed.
 	/// - Parameters:
-	///   - configuration:  `VGSCheckoutAddCardConfiguration` object, configuration.
+	///   - configuration: `VGSCheckoutAddCardConfiguration` object, configuration.
 	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutAddCardConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
@@ -63,9 +66,9 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 //			return
 //		}
 
-		var savedCardConfiguration = VGSCheckoutAddCardConfiguration(accessToken: accessToken, tenantId: tenantId, environment: environment)
+		let vgsCollect = VGSCollect(id: tenantId, environment: environment)
 
-			let vgsCollect = VGSCollect(id: tenantId, environment: environment)
+		var savedCardConfiguration = VGSCheckoutAddCardConfiguration(accessToken: accessToken, tenantId: tenantId, environment: environment, vgsCollect: vgsCollect)
 
 		/// For UITests use mocked data.
 			if UIApplication.isRunningUITest && UIApplication.hasSavedCardInUITest {
@@ -96,10 +99,11 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   ///   - accessToken: `String` object, should be valid access token for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	internal init(accessToken: String, tenantId: String, environment: String = "sandbox") {
+	internal init(accessToken: String, tenantId: String, environment: String = "sandbox", vgsCollect: VGSCollect) {
     self.accessToken = accessToken
 		self.tenantId = tenantId
 		self.environment = environment
+		self.vgsCollect = vgsCollect
 	}
 
   // MARK: - UI Configuration

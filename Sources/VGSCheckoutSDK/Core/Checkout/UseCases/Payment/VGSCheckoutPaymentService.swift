@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Basic interface for payopt service.
-internal protocol VGSCheckoutBasicPayoptServiceProtocol: AnyObject {
+internal protocol VGSCheckoutBasicPayoptServiceProtocol: AnyObject, VGSCheckoutServiceProtocol {
 
 	/// Service delegate.
 	var serviceDelegate: VGSCheckoutServiceDelegateProtocol? {get set}
@@ -16,8 +16,11 @@ internal protocol VGSCheckoutBasicPayoptServiceProtocol: AnyObject {
 	/// Checkout configuration type.
 	var checkoutConfigurationType: VGSCheckoutConfigurationType {get}
 
-	/// Configuration
-	var configuration: VGSCheckoutPayoptBasicConfiguration {get set}
+	/// Configuration.
+	var configuration: VGSCheckoutPayoptBasicConfiguration {get}
+
+	/// Initial screen.
+	var initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen {get}
 }
 
 /// Handles `Pay with card` use case logic.
@@ -32,8 +35,13 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	/// Checkout configuration type.
 	internal let checkoutConfigurationType: VGSCheckoutConfigurationType
 
+	/// Configuration.
+	internal var configuration: VGSCheckoutPayoptBasicConfiguration {
+		return transfersConfiguration
+	}
+
 	/// Pay opt configuration.
-	internal var configuration: VGSCheckoutPaymentConfiguration {
+	internal var transfersConfiguration: VGSCheckoutPaymentConfiguration {
 		switch checkoutConfigurationType {
 		case .payoptTransfers(let payOptConfiguration):
 			return payOptConfiguration

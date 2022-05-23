@@ -42,6 +42,12 @@ internal protocol VGSCheckoutPayoptBasicConfiguration {
 
 	/// Payopt flow type.
 	var payoptFlow: VGSCheckoutPayOptFlow {get}
+
+	/// UI theme.
+	var uiTheme: VGSCheckoutThemeProtocol {get set}
+
+	/// VGSCollect object.
+	var vgsCollect: VGSCollect {get}
 }
 
 /// Defines payopt flow type.
