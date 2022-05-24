@@ -10,7 +10,7 @@ internal final class VGSPayoptTransfersViewModelFactory {
 
 	/// Builds pay with new card view model for payopt transders checkout configuration.
 	/// - Parameters:
-	///   - checkoutService: `VGSCheckoutPayoptTransfersService` object, save card checkout configuration service.
+	///   - checkoutService: `VGSCheckoutBasicPayoptServiceProtocol` object, basic payopt checkout service.
 	/// - Returns: `VGSPayoptTransfersPayWithNewCardViewModel` object, pay with new card view model.
 	internal static func buildPayWithNewCardViewModel(with checkoutService: VGSCheckoutBasicPayoptServiceProtocol) ->
 	VGSPayoptTransfersPayWithNewCardViewModel {

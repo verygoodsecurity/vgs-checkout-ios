@@ -15,10 +15,10 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Initializer.
 	/// - Parameters:
-	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
+	///   - configuration: `VGSCheckoutPayoptBasicConfiguration`, payment configuration.
 	///   - vgsCollect: `VGSCollect` object, vgs collect.
 	///   - checkoutService: `VGSPayoptAddCardCheckoutService` object, payopt add card service.
-	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkoutService: VGSPayoptAddCardCheckoutService) {
+	internal init(configuration: VGSCheckoutPayoptBasicConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.configuration = configuration
 		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect, configuration: configuration)
 //		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
@@ -36,7 +36,7 @@ internal class VGSPaymentOptionsViewModel {
 	internal var paymentOptions: [VGSPaymentOption] = []
 
 	/// Configuration.
-	private(set) var configuration: VGSCheckoutAddCardConfiguration
+	private(set) var configuration: VGSCheckoutPayoptBasicConfiguration
 
 	/// Transfers API worker.
 //	internal let apiWorker: VGSPayoptTransfersAPIWorker

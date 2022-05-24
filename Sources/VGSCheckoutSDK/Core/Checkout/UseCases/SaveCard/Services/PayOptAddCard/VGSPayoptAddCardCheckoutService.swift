@@ -8,7 +8,7 @@ import UIKit
 #endif
 
 /// Checkout service for payopt add card configuration.
-internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProtocol {
+internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProtocol, VGSCheckoutBasicPayoptServiceProtocol {
 
 	/// Initial screen for transfer flow.
 	enum InitialScreen {
@@ -27,7 +27,7 @@ internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProt
 	internal let checkoutConfigurationType: VGSCheckoutConfigurationType
 
 	/// Add card configuration.
-	internal var configuration: VGSCheckoutAddCardConfiguration {
+	internal var addCardConfiguration: VGSCheckoutAddCardConfiguration {
 		switch checkoutConfigurationType {
 		case .payoptAddCard(let configuration):
 			return configuration
@@ -44,6 +44,11 @@ internal class VGSPayoptAddCardCheckoutService: NSObject, VGSCheckoutServiceProt
 
 	/// Initial screen.
 	internal let initialScreen: InitialScreen
+
+	/// Configuration.
+	internal var configuration: VGSCheckoutPayoptBasicConfiguration {
+		return addCardConfiguration
+	}
 
 	/// Initializer.
 	/// - Parameters:

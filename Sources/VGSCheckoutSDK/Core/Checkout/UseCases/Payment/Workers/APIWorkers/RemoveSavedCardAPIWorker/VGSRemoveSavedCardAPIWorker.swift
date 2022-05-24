@@ -33,7 +33,7 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 	internal let vgsCollect: VGSCollect
 
 	/// Configuration.
-	internal let configuration: VGSCheckoutAddCardConfiguration
+	internal let configuration: VGSCheckoutPayoptBasicConfiguration
 
 	/// Path to remove card.
 	internal let path: String = "/financial_instruments/"
@@ -42,8 +42,8 @@ internal class VGSRemoveSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol 
 
 	/// Initialization.
 	/// - Parameter vgsCollect: `VGSCollect` object, vgs collect instance.
-	/// - Parameter configuration: `VGSCheckoutAddCardConfiguration` object, pay opt add card configuration instance.
-	init(vgsCollect: VGSCollect, configuration: VGSCheckoutAddCardConfiguration) {
+	/// - Parameter configuration: `VGSCheckoutPayoptBasicConfiguration` object, pay opt configuration instance.
+	init(vgsCollect: VGSCollect, configuration: VGSCheckoutPayoptBasicConfiguration) {
 		self.vgsCollect = vgsCollect
 		self.configuration = configuration
 	}
