@@ -7,6 +7,9 @@ import Foundation
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
 internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
+	var vgsCollect: VGSCollect
+
+
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutPaymentConfiguration` object, configuration.
@@ -66,7 +69,7 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 		orderAPIWorker.fetchPaymentConfiguration(for: orderId) { paymentInfo in
 			print("succcess")
 
-			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment)
+			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment, vgsCollect: vgsCollect)
 			success(&paymentCardConfiguration)
 //			if let methods = options?.methods {
 //				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
@@ -93,12 +96,13 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	///   - paymentInfo: `VGSPayoptTransfersOrderInfo` object, order info.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox") {
+	internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", vgsCollect: VGSCollect) {
 		self.accessToken = accessToken
 		self.orderId = orderId
 		self.paymentInfo = paymentInfo
 		self.tenantId = tenantId
 		self.environment = environment
+		self.vgsCollect = vgsCollect
 	}
 
 	// MARK: - UI Configuration

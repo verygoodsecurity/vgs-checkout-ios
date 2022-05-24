@@ -100,12 +100,12 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 
 		return paymentOptionsVC
 	}
-//
-//	/// Builds pay with new card vc.
-//	/// Returns: `UIViewController` object, view controller for pay with new card.
-//	internal func buildPayWithNewCardVC() -> UIViewController {
-//		let payWithNewCardVC = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
-//
-//		return payWithNewCardVC
-//	}
+
+	/// Builds pay with new card vc.
+	/// Returns: `UIViewController` object, view controller for pay with new card.
+	internal func buildPayWithNewCardVC() -> UIViewController {
+		let payWithNewCardVC = VGSPayWithCardViewController(paymentService: self, initialScreen: .payWithNewCard)
+
+		return payWithNewCardVC
+	}
 }

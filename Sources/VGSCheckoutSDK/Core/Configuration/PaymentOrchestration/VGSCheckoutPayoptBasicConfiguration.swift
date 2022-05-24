@@ -48,6 +48,9 @@ internal protocol VGSCheckoutPayoptBasicConfiguration {
 
 	/// VGSCollect object.
 	var vgsCollect: VGSCollect {get}
+
+	/// Access token.
+	var accessToken: String {get}
 }
 
 /// Defines payopt flow type.

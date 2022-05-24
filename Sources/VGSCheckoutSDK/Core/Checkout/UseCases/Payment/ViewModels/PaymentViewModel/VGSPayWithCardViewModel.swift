@@ -7,7 +7,7 @@ import Foundation
 /// Pay with card component view model for payopt transfers configuration.
 internal class VGSPayoptTransfersPayWithNewCardViewModel {
 
-	internal init(configuration: VGSCheckoutAddCardConfiguration, vgsCollect: VGSCollect, checkourService: VGSPayoptAddCardCheckoutService) {
+	internal init(configuration: VGSCheckoutPayoptBasicConfiguration, vgsCollect: VGSCollect, checkourService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.configuration = configuration
 		self.apiWorker = VGSPayoptAddCardAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkourService)
 	}
@@ -15,7 +15,7 @@ internal class VGSPayoptTransfersPayWithNewCardViewModel {
 	// MARK: - Vars
 
 	/// Configuration.
-	private(set) var configuration: VGSCheckoutAddCardConfiguration
+	private(set) var configuration: VGSCheckoutPayoptBasicConfiguration
 
 	/// Api worker.
   internal let apiWorker: VGSPayoptAddCardAPIWorker
