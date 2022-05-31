@@ -5,20 +5,20 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
+public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
-	var vgsCollect: VGSCollect
-
+	/// `VGSCollect` object.
+	internal var vgsCollect: VGSCollect
 
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutPaymentConfiguration` object, configuration.
-	internal typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
+	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
 	/// - Parameters:
 	///   - error: `Error` object, the error on configuration setup fail.
-	internal typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
+	public typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
 
 	/// Payopt flow type.
 	internal let payoptFlow: VGSCheckoutPayOptFlow = .transfers
@@ -29,7 +29,7 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	internal let tenantId: String
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	internal let environment: String
+	public let environment: String
 
 	/// Order id.
 	internal let orderId: String
@@ -108,7 +108,7 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	// MARK: - UI Configuration
 
 	/// Checkout UI elements  configuration.
-	internal var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
 	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
 	public var isSaveCardOptionEnabled: Bool = true
