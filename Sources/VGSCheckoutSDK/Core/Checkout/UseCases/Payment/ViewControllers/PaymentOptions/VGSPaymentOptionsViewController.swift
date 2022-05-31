@@ -102,20 +102,18 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 				case .addCard:
 					service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.savedCard(VGSCheckoutPaymentCardInfo(id: cardInfo.id))), in: service)
 				case .transfers:
-					break
-					//
-					//				mainView.isUserInteractionEnabled = false
-					//				closeBarButtomItem.isEnabled = false
-					//				editCardsBarButtomItem.isEnabled = false
-					//				mainView.submitButton.status = .processing
-					//				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
-									//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
-									//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
-									//					guard let strongSelf = self else {return}
-									//					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
-									//					guard let service = strongSelf.paymentService else {return}
-									//					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
-									//				})
+					mainView.isUserInteractionEnabled = false
+					closeBarButtomItem.isEnabled = false
+					editCardsBarButtomItem.isEnabled = false
+					mainView.submitButton.status = .processing
+					mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
+					let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
+					viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
+						guard let strongSelf = self else {return}
+						let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+						guard let service = strongSelf.paymentService else {return}
+						strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+					})
 				}
 			case .editingSavedCards:
 				mainView.submitButton.status = .disabled

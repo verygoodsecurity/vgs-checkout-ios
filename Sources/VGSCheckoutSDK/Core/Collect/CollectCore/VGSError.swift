@@ -30,8 +30,8 @@ internal enum VGSErrorType: Int {
 //		/// When payment orchestration JWT token is not valid.
 //		case invalidJWTToken = 2000
 //
-//		/// When fin ID not found on Save card request during payment flow.
-//		case finIdNotFound = 2002
+		/// When fin ID not found on Save card request during payment flow.
+		case finIdNotFound = 2002
 //
 //		/// When fin ID not found on Save card request during payment flow.
 //		case orderIDInfoNotFound = 2003

@@ -20,11 +20,11 @@ internal final class VGSPayoptAddCardAPIWorker {
 	/// Configuration.
 	private let configuration: VGSCheckoutPayoptBasicConfiguration
 
-  /// Financial instruments path.
-  private let finInstrumentsPath = "/financial_instruments"
+	/// Financial instruments path.
+	private let finInstrumentsPath = "/financial_instruments"
 
-  /// Transfers path.
-  private let transfersPath = "/transfers"
+	/// Transfers path.
+	private let transfersPath = "/transfers"
 
 	/// Checkout service.
 	private weak var checkoutService: VGSCheckoutBasicPayoptServiceProtocol?
@@ -41,16 +41,16 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
 			guard let strongSelf = self else {return}
-      
-      var extraData = [String: Any]()
+
+			var extraData = [String: Any]()
 			extraData["config"] = "payopt"
 			extraData["configType"] = "addCard"
-      extraData["method"] = "CreateFinInstrument"
-      
+			extraData["method"] = "CreateFinInstrument"
+
 			switch response {
 			case .success(let code, let data, let response):
-        extraData["statusCode"] = code
-        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .success, extraData: extraData)
+				extraData["statusCode"] = code
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .success, extraData: extraData)
 
 
 				switch strongSelf.configuration.payoptFlow {
@@ -60,42 +60,41 @@ internal final class VGSPayoptAddCardAPIWorker {
 						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 					}
 				case .transfers:
-					break
-					//				guard let id = VGSPayoptTransfersAPIWorker.financialInstrumentID(from: data) else {
-					//					let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
-					//					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
-					//					completion(requestResult)
-					//					return
-					//				}
+					guard let id = VGSPayoptAddCardAPIWorker.financialInstrumentID(from: data) else {
+						let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
+						let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
+						completion(requestResult)
+						return
+					}
 
-
-
-					//        strongSelf.sendTransfer(with: paymentInfo, finId: id, completion: completion)
+					strongSelf.sendTransfer(with: nil, finId: id, completion: completion)
 				}
 			case .failure(let code, let data, let response, let error):
-        let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
-        extraData["statusCode"] = code
-        extraData["error"] = errorMessage
-        VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .failed, extraData: extraData)
-//				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
+				let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
+				extraData["statusCode"] = code
+				extraData["error"] = errorMessage
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .failed, extraData: extraData)
+				//				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
 				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
 			}
 		}
 	}
 
-	/*
-	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo?, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
+			fatalError("Cannot send transfers in invalid flow.")
+		}
 		let transderPayload: [String: Any] = [
-			"order_id": configuration.orderId,
+			"order_id": config.orderId,
 			"financial_instrument_id": finId
 		]
 		// Use API client sendRequest since we don't need to send collected data again.
 		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transderPayload) { response in
 			switch response {
 			case .success(let code, let data, let response):
-        /// Additional checkout flow info.
-        let info = paymentInfo
+				/// Additional checkout flow info.
+				let info = paymentInfo
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, info)
 				completion(requestResult)
 			case .failure(let code, let data, let response, let error):
@@ -104,7 +103,6 @@ internal final class VGSPayoptAddCardAPIWorker {
 			}
 		}
 	}
-	*/
 
 	/// Financial instrument id from success financial instrument response.
 	/// - Parameter data: `Data?` object, response data.

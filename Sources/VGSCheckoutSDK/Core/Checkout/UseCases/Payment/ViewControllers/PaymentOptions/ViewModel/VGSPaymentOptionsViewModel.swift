@@ -21,7 +21,7 @@ internal class VGSPaymentOptionsViewModel {
 	internal init(configuration: VGSCheckoutPayoptBasicConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.configuration = configuration
 		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect, configuration: configuration)
-//		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
+		self.apiWorker = VGSPayoptAddCardAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
 		self.paymentOptions = configuration.savedCards.map({return .savedCard($0)})
 		self.paymentOptions.append(.newCard)
@@ -39,8 +39,9 @@ internal class VGSPaymentOptionsViewModel {
 	private(set) var configuration: VGSCheckoutPayoptBasicConfiguration
 
 	/// Transfers API worker.
-//	internal let apiWorker: VGSPayoptTransfersAPIWorker
+	internal let apiWorker: VGSPayoptAddCardAPIWorker
 
+	/// API worker for removing cards.
 	internal let removeSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol
 
 	/// Payment button title.
@@ -49,9 +50,6 @@ internal class VGSPaymentOptionsViewModel {
 		case .addCard:
 			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
 		case .transfers:
-			guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
-				fatalError("Configuration doesn't match transfers flow")
-			}
 			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
 		}
 	}
