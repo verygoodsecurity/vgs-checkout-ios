@@ -45,8 +45,15 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
-//		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
+		switch configuration.payoptFlow {
+		case .addCard:
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
+		case .transfers:
+			guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
+				fatalError("Configuration doesn't match transfers flow")
+			}
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
+		}
 	}
 
 	/// Navigation bar title.
@@ -55,16 +62,19 @@ internal class VGSPaymentOptionsViewModel {
 	}
 
 	/// Formatted amount.
-//	internal var formattedAmount: String {
-//		let paymentInfo = configuration.paymentInfo
-//		guard let text = VGSFormatAmountUtils.formatted(amount: paymentInfo.amount, currencyCode: paymentInfo.currency) else {
-//			let event = VGSLogEvent(level: .warning, text: "Cannot format amount: \(paymentInfo.amount) currency: \(paymentInfo.currency)", severityLevel: .warning)
-//			VGSCheckoutLogger.shared.forwardLogEvent(event)
-//			return ""
-//		}
-//
-//		return text
-//	}
+	internal var formattedAmount: String {
+		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
+			fatalError("Configuration doesn't match transfers flow")
+		}
+		let paymentInfo = config.paymentInfo
+		guard let text = VGSFormatAmountUtils.formatted(amount: paymentInfo.amount, currencyCode: paymentInfo.currency) else {
+			let event = VGSLogEvent(level: .warning, text: "Cannot format amount: \(paymentInfo.amount) currency: \(paymentInfo.currency)", severityLevel: .warning)
+			VGSCheckoutLogger.shared.forwardLogEvent(event)
+			return ""
+		}
+
+		return text
+	}
 
 	/// Handles tap on payment option. Updates selection state if needed.
 	/// - Parameter index: `Int` object, index.
