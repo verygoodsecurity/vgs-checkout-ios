@@ -181,6 +181,9 @@
 /* Pay with card button text. */
 "vgs_checkout_pay_with_card_button_title" = "Pay";
 
+/* Pay with card button text in transfers flow. */
+"vgs_checkout_transfers_pay_with_card_button_title" = "Pay";
+
 /* Pay with new card option title. */
 "vgs_checkout_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";
 

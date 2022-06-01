@@ -50,7 +50,7 @@ internal class VGSPaymentOptionsViewModel {
 		case .addCard:
 			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
 		case .transfers:
-			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_transfers_pay_with_card_button_title") + " \(formattedAmount)"
 		}
 	}
 
