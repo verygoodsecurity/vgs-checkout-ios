@@ -94,6 +94,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - paymentInfo: `VGSPayoptTransfersOrderInfo` object, order info.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	///   - vgsCollect: `VGSCollect` object, collect object.
 	internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", vgsCollect: VGSCollect) {
 		self.accessToken = accessToken
 		self.orderId = orderId

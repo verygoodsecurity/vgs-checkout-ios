@@ -55,11 +55,12 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 				switch strongSelf.configuration.payoptFlow {
 				case .addCard:
-					/// Notifies delegate with checkout did finish request result success event.
+					/// Notifies delegate with checkout did finish new card event.
 					if let service = strongSelf.checkoutService {
 						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 					}
 				case .transfers:
+					/// Sends transfer with fin_id.
 					guard let id = VGSPayoptAddCardAPIWorker.financialInstrumentID(from: data) else {
 						let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
 						let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
@@ -81,6 +82,11 @@ internal final class VGSPayoptAddCardAPIWorker {
 		}
 	}
 
+	/// Sends transfer request.
+	/// - Parameters:
+	///   - paymentInfo: `VGSCheckoutPaymentResultInfo?` object, additional payment info.
+	///   - finId: `String` object, id to initiate request.
+	///   - completion: `VGSCheckoutRequestResultCompletion` object, request completion.
 	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo?, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
 			fatalError("Cannot send transfers in invalid flow.")
