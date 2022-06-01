@@ -51,12 +51,10 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+	///   - options: `VGSCheckoutPaymentOptions` object, additional checkout options, default is `nil`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
-
-		/// No additional options by default now.
-		let options: VGSCheckoutPaymentOptions? = nil
+	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", options: VGSCheckoutPaymentOptions? = nil, success:  @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
 
 //		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 //			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
@@ -234,9 +232,12 @@ public enum VGSCheckoutSavedPaymentMethods {
 	//case userId(_ id: String)
 }
 
-/// Additional options
+/// Additional checkout payment options.
 public struct VGSCheckoutPaymentOptions {
+
+	/// Saved payment methods. Default is `nil`.
 	public var methods: VGSCheckoutSavedPaymentMethods? = nil
 
+	/// no:doc
 	public init() {}
 }
