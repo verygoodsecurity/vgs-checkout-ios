@@ -116,7 +116,15 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 				strongSelf.delegate?.checkoutDidFinish(with: paymentMethod)
 			}
 		case .checkoutTransferDidCreateNewCard(let newCardInfo, let result):
-			self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+			switch result {
+			case .success:
+				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+			case .failure:
+				coordintator.dismissRootViewController {
+					// Close checkout with success request result.
+					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+				}
+			}
 		}
 	}
 }

@@ -60,6 +60,9 @@ internal final class VGSPayoptAddCardAPIWorker {
 						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 					}
 				case .transfers:
+					if let service = strongSelf.checkoutService {
+						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutTransferDidCreateNewCard(newCardInfo, .success(code, data, response, nil)), in: service)
+					}
 					/// Sends transfer with fin_id.
 					guard let id = VGSPayoptAddCardAPIWorker.financialInstrumentID(from: data) else {
 						let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.finIdNotFound.rawValue, userInfo: [NSLocalizedDescriptionKey: "Request to payopt service succeed, cannot find fin_id in response"])
@@ -76,8 +79,16 @@ internal final class VGSPayoptAddCardAPIWorker {
 				extraData["error"] = errorMessage
 				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .finInstrument, status: .failed, extraData: extraData)
 				//				var paymentInfo = VGSCheckoutPaymentResultInfo(paymentMethod: .newCard(newCardInfo))
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
-				completion(requestResult)
+
+				switch strongSelf.configuration.payoptFlow {
+				case .addCard:
+					let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
+				 completion(requestResult)
+				case .transfers:
+					if let service = strongSelf.checkoutService {
+						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutTransferDidCreateNewCard(newCardInfo, .failure(code, data, response, error, nil)), in: service)
+					}
+				}
 			}
 		}
 	}
