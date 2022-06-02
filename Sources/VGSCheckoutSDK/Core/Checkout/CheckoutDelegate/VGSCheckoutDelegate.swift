@@ -22,7 +22,7 @@ public protocol VGSCheckoutDelegate: AnyObject {
 	/// - Parameter paymentMethod: `VGSCheckoutPaymentMethod` object, holds payment method info.
 	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod)
 
-	/// Tells the delegate that user created new card.
+	/// Tells the delegate that user created new card before transfer start.
 	/// - Parameter newCardInfo: `VGSCheckoutNewPaymentCardInfo` object, holds new card info.
 	/// - Parameter result: `VGSCheckoutRequestResult` object, create new card request result.
 	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult)

@@ -40,6 +40,8 @@ internal enum VGSAddCardFlowState {
 			- paymentMethod: `VGSCheckoutPaymentMethod` object, payment method.
 	*/
 	case checkoutDidFinish(_ paymentMethod: VGSCheckoutPaymentMethod)
+
+	case checkoutTransferDidCreateNewCard(_ newCardInfo: VGSCheckoutNewPaymentCardInfo, _ result: VGSCheckoutRequestResult)
 }
 
 /// Handles `Save card` use case logic for custom configuration.
