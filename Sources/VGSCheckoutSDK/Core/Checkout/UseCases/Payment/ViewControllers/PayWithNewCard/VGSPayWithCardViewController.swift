@@ -105,14 +105,17 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 			let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
 			viewModel.apiWorker.createFinID(with: cardInfo) {[weak self] requestResult in
 				guard let strongSelf = self else {return}
-				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+
 				guard let service = strongSelf.paymentService else {return}
+				// Trigger different callbacks with checkout state change for add card and transfer flow.
+				let state: VGSAddCardFlowState
 				switch strongSelf.viewModel.configuration.payoptFlow {
 				case .addCard:
-					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+					state = VGSAddCardFlowState.requestSubmitted(requestResult)
 				case .transfers:
-					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutTransferDidFinish(requestResult), in: service)
+					state = VGSAddCardFlowState.checkoutTransferDidFinish(requestResult)
 				}
+				strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
 			}
 		default:
 			break
