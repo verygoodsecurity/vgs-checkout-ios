@@ -13,6 +13,12 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	/// Fail completion for token fetch.
 	typealias FetchTokenCompletionFail = (_ errorMessage: String) -> Void
 
+	/// Success completion for create order request.
+	typealias CreateOrderCompletionSuccess = (_ orderId: String) -> Void
+
+	/// Fail completion for create order request.
+	typealias CreateOrderCompletionFail = (_ errorMessage: String) -> Void
+
 	// Use your own backend to fetch access_token token.
 	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/get-auth-token")!
 
@@ -25,26 +31,26 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 		var request = URLRequest(url: yourCustomBackendTokenURL)
 		request.httpMethod = "POST"
 		let task = URLSession.shared.dataTask(
-				with: request,
-				completionHandler: { (data, response, error) in
-						guard let data = data,
-								let json = try? JSONSerialization.jsonObject(with: data, options: [])
-										as? [String: Any],
-								let token = json["access_token"] as? String else {
+			with: request,
+			completionHandler: { (data, response, error) in
+				guard let data = data,
+							let json = try? JSONSerialization.jsonObject(with: data, options: [])
+								as? [String: Any],
+							let token = json["access_token"] as? String else {
 								// Handle error
-							DispatchQueue.main.async {
-								DemoAppResponseParser.logErrorResponse(response, data: data, error: error)
-								failure("Cannot fetch token")
+								DispatchQueue.main.async {
+									DemoAppResponseParser.logErrorResponse(response, data: data, error: error)
+									failure("Cannot fetch token")
+								}
+								return
 							}
-							return
-						}
 
-					let multipexingToken = token
-					print("access_token: \(token)")
-					DispatchQueue.main.async {
-						success(multipexingToken)
-					}
-				})
+				let multipexingToken = token
+				print("access_token: \(token)")
+				DispatchQueue.main.async {
+					success(multipexingToken)
+				}
+			})
 		task.resume()
 	}
 
@@ -53,13 +59,40 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	/// - Returns: `String?` object, financial instrument id or `nil`.
 	func financialInstrumentID(from data: Data?) -> String? {
 		if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-				if let dataJSON = jsonData["data"] as? [String: Any] {
-					if let financialInstumentID = dataJSON["id"] as? String {
-						return financialInstumentID
-					}
+			if let dataJSON = jsonData["data"] as? [String: Any] {
+				if let financialInstumentID = dataJSON["id"] as? String {
+					return financialInstumentID
 				}
+			}
 		}
 
 		return nil
+	}
+	
+	/// Creates order on multiplexing with your custom backend.
+	/// - Parameters:
+	///   - amount: `String` object, amount of order.
+	///   - currency: `String` object, currency of transaction.
+	///   - success: `CreateOrderCompletionSuccess` object, completion on success create order.
+	///   - failure: `CreateOrderCompletionFail` object, completion on failed create order with error message.
+	func createOrder(with amount: String, currency: String, success: @escaping CreateOrderCompletionSuccess, failure: @escaping CreateOrderCompletionFail) {
+
+		let orderPayload: [String: Any] = [
+			"amount": amount,
+			"currency": currency
+		]
+
+		sendRequest("/orders", payload: orderPayload, httpMethod: "POST", headers: nil) { result in
+			switch result {
+			case .success(let json, _):
+				guard let orderJSON = json, let orderId = orderJSON["order_id"] as? String else {
+					failure("Cannot create order: no order_id in response!")
+					return
+				}
+				success(orderId)
+			case .fail(let errorText):
+				failure("Cannot create order: \(errorText)")
+			}
+		}
 	}
 }
