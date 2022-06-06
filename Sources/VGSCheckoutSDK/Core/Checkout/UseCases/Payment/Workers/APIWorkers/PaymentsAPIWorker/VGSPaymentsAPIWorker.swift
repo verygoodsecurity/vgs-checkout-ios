@@ -4,12 +4,12 @@
 
 import Foundation
 
-/// Additional Payment Flow info.
-public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
-
-	/// Payment method choosen by user.
-	public let paymentMethod: VGSCheckoutPaymentMethod
-}
+///// Additional Payment Flow info.
+//public struct VGSCheckoutPaymentResultInfo: VGSCheckoutInfo {
+//
+//	/// Payment method choosen by user.
+//	public let paymentMethod: VGSCheckoutPaymentMethod
+//}
 
 /// Payopt transfers api Worker.
 internal final class VGSPayoptAddCardAPIWorker {
@@ -71,7 +71,7 @@ internal final class VGSPayoptAddCardAPIWorker {
 						return
 					}
 
-					strongSelf.sendTransfer(with: nil, finId: id, completion: completion)
+					strongSelf.sendTransfer(with: id, completion: completion)
 				}
 			case .failure(let code, let data, let response, let error):
 				let errorMessage =  (error as NSError?)?.localizedDescription ?? ""
@@ -95,10 +95,9 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 	/// Sends transfer request.
 	/// - Parameters:
-	///   - paymentInfo: `VGSCheckoutPaymentResultInfo?` object, additional payment info.
 	///   - finId: `String` object, id to initiate request.
 	///   - completion: `VGSCheckoutRequestResultCompletion` object, request completion.
-	internal func sendTransfer(with paymentInfo: VGSCheckoutPaymentResultInfo?, finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
+	internal func sendTransfer(with finId: String, completion: @escaping VGSCheckoutRequestResultCompletion) {
 		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
 			fatalError("Cannot send transfers in invalid flow.")
 		}
@@ -111,11 +110,10 @@ internal final class VGSPayoptAddCardAPIWorker {
 			switch response {
 			case .success(let code, let data, let response):
 				/// Additional checkout flow info.
-				let info = paymentInfo
-				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, info)
+				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, nil)
 				completion(requestResult)
 			case .failure(let code, let data, let response, let error):
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, paymentInfo)
+				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
 				completion(requestResult)
 			}
 		}

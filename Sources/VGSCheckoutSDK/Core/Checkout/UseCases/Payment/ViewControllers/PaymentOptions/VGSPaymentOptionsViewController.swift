@@ -107,8 +107,8 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 					editCardsBarButtomItem.isEnabled = false
 					mainView.submitButton.status = .processing
 					mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
-					let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
-					viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
+//					let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
+					viewModel.apiWorker.sendTransfer(with:cardInfo.id, completion: {[weak self] requestResult in
 						guard let strongSelf = self else {return}
 						let state = VGSAddCardFlowState.requestSubmitted(requestResult)
 						guard let service = strongSelf.paymentService else {return}
