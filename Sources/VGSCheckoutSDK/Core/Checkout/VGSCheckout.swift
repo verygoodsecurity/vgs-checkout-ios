@@ -121,13 +121,13 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
 			case .failure:
 				coordintator.dismissRootViewController {
-					// Close checkout with success request result.
+					// Close checkout with request result on fail.
 					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
 				}
 			}
 		case .checkoutTransferDidFinish(let result):
 			coordintator.dismissRootViewController {
-				// Close checkout with success request result.
+				// Close checkout with request result.
 				self.delegate?.checkoutTransferDidFinish(with: result)
 			}
 		}
