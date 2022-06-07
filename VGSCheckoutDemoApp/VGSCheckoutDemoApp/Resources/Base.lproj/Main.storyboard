@@ -145,17 +145,17 @@
             </objects>
             <point key="canvasLocation" x="1616" y="786"/>
         </scene>
-        <!--Multiplexing Payment-->
+        <!--Checkout Transfers-->
         <scene sceneID="oCL-kY-VzJ">
             <objects>
-                <viewController id="75a-pK-j8b" customClass="CheckoutMultiplexingPaymentFlowVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="75a-pK-j8b" customClass="CheckoutTransfersVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hIZ-ti-OQM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="8ed-GZ-7gE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Multiplexing Payment" id="m6c-7d-GFz"/>
+                    <navigationItem key="navigationItem" title="Checkout Transfers" id="m6c-7d-GFz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pxc-SK-HJl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
