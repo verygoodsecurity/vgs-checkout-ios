@@ -103,7 +103,7 @@ internal final class VGSPayoptAddCardAPIWorker {
 		}
 		let transderPayload: [String: Any] = [
 			"order_id": config.orderId,
-			"financial_instrument_id": finId
+			"source": finId
 		]
 		// Use API client sendRequest since we don't need to send collected data again.
 		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transderPayload) { response in
