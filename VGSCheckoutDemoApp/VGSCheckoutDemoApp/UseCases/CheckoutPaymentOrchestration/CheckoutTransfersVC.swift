@@ -21,7 +21,7 @@ import SVProgressHUD
  Step 4: Create `VGSCheckoutPaymentConfiguration` with access token and order_id.
  Step 5: Implement `VGSCheckoutDelegate` protocol to get notified when checkout flow will be finished.
  Step 6: Implement `checkoutTransferDidFinish` method and parse response for required data.
-*/
+ */
 class CheckoutTransfersVC: UIViewController {
 
 	// MARK: - Vars
@@ -70,115 +70,106 @@ class CheckoutTransfersVC: UIViewController {
 extension CheckoutTransfersVC: CheckoutFlowMainViewDelegate {
 
 	func checkoutButtonDidTap(in view: CheckoutFlowMainView) {
-
 		// Create order.
 		guard let newOrderId = orderId else {
 			// Start progress hud animation until token is fetched.
 			SVProgressHUD.show()
-			paymentOrchestrationAPIClient.createOrder(with: "5300", currency: "USD") {[weak self] createdOrderId in
+
+			paymentOrchestrationAPIClient.fetchToken {[weak self] payoptAccessToken in
 				guard let strongSelf = self else {return}
-				SVProgressHUD.dismiss()
-				strongSelf.orderId = createdOrderId
 
-				// Fetch token.
-				strongSelf.paymentOrchestrationAPIClient.fetchToken {[weak self]  token in
-
-					// Uncomment the line below to simulate 401 error and set invalid token to payment orchestration.
-					// let invalidToken = "Some invalid token"
-					guard let strongSelf = self else {return}
-					var options = VGSCheckoutPaymentOptions()
-					options.methods = .savedCards([""])
-
-					VGSCheckoutPaymentConfiguration.createConfiguration(accessToken: token, orderId: createdOrderId, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: nil) { configuration in
-
+				strongSelf.paymentOrchestrationAPIClient.createOrder(with: 5300, currency: "USD", accessToken: payoptAccessToken) { orderId in
+					VGSCheckoutPaymentConfiguration.createConfiguration(accessToken: payoptAccessToken, orderId: orderId, tenantId: DemoAppConfiguration.shared.paymentOrchestrationTenantId, environment: DemoAppConfiguration.shared.environment, options: nil) { configuration in
 						strongSelf.vgsCheckout = VGSCheckout(configuration: configuration)
 
 						strongSelf.vgsCheckout?.delegate = strongSelf
 
 						SVProgressHUD.dismiss()
-						
+
 						// Present checkout configuration.
 						strongSelf.vgsCheckout?.present(from: strongSelf)
 
 						print("Start checkout with payment configuration!")
 					} failure: { error in
-						SVProgressHUD.showError(withStatus: "Cannot create checkout configuration! Error: \(error)")
+						SVProgressHUD.showError(withStatus: "Cannot start checkout with payment configuration!")
 					}
-				} failure: { errorText in
-					SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
+
+				} failure: { errorMessage in
+					SVProgressHUD.dismiss()
+					SVProgressHUD.showError(withStatus: "Cannot create order!")
 				}
-				return
 
 			} failure: { errorMessage in
-				SVProgressHUD.showError(withStatus: "Cannot create orderId!")
+				SVProgressHUD.dismiss()
+				SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
 			}
 			return
 		}
 	}
 }
 
-// MARK: - VGSCheckoutDelegate
+	// MARK: - VGSCheckoutDelegate
 
-extension CheckoutTransfersVC: VGSCheckoutDelegate {
+	extension CheckoutTransfersVC: VGSCheckoutDelegate {
 
-	func checkoutDidCancel() {
-		CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout Payment configuration status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
-	}
-
-	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult) {
-		switch result {
-		case .success(let statusCode, let data, let response, let info):
-			if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
-				print("Fin instrument id is: \(id)")
-			}
-			print("New card info: \(newCardInfo)")
-		case .failure(let statusCode, _, _, let error, let info):
-			print("Failed to create fin instrument id: \(error?.localizedDescription)")
+		func checkoutDidCancel() {
+			CheckoutDemoDialogHelper.presentAlertDialog(with: "Checkout Payment configuration status: .cancelled", message: "User cancelled checkout.", okActionTitle: "Ok", in: self, completion: nil)
 		}
-	}
 
-	func checkoutTransferDidFinish(with requestResult: VGSCheckoutRequestResult) {
-
-		var title = ""
-		var message = ""
-
-		switch requestResult {
-		case .success(let statusCode, let data, _, _):
-			title = "Checkout Payment configuration status: Payment Success!"
-			let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
-			mainView.responseTextView.isHidden = false
-			mainView.responseTextView.text = text
-
-		case .failure(let statusCode, _, _, let error, _):
-			title = "Checkout Multiplexing status: Failed!"
-			message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
-
-			// If not authorized - suggest user to retry and refetch token.
-			if statusCode == 401 {
-				CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Payment orchestration token is invalid", in: self) {
-					SVProgressHUD.show()
-					self.paymentOrchestrationAPIClient.fetchToken { token in
-						SVProgressHUD.dismiss()
-					} failure: { _ in
-						SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
-					}
+		func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult) {
+			switch result {
+			case .success(let statusCode, let data, let response, let info):
+				if let id = paymentOrchestrationAPIClient.financialInstrumentID(from: data) {
+					print("Fin instrument id is: \(id)")
 				}
-				return
+				print("New card info: \(newCardInfo)")
+			case .failure(let statusCode, _, _, let error, let info):
+				print("Failed to create fin instrument id: \(error?.localizedDescription)")
 			}
 		}
 
-		let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+		func checkoutTransferDidFinish(with requestResult: VGSCheckoutRequestResult) {
 
-		alert.addAction(UIAlertAction(title: "OK", style: .default))
+			var title = ""
+			var message = ""
 
-		if let popoverController = alert.popoverPresentationController {
-			popoverController.sourceView = self.view //to set the source of your alert
-			popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
-			popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+			switch requestResult {
+			case .success(let statusCode, let data, _, _):
+				title = "Checkout Payment configuration status: Payment Success!"
+				let text = DemoAppResponseParser.stringifySuccessResponse(from: data, rootJsonKey: "data") ?? ""
+				mainView.responseTextView.isHidden = false
+				mainView.responseTextView.text = text
+
+			case .failure(let statusCode, _, _, let error, _):
+				title = "Checkout Multiplexing status: Failed!"
+				message = "status code is: \(statusCode) error: \(error?.localizedDescription ?? "Uknown error!")"
+
+				// If not authorized - suggest user to retry and refetch token.
+				if statusCode == 401 {
+					CheckoutDemoDialogHelper.displayRetryDialog(with: "Error", message: "Session has been expired. Payment orchestration token is invalid", in: self) {
+						SVProgressHUD.show()
+						self.paymentOrchestrationAPIClient.fetchToken { token in
+							SVProgressHUD.dismiss()
+						} failure: { _ in
+							SVProgressHUD.showError(withStatus: "Cannot fetch payment orchestration token!")
+						}
+					}
+					return
+				}
+			}
+
+			let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+			alert.addAction(UIAlertAction(title: "OK", style: .default))
+
+			if let popoverController = alert.popoverPresentationController {
+				popoverController.sourceView = self.view //to set the source of your alert
+				popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+				popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+			}
+
+			self.present(alert, animated: true, completion: nil)
 		}
-
-		self.present(alert, animated: true, completion: nil)
 	}
-}
 
-// swiftlint:enable all
+	// swiftlint:enable all

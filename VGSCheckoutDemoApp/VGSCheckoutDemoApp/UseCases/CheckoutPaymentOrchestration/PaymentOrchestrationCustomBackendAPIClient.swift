@@ -91,16 +91,42 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	/// - Parameters:
 	///   - amount: `String` object, amount of order.
 	///   - currency: `String` object, currency of transaction.
+	///   - accessToken: `String` object, access token.
 	///   - success: `CreateOrderCompletionSuccess` object, completion on success create order.
 	///   - failure: `CreateOrderCompletionFail` object, completion on failed create order with error message.
-	func createOrder(with amount: String, currency: String, success: @escaping CreateOrderCompletionSuccess, failure: @escaping CreateOrderCompletionFail) {
+	func createOrder(with amount: Int, currency: String, accessToken: String, success: @escaping CreateOrderCompletionSuccess, failure: @escaping CreateOrderCompletionFail) {
+
+		/*
+		 {
+				 "order": {
+						 "amount": 149,
+						 "currency": "USD",
+						 "financial_instrument_types": [
+								 "card",
+								 "google-pay"
+						 ]
+				 },
+				 "items": [
+						 {
+								 "name": "VGS cookies", "price": 500, "quantity": 30
+						 }
+				 ]
+		 }
+		 */
 
 		let orderPayload: [String: Any] = [
+			"order": [
 			"amount": amount,
-			"currency": currency
+			"currency": currency,
+			"financial_instrument_types" : [
+				"card"
+			]
+		],
+			"items": [["name": "Pizza", "price": amount, "quantity": 2]]
 		]
 
-		sendRequest("/orders", payload: orderPayload, httpMethod: "POST", headers: nil) { result in
+		let mainURL = URL(string: "https://\(DemoAppConfiguration.shared.paymentOrchestrationTenantId).sandbox.verygoodproxy.com")
+		sendRequest("/orders", mainURL: mainURL, payload: orderPayload, httpMethod: "POST", headers: ["Authorization" : "Bearer \(accessToken)"]) { result in
 			switch result {
 			case .success(let json, _):
 				guard let orderJSON = json,
@@ -125,9 +151,14 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	///   - httpMethod: `String` object, should be valid HTTP Method.
 	///   - headers: `[String : String]?` object, headers, default is `nil`.
 	///   - completion: `APIRequestCompletion` object, api request completion.
-	private func sendRequest(_ path: String, payload: [String: Any]?, httpMethod: String, headers: [String: String]? = nil, completion: @escaping (APIRequestCompletion)) {
+	private func sendRequest(_ path: String, mainURL: URL? = nil, payload: [String: Any]?, httpMethod: String, headers: [String: String]? = nil, completion: @escaping (APIRequestCompletion)) {
 
-		let url = mainURL.appendingPathComponent(path)
+		let url: URL
+		if let mainRequestURL = mainURL {
+			url = mainRequestURL.appendingPathComponent(path)
+		} else {
+			url = self.mainURL.appendingPathComponent(path)
+		}
 
 		var request = URLRequest(url: url)
 		request.httpMethod = httpMethod
