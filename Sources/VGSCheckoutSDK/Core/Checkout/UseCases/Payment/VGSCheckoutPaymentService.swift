@@ -70,7 +70,7 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 		//		self.initialScreen = .payWithNewCard
 		switch checkoutConfigurationType {
 		case .payoptTransfers(let configuration):
-			if !configuration.savedCards.isEmpty {
+			if configuration.savedCards.isEmpty {
 					self.initialScreen = .payWithNewCard
 				} else {
 					self.initialScreen = .paymentOptions
