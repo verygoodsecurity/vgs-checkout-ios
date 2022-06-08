@@ -217,5 +217,8 @@
 /* Add new card option title. */
 "vgs_checkout_payment_options_add_new_card_title" = "ADD NEW CARD";
 
+/* Pay with new card option title. */
+"vgs_checkout_transfer_payment_options_pay_with_new_card_title" = "PAY WITH NEW CARD";
+
 /* Add card button text. */
 "vgs_checkout_add_card_button_title" = "SAVE";

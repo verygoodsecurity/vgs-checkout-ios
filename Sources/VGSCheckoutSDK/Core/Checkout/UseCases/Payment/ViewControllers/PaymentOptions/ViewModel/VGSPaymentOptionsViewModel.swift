@@ -54,6 +54,16 @@ internal class VGSPaymentOptionsViewModel {
 		}
 	}
 
+	/// New card cell title.
+	internal var newCardCellTitle: String {
+		switch configuration.payoptFlow {
+		case .addCard:
+			return 	VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_add_new_card_title")
+		case .transfers:
+			return 	VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_transfer_payment_options_pay_with_new_card_title")
+		}
+	}
+
 	/// Navigation bar title.
 	internal var rootNavigationTitle: String {
 		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_navigation_bar_title")

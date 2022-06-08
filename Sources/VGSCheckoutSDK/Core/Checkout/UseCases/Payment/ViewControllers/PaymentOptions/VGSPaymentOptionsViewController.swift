@@ -296,7 +296,7 @@ extension VGSPaymentOptionsViewController: UITableViewDataSource {
 			return cell
 		case .newCard:
 			let cell: VGSPaymentOptionNewCardTableViewCell = tableView.dequeue(cellForRowAt: indexPath)
-			cell.configure(with: uiTheme)
+			cell.configure(with: uiTheme, text: viewModel.newCardCellTitle)
 
 			return cell
 		}
