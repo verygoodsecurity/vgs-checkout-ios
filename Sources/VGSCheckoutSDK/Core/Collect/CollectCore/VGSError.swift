@@ -34,7 +34,7 @@ internal enum VGSErrorType: Int {
 		case finIdNotFound = 2002
 
 //		/// When order cannot be fetched from pay opt backend.
-		case orderIDInfoNotFound = 2003
+		case orderInfoNotFound = 2003
 }
 
 /// An error produced by `VGSCheckout`. Works similar to default `NSError` in iOS.
