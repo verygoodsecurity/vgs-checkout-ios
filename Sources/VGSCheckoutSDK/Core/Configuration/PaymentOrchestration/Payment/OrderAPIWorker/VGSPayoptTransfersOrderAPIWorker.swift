@@ -75,7 +75,6 @@ internal class VGSPayoptTransfersOrderAPIWorker {
 				print("Fetched order info success!")
 				success(paymentInfo)
 			case .failure(let code, let data, let response, let error):
-				break
 				// TODO: - add cannot fetch order info error code.
 				let fetchOrderError = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.orderInfoNotFound.rawValue, userInfo: [
 					NSLocalizedDescriptionKey: "Cannot fetch order info from id: \(orderId)",

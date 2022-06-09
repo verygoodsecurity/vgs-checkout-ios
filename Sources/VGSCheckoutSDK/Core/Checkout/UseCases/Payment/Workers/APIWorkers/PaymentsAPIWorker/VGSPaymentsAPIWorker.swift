@@ -59,6 +59,8 @@ internal final class VGSPayoptAddCardAPIWorker {
 					if let service = strongSelf.checkoutService {
 						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.newCard(.success(code, data, response, nil), newCardInfo)), in: service)
 					}
+
+					return
 				case .transfers:
 					if let service = strongSelf.checkoutService {
 						service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutTransferDidCreateNewCard(newCardInfo, .success(code, data, response, nil)), in: service)

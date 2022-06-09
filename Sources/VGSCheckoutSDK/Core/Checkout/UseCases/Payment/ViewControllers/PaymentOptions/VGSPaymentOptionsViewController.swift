@@ -110,7 +110,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 //					let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
 					viewModel.apiWorker.sendTransfer(with:cardInfo.id, completion: {[weak self] requestResult in
 						guard let strongSelf = self else {return}
-						let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+						let state = VGSAddCardFlowState.checkoutTransferDidFinish(requestResult)
 						guard let service = strongSelf.paymentService else {return}
 						strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
 					})
