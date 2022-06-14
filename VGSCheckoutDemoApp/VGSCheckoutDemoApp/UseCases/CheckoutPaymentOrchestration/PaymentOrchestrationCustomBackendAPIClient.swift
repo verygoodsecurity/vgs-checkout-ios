@@ -89,7 +89,7 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	
 	/// Creates order for payment orchestration with your custom backend.
 	/// - Parameters:
-	///   - amount: `String` object, amount of order.
+	///   - amount: `Int` object, amount of order.
 	///   - currency: `String` object, currency of transaction.
 	///   - accessToken: `String` object, access token.
 	///   - success: `CreateOrderCompletionSuccess` object, completion on success create order.
