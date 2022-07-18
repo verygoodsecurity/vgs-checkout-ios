@@ -29,24 +29,8 @@ internal extension APIClient {
 		if !VGSCollect.tenantIDValid(tenantId) {
 			logInvalidVaultIDEvent(tenantId)
 		}
-
-    let strUrl: String
-    // Check is routeId is set and valid.
-    if let routeId = routeId, !routeId.isEmpty {
-      // Validate routeId
-      if !VGSCollect.routeIdStringValid(routeId) {
-        logInvalidRouteIdEvent(routeId)
-        return nil
-      }
-      // Build url with specifi route id.
-      strUrl = "https://" + tenantId + "-" + "\(routeId)" + "." + regionalEnvironment + ".verygoodproxy.com"
-    } else {
-      // Build default url.
-      strUrl = "https://" + tenantId + "." + regionalEnvironment + ".verygoodproxy.com"
-    }
-    
 		// Check vault url is valid.
-		guard let url = URL(string: strUrl) else {
+    guard let url = buildVaultURL(tenantId: tenantId, regionalEnvironment: regionalEnvironment, routeId: routeId) else {
 			APIClient.logCannotBuildURLEvent(for: tenantId, regionalEnvironment: regionalEnvironment, routeId: routeId)
 
 			return nil
@@ -98,4 +82,27 @@ internal extension APIClient {
 		let event = VGSLogEvent(level: .warning, text: eventText, severityLevel: .error)
 		VGSCheckoutLogger.shared.forwardLogEvent(event)
 	}
+  
+  /// Build valut URL.
+  /// - Parameters:
+  ///   - tenantId: `String` object, invalid vaultID.
+  ///   - regionalEnvironment: `String` object, invalid regionalEnvironment.
+  ///   - routeId: `String?` object,  inbound route id could be nil or valid uuid string.
+  static func buildVaultURL(tenantId: String, regionalEnvironment: String, routeId: String?) -> URL? {
+    let strUrl: String
+    // Check is routeId is set and valid.
+    if let routeId = routeId, !routeId.isEmpty {
+      // Validate routeId
+      if !VGSCollect.routeIdStringValid(routeId) {
+        logInvalidRouteIdEvent(routeId)
+        return nil
+      }
+      // Build url with specific route id.
+      strUrl = "https://" + tenantId + "-" + "\(routeId)" + "." + regionalEnvironment + ".verygoodproxy.com"
+    } else {
+      // Build default url.
+      strUrl = "https://" + tenantId + "." + regionalEnvironment + ".verygoodproxy.com"
+    }
+    return URL(string: strUrl)
+  }
 }
