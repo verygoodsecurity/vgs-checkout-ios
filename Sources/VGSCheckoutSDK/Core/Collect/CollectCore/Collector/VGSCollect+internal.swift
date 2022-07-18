@@ -25,6 +25,11 @@ internal extension VGSCollect {
       return !enironment.isEmpty && NSPredicate(format: "SELF MATCHES %@", "^(live|sandbox|LIVE|SANDBOX)+((-)+([a-zA-Z0-9]+)|)+\\d*$").evaluate(with: enironment)
     }
   
+    /// Validate uuid string representing  routeId.
+    class func routeIdStringValid(_ routeId: String) -> Bool {
+      return UUID(uuidString: routeId) != nil
+    }
+    
     /// Validate stored textfields input data
     func validateStoredInputData() -> VGSError? {
         return validate(storage.textFields)

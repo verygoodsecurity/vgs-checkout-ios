@@ -10,6 +10,9 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	/// `VGSCollect` object.
 	internal var vgsCollect: VGSCollect
 
+  /// Default Inbound route route id created in vault during default integration with payopt on VGS dashboard.
+  public static let defaultPayoptRouteId = "4880868f-d88b-4333-ab70-d9deecdbffc4"
+  
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutPaymentConfiguration` object, configuration.
@@ -30,6 +33,9 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
+  
+  /// `String?`, organization vault inbound rout id.
+  public var routeId: String?
 
 	/// Order id.
 	internal let orderId: String
@@ -51,10 +57,11 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+  ///   - routeId: `String?`, organization vault inbound rout id, default is route id created during integration with payopt on VGS dashboard.
 	///   - options: `VGSCheckoutPaymentOptions` object, additional checkout options, default is `nil`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", options: VGSCheckoutPaymentOptions? = nil, success:  @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
+  public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", routeId: String? = defaultPayoptRouteId, options: VGSCheckoutPaymentOptions? = nil, success:  @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
 
 //		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 //			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
@@ -62,12 +69,12 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 //			return
 //		}
 
-		let vgsCollect = VGSCollect(id: tenantId, environment: environment)
+		let vgsCollect = VGSCollect(id: tenantId, environment: environment, routeId: routeId)
 		let orderAPIWorker = VGSPayoptTransfersOrderAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
 		orderAPIWorker.fetchPaymentConfiguration(for: orderId) { paymentInfo in
 			print("succcess")
 
-			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment, vgsCollect: vgsCollect)
+			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment, routeId: routeId, vgsCollect: vgsCollect)
 			if let methods = options?.methods {
 				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
 				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
@@ -93,13 +100,15 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - paymentInfo: `VGSPayoptTransfersOrderInfo` object, order info.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+  ///   - routeId: `String?`, organization vault inbound rout id, could be `nil`.
 	///   - vgsCollect: `VGSCollect` object, collect object.
-	internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", vgsCollect: VGSCollect) {
+  internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", routeId: String?, vgsCollect: VGSCollect) {
 		self.accessToken = accessToken
 		self.orderId = orderId
 		self.paymentInfo = paymentInfo
 		self.tenantId = tenantId
 		self.environment = environment
+    self.routeId = routeId
 		self.vgsCollect = vgsCollect
 	}
 

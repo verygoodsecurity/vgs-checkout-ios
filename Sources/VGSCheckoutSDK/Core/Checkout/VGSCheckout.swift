@@ -36,7 +36,7 @@ public class VGSCheckout {
 		}
 
 		self.checkoutConfigurationType = checkoutConfigurationType
-		vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, paymentFlow: checkoutConfigurationType)
+    vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, routeId: configuration.routeId, paymentFlow: checkoutConfigurationType)
 		self.uiTheme = configuration.uiTheme
 	}
 

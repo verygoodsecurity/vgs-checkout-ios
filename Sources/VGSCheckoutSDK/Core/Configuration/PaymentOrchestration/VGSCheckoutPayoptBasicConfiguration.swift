@@ -51,6 +51,9 @@ internal protocol VGSCheckoutPayoptBasicConfiguration {
 
 	/// Access token.
 	var accessToken: String {get}
+  
+  /// Default Inbound route route id created in vault during default integration with payopt on dashboard.
+  static var defaultPayoptRouteId: String {get}
 }
 
 /// Defines payopt flow type.

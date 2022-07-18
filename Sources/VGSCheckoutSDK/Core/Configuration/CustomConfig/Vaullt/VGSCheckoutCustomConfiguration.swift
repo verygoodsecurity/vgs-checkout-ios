@@ -13,13 +13,18 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
+  /// `String?`, organization vault inbound rout id, could be `nil` when vault has only one route.
+  public var routeId: String? {
+    return routeConfiguration.routeId
+  }
+  
   // MARK: - Initialization
   
 	/// Configuration initializer.
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	public init(vaultID: String, environment: String = "sandbox") {
+  public init(vaultID: String, environment: String = "sandbox") {
 		self.vaultID = vaultID
 		self.environment = environment
 	}
