@@ -118,17 +118,18 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 		case .checkoutTransferDidCreateNewCard(let newCardInfo, let result):
 			switch result {
 			case .success:
-				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+//				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+				break
 			case .failure:
 				coordintator.dismissRootViewController {
 					// Close checkout with request result on fail.
-					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+//					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
 				}
 			}
 		case .checkoutTransferDidFinish(let result):
 			coordintator.dismissRootViewController {
 				// Close checkout with request result.
-				self.delegate?.checkoutTransferDidFinish(with: result)
+//				self.delegate?.checkoutTransferDidFinish(with: result)
 			}
 		}
 	}

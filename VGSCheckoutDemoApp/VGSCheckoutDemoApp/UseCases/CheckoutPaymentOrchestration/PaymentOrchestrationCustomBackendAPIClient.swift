@@ -34,7 +34,7 @@ final class PaymentOrchestrationCustomBackendAPIClient {
 	/// Fail completion for create order request.
 	typealias CreateOrderCompletionFail = (_ errorMessage: String) -> Void
 
-	// Use your own backend to fetch access_token token.
+	// Use your own backend to fetch access_token.
 	fileprivate let yourCustomBackendTokenURL = URL(string:  DemoAppConfiguration.shared.paymentOrchestrationServicePath + "/get-auth-token")!
 
 	/// Main url.
