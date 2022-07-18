@@ -35,7 +35,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	public let environment: String
   
   /// `String?`, organization vault inbound rout id.
-  public var routeId: String?
+  public let routeId: String?
 
 	/// Order id.
 	internal let orderId: String
