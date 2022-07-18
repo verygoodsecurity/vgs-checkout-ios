@@ -16,6 +16,7 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 	struct APISatelliteTestData {
 	 let environment: String
 	 let hostname: String?
+    let routeId: String?
 	 let port: Int?
 	 let url: URL
 	}
@@ -39,13 +40,13 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 	/// Test `API` valid satellite configurations to be resolved to `.satelliteURL` policy.
 	func testAPIURLPolicyValidSatellite() {
 		let testData = [
-			APISatelliteTestData(environment: "sandbox", hostname: "localhost", port: 9908, url: URL(string: "http://localhost:9908")!),
+      APISatelliteTestData(environment: "sandbox", hostname: "localhost", routeId: nil, port: 9908, url: URL(string: "http://localhost:9908")!),
 
-			APISatelliteTestData(environment: "sandbox", hostname: "192.168.0", port: 9908, url: URL(string: "http://192.168.0:9908")!),
+			APISatelliteTestData(environment: "sandbox", hostname: "192.168.0", routeId: nil, port: 9908, url: URL(string: "http://192.168.0:9908")!),
 
-			APISatelliteTestData(environment: "sandbox", hostname: "192.168.1.5", port: 9908, url: URL(string: "http://192.168.1.5:9908")!),
+			APISatelliteTestData(environment: "sandbox", hostname: "192.168.1.5", routeId: nil, port: 9908, url: URL(string: "http://192.168.1.5:9908")!),
 
-			APISatelliteTestData(environment: "sandbox", hostname: "http://192.168.1.5", port: 9908, url: URL(string: "http://192.168.1.5:9908")!)
+      APISatelliteTestData(environment: "sandbox", hostname: "http://192.168.1.5", routeId: nil, port: 9908, url: URL(string: "http://192.168.1.5:9908")!)
 		]
 
 		for index in 0..<testData.count {
@@ -53,7 +54,7 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 
 			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(config.port!) should produce: \(config.url)"
-			let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
+      let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, routeId: config.routeId, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 
 			XCTAssertTrue(client.formAnalyticDetails.isSatelliteMode == true, "\(outputText) should produce *satellite* mode in analytics")
 
@@ -73,15 +74,15 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 	/// Test `API` invalid satellite configurations to be resolved to `.vaultURL` policy.
 	func testAPIURLPolicyInValidSatellite() {
 		let testData = [
-			APISatelliteTestData(environment: "live", hostname: "localhost", port: 9908, url: URL(string: "https://testID.live.verygoodproxy.com")!),
+      APISatelliteTestData(environment: "live", hostname: "localhost", routeId: nil, port: 9908, url: URL(string: "https://testID.live.verygoodproxy.com")!),
 
-			APISatelliteTestData(environment: "live-eu", hostname: "192.168.0", port: 9908, url: URL(string: "https://testID.live-eu.verygoodproxy.com")!),
+			APISatelliteTestData(environment: "live-eu", hostname: "192.168.0", routeId: nil, port: 9908, url: URL(string: "https://testID.live-eu.verygoodproxy.com")!),
 
-			APISatelliteTestData(environment: "sandbox", hostname: nil, port: 9908, url: URL(string: "https://testID.sandbox.verygoodproxy.com")!),
+			APISatelliteTestData(environment: "sandbox", hostname: nil, routeId: nil, port: 9908, url: URL(string: "https://testID.sandbox.verygoodproxy.com")!),
 
-			APISatelliteTestData(environment: "sandbox", hostname: nil, port: nil, url: URL(string: "https://testID.sandbox.verygoodproxy.com")!),
+			APISatelliteTestData(environment: "sandbox", hostname: nil, routeId: nil, port: nil, url: URL(string: "https://testID.sandbox.verygoodproxy.com")!),
 
-			APISatelliteTestData(environment: "live", hostname: "http://192.168.1.5", port: 9908, url: URL(string: "https://testID.live.verygoodproxy.com")!)
+			APISatelliteTestData(environment: "live", hostname: "http://192.168.1.5", routeId: nil, port: 9908, url: URL(string: "https://testID.live.verygoodproxy.com")!)
 		]
 
 		for index in 0..<testData.count {
@@ -92,7 +93,7 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 			}
 			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(portText) should produce *nil*"
-			let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
+      let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment,routeId: config.routeId, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 
 			XCTAssertTrue(client.formAnalyticDetails.isSatelliteMode == false, "\(outputText) should NOT produce satellite mode in analytics")
 
