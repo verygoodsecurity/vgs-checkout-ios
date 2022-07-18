@@ -37,7 +37,7 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
   
-  /// `String?`, organization vault inbound rout id, could be `nil` when vault has only one route.
+  /// `String?`, organization vault inbound route id, could be `nil` when vault has only one route.
   public let routeId: String?
 
 	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
@@ -62,7 +62,7 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - accessToken: `String` object, should be valid access token for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-  ///   - routeId: `String?`, organization vault inbound rout id, default is route id created during integration with payopt on VGS dashboard.
+  ///   - routeId: `String?`, organization vault inbound route id, default is route id created during integration with payopt on VGS dashboard.
 	///   - options: `VGSCheckoutPaymentOptions` object, additional checkout options, default is `nil`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
@@ -106,7 +106,7 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   ///   - accessToken: `String` object, should be valid access token for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-  ///   - routeId: `String?`, organization vault inbound rout id.
+  ///   - routeId: `String?`, organization vault inbound route id.
   ///   - vgsCollect: `VGSCollect` object.
   internal init(accessToken: String, tenantId: String, environment: String = "sandbox", routeId: String?, vgsCollect: VGSCollect) {
     self.accessToken = accessToken

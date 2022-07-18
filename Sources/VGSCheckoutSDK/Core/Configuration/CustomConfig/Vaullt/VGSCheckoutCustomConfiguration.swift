@@ -13,7 +13,7 @@ public struct VGSCheckoutCustomConfiguration: VGSCheckoutBasicConfigurationProto
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
 
-  /// `String?`, organization vault inbound rout id, could be `nil` when vault has only one route.
+  /// `String?`, organization vault inbound route id, could be `nil` when vault has only one route.
   public var routeId: String? {
     return routeConfiguration.routeId
   }

@@ -9,7 +9,7 @@ internal extension VGSCollect {
 	/// - Parameters:
 	///   - vaultID: `String` object, organization vault id.
 	///   - environment: environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-  ///  - routeId: `String?`, organization vault inbound rout id, could be `nil`.
+  ///  - routeId: `String?`, organization vault inbound route id, could be `nil`.
 	///   - paymentFlow: `VGSPaymentProcessingFlow` object.
   convenience init(vaultID: String, environment: String, routeId: String?, paymentFlow: VGSCheckoutConfigurationType) {
 		switch paymentFlow {

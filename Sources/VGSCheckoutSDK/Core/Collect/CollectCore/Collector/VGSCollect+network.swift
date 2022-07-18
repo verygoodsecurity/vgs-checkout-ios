@@ -11,7 +11,7 @@ extension VGSCollect {
      Send data from VGSTextFields to your organization vault.
      
      - Parameters:
-        - path: Inbound rout path for your organization vault.
+        - path: Inbound route path for your organization vault.
         - method: HTTPMethod, default is `.post`.
         - extraData: Any data you want to send together with data from VGSTextFields , default is `nil`.
 	      - requestOptions: `VGSCollectRequestOptions` object, holds additional request options. Default options are `.nestedJSON`.

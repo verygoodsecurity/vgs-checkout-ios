@@ -34,7 +34,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	public let environment: String
   
-  /// `String?`, organization vault inbound rout id.
+  /// `String?`, organization vault inbound route id.
   public let routeId: String?
 
 	/// Order id.
@@ -57,7 +57,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-  ///   - routeId: `String?`, organization vault inbound rout id, default is route id created during integration with payopt on VGS dashboard.
+  ///   - routeId: `String?`, organization vault inbound route id, default is route id created during integration with payopt on VGS dashboard.
 	///   - options: `VGSCheckoutPaymentOptions` object, additional checkout options, default is `nil`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
@@ -100,7 +100,7 @@ public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProt
 	///   - paymentInfo: `VGSPayoptTransfersOrderInfo` object, order info.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-  ///   - routeId: `String?`, organization vault inbound rout id, could be `nil`.
+  ///   - routeId: `String?`, organization vault inbound route id, could be `nil`.
 	///   - vgsCollect: `VGSCollect` object, collect object.
   internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", routeId: String?, vgsCollect: VGSCollect) {
 		self.accessToken = accessToken
