@@ -16,7 +16,7 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 	// MARK: - Vars
 
 	// Pay with card service.
-	fileprivate weak var paymentService: VGSPayoptAddCardCheckoutService?
+	fileprivate weak var paymentService: VGSCheckoutBasicPayoptServiceProtocol?
 
 	// View model.
 	fileprivate let viewModel: VGSPayoptTransfersPayWithNewCardViewModel
@@ -26,15 +26,15 @@ internal class VGSPayWithCardViewController: VGSBaseCardViewController {
 
 	// MARK: - Initialization
 
-	init(paymentService: VGSPayoptAddCardCheckoutService, initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen) {
+	init(paymentService: VGSCheckoutBasicPayoptServiceProtocol, initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen) {
 		self.paymentService = paymentService
 		self.initialScreen = initialScreen
 		self.viewModel = VGSPayoptTransfersViewModelFactory.buildPayWithNewCardViewModel(with: paymentService)
-		self.checkboxButton = VGSCheckboxButton(text: VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_save_card_checkbox_hint"), theme: paymentService.uiTheme)
-		super.init(checkoutConfigurationType: paymentService.checkoutConfigurationType, vgsCollect: paymentService.vgsCollect, uiTheme: paymentService.uiTheme)
+		self.checkboxButton = VGSCheckboxButton(text: VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_save_card_checkbox_hint"), theme: paymentService.configuration.uiTheme)
+		super.init(checkoutConfigurationType: paymentService.checkoutConfigurationType, vgsCollect: paymentService.configuration.vgsCollect, uiTheme: paymentService.configuration.uiTheme)
 
 		if initialScreen == .payWithNewCard {
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
+			VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.configuration.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
 		}
 	}
 
@@ -105,8 +105,16 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 			let cardInfo = VGSCheckoutNewPaymentCardInfo(shouldSave: viewModel.saveCardCheckboxSelected)
 			viewModel.apiWorker.createFinID(with: cardInfo) {[weak self] requestResult in
 				guard let strongSelf = self else {return}
-				let state = VGSAddCardFlowState.requestSubmitted(requestResult)
+
 				guard let service = strongSelf.paymentService else {return}
+				// Trigger different callbacks with checkout state change for add card and transfer flow.
+				let state: VGSAddCardFlowState
+				switch strongSelf.viewModel.configuration.payoptFlow {
+				case .addCard:
+					state = VGSAddCardFlowState.requestSubmitted(requestResult)
+				case .transfers:
+					state = VGSAddCardFlowState.checkoutTransferDidFinish(requestResult)
+				}
 				strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
 			}
 		default:

@@ -36,7 +36,7 @@ public class VGSCheckout {
 		}
 
 		self.checkoutConfigurationType = checkoutConfigurationType
-		vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, paymentFlow: checkoutConfigurationType)
+    vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, routeId: configuration.routeId, paymentFlow: checkoutConfigurationType)
 		self.uiTheme = configuration.uiTheme
 	}
 
@@ -114,6 +114,21 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .paymentMethodSelected, status: .success, extraData: extraData)
         
 				strongSelf.delegate?.checkoutDidFinish(with: paymentMethod)
+			}
+		case .checkoutTransferDidCreateNewCard(let newCardInfo, let result):
+			switch result {
+			case .success:
+				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+			case .failure:
+				coordintator.dismissRootViewController {
+					// Close checkout with request result on fail.
+					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+				}
+			}
+		case .checkoutTransferDidFinish(let result):
+			coordintator.dismissRootViewController {
+				// Close checkout with request result.
+				self.delegate?.checkoutTransferDidFinish(with: result)
 			}
 		}
 	}

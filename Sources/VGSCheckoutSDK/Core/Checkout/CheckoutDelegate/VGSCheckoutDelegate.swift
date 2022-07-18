@@ -21,6 +21,15 @@ public protocol VGSCheckoutDelegate: AnyObject {
 	/// Tells the delegate that checkout flow did finish with payment method.
 	/// - Parameter paymentMethod: `VGSCheckoutPaymentMethod` object, holds payment method info.
 	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod)
+
+	/// Tells the delegate that user created new card before transfer start.
+	/// - Parameter newCardInfo: `VGSCheckoutNewPaymentCardInfo` object, holds new card info.
+	/// - Parameter result: `VGSCheckoutRequestResult` object, create new card request result.
+	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult)
+
+	/// Tells the delegate that checkout transfer flow finished.
+	/// - Parameter result: `VGSCheckoutRequestResult` object, transfer request result.
+	func checkoutTransferDidFinish(with result: VGSCheckoutRequestResult)
 }
 
 /// no:doc
@@ -37,4 +46,10 @@ public extension VGSCheckoutDelegate {
 
 	/// no:doc
 	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod) {}
+
+	/// no:doc
+	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult) {}
+
+	/// no:doc
+	func checkoutTransferDidFinish(with result: VGSCheckoutRequestResult) {}
 }

@@ -78,6 +78,26 @@
                                             <segue destination="QfD-AX-chV" kind="push" id="Cfs-TW-NDF"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="HOp-GE-ELI" style="IBUITableViewCellStyleDefault" id="lUB-nA-Ymj">
+                                        <rect key="frame" x="20" y="113" width="374" height="47.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lUB-nA-Ymj" id="TOD-cs-1Xa">
+                                            <rect key="frame" x="0.0" y="0.0" width="345.5" height="47.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Checkout Payment Transfer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="HOp-GE-ELI">
+                                                    <rect key="frame" x="20" y="0.0" width="317.5" height="47.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="75a-pK-j8b" kind="push" id="GeR-ww-E5w"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -124,6 +144,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2v-xl-tbU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1616" y="786"/>
+        </scene>
+        <!--Checkout Transfers-->
+        <scene sceneID="oCL-kY-VzJ">
+            <objects>
+                <viewController id="75a-pK-j8b" customClass="CheckoutTransfersVC" customModule="VGSCheckoutDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hIZ-ti-OQM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="8ed-GZ-7gE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Checkout Transfers" id="m6c-7d-GFz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pxc-SK-HJl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800" y="785"/>
         </scene>
     </scenes>
     <resources>

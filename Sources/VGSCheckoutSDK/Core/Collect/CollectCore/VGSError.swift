@@ -30,11 +30,11 @@ internal enum VGSErrorType: Int {
 //		/// When payment orchestration JWT token is not valid.
 //		case invalidJWTToken = 2000
 //
-//		/// When fin ID not found on Save card request during payment flow.
-//		case finIdNotFound = 2002
-//
-//		/// When fin ID not found on Save card request during payment flow.
-//		case orderIDInfoNotFound = 2003
+		/// When fin ID not found on Save card request during payment flow.
+		case finIdNotFound = 2002
+
+//		/// When order cannot be fetched from pay opt backend.
+		case orderInfoNotFound = 2003
 }
 
 /// An error produced by `VGSCheckout`. Works similar to default `NSError` in iOS.

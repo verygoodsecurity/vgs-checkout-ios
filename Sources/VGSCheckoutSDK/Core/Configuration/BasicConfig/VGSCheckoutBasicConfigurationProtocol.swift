@@ -13,6 +13,9 @@ public protocol VGSCheckoutConfigurationProtocol {
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
 	var environment: String {get}
+  
+  /// `String?` object, organization vault inbound route id or `nil`.
+  var routeId: String? {get}
 }
 
 /// Internal protocol for VGSCheckout configuration.

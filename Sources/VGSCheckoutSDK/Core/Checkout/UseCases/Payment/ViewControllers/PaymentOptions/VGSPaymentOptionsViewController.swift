@@ -68,7 +68,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	fileprivate let uiTheme: VGSCheckoutThemeProtocol
 
 	// Pay with card service.
-	fileprivate weak var paymentService: VGSPayoptAddCardCheckoutService?
+	fileprivate weak var paymentService: VGSCheckoutBasicPayoptServiceProtocol?
 
 	/// Close bar button item.
 	fileprivate lazy var closeBarButtomItem: UIBarButtonItem = {
@@ -98,20 +98,23 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 				/// Notifies delegate that user pressed pay with selected card id and close checkout.
 				guard let service = paymentService else {return}
-				service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.savedCard(VGSCheckoutPaymentCardInfo(id: cardInfo.id))), in: service)
-//
-//				mainView.isUserInteractionEnabled = false
-//				closeBarButtomItem.isEnabled = false
-//				editCardsBarButtomItem.isEnabled = false
-//				mainView.submitButton.status = .processing
-//				mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
-				//				let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
-				//				viewModel.apiWorker.sendTransfer(with: info, finId: cardInfo.id, completion: {[weak self] requestResult in
-				//					guard let strongSelf = self else {return}
-				//					let state = VGSAddCardFlowState.requestSubmitted(requestResult)
-				//					guard let service = strongSelf.paymentService else {return}
-				//					strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
-				//				})
+				switch service.configuration.payoptFlow {
+				case .addCard:
+					service.serviceDelegate?.checkoutServiceStateDidChange(with: .checkoutDidFinish(.savedCard(VGSCheckoutPaymentCardInfo(id: cardInfo.id))), in: service)
+				case .transfers:
+					mainView.isUserInteractionEnabled = false
+					closeBarButtomItem.isEnabled = false
+					editCardsBarButtomItem.isEnabled = false
+					mainView.submitButton.status = .processing
+					mainView.alpha = VGSUIConstants.FormUI.formProcessingAlpha
+//					let info = VGSCheckoutPaymentResultInfo(paymentMethod: .savedCard(cardInfo))
+					viewModel.apiWorker.sendTransfer(with:cardInfo.id, completion: {[weak self] requestResult in
+						guard let strongSelf = self else {return}
+						let state = VGSAddCardFlowState.checkoutTransferDidFinish(requestResult)
+						guard let service = strongSelf.paymentService else {return}
+						strongSelf.paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: state, in: service)
+					})
+				}
 			case .editingSavedCards:
 				mainView.submitButton.status = .disabled
 				editCardsBarButtomItem.title = cancelEditTitle
@@ -166,13 +169,13 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 	/// Initializer
 	/// - Parameter paymentService: `VGSSaveCardCheckoutService` object, pay opt  checkout transfer service.
-	init(paymentService: VGSPayoptAddCardCheckoutService) {
+	init(paymentService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.paymentService = paymentService
 		self.viewModel = VGSPayoptTransfersViewModelFactory.buildPaymentOptionsViewModel(with: paymentService)
-		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.uiTheme)
-		self.uiTheme = paymentService.uiTheme
+		self.mainView = VGSPaymentOptionsMainView(uiTheme: paymentService.configuration.uiTheme)
+		self.uiTheme = paymentService.configuration.uiTheme
 
-		VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(paymentService.configuration.vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
 
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -195,7 +198,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 
 		// Enable editing saved cards.
 		if let service = paymentService {
-			if service.configuration.isRemoveCardOptionEnabled {
+			if service.configuration.isRemoveCardOptionEnabled && !service.configuration.savedCards.isEmpty {
 				navigationItem.rightBarButtonItem = editCardsBarButtomItem
 			}
 		}
@@ -251,7 +254,7 @@ internal class VGSPaymentOptionsViewController: UIViewController {
 	/// Handles tap on close button.
 	@objc fileprivate func closeButtonDidTap() {
 		guard let service = paymentService else {return}
-		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.vgsCollect.formAnalyticsDetails, type: .cancel, extraData: ["config": "payopt", "configType": "addCard"])
+		VGSCheckoutAnalyticsClient.shared.trackFormEvent(service.configuration.vgsCollect.formAnalyticsDetails, type: .cancel, extraData: ["config": "payopt", "configType": "addCard"])
 		paymentService?.serviceDelegate?.checkoutServiceStateDidChange(with: .cancelled, in: service)
 	}
 
@@ -293,7 +296,7 @@ extension VGSPaymentOptionsViewController: UITableViewDataSource {
 			return cell
 		case .newCard:
 			let cell: VGSPaymentOptionNewCardTableViewCell = tableView.dequeue(cellForRowAt: indexPath)
-			cell.configure(with: uiTheme)
+			cell.configure(with: uiTheme, text: viewModel.newCardCellTitle)
 
 			return cell
 		}

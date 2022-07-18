@@ -5,17 +5,26 @@
 import Foundation
 
 /// Holds configuration with predefined setup for work with payment orchestration app, confirms to `VGSCheckoutBasicConfigurationProtocol`.
-internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
+public struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationProtocol, VGSCheckoutPayoptBasicConfiguration {
 
+	/// `VGSCollect` object.
+	internal var vgsCollect: VGSCollect
+
+  /// Default Inbound route route id created in vault during default integration with payopt on VGS dashboard.
+  public static let defaultPayoptRouteId = "4880868f-d88b-4333-ab70-d9deecdbffc4"
+  
 	/// A callback to be run with a `VGSCheckoutPaymentConfiguration` on configuration setup succeed.
 	/// - Parameters:
 	///   - configuration:  `VGSCheckoutPaymentConfiguration` object, configuration.
-	internal typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
+	public typealias CreateConfigurationSuccessCompletion = (_ configuration: inout VGSCheckoutPaymentConfiguration) -> Void
 
 	/// A callback to be run with an error when configuration setup fail.
 	/// - Parameters:
 	///   - error: `Error` object, the error on configuration setup fail.
-	internal typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
+	public typealias CreateConfigurationFailCompletion = (_ error: Error) -> Void
+
+	/// Payopt flow type.
+	internal let payoptFlow: VGSCheckoutPayOptFlow = .transfers
 
 	// MARK: - Attributes
 
@@ -23,7 +32,10 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	internal let tenantId: String
 
 	/// `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	internal let environment: String
+	public let environment: String
+  
+  /// `String?`, organization vault inbound route id.
+  public let routeId: String?
 
 	/// Order id.
 	internal let orderId: String
@@ -45,12 +57,11 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	///   - orderId: `String` object, orderId for payment orchestration.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
+  ///   - routeId: `String?`, organization vault inbound route id, default is route id created during integration with payopt on VGS dashboard.
+	///   - options: `VGSCheckoutPaymentOptions` object, additional checkout options, default is `nil`.
 	///   - success: `CreateConfigurationSuccessCompletion` object, callback for configuration setup succeed.
 	///   - failure: `CreateConfigurationFailCompletion` object, callback for configuration setup fail.
-	public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", success: @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
-
-		/// No additional options by default now.
-		let options: VGSCheckoutPaymentOptions? = nil
+  public static func createConfiguration(accessToken: String, orderId: String, tenantId: String, environment: String = "sandbox", routeId: String? = defaultPayoptRouteId, options: VGSCheckoutPaymentOptions? = nil, success:  @escaping CreateConfigurationSuccessCompletion, failure: @escaping CreateConfigurationFailCompletion) {
 
 //		guard VGSCheckoutCredentialsValidator.isJWTScopeValid(accessToken, vaultId: tenantId, environment: environment) else {
 //			let error = NSError(domain: VGSCheckoutErrorDomain, code: VGSErrorType.invalidJWTToken.rawValue, userInfo: [NSLocalizedDescriptionKey: "JWT token is invalid or empty!"])
@@ -58,24 +69,23 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 //			return
 //		}
 
-		let vgsCollect = VGSCollect(id: tenantId, environment: environment)
+		let vgsCollect = VGSCollect(id: tenantId, environment: environment, routeId: routeId)
 		let orderAPIWorker = VGSPayoptTransfersOrderAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
 		orderAPIWorker.fetchPaymentConfiguration(for: orderId) { paymentInfo in
 			print("succcess")
 
-			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment)
-			success(&paymentCardConfiguration)
-//			if let methods = options?.methods {
-//				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
-//				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
-//					paymentCardConfiguration.savedCards = savedCards
-//					success(&paymentCardConfiguration)
-//				} failure: { error in
-//					success(&paymentCardConfiguration)
-//				}
-//			} else {
-//				success(&paymentCardConfiguration)
-//			}
+			var paymentCardConfiguration = VGSCheckoutPaymentConfiguration(accessToken: accessToken, orderId: orderId, paymentInfo: paymentInfo, tenantId: tenantId, environment: environment, routeId: routeId, vgsCollect: vgsCollect)
+			if let methods = options?.methods {
+				let savedCardsAPIWorker = VGSSavedPaymentMethodsAPIWorker(vgsCollect: vgsCollect, accessToken: accessToken)
+				savedCardsAPIWorker.fetchSavedPaymentMethods(methods) { savedCards in
+					paymentCardConfiguration.savedCards = savedCards
+					success(&paymentCardConfiguration)
+				} failure: { error in
+					success(&paymentCardConfiguration)
+				}
+			} else {
+				success(&paymentCardConfiguration)
+			}
 		} failure: { error in
 			failure(error)
 		}
@@ -90,21 +100,28 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 	///   - paymentInfo: `VGSPayoptTransfersOrderInfo` object, order info.
 	///   - tenantId: `String` object, payment orchestration tenant id.
 	///   - environment: `String` object, organization vault environment with data region.(e.g. "live", "live-eu1", "sandbox"). Default is `sandbox`.
-	internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox") {
+  ///   - routeId: `String?`, organization vault inbound route id, could be `nil`.
+	///   - vgsCollect: `VGSCollect` object, collect object.
+  internal init(accessToken: String, orderId: String, paymentInfo: VGSPayoptTransfersOrderInfo, tenantId: String, environment: String = "sandbox", routeId: String?, vgsCollect: VGSCollect) {
 		self.accessToken = accessToken
 		self.orderId = orderId
 		self.paymentInfo = paymentInfo
 		self.tenantId = tenantId
 		self.environment = environment
+    self.routeId = routeId
+		self.vgsCollect = vgsCollect
 	}
 
 	// MARK: - UI Configuration
 
 	/// Checkout UI elements  configuration.
-	internal var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
+	public var uiTheme: VGSCheckoutThemeProtocol = VGSCheckoutDefaultTheme()
   
-  /// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`.
-	internal var saveCardOptionEnabled: Bool = true
+	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
+	public var isSaveCardOptionEnabled: Bool = true
+
+	/// A boolean flag indicating whether user can remove saved cards. Default is `true`.
+	public var isRemoveCardOptionEnabled: Bool = true
 
 	/// Billing address visibility.
 	internal var billingAddressVisibility: VGSCheckoutBillingAddressVisibility {
@@ -183,6 +200,7 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 		}
 	}
 
+	/// An array of saved cards.
 	internal var savedCards: [VGSSavedCardModel] = []
 
 	/// An array of financial instruments ids representing saved cards.
@@ -200,6 +218,17 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
 			content.append("valid_countries")
 		}
 
+		switch billingAddressVisibility {
+		case .hidden:
+			content.append("billing_address_hidden")
+		case .visible:
+			content.append("billing_address_visible")
+		}
+
+		if isSaveCardOptionEnabled {
+			content.append("save_card_checkbox")
+		}
+
 		content.append(formValidationBehaviour.analyticsName)
 		return content
 	}
@@ -212,9 +241,12 @@ public enum VGSCheckoutSavedPaymentMethods {
 	//case userId(_ id: String)
 }
 
-/// Additional options
+/// Additional checkout payment options.
 public struct VGSCheckoutPaymentOptions {
+
+	/// Saved payment methods. Default is `nil`.
 	public var methods: VGSCheckoutSavedPaymentMethods? = nil
 
+	/// no:doc
 	public init() {}
 }
