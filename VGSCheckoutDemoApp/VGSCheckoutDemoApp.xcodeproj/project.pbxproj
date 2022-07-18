@@ -41,7 +41,6 @@
 		4472AC2527FAAC2A005A0870 /* CheckoutAddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */; };
 		44B601CE27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
-		44D1B2E4284E0E8200002231 /* CheckoutTransfersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D1B2E3284E0E8200002231 /* CheckoutTransfersVC.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
 		44E10AD0269D7A5A001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AD2269D7A5A001F0D44 /* Localizable.strings */; };
 		44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC9F75265FC4F7001CDD79 /* DemoInsetContainerView.swift */; };
@@ -108,7 +107,6 @@
 		4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutAddCardVC.swift; sourceTree = "<group>"; };
 		44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnlyPostalCodeTests.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
-		44D1B2E3284E0E8200002231 /* CheckoutTransfersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTransfersVC.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
 		44E10AD1269D7A5A001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44E10AD3269D7A79001F0D44 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -488,7 +486,6 @@
 			children = (
 				4472AC2227FAAC2A005A0870 /* PaymentOrchestrationCustomBackendAPIClient.swift */,
 				4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */,
-				44D1B2E3284E0E8200002231 /* CheckoutTransfersVC.swift */,
 			);
 			path = CheckoutPaymentOrchestration;
 			sourceTree = "<group>";
@@ -793,7 +790,6 @@
 				44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */,
 				441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */,
 				441927E3265F6ACE0080B01E /* OrderItem.swift in Sources */,
-				44D1B2E4284E0E8200002231 /* CheckoutTransfersVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
