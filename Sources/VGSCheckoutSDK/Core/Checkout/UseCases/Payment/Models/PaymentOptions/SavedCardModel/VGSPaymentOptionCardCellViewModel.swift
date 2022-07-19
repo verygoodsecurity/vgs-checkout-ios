@@ -21,4 +21,7 @@ internal struct VGSPaymentOptionCardCellViewModel {
 
 	/// Indicates selected state.
 	internal var isSelected: Bool
+
+	/// Last 4.
+	internal let last4: String?
 }

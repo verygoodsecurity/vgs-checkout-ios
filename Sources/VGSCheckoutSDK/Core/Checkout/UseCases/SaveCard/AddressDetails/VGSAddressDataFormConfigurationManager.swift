@@ -35,63 +35,144 @@ internal class VGSAddressDataFormConfigurationManager {
 			break
 		}
 
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
-    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
-		countryConfiguration.type = .none
-		countryConfiguration.isRequiredValidOnly = true
+		let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 
-		countryTextField.configuration = countryConfiguration
+		let addressFieldsOptions = [vaultConfiguration.billingAddressCountryFieldOptions, vaultConfiguration.billingAddressLine1FieldOptions, vaultConfiguration.billingAddressLine2FieldOptions, vaultConfiguration.billingAddressCityFieldOptions, vaultConfiguration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
 
-		// Force select first row in picker.
-		countryTextField.selectFirstRow()
+		// Check if has visible address fields.
+		let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
+		if visibleAddressFields.isEmpty {
+			// Hide address view.
+			addressFormView.isHidden = true
+			return
+		}
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
-		addressLine1Configuration.type = .none
-    addressLine1Configuration.keyboardType = .default
-		addressLine1Configuration.isRequiredValidOnly = true
-		addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
+		for option in addressFieldsOptions {
+			switch option.fieldType {
+			case .country:
+				if option.visibility == .visible {
+					let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: countryOptions.fieldName)
+					let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+					countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
+					countryConfiguration.type = .none
+					countryConfiguration.isRequiredValidOnly = true
 
-		addressLine1TextField.configuration = addressLine1Configuration
+					countryTextField.configuration = countryConfiguration
 
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
-		addressLine2Configuration.type = .none
-    addressLine2Configuration.keyboardType = .default
-		addressLine2Configuration.isRequiredValidOnly = false
+					// Force select first row in picker.
+					countryTextField.selectFirstRow()
+				} else {
+					addressFormView.countryFieldView.isHidden = true
 
-		addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
-		addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
+					var hasCountries = false
+					if let countries = countryOptions.validCountries {
+						hasCountries = !countries.isEmpty
+					}
 
-		addressLine2TextField.configuration = addressLine2Configuration
+					if !hasCountries {
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden in billing address. You should provide validCountries array.", severityLevel: .warning)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
+					}
+				}
+			case .addressLine1:
+				if option.visibility == .visible {
+					let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine1Options.fieldName)
+					addressLine1Configuration.type = .none
+					addressLine1Configuration.keyboardType = .default
+//					if option.isRequired {
+//						addressLine1Configuration.isRequiredValidOnly = true
+//					} else {
+//						addressLine1Configuration.isRequired = false
+//					}
+					addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
-		cityConfiguration.type = .none
-    cityConfiguration.keyboardType = .default
-		cityConfiguration.isRequiredValidOnly = true
-		cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
+					addressLine1TextField.configuration = addressLine1Configuration
+				} else {
+					addressFormView.addressLine1FieldView.isHidden = true
+				}
+			case .addressLine2:
+				if option.visibility == .visible {
+					let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: addressLine2Options.fieldName)
+					addressLine2Configuration.type = .none
+					addressLine2Configuration.keyboardType = .default
 
-		cityTextField.configuration = cityConfiguration
+					addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+					addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
 
-		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
-		postalCodeConfiguration.type = .none
-		postalCodeConfiguration.isRequiredValidOnly = true
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
-			VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
-		])
-		postalCodeConfiguration.returnKeyType = .done
+					addressLine2TextField.configuration = addressLine2Configuration
+				} else {
+					addressFormView.addressLine2FieldView.isHidden = true
+				}
+			case .city:
+				if option.visibility == .visible {
+					let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: cityOptions.fieldName)
+					cityConfiguration.type = .none
+					cityConfiguration.keyboardType = .default
+//					if option.isRequired {
+//						cityConfiguration.isRequiredValidOnly = true
+//					} else {
+//						cityConfiguration.isRequired = false
+//					}
+					cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
-		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+					cityTextField.configuration = cityConfiguration
+				} else {
+					addressFormView.cityFieldView.isHidden = true
+				}
+			case .postalCode:
+				if option.visibility == .visible {
+					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
+					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
 
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					if !firstCountryISOCode.hasPostalCode {
+						let isOnlyPostalCodeVisible: Bool = {
+							let otherAddressFields = addressFieldsOptions.filter({$0.fieldType != .postalCode})
+							let otherVisibleFields = otherAddressFields.filter({$0.visibility == .visible})
 
-		postalCodeTextField.configuration = postalCodeConfiguration
+							return otherVisibleFields.isEmpty
+						}()
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+						if isOnlyPostalCodeVisible {
+							let event = VGSLogEvent(level: .warning, text: "Postal code field is visible. Valid country \(firstCountryRawCode) does not have postal code. Address section view will be hidden", severityLevel: .warning)
+							VGSCheckoutLogger.shared.forwardLogEvent(event)
+
+							// Hide address view.
+							addressFormView.isHidden = true
+							return
+						}
+					}
+
+					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: postalCodeOptions.fieldName)
+					postalCodeConfiguration.type = .none
+//					if option.isRequired {
+					postalCodeConfiguration.isRequiredValidOnly = true
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
+
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					//					} else {
+					//						postalCodeConfiguration.isRequired = false
+					//					}
+
+					postalCodeConfiguration.returnKeyType = .done
+
+
+
+					postalCodeTextField.configuration = postalCodeConfiguration
+
+					VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+				} else {
+					addressFormView.postalCodeFieldView.isHidden = true
+				}
+			default:
+				break
+			}
+		}
 	}
 
 	/*
@@ -145,6 +226,12 @@ internal class VGSAddressDataFormConfigurationManager {
 		let cityTextField = addressFormView.cityFieldView.textField
 		let postalCodeTextField = addressFormView.postalCodeFieldView.textField
 
+		let countryOptions = configuration.billingAddressCountryFieldOptions
+		let addressLine1Options = configuration.billingAddressLine1FieldOptions
+		let addressLine2Options = configuration.billingAddressLine2FieldOptions
+		let cityOptions = configuration.billingAddressCityFieldOptions
+		let postalCodeOptions = configuration.billingAddressPostalCodeFieldOptions
+
     let addressVisibility = configuration.formConfiguration.billingAddressVisibility
     
     switch addressVisibility {
@@ -154,53 +241,153 @@ internal class VGSAddressDataFormConfigurationManager {
     case .visible:
       break
     }
-    
-		let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
-    let countryOptions = configuration.billingAddressCountryFieldOptions
-    let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
-		countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
-		countryConfiguration.type = .none
-		countryConfiguration.isRequiredValidOnly = true
 
-		countryTextField.configuration = countryConfiguration
+		let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 
-		// Force select first row in picker.
-		countryTextField.selectFirstRow()
+		let addressFieldsOptions = [countryOptions, addressLine1Options, addressLine2Options, cityOptions, postalCodeOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
 
-		let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.address1")
-		addressLine1Configuration.type = .none
-    addressLine1Configuration.keyboardType = .default
-		addressLine1Configuration.isRequiredValidOnly = true
+		// Check if has visible address fields.
+		let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
 
-		addressLine1TextField.configuration = addressLine1Configuration
+		if visibleAddressFields.isEmpty {
+			// Hide address view.
+			addressFormView.isHidden = true
+			return
+		}
 
-		let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.adddressLine2")
-		addressLine2Configuration.type = .none
-    addressLine2Configuration.keyboardType = .default
-		addressLine2Configuration.isRequiredValidOnly = false
-		addressLine2TextField.configuration = addressLine2Configuration
+		for option in addressFieldsOptions {
+			switch option.fieldType {
+			case .country:
+				if option.visibility == .visible {
+					let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
+					let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
+					countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
+					countryConfiguration.type = .none
+					countryConfiguration.isRequiredValidOnly = true
 
-		let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.city")
-		cityConfiguration.type = .none
-    cityConfiguration.keyboardType = .default
-		cityConfiguration.isRequiredValidOnly = true
+					countryTextField.configuration = countryConfiguration
 
-		cityTextField.configuration = cityConfiguration
+					// Force select first row in picker.
+					countryTextField.selectFirstRow()
+				} else {
+					addressFormView.countryFieldView.isHidden = true
 
-		let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.postal_code")
-		postalCodeConfiguration.type = .none
-		postalCodeConfiguration.isRequiredValidOnly = true
+					var hasCountries = false
+					if let countries = countryOptions.validCountries {
+						hasCountries = !countries.isEmpty
+					}
 
-		let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
-		let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+					// For payment orchestration if country field is hidden bind country field to collect anyway since we cannot identify country by postal code only.
+					let validCountriesDataSource = VGSCountryPickerDataSource(validCountryISOCodes: countryOptions.validCountries)
 
+					let countryConfiguration = VGSPickerTextFieldConfiguration(collector: vgsCollect, fieldName: "card.billing_address.country")
+					countryConfiguration.dataProvider = VGSPickerDataSourceProvider(dataSource: validCountriesDataSource)
+					countryConfiguration.type = .none
+					countryTextField.configuration = countryConfiguration
+					countryTextField.selectFirstRow()
 
+					if !hasCountries {
+						let event = VGSLogEvent(level: .warning, text: "Country field is hidden in billing address. You should provide validCountries array.", severityLevel: .warning)
+						VGSCheckoutLogger.shared.forwardLogEvent(event)
+					}
+				}
+			case .addressLine1:
+				if option.visibility == .visible {
+					let addressLine1Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.address1")
+					addressLine1Configuration.type = .none
+					addressLine1Configuration.keyboardType = .default
+//					if option.isRequired {
+//						addressLine1Configuration.isRequiredValidOnly = true
+//					} else {
+//						addressLine1Configuration.isRequired = false
+//					}
+					addressLine1Configuration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
 
-		postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
-		postalCodeTextField.configuration = postalCodeConfiguration
+					addressLine1TextField.configuration = addressLine1Configuration
+				} else {
+					addressFormView.addressLine1FieldView.isHidden = true
+				}
+			case .addressLine2:
+				if option.visibility == .visible {
+					let addressLine2Configuration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.adddressLine2")
+					addressLine2Configuration.type = .none
+					addressLine2Configuration.keyboardType = .default
 
-		VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+					addressLine2TextField.placeholder = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_hint")
+					addressFormView.addressLine2FieldView.placeholderView.hintLabel.text = VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_address_info_address_line2_subtitle")
 
+					addressLine2TextField.configuration = addressLine2Configuration
+				} else {
+					addressFormView.addressLine2FieldView.isHidden = true
+				}
+			case .city:
+				if option.visibility == .visible {
+					let cityConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.city")
+					cityConfiguration.type = .none
+					cityConfiguration.keyboardType = .default
+//					if option.isRequired {
+//						cityConfiguration.isRequiredValidOnly = true
+//					} else {
+//						cityConfiguration.isRequired = false
+//					}
+					cityConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
+
+					cityTextField.configuration = cityConfiguration
+				} else {
+					addressFormView.cityFieldView.isHidden = true
+				}
+			case .postalCode:
+				if option.visibility == .visible {
+					let firstCountryRawCode = validCountriesDataSource.countries.first?.code ?? "US"
+					let firstCountryISOCode = VGSCountriesISO(rawValue: firstCountryRawCode) ?? VGSAddressCountriesDataProvider.defaultFirstCountryCode
+
+					if !firstCountryISOCode.hasPostalCode {
+						let isOnlyPostalCodeVisible: Bool = {
+							let otherAddressFields = addressFieldsOptions.filter({$0.fieldType != .postalCode})
+							let otherVisibleFields = otherAddressFields.filter({$0.visibility == .visible})
+
+							return otherVisibleFields.isEmpty
+						}()
+
+						if isOnlyPostalCodeVisible {
+							let event = VGSLogEvent(level: .warning, text: "Postal code field is visible. Valid country \(firstCountryRawCode) does not have postal code. Address section view will be hidden", severityLevel: .warning)
+							VGSCheckoutLogger.shared.forwardLogEvent(event)
+
+							// Hide address view.
+							addressFormView.isHidden = true
+							return
+						}
+					}
+
+					let postalCodeConfiguration = VGSConfiguration(collector: vgsCollect, fieldName: "card.billing_address.postal_code")
+					postalCodeConfiguration.type = .none
+//					if option.isRequired {
+					postalCodeConfiguration.isRequiredValidOnly = true
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: [
+						VGSValidationRuleLength(min: 1, max: 64, error: VGSValidationErrorType.length.rawValue)
+					])
+
+					postalCodeConfiguration.validationRules = VGSValidationRuleSet(rules: VGSPostalCodeValidationRulesFactory.validationRules(for: firstCountryISOCode))
+					//					} else {
+					//						postalCodeConfiguration.isRequired = false
+					//					}
+
+					postalCodeConfiguration.returnKeyType = .done
+
+					postalCodeTextField.configuration = postalCodeConfiguration
+
+					VGSPostalCodeFieldView.updateUI(for: addressFormView.postalCodeFieldView, countryISOCode: firstCountryISOCode)
+				} else {
+					addressFormView.postalCodeFieldView.isHidden = true
+				}
+			default:
+				break
+			}
+		}
 	}
 
 	/// Updates postal code field view if needed.

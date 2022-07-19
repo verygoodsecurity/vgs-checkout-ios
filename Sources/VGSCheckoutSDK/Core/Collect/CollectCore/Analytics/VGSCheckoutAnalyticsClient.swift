@@ -19,6 +19,8 @@ internal enum VGSAnalyticsEventType: String {
 	case formInit = "Init"
 	case cancel = "Cancel"
 	case jwtValidation = "JWTValidation"
+  case finInstrument = "FinInstrument"
+  case paymentMethodSelected = "PaymentMethodSelected"
 }
 
 /// Client responsably for managing and sending VGS Checkout SDK analytics events.
@@ -88,7 +90,8 @@ public class VGSCheckoutAnalyticsClient {
   internal func trackFormEvent(_ form: VGSCheckoutFormAnanlyticsDetails, type: VGSAnalyticsEventType, status: AnalyticEventStatus = .success, extraData: [String: Any]? = nil) {
       let formDetails = ["formId": form.formId,
                          "tnt": form.tenantId,
-                         "env": form.environment
+                         "env": form.environment,
+                         "routeId": form.routeId ?? ""
                       ]
     var data: [String: Any]
     if let extraData = extraData {

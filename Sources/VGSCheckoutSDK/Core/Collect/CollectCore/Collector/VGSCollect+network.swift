@@ -3,7 +3,6 @@
 //  VGSCheckoutSDK
 //
 
-
 import Foundation
 
 // MARK: - Send data
@@ -12,7 +11,7 @@ extension VGSCollect {
      Send data from VGSTextFields to your organization vault.
      
      - Parameters:
-        - path: Inbound rout path for your organization vault.
+        - path: Inbound route path for your organization vault.
         - method: HTTPMethod, default is `.post`.
         - extraData: Any data you want to send together with data from VGSTextFields , default is `nil`.
 	      - requestOptions: `VGSCollectRequestOptions` object, holds additional request options. Default options are `.nestedJSON`.
@@ -59,7 +58,7 @@ extension VGSCollect {
 
 	/// Track befre submit with invalid fields.
 	/// - Parameter invalidFields: `[String]` object, array of invalid fieldTypes.
-  internal func trackBeforeSubmit(with invalidFields: [String], configurationAnalytics: VGSCheckoutConfigurationAnalyticsProtocol) {
+	internal func trackBeforeSubmit(with invalidFields: [String], configurationAnalytics: VGSCheckoutConfigurationAnalyticsProtocol, extraContent: [String]) {
     
     var extraAnalyticsInfo: [String: Any] = [:]
 
@@ -72,11 +71,17 @@ extension VGSCollect {
     default:
       break
     }
+
+		// Add additional content.
+		for content in extraContent {
+			contentAnalytics.append(content)
+		}
+
     extraAnalyticsInfo["content"] = contentAnalytics
-    
+
 		if let error = validateStoredInputData() {
 			if !invalidFields.isEmpty {
-				extraAnalyticsInfo["fieldTypes"] = invalidFields
+				extraAnalyticsInfo["fieldTypes"] = Array(Set(invalidFields))
 			}
 
 			extraAnalyticsInfo["statusCode"] = error.code

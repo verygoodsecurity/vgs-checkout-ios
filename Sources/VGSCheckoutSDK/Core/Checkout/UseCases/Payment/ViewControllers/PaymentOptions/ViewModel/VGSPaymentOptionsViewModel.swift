@@ -3,6 +3,9 @@
 //  VGSCheckoutSDK
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Payment options component view model for payopt transfers configuration.
 internal class VGSPaymentOptionsViewModel {
@@ -12,15 +15,16 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Initializer.
 	/// - Parameters:
-	///   - configuration: `VGSCheckoutPaymentConfiguration`, payment configuration.
+	///   - configuration: `VGSCheckoutPayoptBasicConfiguration`, payment configuration.
 	///   - vgsCollect: `VGSCollect` object, vgs collect.
-	///   - checkoutService: `VGSCheckoutPayoptTransfersService` object, payopt transfers service.
-	internal init(configuration: VGSCheckoutPaymentConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutPayoptTransfersService) {
+	///   - checkoutService: `VGSPayoptAddCardCheckoutService` object, payopt add card service.
+	internal init(configuration: VGSCheckoutPayoptBasicConfiguration, vgsCollect: VGSCollect, checkoutService: VGSCheckoutBasicPayoptServiceProtocol) {
 		self.configuration = configuration
-		self.apiWorker = VGSPayoptTransfersAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
+		self.removeSavedCardAPIWorker =  VGSRemoveSavedCardAPIWorker(vgsCollect: vgsCollect, configuration: configuration)
+		self.apiWorker = VGSPayoptAddCardAPIWorker(configuration: configuration, vgsCollect: vgsCollect, checkoutService: checkoutService)
 
-		//		self.paymentOptions = savedCardsOptions
-		//		self.paymentOptions.append(.newCard)
+		self.paymentOptions = configuration.savedCards.map({return .savedCard($0)})
+		self.paymentOptions.append(.newCard)
 
 		/// Preselect first card by default.
 		paymentOptions.preselectFirstSavedCard()
@@ -29,17 +33,35 @@ internal class VGSPaymentOptionsViewModel {
 	// MARK: - Vars
 
 	/// An array of payment options.
-	internal var paymentOptions: [VGSPaymentOption] = provideMockedData()
+	internal var paymentOptions: [VGSPaymentOption] = []
 
 	/// Configuration.
-	private(set) var configuration: VGSCheckoutPaymentConfiguration
+	private(set) var configuration: VGSCheckoutPayoptBasicConfiguration
 
 	/// Transfers API worker.
-	internal let apiWorker: VGSPayoptTransfersAPIWorker
+	internal let apiWorker: VGSPayoptAddCardAPIWorker
+
+	/// API worker for removing cards.
+	internal let removeSavedCardAPIWorker: VGSRemoveSavedCardAPIWorkerProtocol
 
 	/// Payment button title.
 	internal var submitButtonTitle: String {
-		return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title") + " \(formattedAmount)"
+		switch configuration.payoptFlow {
+		case .addCard:
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_pay_with_card_button_title")
+		case .transfers:
+			return VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_transfers_pay_with_card_button_title") + " \(formattedAmount)"
+		}
+	}
+
+	/// New card cell title.
+	internal var newCardCellTitle: String {
+		switch configuration.payoptFlow {
+		case .addCard:
+			return 	VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_payment_options_add_new_card_title")
+		case .transfers:
+			return 	VGSCheckoutLocalizationUtils.vgsLocalizedString(forKey: "vgs_checkout_transfer_payment_options_pay_with_new_card_title")
+		}
 	}
 
 	/// Navigation bar title.
@@ -49,7 +71,10 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Formatted amount.
 	internal var formattedAmount: String {
-		let paymentInfo = configuration.paymentInfo
+		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
+			fatalError("Configuration doesn't match transfers flow")
+		}
+		let paymentInfo = config.paymentInfo
 		guard let text = VGSFormatAmountUtils.formatted(amount: paymentInfo.amount, currencyCode: paymentInfo.currency) else {
 			let event = VGSLogEvent(level: .warning, text: "Cannot format amount: \(paymentInfo.amount) currency: \(paymentInfo.currency)", severityLevel: .warning)
 			VGSCheckoutLogger.shared.forwardLogEvent(event)
@@ -126,13 +151,13 @@ internal class VGSPaymentOptionsViewModel {
 
 	/// Handles remove saved card action.
 	/// - Parameter cardIdToRemove: `String` object, card fin instrument id to remove.
-	internal func hadleRemoveSavedCard(with cardIdToRemove: String) {
+	internal func hadleRemoveSavedCard(with cardIdToRemove: String, requestResult: VGSCheckoutRequestResult) {
 		paymentOptions.removeSavedCard(with: cardIdToRemove)
 		if !paymentOptions.hasSelectedCard {
 			paymentOptions.preselectFirstSavedCard()
 		}
 
-		delegate?.savedCardDidRemove(with: cardIdToRemove)
+		delegate?.savedCardDidRemove(with: cardIdToRemove, requestResult: requestResult)
 	}
 
 	/// Selected payment card info.

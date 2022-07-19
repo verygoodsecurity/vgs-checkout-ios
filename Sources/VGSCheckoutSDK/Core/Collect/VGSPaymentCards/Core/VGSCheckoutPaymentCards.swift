@@ -69,7 +69,7 @@ internal class VGSCheckoutPaymentCards {
 						case .mastercard:
 							return "mastercard"
 						case .amex:
-							return "americanexpress"
+							return "amex"
 						case .hipercard:
 							return "hipercard"
 						case .dinersClub:

@@ -9,7 +9,7 @@ class ApiClientTests: VGSCheckoutBaseTestCase {
     var collector: VGSCollect!
         
     override func setUp() {
-        collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID, environment: .sandbox)
+      collector = VGSCollect(id: VGSCheckoutMockedDataProvider.shared.vaultID, environment: .sandbox, routeId: nil)
     }
 
     func testSendCardToEchoServer() {
@@ -95,7 +95,7 @@ class ApiClientTests: VGSCheckoutBaseTestCase {
     }
 
     func testWrongTanentId() {
-        let form = VGSCollect(id: "wrongId")
+      let form = VGSCollect(id: "wrongId", routeId: nil)
         let conf = VGSConfiguration(collector: form, fieldName: "cardField")
         conf.type = .cardNumber
         let field = VGSTextField(frame: .zero)
@@ -137,5 +137,17 @@ class ApiClientTests: VGSCheckoutBaseTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 60.0)
+    }
+  
+    func testValidRouteId() {
+      let vaultId = "tnt12345"
+      let routeId = UUID().uuidString
+      let environment = "sandbox"
+      let proxy = "verygoodproxy.com"
+      let expectedUrl = URL(string: "https://\(vaultId)-\(routeId).\(environment).\(proxy)")
+      // build url
+      let url = APIClient.buildVaultURL(tenantId: vaultId, regionalEnvironment: environment, routeId: routeId)
+      XCTAssertTrue(url?.absoluteString != nil)
+      XCTAssertTrue(url?.absoluteString == expectedUrl?.absoluteString, "-testValidRouteId error, wrong url: \(String(describing: url))")
     }
 }

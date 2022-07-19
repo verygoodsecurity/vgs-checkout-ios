@@ -7,21 +7,27 @@ import Foundation
 import UIKit
 #endif
 
-/// Handles `Pay with card` use case logic.
-internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServiceProtocol {
+/// Basic interface for payopt service.
+internal protocol VGSCheckoutBasicPayoptServiceProtocol: AnyObject, VGSCheckoutServiceProtocol {
 
-	/// Initial screen for transfer flow.
-	enum InitialScreen {
+	/// Service delegate.
+	var serviceDelegate: VGSCheckoutServiceDelegateProtocol? {get set}
 
-		/// Payment options.
-		case paymentOptions
+	/// Checkout configuration type.
+	var checkoutConfigurationType: VGSCheckoutConfigurationType {get}
 
-		/// Pay with new card.
-		case payWithNewCard
-	}
+	/// Configuration.
+	var configuration: VGSCheckoutPayoptBasicConfiguration {get}
 
 	/// Initial screen.
-	internal let initialScreen: InitialScreen
+	var initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen {get}
+}
+
+/// Handles `Pay with card` use case logic.
+internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServiceProtocol, VGSCheckoutBasicPayoptServiceProtocol {
+
+	/// Initial screen.
+	internal let initialScreen: VGSPayoptAddCardCheckoutService.InitialScreen
 
 	/// An object that acts as a delegate for Core `VGSCheckout` instance.
 	internal weak var serviceDelegate: VGSCheckoutServiceDelegateProtocol?
@@ -29,8 +35,13 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 	/// Checkout configuration type.
 	internal let checkoutConfigurationType: VGSCheckoutConfigurationType
 
+	/// Configuration.
+	internal var configuration: VGSCheckoutPayoptBasicConfiguration {
+		return transfersConfiguration
+	}
+
 	/// Pay opt configuration.
-	internal var configuration: VGSCheckoutPaymentConfiguration {
+	internal var transfersConfiguration: VGSCheckoutPaymentConfiguration {
 		switch checkoutConfigurationType {
 		case .payoptTransfers(let payOptConfiguration):
 			return payOptConfiguration
@@ -59,7 +70,7 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 		//		self.initialScreen = .payWithNewCard
 		switch checkoutConfigurationType {
 		case .payoptTransfers(let configuration):
-			if !configuration.savedCards.isEmpty {
+			if configuration.savedCards.isEmpty {
 					self.initialScreen = .payWithNewCard
 				} else {
 					self.initialScreen = .paymentOptions
@@ -77,14 +88,13 @@ internal class VGSCheckoutPayoptTransfersService: NSObject, VGSCheckoutServicePr
 		case .payWithNewCard:
 			vc = buildPayWithNewCardVC()
 		case .paymentOptions:
-			//			fatalError("not implemented")
 			vc = buildPaymentOptionsVC()
 		}
 		return UINavigationController(rootViewController: vc)
 	}
 
-	/// Builds payment options screen.
-	/// Returns: `UIViewController` object, view controller for payment options.
+//	/ Builds payment options screen.
+//	/ Returns: `UIViewController` object, view controller for payment options.
 	internal func buildPaymentOptionsVC() -> UIViewController {
 		let paymentOptionsVC = VGSPaymentOptionsViewController(paymentService: self)
 

@@ -40,6 +40,7 @@ internal class VGSSavedCardModel {
 		static let expYear = "exp_year"
 		static let expMonth = "exp_month"
 		static let brand = "brand"
+		static let last4 = "last4"
 	}
 
 	// MARK: - Initializer
@@ -54,12 +55,13 @@ internal class VGSSavedCardModel {
 		let name = cardJSON[keys.name] as? String,
 		let expYear = cardJSON[keys.expYear] as? Int,
 		let expMonth = cardJSON[keys.expMonth] as? Int,
-		let brand = cardJSON[keys.brand] as? String else {
+		let brand = cardJSON[keys.brand] as? String ,
+		let last4 = cardJSON[keys.last4] as? String else {
 			return nil
 		}
 		self.id = id
 		self.cardHolder = name
-		self.last4 = String(cardNumber.suffix(4))
+		self.last4 = last4
 		self.expDate = "\(expMonth)/" + "\(expYear)"
 		self.cardBrandName = brand
 		self.cardBrand = VGSCheckoutPaymentCards.CardBrand(brand)
@@ -87,7 +89,7 @@ internal class VGSSavedCardModel {
 
 		let last4Text = "•••• \(last4) | \(expDate)"
 
-		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected)
+		return VGSPaymentOptionCardCellViewModel(cardBrandImage: image, cardHolder: cardHolder, last4AndExpDateText: last4Text, isSelected: isSelected, last4: self.last4)
 	}
 
 	/// Masled last 4 digits.

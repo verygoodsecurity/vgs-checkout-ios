@@ -36,7 +36,7 @@ public class VGSCheckout {
 		}
 
 		self.checkoutConfigurationType = checkoutConfigurationType
-		vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, paymentFlow: checkoutConfigurationType)
+    vgsCollect = VGSCollect(vaultID: checkoutConfigurationType.mainCheckoutId, environment: configuration.environment, routeId: configuration.routeId, paymentFlow: checkoutConfigurationType)
 		self.uiTheme = configuration.uiTheme
 	}
 
@@ -65,6 +65,7 @@ public class VGSCheckout {
 
 // MARK: - VGSCheckoutServiceDelegateProtocol
 
+/// no:doc
 extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 
 	/// Handles changes in checkout service state.
@@ -93,12 +94,43 @@ extension VGSCheckout: VGSCheckoutServiceDelegateProtocol {
 						self.delegate?.checkoutDidFinish(with: requestResult)
 					}
 			 }
-		case .saveCardDidSuccess(let data, let response):
-			break
-//			self.delegate?.saveCardDidSuccess(with: data, response: response)
-		case .savedCardDidRemove(let id):
-			break
-//			self.delegate?.savedCardDidRemove(id)
+		case .removeSaveCardDidFinish(let id, let result):
+			self.delegate?.removeCardDidFinish(with: id, result: result)
+		case .checkoutDidFinish(let paymentMethod):
+			coordintator.dismissRootViewController {[weak self] in
+				guard let strongSelf = self else {return}
+        
+        /// Analytics
+        var extraData = [String: Any]()
+        extraData["config"] = "payopt"
+        extraData["configType"] = "addCard"
+        switch paymentMethod {
+        case .newCard:
+          extraData["paymentMethod"] = "newCard"
+        case .savedCard:
+          extraData["paymentMethod"] = "savedCard"
+        }
+
+				VGSCheckoutAnalyticsClient.shared.trackFormEvent(strongSelf.vgsCollect.formAnalyticsDetails, type: .paymentMethodSelected, status: .success, extraData: extraData)
+        
+				strongSelf.delegate?.checkoutDidFinish(with: paymentMethod)
+			}
+		case .checkoutTransferDidCreateNewCard(let newCardInfo, let result):
+			switch result {
+			case .success:
+//				self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+				break
+			case .failure:
+				coordintator.dismissRootViewController {
+					// Close checkout with request result on fail.
+//					self.delegate?.checkoutTransferDidCreateNewCard(with: newCardInfo, result: result)
+				}
+			}
+		case .checkoutTransferDidFinish(let result):
+			coordintator.dismissRootViewController {
+				// Close checkout with request result.
+//				self.delegate?.checkoutTransferDidFinish(with: result)
+			}
 		}
 	}
 }

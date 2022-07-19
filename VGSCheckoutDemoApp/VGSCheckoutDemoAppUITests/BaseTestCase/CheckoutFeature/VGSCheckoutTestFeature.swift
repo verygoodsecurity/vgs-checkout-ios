@@ -16,6 +16,18 @@ enum VGSCheckoutUITestsFeature {
 	/// List of valid countries in billing address.
 	case validCountries( _ countries: [String])
 
+	/// Only postal code field in address is visible.
+	case onlyPostalCodeFieldInAddress
+
+	/// Saved cards.
+	case savedCards
+
+	/// Remove saved card success.
+	case successRemoveSavedCard
+
+	/// Remove card option is disabled.
+	case removeCardDisabled
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -25,6 +37,14 @@ enum VGSCheckoutUITestsFeature {
 			return "onFocusValidation"
 		case .validCountries(let countries):
 			return "validCountries=" + countries.joined(separator: ".")
+		case .onlyPostalCodeFieldInAddress:
+			return "onlyPostalCodeFieldInAddress"
+		case .savedCards:
+			return "savedCards"
+		case .successRemoveSavedCard:
+			return "successRemoveSavedCard"
+		case .removeCardDisabled:
+			return "removeCardDisabled"
 		}
 	}
 }

@@ -31,19 +31,32 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 				VGSCheckoutLogger.shared.forwardCriticalLogEvent(event)
 				savedCardIds = Array(savedCardIds[0..<maxCount])
 			}
-
+      
 			var fetchedSavedCards = [VGSSavedCardModel]()
+      var failedCount = 0
 			let dispatchGroup = DispatchGroup()
 			for idx in 0..<savedCardIds.count {
 					dispatchGroup.enter()
-				fetchPaymentInstrument(with: savedCardIds[idx]) { savedCard in
-					fetchedSavedCards.append(savedCard)
-					dispatchGroup.leave()
-				} failure: { error in
-					dispatchGroup.leave()
-				}
+          fetchPaymentInstrument(with: savedCardIds[idx]) { savedCard in
+            fetchedSavedCards.append(savedCard)
+            dispatchGroup.leave()
+          } failure: { error in
+            failedCount += 1
+            dispatchGroup.leave()
+          }
 			}
+
+      let formDetails = vgsCollect.formAnalyticsDetails
 			dispatchGroup.notify(queue: .main) {
+        var extraData = [String: Any]()
+        extraData["method"] = "LoadFinInstruments"
+        extraData["statusCode"] = 200
+        extraData["failedCount"] = failedCount
+        extraData["totalCount"] = savedCardIds.count
+				extraData["config"] = "payopt"
+				extraData["configType"] = "addCard"
+        VGSCheckoutAnalyticsClient.shared.trackFormEvent(formDetails, type: .finInstrument, status: .success, extraData: extraData)
+        
 				// Reorder fetched by ids since it can be different depending on API request.
 				fetchedSavedCards = fetchedSavedCards.reorderByIds(savedCardIds)
 				success(fetchedSavedCards)
@@ -60,6 +73,7 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(accessToken)"]
 
+		// Use API client directly since we don't need to send data from VGS Collect (it can contain data from VGSTextFields).
 		vgsCollect.apiClient.sendRequest(path: path, method: .get, value: nil) { response in
 			switch response {
 			case .success(let code, let data, let response):
@@ -68,7 +82,6 @@ internal final class VGSSavedPaymentMethodsAPIWorker {
 					return
 				 }
 
-				print("Fetched order info success!")
 				success(savedCard)
 			case .failure(let code, let data, let response, let error):
 				failure(nil)

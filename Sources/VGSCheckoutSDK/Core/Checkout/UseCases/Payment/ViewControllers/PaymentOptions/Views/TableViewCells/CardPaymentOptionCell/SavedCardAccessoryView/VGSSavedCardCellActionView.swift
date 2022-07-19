@@ -46,18 +46,17 @@ internal class VGSSavedCardCellActionView: UIView {
 	internal weak var delegate: VGSSavedCardOptionActionViewDelegate?
 
 	/// Checkbox.
-	private let checkbox: VGSRoundedCheckbox? = nil
+	private let checkbox: VGSRoundedCheckbox
 
 	/// UI theme.
 	private let uiTheme: VGSCheckoutThemeProtocol
 
 	/// Remove card button.
-	fileprivate lazy var removeCardButton: UIButton = {
+	lazy var removeCardButton: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setImage(removeCardImage, for: .normal)
 		button.imageView?.contentMode = .scaleAspectFit
-		button.contentEdgeInsets.right = -8
 
 		return button
 	}()
@@ -75,8 +74,8 @@ internal class VGSSavedCardCellActionView: UIView {
 	/// - Parameter uiTheme: `VGSCheckoutThemeProtocol` object, ui theme.
 	init(uiTheme: VGSCheckoutThemeProtocol) {
 		self.uiTheme = uiTheme
-//		let checkboxTheme = VGSRoundedCheckbox.generateCheckboxThemeForSavedCard(from: uiTheme)
-//		self.checkbox = VGSRoundedCheckbox(theme: checkboxTheme)
+		let checkboxTheme = VGSRoundedCheckbox.generateCheckboxThemeForSavedCard(from: uiTheme)
+		self.checkbox = VGSRoundedCheckbox(theme: checkboxTheme)
 		super.init(frame: .zero)
 		setupUI()
 	}
@@ -98,9 +97,9 @@ internal class VGSSavedCardCellActionView: UIView {
 
 	/// Setups checkbox UI.
 	private func setupCheckboxUI() {
-//		addSubview(checkbox)
-//		checkbox.translatesAutoresizingMaskIntoConstraints = false
-//		checkbox.checkout_constraintViewToSuperviewCenter()
+		addSubview(checkbox)
+		checkbox.translatesAutoresizingMaskIntoConstraints = false
+		checkbox.checkout_constraintViewToSuperviewCenter()
 	}
 
 	/// Setups remove button UI.
@@ -112,18 +111,18 @@ internal class VGSSavedCardCellActionView: UIView {
 
 	/// Updates UI with current state.
 	private func updateUI() {
-//		switch actionViewState {
-//		case .hidden:
-//			checkbox.isHidden = true
-//			removeCardButton.isHidden = true
-//		case .selected(let isSelected):
-//			checkbox.isHidden = false
-//			removeCardButton.isHidden = true
-//			checkbox.isSelected = isSelected
-//		case .remove:
-//			checkbox.isHidden = true
-//			removeCardButton.isHidden = false
-//		}
+		switch actionViewState {
+		case .hidden:
+			checkbox.isHidden = true
+			removeCardButton.isHidden = true
+		case .selected(let isSelected):
+			checkbox.isHidden = false
+			removeCardButton.isHidden = true
+			checkbox.isSelected = isSelected
+		case .remove:
+			checkbox.isHidden = true
+			removeCardButton.isHidden = false
+		}
 	}
 
 	// MARK: - Actions

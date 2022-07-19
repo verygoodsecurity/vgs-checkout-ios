@@ -102,7 +102,6 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "custom"])
 		case .payoptAddCard(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
-			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "addCard"])
 		case .payoptTransfers(let configuration):
 			self.addressDataSectionViewModel = VGSAddressDataSectionViewModel(vgsCollect: vgsCollect, configuration: configuration, validationBehavior: self.validationBehavior, uiTheme: uiTheme, formValidationHelper: formValidationHelper, autoFocusManager: autoFocusManager)
 			VGSCheckoutAnalyticsClient.shared.trackFormEvent(vgsCollect.formAnalyticsDetails, type: .formInit, extraData: ["config": "payopt", "configType": "transfers"])
@@ -123,6 +122,9 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 	internal required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+	/// Extra analytics content.
+	internal var extraAnalyticsContent: [String] = []
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -158,7 +160,7 @@ internal class VGSBaseCardViewController: VGSFormViewController {
 	@objc fileprivate func submitButtonDidTap() {
 				let invalidFieldNames = cardDataSectionViewModel.formValidationHelper.analyticsInvalidFieldNames
 		// Explicitly set payload and custom headers to analytics event content since we track beforeSubmit regardless sending API request.
-		vgsCollect.trackBeforeSubmit(with: invalidFieldNames, configurationAnalytics: checkoutConfigurationType.configuration)
+		vgsCollect.trackBeforeSubmit(with: invalidFieldNames, configurationAnalytics: checkoutConfigurationType.configuration, extraContent: extraAnalyticsContent)
 				switch formState {
 				case .valid:
 						formState = .processing

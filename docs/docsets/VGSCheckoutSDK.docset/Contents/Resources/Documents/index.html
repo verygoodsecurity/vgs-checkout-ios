@@ -197,6 +197,12 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/VGSCheckoutFieldUIState.html">VGSCheckoutFieldUIState</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/VGSCheckoutPaymentMethod.html">VGSCheckoutPaymentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20Enums.html#/s:14VGSCheckoutSDK0A19SavedPaymentMethodsO">VGSCheckoutSavedPaymentMethods</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -214,7 +220,13 @@
             <a class="nav-group-name-link" href="Other%20Protocols.html">Other Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/VGSCheckoutCheckboxThemeProtocol.html">VGSCheckoutCheckboxThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Other%20Protocols.html#/s:14VGSCheckoutSDK0A4InfoP">VGSCheckoutInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/VGSCheckoutPaymentOptionsThemeProtocol.html">VGSCheckoutPaymentOptionsThemeProtocol</a>
               </li>
             </ul>
           </li>
@@ -222,7 +234,34 @@
             <a class="nav-group-name-link" href="Other%20Structs.html">Other Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutAddCardConfiguration.html">VGSCheckoutAddCardConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutBillingAddressCityOptions.html">VGSCheckoutBillingAddressCityOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutBillingAddressCountryOptions.html">VGSCheckoutBillingAddressCountryOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutBillingAddressLine1Options.html">VGSCheckoutBillingAddressLine1Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutBillingAddressLine2Options.html">VGSCheckoutBillingAddressLine2Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutBillingAddressPostalCodeOptions.html">VGSCheckoutBillingAddressPostalCodeOptions</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/VGSCheckoutCustomConfiguationBillingAddressOptions.html">VGSCheckoutCustomConfiguationBillingAddressOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutNewPaymentCardInfo.html">VGSCheckoutNewPaymentCardInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other%20Structs.html#/s:14VGSCheckoutSDK0A15PaymentCardInfoV">VGSCheckoutPaymentCardInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/VGSCheckoutPaymentOptions.html">VGSCheckoutPaymentOptions</a>
               </li>
             </ul>
           </li>
@@ -292,7 +331,7 @@ To check your current Swift tools version run in your terminal:</p>
 <p>NOTE: In some cases you can have multiple Swift tools versions installed.</p>
 </blockquote>
 
-<p>Follow the official Apple SPM guide <a href="https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app">instructions</a> for more details.\n<br>
+<p>Follow the official Apple SPM guide <a href="https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app">instructions</a> for more details.<br/>
 To use Swift Package Manager, in Xcode add the <a href="https://github.com/verygoodsecurity/vgs-checkout-ios.git">https://github.com/verygoodsecurity/vgs-checkout-ios.git</a> dependency.</p>
 <h2 id='usage' class='heading'>Usage</h2>
 <h3 id='import-vgscheckoutsdk-into-your-project' class='heading'>Import VGSCheckoutSDK into your project</h3>
@@ -308,11 +347,30 @@ To use Swift Package Manager, in Xcode add the <a href="https://github.com/veryg
 </code></pre>
 <h3 id='setup-checkout-configuration' class='heading'>Setup Checkout Configuration</h3>
 
-<p>Depends on your needs, you can setup Checkout Configuration that will work with <a href="https://www.verygoodsecurity.com/docs/payment-optimization/orchestration">Payment Orchestration App</a> or your custom API. You can get more info about Configruration in VGS Checkout SDK <a href="https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/configuration">docs</a>.</p>
+<p>Depends on your needs, you can setup Checkout Configuration that will work with <a href="https://www.verygoodsecurity.com/docs/payment-optimization/orchestration">Payment Orchestration App</a> or your custom API. Read more about <a href="https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/add-card-configuration">VGSCheckoutAddCardConfiguration</a> and <a href="https://www.verygoodsecurity.com/docs/payment-optimization/checkout/ios-sdk/%D1%81ustom-configuration">VGSCheckoutCustomConfiguration</a>.</p>
+
+<p>You should use your <code>vaultId</code> to initialize configuration instance, it can be found in your <a href="https://dashboard.verygoodsecurity.com/">organisation dashboard</a>.</p>
+
+<p><strong><em>VGSCheckoutAddCardConfiguration setup</em></strong><br/></p>
+
+<blockquote>
+<p>NOTE: Your backend should be responsible for retrieving <code>accessToken</code> which will allow you to create financial instruments with Payment Orchestration solution.</p>
+</blockquote>
+<pre class="highlight swift"><code><span class="c1">// Create  VGSCheckoutAddCardConfiguration with access token in your view controller.</span>
+<span class="kt">VGSCheckoutAddCardConfiguration</span><span class="o">.</span><span class="nf">createConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="s">"&lt;ACCESS_TOKEN&gt;"</span><span class="p">,</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="s">"&lt;TENANT_ID&gt;"</span><span class="p">,</span> <span class="nv">environment</span><span class="p">:</span> <span class="s">"sandbox"</span><span class="p">)</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">configuration</span> <span class="k">in</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">strongSelf</span> <span class="o">=</span> <span class="k">self</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+    <span class="c1">/// Show billing address section.</span>
+    <span class="n">configuration</span><span class="o">.</span><span class="n">billingAddressVisibility</span> <span class="o">=</span> <span class="o">.</span><span class="n">visible</span>
+
+    <span class="c1">/// Set valid countries. </span>
+    <span class="n">configuration</span><span class="o">.</span><span class="n">billingAddressCountryFieldOptions</span><span class="o">.</span><span class="n">validCountries</span> <span class="o">=</span> <span class="p">[</span><span class="s">"CA"</span><span class="p">,</span> <span class="s">"US"</span><span class="p">,</span> <span class="s">"AU"</span><span class="p">]</span> 
+<span class="p">}</span> <span class="nv">failure</span><span class="p">:</span> <span class="p">{[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"ERROR! Cannot create VGSCheckoutAddCardConfiguration!"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
 
 <p><strong><em>VGSCheckoutCustomConfiguration setup</em></strong><br/></p>
-
-<p>Use your <code>vaultId</code> to initialize <code><a href="Structs/VGSCheckoutCustomConfiguration.html">VGSCheckoutCustomConfiguration</a></code> instance. You can get it in your <a href="https://dashboard.verygoodsecurity.com/">organisation dashboard</a>.</p>
 <pre class="highlight swift"><code><span class="c1">/// Create VGSCheckoutCustomConfiguration instance with vaultID and environment</span>
 <span class="k">var</span> <span class="nv">checkoutConfiguration</span> <span class="o">=</span> <span class="kt">VGSCheckoutCustomConfiguration</span><span class="p">(</span><span class="nv">vaultID</span><span class="p">:</span> <span class="s">"&lt;VAULT_ID&gt;"</span><span class="p">,</span>
                                                        <span class="nv">environment</span><span class="p">:</span> <span class="s">"&lt;ENVIRONMENT&gt;"</span><span class="p">)</span>
@@ -340,6 +398,9 @@ To use Swift Package Manager, in Xcode add the <a href="https://github.com/veryg
 
 <span class="c1">/// Present VGSCheckout Form</span>
 <span class="n">vgsCheckout</span><span class="p">?</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+
+<span class="c1">/// Set Checkout delegate</span>
+<span class="n">vgsCheckout</span><span class="p">?</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="k">self</span>
 </code></pre>
 <h2 id='demo-application' class='heading'>Demo Application</h2>
 
@@ -376,7 +437,7 @@ You can easily opt-out of metrics collection in <code>VGSCheckoutAnalyticsClient
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2022-02-01)</p>
+      <p>&copy; 2022 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2022-07-19)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

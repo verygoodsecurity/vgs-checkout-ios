@@ -37,7 +37,9 @@ internal class VGSSaveCardFormView: VGSFormView {
 	/// Billing address view.
 	internal let billingAddressSectionView: VGSBillingAddressDetailsSectionView
 
+	/// UI theme.
   internal let uiTheme: VGSCheckoutThemeProtocol
+
 	// MARK: - Initialization
 
 	/// Initializer.

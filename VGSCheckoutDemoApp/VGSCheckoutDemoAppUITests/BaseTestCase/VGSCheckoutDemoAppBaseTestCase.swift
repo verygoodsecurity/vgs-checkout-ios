@@ -30,10 +30,18 @@ class VGSCheckoutDemoAppBaseTestCase: XCTestCase {
 	enum UseCases {
 		/// Checkout custom config.
 		static let customConfig = "Checkout Custom Config"
+
+		/// Checkout add card payopt config.
+		static let addCardPayoptConfig = "Checkout Payment Orchestration"
 	}
 
-	/// Navigate to custom config use case.
+	/// Navigates to custom config use case.
 	func navigateToCustomConfigUseCase() {
 		app.tables.staticTexts[UseCases.customConfig].tap()
+	}
+
+	/// Navigates to pay opt add card use case.
+	func navigateToPayoptAddCardUseCase() {
+		app.tables.staticTexts[UseCases.addCardPayoptConfig].tap()
 	}
 }

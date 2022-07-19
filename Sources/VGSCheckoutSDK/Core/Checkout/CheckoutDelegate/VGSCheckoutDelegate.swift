@@ -13,22 +13,47 @@ public protocol VGSCheckoutDelegate: AnyObject {
 	/// Tells the delegate that user cancelled checkout flow (closed checkout screen).
 	func checkoutDidCancel()
 
-	/// Tells the delegate that save card succeeded and fin instrument created.
-	/// - Parameter data: `Data?` object, holds response data with created financial instrument for saved card.
-	/// - Parameter response: `URLResponse?` object, holds URL response object with created financial instrument for saved card.
-//	func saveCardDidSuccess(with data: Data?, response: URLResponse?)
-//
-//	/// Tells the delegate that user removed saved card from payment options methods.
-//	/// - Parameter id: `String` object, removed saved card financial instrument id.
-//	func savedCardDidRemove(_ id: String)
+	/// Tells the delegate that user removed saved card from payment options methods.
+	/// - Parameter id: `String` object, removed saved card financial instrument id.
+	/// - Parameter result: `VGSCheckoutRequestResult` object, remove card request result.
+	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult)
+
+	/// Tells the delegate that checkout flow did finish with payment method.
+	/// - Parameter paymentMethod: `VGSCheckoutPaymentMethod` object, holds payment method info.
+	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod)
+
+	/*
+	/// Tells the delegate that user created new card before transfer start.
+	/// - Parameter newCardInfo: `VGSCheckoutNewPaymentCardInfo` object, holds new card info.
+	/// - Parameter result: `VGSCheckoutRequestResult` object, create new card request result.
+	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult)
+
+	/// Tells the delegate that checkout transfer flow finished.
+	/// - Parameter result: `VGSCheckoutRequestResult` object, transfer request result.
+	func checkoutTransferDidFinish(with result: VGSCheckoutRequestResult)
+	 */
 }
 
-/// Defeault protocol implementation.
-//public extension VGSCheckoutDelegate {
-//
-//	/// no:doc
-//	func saveCardDidSuccess(with data: Data?, response: URLResponse?) {}
-//
-//	/// no:doc
-//	func savedCardDidRemove(_ id: String) {}
-//}
+/// no:doc
+public extension VGSCheckoutDelegate {
+
+	/// no:doc
+	func checkoutDidFinish(with requestResult: VGSCheckoutRequestResult) {}
+
+	/// no:dc
+	func checkoutDidCancel() {}
+
+	/// no:doc
+	func removeCardDidFinish(with id: String, result: VGSCheckoutRequestResult) {}
+
+	/// no:doc
+	func checkoutDidFinish(with paymentMethod: VGSCheckoutPaymentMethod) {}
+
+	/*
+	/// no:doc
+	func checkoutTransferDidCreateNewCard(with newCardInfo: VGSCheckoutNewPaymentCardInfo, result: VGSCheckoutRequestResult) {}
+
+	/// no:doc
+	func checkoutTransferDidFinish(with result: VGSCheckoutRequestResult) {}
+	*/
+}

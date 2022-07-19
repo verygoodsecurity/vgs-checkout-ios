@@ -32,6 +32,18 @@ internal struct VGSCheckoutBillingAddressOptions {
   /// Country field options.
 	internal var countryOptions = VGSCheckoutBillingAddressCountryOptions()
 
+	/// Address line 1 field options.
+	internal var addressLine1Options = VGSCheckoutBillingAddressLine1Options()
+
+	/// Address line 2 field options.
+	internal var addressLine2Options = VGSCheckoutBillingAddressLine2Options()
+
+	/// City field options.
+	internal var cityOptions = VGSCheckoutBillingAddressCityOptions()
+
+	/// Postal code field options.
+	internal var postalCodeOptions = VGSCheckoutBillingAddressPostalCodeOptions()
+
 	/// no:doc
 	internal init() {}
 }
