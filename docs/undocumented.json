@@ -1,6 +1,20 @@
 {
   "warnings": [
     {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Checkout/Models/CheckoutPaymentMethod/VGSCheckoutPaymentMethod.swift",
+      "line": 43,
+      "symbol": "VGSCheckoutPaymentCardInfo.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/Payment/VGSCheckoutPaymentConfiguration.swift",
+      "line": 240,
+      "symbol": "VGSCheckoutSavedPaymentMethods.savedCards(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/UI/CheckoutForm/FormItems/CardFieldViews/VGSCardNumberFieldView.swift",
       "line": 101,
       "symbol": "VGSCardNumberFieldView",

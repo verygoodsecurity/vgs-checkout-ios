@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VGSCheckoutAddCardConfiguration Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/VGSCheckoutAddCardConfiguration" class="dashAnchor"></a>
+
+    <a title="VGSCheckoutAddCardConfiguration Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          VGSCheckoutSDK
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/verygoodsecurity/vgs-checkout-ios">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">VGSCheckoutSDK Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      VGSCheckoutAddCardConfiguration Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../VGSCheckout.html">VGSCheckout</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckout.html">VGSCheckout</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutDelegate.html">VGSCheckoutDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Configuration.html">Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutConfigurationProtocol.html">VGSCheckoutConfigurationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomConfiguration.html">VGSCheckoutCustomConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutFieldVisibility.html">VGSCheckoutFieldVisibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutBillingAddressVisibility.html">VGSCheckoutBillingAddressVisibility</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Card%20Details%20Configuration.html">Card Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardOptions.html">VGSCheckoutCardOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions.html">VGSCheckoutCardHolderOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardHolderOptions/FieldNameType.html">– FieldNameType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCardNumberOptions.html">VGSCheckoutCardNumberOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpirationDateOptions.html">VGSCheckoutExpirationDateOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutCardExpDateFormat.html">VGSCheckoutCardExpDateFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutExpDateSeparateSerializer.html">VGSCheckoutExpDateSeparateSerializer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCVCOptions.html">VGSCheckoutCVCOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Custom%20Billing%20Address%20Details%20Configuration.html">Custom Billing Address Details Configuration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomBillingAddressCountryOptions.html">VGSCheckoutCustomBillingAddressCountryOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomBillingAddressLine1Options.html">VGSCheckoutCustomBillingAddressLine1Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomBillingAddressLine2Options.html">VGSCheckoutCustomBillingAddressLine2Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomBillingAddressCityOptions.html">VGSCheckoutCustomBillingAddressCityOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomBillingAddressPostalCodeOptions.html">VGSCheckoutCustomBillingAddressPostalCodeOptions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../UITheme.html">UITheme</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutDefaultTheme.html">VGSCheckoutDefaultTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../UITheme.html#/s:14VGSCheckoutSDK0A13ThemeProtocolP">VGSCheckoutThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutTextFieldThemeProtocol.html">VGSCheckoutTextFieldThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutSubmitButtonThemeProtocol.html">VGSCheckoutSubmitButtonThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutViewThemeProtocol.html">VGSCheckoutViewThemeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Form%20Validation%20Behaviour.html">Form Validation Behaviour</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutFormValidationBehaviour.html">VGSCheckoutFormValidationBehaviour</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../APIConfiguration.html">APIConfiguration</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomConfigurationRequestOptions.html">VGSCheckoutCustomConfigurationRequestOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomRouteConfiguration.html">VGSCheckoutCustomRouteConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHTTPMethod.html">VGSCheckoutHTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutHostnamePolicy.html">VGSCheckoutHostnamePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutDataMergePolicy.html">VGSCheckoutDataMergePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutRequestResult.html">VGSCheckoutRequestResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Debugging.html">Debugging</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/VGSCheckoutLogger.html">VGSCheckoutLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutLoggingConfiguration.html">VGSCheckoutLoggingConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutLogLevel.html">VGSCheckoutLogLevel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutFieldUIState.html">VGSCheckoutFieldUIState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VGSCheckoutPaymentMethod.html">VGSCheckoutPaymentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Enums.html#/s:14VGSCheckoutSDK0A19SavedPaymentMethodsO">VGSCheckoutSavedPaymentMethods</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIFont.html">UIFont</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Extensions.html#/VGSCheckoutPaymentCards">VGSCheckoutPaymentCards</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Protocols.html">Other Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutCheckboxThemeProtocol.html">VGSCheckoutCheckboxThemeProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Protocols.html#/s:14VGSCheckoutSDK0A4InfoP">VGSCheckoutInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/VGSCheckoutPaymentOptionsThemeProtocol.html">VGSCheckoutPaymentOptionsThemeProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other%20Structs.html">Other Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutAddCardConfiguration.html">VGSCheckoutAddCardConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCityOptions.html">VGSCheckoutBillingAddressCityOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressCountryOptions.html">VGSCheckoutBillingAddressCountryOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine1Options.html">VGSCheckoutBillingAddressLine1Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressLine2Options.html">VGSCheckoutBillingAddressLine2Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutBillingAddressPostalCodeOptions.html">VGSCheckoutBillingAddressPostalCodeOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutCustomConfiguationBillingAddressOptions.html">VGSCheckoutCustomConfiguationBillingAddressOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutNewPaymentCardInfo.html">VGSCheckoutNewPaymentCardInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other%20Structs.html#/s:14VGSCheckoutSDK0A15PaymentCardInfoV">VGSCheckoutPaymentCardInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VGSCheckoutPaymentOptions.html">VGSCheckoutPaymentOptions</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>VGSCheckoutAddCardConfiguration</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">VGSCheckoutAddCardConfiguration</span> <span class="p">:</span> <span class="kt">VGSCheckoutBasicConfigurationProtocol</span><span class="p">,</span> <span class="kt">VGSCheckoutPayoptBasicConfiguration</span></code></pre>
+
+                </div>
+              </div>
+            <p>Holds configuration with predefined setup for work with payment orchestration app, confirms to <code>VGSCheckoutBasicConfigurationProtocol</code>.</p>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L11-L227">Show on GitHub</a>
+              </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV20defaultPayoptRouteIdSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultPayoptRouteId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV20defaultPayoptRouteIdSSvpZ">defaultPayoptRouteId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default Inbound route route id created in vault during default integration with payopt on dashboard.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultPayoptRouteId</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L20">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE17SuccessCompletiona"></a>
+                    <a name="//apple_ref/swift/Alias/CreateConfigurationSuccessCompletion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE17SuccessCompletiona">CreateConfigurationSuccessCompletion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A callback to be run with a <code>VGSCheckoutAddCardConfiguration</code> on configuration setup succeed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CreateConfigurationSuccessCompletion</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">configuration</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">VGSCheckoutAddCardConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>VGSCheckoutAddCardConfiguration</code> object, configuration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L25">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE14FailCompletiona"></a>
+                    <a name="//apple_ref/swift/Alias/CreateConfigurationFailCompletion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE14FailCompletiona">CreateConfigurationFailCompletion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A callback to be run with an error when configuration setup fail.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CreateConfigurationFailCompletion</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>Error</code> object, the error on configuration setup fail.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L30">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Attributes"></a>
+                <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Attributes"></a>
+                  <h3 class="section-name"><p>Attributes</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV8tenantIdSSvp"></a>
+                    <a name="//apple_ref/swift/Property/tenantId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV8tenantIdSSvp">tenantId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>String</code> object, payment orchestration tenant id.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L35">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV11environmentSSvp"></a>
+                    <a name="//apple_ref/swift/Property/environment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV11environmentSSvp">environment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>String</code> object, organization vault environment with data region.(e.g. &ldquo;live&rdquo;, &ldquo;live-eu1&rdquo;, &ldquo;sandbox&rdquo;). Default is <code>sandbox</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">environment</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L38">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV7routeIdSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/routeId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV7routeIdSSSgvp">routeId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>String?</code>, organization vault inbound route id, could be <code>nil</code> when vault has only one route.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">routeId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L41">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV06isSaveD13OptionEnabledSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isSaveCardOptionEnabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06isSaveD13OptionEnabledSbvp">isSaveCardOptionEnabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is <code>true</code>. Default <strong>save card button</strong> state is <code>selected</code>. <strong>NOTE</strong> User choice for save card option will not be stored on VGS side.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isSaveCardOptionEnabled</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L44">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV08isRemoveD13OptionEnabledSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isRemoveCardOptionEnabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV08isRemoveD13OptionEnabledSbvp">isRemoveCardOptionEnabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean flag indicating whether user can remove saved cards. Default is <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isRemoveCardOptionEnabled</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L47">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public"></a>
+                <a name="//apple_ref/swift/Section/Public" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public"></a>
+                  <h3 class="section-name"><p>Public</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV06createE011accessToken8tenantId11environment05routeJ07options7success7failureySS_S3SSgAA0A14PaymentOptionsVSgyACzcys5Error_pctFZ"></a>
+                    <a name="//apple_ref/swift/Method/createConfiguration(accessToken:tenantId:environment:routeId:options:success:failure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06createE011accessToken8tenantId11environment05routeJ07options7success7failureySS_S3SSgAA0A14PaymentOptionsVSgyACzcys5Error_pctFZ">createConfiguration(accessToken:<wbr>tenantId:<wbr>environment:<wbr>routeId:<wbr>options:<wbr>success:<wbr>failure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates Add Card config.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">createConfiguration</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">tenantId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">environment</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"sandbox"</span><span class="p">,</span> <span class="nv">routeId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="n"><a href="../Structs/VGSCheckoutAddCardConfiguration.html#/s:14VGSCheckoutSDK0A20AddCardConfigurationV20defaultPayoptRouteIdSSvpZ">defaultPayoptRouteId</a></span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutPaymentOptions.html">VGSCheckoutPaymentOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/VGSCheckoutAddCardConfiguration.html#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE17SuccessCompletiona">CreateConfigurationSuccessCompletion</a></span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/VGSCheckoutAddCardConfiguration.html#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE14FailCompletiona">CreateConfigurationFailCompletion</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessToken</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>String</code> object, should be valid access token for payment orchestration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tenantId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>String</code> object, payment orchestration tenant id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environment</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>String</code> object, organization vault environment with data region.(e.g. &ldquo;live&rdquo;, &ldquo;live-eu1&rdquo;, &ldquo;sandbox&rdquo;). Default is <code>sandbox</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>routeId</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>String?</code>, organization vault inbound route id, default is route id created during integration with payopt on VGS dashboard.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Structs/VGSCheckoutPaymentOptions.html">VGSCheckoutPaymentOptions</a></code> object, additional checkout options, default is <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Structs/VGSCheckoutAddCardConfiguration.html#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE17SuccessCompletiona">CreateConfigurationSuccessCompletion</a></code> object, callback for configuration setup succeed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code><a href="../Structs/VGSCheckoutAddCardConfiguration.html#/s:14VGSCheckoutSDK0A20AddCardConfigurationV06CreateE14FailCompletiona">CreateConfigurationFailCompletion</a></code> object, callback for configuration setup fail.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L69-L100">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UI%20Configuration"></a>
+                <a name="//apple_ref/swift/Section/UI Configuration" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/UI%20Configuration"></a>
+                  <h3 class="section-name"><p>UI Configuration</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV7uiThemeAA0aG8Protocol_pvp"></a>
+                    <a name="//apple_ref/swift/Property/uiTheme" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV7uiThemeAA0aG8Protocol_pvp">uiTheme</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checkout UI elements  configuration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">uiTheme</span><span class="p">:</span> <span class="kt"><a href="../UITheme.html#/s:14VGSCheckoutSDK0A13ThemeProtocolP">VGSCheckoutThemeProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L122">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV24billingAddressVisibilityAA0a7BillinggH0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressVisibility" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV24billingAddressVisibilityAA0a7BillinggH0Ovp">billingAddressVisibility</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address visibility.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressVisibility</span><span class="p">:</span> <span class="kt"><a href="../Enums/VGSCheckoutBillingAddressVisibility.html">VGSCheckoutBillingAddressVisibility</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L125-L133">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV33billingAddressCountryFieldOptionsAA0a7BillingghJ0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressCountryFieldOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV33billingAddressCountryFieldOptionsAA0a7BillingghJ0Vvp">billingAddressCountryFieldOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address country field options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressCountryFieldOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutBillingAddressCountryOptions.html">VGSCheckoutBillingAddressCountryOptions</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L136-L144">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV31billingAddressLine1FieldOptionsAA0a7BillingghJ0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressLine1FieldOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV31billingAddressLine1FieldOptionsAA0a7BillingghJ0Vvp">billingAddressLine1FieldOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address line 1 field options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressLine1FieldOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutBillingAddressLine1Options.html">VGSCheckoutBillingAddressLine1Options</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L147-L155">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV31billingAddressLine2FieldOptionsAA0a7BillingghJ0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressLine2FieldOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV31billingAddressLine2FieldOptionsAA0a7BillingghJ0Vvp">billingAddressLine2FieldOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address line 2 field options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressLine2FieldOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutBillingAddressLine2Options.html">VGSCheckoutBillingAddressLine2Options</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L158-L166">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV30billingAddressCityFieldOptionsAA0a7BillingghJ0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressCityFieldOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV30billingAddressCityFieldOptionsAA0a7BillingghJ0Vvp">billingAddressCityFieldOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address city field options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressCityFieldOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutBillingAddressCityOptions.html">VGSCheckoutBillingAddressCityOptions</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L169-L177">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV36billingAddressPostalCodeFieldOptionsAA0a7BillingghiK0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/billingAddressPostalCodeFieldOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV36billingAddressPostalCodeFieldOptionsAA0a7BillingghiK0Vvp">billingAddressPostalCodeFieldOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Billing address postal code field options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">billingAddressPostalCodeFieldOptions</span><span class="p">:</span> <span class="kt"><a href="../Structs/VGSCheckoutBillingAddressPostalCodeOptions.html">VGSCheckoutBillingAddressPostalCodeOptions</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L180-L188">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14VGSCheckoutSDK0A20AddCardConfigurationV23formValidationBehaviourAA0a4FormgH0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/formValidationBehaviour" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14VGSCheckoutSDK0A20AddCardConfigurationV23formValidationBehaviourAA0a4FormgH0Ovp">formValidationBehaviour</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Form validation behavior, default is <code>.onSubmit</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">formValidationBehaviour</span><span class="p">:</span> <span class="kt"><a href="../Enums/VGSCheckoutFormValidationBehaviour.html">VGSCheckoutFormValidationBehaviour</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/verygoodsecurity/vgs-checkout-ios/tree/master/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/AddCard/VGSCheckoutAddCardConfiguration.swift#L191-L199">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2022 <a class="link" href="https://verygoodsecurity.com" target="_blank" rel="external">Very Good Security</a>. All rights reserved. (Last updated: 2022-07-19)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
