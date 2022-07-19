@@ -13,12 +13,14 @@ internal struct VGSCheckoutFormAnanlyticsDetails {
   public let formId: String
   public let tenantId: String
   public let environment: String
+  public let routeId: String?
 	internal (set) public var isSatelliteMode: Bool = false
 
-	public init(formId: String, tenantId: String, environment: String, isSatelliteMode: Bool = false) {
+  public init(formId: String, tenantId: String, environment: String, routeId: String?, isSatelliteMode: Bool = false) {
 		self.formId = formId
 		self.tenantId = tenantId
 		self.environment = environment
+    self.routeId = routeId
 		self.isSatelliteMode
 		 = isSatelliteMode
 	}

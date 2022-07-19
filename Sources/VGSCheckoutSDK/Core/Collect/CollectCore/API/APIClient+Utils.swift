@@ -30,7 +30,7 @@ internal extension APIClient {
 			logInvalidVaultIDEvent(tenantId)
 		}
 		// Check vault url is valid.
-    guard let url = buildVaultURL(with: tenantId, regionalEnvironment: regionalEnvironment, routeId: routeId) else {
+    guard let url = buildVaultBaseURL(with: tenantId, regionalEnvironment: regionalEnvironment, routeId: routeId) else {
 			APIClient.logCannotBuildURLEvent(for: tenantId, regionalEnvironment: regionalEnvironment, routeId: routeId)
 
 			return nil
@@ -88,7 +88,7 @@ internal extension APIClient {
   ///   - tenantId: `String` object, invalid vaultID.
   ///   - regionalEnvironment: `String` object, invalid regionalEnvironment.
   ///   - routeId: `String?` object,  inbound route id could be nil or valid uuid string.
-  static func buildVaultURL(with tenantId: String, regionalEnvironment: String, routeId: String?) -> URL? {
+  static func buildVaultBaseURL(with tenantId: String, regionalEnvironment: String, routeId: String?) -> URL? {
     let strUrl: String
     // Check is routeId is set and valid.
     if let routeId = routeId, !routeId.isEmpty {
