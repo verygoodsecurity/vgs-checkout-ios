@@ -63,7 +63,7 @@ internal class VGSCollect {
   internal init(id: String, environment: String, routeId: String? = nil, hostname: String? = nil, satellitePort: Int? = nil) {
       self.tenantId = id
       self.regionalEnvironment = environment
-      self.formAnalyticsDetails = VGSCheckoutFormAnanlyticsDetails.init(formId: formId, tenantId: tenantId, environment: regionalEnvironment)
+    self.formAnalyticsDetails = VGSCheckoutFormAnanlyticsDetails(formId: formId, tenantId: tenantId, environment: regionalEnvironment, routeId: routeId)
     self.apiClient = APIClient(tenantId: id, regionalEnvironment: environment, routeId: routeId, hostname: hostname, formAnalyticsDetails: formAnalyticsDetails, satellitePort: satellitePort)
 
 			if case .satelliteURL = self.apiClient.hostURLPolicy {

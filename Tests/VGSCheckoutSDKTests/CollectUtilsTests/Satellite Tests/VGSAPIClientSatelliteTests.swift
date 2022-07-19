@@ -52,7 +52,7 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 		for index in 0..<testData.count {
 			let config = testData[index]
 
-			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
+			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment, routeId: nil)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(config.port!) should produce: \(config.url)"
       let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment, routeId: config.routeId, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 
@@ -91,7 +91,7 @@ class VGSAPIClientSatelliteTests: VGSCheckoutBaseTestCase {
 			if let port = config.port {
 				portText = "\(port)"
 			}
-			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment)
+			let mockedFormData = VGSCheckoutFormAnanlyticsDetails(formId: "123", tenantId: tenantID, environment: config.environment, routeId: nil)
 			let outputText = "index: \(index) satellite configuration with environment: \(config.environment) hostname: \(config.hostname ?? "*nil*") port: \(portText) should produce *nil*"
       let client = APIClient(tenantId: tenantID, regionalEnvironment: config.environment,routeId: config.routeId, hostname: config.hostname, formAnalyticsDetails: mockedFormData, satellitePort: config.port)
 
