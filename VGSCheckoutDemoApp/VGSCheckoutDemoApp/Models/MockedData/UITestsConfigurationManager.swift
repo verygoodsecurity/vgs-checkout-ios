@@ -32,6 +32,14 @@ enum VGSCheckoutUITestsFeature {
 	/// Billing address section is hidden.
 	case billingAddressIsHidden
 
+	/**
+	 List of fields in billing address section.
+
+	 - Parameters:
+			- fields: An array of `VGSCheckoutUITestsAddressField`, address fields.
+	*/
+	case billingAddressFields( _ fields: [VGSCheckoutUITestsAddressField])
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -51,6 +59,8 @@ enum VGSCheckoutUITestsFeature {
 			return "removeCardDisabled"
 		case .billingAddressIsHidden:
 			return "billingAddressIsHidden"
+		case .billingAddressFields(let fields):
+			return "billingAddressFields=" + fields.map{return $0.rawValue}.joined(separator: ".")
 		}
 	}
 
@@ -76,6 +86,13 @@ enum VGSCheckoutUITestsFeature {
 			return
 		} else if launchArgument == VGSCheckoutUITestsFeature.billingAddressIsHidden.launchArgument {
 			self = .billingAddressIsHidden
+			return
+		} else if launchArgument.hasPrefix("billingAddressFields=") {
+			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
+			let addressFields = countriesStringList.components(separatedBy: ".").compactMap { field in
+				return VGSCheckoutUITestsAddressField(rawValue: field)
+			}
+			self = .billingAddressFields(addressFields)
 			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]

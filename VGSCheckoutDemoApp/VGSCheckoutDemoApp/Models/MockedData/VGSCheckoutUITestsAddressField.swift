@@ -1,0 +1,25 @@
+//
+//  VGSCheckoutUITestsAddressField.swift
+//  VGSCheckoutDemoApp
+//
+
+import Foundation
+
+/// Defines address fields for UI tests.
+enum VGSCheckoutUITestsAddressField: String {
+
+	/// Country.
+	case country
+
+	/// Address line 1.
+	case addressLine1
+
+	/// Address line 2.
+	case addressLine2
+
+	/// City.
+	case city
+
+	/// Postal code.
+	case postalCode
+}
