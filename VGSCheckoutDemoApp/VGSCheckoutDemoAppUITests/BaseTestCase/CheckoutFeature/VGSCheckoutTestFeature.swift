@@ -28,6 +28,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Remove card option is disabled.
 	case removeCardDisabled
 
+	/// Billing address section is hidden.
+	case billingAddressIsHidden
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -45,6 +48,8 @@ enum VGSCheckoutUITestsFeature {
 			return "successRemoveSavedCard"
 		case .removeCardDisabled:
 			return "removeCardDisabled"
+		case .billingAddressIsHidden:
+			return "billingAddressIsHidden"
 		}
 	}
 }

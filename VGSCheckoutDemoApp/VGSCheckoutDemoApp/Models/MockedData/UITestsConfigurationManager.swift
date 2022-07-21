@@ -29,6 +29,9 @@ enum VGSCheckoutUITestsFeature {
 	/// Remove card option is disabled.
 	case removeCardDisabled
 
+	/// Billing address section is hidden.
+	case billingAddressIsHidden
+
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
 		switch self {
@@ -46,6 +49,8 @@ enum VGSCheckoutUITestsFeature {
 			return "successRemoveSavedCard"
 		case .removeCardDisabled:
 			return "removeCardDisabled"
+		case .billingAddressIsHidden:
+			return "billingAddressIsHidden"
 		}
 	}
 
@@ -68,6 +73,9 @@ enum VGSCheckoutUITestsFeature {
 			return
 		} else if launchArgument == VGSCheckoutUITestsFeature.removeCardDisabled.launchArgument {
 			self = .removeCardDisabled
+			return
+		} else if launchArgument == VGSCheckoutUITestsFeature.billingAddressIsHidden.launchArgument {
+			self = .billingAddressIsHidden
 			return
 		} else if launchArgument.hasPrefix("validCountries=") {
 			let countriesStringList = launchArgument.components(separatedBy: "=")[1]
@@ -104,6 +112,8 @@ internal class UITestsConfigurationManager {
 				configuration.billingAddressLine2FieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
+			case .billingAddressIsHidden:
+				configuration.billingAddressVisibility = .hidden
 			default:
 				break
 			}
@@ -133,10 +143,11 @@ internal class UITestsConfigurationManager {
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
 			case .removeCardDisabled:
 				configuration.isRemoveCardOptionEnabled = false
+			case .billingAddressIsHidden:
+				configuration.billingAddressVisibility = .hidden
 			default:
 				break
 			}
 		}
 	}
-
 }
