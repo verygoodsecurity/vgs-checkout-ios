@@ -60,7 +60,7 @@ enum VGSCheckoutUITestsFeature {
 		case .billingAddressIsHidden:
 			return "billingAddressIsHidden"
 		case .billingAddressFields(let fields):
-			return "billingAddressFields=" + fields.map{return $0.rawValue}.joined(separator: ".")
+			return "billingAddressFields=" + fields.map {$0.rawValue}.joined(separator: ".")
 		}
 	}
 
