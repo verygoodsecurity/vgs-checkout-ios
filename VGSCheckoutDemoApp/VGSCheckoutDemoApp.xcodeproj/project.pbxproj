@@ -43,6 +43,7 @@
 		44C1E5FB2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E5FA2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift */; };
 		44C1E5FD288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E5FC288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift */; };
 		44C1E5FF288909A200FF34A8 /* VGSCheckoutUITestsAddressField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E5FE288909A200FF34A8 /* VGSCheckoutUITestsAddressField.swift */; };
+		44C1E60128890F7B00FF34A8 /* VGSCheckoutUITestsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E60028890F7B00FF34A8 /* VGSCheckoutUITestsFeature.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
 		44E10AD0269D7A5A001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AD2269D7A5A001F0D44 /* Localizable.strings */; };
@@ -112,6 +113,7 @@
 		44C1E5FA2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutAddressSectionTests.swift; sourceTree = "<group>"; };
 		44C1E5FC288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutUITestsAddressFields.swift; sourceTree = "<group>"; };
 		44C1E5FE288909A200FF34A8 /* VGSCheckoutUITestsAddressField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutUITestsAddressField.swift; sourceTree = "<group>"; };
+		44C1E60028890F7B00FF34A8 /* VGSCheckoutUITestsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutUITestsFeature.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
 		44E10AD1269D7A5A001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				441927D3265F63540080B01E /* UITestsMockedData.plist */,
 				44282B7B2735248300223A66 /* UITestsConfigurationManager.swift */,
 				44C1E5FE288909A200FF34A8 /* VGSCheckoutUITestsAddressField.swift */,
+				44C1E60028890F7B00FF34A8 /* VGSCheckoutUITestsFeature.swift */,
 			);
 			path = MockedData;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				44282B7C2735248400223A66 /* UITestsConfigurationManager.swift in Sources */,
 				44FC9F76265FC4F7001CDD79 /* DemoInsetContainerView.swift in Sources */,
 				44FC9F79265FC6B9001CDD79 /* UIColor+Extensions.swift in Sources */,
+				44C1E60128890F7B00FF34A8 /* VGSCheckoutUITestsFeature.swift in Sources */,
 				441927EB265FA3E60080B01E /* UIFont+Extensions.swift in Sources */,
 				441927E3265F6ACE0080B01E /* OrderItem.swift in Sources */,
 			);
