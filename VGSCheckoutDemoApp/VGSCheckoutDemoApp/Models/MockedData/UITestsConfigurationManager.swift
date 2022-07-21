@@ -94,7 +94,7 @@ internal class UITestsConfigurationManager {
 	/// Updates checkout configuration for UI tests.
 	/// - Parameter configuration: `VGSCheckoutCustomConfiguration` object, configuration to update.
 	static func updateCustomCheckoutConfigurationForUITests(_ configuration: inout VGSCheckoutCustomConfiguration) {
-		// Get all features from the UI tests launch argument.
+		// Get all features from the UI tests launch arguments.
 		let uiTestsFeatures = ProcessInfo().arguments.compactMap({return VGSCheckoutUITestsFeature(launchArgument: $0)})
 		guard UIApplication.isRunningUITest, !uiTestsFeatures.isEmpty else {return}
 
@@ -123,7 +123,7 @@ internal class UITestsConfigurationManager {
 	/// Updates checkout configuration for UI tests.
 	/// - Parameter configuration: `VGSCheckoutAddCardConfiguration` object, configuration to update.
 	static func updateAddCardCheckoutConfigurationForUITests(_ configuration: inout VGSCheckoutAddCardConfiguration) {
-		// Get all features from the UI tests launch argument.
+		// Get all features from the UI tests launch arguments.
 		let uiTestsFeatures = ProcessInfo().arguments.compactMap({return VGSCheckoutUITestsFeature(launchArgument: $0)})
 		guard UIApplication.isRunningUITest, !uiTestsFeatures.isEmpty else {return}
 
