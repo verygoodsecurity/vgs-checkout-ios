@@ -7,7 +7,7 @@ import Foundation
 import XCTest
 
 /// Tests for address section checkout flow.
-class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
+class VGSCheckoutAddressSectionTests: VGSCheckoutSaveCardBaseTestCase {
 
 	/// Test custom config when billing address section is hidden.
 	func testCustomConfigWhenAddressHidden() {
