@@ -27,7 +27,7 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		app.swipeUp()
 
 		// Verify address hints are hidden.
-		verifyAddressFieldsAreHidden()
+		verifyAllAddressFieldsAreHidden()
 
 		// Swipe down to up.
 		app.swipeDown()
@@ -45,8 +45,8 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
-	// Verifies other address fields are hidden.
-	func verifyAddressFieldsAreHidden() {
+	// Verifies all address fields are hidden.
+	func verifyAllAddressFieldsAreHidden() {
 		// Verify billing address section hint doesn't exist.
 		XCTAssertFalse(Labels.CheckoutSectionTitles.billingAddress.exists(in: app))
 
