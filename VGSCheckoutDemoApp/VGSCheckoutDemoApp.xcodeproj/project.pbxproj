@@ -41,6 +41,7 @@
 		4472AC2527FAAC2A005A0870 /* CheckoutAddCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */; };
 		44B601CE27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */; };
 		44C1E5FB2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E5FA2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift */; };
+		44C1E5FD288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1E5FC288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift */; };
 		44C4C9352666012D00195505 /* DemoAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4C9342666012D00195505 /* DemoAppConfiguration.swift */; };
 		44D520DD26773059005AB588 /* DemoAppResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D520DC26773059005AB588 /* DemoAppResponseParser.swift */; };
 		44E10AD0269D7A5A001F0D44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E10AD2269D7A5A001F0D44 /* Localizable.strings */; };
@@ -108,6 +109,7 @@
 		4472AC2327FAAC2A005A0870 /* CheckoutAddCardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutAddCardVC.swift; sourceTree = "<group>"; };
 		44B601CD27F455B800F2CCFA /* VGSCheckoutOnlyPostalCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutOnlyPostalCodeTests.swift; sourceTree = "<group>"; };
 		44C1E5FA2888FC2C00FF34A8 /* VGSCheckoutAddressSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutAddressSectionTests.swift; sourceTree = "<group>"; };
+		44C1E5FC288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGSCheckoutUITestsAddressFields.swift; sourceTree = "<group>"; };
 		44C4C9342666012D00195505 /* DemoAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppConfiguration.swift; sourceTree = "<group>"; };
 		44D520DC26773059005AB588 /* DemoAppResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppResponseParser.swift; sourceTree = "<group>"; };
 		44E10AD1269D7A5A001F0D44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				44282B742735210200223A66 /* VGSCheckoutTestFeature.swift */,
+				44C1E5FC288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift */,
 			);
 			path = CheckoutFeature;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				445C126326F998C000D6F3DD /* VGSCheckoutCustomConfigFlow.swift in Sources */,
 				445C126C26F99A2900D6F3DD /* VGSUITestElementType.swift in Sources */,
 				445C126F26F99A6300D6F3DD /* XCTestCase+Extensions.swift in Sources */,
+				44C1E5FD288907F100FF34A8 /* VGSCheckoutUITestsAddressFields.swift in Sources */,
 				445C125E26F996DB00D6F3DD /* VGSCheckoutDemoAppBaseTestCase.swift in Sources */,
 				44125747280687F500C27A34 /* VGSCheckoutPayotAddCardConfigFlowTests.swift in Sources */,
 				445C126726F9996700D6F3DD /* VGSCheckoutSaveCardBaseTestCase.swift in Sources */,
