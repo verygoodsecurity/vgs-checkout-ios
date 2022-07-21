@@ -31,6 +31,24 @@ internal class UITestsConfigurationManager {
 				configuration.billingAddressCityFieldOptions.visibility = .hidden
 			case .billingAddressIsHidden:
 				configuration.billingAddressVisibility = .hidden
+			case .billingAddressFields(let fields):
+				// Hide all address fields initially.
+				hideAllAddressFields(in: &configuration)
+
+				fields.forEach { field in
+					switch field {
+					case .country:
+						configuration.billingAddressCountryFieldOptions.visibility = .visible
+					case .addressLine1:
+						configuration.billingAddressLine1FieldOptions.visibility = .visible
+					case .addressLine2:
+						configuration.billingAddressLine2FieldOptions.visibility = .visible
+					case .city:
+						configuration.billingAddressCityFieldOptions.visibility = .visible
+					case .postalCode:
+						configuration.billingAddressPostalCodeFieldOptions.visibility = .visible
+					}
+				}
 			default:
 				break
 			}
@@ -62,9 +80,47 @@ internal class UITestsConfigurationManager {
 				configuration.isRemoveCardOptionEnabled = false
 			case .billingAddressIsHidden:
 				configuration.billingAddressVisibility = .hidden
+			case .billingAddressFields(let fields):
+				// Hide all address fields initially.
+				hideAllAddressFields(in: &configuration)
+
+				fields.forEach { field in
+					switch field {
+					case .country:
+						configuration.billingAddressCountryFieldOptions.visibility = .visible
+					case .addressLine1:
+						configuration.billingAddressLine1FieldOptions.visibility = .visible
+					case .addressLine2:
+						configuration.billingAddressLine2FieldOptions.visibility = .visible
+					case .city:
+						configuration.billingAddressCityFieldOptions.visibility = .visible
+					case .postalCode:
+						configuration.billingAddressPostalCodeFieldOptions.visibility = .visible
+					}
+				}
 			default:
 				break
 			}
 		}
+	}
+
+	/// Hides all address fields in custom config.
+	/// - Parameter customConfig: `VGSCheckoutCustomConfiguration` object, custom configuration.
+	private static func hideAllAddressFields(in customConfig: inout VGSCheckoutCustomConfiguration) {
+		customConfig.billingAddressCountryFieldOptions.visibility = .hidden
+		customConfig.billingAddressLine1FieldOptions.visibility = .hidden
+		customConfig.billingAddressLine2FieldOptions.visibility = .hidden
+		customConfig.billingAddressCityFieldOptions.visibility = .hidden
+		customConfig.billingAddressPostalCodeFieldOptions.visibility = .hidden
+	}
+
+	/// Hides all address fields in add card config.
+	/// - Parameter addCardConfig: `VGSCheckoutAddCardConfiguration` object, add card configuration.
+	private static func hideAllAddressFields(in addCardConfig: inout VGSCheckoutAddCardConfiguration) {
+		addCardConfig.billingAddressCountryFieldOptions.visibility = .hidden
+		addCardConfig.billingAddressLine1FieldOptions.visibility = .hidden
+		addCardConfig.billingAddressLine2FieldOptions.visibility = .hidden
+		addCardConfig.billingAddressCityFieldOptions.visibility = .hidden
+		addCardConfig.billingAddressPostalCodeFieldOptions.visibility = .hidden
 	}
 }
