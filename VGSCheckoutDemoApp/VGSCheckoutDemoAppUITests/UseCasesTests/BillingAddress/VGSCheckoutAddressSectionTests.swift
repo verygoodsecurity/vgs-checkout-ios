@@ -44,28 +44,4 @@ class VGSCheckoutAddressSectionTests: VGSCheckoutSaveCardBaseTestCase {
 		// Check success alert.
 		verifySuccessAlertExists()
 	}
-
-	// Verifies all address fields are hidden.
-	func verifyAllAddressFieldsAreHidden() {
-		// Verify billing address section hint doesn't exist.
-		XCTAssertFalse(Labels.CheckoutSectionTitles.billingAddress.exists(in: app))
-
-		// Verify country hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.countryHint.exists(in: app))
-
-		// Verify address line 1 hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine1Hint.exists(in: app))
-
-		// Verify address line 2 hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine2Hint.exists(in: app))
-
-		// Verify city hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.cityHint.exists(in: app))
-
-		// Verify zip code hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
-
-		// Verify postal code hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
-	}
 }
