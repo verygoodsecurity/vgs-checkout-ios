@@ -11,7 +11,7 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 	/// Test custom config when all fields in billing address section are hidden.
 	func testCustomConfigAllFieldsAreHidden() {
 		// Display no address fields in billing address section.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([]))
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([]).launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -47,7 +47,7 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 	/// Test custom config when only country field is visible in billing address.
 	func testCustomConfigOnlyCountryFieldVisible() {
 		// Display no address fields in billing address section.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country]))
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country]).launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -111,9 +111,9 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 	}
 
 	/// Test custom config when only country field and postal code field is visible in billing address.
-	func testCustomConfigOnlyCountryFieldVisible() {
+	func testCustomConfigCountryAndPostalCodeVisible() {
 		// Display no address fields in billing address section.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country, .postalCode]))
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country, .postalCode]).launchArgument)
 
 		// Launch app.
 		app.launch()
