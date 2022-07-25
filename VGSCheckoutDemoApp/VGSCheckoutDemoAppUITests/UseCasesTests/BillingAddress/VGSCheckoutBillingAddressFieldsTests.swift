@@ -114,6 +114,8 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 	func testCustomConfigCountryAndPostalCodeVisible() {
 		// Display no address fields in billing address section.
 		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country, .postalCode]).launchArgument)
+		// Add onFocus validation.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onFocusValidation.launchArgument)
 
 		// Launch app.
 		app.launch()
@@ -137,7 +139,7 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 		verifyIsPostalCodeVisible(false)
 
 		// Verify country field is visible.
-		verifyFieldsVisibility([.country, .postalCode], isVisible: true)
+		verifyFieldsVisibility([.country, .postalCode], isVisible: true, shouldUseZIP: true)
 
 		// Verify zip is visible.
 		verifyIsZipVisible(true)
@@ -166,6 +168,9 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 		// Verify correct country in field.
 		verifyCountryIsDisplayed("United States")
 
+		// Verify postal code errors.
+		verifyUpdatePostalCodeErrorOnCountryChange()
+
 		// Wait for country change.
 		wait(forTimeInterval: 0.2)
 
@@ -174,6 +179,15 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Fill in card data.
 		fillInCorrectCardData()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Type valid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("12345", shouldClear: true)
+
+		// Dismiss keyboard.
+		dismissKeyboardForCardDetails()
 
 		// Wait for keyboard dismiss.
 		wait(forTimeInterval: 0.5)
