@@ -40,11 +40,29 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Swipe up.
 		app.swipeUp()
 
-		// Verify zip code error is displayed for invalid zip.
-		verifyInvalidZipCodeError()
+		// Swipe up to bottom.
+		app.swipeUp()
 
-		// Verify zip code error is not displayed for valid zip.
-		verifyValidZipCodeNoError()
+		// Type invalid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("1234", shouldClear: true)
+
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
+
+		// Verify invalid zip code error is displayed.
+		XCTAssertTrue(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Type valid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("12345")
+
+		// Focus to city field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
+
+		// Verify invalid zip code error is not displayed.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
 
 		// Wait for keyboard dismiss.
 		wait(forTimeInterval: 0.5)
