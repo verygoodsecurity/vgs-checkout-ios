@@ -28,7 +28,7 @@ extension VGSCheckoutSaveCardBaseTestCase {
 	///   - fields: `[VGSCheckoutUITestsAddressFields]` object, array of billing address fields.
 	///   - isVisible: `Bool` object, `true` if should be visible.
 	///   - shouldUseZIP: `Bool` object, `true` if should verify `zip` code instead of postal code, default is `false`.
-	fileprivate func verifyFieldsVisibility(_ fields: [VGSCheckoutUITestsAddressFields], isVisible: Bool, shouldUseZIP: Bool = false) {
+	func verifyFieldsVisibility(_ fields: [VGSCheckoutUITestsAddressFields], isVisible: Bool, shouldUseZIP: Bool = false) {
 		fields.forEach { field in
 			switch field {
 			case .country:
