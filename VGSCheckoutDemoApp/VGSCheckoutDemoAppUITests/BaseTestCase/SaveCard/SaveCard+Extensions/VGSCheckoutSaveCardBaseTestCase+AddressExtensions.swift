@@ -3,6 +3,7 @@
 //  VGSCheckoutDemoAppUITests
 
 import Foundation
+import XCTest
 
 // no:doc
 extension VGSCheckoutSaveCardBaseTestCase {
