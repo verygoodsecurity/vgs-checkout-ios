@@ -8,10 +8,10 @@ import XCTest
 /// Tests for billing address section fields checkout flow.
 class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 
-	/// Test custom config when billing address section is hidden.
-	func testCustomConfigWhenAddressHidden() {
-		// Hide billing address section.
-		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressIsHidden.launchArgument)
+	/// Test custom config when all fields in billing address section are hidden.
+	func testCustomConfigAllFieldsAreHidden() {
+		// Display no address fields in billing address section.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([]))
 
 		// Launch app.
 		app.launch()
@@ -44,27 +44,144 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
-	// Verifies all address fields are hidden.
-	func verifyAllAddressFieldsAreHidden() {
-		// Verify billing address section hint doesn't exist.
-		XCTAssertFalse(Labels.CheckoutSectionTitles.billingAddress.exists(in: app))
+	/// Test custom config when only country field is visible in billing address.
+	func testCustomConfigOnlyCountryFieldVisible() {
+		// Display no address fields in billing address section.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country]))
 
-		// Verify country hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.countryHint.exists(in: app))
+		// Launch app.
+		app.launch()
 
-		// Verify address line 1 hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine1Hint.exists(in: app))
+		// Navigate to Custom config use case.
+		navigateToCustomConfigUseCase()
 
-		// Verify address line 2 hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.addressLine2Hint.exists(in: app))
+		// Open checkout screen.
+		startCheckout()
 
-		// Verify city hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.cityHint.exists(in: app))
+		// Swipe up to bottom.
+		app.swipeUp()
 
-		// Verify zip code hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+		// Verify address section is visible.
+		verifyIsAddressSectionVisible(true)
 
-		// Verify postal code hint doesn't exists.
-		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
+		// Verify all address fields are hidden (except country).
+		verifyFieldsVisibility([.addressLine1, .addressLine2, .city, .postalCode], isVisible: false)
+
+    // Verify zip is hiden.
+		verifyIsZipVisible(false)
+
+		// Verify country field is visible.
+		verifyFieldsVisibility([.country], isVisible: true)
+
+		// Change country
+		selectCountry("Canada", currentCounryName: "United States")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Verify correct country in field.
+		verifyCountryIsDisplayed("Canada")
+
+		// Change country
+		selectCountry("United States", currentCounryName: "Canada")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Verify correct country in field.
+		verifyCountryIsDisplayed("United States")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Swipe down to up.
+		app.swipeDown()
+
+		// Fill in card data.
+		fillInCorrectCardData()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
+	}
+
+	/// Test custom config when only country field and postal code field is visible in billing address.
+	func testCustomConfigOnlyCountryFieldVisible() {
+		// Display no address fields in billing address section.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([.country, .postalCode]))
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Custom config use case.
+		navigateToCustomConfigUseCase()
+
+		// Open checkout screen.
+		startCheckout()
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Verify address section is visible.
+		verifyIsAddressSectionVisible(true)
+
+		// Verify all address fields are hidden (except country).
+		verifyFieldsVisibility([.addressLine1, .addressLine2, .city], isVisible: false)
+
+		// Verify postal code is hidden.
+		verifyIsPostalCodeVisible(false)
+
+		// Verify country field is visible.
+		verifyFieldsVisibility([.country, .postalCode], isVisible: true)
+
+		// Verify zip is visible.
+		verifyIsZipVisible(true)
+
+		// Change country
+		selectCountry("Canada", currentCounryName: "United States")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Verify postal code UI is displayed.
+		verifyPostalCodeUI()
+
+		// Verify correct country in field.
+		verifyCountryIsDisplayed("Canada")
+
+		// Change country
+		selectCountry("United States", currentCounryName: "Canada")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Verify change country flow when country has no postal code.
+		verifyChangeCountryFlowUI()
+
+		// Verify correct country in field.
+		verifyCountryIsDisplayed("United States")
+
+		// Wait for country change.
+		wait(forTimeInterval: 0.2)
+
+		// Swipe down to up.
+		app.swipeDown()
+
+		// Fill in card data.
+		fillInCorrectCardData()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
 	}
 }
