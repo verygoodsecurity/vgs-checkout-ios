@@ -133,56 +133,11 @@ internal enum VGSCheckoutConfigurationType {
 	internal var isAddressVisible: Bool {
 		switch self {
 		case .custom(let configuration):
-			let isAddressVisible = configuration.billingAddressVisibility == .visible
-
-			if isAddressVisible == false {
-				return false
-			}
-
-			let addressFieldsOptions = [configuration.billingAddressCountryFieldOptions, configuration.billingAddressLine1FieldOptions, configuration.billingAddressLine2FieldOptions, configuration.billingAddressCityFieldOptions, configuration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
-
-			// Check if has visible address fields.
-			let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
-
-			if visibleAddressFields.isEmpty {
-				return false
-			}
-
-			return true
+			return configuration.formConfiguration.isBillingAddressVisible
 		case .payoptAddCard(let configuration):
-			let isAddressVisible = configuration.billingAddressVisibility == .visible
-
-			if isAddressVisible == false {
-				return false
-			}
-
-			let addressFieldsOptions = [configuration.billingAddressCountryFieldOptions, configuration.billingAddressLine1FieldOptions, configuration.billingAddressLine2FieldOptions, configuration.billingAddressCityFieldOptions, configuration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
-
-			// Check if has visible address fields.
-			let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
-
-			if visibleAddressFields.isEmpty {
-				return false
-			}
-
-			return true
+			return configuration.formConfiguration.isBillingAddressVisible
 		case .payoptTransfers(let configuration):
-			let isAddressVisible = configuration.billingAddressVisibility == .visible
-
-			if isAddressVisible == false {
-				return false
-			}
-
-			let addressFieldsOptions = [configuration.billingAddressCountryFieldOptions, configuration.billingAddressLine1FieldOptions, configuration.billingAddressLine2FieldOptions, configuration.billingAddressCityFieldOptions, configuration.billingAddressPostalCodeFieldOptions].compactMap {return $0 as? VGSCheckoutAddressOptionsProtocol}
-
-			// Check if has visible address fields.
-			let visibleAddressFields = addressFieldsOptions.filter({$0.visibility == .visible})
-
-			if visibleAddressFields.isEmpty {
-				return false
-			}
-
-			return true
+			return configuration.formConfiguration.isBillingAddressVisible
 		}
 	}
 
