@@ -13,7 +13,12 @@ enum VGSCheckoutUITestsFeature {
 	/// On focus validation.
 	case onFocusValidation
 
-	/// List of valid countries in billing address.
+	/**
+	 List of valid countries in billing address..
+
+	- Parameters:
+		 - countries: An array of `String`, country codes in ISO format.
+	*/
 	case validCountries( _ countries: [String])
 
 	/// Only postal code field in address is visible.
@@ -27,6 +32,17 @@ enum VGSCheckoutUITestsFeature {
 
 	/// Remove card option is disabled.
 	case removeCardDisabled
+
+	/// Billing address section is hidden.
+	case billingAddressIsHidden
+
+	/**
+	 List of fields in billing address section.
+
+	 - Parameters:
+			- fields: An array of `VGSCheckoutUITestsAddressFields`, address fields.
+	*/
+	case billingAddressFields( _ fields: [VGSCheckoutUITestsAddressFields])
 
 	/// Launch argument for corresponding feature.
 	var launchArgument: String {
@@ -45,6 +61,10 @@ enum VGSCheckoutUITestsFeature {
 			return "successRemoveSavedCard"
 		case .removeCardDisabled:
 			return "removeCardDisabled"
+		case .billingAddressIsHidden:
+			return "billingAddressIsHidden"
+		case .billingAddressFields(let fields):
+			return "billingAddressFields=" + fields.map {$0.rawValue}.joined(separator: ".")
 		}
 	}
 }

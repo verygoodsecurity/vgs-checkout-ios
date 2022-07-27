@@ -354,6 +354,24 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 		XCTAssert(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
 	}
 
+	/// Verifies is zip code visible or hidden.
+	/// - Parameter isVisible: `Bool` object, `true` if field should be visible.
+	func verifyIsZipVisible(_ isVisible: Bool) {
+		XCTAssert(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app) == isVisible)
+	}
+
+	/// Verifies is postal code visible or hidden.
+	/// - Parameter isVisible: `Bool` object, `true` if field should be visible.
+	func verifyIsPostalCodeVisible(_ isVisible: Bool) {
+		XCTAssert(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app) == isVisible)
+	}
+
+	/// Verifies is address section visible.
+	/// - Parameter isVisible: `Bool` object, `true` if address section should be visible.
+	func verifyIsAddressSectionVisible(_ isVisible: Bool) {
+		XCTAssert(Labels.CheckoutSectionTitles.billingAddress.exists(in: app) == isVisible)
+	}
+
 	/// Veify UI on country change.
 	func verifyChangeCountryFlowUI() {
 		// Verify zip code is visible.
@@ -389,6 +407,15 @@ class VGSCheckoutSaveCardBaseTestCase: VGSCheckoutDemoAppBaseTestCase {
 
 		// Verify zip code is visible.
 		verifyZIPUI()
+	}
+
+	/// Verifies country is displayed in field.
+	/// - Parameter countryName: `String` object, country name.
+	func verifyCountryIsDisplayed(_ countryName: String) {
+		/// Address line 2 hint.
+		let countryField: VGSUITestElement = .init(type: .textField, identifier: countryName)
+
+		XCTAssert(countryField.exists(in: app))
 	}
 
 	/// Check whether card details errors are presented.
