@@ -133,11 +133,23 @@ internal enum VGSCheckoutConfigurationType {
 	internal var isAddressVisible: Bool {
 		switch self {
 		case .custom(let configuration):
-			return configuration.billingAddressVisibility == .visible
+			return configuration.formConfiguration.isBillingAddressVisible
 		case .payoptAddCard(let configuration):
-			return configuration.billingAddressVisibility == .visible
+			return configuration.formConfiguration.isBillingAddressVisible
 		case .payoptTransfers(let configuration):
-			return configuration.billingAddressVisibility == .visible
+			return configuration.formConfiguration.isBillingAddressVisible
+		}
+	}
+
+	/// `true` if postal code field is visible.
+	internal var isPostalCodeVisible: Bool {
+		switch self {
+		case .custom(let configuration):
+			return configuration.billingAddressPostalCodeFieldOptions.visibility == .visible
+		case .payoptAddCard(let configuration):
+			return configuration.billingAddressPostalCodeFieldOptions.visibility == .visible
+		case .payoptTransfers(let configuration):
+			return configuration.billingAddressPostalCodeFieldOptions.visibility == .visible
 		}
 	}
 }

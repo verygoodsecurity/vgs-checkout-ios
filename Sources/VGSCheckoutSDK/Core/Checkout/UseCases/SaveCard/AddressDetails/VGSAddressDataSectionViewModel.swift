@@ -115,10 +115,13 @@ final internal class VGSAddressDataSectionViewModel: VGSBaseFormSectionProtocol,
 		let validCountries = checkoutConfigurationType.validCountries
 		let firstCountryISO = VGSAddressCountriesDataProvider.provideFirstCountryISO(for: validCountries)
 
-		// Update collect and validation helpers country without postal code.
-		VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: firstCountryISO,  addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
+		if checkoutConfigurationType.isPostalCodeVisible {
+			// Update collect and validation helpers country without postal code.
+			VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: firstCountryISO,  addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 
-		updatePostalCodeField(with: firstCountryISO)
+			updatePostalCodeField(with: firstCountryISO)
+		}
+
 		updateFormState()
 	}
 
@@ -288,19 +291,25 @@ extension VGSAddressDataSectionViewModel: VGSTextFieldViewDelegate {
 			if let newCountry = VGSCountriesISO(rawValue: currentCountryCode) {
 
 				// Update collect and validation helpers country without postal code.
+
+				if checkoutConfigurationType.isPostalCodeVisible {
 				VGSAddressDataFormConfigurationManager.updatePostalCodeViewIfNeeded(with: newCountry,  addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
+
 
 				// Uncomment this code to enable other countries without AWS support
 //				VGSAddressDataFormConfigurationManager.updateAddressForm(with: newCountry, checkoutConfigurationType: checkoutConfigurationType, addressFormView: billingAddressFormView, vgsCollect: vgsCollect, formValidationHelper: formValidationHelper)
 
 				//updateStateField(with: newCountry)
 				updatePostalCodeField(with: newCountry)
+				}
 
 				// Postal code field configuration has been already updated on previous textChange delegate call. Simulate delegate editing event to refresh state with new configuration.
 				pickerTextField.delegate?.vgsTextFieldDidChange?(pickerTextField)
 
-				if validationBehavior == .onFocus {
-					formValidationHelper.revalidatePostalCodeFieldIfNeeded()
+				if checkoutConfigurationType.isPostalCodeVisible {
+					if validationBehavior == .onFocus {
+						formValidationHelper.revalidatePostalCodeFieldIfNeeded()
+					}
 				}
 				
 				// Revalidate the entire form - on switching countries previous postal code can be invalid now.
