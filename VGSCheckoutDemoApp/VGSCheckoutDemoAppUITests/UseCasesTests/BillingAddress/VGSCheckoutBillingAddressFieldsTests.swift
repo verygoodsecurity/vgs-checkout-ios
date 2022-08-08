@@ -44,6 +44,42 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test add card config when all fields in billing address section are hidden.
+	func testAddCardConfigAllFieldsAreHidden() {
+		// Display no address fields in billing address section.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressFields([]).launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Verify address hints are hidden.
+		verifyAllAddressFieldsAreHidden()
+
+		// Swipe down to up.
+		app.swipeDown()
+
+		// Fill in card data.
+		fillInCorrectCardData()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
+	}
+
 	/// Test custom config when only country field is visible in billing address.
 	func testCustomConfigOnlyCountryFieldVisible() {
 		// Display no address fields in billing address section.
