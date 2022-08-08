@@ -77,7 +77,7 @@ class VGSCheckoutBillingAddressFieldsTests: VGSCheckoutSaveCardBaseTestCase {
 		tapToSaveCardInCheckout()
 
 		// Check success alert.
-		verifySuccessAlertExists()
+		verifySuccessAddCardConfigAlertExists()
 	}
 
 	/// Test custom config when only country field is visible in billing address.

@@ -68,6 +68,9 @@ class VGSCheckoutAddressSectionTests: VGSCheckoutSaveCardBaseTestCase {
 		// Swipe down to up.
 		app.swipeDown()
 
+		// Wait.
+		wait(forTimeInterval: 0.3)
+
 		// Fill in card data.
 		fillInCorrectCardData()
 
@@ -78,6 +81,6 @@ class VGSCheckoutAddressSectionTests: VGSCheckoutSaveCardBaseTestCase {
 		tapToSaveCardInCheckout()
 
 		// Check success alert.
-		verifySuccessAlertExists()
+		verifySuccessAddCardConfigAlertExists()
 	}
 }
