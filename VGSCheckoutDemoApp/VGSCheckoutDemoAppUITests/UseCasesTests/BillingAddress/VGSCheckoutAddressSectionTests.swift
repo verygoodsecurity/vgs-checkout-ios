@@ -44,4 +44,40 @@ class VGSCheckoutAddressSectionTests: VGSCheckoutSaveCardBaseTestCase {
 		// Check success alert.
 		verifySuccessAlertExists()
 	}
+
+	/// Test add card config when billing address section is hidden.
+	func testAddCardConfigWhenAddressHidden() {
+		// Hide billing address section.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.billingAddressIsHidden.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Verify address hints are hidden.
+		verifyAllAddressFieldsAreHidden()
+
+		// Swipe down to up.
+		app.swipeDown()
+
+		// Fill in card data.
+		fillInCorrectCardData()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAlertExists()
+	}
 }
