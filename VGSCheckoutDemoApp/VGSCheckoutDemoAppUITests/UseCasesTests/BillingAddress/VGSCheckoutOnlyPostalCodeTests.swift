@@ -74,6 +74,64 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test Add card config validation when only zip code field is available (for USA).
+	func testAddCardOnlyZipCodeField() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["US"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Payopt config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Verify ZIP field is available.
+		verifyOnlyZipFieldIsVisible()
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Type invalid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("1234", shouldClear: true)
+
+		// Focus to card number field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
+
+		// Verify invalid zip code error is displayed.
+		XCTAssertTrue(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+
+		// Swipe up to bottom.
+		app.swipeUp()
+
+		// Type valid zip code.
+		VGSTextField.BillingAddress.zip.find(in: app).type("12345")
+
+		// Focus to city field.
+		VGSTextField.CardDetails.cardNumber.find(in: app).tap()
+
+		// Verify invalid zip code error is not displayed.
+		XCTAssertFalse(Labels.CheckoutErrorLabels.BillingAddress.invalidZIP.exists(in: app))
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAddCardConfigAlertExists()
+	}
+
 	/// Test validation when only postal code field is available (for CA).
 	func testOnlyPostalCodeField() {
 		// Append valid countries.
@@ -113,7 +171,6 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		// Check success alert.
 		verifySuccessAlertExists()
 	}
-
 
 	/// Test address section is hidden when no postal code.
 	func testAddressSectionHiddenWhenNoPostalCode() {
