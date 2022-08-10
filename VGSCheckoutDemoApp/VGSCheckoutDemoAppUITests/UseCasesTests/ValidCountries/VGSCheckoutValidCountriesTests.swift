@@ -229,7 +229,7 @@ class VGSCheckoutValidCountriesTests: VGSCheckoutSaveCardBaseTestCase {
 		navigateToPayoptAddCardUseCase()
 
 		// Open checkout screen.
-		startCheckout()
+		startPayoptAddCardCheckout()
 
 		// Verify zip code UI is displayed.
 		verifyZIPUI()
