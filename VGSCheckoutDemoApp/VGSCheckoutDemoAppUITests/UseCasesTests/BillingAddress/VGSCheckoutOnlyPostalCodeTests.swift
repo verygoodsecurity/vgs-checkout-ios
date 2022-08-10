@@ -172,6 +172,46 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test validation when only postal code field is available (for CA).
+	func testAddCardOnlyPostalCodeField() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["CA"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Payopt config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Verify ZIP field is available.
+		verifyOnlyPostalCodeFieldIsVisible()
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Verify postal code error is displayed for invalid CA postal code.
+		verifyPostalCodeErrorsForCanada()
+
+		// Verify postal code error is not displayed for valid CA postal code.
+		verifyPostalCodeNoErrorsForCanada()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAddCardConfigAlertExists()
+	}
+
 	/// Test address section is hidden when no postal code.
 	func testAddressSectionHiddenWhenNoPostalCode() {
 		// Append valid countries.
@@ -213,6 +253,49 @@ class VGSCheckoutOnlyPostalCodeTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Check success alert.
 		verifySuccessAlertExists()
+	}
+
+	/// Test Add card address section is hidden when no postal code.
+	func testAddCardAddressSectionHiddenWhenNoPostalCode() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["BO"]).launchArgument)
+		app.launchArguments.append(VGSCheckoutUITestsFeature.onlyPostalCodeFieldInAddress.launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Verify ZIP field is hidden.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.zipHint.exists(in: app))
+
+		// Verify Postal code field is hidden.
+		XCTAssertFalse(Labels.CheckoutHints.BillingAddress.postalCodeHint.exists(in: app))
+
+		// Verify other fields are hidden.
+		verifyAddressFieldsAreHidden()
+
+		// Verify address section is hidden.
+		XCTAssertFalse(Labels.CheckoutSectionTitles.billingAddress.exists(in: app))
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAddCardConfigAlertExists()
 	}
 
 	// MARK: - Helpers
