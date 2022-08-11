@@ -58,6 +58,48 @@ class VGSCheckoutValidCountriesTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test Add card valid countries feature with Bolivia first in list - Bolivia doesn't have postal code.
+	func testAddCardValidCountriesWithBoliviaFirst() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["BO", "US"]).launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Verify postal code/zip fields are not displayed for Bolivia.
+		verifyNoPostalCodeUI()
+
+		// Verify Bolivia is displayed in country field.
+		verifyCountryFieldUI(for: "Bolivia")
+
+		// Swipe down.
+		app.swipeDown()
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Type Bolivia billing address.
+		fillInBoliviaBillingAddress()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAddCardConfigAlertExists()
+	}
+
 	/// Test valid countries feature with Canada first in list - Canada has postal code.
 	func testValidCountriesWithCanadaFirst() {
 		// Append valid countries.
@@ -106,6 +148,54 @@ class VGSCheckoutValidCountriesTests: VGSCheckoutSaveCardBaseTestCase {
 		verifySuccessAlertExists()
 	}
 
+	/// Test Add card valid countries feature with Canada first in list - Canada has postal code.
+	func testAddCardValidCountriesWithCanadaFirst() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries(["CA", "US"]).launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
+
+		// Verify postal code UI is displayed.
+		verifyPostalCodeUI()
+
+		// Verify Canada is displayed in country field.
+		verifyCountryFieldUI(for: "Canada")
+
+		// Verify error for invalid Canada postal code is displayed.
+		verifyPostalCodeErrorsForCanada()
+
+		// Verify errors are updated correctly on country change.
+		verifyErrorsUpdateOnSwitchingCaToUS()
+
+		// Swipe down.
+		app.swipeDown()
+
+		// Fill in correct card data.
+		fillInCorrectCardData()
+
+		// Swipe up.
+		app.swipeUp()
+
+		// Type Canada billing address.
+		fillInCanadaBillingAddress()
+
+		// Wait for keyboard dismiss.
+		wait(forTimeInterval: 0.5)
+
+		// Tap to save card data.
+		tapToSaveCardInCheckout()
+
+		// Check success alert.
+		verifySuccessAddCardConfigAlertExists()
+	}
+
 	/// Test valid countries feature with empty list - should be all countries with US first.
 	func testValidCountriesWithEmptyList() {
 		// Append valid countries.
@@ -119,6 +209,27 @@ class VGSCheckoutValidCountriesTests: VGSCheckoutSaveCardBaseTestCase {
 
 		// Open checkout screen.
 		startCheckout()
+
+		// Verify zip code UI is displayed.
+		verifyZIPUI()
+
+		// Verify United States is displayed in country field.
+		verifyCountryFieldUI(for: "United States")
+	}
+
+	/// Test Add card valid countries feature with empty list - should be all countries with US first.
+	func testAddCardValidCountriesWithEmptyList() {
+		// Append valid countries.
+		app.launchArguments.append(VGSCheckoutUITestsFeature.validCountries([]).launchArgument)
+
+		// Launch app.
+		app.launch()
+
+		// Navigate to Add card config use case.
+		navigateToPayoptAddCardUseCase()
+
+		// Open checkout screen.
+		startPayoptAddCardCheckout()
 
 		// Verify zip code UI is displayed.
 		verifyZIPUI()
