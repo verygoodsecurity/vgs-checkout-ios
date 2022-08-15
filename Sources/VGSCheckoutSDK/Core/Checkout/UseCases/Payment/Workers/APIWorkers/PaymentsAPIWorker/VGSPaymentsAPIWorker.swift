@@ -110,16 +110,16 @@ internal final class VGSPayoptAddCardAPIWorker {
 		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
 			fatalError("Cannot send transfers in invalid flow.")
 		}
-		var transderPayload: [String: Any] = [
+		var transferPayload: [String: Any] = [
 			"order_id": config.orderId,
 			"source": finId
     ]
     if let id = config.subAccountId {
-      transderPayload[SUB_ACCOUNT_KEY] = id
+      transferPayload[SUB_ACCOUNT_KEY] = id
     }
     
 		// Use API client sendRequest since we don't need to send collected data again.
-		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transderPayload) { response in
+		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transferPayload) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				/// Additional checkout flow info.
