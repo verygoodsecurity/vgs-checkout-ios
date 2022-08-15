@@ -36,6 +36,9 @@ internal struct VGSCheckoutPaymentConfiguration: VGSCheckoutBasicConfigurationPr
   
   /// `String?`, organization vault inbound route id.
   public let routeId: String?
+  
+  /// `String?`, organization sub-account id, default `nil`.
+  public var subAccountId: String?
 
 	/// Order id.
 	internal let orderId: String
