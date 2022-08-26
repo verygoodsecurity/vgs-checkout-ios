@@ -111,7 +111,7 @@ extension VGSPayWithCardViewController: VGSCheckoutBaseCardViewControllerDelegat
 				let state: VGSAddCardFlowState
 				switch strongSelf.viewModel.configuration.payoptFlow {
 				case .addCard:
-					state = VGSAddCardFlowState.requestSubmitted(requestResult)
+					state = VGSAddCardFlowState.checkoutDidFinish(.newCard(requestResult, cardInfo))
 				case .transfers:
 					state = VGSAddCardFlowState.checkoutTransferDidFinish(requestResult)
 				}

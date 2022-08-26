@@ -11,6 +11,13 @@ internal class VGSSaveCardPayoptAddCardAPIWorker: VGSSaveCardAPIWorkerProtocol {
 	/// Configuration.
 	internal let configuration: VGSCheckoutAddCardConfiguration
 
+	// swiftlint:disable all
+	
+  /// Sub-account id JSON key
+  private let SUB_ACCOUNT_KEY = "sub_account_id"
+
+	// swiftlint:enable all
+
 	// MARK: - Initialization
 
 	/// Initializer.
@@ -30,9 +37,13 @@ internal class VGSSaveCardPayoptAddCardAPIWorker: VGSSaveCardAPIWorkerProtocol {
 
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 
+    var extraData = [String: Any]()
+    if let id = configuration.subAccountId {
+      extraData[SUB_ACCOUNT_KEY] = id
+    }
 		let path = "/financial_instruments"
 
-		vgsCollect.sendData(path: path, method: .post) { response in
+		vgsCollect.sendData(path: path, method: .post, extraData: extraData) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, nil)
@@ -43,52 +54,6 @@ internal class VGSSaveCardPayoptAddCardAPIWorker: VGSSaveCardAPIWorkerProtocol {
 			}
 		}
 	}
-
-	/// Saves card to create financial instrument.
-	/// - Parameter completion: `VGSCheckoutRequestResultCompletion` object, completion block.
-	internal func saveCard(with completion: @escaping VGSCheckoutRequestResultCompletion) {
-		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
-
-		let path = "/financial_instruments"
-
-		vgsCollect.sendData(path: path, method: .post) { response in
-			switch response {
-			case .success(let code, let data, let response):
-				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, nil)
-				completion(requestResult)
-			case .failure(let code, let data, let response, let error):
-				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
-				completion(requestResult)
-			}
-		}
-	}
-
-	/// Initiates transfer with fin instrument id and order.
-	/// - Parameters:
-	///   - finInstrumentId: `String` object, financial instrument id from payopt.
-	///   - payment: `VGSCheckoutPayment`, payment data.
-	///   - completion: `VGSCheckoutRequestResultCompletion` object, completion block.
-//	internal func initiateTransfer(with finInstrumentId: String, payment: VGSCheckoutPayment, completion: @escaping VGSCheckoutRequestResultCompletion) {
-//
-//		// FIXME: - remove hardcoded order_id
-//		let transderPayload: [String: Any] = [
-//			"order_id" : "orderId",
-//			"financial_instrument_id": finInstrumentId
-//		]
-//
-//		let path = "/transfers"
-//
-//		vgsCollect.sendData(path: path, method: .post) { response in
-//			switch response {
-//			case .success(let code, let data, let response):
-//				let requestResult: VGSCheckoutRequestResult = .success(code, data, response, nil)
-//				completion(requestResult)
-//			case .failure(let code, let data, let response, let error):
-//				let requestResult: VGSCheckoutRequestResult = .failure(code, data, response, error, nil)
-//				completion(requestResult)
-//			}
-//		}
-//	}
 
 	/// Financial instrument id from success payopt financial instrument response.
 	/// - Parameter data: `Data?` object, response data.

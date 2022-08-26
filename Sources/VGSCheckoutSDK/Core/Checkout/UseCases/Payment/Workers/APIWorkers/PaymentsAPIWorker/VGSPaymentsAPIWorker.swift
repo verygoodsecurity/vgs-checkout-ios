@@ -26,6 +26,13 @@ internal final class VGSPayoptAddCardAPIWorker {
 	/// Transfers path.
 	private let transfersPath = "/transfers"
 
+	// swiftlint:disable all
+
+  /// Sub-account id JSON key
+  private let SUB_ACCOUNT_KEY = "sub_account_id"
+
+	// swiftlint:enable all
+
 	/// Checkout service.
 	private weak var checkoutService: VGSCheckoutBasicPayoptServiceProtocol?
 
@@ -37,9 +44,13 @@ internal final class VGSPayoptAddCardAPIWorker {
 		vgsCollect.apiClient.customHeader = ["Authorization": "Bearer \(configuration.accessToken)"]
 	}
 
-	internal func createFinID(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
+  internal func createFinID(with newCardInfo: VGSCheckoutNewPaymentCardInfo, completion: @escaping VGSCheckoutRequestResultCompletion) {
 
-		vgsCollect.sendData(path: finInstrumentsPath, method: .post) {[weak self] response in
+    var extraData = [String: Any]()
+    if let id = configuration.subAccountId {
+      extraData[SUB_ACCOUNT_KEY] = id
+    }
+		vgsCollect.sendData(path: finInstrumentsPath, method: .post, extraData: extraData) {[weak self] response in
 			guard let strongSelf = self else {return}
 
 			var extraData = [String: Any]()
@@ -103,12 +114,16 @@ internal final class VGSPayoptAddCardAPIWorker {
 		guard let config = configuration as? VGSCheckoutPaymentConfiguration else {
 			fatalError("Cannot send transfers in invalid flow.")
 		}
-		let transderPayload: [String: Any] = [
+		var transferPayload: [String: Any] = [
 			"order_id": config.orderId,
 			"source": finId
-		]
+    ]
+    if let id = config.subAccountId {
+      transferPayload[SUB_ACCOUNT_KEY] = id
+    }
+    
 		// Use API client sendRequest since we don't need to send collected data again.
-		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transderPayload) { response in
+		vgsCollect.apiClient.sendRequest(path: transfersPath, method: .post, value: transferPayload) { response in
 			switch response {
 			case .success(let code, let data, let response):
 				/// Additional checkout flow info.

@@ -39,6 +39,9 @@ public struct VGSCheckoutAddCardConfiguration: VGSCheckoutBasicConfigurationProt
   
   /// `String?`, organization vault inbound route id, could be `nil` when vault has only one route.
   public let routeId: String?
+  
+  /// `String?`, organization sub-acccount id, default `nil`.
+  public var subAccountId: String?
 
 	/// Enable save card option. If enabled - button with option to save card for future payments will be displayed. Default is `true`. Default **save card button** state is `selected`. **NOTE** User choice for save card option will not be stored on VGS side.
 	public var isSaveCardOptionEnabled: Bool = true

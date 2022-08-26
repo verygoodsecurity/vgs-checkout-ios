@@ -9,7 +9,7 @@
     },
     {
       "file": "/Users/eugene/vgs-checkout-ios/Sources/VGSCheckoutSDK/Core/Configuration/PaymentOrchestration/Payment/VGSCheckoutPaymentConfiguration.swift",
-      "line": 240,
+      "line": 243,
       "symbol": "VGSCheckoutSavedPaymentMethods.savedCards(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
