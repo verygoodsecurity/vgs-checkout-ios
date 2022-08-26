@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "VGSCheckoutSDK"
-  spec.version      = "1.3.2"
+  spec.version      = "1.3.3"
   spec.summary      = "VGS iOS Checkout SDK!"
 	spec.swift_version = '5.0'
   spec.description  = <<-DESC
