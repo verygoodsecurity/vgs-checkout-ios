@@ -52,6 +52,9 @@ internal protocol VGSCheckoutPayoptBasicConfiguration {
 	/// Access token.
 	var accessToken: String {get}
   
+  /// Organization sub-account id.
+  var subAccountId: String? {get set}
+
   /// Default Inbound route route id created in vault during default integration with payopt on dashboard.
   static var defaultPayoptRouteId: String {get}
 }
