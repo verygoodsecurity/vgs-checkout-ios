@@ -25,9 +25,13 @@ internal final class VGSPayoptAddCardAPIWorker {
 
 	/// Transfers path.
 	private let transfersPath = "/transfers"
-  
+
+	// swiftlint:disable all
+
   /// Sub-account id JSON key
   private let SUB_ACCOUNT_KEY = "sub_account_id"
+
+	// swiftlint:enable all
 
 	/// Checkout service.
 	private weak var checkoutService: VGSCheckoutBasicPayoptServiceProtocol?

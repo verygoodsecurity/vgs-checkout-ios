@@ -10,9 +10,14 @@ internal class VGSSaveCardPayoptAddCardAPIWorker: VGSSaveCardAPIWorkerProtocol {
 
 	/// Configuration.
 	internal let configuration: VGSCheckoutAddCardConfiguration
-  
+
+	// swiftlint:disable all
+	
   /// Sub-account id JSON key
   private let SUB_ACCOUNT_KEY = "sub_account_id"
+
+	// swiftlint:enable all
+
 	// MARK: - Initialization
 
 	/// Initializer.
